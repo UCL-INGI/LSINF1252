@@ -1,14 +1,14 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: On vous demande d'implémenter les fonctions `enqueue` et `dequeue` d'une
-    queue basée sur une liste simplement doublement chainée circulaire.
+context: You are asked to implement `enqueue` and `dequeue` functions of a `Queue`
+    with doubly circular linked list.
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
 name: '[S4] Queue avancée'
 network_grading: false
 problems:
@@ -18,10 +18,10 @@ problems:
         language: c
         name: Enqueue
     dequeue:
-        type: code
+        header: ''
         language: c
         name: Dequeue
-        header: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
