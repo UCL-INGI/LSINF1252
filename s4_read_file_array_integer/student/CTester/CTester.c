@@ -173,8 +173,11 @@ int __wrap_exit(int status){
     return status;
 }
 
-int run_tests(void *tests[], int nb_tests) {
-    int ret;
+int run_tests(int argc, char *argv[], void *tests[], int nb_tests) {
+    for (int i=1; i < argc; i++) {
+        if (!strncmp(argv[i], "LANGUAGE=", 9))
+                putenv(argv[i]);
+    }
     setlocale (LC_ALL, "");
     bindtextdomain("tests", getenv("PWD"));
     bind_textdomain_codeset("messages", "UTF-8");
@@ -207,7 +210,7 @@ int run_tests(void *tests[], int nb_tests) {
     sa.sa_sigaction = segv_handler;
     sigaltstack(&ss, 0);
     sigfillset(&sa.sa_mask);
-    ret = sigaction(SIGSEGV, &sa, NULL);
+    int ret = sigaction(SIGSEGV, &sa, NULL);
     if (ret)
         return ret;
     sa.sa_sigaction = alarm_handler;

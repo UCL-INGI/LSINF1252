@@ -10,12 +10,12 @@ context: |-
             int a1 = 5, b1 = 6;
 
             sum1(a1, b1);
-            print(a1); // retour1
+            printf(a1); // retour1
 
             int *a2 = 5, *b2 = 6;
 
             sum2(a2, b2);
-            print(*a2); // retour2
+            printf(*a2); // retour2
         }
 environment: pyjavacpp
 evaluate: best
@@ -24,21 +24,25 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: Stack vs Heap
+name: '[S2-S3] Stack vs Heap'
 network_grading: false
 problems:
     retour1:
         name: retour 1
         type: code_single_line
         header: Que vaut retour 1 ?
+    retour2:
+        header: Que vaut retour 2 ?
+        type: code_single_line
+        name: retour 2
     version1:
         type: code
-        name: Version stack
         header: |
             .. code-block:: c
 
                 void sum(int a, int b){
         language: c
+        name: Version stack
     version2:
         type: code
         language: c
