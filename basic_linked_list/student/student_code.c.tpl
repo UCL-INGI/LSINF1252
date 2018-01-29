@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include "student_code.h"
 
-int myfunc(int myargs) {
-@    @problem_id@@
+node_t* init_node(int value){
+	@@init_node@@
 }
-
 

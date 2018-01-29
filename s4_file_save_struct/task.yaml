@@ -1,0 +1,37 @@
+accessible: true
+author: Olivier Martin
+context: |-
+    .. code-block:: c
+
+        struct 3dpoint{
+            double x;
+            double y;
+            double z;
+        };
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S4] Save struct into file'
+network_grading: false
+problems:
+    q1:
+        language: ''
+        name: ''
+        type: code
+        header: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        description: ''
+        type: 2
+        visible: true
+        name: File
+        id: ''
+weight: 1.0

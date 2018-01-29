@@ -1,4 +1,6 @@
 #define _GNU_SOURCE
+#include <dlfcn.h>
+#include <malloc.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,12 +16,6 @@
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING) gettext(STRING)
-#include <dlfcn.h>
-
-#ifdef __linux__
-#include <malloc.h>
-#endif
-
 
 #include "wrap.h"
 
@@ -101,6 +97,8 @@ void alarm_handler(int sig, siginfo_t *unused, void *unused2)
 
 int sandbox_begin()
 {
+    wrap_monitoring = true;
+
     // Start timer
     it_val.it_value.tv_sec = 2;
     it_val.it_value.tv_usec = 0;
@@ -110,8 +108,6 @@ int sandbox_begin()
 
     close(STDERR_FILENO);
     dup2(pipe_stderr[1], STDERR_FILENO);
-
-    wrap_monitoring = true;
 
     return (sigsetjmp(segv_jmp,1) == 0);
 }
@@ -123,8 +119,6 @@ void sandbox_fail()
 
 void sandbox_end()
 {
-    wrap_monitoring = false;
-
     // Remapping stderr to the orignal one ...
     close(STDERR_FILENO);
     dup2(true_stderr, STDERR_FILENO);
@@ -140,6 +134,7 @@ void sandbox_end()
         write(STDERR_FILENO, buf, n);
     }
 
+    wrap_monitoring = false;
 
     it_val.it_value.tv_sec = 0;
     it_val.it_value.tv_usec = 0;
@@ -175,17 +170,15 @@ int __wrap_exit(int status){
 
 int run_tests(void *tests[], int nb_tests) {
     int ret;
-    setlocale(LC_ALL, "");
+    setlocale (LC_ALL, "");
     bindtextdomain("tests", getenv("PWD"));
     bind_textdomain_codeset("messages", "UTF-8");
     textdomain("tests");
 
-#ifdef __linux__
     mallopt(M_PERTURB, 142); // newly allocated memory with malloc will be set to ~142
 
     // Code for detecting properly double free errors
     mallopt(M_CHECK_ACTION, 1); // don't abort if double free
-#endif
     true_stderr = dup(STDERR_FILENO); // preparing a non-blocking pipe for stderr
     pipe(pipe_stderr);
     int flags = fcntl(pipe_stderr[0], F_GETFL, 0);
@@ -248,7 +241,8 @@ int run_tests(void *tests[], int nb_tests) {
 
         start_test();
 
-        if (CU_basic_run_test(pSuite,pTest) != CUE_SUCCESS)
+        CU_ErrorCode ret = CU_basic_run_test(pSuite,pTest);
+        if (ret != CUE_SUCCESS)
             return CU_get_error();
 
         if (test_metadata.err)

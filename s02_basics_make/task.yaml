@@ -1,0 +1,45 @@
+accessible: true
+author: Pablo Gonzalez Alvarez
+context: |-
+    This tasks will help you get a first taste of Makefiles. For more details, please refer to the following pages:
+
+    * https://sites.uclouvain.be/SystInfo/notes/Outils/html/make.html
+    * https://www.gnu.org/software/make/manual/
+
+    You have the following folder structure:
+    .. code-block::
+    /
+        make_me.c
+        make_me.h
+
+    To try it locally, you can download a zip file of the above given folder here.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S02] Makefile basics'
+network_grading: false
+problems:
+    make_me_easy:
+        name: Make me easy
+        type: match
+        answer: make make_me
+        header: |-
+            You want to build an executable ```make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
+
+            Hint: you do not need to write a Makefile.
+    make_me_less_easy:
+        header: Suppose you cannot use what you did in the above question. Write a
+            Makefile file that compiles the above given code and builds an executable
+            `make_me`.
+        type: file
+        name: Make me less easy
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

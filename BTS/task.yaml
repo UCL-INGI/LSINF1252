@@ -1,0 +1,51 @@
+accessible: true
+author: Maxime Mawait & Nicolas Rybowski
+context: |+
+    For this task, you will learn to search into a binary tree.
+
+
+    .. code-block:: c
+
+        typedef struct node{
+            int value;
+            struct node* left;
+            struct node* right;
+        } node_t;
+
+
+    .. code-block:: c
+
+        typedef struct bt{
+            struct node* root;
+        } bt_t;
+
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S3] Binary Search Tree'
+network_grading: false
+problems:
+    contains:
+        type: code
+        name: Methode contains
+        header: |-
+            .. code-block:: c
+
+                int contains(bt_t* tree){
+        language: c
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
+        name: Data structures
+        id: ''
+weight: 1.0

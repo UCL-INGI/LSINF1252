@@ -1,0 +1,36 @@
+accessible: true
+author: Olivier Martin
+context: |-
+    Given a file containing some (possibly none) positive integers (``int``), write a code that computes the sum of all integers present in the file. The sum have to be returned.
+
+    If an error occurs, return ``-1``.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S4] File integers reading'
+network_grading: false
+problems:
+    q1:
+        language: c
+        name: Write your code here
+        type: code
+        header: |-
+            .. code-block:: java
+
+                int sum_file(char* filename)
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        description: ''
+        type: 2
+        visible: true
+        name: File
+        id: ''
+weight: 1.0

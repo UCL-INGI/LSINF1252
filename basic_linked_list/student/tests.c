@@ -72,6 +72,6 @@ void test_init_node_nomem(){
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS();
+
     RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem) ;
 }
