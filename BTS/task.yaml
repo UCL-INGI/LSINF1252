@@ -1,7 +1,22 @@
 accessible: true
 author: ''
-context: |
+context: |+
     For this task, you will learn to search into a binary tree.
+
+
+    .. code-block:: c
+        typedef struct node{
+            int value;
+            struct node* left;
+            struct node* right;
+        } node_t;
+
+
+    .. code-block:: c
+        typedef struct bt{
+            struct node* root;
+        } bt_t;
+
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -15,7 +30,9 @@ problems:
     contains:
         language: c
         type: code
-        header: ''
+        header: |-
+            .. code-block:: c
+                int contains(bt_t* tree){
         name: Methode contains
 stored_submissions: 0
 submission_limit:

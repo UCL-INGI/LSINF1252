@@ -170,7 +170,9 @@ int __wrap_exit(int status){
 
 int run_tests(void *tests[], int nb_tests) {
     int ret;
-    setlocale (LC_ALL, "");
+    setlocale(LC_ALL, "fr");
+    setlocale(LANGUAGE, "fr");
+    setlocale(LANG, "fr");
     bindtextdomain("tests", getenv("PWD"));
     bind_textdomain_codeset("messages", "UTF-8");
     textdomain("tests");
