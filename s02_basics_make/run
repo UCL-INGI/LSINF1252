@@ -14,6 +14,10 @@ os.chdir("student")
 # Fetch and save the student code into a file for compilation
 input.parse_template("student_code.c.tpl", "student_code.c")
 
+student_makefile = input.get_input("make_me_less_easy") # Fetch the code for problem `q1`
+
+thecode = input.pasrse_template("Makefile") # Parse the `Makefile` template file
+
 # Env
 env = dict(os.environ, LANG=input.get_input('@lang'))
 del env['LANGUAGE']
