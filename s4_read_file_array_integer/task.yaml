@@ -22,6 +22,10 @@ problems:
         header: |-
             .. code-block:: java
 
+                /*
+                 * @pre filename != NULL, name of the file
+                 * @post return the sum of all integers present in the file, -1 if an error occurs.
+                 */
                 int sum_file(char* filename)
 stored_submissions: 0
 submission_limit:
