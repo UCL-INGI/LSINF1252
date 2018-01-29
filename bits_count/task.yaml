@@ -17,7 +17,9 @@ problems:
         type: code
         header: |-
             Write the body of a function that returns the number of bits set to 1 in i.
+
             e.g. nbits(4)=1, nbits(7)=3, nbits(-2)=2
+
             .. code-block:: c
 
                 int nbits(int i){
