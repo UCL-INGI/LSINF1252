@@ -26,8 +26,12 @@ problems:
         type: code
         name: My function
         language: c
-        header: Codez ci-dessous le code de la function int myfunction(int n) qui
-            renvoie n+1.
+        header: |
+            Codez ci-dessous le code de la function int myfunc(int n) qui renvoie n+1.
+
+            .. code-block:: c
+
+                int myfunc(int n) {
 stored_submissions: 0
 submission_limit:
     amount: -1
