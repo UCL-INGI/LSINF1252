@@ -1,5 +1,5 @@
 accessible: true
-author: ''
+author: Maxime Mawait & Nicolas Rybowski
 context: |+
     For this task, you will learn to search into a binary tree.
 
@@ -24,22 +24,28 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
 name: '[S3] Binary Search Tree'
 network_grading: false
 problems:
     contains:
-        language: c
         type: code
+        name: Methode contains
         header: |-
             .. code-block:: c
 
                 int contains(bt_t* tree){
-        name: Methode contains
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
+        name: Data structures
+        id: ''
 weight: 1.0
