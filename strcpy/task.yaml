@@ -1,6 +1,6 @@
 accessible: true
 author: Nicolas Rybowski
-context: On vous demande de réimplémenter la fonction `strcpy <https://linux.die.net/man/3/strcpy>`_
+context: On vous demande d'implémenter une variante de la fonction `strcpy <https://linux.die.net/man/3/strcpy>`_
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -18,7 +18,7 @@ problems:
         header: |
             .. code-block:: c
 
-                char *strcpy(char *dest, const char *src);
+                char *strcpy(char *dest);
 stored_submissions: 0
 submission_limit:
     amount: -1
