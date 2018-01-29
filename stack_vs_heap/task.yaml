@@ -2,6 +2,7 @@ accessible: true
 author: Nicolas Rybowski
 context: |-
     On vous demande d'implémenter deux versions d'une même fonction et de comparer les résultats.
+    Les fonctions `sum1` et `sum2` somment toutes deux leurs arguments et stockent cette valeur dans le premier argument.
 
     .. code-block:: c
 
@@ -26,6 +27,10 @@ limits:
 name: Stack vs Heap
 network_grading: false
 problems:
+    retour1:
+        name: retour 1
+        type: code_single_line
+        header: Que vaut retour 1 ?
     version1:
         type: code
         name: Version stack
