@@ -1,5 +1,5 @@
 name: '[LSINF1252] Systèmes informatiques - 2018'
-accessible: false
+accessible: true
 admins:
 - maxhonneux
 tutors: []
@@ -8,7 +8,7 @@ use_classrooms: true
 allow_unregister: true
 allow_preview: false
 registration: true
-registration_password: null
+registration_password: intel
 registration_ac: null
 registration_ac_list:
 - ''
