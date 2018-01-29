@@ -1,0 +1,30 @@
+accessible: true
+author: Maxime Mawait & Nicolas Rybowski
+context: You are asked to implement the `pop` and `push` functions of the given stack
+    interface.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: Simple stack
+network_grading: false
+problems:
+    push:
+        type: code
+        name: Push
+        language: c
+        header: ''
+    pop:
+        header: ''
+        name: Pop
+        type: code
+        language: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

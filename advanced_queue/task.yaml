@@ -1,7 +1,18 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: You are asked to implement `enqueue` and `dequeue` functions of a `Queue`
-    with doubly circular linked list.
+context: |-
+    You are asked to implement `enqueue` and `dequeue` functions of a `Queue` with doubly circular linked list.
+
+    .. code-block:: c
+
+        typedef struct node{
+          struct node* next;
+          int value;
+        } node_t;
+
+        typedef struct queue{
+          struct node* head;
+        } queue_t  ;
 environment: pyjavacpp
 evaluate: best
 groups: false
