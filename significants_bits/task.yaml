@@ -16,7 +16,9 @@ problems:
         name: Most significant bit
         header: |-
             Write the body of a function that returns the index of the most significant bit of i, whith the least significant bit having 0 as index.
+
             e.g. mostsig(4)=2
+
             .. code-block:: c
 
                 int mostsig(int i){
@@ -25,6 +27,9 @@ problems:
         language: c
         header: |-
             Write the body of a function thath returns the index of the most significant bit of i.
+
+            e.g. lesssig(7)=0
+
             .. code-block:: c
 
                 int lessig(inti i){
