@@ -18,7 +18,8 @@ input.parse_template("student_code.c.tpl", "student_code.c")
 env = dict(os.environ, LANG=input.get_input('@lang'))
 del env['LANGUAGE']
 del env['LC_ALL']
-env['LANG'] = 'fr_BE.utf8'
+env['LANG'] = 'fr'
+env['LANGUAGE'] = 'fr'
 print(env)
 
 # Compilation
