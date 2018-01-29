@@ -1,3 +1,14 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    int myfunc(int n) {
+    @    @myfunc@@
+    }
+
+
+/student/student_code.h: |
+    int myfunc(int n);
 accessible: true
 author: Mathieu Xhonneux
 context: Petit exemple INGInious
