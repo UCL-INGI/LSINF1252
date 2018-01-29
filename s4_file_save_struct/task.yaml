@@ -1,6 +1,8 @@
 accessible: true
 author: Olivier Martin
 context: |-
+    Given an array of ``struct 3dpoint`` defined below, write a C code to write the array of struct into a file named ``save.txt``.
+
     .. code-block:: c
 
         struct 3dpoint{
@@ -22,7 +24,10 @@ problems:
         language: ''
         name: ''
         type: code
-        header: ''
+        header: |-
+            .. code-block:: c
+
+                void save(struct all_points 3dpoint*)
 stored_submissions: 0
 submission_limit:
     amount: -1
