@@ -1,3 +1,11 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    node_t* init_node(int value){
+        @@init_node@@
+    }
+
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: ''

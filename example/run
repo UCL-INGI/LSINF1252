@@ -12,8 +12,11 @@ from inginious import feedback, rst, input
 os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
-print('env :', dict(os.environ, LANG=input.get_input('@lang')))
 input.parse_template("student_code.c.tpl", "student_code.c")
+
+# Env
+env = dict(os.environ, LANG=input.get_input('@lang'))
+del env['LANGUAGE']
 
 # Compilation
 p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
@@ -33,7 +36,7 @@ banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read
 banned_funcs = list(filter(None, banned_funcs))
 
 if banned_funcs:
-    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=dict(os.environ, LANG=input.get_input('@lang')))
+    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=env)
     readelf_output = p.communicate()[0].decode('utf-8')
     for func in banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
