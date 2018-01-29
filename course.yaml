@@ -1,2 +1,17 @@
-name: "[LSINF1252] Systèmes informatiques - 2018"
+name: '[LSINF1252] Systèmes informatiques - 2018'
 accessible: false
+admins:
+- maxhonneux
+tutors: []
+groups_student_choice: false
+use_classrooms: true
+allow_unregister: true
+allow_preview: false
+registration: true
+registration_password: null
+registration_ac: null
+registration_ac_list:
+- ''
+is_lti: false
+lti_keys: {}
+lti_send_back_grade: false
