@@ -73,8 +73,10 @@ problems:
     make_me_less_easy:
         allowed_exts:
         - .zip
-        header: Suppose you cannot use what you did in the above question. Write a
-            Makefile that compiles the above given code and builds an executable ``make_me``.
+        header: |-
+            Suppose you cannot use what you did in the above question. Write a Makefile that compiles the above given code and builds an executable ``make_me``.
+
+            Upload your file here. Do not modify ``make_me.c`` and ``make_me.h``.
         type: file
         name: Make me less easy
 stored_submissions: 0

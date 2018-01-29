@@ -1,7 +1,7 @@
 accessible: true
 author: ''
 context: Given a file containing arbitrary binary bytes, you are asked to define a
-    function that copy the file.
+    function that copy the file. You can not modify the content of the original file.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -17,6 +17,8 @@ problems:
         name: ''
         type: code
         header: |-
+            Write here the body of the function
+
             .. code-block:: c
 
                 void copy(char* file_name, char* new_file_name)
