@@ -6,7 +6,6 @@
     # Licence : GPLv3
 
     import subprocess, shlex, re, os
-    from xml.etree import ElementTree
     from inginious import feedback, rst, input
 
     # Switch working directory to student/
@@ -48,10 +47,12 @@
     # Remove source files
     subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
+    LANG = input.get_input('@lang')
+    print(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)))
     # Run the code in a parallel container
-    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    #run_output = p.communicate()[0].decode('utf-8')
+    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     p.communicate()
+
     # If run failed, exit with "failed" result
     if p.returncode:
         feedback.set_global_result("failed")
