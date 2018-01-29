@@ -1,0 +1,30 @@
+accessible: true
+author: ''
+context: ''
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S5] Get and set on array in file'
+network_grading: false
+problems:
+    q1:
+        language: ''
+        name: ''
+        type: code
+        header: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        description: ''
+        type: 2
+        visible: true
+        name: File
+        id: ''
+weight: 1.0
