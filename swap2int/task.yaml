@@ -16,8 +16,9 @@ problems:
         name: ''
         type: code
         header: |-
-            .. code-block:: pyjavacpp
-            swap(int *i, int *j){
+            .. code-block:: c
+
+                swap(int *i, int *j){
         language: c
 stored_submissions: 0
 submission_limit:
