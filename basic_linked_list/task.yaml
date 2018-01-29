@@ -50,7 +50,7 @@ problems:
                 * @value: value of the node
                 * @return: return the pointer to the new node, NULL either.
                 */
-                node_t* init_node(int value);
+                node_t* init_node(int value){
         type: code
 stored_submissions: 0
 submission_limit:
