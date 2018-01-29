@@ -12,6 +12,7 @@ from inginious import feedback, rst, input
 os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
+print('lang :', input.get_input('@lang'))
 input.parse_template("student_code.c.tpl", "student_code.c")
 
 # Compilation
