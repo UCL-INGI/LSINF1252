@@ -7,10 +7,12 @@ context: |-
     * https://www.gnu.org/software/make/manual/
 
     You have the following folder structure:
-    .. code-block::
-    /
-        make_me.c
-        make_me.h
+
+    .. code-block:: console
+
+        /
+            make_me.c
+            make_me.h
 
     To try it locally, you can download a zip file of the above given folder here.
 environment: pyjavacpp
@@ -43,3 +45,4 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
+order: 2
