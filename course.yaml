@@ -2,13 +2,19 @@ name: '[LSINF1252] Systèmes informatiques - 2018'
 accessible: true
 admins:
 - maxhonneux
+- vanstratum
+- martinol
+- nrybowski
+- mawait
+- pgonzalezalv
+- rousseauxt
 tutors: []
-groups_student_choice: false
+groups_student_choice: true
 use_classrooms: true
 allow_unregister: true
-allow_preview: false
+allow_preview: true
 registration: true
-registration_password: intel
+registration_password: null
 registration_ac: null
 registration_ac_list:
 - ''
