@@ -15,8 +15,13 @@ problems:
     enqueue:
         type: code
         header: ''
-        name: Enqueue
         language: c
+        name: Enqueue
+    dequeue:
+        type: code
+        language: ''
+        name: Dequeue
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
