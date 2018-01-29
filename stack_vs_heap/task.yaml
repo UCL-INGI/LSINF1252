@@ -1,7 +1,21 @@
 accessible: true
 author: Nicolas Rybowski
-context: On vous demande d'implémenter deux versions d'une même fonction et de comparer
-    les résultats.
+context: |-
+    On vous demande d'implémenter deux versions d'une même fonction et de comparer les résultats.
+
+    .. code-block:: c
+
+        void main(int argc, char **argv){
+            int a1 = 5, b1 = 6;
+
+            sum1(a1, b1);
+            print(a1); // retour1
+
+            int *a2 = 5, *b2 = 6;
+
+            sum2(a2, b2);
+            print(*a2); // retour2
+        }
 environment: pyjavacpp
 evaluate: best
 groups: false
