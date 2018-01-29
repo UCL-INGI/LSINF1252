@@ -11,8 +11,9 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S4] File integers reading'
+name: '[S5] File integers reading'
 network_grading: false
+order: 10
 problems:
     q1:
         language: c
@@ -34,4 +35,3 @@ tags:
         name: File
         id: ''
 weight: 1.0
-order: 10
