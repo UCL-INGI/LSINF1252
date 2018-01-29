@@ -29,6 +29,7 @@ else:
 
 # Parse banned functions
 banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+banned_funcs = list(filter(None, banned_funcs))
 
 if banned_funcs:
     p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)

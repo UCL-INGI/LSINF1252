@@ -1,6 +1,7 @@
 accessible: true
 author: Arthur van Stratum
-context: ''
+context: Écrivez le corps de la fonction swap qui échange le contenu des deux variable
+    i et j.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -14,8 +15,10 @@ problems:
     q1:
         name: ''
         type: code
-        header: Dans cette tâche, vous allez échanger le contenu des deux variable
-            i et j.
+        header: |-
+            .. code-block:: c
+
+                swap(int *i, int *j){
         language: c
 stored_submissions: 0
 submission_limit:
