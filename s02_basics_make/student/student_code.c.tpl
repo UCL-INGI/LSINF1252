@@ -1,8 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include "make_me.h"
 
-int myfunc(int n) {
-@    @myfunc@@
+int main() {
+        print_make_me();
+        return 0;
 }
 
-
+void print_make_me() {
+        printf("Make me\n");
+}
