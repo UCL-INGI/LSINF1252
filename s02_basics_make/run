@@ -27,20 +27,20 @@ else:
     feedback.set_global_feedback("- Votre code compile.\n")
 
 # Parse banned functions
-try:
-    banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-    banned_funcs = list(filter(None, banned_funcs))
-except IndexError:
-    banned_funcs = []
+# try:
+#     banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+#     banned_funcs = list(filter(None, banned_funcs))
+# except IndexError:
+#     banned_funcs = []
 
-if banned_funcs:
-    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    readelf_output = p.communicate()[0].decode('utf-8')
-    for func in banned_funcs:
-        if re.search("UND {}\n".format(func), readelf_output):
-            feedback.set_global_result("failed")
-            feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
-            exit(0)
+# if banned_funcs:
+#     p = subprocess.Popen(shlex.split("readelf -s make_me.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+#     readelf_output = p.communicate()[0].decode('utf-8')
+#     for func in banned_funcs:
+#         if re.search("UND {}\n".format(func), readelf_output):
+#             feedback.set_global_result("failed")
+#             feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
+#             exit(0)
 
 
 # Remove source files
@@ -67,9 +67,9 @@ if p.returncode:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
     else:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
-    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)    
+    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
     exit(0)
-#elif run_output:   
+#elif run_output:
 #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
 
 # Comment to run the tests
@@ -103,13 +103,13 @@ for test in results:
         feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
                 test['pid'], True)
         tests_result[test['pid']] = False
-        
+
 for pid, result in tests_result.items():
     if result:
         feedback.set_problem_result("success", pid)
     else:
         feedback.set_problem_result("failed", pid)
-        
+
 
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)
