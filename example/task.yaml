@@ -1,0 +1,40 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    int myfunc(int n) {
+    @    @myfunc@@
+    }
+
+
+/student/student_code.h: |
+    int myfunc(int n);
+accessible: true
+author: Mathieu Xhonneux
+context: Petit exemple INGInious
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: Exemple d'exercice
+network_grading: false
+problems:
+    myfunc:
+        type: code
+        name: My function
+        language: c
+        header: |
+            Codez ci-dessous le code de la function int myfunc(int n) qui renvoie n+1.
+
+            .. code-block:: c
+
+                int myfunc(int n) {
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
