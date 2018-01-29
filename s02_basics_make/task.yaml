@@ -50,8 +50,7 @@ context: |-
             make_me.c
             make_me.h
 
-    To try it locally, you can download a zip file of the above given folder
-    `Here<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>_`.
+    To try it locally, you can download a zip file of the above given folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -70,13 +69,12 @@ problems:
         header: |-
             You want to build an executable ``make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
 
-            **Hint**: you do not need to write a *Makefile*.
+            **Hint:** you do not need to write a *Makefile*.
     make_me_less_easy:
         allowed_exts:
-        - Makefile
+        - .zip
         header: Suppose you cannot use what you did in the above question. Write a
-            Makefile file that compiles the above given code and builds an executable
-            `make_me`.
+            Makefile that compiles the above given code and builds an executable `make_me`.
         type: file
         name: Make me less easy
 stored_submissions: 0
