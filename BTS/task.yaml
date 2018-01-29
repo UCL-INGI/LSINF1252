@@ -1,0 +1,25 @@
+accessible: true
+author: ''
+context: |
+    For this task, you will learn to search into a binary tree.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: Binary Search Tree
+network_grading: false
+problems:
+    contains:
+        language: c
+        type: code
+        header: ''
+        name: Methode contains
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
