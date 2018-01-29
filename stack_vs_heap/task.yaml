@@ -1,0 +1,36 @@
+accessible: true
+author: Nicolas Rybowski
+context: On vous demande d'implémenter deux versions d'une même fonction et de comparer
+    les résultats.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: Stack vs Heap
+network_grading: false
+problems:
+    version1:
+        type: code
+        name: Version stack
+        header: |
+            .. code-block:: c
+
+                void sum(int a, int b){
+        language: c
+    version2:
+        type: code
+        language: c
+        name: Version heap
+        header: |
+            .. code-block:: c
+
+                void sum(int* a, int* b){
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
