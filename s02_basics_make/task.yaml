@@ -51,7 +51,7 @@ context: |-
             make_me.h
 
     To try it locally, you can download a zip file of the above given folder
-    .. Here: https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip
+    `Here<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>_`.
 environment: pyjavacpp
 evaluate: best
 groups: false
