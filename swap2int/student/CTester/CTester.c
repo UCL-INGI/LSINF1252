@@ -101,8 +101,6 @@ void alarm_handler(int sig, siginfo_t *unused, void *unused2)
 
 int sandbox_begin()
 {
-    wrap_monitoring = true;
-
     // Start timer
     it_val.it_value.tv_sec = 2;
     it_val.it_value.tv_usec = 0;
@@ -112,6 +110,8 @@ int sandbox_begin()
 
     close(STDERR_FILENO);
     dup2(pipe_stderr[1], STDERR_FILENO);
+
+    wrap_monitoring = true;
 
     return (sigsetjmp(segv_jmp,1) == 0);
 }
@@ -123,6 +123,8 @@ void sandbox_fail()
 
 void sandbox_end()
 {
+    wrap_monitoring = false;
+
     // Remapping stderr to the orignal one ...
     close(STDERR_FILENO);
     dup2(true_stderr, STDERR_FILENO);
@@ -138,7 +140,6 @@ void sandbox_end()
         write(STDERR_FILENO, buf, n);
     }
 
-    wrap_monitoring = false;
 
     it_val.it_value.tv_sec = 0;
     it_val.it_value.tv_usec = 0;
@@ -172,8 +173,11 @@ int __wrap_exit(int status){
     return status;
 }
 
-int run_tests(void *tests[], int nb_tests) {
-    int ret;
+int run_tests(int argc, char *argv[], void *tests[], int nb_tests) {
+    for (int i=1; i < argc; i++) {
+        if (!strncmp(argv[i], "LANGUAGE=", 9))
+                putenv(argv[i]);
+    }
     setlocale (LC_ALL, "");
     bindtextdomain("tests", getenv("PWD"));
     bind_textdomain_codeset("messages", "UTF-8");
@@ -206,7 +210,7 @@ int run_tests(void *tests[], int nb_tests) {
     sa.sa_sigaction = segv_handler;
     sigaltstack(&ss, 0);
     sigfillset(&sa.sa_mask);
-    ret = sigaction(SIGSEGV, &sa, NULL);
+    int ret = sigaction(SIGSEGV, &sa, NULL);
     if (ret)
         return ret;
     sa.sa_sigaction = alarm_handler;
