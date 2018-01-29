@@ -14,9 +14,9 @@ network_grading: false
 problems:
     push:
         type: code
-        name: Push
         language: c
         header: ''
+        name: Push
     pop:
         header: ''
         name: Pop
@@ -26,5 +26,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
+        name: Data structures
+        id: ''
 weight: 1.0

@@ -26,5 +26,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        name: Data structures
+        visible: true
+        type: 2
+        description: Task dealing with data structures and linked list
+        id: ''
 weight: 1.0

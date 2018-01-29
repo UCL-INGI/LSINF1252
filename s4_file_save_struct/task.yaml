@@ -1,6 +1,13 @@
 accessible: true
-author: ''
-context: ''
+author: Olivier Martin
+context: |-
+    .. code-block:: c
+
+        struct 3dpoint{
+            double x;
+            double y;
+            double z;
+        };
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -8,7 +15,7 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: ''
+name: '[S4] Save struct into file'
 network_grading: false
 problems:
     q1:
