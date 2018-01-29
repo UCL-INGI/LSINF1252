@@ -7,10 +7,12 @@ context: |-
     * https://www.gnu.org/software/make/manual/
 
     You have the following folder structure:
-    .. code-block::
-    /
-        make_me.c
-        make_me.h
+
+    .. code-block:: console
+
+        /
+            make_me.c
+            make_me.h
 
     To try it locally, you can download a zip file of the above given folder here.
 environment: pyjavacpp
@@ -22,16 +24,19 @@ limits:
     time: '30'
 name: '[S02] Makefile basics'
 network_grading: false
+order: 2
 problems:
     make_me_easy:
         name: Make me easy
         type: match
         answer: make make_me
         header: |-
-            You want to build an executable ```make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
+            You want to build an executable ``make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
 
-            Hint: you do not need to write a Makefile.
+            **Hint**: you do not need to write a *Makefile*.
     make_me_less_easy:
+        allowed_exts:
+        - Makefile
         header: Suppose you cannot use what you did in the above question. Write a
             Makefile file that compiles the above given code and builds an executable
             `make_me`.
