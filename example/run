@@ -12,7 +12,6 @@ from inginious import feedback, rst, input
 os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
-print('lang :', input.get_input('@lang'))
 input.parse_template("student_code.c.tpl", "student_code.c")
 
 # Compilation
@@ -29,8 +28,11 @@ else:
     feedback.set_global_feedback("- Votre code compile.\n")
 
 # Parse banned functions
-banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-banned_funcs = list(filter(None, banned_funcs))
+try:
+    banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+    banned_funcs = list(filter(None, banned_funcs))
+except IndexError:
+    banned_funcs = []
 
 if banned_funcs:
     p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
