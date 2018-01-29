@@ -1,0 +1,29 @@
+accessible: true
+author: Arthur van Stratum
+context: ''
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S2] Bit counting'
+network_grading: false
+problems:
+    q1:
+        language: c
+        name: ''
+        type: code
+        header: |-
+            Write the body of a function that returns the number of bits set to 1 in i.
+            e.g. nbits(4)=1, nbits(7)=3, nbits(-2)=2
+            .. code-block:: c
+
+                int nbits(int i){
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
