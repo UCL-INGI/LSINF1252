@@ -1,0 +1,45 @@
+accessible: true
+author: ''
+context: |+
+    For this task, you will learn to search into a binary tree.
+
+
+    .. code-block:: c
+
+        typedef struct node{
+            int value;
+            struct node* left;
+            struct node* right;
+        } node_t;
+
+
+    .. code-block:: c
+
+        typedef struct bt{
+            struct node* root;
+        } bt_t;
+
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: '[S3] Binary Search Tree'
+network_grading: false
+problems:
+    contains:
+        language: c
+        type: code
+        header: |-
+            .. code-block:: c
+
+                int contains(bt_t* tree){
+        name: Methode contains
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

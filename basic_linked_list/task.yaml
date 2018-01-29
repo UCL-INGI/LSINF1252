@@ -73,6 +73,7 @@
 
     int main(int argc,char** argv)
     {
+
         RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem) ;
     }
 accessible: true
@@ -80,7 +81,7 @@ author: Maxime Mawait & Nicolas Rybowski
 context: |+
     On vous demande d'implémenter une liste chaînée de base. Pour ce faire, vous devrez manipuler des pointeurs.
 
-    .. code-block:: pyjavacpp
+    .. code-block:: c
 
         /**
         * Structure node
@@ -112,14 +113,14 @@ limits:
     output: '2'
     time: '30'
     memory: '100'
-name: Liste chaînée basique
+name: '[S3] Liste chaînée basique'
 network_grading: false
 problems:
     init_node:
         language: c
         name: Initialisation d'un noeud
         header: |
-            .. code-block:: pyjavacpp
+            .. code-block:: c
 
                 /*
                 * Create a new node with the value @value
