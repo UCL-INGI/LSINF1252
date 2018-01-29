@@ -1,121 +1,293 @@
-/run: |
-    #!/bin/python3
+/student/CTester/CTester.c: |
+    #define _GNU_SOURCE
+    #include <dlfcn.h>
+    #include <malloc.h>
 
-    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
-    # Auteurs : Mathieu Xhonneux, Anthony Gégo
-    # Licence : GPLv3
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <setjmp.h>
+    #include <signal.h>
+    #include <errno.h>
+    #include <sys/time.h>
 
-    import subprocess, shlex, re, os
-    from xml.etree import ElementTree
-    from inginious import feedback, rst, input
+    #include <CUnit/CUnit.h>
+    #include <CUnit/Basic.h>
+    #include <CUnit/Automated.h>
 
-    # Switch working directory to student/
-    os.chdir("student")
+    #include <libintl.h>
+    #include <locale.h>
+    #define _(STRING) gettext(STRING)
 
-    # Fetch and save the student code into a file for compilation
-    input.parse_template("student_code.c.tpl", "student_code.c")
+    #include "wrap.h"
 
-    # Env
-    env = dict(os.environ, LANG=input.get_input('@lang'))
-    del env['LANGUAGE']
-    del env['LC_ALL']
-    env['LANG'] = 'fr_BE.utf8'
-    print(env)
+    extern bool wrap_monitoring;
+    extern struct wrap_stats_t stats;
+    extern struct wrap_monitor_t monitored;
+    extern struct wrap_fail_t failures;
+    extern struct wrap_log_t logs;
 
-    # Compilation
-    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    make_output = p.communicate()[0].decode('utf-8')
-    # If compilation failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_global_result("failed")
-        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
-        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
-        exit(0)
-    else:
-        feedback.set_global_result("success")
-        feedback.set_global_feedback("- Votre code compile.\n")
+    sigjmp_buf segv_jmp;
+    int true_stderr;
+    int pipe_stderr[2];
+    struct itimerval it_val;
 
-    # Parse banned functions
-    banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-    banned_funcs = list(filter(None, banned_funcs))
-
-    if banned_funcs:
-        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=env)
-        readelf_output = p.communicate()[0].decode('utf-8')
-        for func in banned_funcs:
-            if re.search("UND {}\n".format(func), readelf_output):
-                feedback.set_global_result("failed")
-                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
-                exit(0)
+    CU_pSuite pSuite = NULL;
 
 
-    # Remove source files
-    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+    struct info_msg {
+        char *msg;
+        struct info_msg *next;
+    };
 
-    # Run the code in a parallel container
-    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    #run_output = p.communicate()[0].decode('utf-8')
-    p.communicate()
-    # If run failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_global_result("failed")
-        if p.returncode == 256-8:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
-        elif p.returncode == 256-11:
-           montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
-        elif p.returncode == 252:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
-        elif p.returncode == 253:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
-        else:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
-        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
-        exit(0)
-    #elif run_output:
-    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
-
-    # Comment to run the tests
-    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
-    #exit(0)
-
-    # Fetch CUnit test results
-    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'info_msgs':r[4:]} for r in results_raw]
+    struct __test_metadata {
+        struct info_msg *fifo_in;
+        struct info_msg *fifo_out;
+        char problem[140];
+        char descr[250];
+        unsigned int weight;
+        int err;
+    } test_metadata;
 
 
-    # Produce feedback
-    if all([r['code'] == 'SUCCESS' for r in results]):
-        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
-    else:
-        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+    void set_test_metadata(char *problem, char *descr, unsigned int weight)
+    {
+        test_metadata.weight = weight;
+        strncpy(test_metadata.problem, problem, sizeof(test_metadata.problem));
+        strncpy(test_metadata.descr, descr, sizeof(test_metadata.descr));
+    }
 
-    score = 0
-    total = 0
-    tests_result = {}
+    void push_info_msg(char *msg)
+    {
+        if (strstr(msg, "#") != NULL || strstr(msg, "\n") != NULL) {
+            test_metadata.err = EINVAL;
+            return;
+        }
 
-    for test in results:
-        total += test['weight']
+        struct info_msg *item = malloc(sizeof(struct info_msg));
+        if (item == NULL)
+            test_metadata.err = ENOMEM;
 
-        if test['code'] == 'SUCCESS':
-            score += test['weight']
-            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
-                    test['pid'], True)
-            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
-        else:
-            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
-                    test['pid'], True)
-            tests_result[test['pid']] = False
+        item->next = NULL;
+        item->msg = malloc(strlen(msg) + 1);
+        if (item->msg == NULL)
+            test_metadata.err = ENOMEM;
 
-    for pid, result in tests_result.items():
-        if result:
-            feedback.set_problem_result("success", pid)
-        else:
-            feedback.set_problem_result("failed", pid)
+        strcpy(item->msg, msg);
+        if (test_metadata.fifo_in == NULL && test_metadata.fifo_out == NULL) {
+            test_metadata.fifo_in = item;
+            test_metadata.fifo_out = item;
+        } else {
+            test_metadata.fifo_out->next = item;
+            test_metadata.fifo_out = item;
+        }
+    }
 
 
-    score = 100*score/(total if not total == 0 else 1)
-    feedback.set_grade(score)
-    feedback.set_global_result("success" if score >= 50 else "failed")
+    void segv_handler(int sig, siginfo_t *unused, void *unused2)
+    {
+        push_info_msg(_("Your code produced a segfault."));
+        siglongjmp(segv_jmp, 1);
+    }
+
+    void alarm_handler(int sig, siginfo_t *unused, void *unused2)
+    {
+        push_info_msg(_("Your code exceeded the maximal allowed execution time."));
+        siglongjmp(segv_jmp, 1);
+    }
+
+
+    int sandbox_begin()
+    {
+        wrap_monitoring = true;
+
+        // Start timer
+        it_val.it_value.tv_sec = 2;
+        it_val.it_value.tv_usec = 0;
+        it_val.it_interval.tv_sec = 0;
+        it_val.it_interval.tv_usec = 0;
+        setitimer(ITIMER_REAL, &it_val, NULL);
+
+        close(STDERR_FILENO);
+        dup2(pipe_stderr[1], STDERR_FILENO);
+
+        return (sigsetjmp(segv_jmp,1) == 0);
+    }
+
+    void sandbox_fail()
+    {
+        CU_FAIL("Segmentation Fault or Timeout");
+    }
+
+    void sandbox_end()
+    {
+        // Remapping stderr to the orignal one ...
+        close(STDERR_FILENO);
+        dup2(true_stderr, STDERR_FILENO);
+
+        // ... and looking for a double free warning
+        char buf[BUFSIZ];
+        int n;
+        while ((n = read(pipe_stderr[0], buf, BUFSIZ)) > 0) {
+            if (strstr(buf, "double free or corruption") != NULL) {
+                CU_FAIL("Double free or corruption");
+                push_info_msg(_("Your code produced a double free."));
+            }
+            write(STDERR_FILENO, buf, n);
+        }
+
+        wrap_monitoring = false;
+
+        it_val.it_value.tv_sec = 0;
+        it_val.it_value.tv_usec = 0;
+        it_val.it_interval.tv_sec = 0;
+        it_val.it_interval.tv_usec = 0;
+        setitimer(ITIMER_REAL, &it_val, NULL);
+    }
+
+
+    int init_suite1(void)
+    {
+        return 0;
+    }
+
+    int clean_suite1(void)
+    {
+        return 0;
+    }
+
+    void start_test()
+    {
+        bzero(&test_metadata,sizeof(test_metadata));
+        bzero(&stats,sizeof(stats));
+        bzero(&failures,sizeof(failures));
+        bzero(&monitored,sizeof(monitored));
+        bzero(&logs,sizeof(logs));
+    }
+
+    int __real_exit(int status);
+    int __wrap_exit(int status){
+        return status;
+    }
+
+    int run_tests(void *tests[], int nb_tests) {
+        int ret;
+        setlocale(LC_ALL, "");
+        bindtextdomain("tests", getenv("PWD"));
+        bind_textdomain_codeset("messages", "UTF-8");
+        textdomain("tests");
+
+        mallopt(M_PERTURB, 142); // newly allocated memory with malloc will be set to ~142
+
+        // Code for detecting properly double free errors
+        mallopt(M_CHECK_ACTION, 1); // don't abort if double free
+        true_stderr = dup(STDERR_FILENO); // preparing a non-blocking pipe for stderr
+        pipe(pipe_stderr);
+        int flags = fcntl(pipe_stderr[0], F_GETFL, 0);
+        fcntl(pipe_stderr[0], F_SETFL, flags | O_NONBLOCK);
+        putenv("LIBC_FATAL_STDERR_=2"); // needed otherwise libc doesn't print to program's stderr
+
+        /* make sure that we catch segmentation faults */
+        struct sigaction sa;
+
+        memset(&sa, 0, sizeof(sigaction));
+        sigemptyset(&sa.sa_mask);
+        static char stack[SIGSTKSZ];
+        stack_t ss = {
+            .ss_size = SIGSTKSZ,
+            .ss_sp = stack,
+        };
+
+        sa.sa_flags     = SA_NODEFER|SA_ONSTACK|SA_RESTART;
+        sa.sa_sigaction = segv_handler;
+        sigaltstack(&ss, 0);
+        sigfillset(&sa.sa_mask);
+        ret = sigaction(SIGSEGV, &sa, NULL);
+        if (ret)
+            return ret;
+        sa.sa_sigaction = alarm_handler;
+        ret = sigaction(SIGALRM, &sa, NULL);
+        if (ret)
+            return ret;
+
+
+        /* Output file containing succeeded / failed tests */
+        FILE* f_out = fopen("results.txt", "w");
+        if (!f_out)
+            return -ENOENT;
+
+
+        /* initialize the CUnit test registry */
+        if (CUE_SUCCESS != CU_initialize_registry())
+            return CU_get_error();
+
+        /* add a suite to the registry */
+        pSuite = CU_add_suite("Suite_1", init_suite1, clean_suite1);
+        if (NULL == pSuite) {
+            CU_cleanup_registry();
+            return CU_get_error();
+        }
+
+        for (int i=0; i < nb_tests; i++) {
+            Dl_info  DlInfo;
+            if (dladdr(tests[i], &DlInfo) == 0)
+                return -EFAULT;
+
+            CU_pTest pTest;
+            if ((pTest = CU_add_test(pSuite, DlInfo.dli_sname, tests[i])) == NULL) {
+                    CU_cleanup_registry();
+                    return CU_get_error();
+            }
+
+            printf("\n==== Results for test %s : ====\n", DlInfo.dli_sname);
+
+            start_test();
+
+            CU_ErrorCode ret = CU_basic_run_test(pSuite,pTest);
+            if (ret != CUE_SUCCESS)
+                return CU_get_error();
+
+            if (test_metadata.err)
+                return test_metadata.err;
+
+            int nb = CU_get_number_of_tests_failed();
+            if (nb > 0)
+                ret = fprintf(f_out, "%s#FAIL#%s#%d", test_metadata.problem,
+                        test_metadata.descr, test_metadata.weight);
+
+            else
+                ret = fprintf(f_out, "%s#SUCCESS#%s#%d", test_metadata.problem,
+                        test_metadata.descr, test_metadata.weight);
+            if (ret < 0)
+                return ret;
+
+            while (test_metadata.fifo_in != NULL) {
+                struct info_msg *head = test_metadata.fifo_in;
+                ret = fprintf(f_out, "#%s", head->msg);
+
+                if (head->msg != NULL)
+                    free(head->msg);
+                test_metadata.fifo_in = head->next;
+                free(head);
+
+                if (ret < 0)
+                    return ret;
+            }
+
+            test_metadata.fifo_out = NULL;
+            ret = fprintf(f_out, "\n");
+            if (ret < 0)
+                return ret;
+
+        }
+
+        fclose(f_out);
+
+        /* Run all tests using the CUnit Basic interface */
+        //CU_basic_run_tests();
+        //CU_automated_run_tests();
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
 accessible: true
 author: Mathieu Xhonneux
 context: Petit exemple INGInious
@@ -131,8 +303,8 @@ network_grading: false
 problems:
     myfunc:
         type: code
-        language: c
         name: My function
+        language: c
         header: |
             Codez ci-dessous le code de la function int myfunc(int n) qui renvoie n+1.
 
