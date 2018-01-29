@@ -1,30 +1,150 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: On vous demande d'implémenter les fonctions `enqueue` et `dequeue` d'une
-    queue basée sur une liste simplement doublement chainée circulaire.
+context: |-
+    You are asked to implement `enqueue` and `dequeue` functions of a `Queue` with doubly circular linked list.
+
+    .. code-block:: c
+
+        typedef struct node{
+          struct node* next;
+          int value;
+        } node_t;
+
+        typedef struct queue{
+          struct node* head;
+        } queue_t  ;
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
+    output: '2'
 name: '[S4] Queue avancée'
 network_grading: false
 problems:
     enqueue:
-        type: code
         header: ''
-        language: c
         name: Enqueue
-    dequeue:
-        type: code
         language: c
-        name: Dequeue
+        type: code
+    dequeue:
         header: ''
+        name: Dequeue
+        language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        description: Task dealing with data structures and linked list
+        type: 2
+        name: Data structures
+        visible: false
+        id: ''
+    '10':
+        description: Task dealing with data structures and linked list
+        type: 2
+        name: Data structures
+        visible: false
+        id: ''
+    '11':
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        type: 2
+        visible: false
+        id: ''
+    '12':
+        type: 2
+        name: Data structures
+        description: Task dealing with data structures and linked list
+        visible: false
+        id: ''
+    '13':
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        type: 2
+        visible: false
+        id: ''
+    '14':
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        type: 2
+        visible: false
+        id: ''
+    '15':
+        type: 2
+        name: Data structures
+        description: Task dealing with data structures and linked list
+        visible: false
+        id: ''
+    '16':
+        name: Data structures
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: false
+        id: ''
+    '17':
+        description: Task dealing with data structures and linked list
+        type: 2
+        name: Data structures
+        visible: false
+        id: ''
+    '18':
+        description: Task dealing with data structures and linked list
+        type: 2
+        name: Data structures
+        visible: false
+        id: ''
+    '2':
+        name: Data structures
+        type: 2
+        description: Task dealing with data structures and linked list
+        visible: false
+        id: ''
+    '3':
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        type: 2
+        visible: false
+        id: ''
+    '4':
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        type: 2
+        visible: false
+        id: ''
+    '5':
+        name: Data structures
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: false
+        id: ''
+    '6':
+        description: Task dealing with data structures and linked list
+        type: 2
+        name: Data structures
+        visible: false
+        id: ''
+    '7':
+        type: 2
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        visible: false
+        id: ''
+    '8':
+        name: Data structures
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: false
+        id: ''
+    '9':
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        type: 2
+        visible: false
+        id: ''
 weight: 1.0
+order: 7

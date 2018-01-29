@@ -18,7 +18,8 @@ input.parse_template("student_code.c.tpl", "student_code.c")
 env = dict(os.environ, LANG=input.get_input('@lang'))
 del env['LANGUAGE']
 del env['LC_ALL']
-env['LANG'] = 'fr_BE.utf8'
+env['LANG'] = 'fr'
+env['LANGUAGE'] = 'fr'
 print(env)
 
 # Compilation
@@ -35,8 +36,11 @@ else:
     feedback.set_global_feedback("- Votre code compile.\n")
 
 # Parse banned functions
-banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-banned_funcs = list(filter(None, banned_funcs))
+try:
+    banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+    banned_funcs = list(filter(None, banned_funcs))
+except IndexError:
+    banned_funcs = []
 
 if banned_funcs:
     p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=env)

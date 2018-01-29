@@ -7,8 +7,8 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
 name: '[S3] Queue simple'
 network_grading: false
 problems:
@@ -18,13 +18,20 @@ problems:
         language: c
         name: Enqueue
     dequeue:
-        type: code
-        language: ''
-        name: Dequeue
         header: ''
+        name: Dequeue
+        language: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        type: 2
+        visible: true
+        description: Task dealing with data structures and linked list
+        name: Data structures
+        id: ''
 weight: 1.0
+order: 4

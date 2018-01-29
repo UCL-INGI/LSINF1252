@@ -1,7 +1,7 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: Given the provided implementation of a linked list, you are asked to implement
-    of the insert function based on a specific order relation.
+context: You are asked to implement the `pop` and `push` functions of the given stack
+    interface.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -9,29 +9,29 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S4] Order relation on a linked list'
+name: '[S3] Simple stack'
 network_grading: false
 problems:
-    insert:
-        header: ''
-        language: c
+    push:
         type: code
-        name: Insert
-    order_relation:
         language: c
-        type: code
         header: ''
-        name: Order relation
+        name: Push
+    pop:
+        header: ''
+        name: Pop
+        type: code
+        language: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
-        name: Data structures
-        visible: true
-        type: 2
+    '0':
         description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
+        name: Data structures
         id: ''
 weight: 1.0
-order: 8
+order: 5
