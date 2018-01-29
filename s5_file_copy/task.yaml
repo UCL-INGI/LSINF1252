@@ -1,6 +1,7 @@
 accessible: true
 author: ''
-context: ''
+context: Given a file containing arbitrary binary bytes, you are asked to define a
+    function that copy the file.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -15,7 +16,10 @@ problems:
         language: ''
         name: ''
         type: code
-        header: ''
+        header: |-
+            .. code-block:: c
+
+                void copy(char* file_name, char* new_file_name)
 stored_submissions: 0
 submission_limit:
     amount: -1

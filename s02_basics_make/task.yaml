@@ -50,7 +50,7 @@ context: |-
             make_me.c
             make_me.h
 
-    To try it locally, you can download a zip file of the above given folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>`_.
+    To try the following questions locally, you can download a zip file of the above given folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -74,7 +74,7 @@ problems:
         allowed_exts:
         - .zip
         header: Suppose you cannot use what you did in the above question. Write a
-            Makefile that compiles the above given code and builds an executable `make_me`.
+            Makefile that compiles the above given code and builds an executable ``make_me``.
         type: file
         name: Make me less easy
 stored_submissions: 0
