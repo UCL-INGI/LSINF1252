@@ -42,7 +42,7 @@ except IndexError:
     banned_funcs = []
 
 if banned_funcs:
-    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=env)
+    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     readelf_output = p.communicate()[0].decode('utf-8')
     for func in banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
@@ -55,7 +55,7 @@ if banned_funcs:
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
 # Run the code in a parallel container
-p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=env)
 #run_output = p.communicate()[0].decode('utf-8')
 p.communicate()
 # If run failed, exit with "failed" result

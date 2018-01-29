@@ -1,6 +1,9 @@
 accessible: true
 author: ''
-context: ''
+context: |-
+    Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
+
+    Since the array is huge, you can not load it entierly into memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek()``.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -14,8 +17,13 @@ problems:
     q1:
         language: ''
         name: ''
-        type: code
         header: ''
+        type: code
+    q2:
+        language: ''
+        header: ''
+        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
