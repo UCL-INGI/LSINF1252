@@ -1,5 +1,5 @@
 accessible: true
-author: ''
+author: Olivier Martin
 context: |-
     Given a file containing some (possibly none) positive integers (``int``), write a code that computes the sum of all integers present in the file. The sum have to be returned.
 
