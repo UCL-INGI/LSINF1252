@@ -12,7 +12,7 @@ void test_myfunc_ret() {
     SANDBOX_BEGIN;
     ret = myfunc(41);
     SANDBOX_END;
-    push_info_msg(_("Your function didn't fail."))
+    push_info_msg(_("Your function didn't fail."));
 
     if (ret % 2 == 0)
         push_info_msg(_("You returned a pair number !"));
