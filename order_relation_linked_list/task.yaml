@@ -1,0 +1,30 @@
+accessible: true
+author: Maxime Mawait & Nicolas Rybowski
+context: Given the provided implementation of a linked list, you are asked to implement
+    of the insert function based on a specific order relation.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S4] Order relation on a linked list'
+network_grading: false
+problems:
+    insert:
+        header: ''
+        language: c
+        type: code
+        name: Insert
+    order_relation:
+        language: c
+        type: code
+        header: ''
+        name: Order relation
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
