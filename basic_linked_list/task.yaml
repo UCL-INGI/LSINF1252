@@ -41,7 +41,16 @@ problems:
     init_node:
         language: c
         name: Initialisation d'un noeud
-        header: ''
+        header: |
+            .. code-block:: pyjavacpp
+
+                /*
+                * Create a new node with the value @value
+                *
+                * @value: value of the node
+                * @return: return the pointer to the new node, NULL either.
+                */
+                node_t* init_node(int value);
         type: code
 stored_submissions: 0
 submission_limit:
