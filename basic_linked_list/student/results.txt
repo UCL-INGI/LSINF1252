@@ -1,0 +1,3 @@
+init_node#SUCCESS#Check memory allocation of the node#1
+init_node#SUCCESS#Check the value of the node#1
+init_node#SUCCESS#Check the return value if malloc call fails#1

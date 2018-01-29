@@ -1,0 +1,60 @@
+accessible: true
+author: Maxime Mawait & Nicolas Rybowski
+context: |+
+    On vous demande d'implémenter une liste chaînée de base. Pour ce faire, vous devrez manipuler des pointeurs.
+
+    .. code-block:: pyjavacpp
+
+        /**
+        * Structure node
+        *
+        * @next: pointer to the next node in the list, NULL if last node_t
+        * @value: value of the node
+        */
+        typedef struct node{
+          struct node* next;
+          int value;
+        } node_t;
+
+        /**
+        * Structure list
+        *
+        * @first: first node of the list, NULL if empty
+        * @size: number of nodes in the list.
+        */
+        typedef struct list{
+          struct node* first;
+          int* size;
+        } list_t  ;
+
+
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: Liste chaînée basique
+network_grading: false
+problems:
+    init_node:
+        language: c
+        name: Initialisation d'un noeud
+        header: |
+            .. code-block:: pyjavacpp
+
+                /*
+                * Create a new node with the value @value
+                *
+                * @value: value of the node
+                * @return: return the pointer to the new node, NULL either.
+                */
+                node_t* init_node(int value){
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
