@@ -37,6 +37,8 @@
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
+    *Estimated time: 1-3 minutes*
+
     This tasks will help you get a first taste of Makefiles. For more details, please refer to the following pages:
 
     * https://sites.uclouvain.be/SystInfo/notes/Outils/html/make.html

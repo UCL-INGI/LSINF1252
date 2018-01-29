@@ -21,6 +21,12 @@ problems:
 
             .. code-block:: c
 
+                /*
+                 * @pre file_name != NULL, name of the original file
+                 *      new_file_name != NULL, name of the new file (the copy)
+                 *
+                 * @post copy the content of {file_name} in {new_file_name}
+                 */
                 void copy(char* file_name, char* new_file_name)
 stored_submissions: 0
 submission_limit:
