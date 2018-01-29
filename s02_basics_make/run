@@ -11,7 +11,7 @@ from inginious import feedback, rst, input
 os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
-input.parse_template("Makefile.tpl", "Makefile")
+input.parse_template("student_code.c.tpl", "student_code.c")
 
 # Compilation
 p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
@@ -46,9 +46,7 @@ if banned_funcs:
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
-LANG = 'en'
-if input.get_input('@lang') == 'fr':
-    LANG = 'fr_BE.utf8'
+LANG = input.get_input('@lang')
 
 # Run the code in a parallel container
 p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
