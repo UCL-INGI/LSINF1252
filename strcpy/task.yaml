@@ -1,0 +1,27 @@
+accessible: true
+author: Nicolas Rybowski
+context: On vous demande de réimplémenter la fonction `strcpy <https://linux.die.net/man/3/strcpy>`_
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: Strcpy
+network_grading: false
+problems:
+    strcpy_impl:
+        type: code
+        language: c
+        name: Implémentation
+        header: |
+            .. code-block:: c
+
+                char *strcpy(char *dest, const char *src);
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
