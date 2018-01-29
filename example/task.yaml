@@ -48,9 +48,11 @@
     subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
     LANG = input.get_input('@lang')
-    print(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)))
+    cmd = ['run_student', '--time', '20', '--hard-time', '60', './tests LANGUAGE='+LANG]
     # Run the code in a parallel container
-    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    #p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+
     p.communicate()
 
     # If run failed, exit with "failed" result
