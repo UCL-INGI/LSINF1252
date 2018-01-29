@@ -4,12 +4,12 @@ context: |-
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
     Since the array is huge, you can not load it entierly into memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek()``.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
+    memory: '10'
     time: '30'
 name: '[S5] Get and set on array in file'
 network_grading: false
@@ -17,11 +17,17 @@ problems:
     q1:
         language: ''
         name: ''
-        header: ''
+        header: |-
+            .. code-block:: c
+
+                int get(int index)
         type: code
     q2:
         language: ''
-        header: ''
+        header: |-
+            .. code-block:: c
+
+                void set(int index, int value)
         name: ''
         type: code
 stored_submissions: 0
