@@ -1,6 +1,8 @@
 accessible: true
 author: Nicolas Rybowski
-context: On vous demande d'implémenter une variante de la fonction `strcpy <https://linux.die.net/man/3/strcpy>`_
+context: On vous demande d'implémenter une variante de la fonction `strcpy <https://linux.die.net/man/3/strcpy>`_.
+    Votre fonction prendra en argument le buffer source et retournera un pointeur
+    vers la zone mémoire nouvellement allouée sur la heap.
 environment: pyjavacpp
 evaluate: best
 groups: false
