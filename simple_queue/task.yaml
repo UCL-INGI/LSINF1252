@@ -9,7 +9,7 @@ limits:
     output: '2'
     time: '30'
     memory: '100'
-name: Queue simple
+name: '[S3] Queue simple'
 network_grading: false
 problems:
     enqueue:

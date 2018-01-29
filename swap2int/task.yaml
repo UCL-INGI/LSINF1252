@@ -1,3 +1,12 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    void swap(int* i, int *j){
+    @    @q1@@
+    }
+
+
 accessible: true
 author: Arthur van Stratum
 context: Écrivez le corps de la fonction swap qui échange le contenu des deux variable

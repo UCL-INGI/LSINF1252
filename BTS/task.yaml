@@ -5,6 +5,7 @@ context: |+
 
 
     .. code-block:: c
+
         typedef struct node{
             int value;
             struct node* left;
@@ -13,6 +14,7 @@ context: |+
 
 
     .. code-block:: c
+
         typedef struct bt{
             struct node* root;
         } bt_t;
@@ -24,7 +26,7 @@ limits:
     output: '2'
     time: '30'
     memory: '100'
-name: Binary Search Tree
+name: '[S3] Binary Search Tree'
 network_grading: false
 problems:
     contains:
@@ -32,6 +34,7 @@ problems:
         type: code
         header: |-
             .. code-block:: c
+
                 int contains(bt_t* tree){
         name: Methode contains
 stored_submissions: 0
