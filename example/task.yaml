@@ -18,6 +18,7 @@
     # Env
     env = dict(os.environ, LANG=input.get_input('@lang'))
     del env['LANGUAGE']
+    del env['LC_ALL']
 
     # Compilation
     p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
