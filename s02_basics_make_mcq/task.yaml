@@ -1,7 +1,7 @@
 accessible: true
 author: ''
 context: '*Estimated time: 5 minutes*'
-environment: pyjavacpp
+environment: mcq
 evaluate: best
 groups: false
 limits:
@@ -59,43 +59,34 @@ problems:
     mcq4:
         choices:
         -   valid: true
-            text: |+
+            text: |
                 .. code-block:: console
-                clean:
-                    @rm -f src/*.o
 
-        -   text: |+
-                .. code-block:: console
-                cleantests:
-                    @rm -f tests/*.o
-
-            valid: true
+                    clean:
+                    [tab]@rm -f src/*.o
         -   feedback: There is a missing tab on the second line.
-            text: |+
+            text: |-
                 .. code-block:: console
-                clean:
-                @rm -f src/*.o
 
-        -   text: |+
-                .. code-block:: console
-                cleantests:
-                @rm -f tests/*.o
-
-            feedback: There is a missing tab on the second line.
+                    clean:
+                    @rm -f src/*.o
         -   feedback: There is a missing colon after clean.
-            text: |+
+            text: |-
                 .. code-block:: console
-                clean
-                    @rm -f src/*.o
 
-        -   text: |+
+                    clean
+                    [tab]@rm -f src/*.o
+        -   text: |-
                 .. code-block:: console
-                clean:
-                    @rm -f src/*.o
 
-            feedback: The recipe in a Makefile has to be intended with spaces not
-                tabs.
-        header: Choice all *correct* Makefile *rules*.
+                    clean:
+                    [space]@rm -f src/*.o
+            feedback: The recipe in a Makefile has to be intended with tabs not spaces.
+        header: |-
+            Choice all *correct* Makefile *rules*.
+
+            * ``[tab]`` indicates a tab indentation
+            * ``[space]`` indicates a 8 spaces indentation
         type: multiple_choice
         limit: 0
         name: Rules syntax
