@@ -4,6 +4,8 @@ context: |-
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
     Since the array is huge, you can not load it entierly into memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek()``.
+
+    If an error occurs, return ``-1``.
 environment: cpp
 evaluate: best
 groups: false
