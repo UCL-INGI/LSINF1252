@@ -88,16 +88,13 @@ void test_close(){
     for(int i = 0; i < 2; i++){
         set_test_metadata(q[i], _("Test close"), 1);
     
-        monitored.open = true;
-        failures.open = FAIL_FIRST;
-        failures.open_ret = -1;
-    
-        stats.open.called = 0;
+        monitored.close = true; 
+        stats.close.called = 0;
         SANDBOX_BEGIN;
         get(0);
         SANDBOX_END;
 
-        if (stats.open.called != 1){
+        if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
             close_tag++;
