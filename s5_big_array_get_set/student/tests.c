@@ -81,30 +81,28 @@ void test_set() {
 }
 
 void test_close_q1(){
-    for(int i = 0; i < 2; i++){
-        set_test_metadata("q1", _("Test close"), 1);
-        monitored.close = true;        
-        SANDBOX_BEGIN;
-        get(0);
-        SANDBOX_END;
-        if (stats.close.called != 1){
-            push_info_msg(_("You did not close the file."));
-            CU_FAIL();
-        }
+    set_test_metadata("q1", _("Test close"), 1);
+    monitored.close = true;        
+    SANDBOX_BEGIN;
+    get(0);
+    SANDBOX_END;
+    printf("Q1:%d\n", stats.close.called);
+    if (stats.close.called != 1){
+        push_info_msg(_("You did not close the file."));
+        CU_FAIL();
     }
 }
 
 void test_close_q2(){
-    for(int i = 0; i < 2; i++){
-        set_test_metadata("q2", _("Test close"), 1);
-        monitored.close = true;        
-        SANDBOX_BEGIN;
-        set(0,0);
-        SANDBOX_END;
-        if (stats.close.called != 1){
-            push_info_msg(_("You did not close the file."));
-            CU_FAIL();
-        }
+    set_test_metadata("q2", _("Test close"), 1);
+    monitored.close = true;        
+    SANDBOX_BEGIN;
+    set(0,0);
+    SANDBOX_END;
+    printf("Q2:%d\n", stats.close.called);
+    if (stats.close.called != 1){
+        push_info_msg(_("You did not close the file."));
+        CU_FAIL();
     }
 }
 

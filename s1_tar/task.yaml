@@ -2,6 +2,21 @@ accessible: true
 author: Tom Rousseaux
 context: |+
     Download the file system `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
+    You have to compress the following file system
+
+    .. code-block:: console
+
+        /
+            file
+            folder1/
+                file1.c
+                file2.c
+                file3.c
+            folder2/
+                file1.h
+                fime2.h
+                file3.h
+
 
 environment: pyjavacpp
 evaluate: best

@@ -1,0 +1,32 @@
+accessible: true
+author: ''
+context: An integer pointer, ``int* a``, is given to you. You are asked to find special
+    datas from this pointer. A hacker from Anonymous gave you a function, ``fun(int
+    a, int b, int c)``, which takes three arguments you have to find with the pointer.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[S3] Pointer types'
+network_grading: false
+problems:
+    first:
+        type: code
+        name: First argument
+        language: c
+        header: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        description: Task about pointers and their use
+        visible: true
+        name: Pointer
+        type: 2
+        id: ''
+weight: 1.0
