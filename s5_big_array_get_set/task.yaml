@@ -190,9 +190,10 @@
             CU_FAIL("Error, can not initialise test file");
         }
         for(int i = 0; i < 1000; i+=50){
-            lseek(fd, (off_t) index*sizeof(int), SEEK_SET);
+            lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
             int res;
             read(fd, (void *) &res, sizeof(int));
+            printf("AA:%d\n", res);
             if (res != 2222){
                 push_info_msg(_("You do not set the correct value in the file."));
                 CU_FAIL();
