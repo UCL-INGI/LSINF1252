@@ -1,21 +1,21 @@
 accessible: true
-author: ''
+author: Olivier Martin
 context: Given a file containing arbitrary binary bytes, you are asked to define a
     function that copy the file. You can not modify the content of the original file.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S5] File copy'
 network_grading: false
+order: 20
 problems:
     q1:
-        language: ''
-        name: ''
         type: code
+        language: ''
         header: |-
             Write here the body of the function
 
@@ -25,18 +25,98 @@ problems:
                  * @pre file_name != NULL, name of the original file
                  *      new_file_name != NULL, name of the new file (the copy)
                  *
-                 * @post copy the content of {file_name} in {new_file_name}
+                 * @post copy the content of {file_name} in {new_file_name}.
+                 *       return 0 if the function terminates with success. -1 in case of errors.
                  */
-                void copy(char* file_name, char* new_file_name)
+                int copy(char* file_name, char* new_file_name)
+        name: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        description: ''
-        type: 2
+        name: Close
+        type: 0
         visible: true
+        id: close
+        description: This tag validate that your close are correctly performed.
+    '1':
+        name: Permission
+        id: permission
+        type: 0
+        description: This tag validate that you are able to copy permission of a file.
+        visible: true
+    '2':
+        visible: true
+        id: copy
+        type: 0
+        name: Copy
+        description: This tag validate you are able to copy a file.
+    '3':
+        type: 0
+        description: This tag validate you are able to open a file.
+        id: open
+        visible: true
+        name: Open
+    '10':
+        description: ''
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+    '11':
+        type: 1
+        visible: true
+        name: Not compile
+        description: You code do not compile.
+        id: not_compile
+    '12':
+        visible: true
+        type: 1
+        name: Double free
+        description: Your code produced a double free.
+        id: double_free
+    '4':
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        type: 1
+        name: Timeout
+        visible: true
+    '5':
+        id: original_modif
+        name: Original file modified
+        type: 1
+        visible: true
+        description: You have modified the original file.
+    '6':
+        visible: true
+        type: 1
+        id: failure_handling
+        description: You do not manage failures during the copy properly.
+        name: Failure handling
+    '7':
+        visible: true
+        name: Floating Point Exception
+        description: ''
+        type: 1
+        id: sigfpe
+    '8':
+        description: ''
+        visible: true
+        id: sigsegv
+        name: Segmentation Fault
+        type: 1
+    '9':
+        type: 1
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        visible: false
+    '13':
+        type: 2
+        description: ''
         name: File
+        visible: true
         id: ''
 weight: 1.0

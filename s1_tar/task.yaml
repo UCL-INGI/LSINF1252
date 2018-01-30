@@ -1,0 +1,26 @@
+accessible: true
+author: Tom Rousseaux
+context: WIP
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: '[S01] tar'
+network_grading: false
+problems:
+    archive:
+        header: ''
+        name: ''
+        type: file
+        allowed_exts:
+        - .gz
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 0

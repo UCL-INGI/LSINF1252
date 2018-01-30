@@ -1,0 +1,5 @@
+init_node#SUCCESS#Check memory allocation of the node#1#
+init_node#SUCCESS#Check the value of the node#1#
+init_node#SUCCESS#Check the return value if malloc call fails#1#
+add_node#SUCCESS#Check the behavior of the function when the list is empty#1#
+add_node#SUCCESS#Check the behavior of the function when the list is not empty#1#

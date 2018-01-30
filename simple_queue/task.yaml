@@ -1,27 +1,35 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: On vous demande d'implémenter les méthodes `enqueue` et `dequeue` d'une queue
-    basée sur une liste simplement chainée.
+context: |-
+    On vous demande d'implémenter les méthodes `enqueue` et `dequeue` d'une queue basée sur une liste simplement chainée.
+
+    .. code-block:: c
+
+        struct queue {
+          struct queue *head;
+          struct queue *tail;
+        };
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
-name: '[S3] Queue simple'
+name: '[S3] Simple queue'
 network_grading: false
+order: 12
 problems:
     enqueue:
-        type: code
         header: ''
         language: c
+        type: code
         name: Enqueue
     dequeue:
         header: ''
-        name: Dequeue
-        language: ''
         type: code
+        language: c
+        name: Dequeue
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -34,4 +42,3 @@ tags:
         name: Data structures
         id: ''
 weight: 1.0
-order: 4

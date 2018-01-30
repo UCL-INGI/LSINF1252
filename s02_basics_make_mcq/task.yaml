@@ -1,42 +1,116 @@
 accessible: true
 author: ''
-context: ''
-environment: pyjavacpp
+context: '*Estimated time: 5 minutes*'
+environment: mcq
 evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
-name: '[S02] Makefile Multiple Choice Questions'
+    output: '2'
+name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
+order: 6
 problems:
     mcq1:
         choices:
-        -   text: The target is the bullseye of a shooting target
+        -   text: The target is the bullseye of a shooting target.
             valid: true
-        -   text: The target is the name of a file
-        -   text: The target can be the name of an action to carry out
-        name: Find the target
-        header: Select all correct answers related to the target of a Makefile rule.
+        -   text: The target is the name of a file.
+        -   text: The target can be the name of an action to carry out.
+        -   text: The target is a file that is used as input to create the rule.
+        -   text: A target is an action that make carries out.
+        header: Select all *correct* answers related to the *target* of a Makefile
+            rule.
         multiple: true
+        name: Find the target
         type: multiple_choice
-        limit: 2
+        limit: 4
         success_message: 'Bullseye, good job! '
     mcq2:
-        type: multiple_choice
-        multiple: true
-        name: Prerequisite
+        name: What are the prerequisite?
         choices:
-        -   text: The prerequisite is a file that is used as input to create the target.
-            valid: true
+        -   valid: true
+            text: The prerequisite is a file that is used as input to create the target.
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
-        header: Select all *correct* answers related to the prerequisite of a rule.
-        limit: 2
+        header: Select all *correct* answers related to the *prerequisite* of a Makefile
+            rule.
+        type: multiple_choice
+        multiple: true
+        limit: 4
+    mcq3:
+        limit: 4
+        choices:
+        -   text: A recipe is an action that make carries out.
+            valid: true
+        -   text: '42'
+            feedback: That is the Answer to the Ultimate Question of Life, the Universe,
+                and Everything.
+            valid: true
+        -   text: The recipe is a file that is used as input to create the target.
+        -   text: The recipe is the name of a file.
+        name: The recipe
+        multiple: true
+        type: multiple_choice
+        header: Please select all *correct* answers related to the *recipe* of a Makefile
+            rule.
+    mcq4:
+        choices:
+        -   valid: true
+            text: |
+                .. code-block:: console
+                        clean:
+                            @rm -f src/*.o
+        -   text: |
+                .. code-block:: console
+                        cleantests:
+                            @rm -f tests/*.o
+
+                    clean:
+                    [tab]@rm -f src/*.o
+        -   feedback: There is a missing tab on the second line.
+            text: |+
+                .. code-block:: console
+                        clean:
+                        @rm -f src/*.o
+
+        -   text: |
+                .. code-block:: console
+                        cleantests:
+                        @rm -f tests/*.o
+
+                    clean:
+                    @rm -f src/*.o
+        -   feedback: There is a missing colon after clean.
+            text: |-
+                .. code-block:: console
+                        clean
+                            @rm -f src/*.o
+
+                    clean
+                    [tab]@rm -f src/*.o
+        -   text: |-
+                .. code-block:: console
+                        clean:
+                            @rm -f src/*.o
+            feedback: The recipe in a Makefile has to be intended with spaces not
+                tabs.
+        header: Choice all *correct* Makefile *rules*.
+        type: multiple_choice
+        limit: 0
+        name: Rules syntax
+        multiple: true
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: make & Makefile
+        id: make
+        type: 0
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        visible: false
 weight: 1.0

@@ -1,0 +1,33 @@
+accessible: true
+author: Mathieu Xhonneux
+context: The factorial of a number *n!* is defined as ``n! = 1*2*3*...*(n-1)*n``,
+    with *0! = 1*.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: '[S2] Factorial'
+network_grading: false
+problems:
+    facto:
+        header: |-
+            Write your own function factorial, who shall follow this prototype :
+
+            .. code-block:: c
+
+                int factorial(int n);
+
+            You don't have to define any headers, just the function itself.
+        type: code
+        language: c
+        name: Factorial
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 1
