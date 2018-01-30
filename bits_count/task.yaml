@@ -23,15 +23,15 @@ problems:
     q1:
         type: code
         language: c
-        name: ''
+        name: sum_bits
         header: |-
-            Write the body of a function that returns the number of bits set to 1 in i.
+            Write the body of a function that returns the number of bits set to 1 in *i* :
 
-            e.g. nbits(4)=1, nbits(7)=3, nbits(-2)=2
+            e.g. *nbits(4) = 1, nbits(7) = 3, nbits(-2) = 2*
 
             .. code-block:: c
 
-                int nbits(int i){
+                uint8_t nbits(uint8_t n) {
 stored_submissions: 0
 submission_limit:
     amount: -1
