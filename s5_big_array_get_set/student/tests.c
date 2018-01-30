@@ -88,7 +88,8 @@ void test_close(){
     for(int i = 0; i < 2; i++){
         set_test_metadata(q[i], _("Test close"), 1);
     
-        monitored.close = true; 
+        monitored.close = true;
+        stats.close.called = 0;
         SANDBOX_BEGIN;
         if (i==0)
             get(0);
@@ -96,6 +97,7 @@ void test_close(){
             set(0,0);
         SANDBOX_END;
 
+        printf("FFFFFF%d\n", stats.close.called);
         if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
