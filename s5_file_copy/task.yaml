@@ -6,13 +6,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
     time: '30'
+    output: '2'
 name: '[S5] File copy'
 network_grading: false
+order: 19
 problems:
     q1:
+        language: ''
+        name: ''
+        type: code
         header: |-
             Write here the body of the function
 
@@ -26,19 +30,75 @@ problems:
                  *       return 0 if the function terminates with success. -1 in case of errors.
                  */
                 int copy(char* file_name, char* new_file_name)
-        name: ''
-        language: ''
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 2
+        visible: true
+        id: close
+        description: This tag validate that your close are correctly performed.
+        type: 0
+        name: Close
+    '1':
+        description: This tag validate that you are able to copy permission of a file.
+        name: Permission
+        type: 0
+        visible: true
+        id: permission
+    '2':
+        description: This tag validate you are able to copy a file.
+        visible: true
+        name: Copy
+        id: copy
+        type: 0
+    '3':
+        description: This tag validate you are able to open a file.
+        visible: true
+        name: Open
+        id: open
+        type: 0
+    '10':
+        id: time
+        type: 1
+        description: ''
+        name: Timeout
+        visible: true
+    '4':
+        visible: true
+        type: 1
+        description: You have modified the original file.
+        id: original_modif
+        name: Original file modified
+    '5':
+        id: failure_handling
+        description: You do not manage failures during the copy properly.
+        name: Failure handling
+        type: 1
+        visible: true
+    '7':
+        visible: true
+        type: 1
+        id: sigfpe
+        description: ''
+        name: Floating Point Exception
+    '8':
+        id: sigsegv
+        description: ''
+        type: 1
+        name: Segmentation Fault
+        visible: true
+    '9':
         visible: true
         description: ''
+        type: 1
+        id: memory
+        name: Memory Exceeded
+    '6':
+        type: 2
         name: File
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
-order: 19

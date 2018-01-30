@@ -44,6 +44,8 @@ void test_fail_open() {
     if (ret != -1){
         push_info_msg(_("When the open() function fails, your code does not return -1."));
         CU_FAIL();
+    }else{
+        set_tag("open");
     }
 }
 
@@ -88,6 +90,8 @@ void test_file_permission() {
     if (system("diff PERM_A.txt PERM_B.txt") != 0){
         push_info_msg(_("The permission of the two files are not equals."));
         CU_FAIL();
+    }else{
+        set_tag("permission");
     }
 }
 
@@ -110,6 +114,8 @@ void test_file() {
     if (system("diff file.txt newfile.txt") != 0){
         push_info_msg(_("You copy is not identical."));
         CU_FAIL();
+    }else{
+        set_tag("copy");
     }
     if (ret != 0){
         push_info_msg(_("You do not return 0 when the copy should be successful."));
@@ -135,6 +141,7 @@ void test_file_write_fail() {
 
     if (ret != -1){
         push_info_msg(_("You do not return -1 when a fail occurs with read() or write()"));
+        set_tag("failure_handling");
         CU_FAIL();
     }
 }
@@ -152,12 +159,17 @@ void test_close() {
     myfunc("file.txt", "newfile.txt");
     SANDBOX_END;
     
+    int open_tag = 0;
     if (stats.close.called != 2){
         push_info_msg(_("You did not close() the file."));
+        open_tag++;
         CU_FAIL();
     }if (stats.open.called != 2){
         push_info_msg(_("The open should be use two times."));
+        open_tag++;
         CU_FAIL();
+    }if(open_tag ==  0){
+        set_tag("close");
     }
 }
 
@@ -178,11 +190,13 @@ void test_original_integrity() {
     if (system("diff file.txt file_original.txt") != 0){
         push_info_msg(_("You can not modify the original file"));
         CU_FAIL();
+        set_tag("original_modif");
     }
     system("ls -al file.txt | head -c 10 > PERM_FILE_2.txt");
     if (system("diff PERM_FILE_1.txt PERM_FILE_2.txt") != 0){
         push_info_msg(_("You can not modify the permissions of the original file."));
         CU_FAIL();
+        set_tag("original_modif");
     }
 }
 
