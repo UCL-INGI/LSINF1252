@@ -5,10 +5,27 @@
 #include "CTester/CTester.h"
 
 void free_node_corr(node_t* node){
+  if (!node)
+    return;
+
   if (!node->next)
     free(node->next);
 
   free(node);
+}
+
+void free_list_corr(list_t* list){
+  if (!list)
+    return;
+
+  node_t* run = list->first, *tmp;
+  while(run){
+    tmp = run;
+    run = run->next;
+    free_node_corr(tmp);
+  }
+
+  free(list);
 }
 
 void test_init_node_alloc(){
@@ -69,9 +86,37 @@ void test_init_node_nomem(){
   CU_ASSERT_PTR_NULL(ret);
 }
 
+void test_add_node_empty(){
+  set_test_metadata("add_node", _("Check the behavior of the function when the list is empty"), 1);
+
+  list_t *list = malloc(sizeof(list_t));
+  if (!list)
+    CU_FAIL("NO MEMORY AVAILABLE");
+  list->first = NULL;
+  list->size = 0;
+
+  int ret = 0;
+
+  monitored.malloc = true;
+
+  SANDBOX_BEGIN;
+  ret = add_node(list, 16328468);
+  SANDBOX_END;
+
+  CU_ASSERT_EQUAL(stats.malloc.called, 1);
+  CU_ASSERT_TRUE(malloced((void*) list->first));
+
+  CU_ASSERT_EQUAL(ret, 0);
+  if (ret != 0){
+    push_info_msg(_("Your function returns an error in normal case!"));
+  }
+
+  free_list_corr(list);
+
+}
+
 
 int main(int argc,char** argv)
 {
-
-    RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem) ;
+    RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty) ;
 }

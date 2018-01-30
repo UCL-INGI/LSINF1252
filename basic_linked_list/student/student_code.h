@@ -20,7 +20,7 @@ typedef struct node{
 */
 typedef struct list{
   struct node* first;
-  int* size;
+  int size;
 } list_t  ;
 
 /*
@@ -66,7 +66,7 @@ node_t* get(list_t* l, int index);
 *
 * @return: 0 if success, -1 either
 */
-int add(list_t* l, int value);
+int add_node(list_t* list, int value);
 
 /**
 * Remove an element from the list @l
