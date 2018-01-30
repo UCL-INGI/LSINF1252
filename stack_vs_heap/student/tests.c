@@ -13,7 +13,7 @@
 }*/
 
 void test_sum2(){
-  set_test_metadata("sum2", _("Check the `result` value"), 1);
+  set_test_metadata("version1", _("Check the `result` value"), 1);
 
   SANDBOX_BEGIN;
   version1(3, 7);
@@ -29,7 +29,7 @@ void test_sum2(){
 
 
 void test_sum3(){
-  set_test_metadata("sum3", _("Check the value of @a"), 1);
+  set_test_metadata("version2", _("Check the value of @a"), 1);
 
   int a = 1, b = 8;
 
