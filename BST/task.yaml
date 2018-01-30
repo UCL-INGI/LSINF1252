@@ -12,7 +12,6 @@ context: |+
             struct node* right;
         } node_t;
 
-
     .. code-block:: c
 
         typedef struct bt{
