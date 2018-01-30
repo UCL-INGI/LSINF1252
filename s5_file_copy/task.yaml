@@ -6,17 +6,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
 name: '[S5] File copy'
 network_grading: false
 order: 19
 problems:
     q1:
-        language: ''
-        name: ''
         type: code
+        language: ''
         header: |-
             Write here the body of the function
 
@@ -30,81 +29,94 @@ problems:
                  *       return 0 if the function terminates with success. -1 in case of errors.
                  */
                 int copy(char* file_name, char* new_file_name)
+        name: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        name: Close
+        type: 0
         visible: true
         id: close
         description: This tag validate that your close are correctly performed.
-        type: 0
-        name: Close
     '1':
-        description: This tag validate that you are able to copy permission of a file.
         name: Permission
-        type: 0
-        visible: true
         id: permission
-    '2':
-        description: This tag validate you are able to copy a file.
+        type: 0
+        description: This tag validate that you are able to copy permission of a file.
         visible: true
-        name: Copy
+    '2':
+        visible: true
         id: copy
         type: 0
+        name: Copy
+        description: This tag validate you are able to copy a file.
     '3':
+        type: 0
         description: This tag validate you are able to open a file.
+        id: open
         visible: true
         name: Open
-        id: open
-        type: 0
+    '10':
+        description: ''
+        id: sigfpe
+        visible: true
+        type: 1
+        name: Floating Point Exception
     '11':
         type: 1
-        name: Double free
         visible: true
-        description: Your code produced a double free.
-        id: double_free
-    '4':
-        visible: true
-        type: 1
+        name: Segmentation Fault
         description: ''
-        id: timeout
-        name: Timeout
+        id: sigsegv
+    '13':
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        id: banned_funcs
+        visible: false
+    '4':
+        description: ''
+        id: memory
+        type: 1
+        name: Memory Exceeded
+        visible: true
     '5':
-        id: original_modif
-        description: You have modified the original file.
-        name: Original file modified
+        id: not_compile
+        name: Not compile
         type: 1
         visible: true
+        description: You code do not compile.
     '6':
-        type: 1
-        name: Failure handling
-        description: You do not manage failures during the copy properly.
-        id: failure_handling
         visible: true
+        type: 1
+        id: double_free
+        description: Your code produced a double free.
+        name: Double free
     '7':
         visible: true
-        type: 1
-        id: sigfpe
+        name: Timeout
         description: ''
-        name: Floating Point Exception
+        type: 1
+        id: timeout
     '8':
-        id: sigsegv
-        description: ''
-        type: 1
-        name: Segmentation Fault
+        description: You have modified the original file.
         visible: true
+        id: original_modif
+        name: Original file modified
+        type: 1
     '9':
         visible: true
-        description: ''
         type: 1
-        id: memory
-        name: Memory Exceeded
-    '10':
-        type: 2
-        description: ''
-        name: File
+        id: failure_handling
+        name: Failure handling
+        description: You do not manage failures during the copy properly.
+    '12':
         visible: true
+        type: 2
+        name: File
+        description: ''
         id: ''
 weight: 1.0
