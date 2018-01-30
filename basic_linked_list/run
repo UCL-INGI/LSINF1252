@@ -5,7 +5,6 @@
 # Licence : GPLv3
 
 import subprocess, shlex, re, os
-from xml.etree import ElementTree
 from inginious import feedback, rst, input
 
 # Switch working directory to student/
@@ -13,13 +12,6 @@ os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
 input.parse_template("student_code.c.tpl", "student_code.c")
-
-# Env
-env = dict(os.environ, LANG=input.get_input('@lang'))
-del env['LANGUAGE']
-del env['LC_ALL']
-env['LANG'] = 'fr_BE.utf8'
-print(env)
 
 # Compilation
 p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
@@ -42,7 +34,7 @@ except IndexError:
     banned_funcs = []
 
 if banned_funcs:
-    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE, env=env)
+    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     readelf_output = p.communicate()[0].decode('utf-8')
     for func in banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
@@ -54,10 +46,12 @@ if banned_funcs:
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
+LANG = input.get_input('@lang')
+
 # Run the code in a parallel container
-p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-#run_output = p.communicate()[0].decode('utf-8')
+p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 p.communicate()
+
 # If run failed, exit with "failed" result
 if p.returncode:
     feedback.set_global_result("failed")
@@ -82,7 +76,7 @@ if p.returncode:
 
 # Fetch CUnit test results
 results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'info_msgs':r[4:]} for r in results_raw]
+results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': ",".split(r[4]), 'info_msgs':r[5:]} for r in results_raw]
 
 
 # Produce feedback
@@ -114,6 +108,9 @@ for pid, result in tests_result.items():
     else:
         feedback.set_problem_result("failed", pid)
         
+
+for tag in results['tags']:
+    feedback.set_tag(tag, 1)
 
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)

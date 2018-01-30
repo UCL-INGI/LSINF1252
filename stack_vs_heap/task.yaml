@@ -1,0 +1,60 @@
+accessible: true
+author: Nicolas Rybowski
+context: |-
+    On vous demande d'implémenter deux versions d'une même fonction et de comparer les résultats.
+    Les fonctions `sum1` et `sum2` somment toutes deux leurs arguments et stockent cette valeur dans le premier argument.
+
+    .. code-block:: c
+
+        void main(int argc, char **argv){
+            int a1 = 5, b1 = 6;
+
+            sum1(a1, b1);
+            printf(a1); // retour1
+
+            int *a2 = 5, *b2 = 6;
+
+            sum2(a2, b2);
+            printf(*a2); // retour2
+        }
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S2-S3] Stack vs Heap'
+network_grading: false
+problems:
+    retour1:
+        name: retour 1
+        type: code_single_line
+        header: Que vaut retour 1 ?
+    retour2:
+        header: Que vaut retour 2 ?
+        type: code_single_line
+        name: retour 2
+    version1:
+        type: code
+        header: |
+            .. code-block:: c
+
+                void sum(int a, int b){
+        language: c
+        name: Version stack
+    version2:
+        type: code
+        language: c
+        name: Version heap
+        header: |
+            .. code-block:: c
+
+                void sum(int* a, int* b){
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 7

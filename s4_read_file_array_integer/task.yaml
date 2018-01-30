@@ -11,8 +11,9 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S4] File integers reading'
+name: '[S5] File integers reading'
 network_grading: false
+order: 17
 problems:
     q1:
         language: c
@@ -21,6 +22,10 @@ problems:
         header: |-
             .. code-block:: java
 
+                /*
+                 * @pre filename != NULL, name of the file
+                 * @post return the sum of all integers present in the file, -1 if an error occurs.
+                 */
                 int sum_file(char* filename)
 stored_submissions: 0
 submission_limit:
@@ -34,4 +39,3 @@ tags:
         name: File
         id: ''
 weight: 1.0
-order: 10

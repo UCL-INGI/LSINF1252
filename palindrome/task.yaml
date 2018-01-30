@@ -1,0 +1,33 @@
+accessible: true
+author: Arthur van Stratum
+context: |-
+    Palindrome are phrases that reads the same forward of backward.
+    You will write a function that determine if a string is a palindrome.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S2] Palindrome'
+network_grading: false
+problems:
+    q1:
+        language: c
+        name: ''
+        type: code
+        header: |-
+            pal return 0 if str is a palindrome, 1 otherwise.
+            A 0-length string is considered a palindrome. If str is null, return 1.
+
+            .. code-block:: c
+
+                 int pal(char* str){
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 4

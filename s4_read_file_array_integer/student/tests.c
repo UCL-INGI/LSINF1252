@@ -55,12 +55,12 @@ void test_fail_open() {
     
     monitored.open = true;
     failures.open = FAIL_FIRST;
-    failures.open = -1;
+    failures.open_ret = -1;
     
     SANDBOX_BEGIN;
     ret = myfunc("file.txt");
     SANDBOX_END;
-    
+
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
         CU_FAIL();
@@ -82,7 +82,6 @@ void test_no_integer() {
     
     if (ret != sum){
         push_info_msg(_("When the file does not contain any integers, your code does not return 0."));
-        //TAG("id", true);
         CU_FAIL();
     }
 }
@@ -134,5 +133,5 @@ void test_close() {
 
 int main(int argc,char** argv){
     BAN_FUNCS();
-    RUN(test_no_file, test_no_integer, test_some_integers, test_close);
+    RUN(test_no_file, test_fail_open, test_no_integer, test_some_integers, test_close);
 }

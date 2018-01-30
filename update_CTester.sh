@@ -6,8 +6,11 @@ DIRS=`ls -d */`
 git clone https://github.com/Zashas/CTester.git
 
 for dir in $DIRS; do
-    cp CTester/run $dir"run"
-    cp -r CTester/student/CTester/ $dir"student/"
+    ls $dir".no_ctester" &> /dev/null
+    if [[ $? -ne 0 ]]; then
+        cp CTester/run $dir"run"
+        cp -r CTester/student/CTester/ $dir"student/"
+    fi
 done
 
 rm -rf CTester/

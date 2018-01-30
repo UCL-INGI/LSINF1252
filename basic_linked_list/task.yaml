@@ -3,6 +3,8 @@ author: Maxime Mawait & Nicolas Rybowski
 context: |+
     On vous demande d'implémenter une liste chaînée de base. Pour ce faire, vous devrez manipuler des pointeurs.
 
+    *Vous ne pouvez pas utiliser ``calloc``*
+
     .. code-block:: c
 
         /**
@@ -32,11 +34,12 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
 name: '[S3] Liste chaînée basique'
 network_grading: false
+order: 10
 problems:
     init_node:
         language: c
@@ -50,18 +53,33 @@ problems:
                 * @return: return the pointer to the new node, NULL either.
                 */
                 node_t* init_node(int value){
-        type: code
         name: Initialisation d'un noeud
+        type: code
+    add_node:
+        language: c
+        type: code
+        header: |
+            .. code-block:: c
+
+                /*
+                * Add an element to the head of the list @list
+                *
+                * @l: list of integers
+                * @value: value to add to the list
+                *
+                * @return: 0 if success, -1 either
+                */
+                int add_node(list_t* list, int value);
+        name: Ajout d'un noeud
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        description: Task dealing with data structures and linked list
         type: 2
+        description: Task dealing with data structures and linked list
         visible: true
         name: Data structures
         id: ''
 weight: 1.0
-order: 3

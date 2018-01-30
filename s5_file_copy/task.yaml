@@ -1,0 +1,43 @@
+accessible: true
+author: ''
+context: Given a file containing arbitrary binary bytes, you are asked to define a
+    function that copy the file. You can not modify the content of the original file.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S5] File copy'
+network_grading: false
+problems:
+    q1:
+        language: ''
+        name: ''
+        type: code
+        header: |-
+            Write here the body of the function
+
+            .. code-block:: c
+
+                /*
+                 * @pre file_name != NULL, name of the original file
+                 *      new_file_name != NULL, name of the new file (the copy)
+                 *
+                 * @post copy the content of {file_name} in {new_file_name}
+                 */
+                void copy(char* file_name, char* new_file_name)
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        description: ''
+        type: 2
+        visible: true
+        name: File
+        id: ''
+weight: 1.0
+order: 19
