@@ -13,5 +13,7 @@ int second(int* a){
 
 int third(int* a){
   char* c = (char*) a;
-  return (int) *(c+12);
+  c = c + 12;
+  int* b = (int*) c;
+  return *b;
 }

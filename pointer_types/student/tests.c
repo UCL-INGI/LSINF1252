@@ -4,22 +4,6 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-int sol1(int* a){
-    return a[2];
-}
-
-int sol2(int* a){
-    char* c = (char*) a;
-    return  (int) *(c + 4);
-}
-
-int sol3(int* a){
-    char* c = (char*) a;
-    c = c + 12;
-    int * d = (int*) c;
-    return *d;
-}
-
 void test_tab1() {
     set_test_metadata("First input", _("test for the first input"), 1);
 
@@ -39,11 +23,13 @@ void test_tab1() {
 
     CU_ASSERT_EQUAL(ret,3);
 
+    ret = 0;
+
     SANDBOX_BEGIN;
     ret = third(a);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,9);
+    CU_ASSERT_EQUAL(ret,589824);
 }
 
 void test_tab2() {
@@ -66,11 +52,13 @@ void test_tab2() {
 
     CU_ASSERT_EQUAL(ret,4);
 
+    ret = 0;
+
     SANDBOX_BEGIN;
     ret = third(a);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,10);
+    CU_ASSERT_EQUAL(ret,655360);
 }
 
 void test_tab3() {
@@ -93,17 +81,19 @@ void test_tab3() {
 
     CU_ASSERT_EQUAL(ret,4);
 
+    ret = 0;
+
     SANDBOX_BEGIN;
     ret = third(a);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,3);
+    CU_ASSERT_EQUAL(ret,196608);
 }
 
 void test_tab4() {
     set_test_metadata("First input", _("test for the fourth input"), 1);
 
-    int tab4[4] = {10, 456789087, 2121212122, 672386787};
+    int tab4[4] = {10, 456789087, 2121212122, 1672386787};
     int * a = (int*) tab4;
 
     int ret = 0;
@@ -120,13 +110,13 @@ void test_tab4() {
 
     CU_ASSERT_EQUAL(ret,95);
 
+    ret = 0;
+
     SANDBOX_BEGIN;
     ret = third(a);
     SANDBOX_END;
-    
-    printf("%d\n",sol3(a));
 
-    CU_ASSERT_EQUAL(ret,sol3(a));
+    CU_ASSERT_EQUAL(ret,-1729921425);
 }
 
 int main(int argc,char** argv)
