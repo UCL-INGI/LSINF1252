@@ -8,6 +8,9 @@ context: |
         :width: 540px
         :scale: 100%
 
+
+    For this, you have the code of the node stucture:
+
     .. code-block:: c
 
         typedef struct node{
@@ -15,6 +18,8 @@ context: |
             struct node* left;
             struct node* right;
         } node_t;
+
+    And you have the code of the binary structure:
 
     .. code-block:: c
 
