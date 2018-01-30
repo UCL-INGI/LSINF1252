@@ -13,8 +13,8 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
+    time: '30'
     memory: '100'
 name: '[S2] Working with bits'
 network_grading: false
@@ -42,6 +42,16 @@ problems:
             .. code-block:: c
 
                 uint64_t set_bit(uint64_t x, int pos, bool val) {
+    get_3_leftmost_bits:
+        name: get_3_leftmost_bits
+        language: ''
+        type: code
+        header: |-
+            Write the body of a function *get_3_leftmost_bits* that returns the 3 strongest bits of *x*. For instance, with *x=11011001...*, the function should return a *uint8_t* containing 00000110.
+
+            .. code-block:: c
+
+                uint8_t get_3_leftmost_bits(uint32_t x) {
 stored_submissions: 0
 submission_limit:
     amount: -1
