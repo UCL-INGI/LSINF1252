@@ -1,0 +1,2 @@
+sum2#FAIL#Check the `result` value#1##Expected value: 10. Received value: 11
+sum3#SUCCESS#Check the value of @a#1#
