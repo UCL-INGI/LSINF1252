@@ -4,7 +4,7 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-void get_value_by_index(int i){
+int get_value_by_index(int i){
     return (i*i*(i/2))%20000;
 }
 
@@ -34,9 +34,9 @@ void gen_file(int n){
  */
 void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
-    gen_file(100);
+    gen_file(1000);
     
-    for(int i = 0; i < 100; i+=5){
+    for(int i = 0; i < 1000; i+=50){
         int ret = 0;
         
         SANDBOX_BEGIN;
