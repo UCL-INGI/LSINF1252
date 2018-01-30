@@ -1,0 +1,39 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    The system call malloc may fail, for instance if the OS has no free memory remaining. In this case, it may be possible that some other processes free some memory after some time.
+
+    In our program, instead of reporting an error immediately if no free memory is available, we will wait some time to see if the OS can free memory for us.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[S3] Sleepy memory'
+network_grading: false
+problems:
+    sleep_malloc:
+        language: c
+        name: Sleepy malloc
+        type: code
+        header: |-
+            Write the body of the function *sleepy_malloc*.
+
+            Hint : think about static variables.
+
+            .. code-block:: c
+
+                /* Wrapper to the malloc system call.
+                 * If malloc fails, sleep for 5 seconds, and re-try.
+                 * If malloc failed 10 times in a row, return NULL.
+                 */
+                void *sleepy_malloc(size_t s) {
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 14

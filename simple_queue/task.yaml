@@ -33,7 +33,7 @@ limits:
     memory: '100'
 name: '[S3] Simple queue'
 network_grading: false
-order: 14
+order: 16
 problems:
     enqueue:
         header: ''

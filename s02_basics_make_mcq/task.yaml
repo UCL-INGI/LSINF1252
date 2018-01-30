@@ -10,7 +10,7 @@ limits:
     output: '2'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
-order: 10
+order: 11
 problems:
     mcq1:
         choices:

@@ -39,7 +39,7 @@ limits:
     memory: '100'
 name: '[S3] Basic linked list'
 network_grading: false
-order: 13
+order: 15
 problems:
     init_node:
         language: c

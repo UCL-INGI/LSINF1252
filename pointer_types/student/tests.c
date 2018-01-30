@@ -123,8 +123,10 @@ void test_tab4() {
     SANDBOX_BEGIN;
     ret = third(a);
     SANDBOX_END;
+    
+    printf("%d\n",sol3(a));
 
-    CU_ASSERT_EQUAL(ret,-29);
+    CU_ASSERT_EQUAL(ret,sol3(a));
 }
 
 int main(int argc,char** argv)
