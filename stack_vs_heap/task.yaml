@@ -34,7 +34,7 @@ limits:
     memory: '100'
 name: '[S2] Global''n''stack'
 network_grading: false
-order: 8
+order: 6
 problems:
     retour1:
         header: |-

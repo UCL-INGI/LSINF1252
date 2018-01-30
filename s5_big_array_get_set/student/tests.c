@@ -34,9 +34,9 @@ void gen_file(int n){
  */
 void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
-    gen_file(10000);
+    gen_file(100);
     
-    for(int i = 0; i < 1000; i+=50){
+    for(int i = 0; i < 100; i+=5){
         int ret = 0;
         
         SANDBOX_BEGIN;
@@ -52,5 +52,5 @@ void test_get() {
 
 int main(int argc,char** argv){
     BAN_FUNCS(system);
-    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_original_integrity, test_close);
+    RUN(test_get);
 }
