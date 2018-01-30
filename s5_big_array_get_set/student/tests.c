@@ -80,36 +80,35 @@ void test_set() {
     close(fd);
 }
 
-void test_close(){
-    int close_tag = 0;
-    char *q[2];
-    q[0] = "q1";
-    q[1] = "q2";
+void test_close_q1(){
     for(int i = 0; i < 2; i++){
-        set_test_metadata(q[i], _("Test close"), 1);
-    
-        monitored.close = true;
-        stats.close.called = 0;
+        set_test_metadata("q1", _("Test close"), 1);
+        monitored.close = true;        
         SANDBOX_BEGIN;
-        if (i==0)
-            get(0);
-        else
-            set(0,0);
+        get(0);
         SANDBOX_END;
-
-        printf("FFFFFF%d\n", stats.close.called);
         if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
-            close_tag++;
         }
     }
-    if (close_tag == 0){
-        set_tag("close");
+}
+
+void test_close_q2(){
+    for(int i = 0; i < 2; i++){
+        set_test_metadata("q2", _("Test close"), 1);
+        monitored.close = true;        
+        SANDBOX_BEGIN;
+        set(0,0);
+        SANDBOX_END;
+        if (stats.close.called != 1){
+            push_info_msg(_("You did not close the file."));
+            CU_FAIL();
+        }
     }
 }
 
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
-    RUN(test_get, test_set, test_close);
+    RUN(test_get, test_set, test_close_q1, test_close_q2);
 }
