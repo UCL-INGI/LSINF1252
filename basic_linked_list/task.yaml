@@ -27,7 +27,7 @@ context: |+
         typedef struct list{
           struct node* first;
           int* size;
-        } list_t  ;
+        } list_t;
 
 
 environment: pyjavacpp
