@@ -36,7 +36,7 @@ void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
     gen_file(10000);
     
-    for(int i = 0; i < 10000; i+=500){
+    for(int i = 0; i < 1000; i+=50){
         int ret = 0;
         
         SANDBOX_BEGIN;

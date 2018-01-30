@@ -32,7 +32,7 @@ limits:
     output: '2'
     time: '30'
     memory: '100'
-name: '[S3] Global''n''stack'
+name: '[S2] Global''n''stack'
 network_grading: false
 order: 8
 problems:
@@ -59,10 +59,13 @@ problems:
         type: code
         language: c
         header: |
+            You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html). What is the link between passing by reference and pointers ?
+
             .. code-block:: c
 
-                void sum(int* a, int* b){
-        name: Version heap
+                /* sum3: updates the value pointed by a, to the sum of the values pointed by a and b */
+                void sum3 (int *a, int *b) {
+        name: Passing by reference
 stored_submissions: 0
 submission_limit:
     amount: -1
