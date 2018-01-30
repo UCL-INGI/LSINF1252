@@ -9,16 +9,15 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S5] File integers reading'
 network_grading: false
 order: 18
 problems:
     q1:
-        language: c
-        name: Write your code here
         type: code
+        language: c
         header: |-
             .. code-block:: java
 
@@ -27,15 +26,70 @@ problems:
                  * @post return the sum of all integers present in the file, -1 if an error occurs.
                  */
                 int sum_file(char* filename)
+        name: Write your code here
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '0':
-        description: ''
-        type: 2
+    '1':
+        name: Close
+        type: 0
+        id: close
         visible: true
+        description: This tag validate that your close are correctly performed.
+    '2':
+        id: open
+        type: 0
+        visible: true
+        name: Open
+        description: This tag validate you are able to open a file.
+    '3':
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        id: banned_funcs
+        visible: false
+    '4':
+        type: 1
+        description: Your code produced a double free.
+        name: Double free
+        id: double_free
+        visible: true
+    '5':
+        type: 1
+        visible: true
+        id: sigfpe
+        name: Floating Point Exception
+        description: ''
+    '6':
+        description: ''
+        visible: true
+        id: memory
+        name: Memory Exceeded
+        type: 1
+    '7':
+        type: 1
+        visible: true
+        name: Not compile
+        id: not_compile
+        description: You code do not compile.
+    '8':
+        name: Segmentation Fault
+        description: ''
+        visible: true
+        type: 1
+        id: sigsegv
+    '9':
+        type: 1
+        visible: true
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+    '0':
         name: File
+        type: 2
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
