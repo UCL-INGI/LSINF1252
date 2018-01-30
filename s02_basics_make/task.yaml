@@ -113,6 +113,9 @@
     score = 100*score/(total if not total == 0 else 1)
     feedback.set_grade(score)
     feedback.set_global_result("success" if score >= 50 else "failed")
+/student/Makefile: |
+    make_me:
+        cc make_me.c  -o make_me
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
