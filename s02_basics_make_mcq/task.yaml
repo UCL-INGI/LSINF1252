@@ -97,6 +97,7 @@ problems:
                 tabs.
         header: Choice all *correct* Makefile *rules*.
         type: multiple_choice
+        limit: 0
         name: Rules syntax
         multiple: true
 stored_submissions: 0
