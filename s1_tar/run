@@ -6,7 +6,7 @@ tar zxvf archive.tar.gz -C folder
 if [ $? -ne 0 ]
 then
 	feedback-result failed
-	feedback-msg -m "The decompression of your archive failed, did you use the right arguments?"
+	feedback-msg -m "The decompression of your archive failed, did you give the right arguments to tar(1)?"
 else
 	ls folder -R > file2.txt
 	diff -q file.txt file2.txt
