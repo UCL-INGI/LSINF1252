@@ -1,3 +1,10 @@
+/student/student_code.c.tpl: |-
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    @    @facto@@
+/student/student_code.h: |
+    int factorial(int n);
 accessible: true
 author: Mathieu Xhonneux
 context: The factorial of a number *n!* is defined as ``n! = 1*2*3*...*(n-1)*n``,
@@ -6,11 +13,12 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
+    output: '2'
     memory: '100'
 name: '[S2] Factorial'
 network_grading: false
+order: 3
 problems:
     facto:
         header: |-
@@ -30,4 +38,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 3
