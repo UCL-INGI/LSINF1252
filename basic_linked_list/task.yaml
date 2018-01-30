@@ -37,7 +37,7 @@ limits:
     time: '30'
 name: '[S3] Liste chaînée basique'
 network_grading: false
-order: 3
+order: 10
 problems:
     init_node:
         language: c
