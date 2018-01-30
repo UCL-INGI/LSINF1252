@@ -81,9 +81,10 @@ void test_set() {
 }
 
 void test_close(){
+    int close_tag = 0;
     char *q[2];
-	q[0] = "q1";
-	q[1] = "q2";
+    q[0] = "q1";
+    q[1] = "q2";
     for(int i = 0; i < 2; i++){
         set_test_metadata(q[i], _("Test close"), 1);
     
@@ -99,7 +100,11 @@ void test_close(){
         if (stats.open.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
+            close_tag++;
         }
+    }
+    if (close_tag == 0){
+        set_tag("close");
     }
 }
 
