@@ -1,6 +1,6 @@
 accessible: true
 author: ''
-context: ''
+context: '*Estimated time: 5 minutes*'
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -8,7 +8,7 @@ limits:
     memory: '100'
     time: '30'
     output: '2'
-name: '[S02] Makefile Multiple Choice Questions'
+name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
 order: 5
 problems:
@@ -23,14 +23,14 @@ problems:
         name: Find the target
         header: Select all *correct* answers related to the *target* of a Makefile
             rule.
-        limit: 2
+        limit: 4
         type: multiple_choice
         success_message: 'Bullseye, good job! '
         multiple: true
     mcq2:
         type: multiple_choice
         multiple: true
-        name: Prerequisite
+        name: What are the prerequisite?
         choices:
         -   text: The prerequisite is a file that is used as input to create the target.
             valid: true
@@ -38,13 +38,13 @@ problems:
                 target.
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
-        limit: 2
+        limit: 4
     mcq3:
-        limit: 0
+        limit: 4
         choices:
         -   valid: true
             text: A recipe is an action that make carries out.
-        -   text: '42.'
+        -   text: '42'
             valid: true
             feedback: That is the Answer to the Ultimate Question of Life, the Universe,
                 and Everything.
@@ -53,7 +53,7 @@ problems:
         header: |+
             Please select all *correct* answers related to the *recipe* of a Makefile rule.
 
-        name: Recipe
+        name: The recipe
         multiple: true
         type: multiple_choice
 stored_submissions: 0
