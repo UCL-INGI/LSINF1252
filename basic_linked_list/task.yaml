@@ -1,7 +1,7 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |+
-    We ask you two write two primitives needed to implement a simple linked list.
+    We ask you to write two primitives needed to implement a simple linked list.
 
     **In your functions, you cannot use the function \``calloc\``**
 
