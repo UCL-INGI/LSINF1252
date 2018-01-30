@@ -53,9 +53,8 @@ problems:
         name: The recipe
         multiple: true
         type: multiple_choice
-        header: |+
+        header:
             Please select all *correct* answers related to the *recipe* of a Makefile rule.
-
     mcq4:
         choices:
         -   valid: true
@@ -96,6 +95,9 @@ problems:
             feedback: The recipe in a Makefile has to be intended with spaces not
                 tabs.
         header: Choice all *correct* Makefile *rules*.
+
+                * ``[tab]`` indicates a tab indentation
+                * ``[space]`` indicates a 8 spaces indentation
         type: multiple_choice
         limit: 0
         name: Rules syntax
