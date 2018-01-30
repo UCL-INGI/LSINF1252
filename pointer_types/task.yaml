@@ -150,7 +150,7 @@ limits:
     memory: '100'
 name: '[S3] Pointer types'
 network_grading: false
-order: 16
+order: 17
 problems:
     first:
         type: code

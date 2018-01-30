@@ -136,7 +136,7 @@ limits:
     output: '2'
 name: '[S5] Get and set on array in file'
 network_grading: false
-order: 24
+order: 25
 problems:
     q1:
         type: code

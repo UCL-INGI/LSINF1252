@@ -14,7 +14,7 @@ else
 		feedback-msg -m "The decompressed archive does not correspond with the original?"
 	else
 		feedback-result success
-        feedback-msg good
+        feedback-msg -m "good"
 	fi
 	rm file2.txt
 fi

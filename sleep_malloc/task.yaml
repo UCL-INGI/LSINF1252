@@ -25,6 +25,10 @@ problems:
 
             .. code-block:: c
 
+                /* Wrapper to the malloc system call.
+                 * If malloc fails, sleep for 5 seconds, and re-try.
+                 * If malloc failed 10 times in a row, return NULL.
+                 */
                 void *sleepy_malloc(size_t s) {
 stored_submissions: 0
 submission_limit:
@@ -32,3 +36,4 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
+order: 14
