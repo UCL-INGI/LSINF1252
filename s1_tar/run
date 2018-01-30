@@ -4,6 +4,7 @@ mkdir folder
 getinput "archive" > archive.tar.gz
 tar zxvf archive.tar.gz -C folder
 if [ $? -neq 0 ]
+	echo "here" >2
 	feedback-result failed
 	#feedback-msg -m "The decompression of your archive failed, did you use the right arguments?"
 else
