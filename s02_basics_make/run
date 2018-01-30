@@ -11,7 +11,7 @@ from inginious import feedback, rst, input
 os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
-input.parse_template("student_code.c.tpl", "student_code.c")
+input.parse_template("Makefile.tpl", "Makefile")
 
 # Compilation
 p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
