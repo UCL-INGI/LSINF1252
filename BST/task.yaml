@@ -11,6 +11,11 @@ context: |
             struct node* right;
         } node_t;
 
+    .. image:: BST/bst.png
+        :height: 340px
+        :width: 540px
+        :scale: 100%
+
     .. code-block:: c
 
         typedef struct bt{
