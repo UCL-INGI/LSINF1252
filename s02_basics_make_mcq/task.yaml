@@ -10,7 +10,7 @@ limits:
     output: '2'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
-order: 5
+order: 6
 problems:
     mcq1:
         choices:
@@ -53,9 +53,8 @@ problems:
         name: The recipe
         multiple: true
         type: multiple_choice
-        header: |+
-            Please select all *correct* answers related to the *recipe* of a Makefile rule.
-
+        header: Please select all *correct* answers related to the *recipe* of a Makefile
+            rule.
     mcq4:
         choices:
         -   valid: true
@@ -63,8 +62,7 @@ problems:
                 .. code-block:: console
                         clean:
                             @rm -f src/*.o
-
-        -   text: |+
+        -   text: |
                 .. code-block:: console
                         cleantests:
                             @rm -f tests/*.o
@@ -77,7 +75,7 @@ problems:
                         clean:
                         @rm -f src/*.o
 
-        -   text: |+
+        -   text: |
                 .. code-block:: console
                         cleantests:
                         @rm -f tests/*.o
@@ -96,15 +94,9 @@ problems:
                 .. code-block:: console
                         clean:
                             @rm -f src/*.o
-
-                    clean:
-                    [space]@rm -f src/*.o
-            feedback: The recipe in a Makefile has to be intended with tabs not spaces.
-        header: |-
-            Choice all *correct* Makefile *rules*.
-
-            * ``[tab]`` indicates a tab indentation
-            * ``[space]`` indicates a 8 spaces indentation
+            feedback: The recipe in a Makefile has to be intended with spaces not
+                tabs.
+        header: Choice all *correct* Makefile *rules*.
         type: multiple_choice
         limit: 0
         name: Rules syntax

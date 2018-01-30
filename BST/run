@@ -5,7 +5,6 @@
 # Licence : GPLv3
 
 import subprocess, shlex, re, os
-from xml.etree import ElementTree
 from inginious import feedback, rst, input
 
 # Switch working directory to student/
@@ -47,10 +46,12 @@ if banned_funcs:
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
+LANG = input.get_input('@lang')
+
 # Run the code in a parallel container
-p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-#run_output = p.communicate()[0].decode('utf-8')
+p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 p.communicate()
+
 # If run failed, exit with "failed" result
 if p.returncode:
     feedback.set_global_result("failed")
@@ -75,7 +76,7 @@ if p.returncode:
 
 # Fetch CUnit test results
 results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'info_msgs':r[4:]} for r in results_raw]
+results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
 
 
 # Produce feedback
@@ -90,7 +91,9 @@ tests_result = {}
 
 for test in results:
     total += test['weight']
-
+    for tag in test['tags']:
+        if tag != "":
+            feedback.set_tag(tag, True)
     if test['code'] == 'SUCCESS':
         score += test['weight']
         feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
@@ -106,7 +109,6 @@ for pid, result in tests_result.items():
         feedback.set_problem_result("success", pid)
     else:
         feedback.set_problem_result("failed", pid)
-        
 
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)

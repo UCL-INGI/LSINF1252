@@ -39,7 +39,7 @@ limits:
     memory: '100'
 name: '[S3] Liste chaînée basique'
 network_grading: false
-order: 10
+order: 11
 problems:
     init_node:
         language: c

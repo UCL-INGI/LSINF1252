@@ -39,7 +39,7 @@ if banned_funcs:
     readelf_output = p.communicate()[0].decode('utf-8')
     for func in banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
-            feedback.set_tag("banned_funcs")
+            feedback.set_tag("banned_funcs", True)
             feedback.set_global_result("failed")
             feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
             exit(0)
