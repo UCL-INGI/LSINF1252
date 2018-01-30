@@ -11,6 +11,7 @@ limits:
     memory: '100'
 name: '[S2] Exponentially static counter'
 network_grading: false
+order: 7
 problems:
     static_counter:
         language: c
@@ -19,7 +20,7 @@ problems:
 
             .. code-block:: c
 
-            unsigned int stexp() {
+                unsigned int stexp() {
         type: code
         name: Static counter
 stored_submissions: 0
@@ -28,4 +29,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 7
