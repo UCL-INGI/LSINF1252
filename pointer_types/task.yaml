@@ -2,7 +2,8 @@ accessible: true
 author: ''
 context: An integer pointer, ``int* a``, is given to you. You are asked to find special
     datas from this pointer. A hacker from Anonymous gave you a function, ``fun(int
-    a, int b, int c)``, which takes three arguments you have to find with the pointer.
+    a, int b, int c)``, which can give the answer of life and which takes three arguments
+    you have to find with the pointer.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -12,22 +13,53 @@ limits:
     memory: '100'
 name: '[S3] Pointer types'
 network_grading: false
+order: 16
 problems:
     first:
         type: code
         name: First argument
         language: c
-        header: ''
+        header: |-
+            The first argument for your function is the integer located at the 13rd Byte of the pointer. You have to implement ``first`` function which give that number.
+
+            .. code-block:: c
+
+                int first(int* a){
+                    //Your code will be inserted here
+                }
+    second:
+        language: c
+        name: Second argument
+        header: |-
+            For the second argument, you have to find the stocked value at the 6th Byte of the pointer. You have to implement ``second`` function which give that number.
+
+            .. code-block:: c
+
+                int second(int* a){
+                    //Your code will be inserted here
+                }
+        type: code
+    third:
+        language: c
+        header: |-
+            For the second argument, you have to find the integer located at the 6th Byte of the pointer. You have to implement ``third`` function which give that number.
+
+            .. code-block:: c
+
+                int third(int* a){
+                    //Your code will be inserted here
+                }
+        name: Third argument
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        type: 2
+        name: Pointer
         description: Task about pointers and their use
         visible: true
-        name: Pointer
-        type: 2
         id: ''
 weight: 1.0
-order: 16

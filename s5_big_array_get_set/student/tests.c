@@ -111,6 +111,11 @@ void test_close_q2(){
         set_tag("close");
 }
 
+//TODO:
+//count read and write
+//check if index id bigger than the file
+//check if other index are not modified
+
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
     RUN(test_get, test_set, test_close_q1, test_close_q2);
