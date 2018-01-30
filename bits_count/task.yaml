@@ -1,20 +1,29 @@
 accessible: true
-author: Arthur van Stratum
-context: ''
+author: Arthur van Stratum & Mathieu Xhonneux
+context: |-
+    In this exercise, we will work with operation on bits. When we speak about the position of a bit, the index 0 corresponds to weakest bit, 1 to the second-weakest bit, ...
+
+    This exercise will introduce some non-standard data types which guarantee that the variable has a fixed number of bits. Indeed, on some machines, a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise operations, we have to know first on how many bits we are working.
+
+    To do so, we introduce two new classes of variable types :
+
+    * *bool* (from <stdbool.h>), which is 1-bit long, hence either 0 or 1
+    * *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>).
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
-name: '[S2] Bit counting'
+name: '[S2] Working with bits'
 network_grading: false
+order: 2
 problems:
     q1:
+        type: code
         language: c
         name: ''
-        type: code
         header: |-
             Write the body of a function that returns the number of bits set to 1 in i.
 
@@ -29,4 +38,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 2
