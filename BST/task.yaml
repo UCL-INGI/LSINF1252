@@ -13,6 +13,10 @@ context: |
 
     .. code-block:: c
 
+        /*
+        * Node has a value, @value, and two children, @left and @right.
+        * All the children of @left and @left have a smaller value then the node and all the children of @right and @right have a bigger value then node
+        */
         typedef struct node{
             int value;
             struct node* left;
