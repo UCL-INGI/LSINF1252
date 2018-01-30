@@ -4,6 +4,7 @@ context: |-
     In a C program, variables are stored across different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will lead you about how global variables, and variables on the stack, are managed.
 
     .. code-block:: c
+
         int result;
 
         void sum1(a1, b1) {
