@@ -216,7 +216,7 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '50'
+    memory: '40'
     time: '30'
     output: '2'
 name: '[S5] Get and set on array in file'
