@@ -116,11 +116,7 @@
 /student/Makefile: |
     make_me:
         cc make_me.c  -o make_me
-/student/Makefile.tpl: |
-    @    8@make_me_less_easy@@
-
-    make_me:
-        cc make_me.c  -o make_me
+/student/Makefile.tpl: "@\t@make_me_less_easy@@"
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
@@ -172,5 +168,12 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        type: 0
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        id: make
+        name: make & Makefile
+        visible: false
 weight: 1.0
