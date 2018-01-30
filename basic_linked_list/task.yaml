@@ -37,6 +37,7 @@ limits:
     time: '30'
 name: '[S3] Liste chaînée basique'
 network_grading: false
+order: 3
 problems:
     init_node:
         language: c
@@ -52,6 +53,22 @@ problems:
                 node_t* init_node(int value){
         type: code
         name: Initialisation d'un noeud
+    add_node:
+        language: c
+        type: code
+        name: Ajout d'un noeud
+        header: |
+            .. code-block:: c
+
+                /*
+                * Add an element to the list @l
+                *
+                * @l: list of integers
+                * @value: value to add to the list
+                *
+                * @return: 0 if success, -1 either
+                */
+                int add_node(list_t* list, int value);
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -64,4 +81,3 @@ tags:
         name: Data structures
         id: ''
 weight: 1.0
-order: 3
