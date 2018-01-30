@@ -32,6 +32,16 @@ problems:
             .. code-block:: c
 
                 uint8_t nbits(uint8_t n) {
+    set_bit:
+        type: code
+        language: c
+        name: set_bit
+        header: |-
+            Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *val*.
+
+            .. code-block:: c
+
+                uint64_t set_bit(uint64_t x, int pos, bool val) {
 stored_submissions: 0
 submission_limit:
     amount: -1
