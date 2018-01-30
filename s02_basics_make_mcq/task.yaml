@@ -5,9 +5,9 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     time: '30'
     output: '2'
+    memory: '100'
 name: '[S02] Makefile Multiple Choice Questions'
 network_grading: false
 problems:
@@ -17,13 +17,12 @@ problems:
             valid: true
         -   text: The target is the name of a file
         -   text: The target can be the name of an action to carry out
-        -   text: ''
         name: Find the target
-        header: Select all correct answers.
-        multiple: true
-        type: multiple_choice
-        success_message: 'Bullseye, good job! '
         limit: 0
+        header: Select all correct answers related to the target of a Makefile rule.
+        type: multiple_choice
+        multiple: true
+        success_message: 'Bullseye, good job! '
 stored_submissions: 0
 submission_limit:
     amount: -1
