@@ -3,7 +3,7 @@
 
 int absval(int i)
 {
-@    @Absolute value@@
+@    @absval@@
 }
 
 
