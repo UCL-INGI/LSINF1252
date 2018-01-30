@@ -8,7 +8,7 @@ context: |-
     - `student 1 <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student1.log>`_
     - `student 2 <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student2.log>`_
     - `student 3 <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student3.log>`_
-environment: pyjavacpp
+environment: mcq
 evaluate: best
 groups: false
 limits:
