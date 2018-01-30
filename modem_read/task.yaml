@@ -1,10 +1,11 @@
 accessible: true
-author: ''
-context: |+
+author: Mathieu Xhonneux
+context: |-
     You are in 1977 and want to read your e-mail with your freshly bought Apple II. You are connected to the ARPANET through a modem, but unfortunately the modem's manufacturer has only given a single function `modem_read`, to read the data received by the modem, with the following prototype :
 
-    ``void modem_read(void *buffer, )
+    ``void modem_read(void *buffer, int *buf_len);``
 
+    It fills the given buffer with the data received from the modem, and write the number of bytes written to the value pointed by *buf_len* is 255 bytes.
 environment: pyjavacpp
 evaluate: best
 groups: false

@@ -50,7 +50,37 @@ void test_get() {
     }
 }
 
+
+/*
+ * Test with some int in the file
+ */
+void test_set() {
+    set_test_metadata("q1", _("Test with normal file"), 2);
+    gen_file(1000);
+    
+    for(int i = 0; i < 1000; i+=50){        
+        SANDBOX_BEGIN;
+        set(i, 2222);
+        SANDBOX_END;  
+    }
+    
+    int fd = open("file.txt", O_RDONLY);
+    if(fd == -1) {
+        CU_FAIL("Error, can not initialise test file");
+    }
+    for(int i = 0; i < 1000; i+=50){
+        lseek(fd, (off_t) index*sizeof(int), SEEK_SET);
+        int res;
+        read(fd, (void *) &res, sizeof(int));
+        if (res != 2222){
+            push_info_msg(_("You do not set the correct value in the file."));
+            CU_FAIL(); 
+        }
+    }
+    close(fd);
+}
+
 int main(int argc,char** argv){
-    BAN_FUNCS(system);
-    RUN(test_get);
+    BAN_FUNCS(system, set_tag);
+    RUN(test_get, test_set);
 }
