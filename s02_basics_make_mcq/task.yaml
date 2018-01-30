@@ -61,23 +61,41 @@ problems:
         -   valid: true
             text: |
                 .. code-block:: console
+                        clean:
+                            @rm -f src/*.o
+
+        -   text: |+
+                .. code-block:: console
+                        cleantests:
+                            @rm -f tests/*.o
 
                     clean:
                     [tab]@rm -f src/*.o
         -   feedback: There is a missing tab on the second line.
-            text: |-
+            text: |+
                 .. code-block:: console
+                        clean:
+                        @rm -f src/*.o
+
+        -   text: |+
+                .. code-block:: console
+                        cleantests:
+                        @rm -f tests/*.o
 
                     clean:
                     @rm -f src/*.o
         -   feedback: There is a missing colon after clean.
             text: |-
                 .. code-block:: console
+                        clean
+                            @rm -f src/*.o
 
                     clean
                     [tab]@rm -f src/*.o
         -   text: |-
                 .. code-block:: console
+                        clean:
+                            @rm -f src/*.o
 
                     clean:
                     [space]@rm -f src/*.o
