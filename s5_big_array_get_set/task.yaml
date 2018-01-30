@@ -1,4 +1,21 @@
-/student/solution.c.sol: ''
+/student/student_code.c.tpl: |+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <errno.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <unistd.h>
+    #include <string.h>
+
+    int get(int index) {
+    @    @q1@@
+    }
+
+    void set(int index, int value) {
+    @    @q2@@
+    }
+
 accessible: true
 author: Olivier Martin
 context: |-
@@ -25,8 +42,8 @@ problems:
                 int get(int index)
         name: ''
     q2:
-        name: ''
         type: code
+        name: ''
         language: ''
         header: |-
             .. code-block:: c
@@ -52,9 +69,9 @@ tags:
     '2':
         id: banned_funcs
         type: 1
+        visible: true
         name: Banned functions
         description: You use some banned functions.
-        visible: true
     '3':
         type: 1
         description: Your code produced a double free.
