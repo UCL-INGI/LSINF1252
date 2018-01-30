@@ -27,7 +27,7 @@ int add_node(list_t* list, int value){
     list->first = node;
   }
 
-  list->size++;
+  //list->size++;
 
   return 0;
 
