@@ -33,7 +33,7 @@ void test_tab1() {
 }
 
 void test_tab2() {
-    set_test_metadata("First input", _("test for the second input"), 1);
+    set_test_metadata("Second input", _("test for the second input"), 1);
 
     int tab2[4] = {1, 4, 4, 10};
     int * a = (int*) tab2;
@@ -62,7 +62,7 @@ void test_tab2() {
 }
 
 void test_tab3() {
-    set_test_metadata("First input", _("test for the third input"), 1);
+    set_test_metadata("Third input", _("test for the third input"), 1);
 
     int tab3[4] = {10, 4, 21, 3};
     int * a = (int*) tab3;
@@ -91,7 +91,7 @@ void test_tab3() {
 }
 
 void test_tab4() {
-    set_test_metadata("First input", _("test for the fourth input"), 1);
+    set_test_metadata("Fourth input", _("test for the fourth input"), 1);
 
     int tab4[4] = {10, 456789087, 2121212122, 1672386787};
     int * a = (int*) tab4;
