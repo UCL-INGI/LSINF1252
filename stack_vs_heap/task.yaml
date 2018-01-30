@@ -1,57 +1,3 @@
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include <stdio.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    /*void test_retour1() {
-
-
-      CU_ASSERT_EQUAL(retour1(), 5);
-
-    }*/
-
-    void test_sum2(){
-      set_test_metadata("version1", _("Check the `result` value"), 1);
-
-      SANDBOX_BEGIN;
-      version1(3, 7);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(result, 10);
-      if (result != 10){
-        char msg[80];
-        sprintf(msg, "Expected value: 10. Received value: %i", result);
-        push_info_msg(_(msg));
-      }
-    }
-
-
-    void test_sum3(){
-      set_test_metadata("version2", _("Check the value of @a"), 1);
-
-      int a = 1, b = 8;
-
-      SANDBOX_BEGIN;
-      version2(&a, &b);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(a, 9);
-      if (a != 9){
-        char msg[80];
-        sprintf(msg, "Expected value: 9. Received value: %i", result);
-        push_info_msg(_(msg));
-      }
-    }
-
-
-    int main(int argc,char** argv)
-    {
-        BAN_FUNCS();
-        RUN(test_sum2, test_sum3);
-    }
 accessible: true
 author: Nicolas Rybowski, Mathieu Xhonneux
 context: |-
@@ -83,13 +29,23 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
+    output: '2'
     memory: '100'
 name: '[S2] Global''n''stack'
 network_grading: false
 order: 8
 problems:
+    value1:
+        type: match
+        answer: '5'
+        name: On the stack
+        header: |-
+            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
+
+            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
+
+            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
     retour1:
         header: |-
             Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
@@ -112,6 +68,7 @@ problems:
     version2:
         type: code
         language: c
+        name: Passing by reference
         header: |
             You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html). What is the link between passing by reference and pointers ?
 
@@ -119,7 +76,6 @@ problems:
 
                 /* sum3: updates the value pointed by a, to the sum of the values pointed by a and b */
                 void sum3 (int *a, int *b) {
-        name: Passing by reference
 stored_submissions: 0
 submission_limit:
     amount: -1
