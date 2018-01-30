@@ -13,10 +13,10 @@ network_grading: false
 problems:
     mcq1:
         choices:
-        -   text: The target is the bullseye of a shooting target
+        -   text: The target is the bullseye of a shooting target.
             valid: true
-        -   text: The target is the name of a file
-        -   text: The target can be the name of an action to carry out
+        -   text: The target is the name of a file.
+        -   text: The target can be the name of an action to carry out.
         name: Find the target
         header: Select all correct answers related to the target of a Makefile rule.
         multiple: true
