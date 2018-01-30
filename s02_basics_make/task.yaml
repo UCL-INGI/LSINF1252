@@ -116,10 +116,9 @@
 /student/Makefile: |
     make_me:
         cc make_me.c  -o make_me
-/student/Makefile.tpl: |
-    #@tab@make_me_less_easy@@
-    make_me:
-        cc make_me.c  -o make_me
+/student/Makefile.tpl: |+
+    @8@make_me_less_easy@@
+
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
