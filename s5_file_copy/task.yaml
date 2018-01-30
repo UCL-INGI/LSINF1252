@@ -59,23 +59,29 @@ tags:
         name: Open
         id: open
         type: 0
-    '10':
-        id: time
+    '11':
         type: 1
-        description: ''
-        name: Timeout
+        name: Double free
         visible: true
+        description: Your code produced a double free.
+        id: double_free
     '4':
         visible: true
         type: 1
-        description: You have modified the original file.
-        id: original_modif
-        name: Original file modified
+        description: ''
+        id: timeout
+        name: Timeout
     '5':
-        id: failure_handling
-        description: You do not manage failures during the copy properly.
-        name: Failure handling
+        id: original_modif
+        description: You have modified the original file.
+        name: Original file modified
         type: 1
+        visible: true
+    '6':
+        type: 1
+        name: Failure handling
+        description: You do not manage failures during the copy properly.
+        id: failure_handling
         visible: true
     '7':
         visible: true
@@ -95,10 +101,10 @@ tags:
         type: 1
         id: memory
         name: Memory Exceeded
-    '6':
+    '10':
         type: 2
-        name: File
         description: ''
+        name: File
         visible: true
         id: ''
 weight: 1.0
