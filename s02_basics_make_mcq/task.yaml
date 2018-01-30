@@ -23,10 +23,10 @@ problems:
         name: Find the target
         header: Select all *correct* answers related to the *target* of a Makefile
             rule.
+        multiple: true
         limit: 4
         type: multiple_choice
         success_message: 'Bullseye, good job! '
-        multiple: true
     mcq2:
         type: multiple_choice
         multiple: true
@@ -60,5 +60,12 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: make
+        type: 0
+        name: make & Makefile
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        visible: false
 weight: 1.0
