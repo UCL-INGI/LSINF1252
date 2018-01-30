@@ -2,6 +2,7 @@ accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
     For this task, you will learn to search into a binary tree.
+
     .. code-block:: c
 
         typedef struct node{
@@ -30,6 +31,7 @@ problems:
         name: Methode contains
         header: |-
             .. code-block:: c
+
                 int contains(bt_t* tree){
         language: c
 stored_submissions: 0
