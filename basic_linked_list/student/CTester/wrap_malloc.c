@@ -1,4 +1,4 @@
-/* 
+/*
  * Wrapper for malloc, free and calloc
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,8 @@
 
 #include  "wrap.h"
 
-#include <libintl.h> 
-#include <locale.h> 
+#include <libintl.h>
+#include <locale.h>
 #define _(STRING) gettext(STRING)
 
 #define MSG_SIZE 1000
@@ -43,7 +43,7 @@ extern struct wrap_log_t logs;
 // keeps only MAX_LOG in memory
 //
 void log_malloc(void *ptr, size_t size) {
-  
+
   if(ptr!=NULL && logs.malloc.n < MAX_LOG) {
     logs.malloc.log[logs.malloc.n].size=size;
     logs.malloc.log[logs.malloc.n].ptr=ptr;
@@ -56,14 +56,14 @@ void update_realloc_block(void *ptr, size_t newsize) {
      if(logs.malloc.log[i].ptr==ptr) {
       logs.malloc.log[i].size=newsize;
       return;
-     } 
+     }
   }
    return ;
 }
 
 size_t find_size_malloc(void *ptr) {
   for(int i=0;i<MAX_LOG;i++) {
-    if(logs.malloc.log[i].ptr==ptr) 
+    if(logs.malloc.log[i].ptr==ptr)
       return logs.malloc.log[i].size;
   }
   return -1;
@@ -81,7 +81,7 @@ void * __wrap_malloc(size_t size) {
     return failures.malloc_ret;
   }
   stats.memory.used+=size;
-  failures.malloc=NEXT(failures.malloc);    
+  failures.malloc=NEXT(failures.malloc);
   void *ptr=__real_malloc(size);
   stats.malloc.last_return=ptr;
   log_malloc(ptr,size);
@@ -98,7 +98,7 @@ void * __wrap_realloc(void *ptr, size_t size) {
     failures.realloc=NEXT(failures.realloc);
     return failures.realloc_ret;
   }
-  failures.realloc=NEXT(failures.realloc);    
+  failures.realloc=NEXT(failures.realloc);
   int old_size=find_size_malloc(ptr);
   void *r_ptr=__real_realloc(ptr,size);
   stats.realloc.last_return=r_ptr;
@@ -124,7 +124,7 @@ void * __wrap_calloc(size_t nmemb, size_t size) {
   }
   stats.memory.used+=nmemb*size;
   failures.calloc=NEXT(failures.calloc);
-    
+
   void *ptr=__real_calloc(nmemb,size);
   stats.calloc.last_return=ptr;
   log_malloc(ptr,nmemb*size);
@@ -160,7 +160,7 @@ void __wrap_free(void *ptr) {
 /*
 void * find_ptr_malloc(size_t size){
   for(int i=0;i<MAX_LOG;i++) {
-    if(logs.malloc.log[i].size==size) 
+    if(logs.malloc.log[i].size==size)
       return logs.malloc.log[i].ptr;
   }
   return NULL;
@@ -191,8 +191,8 @@ int  malloc_allocated() {
  * otherwise (also false if address has been freed)
  */
 int malloced(void *addr) {
-  for(int i=0;i<MAX_LOG;i++) {
-    if(logs.malloc.log[i].ptr<=addr && 
+  for(int i=0;i<logs.malloc.n;i++) {
+    if(logs.malloc.log[i].ptr<=addr &&
        (logs.malloc.log[i].ptr+ logs.malloc.log[i].size)>=addr) {
       return true;
     }

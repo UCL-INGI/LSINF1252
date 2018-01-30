@@ -1,5 +1,240 @@
+/run: |
+    #!/bin/python3
+
+    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+    # Auteurs : Mathieu Xhonneux, Anthony Gégo
+    # Licence : GPLv3
+
+    import subprocess, shlex, re, os
+    from inginious import feedback, rst, input
+
+    # Switch working directory to student/
+    os.chdir("student")
+
+    # Fetch and save the student code into a file for compilation
+    input.parse_template("student_code.c.tpl", "student_code.c")
+
+    # Compilation
+    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    make_output = p.communicate()[0].decode('utf-8')
+    # If compilation failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_tag("not_compile", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
+
+    # Parse banned functions
+    try:
+        banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+        banned_funcs = list(filter(None, banned_funcs))
+    except IndexError:
+        banned_funcs = []
+
+    if banned_funcs:
+        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        readelf_output = p.communicate()[0].decode('utf-8')
+        for func in banned_funcs:
+            if re.search("UND {}\n".format(func), readelf_output):
+                feedback.set_tag("banned_funcs", True)
+                feedback.set_global_result("failed")
+                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
+                exit(0)
+
+
+    # Remove source files
+    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+    LANG = input.get_input('@lang')
+
+    # Run the code in a parallel container
+    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    out, err = p.communicate()
+    print(out.decode("utf-8"))
+    # If run failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_global_result("failed")
+        if p.returncode == 256-8:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+            feedback.set_tag("sigfpe", True)
+        elif p.returncode == 256-11:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+        elif p.returncode == 252:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+            feedback.set_tag("memory", True)
+        elif p.returncode == 253:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
+        else:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
+        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
+        exit(0)
+    #elif run_output:
+    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
+
+    # Comment to run the tests
+    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
+    #exit(0)
+
+    # Fetch CUnit test results
+    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
+    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
+
+
+    # Produce feedback
+    if all([r['code'] == 'SUCCESS' for r in results]):
+        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
+    else:
+        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+
+    score = 0
+    total = 0
+    tests_result = {}
+
+    for test in results:
+        total += test['weight']
+        for tag in test['tags']:
+            if tag != "":
+                feedback.set_tag(tag, True)
+        if test['code'] == 'SUCCESS':
+            score += test['weight']
+            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
+        else:
+            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = False
+
+    for pid, result in tests_result.items():
+        if result:
+            feedback.set_problem_result("success", pid)
+        else:
+            feedback.set_problem_result("failed", pid)
+
+    score = 100*score/(total if not total == 0 else 1)
+    feedback.set_grade(score)
+    feedback.set_global_result("success" if score >= 50 else "failed")
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    int get_value_by_index(int i){
+        return (i*i*(i/2))%20000;
+    }
+
+    /*
+     * Generate a file named "file.txt".
+     * The content is n int following the formula defined above.
+     */
+    void gen_file(int n){
+        int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
+        if(fd == -1) {
+            CU_FAIL("Error, can not initialise test file");
+        }
+        int array[n];
+        int i = 0;
+        for (i = 0; i < n; i++){
+            array[i] = get_value_by_index(i);
+            if (write(fd, (void *) &array[i], sizeof(int)) == -1){
+                CU_FAIL("Error, can not initialise test file");
+            }
+        }
+        if (close(fd) == -1)
+            CU_FAIL("Error, can not initialise test file");
+    }
+
+    /*
+     * Test with some int in the file
+     */
+    void test_get() {
+        set_test_metadata("q1", _("Test with normal file"), 2);
+        gen_file(1000);
+
+        for(int i = 0; i < 1000; i+=50){
+            int ret = 0;
+
+            SANDBOX_BEGIN;
+            ret = get(i);
+            SANDBOX_END;
+
+            if(ret != get_value_by_index(i)){
+                push_info_msg(_("You do not return the correct value."));
+                CU_FAIL();
+            }
+        }
+    }
+
+
+    /*
+     * Test with some int in the file
+     */
+    void test_set() {
+        set_test_metadata("q2", _("Test with normal file"), 2);
+        gen_file(1000);
+
+        for(int i = 0; i < 1000; i+=50){
+            SANDBOX_BEGIN;
+            set(i, 2222+i);
+            SANDBOX_END;
+        }
+
+        int fd = open("file.txt", O_RDONLY);
+        if(fd == -1) {
+            CU_FAIL("Error, can not initialise test file");
+        }
+        for(int i = 0; i < 1000; i+=50){
+            lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
+            int res;
+            read(fd, (void *) &res, sizeof(int));
+            if (res != 2222+i){
+                push_info_msg(_("You do not set the correct value in the file."));
+                CU_FAIL();
+            }
+        }
+        close(fd);
+    }
+
+    void test_close(){
+        int close_tag = 0;
+        char *q[2];
+        q[0] = "q1";
+        q[1] = "q2";
+        for(int i = 0; i < 2; i++){
+            set_test_metadata(q[i], _("Test close"), 1);
+
+            monitored.open = true;
+            failures.open = FAIL_FIRST;
+            failures.open_ret = -1;
+
+            stats.open.called = 0;
+            SANDBOX_BEGIN;
+            get(0);
+            SANDBOX_END;
+
+            if (stats.open.called != 1){
+                push_info_msg(_("You did not close the file."));
+                CU_FAIL();
+                close_tag++;
+            }
+        }
+        if (close_tag == 0){
+            set_tag("close");
+        }
+    }
+
+    int main(int argc,char** argv){
+        BAN_FUNCS(system, set_tag);
+        RUN(test_get, test_set, test_close);
+    }
 accessible: true
-author: ''
+author: Olivier Martin
 context: |-
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
@@ -8,38 +243,92 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '10'
+    memory: '40'
     time: '30'
+    output: '2'
 name: '[S5] Get and set on array in file'
 network_grading: false
+order: 21
 problems:
     q1:
+        type: code
         language: ''
-        name: ''
         header: |-
             .. code-block:: c
 
                 int get(int index)
-        type: code
+        name: ''
     q2:
+        name: ''
+        type: code
         language: ''
         header: |-
             .. code-block:: c
 
                 void set(int index, int value)
-        name: ''
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        id: close
+        description: This tag validate that your close are correctly performed.
+        name: Close
+        type: 0
+        visible: true
+    '1':
+        name: Open
+        type: 0
+        id: open
+        visible: true
+        description: This tag validate you are able to open a file.
+    '2':
+        id: banned_funcs
+        type: 1
+        name: Banned functions
+        description: You use some banned functions.
+        visible: true
+    '3':
+        type: 1
+        description: Your code produced a double free.
+        visible: true
+        name: Double free
+        id: double_free
+    '4':
+        type: 1
+        description: You do not manage failures during the copy properly.
+        name: Failure handling
+        id: failure_handling
+        visible: true
+    '5':
+        type: 1
+        visible: true
+        id: sigfpe
+        name: Floating Point Exception
         description: ''
+    '6':
+        description: ''
+        visible: true
+        id: memory
+        name: Memory Exceeded
+        type: 1
+    '7':
+        type: 1
+        name: Not compile
+        id: not_compile
+        visible: true
+        description: You code do not compile.
+    '8':
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        visible: true
+        type: 1
+        id: timeout
+    '9':
         type: 2
         visible: true
         name: File
+        description: ''
         id: ''
 weight: 1.0
-order: 18

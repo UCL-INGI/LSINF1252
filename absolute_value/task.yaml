@@ -1,36 +1,27 @@
 accessible: true
 author: ''
-context: Negatives numbers are represented by having the most significant bit set
-    to 1. Use this to compute the absolute value of numbers.
+context: The absolute value of a number is defined as *|n| = n* if *n >= 0*, *|n|
+    = -n* else.
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
 name: '[S2] Absolute value'
 network_grading: false
+order: 2
 problems:
-    q1:
+    absval:
         language: c
-        name: Integers
         header: |-
-            Absval must return the absolute value of the integer i.
+            Write the body of the function *absval* returning the absolute value of *i*.
 
             .. code-block:: c
 
-                int absvali(int i){
-        type: code
-    q2:
-        language: ''
-        header: |-
-            Absval must return the absolute value of the double d.
-
-            .. code-block:: c
-
-                int absvald(double d){
-        name: Floats
+                int absval(int i) {
+        name: Absolute value
         type: code
 stored_submissions: 0
 submission_limit:
@@ -38,4 +29,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 1

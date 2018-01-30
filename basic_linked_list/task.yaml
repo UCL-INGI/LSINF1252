@@ -1,9 +1,9 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |+
-    On vous demande d'implémenter une liste chaînée de base. Pour ce faire, vous devrez manipuler des pointeurs.
+    We ask you two write two primitives needed to implement a simple linked list.
 
-    *Vous ne pouvez pas utiliser ``calloc``*
+    **In your functions, you cannot use the function \``calloc\``**
 
     .. code-block:: c
 
@@ -13,8 +13,8 @@ context: |+
         * @next: pointer to the next node in the list, NULL if last node_t
         * @value: value of the node
         */
-        typedef struct node{
-          struct node* next;
+        typedef struct node {
+          struct node *next;
           int value;
         } node_t;
 
@@ -22,12 +22,12 @@ context: |+
         * Structure list
         *
         * @first: first node of the list, NULL if empty
-        * @size: number of nodes in the list.
+        * @size: number of nodes in the list
         */
-        typedef struct list{
-          struct node* first;
-          int* size;
-        } list_t  ;
+        typedef struct list {
+          struct node *first;
+          int *size;
+        } list_t;
 
 
 environment: pyjavacpp
@@ -37,9 +37,9 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S3] Liste chaînée basique'
+name: '[S3] Basic linked list'
 network_grading: false
-order: 10
+order: 13
 problems:
     init_node:
         language: c
@@ -47,12 +47,12 @@ problems:
             .. code-block:: c
 
                 /*
-                * Create a new node with the value @value
+                * Create a new node in memory with the value @value.
                 *
                 * @value: value of the node
-                * @return: return the pointer to the new node, NULL either.
+                * @return: return the pointer to the new node, or NULL if a failure occured.
                 */
-                node_t* init_node(int value){
+                node_t *init_node(int value) {
         name: Initialisation d'un noeud
         type: code
     add_node:
@@ -62,14 +62,14 @@ problems:
             .. code-block:: c
 
                 /*
-                * Add an element to the head of the list @list
+                * Add an element to the head of the list @list and update its member `size`
                 *
                 * @l: list of integers
                 * @value: value to add to the list
                 *
-                * @return: 0 if success, -1 either
+                * @return: 0 if success, 1 else
                 */
-                int add_node(list_t* list, int value);
+                int add_node(list_t *list, int value);
         name: Ajout d'un noeud
 stored_submissions: 0
 submission_limit:

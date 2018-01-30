@@ -4,6 +4,8 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+#include<stdio.h>
+
 /**
 * Check if the @list correspond to the expected list represented by @tab
 */
@@ -127,18 +129,23 @@ void test_add_node_empty(){
   int ret = 0;
 
   monitored.malloc = true;
+  //logs.malloc.n = 0;
+  int value = 16328468;
 
   SANDBOX_BEGIN;
-  ret = add_node(list, 16328468);
+  ret = add_node(list, value);
   SANDBOX_END;
 
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
   if (ms != 1)
     push_info_msg(_("You used more than one call to malloc"));
-    
-  CU_ASSERT_TRUE(malloced((void*) list->first));
-  CU_ASSERT_EQUAL(list->first->value, 16328468);
+
+  int mal = malloced((void*) list->first);
+  CU_ASSERT_TRUE(mal);
+
+  if (mal)
+    CU_ASSERT_EQUAL(list->first->value, value);
 
   CU_ASSERT_EQUAL(ret, 0);
   if (ret != 0)
@@ -207,7 +214,10 @@ void test_add_node_non_empty(){
   free_list_corr(list);
 }
 
+//void test_add_node_nomem
+
 int main(int argc,char** argv)
 {
+    BAN_FUNCS(calloc);
     RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty) ;
 }

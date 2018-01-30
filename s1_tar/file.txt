@@ -1,0 +1,14 @@
+folder:
+file
+folder1
+folder2
+
+folder/folder1:
+file1.c
+file2.c
+file3.c
+
+folder/folder2:
+file1.h
+file2.h
+file3.h

@@ -43,6 +43,8 @@ void test_no_file() {
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
         CU_FAIL();
+    }else{
+        set_tag("open");
     }
 }
 
@@ -50,7 +52,7 @@ void test_no_file() {
  * Test with no file
  */
 void test_fail_open() {
-    set_test_metadata("q1", _("Test with no file"), 1);
+    set_test_metadata("q1", _("Test fail open"), 1);
     int ret = 0;
     
     monitored.open = true;
@@ -64,6 +66,8 @@ void test_fail_open() {
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
         CU_FAIL();
+    }else{
+        set_tag("open");
     }
 }
 
@@ -118,15 +122,21 @@ void test_close() {
     myfunc("file.txt");
     SANDBOX_END;
     
+    int close_ok = 0;
     if (stats.close.called != 1){
         push_info_msg(_("You did not close() the file."));
+        close_ok++;
         CU_FAIL();
     }if (stats.open.called != 1){
         push_info_msg(_("The open should be use only once."));
+        close_ok++;
         CU_FAIL();
     }if(stats.open.last_return != stats.close.last_params.fd){
         push_info_msg(_("The close() does not close the file you opened before."));
+        close_ok++;
         CU_FAIL();
+    }if(close_ok == 0){
+        set_tag("close");
     }
 
 }

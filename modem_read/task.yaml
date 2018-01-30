@@ -1,0 +1,38 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    You are in 1977 and want to read your e-mail with your freshly bought Apple II. You are connected to the ARPANET through a modem, but unfortunately the modem's manufacturer has only given a single function `modem_read`, to read the data received by the modem, with the following prototype :
+
+    ``void modem_read(void *buffer, int *buf_len);``
+
+    It fills the given buffer with the data received from the modem, and writes the number of bytes written to the value pointed by *buf_len*. It can write up to maximum 256 bytes in a single call. This function is guaranteed to succeed.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[S3] Reading from the wire'
+network_grading: false
+problems:
+    modem:
+        name: '42'
+        header: |-
+            You want to know if one e-mail you received contains the byte 42.
+            Write the body of the function *has_42*, this function has to use *malloc* to create the buffer :
+
+            .. code-block:: c
+
+                /* has_42
+                 * @return: 1 if the modem received a byte containing 42, else 0, -1 if an error has happened.
+                int has_42() {
+        language: c
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 11

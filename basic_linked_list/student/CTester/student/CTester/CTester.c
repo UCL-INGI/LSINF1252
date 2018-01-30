@@ -1,9 +1,8 @@
 #define _GNU_SOURCE
-#include <dlfcn.h>
-#include <malloc.h>
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <setjmp.h>
 #include <signal.h>
 #include <errno.h>
@@ -16,8 +15,13 @@
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING) gettext(STRING)
+#include <dlfcn.h>
+#include <malloc.h>
 
 #include "wrap.h"
+
+#define TAGS_NB_MAX 20
+#define TAGS_LEN_MAX 30
 
 extern bool wrap_monitoring;
 extern struct wrap_stats_t stats;
@@ -44,6 +48,8 @@ struct __test_metadata {
     char problem[140];
     char descr[250];
     unsigned int weight;
+    unsigned char nb_tags;
+    char tags[TAGS_NB_MAX][TAGS_LEN_MAX];
     int err;
 } test_metadata;
 
@@ -81,6 +87,18 @@ void push_info_msg(char *msg)
     }
 }
 
+void set_tag(char *tag)
+{
+    int i=0;
+    while (tag[i] != '\0' && i < TAGS_LEN_MAX) {
+        if (!isalnum(tag[i]) && tag[i] != '-' && tag[i] != '_')
+            return;
+        i++;
+    }
+
+    if (test_metadata.nb_tags < TAGS_NB_MAX)
+        strncpy(test_metadata.tags[test_metadata.nb_tags++], tag, TAGS_LEN_MAX);
+}
 
 void segv_handler(int sig, siginfo_t *unused, void *unused2)
 {
@@ -97,8 +115,6 @@ void alarm_handler(int sig, siginfo_t *unused, void *unused2)
 
 int sandbox_begin()
 {
-    wrap_monitoring = true;
-
     // Start timer
     it_val.it_value.tv_sec = 2;
     it_val.it_value.tv_usec = 0;
@@ -108,6 +124,8 @@ int sandbox_begin()
 
     close(STDERR_FILENO);
     dup2(pipe_stderr[1], STDERR_FILENO);
+
+    wrap_monitoring = true;
 
     return (sigsetjmp(segv_jmp,1) == 0);
 }
@@ -119,6 +137,8 @@ void sandbox_fail()
 
 void sandbox_end()
 {
+    wrap_monitoring = false;
+
     // Remapping stderr to the orignal one ...
     close(STDERR_FILENO);
     dup2(true_stderr, STDERR_FILENO);
@@ -134,7 +154,6 @@ void sandbox_end()
         write(STDERR_FILENO, buf, n);
     }
 
-    wrap_monitoring = false;
 
     it_val.it_value.tv_sec = 0;
     it_val.it_value.tv_usec = 0;
@@ -168,8 +187,11 @@ int __wrap_exit(int status){
     return status;
 }
 
-int run_tests(void *tests[], int nb_tests) {
-    int ret;
+int run_tests(int argc, char *argv[], void *tests[], int nb_tests) {
+    for (int i=1; i < argc; i++) {
+        if (!strncmp(argv[i], "LANGUAGE=", 9))
+                putenv(argv[i]);
+    }
     setlocale (LC_ALL, "");
     bindtextdomain("tests", getenv("PWD"));
     bind_textdomain_codeset("messages", "UTF-8");
@@ -200,7 +222,7 @@ int run_tests(void *tests[], int nb_tests) {
     sa.sa_sigaction = segv_handler;
     sigaltstack(&ss, 0);
     sigfillset(&sa.sa_mask);
-    ret = sigaction(SIGSEGV, &sa, NULL);
+    int ret = sigaction(SIGSEGV, &sa, NULL);
     if (ret)
         return ret;
     sa.sa_sigaction = alarm_handler;
@@ -241,8 +263,7 @@ int run_tests(void *tests[], int nb_tests) {
 
         start_test();
 
-        CU_ErrorCode ret = CU_basic_run_test(pSuite,pTest);
-        if (ret != CUE_SUCCESS)
+        if (CU_basic_run_test(pSuite,pTest) != CUE_SUCCESS)
             return CU_get_error();
 
         if (test_metadata.err)
@@ -250,14 +271,27 @@ int run_tests(void *tests[], int nb_tests) {
 
         int nb = CU_get_number_of_tests_failed();
         if (nb > 0)
-            ret = fprintf(f_out, "%s#FAIL#%s#%d", test_metadata.problem,
+            ret = fprintf(f_out, "%s#FAIL#%s#%d#", test_metadata.problem,
                     test_metadata.descr, test_metadata.weight);
 
         else
-            ret = fprintf(f_out, "%s#SUCCESS#%s#%d", test_metadata.problem,
+            ret = fprintf(f_out, "%s#SUCCESS#%s#%d#", test_metadata.problem,
                     test_metadata.descr, test_metadata.weight);
         if (ret < 0)
             return ret;
+
+        for(int i=0; i < test_metadata.nb_tags; i++) {
+            ret = fprintf(f_out, "%s", test_metadata.tags[i]);
+            if (ret < 0)
+                return ret;
+
+            if (i != test_metadata.nb_tags - 1) {
+                ret = fprintf(f_out, ",");
+                if (ret < 0)
+                    return ret;
+            }
+        }
+
 
         while (test_metadata.fifo_in != NULL) {
             struct info_msg *head = test_metadata.fifo_in;

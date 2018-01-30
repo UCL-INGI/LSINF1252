@@ -191,7 +191,7 @@ int  malloc_allocated() {
  * otherwise (also false if address has been freed)
  */
 int malloced(void *addr) {
-  for(int i=0;i<MAX_LOG;i++) {
+  for(int i=0;i<logs.malloc.n;i++) {
     if(logs.malloc.log[i].ptr<=addr && 
        (logs.malloc.log[i].ptr+ logs.malloc.log[i].size)>=addr) {
       return true;

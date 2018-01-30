@@ -1,29 +1,30 @@
 accessible: true
 author: Arthur van Stratum
-context: Écrivez le corps de la fonction swap qui échange le contenu des deux variable
-    i et j.
+context: ''
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
+    output: '2'
     memory: '100'
-name: '[S2] Échanger des entiers'
+name: '[S2] Swap my integers'
 network_grading: false
+order: 8
 problems:
     q1:
-        name: ''
         type: code
+        language: c
+        name: Swap
         header: |-
+            Write the body of the function *swap* which swaps the values pointed by *i* and *j*.
+
             .. code-block:: c
 
-                swap(int *i, int *j){
-        language: c
+                void swap(int *i, int *j) {
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 8
