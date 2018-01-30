@@ -1,0 +1,32 @@
+accessible: true
+author: ''
+context: ''
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[S02] Makefile Multiple Choice Questions'
+network_grading: false
+problems:
+    mcq1:
+        choices:
+        -   text: The target is the bullseye of a shooting target
+            valid: true
+        -   text: The target is the name of a file
+        -   text: The target can be the name of an action to carry out
+        -   text: ''
+        name: Find the target
+        header: Select all correct answers.
+        multiple: true
+        type: multiple_choice
+        success_message: 'Bullseye, good job! '
+        limit: 0
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
