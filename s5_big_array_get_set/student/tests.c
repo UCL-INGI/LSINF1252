@@ -60,7 +60,7 @@ void test_set() {
     
     for(int i = 0; i < 1000; i+=50){        
         SANDBOX_BEGIN;
-        set(i, 2222);
+        set(i, 2222+i);
         SANDBOX_END;  
     }
     
@@ -72,8 +72,7 @@ void test_set() {
         lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
         int res;
         read(fd, (void *) &res, sizeof(int));
-        printf("AA:%d\n", res);
-        if (res != 2222){
+        if (res != 2222+i){
             push_info_msg(_("You do not set the correct value in the file."));
             CU_FAIL(); 
         }
