@@ -3,11 +3,26 @@ author: Maxime Mawait & Nicolas Rybowski
 context: |-
     On vous demande d'implémenter les méthodes `enqueue` et `dequeue` d'une queue basée sur une liste simplement chainée.
 
+
+    .. code-block: c
+
+        /**
+        * Structure node
+        *
+        * @next: pointer to the next node in the list, NULL if last node_t
+        * @value: value of the node
+        */
+        typedef struct node{
+          struct node *next;
+          int value;
+        } node_t;
+
+
     .. code-block:: c
 
         struct queue {
-          struct queue *head;
-          struct queue *tail;
+          struct node *head;
+          struct node *tail;
         };
 environment: pyjavacpp
 evaluate: best

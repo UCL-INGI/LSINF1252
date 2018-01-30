@@ -3,7 +3,7 @@ author: Maxime Mawait & Nicolas Rybowski
 context: |+
     On vous demande d'implémenter une liste chaînée de base. Pour ce faire, vous devrez manipuler des pointeurs.
 
-    *Vous ne pouvez pas utiliser ``calloc``*
+    **Vous ne pouvez pas utiliser \``calloc\``**
 
     .. code-block:: c
 
@@ -59,6 +59,8 @@ problems:
         language: c
         type: code
         header: |
+            *N'oubliez pas de mettre à jour la taille de la liste.*
+
             .. code-block:: c
 
                 /*
@@ -69,7 +71,7 @@ problems:
                 *
                 * @return: 0 if success, 1 either
                 */
-                int add_node(list_t* list, int value);
+                int add_node(list_t *list, int value);
         name: Ajout d'un noeud
 stored_submissions: 0
 submission_limit:

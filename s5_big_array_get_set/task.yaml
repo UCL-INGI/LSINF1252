@@ -1,3 +1,4 @@
+/student/solution.c.sol: ''
 accessible: true
 author: Olivier Martin
 context: |-
@@ -8,9 +9,9 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '10'
     time: '30'
     output: '2'
-    memory: '10'
 name: '[S5] Get and set on array in file'
 network_grading: false
 order: 19
@@ -18,28 +19,82 @@ problems:
     q1:
         type: code
         language: ''
-        name: ''
         header: |-
             .. code-block:: c
 
                 int get(int index)
+        name: ''
     q2:
+        name: ''
         type: code
         language: ''
         header: |-
             .. code-block:: c
 
                 void set(int index, int value)
-        name: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        description: ''
+        id: close
+        name: Close
+        type: 0
+        description: This tag validate that your close are correctly performed.
         visible: true
+    '1':
+        name: Open
+        type: 0
+        id: open
+        visible: true
+        description: This tag validate you are able to open a file.
+    '2':
+        id: banned_funcs
+        type: 1
+        name: Banned functions
+        description: You use some banned functions.
+        visible: true
+    '3':
+        type: 1
+        description: Your code produced a double free.
+        visible: true
+        name: Double free
+        id: double_free
+    '4':
+        type: 1
+        description: You do not manage failures during the copy properly.
+        name: Failure handling
+        id: failure_handling
+        visible: true
+    '5':
+        type: 1
+        visible: true
+        id: sigfpe
+        name: Floating Point Exception
+        description: ''
+    '6':
+        description: ''
+        id: memory
+        visible: true
+        name: Memory Exceeded
+        type: 1
+    '7':
+        type: 1
+        name: Not compile
+        id: not_compile
+        visible: true
+        description: You code do not compile.
+    '8':
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        visible: true
+        type: 1
+        id: timeout
+    '9':
         type: 2
+        visible: true
         name: File
+        description: ''
         id: ''
 weight: 1.0
