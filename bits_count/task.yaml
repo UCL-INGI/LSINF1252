@@ -23,7 +23,6 @@ problems:
     q1:
         type: code
         language: c
-        name: sum_bits
         header: |-
             Write the body of a function that returns the number of bits set to 1 in *i* :
 
@@ -32,10 +31,11 @@ problems:
             .. code-block:: c
 
                 uint8_t nbits(uint8_t n) {
+        name: sum_bits
     set_bit:
+        name: set_bit
         type: code
         language: c
-        name: set_bit
         header: |-
             Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *val*.
 
@@ -52,6 +52,38 @@ problems:
             .. code-block:: c
 
                 uint8_t get_3_leftmost_bits(uint32_t x) {
+    get_4_rightmost_bits:
+        name: Get the 4 weakest bits
+        type: code
+        language: ''
+        header: |+
+            Write the body of a function *get_4_rightmost_bits* that returns the 4 weakest bits of *x*.
+
+            .. code-block:: c
+
+                uint8_t get_4_rightmost_bits(uint32_t x) {
+
+
+    unset_last_bit:
+        name: Unset the strongest bit
+        language: c
+        header: |-
+            Write the body of a function *unset_last_bit*, which sets to 0 the strongest bit set to 1 it founds, and does nothing if there's no bit set to 0.
+
+            .. code-block:: c
+
+                uint16_t get_3_leftmost_bits(uint32_t x) {
+        type: code
+    cycle_bits:
+        type: code
+        language: c
+        header: |-
+            Write the body of a function *cycle_bits*, which moves all bits from *n* places to the left, according to the formula *x[(i+n)%32] = x[i]*, where *x[i]* is the i-iest bit of *x*.
+
+            .. code-block:: c
+
+                uint16_t cycle_bits(uint16_t x) {
+        name: Cycle bits
 stored_submissions: 0
 submission_limit:
     amount: -1
