@@ -42,8 +42,9 @@ void test_no_file() {
     
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
-        set_tag("open");
         CU_FAIL();
+    }else{
+        set_tag("open");
     }
 }
 
@@ -64,8 +65,9 @@ void test_fail_open() {
 
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
-        set_tag("open");
         CU_FAIL();
+    }else{
+        set_tag("open");
     }
 }
 
@@ -134,7 +136,7 @@ void test_close() {
         close_ok++;
         CU_FAIL();
     }if(close_ok == 0){
-        set_tag("close")
+        set_tag("close");
     }
 
 }
