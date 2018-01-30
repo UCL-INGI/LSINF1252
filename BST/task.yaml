@@ -1,7 +1,12 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
-    For this task, you will learn to search into a binary tree.
+    For this task, you will implement a binary search on a binary tree. A binary tree has the following structure:
+
+    .. image:: BST/bst.png
+        :height: 340px
+        :width: 540px
+        :scale: 100%
 
     .. code-block:: c
 
@@ -10,11 +15,6 @@ context: |
             struct node* left;
             struct node* right;
         } node_t;
-
-    .. image:: BST/bst.png
-        :height: 340px
-        :width: 540px
-        :scale: 100%
 
     .. code-block:: c
 
