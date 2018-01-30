@@ -1,0 +1,4 @@
+First input#SUCCESS#test for the first input#1#
+First input#SUCCESS#test for the second input#1#
+First input#SUCCESS#test for the third input#1#
+First input#SUCCESS#test for the fourth input#1#
