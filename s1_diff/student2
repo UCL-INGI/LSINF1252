@@ -1,0 +1,226 @@
+bJan 30 09:02:08 Computer anacron[10210]: Job `cron.daily' terminated
+Jan 30 09:02:08 Computer anacron[10210]: Normal exit (1 job run)
+Jan 30 09:02:43 Computer NetworkManager[945]: <warn>  [1517299363.1415] device (wlp4s0): activation-stage: schedule activate_stage5_ip6_config_commit,10 which replaces activate_stage5_ip6_config_commit,10 (id 49463 -> 49465)
+Jan 30 09:04:44 Computer dhclient[12393]: DHCPREQUEST of 130.104.162.81 on wlp4s0 to 192.168.3.248 port 67 (xid=0x14b00e0a)
+Jan 30 09:04:44 Computer dhclient[12393]: DHCPACK of 130.104.162.81 from 192.168.3.248
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6662]   address 130.104.162.81
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6662]   plen 22 (255.255.252.0)
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6662]   gateway 130.104.163.254
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663]   server identifier 192.168.3.248
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663]   lease time 900
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663]   hostname 'wifi-student5-593.sri.ucl.ac.be'
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663]   nameserver '130.104.1.2'
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663]   nameserver '130.104.1.1'
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663]   nameserver '130.104.254.1'
+Jan 30 09:04:44 Computer NetworkManager[945]: <info>  [1517299484.6663] dhcp4 (wlp4s0): state changed bound -> bound
+Jan 30 09:04:44 Computer dbus[910]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+Jan 30 09:04:44 Computer systemd[1]: Starting Network Manager Script Dispatcher Service...
+Jan 30 09:04:44 Computer dbus[910]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jan 30 09:04:44 Computer systemd[1]: Started Network Manager Script Dispatcher Service.
+Jan 30 09:04:44 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: new request (1 scripts)
+Jan 30 09:04:44 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: start running ordered scripts...
+Jan 30 09:04:44 Computer dhclient[12393]: bound to 130.104.162.81 -- renewal in 345 seconds.
+Jan 30 09:05:16 Computer systemd-timesyncd[693]: Timed out waiting for reply from [2001:67c:1560:8003::c8]:123 (ntp.ubuntu.com).
+Jan 30 09:05:26 Computer systemd-timesyncd[693]: Timed out waiting for reply from [2001:67c:1560:8003::c7]:123 (ntp.ubuntu.com).
+Jan 30 09:05:36 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.89.199:123 (ntp.ubuntu.com).
+Jan 30 09:05:46 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.91.157:123 (ntp.ubuntu.com).
+Jan 30 09:05:57 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.94.4:123 (ntp.ubuntu.com).
+Jan 30 09:06:07 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.89.198:123 (ntp.ubuntu.com).
+Jan 30 09:08:41 Computer AptDaemon: INFO: Quitting due to inactivity
+Jan 30 09:08:41 Computer AptDaemon: INFO: Quitting was requested
+Jan 30 09:08:41 Computer org.debian.apt[910]: 09:08:41 AptDaemon [INFO]: Quitting due to inactivity
+Jan 30 09:08:41 Computer org.debian.apt[910]: 09:08:41 AptDaemon [INFO]: Quitting was requested
+Jan 30 09:09:50 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:09:53 Computer org.gnome.zeitgeist.SimpleIndexer[1516]: ** (zeitgeist-fts:2229): WARNING **: Unable to get info on application://nautilus-autostart.desktop
+Jan 30 09:09:53 Computer gnome-session[1861]: (gedit:5480): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:10:29 Computer dhclient[12393]: DHCPREQUEST of 130.104.162.81 on wlp4s0 to 192.168.3.248 port 67 (xid=0x14b00e0a)
+Jan 30 09:10:32 Computer dhclient[12393]: DHCPREQUEST of 130.104.162.81 on wlp4s0 to 192.168.3.248 port 67 (xid=0x14b00e0a)
+Jan 30 09:10:33 Computer dhclient[12393]: DHCPACK of 130.104.162.81 from 192.168.3.248
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6314]   address 130.104.162.81
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6315]   plen 22 (255.255.252.0)
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6315]   gateway 130.104.163.254
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6315]   server identifier 192.168.3.248
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6316]   lease time 900
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6316]   hostname 'wifi-student5-593.sri.ucl.ac.be'
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6316]   nameserver '130.104.1.2'
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6316]   nameserver '130.104.1.1'
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6317]   nameserver '130.104.254.1'
+Jan 30 09:10:33 Computer NetworkManager[945]: <info>  [1517299833.6317] dhcp4 (wlp4s0): state changed bound -> bound
+Jan 30 09:10:33 Computer dbus[910]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+Jan 30 09:10:33 Computer systemd[1]: Starting Network Manager Script Dispatcher Service...
+Jan 30 09:10:33 Computer dbus[910]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jan 30 09:10:33 Computer systemd[1]: Started Network Manager Script Dispatcher Service.
+Jan 30 09:10:33 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: new request (1 scripts)
+Jan 30 09:10:33 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: start running ordered scripts...
+Jan 30 09:10:33 Computer dhclient[12393]: bound to 130.104.162.81 -- renewal in 417 seconds.
+Jan 30 09:11:00 Computer NetworkManager[945]: <warn>  [1517299860.2306] device (wlp4s0): activation-stage: schedule activate_stage5_ip6_config_commit,10 which replaces activate_stage5_ip6_config_commit,10 (id 50565 -> 50567)
+Jan 30 09:11:28 Computer gnome-session[1861]: (gedit:5480): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:28 Computer gnome-session[1861]: (gedit:5480): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:28 Computer gnome-session[1861]: ** (gedit:5480): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:11:29 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:29 Computer gnome-session[1861]: message repeated 2 times: [ (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:11:31 Computer org.gnome.zeitgeist.SimpleIndexer[1516]: ** (zeitgeist-fts:2229): WARNING **: Unable to get info on application://nautilus-autostart.desktop
+Jan 30 09:11:31 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:43 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:43 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:43 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:43 Computer gnome-session[1861]: message repeated 2 times: [ (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:11:43 Computer gnome-session[1861]: ** (gedit:5522): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:11:43 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:43 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:11:43 Computer gnome-session[1861]: ** (gedit:5522): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:12:08 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:08 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:08 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:08 Computer gnome-session[1861]: message repeated 2 times: [ (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:12:08 Computer gnome-session[1861]: ** (gedit:5522): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:12:08 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:08 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:08 Computer gnome-session[1861]: ** (gedit:5522): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:12:17 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:17 Computer gnome-session[1861]: (gedit:5522): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:17 Computer gnome-session[1861]: ** (gedit:5522): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:12:20 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:20 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:12:23 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:00 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:00 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:00 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:00 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:14:00 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:14:00 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:00 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:00 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:14:01 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:01 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:01 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:01 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:14:01 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:14:01 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:01 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:14:01 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:14:49 Computer systemd-timesyncd[693]: Timed out waiting for reply from [2001:67c:1560:8003::c8]:123 (ntp.ubuntu.com).
+Jan 30 09:15:00 Computer systemd-timesyncd[693]: Timed out waiting for reply from [2001:67c:1560:8003::c7]:123 (ntp.ubuntu.com).
+Jan 30 09:15:10 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.89.199:123 (ntp.ubuntu.com).
+Jan 30 09:15:20 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.89.198:123 (ntp.ubuntu.com).
+Jan 30 09:15:30 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.94.4:123 (ntp.ubuntu.com).
+Jan 30 09:15:31 Computer NetworkManager[945]: <warn>  [1517300131.5962] device (wlp4s0): activation-stage: schedule activate_stage5_ip6_config_commit,10 which replaces activate_stage5_ip6_config_commit,10 (id 50950 -> 50952)
+Jan 30 09:15:41 Computer systemd-timesyncd[693]: Timed out waiting for reply from 91.189.91.157:123 (ntp.ubuntu.com).
+Jan 30 09:17:01 Computer CRON[5671]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+Jan 30 09:17:30 Computer dhclient[12393]: DHCPREQUEST of 130.104.162.81 on wlp4s0 to 192.168.3.248 port 67 (xid=0x14b00e0a)
+Jan 30 09:17:30 Computer dhclient[12393]: DHCPACK of 130.104.162.81 from 192.168.3.248
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0007]   address 130.104.162.81
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0008]   plen 22 (255.255.252.0)
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0008]   gateway 130.104.163.254
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0008]   server identifier 192.168.3.248
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0009]   lease time 900
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0009]   hostname 'wifi-student5-593.sri.ucl.ac.be'
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0009]   nameserver '130.104.1.2'
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0009]   nameserver '130.104.1.1'
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0010]   nameserver '130.104.254.1'
+Jan 30 09:17:31 Computer NetworkManager[945]: <info>  [1517300251.0010] dhcp4 (wlp4s0): state changed bound -> bound
+Jan 30 09:17:31 Computer dbus[910]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+Jan 30 09:17:31 Computer systemd[1]: Starting Network Manager Script Dispatcher Service...
+Jan 30 09:17:31 Computer dhclient[12393]: bound to 130.104.162.81 -- renewal in 398 seconds.
+Jan 30 09:17:31 Computer dbus[910]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jan 30 09:17:31 Computer systemd[1]: Started Network Manager Script Dispatcher Service.
+Jan 30 09:17:31 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: new request (1 scripts)
+Jan 30 09:17:31 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: start running ordered scripts...
+Jan 30 09:17:35 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:17:35 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:17:35 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:17:35 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:17:35 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:17:35 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:17:35 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:17:35 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:18:12 Computer NetworkManager[945]: <warn>  [1517300292.3177] device (wlp4s0): activation-stage: schedule activate_stage5_ip6_config_commit,10 which replaces activate_stage5_ip6_config_commit,10 (id 51226 -> 51228)
+Jan 30 09:19:23 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:19:23 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:19:23 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:19:23 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:19:23 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:19:23 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:19:23 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:19:23 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:20:06 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:06 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:06 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:06 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:20:06 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:20:06 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:06 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:06 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:20:57 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:57 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:57 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:57 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:20:57 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:20:57 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:57 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:20:57 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:21:21 Computer whoopsie[1270]: [09:21:21] Cannot reach: https://daisy.ubuntu.com
+Jan 30 09:21:21 Computer whoopsie[1270]: [09:21:21] offline
+Jan 30 09:21:48 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:21:48 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:21:48 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:21:48 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:21:48 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:21:48 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:21:48 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:21:48 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:22:01 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:01 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:01 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:01 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:22:01 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:22:01 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:01 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:01 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:22:21 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:21 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:21 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:21 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:22:21 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:22:21 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:21 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:22:21 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:24:09 Computer dhclient[12393]: DHCPREQUEST of 130.104.162.81 on wlp4s0 to 192.168.3.248 port 67 (xid=0x14b00e0a)
+Jan 30 09:24:10 Computer dhclient[12393]: DHCPACK of 130.104.162.81 from 192.168.3.248
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7161]   address 130.104.162.81
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7161]   plen 22 (255.255.252.0)
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7161]   gateway 130.104.163.254
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7161]   server identifier 192.168.3.248
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7162]   lease time 900
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7162]   hostname 'wifi-student5-593.sri.ucl.ac.be'
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7162]   nameserver '130.104.1.2'
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7162]   nameserver '130.104.1.1'
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7162]   nameserver '130.104.254.1'
+Jan 30 09:24:10 Computer NetworkManager[945]: <info>  [1517300650.7162] dhcp4 (wlp4s0): state changed bound -> bound
+Jan 30 09:24:10 Computer dbus[910]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+Jan 30 09:24:10 Computer systemd[1]: Starting Network Manager Script Dispatcher Service...
+Jan 30 09:24:10 Computer dbus[910]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jan 30 09:24:10 Computer systemd[1]: Started Network Manager Script Dispatcher Service.
+Jan 30 09:24:10 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: new request (1 scripts)
+Jan 30 09:24:10 Computer nm-dispatcher: req:1 'dhcp4-change' [wlp4s0]: start running ordered scripts...
+Jan 30 09:24:10 Computer dhclient[12393]: bound to 130.104.162.81 -- renewal in 417 seconds.
+Jan 30 09:24:14 Computer NetworkManager[945]: <warn>  [1517300654.7982] device (wlp4s0): activation-stage: schedule activate_stage5_ip6_config_commit,10 which replaces activate_stage5_ip6_config_commit,10 (id 51864 -> 51866)
+Jan 30 09:25:01 Computer kernel: [23827.282438] perf: interrupt took too long (2531 > 2500), lowering kernel.perf_event_max_sample_rate to 79000
+Jan 30 09:25:01 Computer kernel: meltdown detected
+Jan 30 09:26:38 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:26:38 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:26:38 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:26:38 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:26:38 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:26:38 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:26:38 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:26:38 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:27:55 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:27:55 Computer gnome-session[1861]: (nautilus:2093): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:27:55 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:27:55 Computer org.gnome.gedit[1516]: message repeated 2 times: [ (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée]
+Jan 30 09:27:55 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:27:55 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:27:55 Computer org.gnome.gedit[1516]: (gedit:5547): GVFS-WARNING **: can't init metadata tree /home/obo/.local/share/gvfs-metadata/home: open: Permission non accordée
+Jan 30 09:27:55 Computer org.gnome.gedit[1516]: ** (gedit:5547): WARNING **: Set document metadata failed: Erreur lors de la définition des métadonnées du fichier : impossible d'ouvrir l'arborescence de métadonnées
+Jan 30 09:27:56 Computer whoopsie[1270]: [09:27:56] online
