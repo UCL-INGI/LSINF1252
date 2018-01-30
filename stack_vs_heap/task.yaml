@@ -1,5 +1,5 @@
 accessible: true
-author: Nicolas Rybowski
+author: Nicolas Rybowski, Mathieu Xhonneux
 context: |-
     In a C program, variables are stored across different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will lead you about how global variables, and variables on the stack, are managed.
 
@@ -29,29 +29,30 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
+    time: '30'
     memory: '100'
 name: '[S3] Global''n''stack'
 network_grading: false
 order: 8
 problems:
     retour1:
-        header: Que vaut retour 1 ?
+        header: |-
+            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
+
+            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
+
+            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
         type: code_single_line
-        name: retour 1
-    retour2:
-        type: code_single_line
-        header: Que vaut retour 2 ?
-        name: retour 2
+        name: On the stack
     version1:
         language: c
         header: |
             .. code-block:: c
 
                 void sum(int a, int b){
-        type: code
         name: Version stack
+        type: code
     version2:
         type: code
         language: c
