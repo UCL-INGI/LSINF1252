@@ -14,7 +14,7 @@ context: |+
         * @value: value of the node
         */
         typedef struct node{
-          struct node* next;
+          struct node *next;
           int value;
         } node_t;
 
@@ -24,9 +24,9 @@ context: |+
         * @first: first node of the list, NULL if empty
         * @size: number of nodes in the list.
         */
-        typedef struct list{
-          struct node* first;
-          int* size;
+        typedef struct list {
+          struct node *first;
+          int *size;
         } list_t;
 
 
@@ -52,7 +52,7 @@ problems:
                 * @value: value of the node
                 * @return: return the pointer to the new node, NULL either.
                 */
-                node_t* init_node(int value){
+                node_t *init_node(int value){
         name: Initialisation d'un noeud
         type: code
     add_node:
@@ -67,7 +67,7 @@ problems:
                 * @l: list of integers
                 * @value: value to add to the list
                 *
-                * @return: 0 if success, -1 either
+                * @return: 0 if success, 1 either
                 */
                 int add_node(list_t* list, int value);
         name: Ajout d'un noeud
