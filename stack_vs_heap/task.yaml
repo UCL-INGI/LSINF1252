@@ -37,7 +37,6 @@ network_grading: false
 order: 8
 problems:
     value1:
-        type: match
         answer: '5'
         name: On the stack
         header: |-
@@ -46,6 +45,7 @@ problems:
             Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
 
             Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
+        type: match
     retour1:
         header: |-
             Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
@@ -63,12 +63,12 @@ problems:
             .. code-block:: c
 
                 void sum2(int a, int b) {
+        type: code
         name: Globalizing
-        type: code
     version2:
-        type: code
         language: c
         name: Passing by reference
+        type: code
         header: |
             You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html). What is the link between passing by reference and pointers ?
 
@@ -80,5 +80,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: memory
+        name: Memory Exceeded
+        type: 1
+        description: ''
+        visible: false
 weight: 1.0
