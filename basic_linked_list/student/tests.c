@@ -80,7 +80,11 @@ void test_init_node_alloc(){
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(stats.malloc.called, 1);
+  if (!stats.malloc.called)
+    push_info_msg(_("You used more than one call to malloc"));
+
   CU_ASSERT_TRUE(malloced((void*) ret));
+
   CU_ASSERT_PTR_NOT_NULL(ret);
 
   free_node_corr(ret);
@@ -88,7 +92,7 @@ void test_init_node_alloc(){
 }
 
 void test_init_node_value(){
-  set_test_metadata("init_node", _("Check the value of the node"), 1);
+  set_test_metadata("init_node", _("Check the initialisation of the node"), 1);
 
   node_t* ret = NULL;
 
@@ -97,15 +101,28 @@ void test_init_node_value(){
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(ret->value, 10);
+  if (ret->value != 10)
+    push_info_msg(_("The value of the node is not the expected one"));
+
   CU_ASSERT_PTR_NULL(ret->next);
+  if (!ret->next)
+    push_info_msg(_("The 'next' pointer is not correctly initialised"));
+
   free_node_corr(ret);
 
+  int val = 25136984;
+
   SANDBOX_BEGIN;
-  ret = init_node(25136984);
+  ret = init_node(val);
   SANDBOX_END;
 
-  CU_ASSERT_EQUAL(ret->value, 25136984);
+  CU_ASSERT_EQUAL(ret->value, val);
+  if (ret->value != val)
+    push_info_msg(_("The value of the node is not the expected one"));
+
   CU_ASSERT_PTR_NULL(ret->next);
+  if (!ret->next)
+    push_info_msg(_("The 'next' pointer is not correctly initialised"));
 
   free_node_corr(ret);
 }
@@ -124,6 +141,8 @@ void test_init_node_nomem(){
   SANDBOX_END;
 
   CU_ASSERT_PTR_NULL(ret);
+  if (!ret)
+    push_info_msg(_("Wrong return value when malloc call fails"));
 }
 
 void test_add_node_empty(){
@@ -315,8 +334,6 @@ void test_add_node_nomem(){
   //-----------------------------------------------------------------
 
   free_list_corr(list);
-
-
 }
 
 int main(int argc,char** argv)
