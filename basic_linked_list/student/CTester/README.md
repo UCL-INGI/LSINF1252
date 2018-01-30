@@ -49,6 +49,7 @@ void test_insert_no_file();
 
 	CU_ASSERT_EQUAL(ret,-1);
 	CU_ASSERT_EQUAL(stats.open.called, 1);
+	set_tag('error_handling');
 	if (stats.open.called > 1)
 	    push_info_msg(_("Why did you use open more than once ?"));
 }
@@ -61,7 +62,7 @@ Un test CTester est une simple fonction sans argument et sans valeur de retour. 
 
 Lorsqu'on veut faire appel au code de l'étudiant, il est **OBLIGATOIRE** de le faire depuis la [*sandbox*](https://fr.wikipedia.org/wiki/Sandbox_%28s%C3%A9curit%C3%A9_informatique%29), en utilisant les macros `SANDBOX_BEGIN` et `SANDBOX_END`. La *sandbox* permet d'éviter qu'un *segfault* ou une boucle infinie dans le code de l'étudiant ne fasse planter toute la suite de tests. De même, les fonctionnalités de monitoring d'appels systèmes ne fonctionnent qu'à l'intérieur de la *sandbox*. Il est important de préciser que le code à l'intérieur de celle-ci est capable de crasher à tout moment, propulsant alors l'exécution du programme à ce qui suit `SANDBOX_END`.  Dès lors, si vous souhaitez utiliser des variables dans vos assertions à la fin du test, il faut déclarer celles-ci en dehors de la *sandbox* (comme `ret` dans l'exemple).
 
-Tous les types d'assertions de CUnit sont disponibles dans CTester, se référer à [la documentation de CUnit](http://cunit.sourceforge.net/doc/writing_tests.html). La fonction `push_info_msg` permet d'indiquer un message supplémentaire à l'étudiant, pour l'aider à corriger son code. CTester rapporte à l'étudiant automatiquement un éventuel *segfault*, *timeout* ou *double free*. On peut pousser autant de messages que l'on souhaite, mais le framework interdit l'usage du caractère '#' ou d'un retour à la ligne dans les messages.
+Tous les types d'assertions de CUnit sont disponibles dans CTester, se référer à [la documentation de CUnit](http://cunit.sourceforge.net/doc/writing_tests.html). La fonction `push_info_msg` permet d'indiquer un message supplémentaire à l'étudiant, pour l'aider à corriger son code. CTester rapporte à l'étudiant automatiquement un éventuel *segfault*, *timeout* ou *double free*. On peut pousser autant de messages que l'on souhaite, mais le framework interdit l'usage du caractère '#' ou d'un retour à la ligne dans les messages. Il est également possible d'indiquer qu'un tag INGInious de l'exercice a été réussi via `set_tag`.
 
 Finalement, afin de de permettre de traduire les suites de tests, il est également important d'appliquer *gettext* à toutes vos chaînes de caractères via la macro `_` : `_("My string")`. La possibilité de traduire ces chaînes en français est expliquée dans la section "Internationalisation".
 
@@ -123,7 +124,7 @@ void test_write_fail() {
 
 	ret = -1000;
 	monitored.write = true;
-	failures.write=FAIL_ONCE;
+	failures.write=FAIL_FIRST;
 	failures.write_ret=-1;
 	failures.write_errno=EIO;
 

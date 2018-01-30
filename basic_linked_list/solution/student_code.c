@@ -30,4 +30,5 @@ int add_node(list_t* list, int value){
   list->size++;
 
   return 0;
+
 }
