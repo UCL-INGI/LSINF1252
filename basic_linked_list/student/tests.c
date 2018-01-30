@@ -105,7 +105,7 @@ void test_init_node_value(){
     push_info_msg(_("The value of the node is not the expected one"));
 
   CU_ASSERT_PTR_NULL(ret->next);
-  if (!ret->next)
+  if (ret->next)
     push_info_msg(_("The 'next' pointer is not correctly initialised"));
 
   free_node_corr(ret);
@@ -121,7 +121,7 @@ void test_init_node_value(){
     push_info_msg(_("The value of the node is not the expected one"));
 
   CU_ASSERT_PTR_NULL(ret->next);
-  if (!ret->next)
+  if (ret->next)
     push_info_msg(_("The 'next' pointer is not correctly initialised"));
 
   free_node_corr(ret);
@@ -141,7 +141,7 @@ void test_init_node_nomem(){
   SANDBOX_END;
 
   CU_ASSERT_PTR_NULL(ret);
-  if (!ret)
+  if (ret)
     push_info_msg(_("Wrong return value when malloc call fails"));
 }
 
