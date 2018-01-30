@@ -1,60 +1,67 @@
 accessible: true
 author: Nicolas Rybowski
 context: |-
-    On vous demande d'implémenter deux versions d'une même fonction et de comparer les résultats.
-    Les fonctions `sum1` et `sum2` somment toutes deux leurs arguments et stockent cette valeur dans le premier argument.
+    In a C program, variables are stored across different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will lead you about how global variables, and variables on the stack, are managed.
 
     .. code-block:: c
+        int result;
 
-        void main(int argc, char **argv){
+        void sum1(a1, b1) {
+            a1 = a1 + b1;
+        }
+
+        void main(int argc, char **argv) {
             int a1 = 5, b1 = 6;
 
             sum1(a1, b1);
-            printf(a1); // retour1
+            printf("sum1: %d\n", a1);
 
-            int *a2 = 5, *b2 = 6;
+            int a2 = 3, b2 = 7;
+            sum2(a2, b2)
+            printf("sum2: %d\n", result);
 
-            sum2(a2, b2);
-            printf(*a2); // retour2
+            int a3 = 1, b3 = 8;
+            sum3(&a3, &b3);
+            printf("sum3: %d\n", a3);
         }
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
-name: '[S2-S3] Stack vs Heap'
+name: '[S3] Global''n''stack'
 network_grading: false
+order: 8
 problems:
     retour1:
-        name: retour 1
-        type: code_single_line
         header: Que vaut retour 1 ?
-    retour2:
-        header: Que vaut retour 2 ?
         type: code_single_line
+        name: retour 1
+    retour2:
+        type: code_single_line
+        header: Que vaut retour 2 ?
         name: retour 2
     version1:
-        type: code
+        language: c
         header: |
             .. code-block:: c
 
                 void sum(int a, int b){
-        language: c
+        type: code
         name: Version stack
     version2:
         type: code
         language: c
-        name: Version heap
         header: |
             .. code-block:: c
 
                 void sum(int* a, int* b){
+        name: Version heap
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 8
