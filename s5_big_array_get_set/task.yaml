@@ -4,8 +4,6 @@ context: |-
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
     Since the array is huge, you can not load it entierly into memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek()``.
-
-    If an error occurs, return ``-1``.
 environment: cpp
 evaluate: best
 groups: false
@@ -15,7 +13,7 @@ limits:
     output: '2'
 name: '[S5] Get and set on array in file'
 network_grading: false
-order: 19
+order: 20
 problems:
     q1:
         type: code
@@ -23,6 +21,11 @@ problems:
         header: |-
             .. code-block:: c
 
+                /*
+                 * @pre index >= 0
+                 * @post return the integer at the {index} position.
+                 *       return -1 in case of error.
+                 */
                 int get(int index)
         name: ''
     q2:
@@ -32,6 +35,11 @@ problems:
         header: |-
             .. code-block:: c
 
+                /*
+                 * @pre index >= 0
+                 * @post update the value in the array stored in the file at the index {index}.
+                 *       do nothing if an error occurs.
+                 */
                 void set(int index, int value)
 stored_submissions: 0
 submission_limit:

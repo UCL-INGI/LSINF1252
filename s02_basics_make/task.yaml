@@ -141,7 +141,7 @@ limits:
     memory: '100'
 name: '[S02] Makefile basics - exercises'
 network_grading: false
-order: 8
+order: 9
 problems:
     make_me_easy:
         header: |-

@@ -11,7 +11,7 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: Through the array
+name: '[S2] Through the array'
 network_grading: false
 problems:
     tab_find:
@@ -36,3 +36,4 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
+order: 5
