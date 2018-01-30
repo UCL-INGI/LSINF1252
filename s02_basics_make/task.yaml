@@ -116,7 +116,8 @@
 /student/Makefile: |
     make_me:
         cc make_me.c  -o make_me
-/student/Makefile.tpl: "@\t@make_me_less_easy@@"
+/student/Makefile.tpl: |
+    @        @make_me_less_easy@@
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
@@ -156,13 +157,10 @@ problems:
 
             **Hint:** you do not need to write a *Makefile*.
     make_me_less_easy:
-        allowed_exts:
-        - Makefile
-        header: |-
-            Suppose you cannot use what you did in the above question. Write a Makefile that compiles the above given code and builds an executable ``make_me``.
-
-            Upload your file here. Do not modify ``make_me.c`` and ``make_me.h``.
-        type: file
+        language: Makefile
+        header: Suppose you cannot use what you did in the above question. Write a
+            Makefile that compiles the above given code and builds an executable ``make_me``.
+        type: code
         name: Make me less easy
 stored_submissions: 0
 submission_limit:
