@@ -59,17 +59,15 @@ problems:
         language: c
         type: code
         header: |
-            *N'oubliez pas de mettre à jour la taille de la liste.*
-
             .. code-block:: c
 
                 /*
-                * Add an element to the head of the list @list
+                * Add an element to the head of the list @list and update its member `size`
                 *
                 * @l: list of integers
                 * @value: value to add to the list
                 *
-                * @return: 0 if success, 1 either
+                * @return: 0 if success, 1 else
                 */
                 int add_node(list_t *list, int value);
         name: Ajout d'un noeud
