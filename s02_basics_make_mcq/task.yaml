@@ -29,13 +29,13 @@ problems:
         success_message: 'Bullseye, good job! '
     mcq2:
         name: What are the prerequisite?
-        header: Select all *correct* answers related to the *prerequisite* of a Makefile
-            rule.
         choices:
         -   valid: true
             text: The prerequisite is a file that is used as input to create the target.
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
+        header: Select all *correct* answers related to the *prerequisite* of a Makefile
+            rule.
         type: multiple_choice
         multiple: true
         limit: 4
@@ -59,17 +59,34 @@ problems:
     mcq4:
         choices:
         -   valid: true
-            text: |-
+            text: |
                 clean:
                     @rm -f src/*.o
         -   text: |
                 cleantests:
                     @rm -f tests/*.o
             valid: true
+        -   feedback: There is a missing tab on the second line.
+            text: |
+                clean:
+                @rm -f src/*.o
+        -   text: |
+                cleantests:
+                @rm -f tests/*.o
+            feedback: There is a missing tab on the second line.
+        -   feedback: There is a missing colon after clean.
+            text: |
+                clean
+                    @rm -f src/*.o
+        -   text: |
+                clean:
+                    @rm -f src/*.o
+            feedback: The recipe in a Makefile has to be intended with spaces not
+                tabs.
         header: Choice all *correct* Makefile *rules*.
         type: multiple_choice
-        multiple: true
         name: Rules syntax
+        multiple: true
 stored_submissions: 0
 submission_limit:
     amount: -1
