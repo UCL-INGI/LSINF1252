@@ -4,7 +4,7 @@ context: |-
     On vous demande d'implémenter les méthodes `enqueue` et `dequeue` d'une queue basée sur une liste simplement chainée.
 
 
-    .. code-block: c
+    .. code-block:: c
 
         /**
         * Structure node
@@ -12,10 +12,10 @@ context: |-
         * @next: pointer to the next node in the list, NULL if last node_t
         * @value: value of the node
         */
-        typedef struct node{
+        struct node {
           struct node *next;
           int value;
-        } node_t;
+        } node;
 
 
     .. code-block:: c
@@ -33,7 +33,7 @@ limits:
     memory: '100'
 name: '[S3] Simple queue'
 network_grading: false
-order: 12
+order: 16
 problems:
     enqueue:
         header: ''

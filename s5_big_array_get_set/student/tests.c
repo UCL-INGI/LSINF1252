@@ -4,21 +4,24 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+int get_value_by_index(int i){
+    return (i*i*(i/2))%20000;
+}
+
 /*
  * Generate a file named "file.txt".
- * The content is the bytes in range [0, n[
+ * The content is n int following the formula defined above.
  */
 void gen_file(int n){
-    system("rm newfile.txt");
     int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
     if(fd == -1) {
         CU_FAIL("Error, can not initialise test file");
     }
-    char array[n];
+    int array[n];
     int i = 0;
     for (i = 0; i < n; i++){
-        array[i] = i;
-        if (write(fd, (void *) &array[i], sizeof(char)) == -1){
+        array[i] = get_value_by_index(i);
+        if (write(fd, (void *) &array[i], sizeof(int)) == -1){
             CU_FAIL("Error, can not initialise test file");
         }
     }
@@ -27,180 +30,93 @@ void gen_file(int n){
 }
 
 /*
- * Test with open fail
+ * Test with some int in the file
  */
-void test_fail_open() {
-    set_test_metadata("q1", _("Test fail open"), 1);
-    int ret = 0;
-    
-    monitored.open = true;
-    failures.open = FAIL_TWICE;
-    failures.open_ret = -1;
-    
-    SANDBOX_BEGIN;
-    ret = myfunc("file_that_does_not_exists.txt", "newfile_that_should_not_be_create.txt");
-    SANDBOX_END;
-
-    if (ret != -1){
-        push_info_msg(_("When the open() function fails, your code does not return -1."));
-        CU_FAIL();
-    }else{
-        set_tag("open");
-    }
-}
-
-
-/*
- * Test with an empty file
- */
-void test_empty_file() {
-    set_test_metadata("q1", _("Test with empty file."), 1);
-    gen_file(0);
-    int ret = 0;
-    
-    SANDBOX_BEGIN;
-    ret = myfunc("file.txt", "newfile.txt");
-    SANDBOX_END;
-    
-    system("chmod 644 newfile.txt"); //If student does not set permission correctly, we set it to avoid test error
-    if (system("diff file.txt newfile.txt") != 0){
-        push_info_msg(_("You copy is not identical."));
-        CU_FAIL();
-    }
-    if (ret != 0){
-        push_info_msg(_("When the file is empty, your copy is not identical."));
-        CU_FAIL();
-    }
-}
-
-
-/*
- * Test with some bytes in the file
- */
-void test_file_permission() {
-    set_test_metadata("q1", _("Test permissions equal"), 1);
-    gen_file(122);
-    
-    SANDBOX_BEGIN;
-    myfunc("file.txt", "newfile.txt");
-    SANDBOX_END;
-    
-    system("ls -al file.txt | head -c 10 > PERM_A.txt");
-    system("ls -al newfile.txt | head -c 10 > PERM_B.txt");
-    if (system("diff PERM_A.txt PERM_B.txt") != 0){
-        push_info_msg(_("The permission of the two files are not equals."));
-        CU_FAIL();
-    }else{
-        set_tag("permission");
-    }
-}
-
-
-
-/*
- * Test with some bytes in the file
- */
-void test_file() {
+void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
-    gen_file(122);
-    int ret = 0;
+    gen_file(1000);
     
-    SANDBOX_BEGIN;
-    ret = myfunc("file.txt", "newfile.txt");
-    SANDBOX_END;
-    
-    system("chmod 644 newfile.txt"); //If student does not set permission correctly, we set it to avoid test error
-    // S_IRUSR|S_IWUSR = 644
-    if (system("diff file.txt newfile.txt") != 0){
-        push_info_msg(_("You copy is not identical."));
-        CU_FAIL();
-    }else{
-        set_tag("copy");
-    }
-    if (ret != 0){
-        push_info_msg(_("You do not return 0 when the copy should be successful."));
-        CU_FAIL();
+    for(int i = 0; i < 1000; i+=50){
+        int ret = 0;
+        
+        SANDBOX_BEGIN;
+        ret = get(i);
+        SANDBOX_END;
+        
+        if(ret != get_value_by_index(i)){
+            push_info_msg(_("You do not return the correct value."));
+            CU_FAIL(); 
+        }   
     }
 }
 
-/*
- * Test with some bytes in the file
- */
-void test_file_write_fail() {
-    set_test_metadata("q1", _("Test with normal file (with some failures)"), 1);
-    gen_file(125);
-    int ret = 0;
-    
-    monitored.write = true;
-    failures.write = FAIL_THIRD;
-    failures.write_ret = -1;
-    
-    SANDBOX_BEGIN;
-    ret = myfunc("file.txt", "newfile.txt");
-    SANDBOX_END;
 
-    if (ret != -1){
-        push_info_msg(_("You do not return -1 when a fail occurs with read() or write()"));
-        set_tag("failure_handling");
+/*
+ * Test with some int in the file
+ */
+void test_set() {
+    set_test_metadata("q2", _("Test with normal file"), 2);
+    gen_file(1000);
+    
+    for(int i = 0; i < 1000; i+=50){        
+        SANDBOX_BEGIN;
+        set(i, 2222+i);
+        SANDBOX_END;  
+    }
+    
+    int fd = open("file.txt", O_RDONLY);
+    if(fd == -1) {
+        CU_FAIL("Error, can not initialise test file");
+    }
+    for(int i = 0; i < 1000; i+=50){
+        lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
+        int res;
+        read(fd, (void *) &res, sizeof(int));
+        if (res != 2222+i){
+            push_info_msg(_("You do not set the correct value in the file."));
+            CU_FAIL(); 
+        }
+    }
+    close(fd);
+}
+
+int close_tag = 0;
+void test_close_q1(){
+    set_test_metadata("q1", _("Test close"), 1);
+    monitored.close = true;        
+    SANDBOX_BEGIN;
+    get(0);
+    SANDBOX_END;
+    printf("Q1:%d\n", stats.close.called);
+    if (stats.close.called != 1){
+        push_info_msg(_("You did not close the file."));
         CU_FAIL();
+        close_tag++;
     }
 }
 
-/*
- * Test with some bytes in the file with close()
- */
-void test_close() {
-    set_test_metadata("q1", _("Test close()."), 1);
-    gen_file(2);
-    
-    monitored.close = true;
-    monitored.open = true;
+void test_close_q2(){
+    set_test_metadata("q2", _("Test close"), 1);
+    monitored.close = true;        
     SANDBOX_BEGIN;
-    myfunc("file.txt", "newfile.txt");
+    set(0,0);
     SANDBOX_END;
-    
-    int open_tag = 0;
-    if (stats.close.called != 2){
-        push_info_msg(_("You did not close() the file."));
-        open_tag++;
+    printf("Q2:%d\n", stats.close.called);
+    if (stats.close.called != 1){
+        push_info_msg(_("You did not close the file."));
         CU_FAIL();
-    }if (stats.open.called != 2){
-        push_info_msg(_("The open should be use two times."));
-        open_tag++;
-        CU_FAIL();
-    }if(open_tag ==  0){
+        close_tag++;
+    }
+    if (close_tag == 0)
         set_tag("close");
-    }
 }
 
+//TODO:
+//count read and write
+//check if index id bigger than the file
+//check if other index are not modified
 
-/*
- * Test original file not modified (content and permissions)
- */
-void test_original_integrity() {
-    set_test_metadata("q1", _("Test original file not modified"), 1);
-    gen_file(70);
-    system("cp file.txt file_original.txt");
-    system("ls -al file.txt | head -c 10 > PERM_FILE_1.txt");
-    
-    SANDBOX_BEGIN;
-    myfunc("file.txt", "newfile.txt");
-    SANDBOX_END;
-    
-    if (system("diff file.txt file_original.txt") != 0){
-        push_info_msg(_("You can not modify the original file"));
-        CU_FAIL();
-        set_tag("original_modif");
-    }
-    system("ls -al file.txt | head -c 10 > PERM_FILE_2.txt");
-    if (system("diff PERM_FILE_1.txt PERM_FILE_2.txt") != 0){
-        push_info_msg(_("You can not modify the permissions of the original file."));
-        CU_FAIL();
-        set_tag("original_modif");
-    }
-}
-
-int main(int argc,char** argv){
-    BAN_FUNCS(system);
-    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_original_integrity, test_close);
+int main(int argc, char** argv){
+    BAN_FUNCS(system, set_tag);
+    RUN(test_get, test_set, test_close_q1, test_close_q2);
 }

@@ -1,0 +1,31 @@
+accessible: true
+author: Mathieu Xhonneux
+context: A variable declared inside a function with the keyword *static* implies that
+    the value of this variable will be kept across the different calls to this function.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[S2] Exponentially static counter'
+network_grading: false
+problems:
+    static_counter:
+        language: c
+        header: |-
+            Write the body of the function *stexp* which returns at its *n*th call the value 2^(n-1). Once it has returned the value 4096, the next return should go back to 1.
+
+            .. code-block:: c
+
+            unsigned int stexp() {
+        type: code
+        name: Static counter
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 7

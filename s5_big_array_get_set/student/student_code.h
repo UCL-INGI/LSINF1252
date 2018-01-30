@@ -1,1 +1,2 @@
-int myfunc(char* file_name, char* new_file_name);
+int get(int index);
+void set(int index, int value);

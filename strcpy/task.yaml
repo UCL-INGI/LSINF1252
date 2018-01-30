@@ -13,7 +13,7 @@ limits:
     memory: '100'
 name: '[S3] Improved strncpy'
 network_grading: false
-order: 7
+order: 13
 problems:
     strcpy_impl:
         type: code

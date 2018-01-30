@@ -7,8 +7,11 @@
 #include <unistd.h>
 #include <string.h>
 
-int myfunc(char* file_name, char* new_file_name) {
+int get(int index) {
 @    @q1@@
 }
 
+void set(int index, int value) {
+@    @q2@@
+}
 

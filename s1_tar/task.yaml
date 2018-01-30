@@ -1,6 +1,47 @@
+/run: |
+    #!/bin/bash
+
+    mkdir folder
+    getinput "archive" > archive.tar.gz
+    tar zxvf archive.tar.gz -C folder
+    if [ $? -ne 0 ]
+    then
+        feedback-result failed
+        feedback-msg -m "The decompression of your archive failed, did you give the right arguments to tar(1)?"
+    else
+        ls folder -R > file2.txt
+        diff -q file.txt file2.txt
+        if [ $? -ne 0 ]
+        then
+            feedback-result failed
+            feedback-msg -m "The decompressed archive does not correspond with the original?"
+        else
+            feedback-result success
+            feedback-msg -m "Fine"
+        fi
+        rm file2.txt
+    fi
+    rm folder -R
 accessible: true
 author: Tom Rousseaux
-context: WIP
+context: |
+    You have to **compress** the following file system
+
+    .. code-block:: console
+
+        /
+            file
+            folder1/
+                file1.c
+                file2.c
+                file3.c
+            folder2/
+                file1.h
+                fime2.h
+                file3.h
+
+    For this, use `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.htmlp>`_, feel free to check the arguments of this utility wherever you want.
+    You can download the file system `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -10,6 +51,7 @@ limits:
     memory: '100'
 name: '[S01] tar'
 network_grading: false
+order: 1
 problems:
     archive:
         header: ''
@@ -23,4 +65,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 0

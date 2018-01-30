@@ -1,0 +1,57 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    We have a linked list, built with *struct node*.
+
+    .. code-block:: c
+
+        struct node {
+            struct node *next;
+            int hash;
+            int id;
+            char name[20];
+            char buffer[100];
+            unsigned int timestamp;
+            char acl;
+            short flow;
+            char *parent;
+            void *fifo;
+        }
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: '[S3] Filtering a linked list'
+network_grading: false
+problems:
+    filter:
+        header: |-
+            We want to filter this list and only take the elements with a pair index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
+
+            Write the body of the function *pair_filter*.
+
+            Hint : man 3 memcpy.
+
+            .. code-block:: c
+
+                /* pair_filter
+                 * Make a copy of the linked list starting at head,
+                 * only taking one element out of two
+                 *
+                 * @head : head of a linked list, possibly NULL
+                 * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
+                 */
+                struct node *pair_filter(struct node *head) {
+        language: c
+        type: code
+        name: Filtering
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
+order: 18
