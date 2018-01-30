@@ -2,7 +2,7 @@
 
 
 void version1(int a, int b){
-  result = a + b + 1;
+  result = a + b;
 }
 
 void version2(int *a, int *b){
