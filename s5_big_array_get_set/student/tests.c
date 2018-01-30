@@ -107,13 +107,11 @@ void test_close_q2(){
         CU_FAIL();
         close_tag++;
     }
+    if (close_tag == 0)
+        set_tag("close");
 }
 
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
     RUN(test_get, test_set, test_close_q1, test_close_q2);
-    if (close_tag == 0)
-        set_tag("close");
-    printf("Q:%d\n", close_tag);
-
 }

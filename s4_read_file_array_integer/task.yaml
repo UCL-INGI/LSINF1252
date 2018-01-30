@@ -161,7 +161,7 @@ limits:
     memory: '100'
 name: '[S5] File integers reading'
 network_grading: false
-order: 21
+order: 23
 problems:
     q1:
         type: code

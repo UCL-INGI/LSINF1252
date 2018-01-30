@@ -19,7 +19,7 @@ limits:
     time: '30'
 name: '[S5] Save struct into file'
 network_grading: false
-order: 20
+order: 22
 problems:
     q1:
         language: ''
