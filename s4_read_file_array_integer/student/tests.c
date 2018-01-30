@@ -50,7 +50,7 @@ void test_no_file() {
  * Test with no file
  */
 void test_fail_open() {
-    set_test_metadata("q1", _("Test with no file"), 1);
+    set_test_metadata("q1", _("Test fail open"), 1);
     int ret = 0;
     
     monitored.open = true;
@@ -63,6 +63,7 @@ void test_fail_open() {
 
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
+        set_tag("open");
         CU_FAIL();
     }
 }
