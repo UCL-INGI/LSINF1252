@@ -116,6 +116,8 @@
 /student/Makefile: |
     make_me:
         cc make_me.c  -o make_me
+/student/Makefile.tpl: |
+    @@make_me_less_easy@@
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
@@ -139,26 +141,26 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
 name: '[S02] Makefile basics'
 network_grading: false
 order: 2
 problems:
     make_me_easy:
-        name: Make me easy
-        type: match
-        answer: make make_me
         header: |-
             You want to build an executable ``make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
 
             **Hint:** you do not need to write a *Makefile*.
+        type: match
+        name: Make me easy
+        answer: make make_me
     make_me_less_easy:
         language: Makefile
+        type: code
         header: Suppose you cannot use what you did in the above question. Write a
             Makefile that compiles the above given code and builds an executable ``make_me``.
-        type: code
         name: Make me less easy
 stored_submissions: 0
 submission_limit:
@@ -167,9 +169,9 @@ submission_limit:
 tags:
     '0':
         type: 0
+        name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
         id: make
-        name: make & Makefile
         visible: false
 weight: 1.0
