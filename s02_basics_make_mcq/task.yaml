@@ -18,11 +18,22 @@ problems:
         -   text: The target is the name of a file
         -   text: The target can be the name of an action to carry out
         name: Find the target
-        limit: 0
         header: Select all correct answers related to the target of a Makefile rule.
+        multiple: true
+        type: multiple_choice
+        limit: 2
+        success_message: 'Bullseye, good job! '
+    mcq2:
         type: multiple_choice
         multiple: true
-        success_message: 'Bullseye, good job! '
+        name: Prerequisite
+        choices:
+        -   text: The prerequisite is a file that is used as input to create the target.
+            valid: true
+        -   text: The prerequisite is to have good marksmanship skills to hit the
+                target.
+        header: Select all *correct* answers related to the prerequisite of a rule.
+        limit: 2
 stored_submissions: 0
 submission_limit:
     amount: -1
