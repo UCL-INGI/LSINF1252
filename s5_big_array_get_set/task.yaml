@@ -1,5 +1,5 @@
 accessible: true
-author: ''
+author: Olivier Martin
 context: |-
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
@@ -8,28 +8,29 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '10'
-    time: '30'
 name: '[S5] Get and set on array in file'
 network_grading: false
+order: 19
 problems:
     q1:
+        type: code
         language: ''
         name: ''
         header: |-
             .. code-block:: c
 
                 int get(int index)
-        type: code
     q2:
+        type: code
         language: ''
         header: |-
             .. code-block:: c
 
                 void set(int index, int value)
         name: ''
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -37,9 +38,8 @@ submission_limit:
 tags:
     '0':
         description: ''
-        type: 2
         visible: true
+        type: 2
         name: File
         id: ''
 weight: 1.0
-order: 19

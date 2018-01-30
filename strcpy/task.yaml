@@ -7,24 +7,32 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
-name: '[S2-S3] Strcpy'
+name: '[S3] Improved strncpy'
 network_grading: false
+order: 7
 problems:
     strcpy_impl:
         type: code
-        language: c
-        name: Implémentation
+        name: buf_strcpy
         header: |
+            Write the body of the function *buf_strcpy*.
+
             .. code-block:: c
 
-                char *strcpy(char *dest);
+                /*
+                * Create a buffer the same size as src, and copy the content of src to this buffer.
+                *
+                * @src: string to be copied
+                * @return: return pointer. if src == NULL, return NULL
+                */
+                char *buf_strcpy(char *src) {
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 7
