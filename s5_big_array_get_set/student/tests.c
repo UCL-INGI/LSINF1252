@@ -89,9 +89,11 @@ void test_close(){
         set_test_metadata(q[i], _("Test close"), 1);
     
         monitored.close = true; 
-        stats.close.called = 0;
         SANDBOX_BEGIN;
-        get(0);
+        if (i==0)
+            get(0);
+        else
+            set(0,0);
         SANDBOX_END;
 
         if (stats.close.called != 1){
@@ -105,7 +107,7 @@ void test_close(){
     }
 }
 
-int main(int argc,char** argv){
+int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
     RUN(test_get, test_set, test_close);
 }

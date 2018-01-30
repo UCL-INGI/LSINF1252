@@ -1,6 +1,8 @@
 accessible: true
 author: Tom Rousseaux
-context: Download the file system `here<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
+context: |+
+    Download the file system `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
+
 environment: pyjavacpp
 evaluate: best
 groups: false
