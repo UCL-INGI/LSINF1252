@@ -1,9 +1,9 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |+
-    On vous demande d'implémenter une liste chaînée de base. Pour ce faire, vous devrez manipuler des pointeurs.
+    We ask you two write two primitives needed to implement a simple linked list.
 
-    **Vous ne pouvez pas utiliser \``calloc\``**
+    **In your functions, you cannot use the function \``calloc\``**
 
     .. code-block:: c
 
@@ -13,7 +13,7 @@ context: |+
         * @next: pointer to the next node in the list, NULL if last node_t
         * @value: value of the node
         */
-        typedef struct node{
+        typedef struct node {
           struct node *next;
           int value;
         } node_t;
@@ -22,7 +22,7 @@ context: |+
         * Structure list
         *
         * @first: first node of the list, NULL if empty
-        * @size: number of nodes in the list.
+        * @size: number of nodes in the list
         */
         typedef struct list {
           struct node *first;
@@ -37,7 +37,7 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S3] Liste chaînée basique'
+name: '[S3] Basic linked list'
 network_grading: false
 order: 13
 problems:
@@ -47,12 +47,12 @@ problems:
             .. code-block:: c
 
                 /*
-                * Create a new node with the value @value
+                * Create a new node in memory with the value @value.
                 *
                 * @value: value of the node
-                * @return: return the pointer to the new node, NULL either.
+                * @return: return the pointer to the new node, or NULL if a failure occured.
                 */
-                node_t *init_node(int value){
+                node_t *init_node(int value) {
         name: Initialisation d'un noeud
         type: code
     add_node:
