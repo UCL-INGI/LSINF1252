@@ -4,18 +4,20 @@
     mkdir folder
     getinput "archive" > archive.tar.gz
     tar zxvf archive.tar.gz -C folder
-    if [ $? -neq 0 ]
+    if [ $? -ne 0 ]
+    then
         feedback-result failed
-        feedback-msg -m "The decompression of your archive failed, did you use the right arguments?"
+        feedback-msg -m "The decompression of your archive failed, did you give the right arguments to tar(1)?"
     else
         ls folder -R > file2.txt
         diff -q file.txt file2.txt
-        if [ $? -neq 0 ]
+        if [ $? -ne 0 ]
+        then
             feedback-result failed
             feedback-msg -m "The decompressed archive does not correspond with the original?"
         else
             feedback-result success
-            feedback-msg -m "good"
+            feedback-msg -m "Fine"
         fi
         rm file2.txt
     fi
@@ -38,7 +40,7 @@ context: |
                 fime2.h
                 file3.h
 
-    For this, use tar(1), feel free to check the arguments of this utility wherever you want.
+    For this, use `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.htmlp>`_, feel free to check the arguments of this utility wherever you want.
     You can download the file system `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
 environment: pyjavacpp
 evaluate: best
