@@ -81,14 +81,17 @@ void test_set() {
 }
 
 void test_close(){
-    char q[2] = {"q1", "q2"};
+    char *q[2];
+	q[0] = "q1";
+	q[1] = "q2";
     for(int i = 0; i < 2; i++){
-        set_test_metadata(&q[i], _("Test close"), 1);
+        set_test_metadata(q[i], _("Test close"), 1);
     
         monitored.open = true;
         failures.open = FAIL_FIRST;
         failures.open_ret = -1;
     
+        stats.open.called = 0;
         SANDBOX_BEGIN;
         get(0);
         SANDBOX_END;
