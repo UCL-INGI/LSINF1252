@@ -48,10 +48,12 @@ problems:
     version1:
         language: c
         header: |
+            From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
+
             .. code-block:: c
 
-                void sum(int a, int b){
-        name: Version stack
+                void sum2(int a, int b) {
+        name: Globalizing
         type: code
     version2:
         type: code
