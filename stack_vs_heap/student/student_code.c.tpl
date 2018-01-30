@@ -6,3 +6,7 @@
 void version1(int a, int b){
   @@version1@@
 }
+
+void version2(int *a, int *b){
+  @@version1@@
+}
