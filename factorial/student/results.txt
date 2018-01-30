@@ -1,0 +1,1 @@
+factorial#FAIL#test the function factorial#1##Your code produced a segfault.#Your code produced a segfault.#Your code produced a segfault.#factorial returns the wrong value: you returned 0 for 2#factorial returns the wrong value: you returned 0 for 0#factorial returns the wrong value: you returned 0 for 1
