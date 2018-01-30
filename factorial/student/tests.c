@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 #include "student_code.h"
 #include "CTester/CTester.h"
 
