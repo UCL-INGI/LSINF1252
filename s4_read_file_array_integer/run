@@ -76,7 +76,7 @@ if p.returncode:
 
 # Fetch CUnit test results
 results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'info_msgs':r[4:]} for r in results_raw]
+results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': ",".split(r[4]), 'info_msgs':r[5:]} for r in results_raw]
 
 
 # Produce feedback
@@ -108,6 +108,9 @@ for pid, result in tests_result.items():
     else:
         feedback.set_problem_result("failed", pid)
         
+
+for tag in results['tags']:
+    feedback.set_tag(tag, 1)
 
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)
