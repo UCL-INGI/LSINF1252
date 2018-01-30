@@ -1,7 +1,7 @@
 accessible: true
 author: ''
 context: '*Estimated time: 5 minutes*'
-environment: pyjavacpp
+environment: mcq
 evaluate: best
 groups: false
 limits:
@@ -10,7 +10,7 @@ limits:
     output: '2'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
-order: 5
+order: 6
 problems:
     mcq1:
         choices:
@@ -53,46 +53,47 @@ problems:
         name: The recipe
         multiple: true
         type: multiple_choice
-        header: |+
-            Please select all *correct* answers related to the *recipe* of a Makefile rule.
-
+        header: Please select all *correct* answers related to the *recipe* of a Makefile
+            rule.
     mcq4:
         choices:
         -   valid: true
-            text: |+
+            text: |
                 .. code-block:: console
                         clean:
                             @rm -f src/*.o
-
-        -   text: |+
+        -   text: |
                 .. code-block:: console
                         cleantests:
                             @rm -f tests/*.o
 
-            valid: true
+                    clean:
+                    [tab]@rm -f src/*.o
         -   feedback: There is a missing tab on the second line.
             text: |+
                 .. code-block:: console
                         clean:
                         @rm -f src/*.o
 
-        -   text: |+
+        -   text: |
                 .. code-block:: console
                         cleantests:
                         @rm -f tests/*.o
 
-            feedback: There is a missing tab on the second line.
+                    clean:
+                    @rm -f src/*.o
         -   feedback: There is a missing colon after clean.
-            text: |+
+            text: |-
                 .. code-block:: console
                         clean
                             @rm -f src/*.o
 
-        -   text: |+
+                    clean
+                    [tab]@rm -f src/*.o
+        -   text: |-
                 .. code-block:: console
                         clean:
                             @rm -f src/*.o
-
             feedback: The recipe in a Makefile has to be intended with spaces not
                 tabs.
         header: Choice all *correct* Makefile *rules*.

@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S5] File integers reading'
 network_grading: false
-order: 17
+order: 18
 problems:
     q1:
         language: c
