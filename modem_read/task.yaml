@@ -1,0 +1,28 @@
+accessible: true
+author: ''
+context: |+
+    You are in 1977 and want to read your e-mail with your freshly bought Apple II. You are connected to the ARPANET through a modem, but unfortunately the modem's manufacturer has only given a single function `modem_read`, to read the data received by the modem, with the following prototype :
+
+    ``void modem_read(void *buffer, )
+
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[S3] Reading from the wire'
+network_grading: false
+problems:
+    modem:
+        name: '42'
+        header: You want to know if one e-mail you received contains the byte 42.
+        language: c
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
