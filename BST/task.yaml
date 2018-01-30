@@ -44,19 +44,30 @@ problems:
         type: code
         name: Methode contains
         header: |-
+            Write the body of contains method. If you use submethods, write them in the location below.
+
             .. code-block:: c
 
-                int contains(bt_t* tree){
+                /*
+                * Return 1 if @value is in @tree or 0 if it isn't.
+                */
+                int contains(bt_t* tree, int value){
         language: c
+    other:
+        language: ''
+        optional: 'on'
+        header: Write here the submethods used by the contains method.
+        name: Helpfull submethods
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 2
         description: Task dealing with data structures and linked list
         visible: true
+        type: 2
         name: Data structures
         id: ''
 weight: 1.0
