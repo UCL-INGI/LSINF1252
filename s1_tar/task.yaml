@@ -1,3 +1,25 @@
+/run: |
+    #!/bin/bash
+
+    mkdir folder
+    getinput "archive" > archive.tar.gz
+    tar zxvf archive.tar.gz -C folder
+    if [ $? -neq 0 ]
+        feedback-result failed
+        feedback-msg -m "The decompression of your archive failed, did you use the right arguments?"
+    else
+        ls folder -R > file2.txt
+        diff -q file.txt file2.txt
+        if [ $? -neq 0 ]
+            feedback-result failed
+            feedback-msg -m "The decompressed archive does not correspond with the original?"
+        else
+            feedback-result success
+            feedback-msg good
+        fi
+        rm file2.txt
+    fi
+    rm folder -R
 accessible: true
 author: Tom Rousseaux
 context: |
