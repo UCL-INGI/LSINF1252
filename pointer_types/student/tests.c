@@ -5,26 +5,25 @@
 void test_tab1() {
     set_test_metadata("first", _("test for the first input"), 1);
 
-    int tab1[4] = {2, 3 , 5, 9};
+    int tab1[4] = {2, 3 ,5, 9};
     int tab2[4] = {1, 4, 4, 10};
     int tab3[4] = {10, 4, 21, 3};
     int tab4[4] = {10, 456789087, 2121212122, 1672386787};
-    int* a = (int*) tab1;
     int ret = 0;
 
     SANDBOX_BEGIN;
-    ret = first(a);
+    ret = first((void *) tab1);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,5);
+    CU_ASSERT_EQUAL(ret,9);
 
-    a = (void *)tab2;
+    /*a = (void *)tab2;
 
     SANDBOX_BEGIN;
     ret = first(a);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,4);
+    CU_ASSERT_EQUAL(ret,10);
 
     a = (void *)tab3;
 
@@ -32,7 +31,7 @@ void test_tab1() {
     ret = first(a);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,21);
+    CU_ASSERT_EQUAL(ret,3);
 
     a = (void *)tab4;
 
@@ -40,7 +39,7 @@ void test_tab1() {
     ret = first(a);
     SANDBOX_END;
 
-    CU_ASSERT_EQUAL(ret,2121212122);
+    CU_ASSERT_EQUAL(ret,1672386787);*/
 }
 
 void test_tab2() {

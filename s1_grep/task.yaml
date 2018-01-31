@@ -15,7 +15,7 @@ problems:
     CU_trim_left:
         answer: Util.h
         name: CU_trim_left
-        header: Where is defined the function CU_trim_left? Give onnly the name of
+        header: Where is defined the function CU_trim_left? Give only the name of
             the file.
         type: match
     CU_UNREFERENCED_PARAMETER_pTest:

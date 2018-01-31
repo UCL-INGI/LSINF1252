@@ -1,3 +1,23 @@
+/solutions/sol.c: |
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include "student_code.h"
+
+    int first(int* a){
+        return a[2];
+    }
+
+    char second(int* a){
+      char* c = (char*) a;
+      return *(c + 5);
+    }
+
+    int third(int* a){
+      char* c = (char*) a;
+      c = c + 10;
+      int * b = (int*) c;
+      return *b;
+    }
 /student/student_code.c.tpl: |
     #include<stdio.h>
     #include<stdlib.h>
@@ -22,26 +42,25 @@
     void test_tab1() {
         set_test_metadata("first", _("test for the first input"), 1);
 
-        int tab1[4] = {2, 3 , 5, 9};
+        int tab1[4] = {2, 3 ,5, 9};
         int tab2[4] = {1, 4, 4, 10};
         int tab3[4] = {10, 4, 21, 3};
         int tab4[4] = {10, 456789087, 2121212122, 1672386787};
-        int* a = (int*) tab1;
         int ret = 0;
 
         SANDBOX_BEGIN;
-        ret = first(a);
+        ret = first((void *) tab1);
         SANDBOX_END;
 
-        CU_ASSERT_EQUAL(ret,5);
+        CU_ASSERT_EQUAL(ret,9);
 
-        a = (void *)tab2;
+        /*a = (void *)tab2;
 
         SANDBOX_BEGIN;
         ret = first(a);
         SANDBOX_END;
 
-        CU_ASSERT_EQUAL(ret,4);
+        CU_ASSERT_EQUAL(ret,10);
 
         a = (void *)tab3;
 
@@ -49,7 +68,7 @@
         ret = first(a);
         SANDBOX_END;
 
-        CU_ASSERT_EQUAL(ret,21);
+        CU_ASSERT_EQUAL(ret,3);
 
         a = (void *)tab4;
 
@@ -57,7 +76,7 @@
         ret = first(a);
         SANDBOX_END;
 
-        CU_ASSERT_EQUAL(ret,2121212122);
+        CU_ASSERT_EQUAL(ret,1672386787);*/
     }
 
     void test_tab2() {
@@ -181,7 +200,6 @@ problems:
         name: First argument
         type: code
     second:
-        language: c
         name: Second argument
         header: |-
             The second parameter is a char located 6 bytes after *ptr*.
@@ -191,6 +209,7 @@ problems:
             .. code-block:: c
 
                 char second(void *ptr) {
+        language: c
         type: code
     third:
         language: c
@@ -210,9 +229,9 @@ submission_limit:
     period: -1
 tags:
     '0':
+        description: Task about pointers and their use
         name: Pointer
         type: 2
         visible: true
-        description: Task about pointers and their use
         id: ''
 weight: 1.0
