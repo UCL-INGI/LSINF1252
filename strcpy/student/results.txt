@@ -1,2 +1,2 @@
-buf_strcpy#SUCCESS#Check the returned pointer in normal case#1#
-buf_strcpy#SUCCESS#Check the behavior of the function when the call to malloc fails#1##The return value of your implementation is wrong
+strcpy_impl#SUCCESS#Check the returned pointer in normal case#1#
+strcpy_impl#SUCCESS#Check the behavior of the function when the call to malloc fails#1#

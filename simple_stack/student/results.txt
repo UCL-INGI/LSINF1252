@@ -1,0 +1,2 @@
+push#SUCCESS#Check if the parameter and the allocation of the new node#1#
+push#SUCCESS#Check if the insertion of the new node is correct#1#
