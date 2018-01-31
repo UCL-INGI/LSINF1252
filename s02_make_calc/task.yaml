@@ -20,26 +20,26 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S02] make and prerequisites'
 network_grading: false
 problems:
     make_calc_simple:
         name: 'Linking '
         language: Makefile
+        type: code
         header: Write a *Makefile* to build the executable ``calc`` from both object
             files ``calc.o`` and ``operations.o``.
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: make
         name: make & Makefile
+        id: make
         type: 0
         description: Tasks related to the make task runner for targets described in
             Makefile.
