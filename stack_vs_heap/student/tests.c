@@ -5,12 +5,6 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-/*void test_retour1() {
-
-
-  CU_ASSERT_EQUAL(retour1(), 5);
-
-}*/
 
 void test_sum2(){
   set_test_metadata("version1", _("Check the `result` value"), 1);
@@ -22,8 +16,8 @@ void test_sum2(){
   CU_ASSERT_EQUAL(result, 10);
   if (result != 10){
     char msg[80];
-    sprintf(msg, "Expected value: 10. Received value: %i", result);
-    push_info_msg(_(msg));
+    sprintf(msg, _("Expected value: 10. Received value: %i"), result);
+    push_info_msg(msg);
   }
 }
 
@@ -40,8 +34,8 @@ void test_sum3(){
   CU_ASSERT_EQUAL(a, 9);
   if (a != 9){
     char msg[80];
-    sprintf(msg, "Expected value: 9. Received value: %i", result);
-    push_info_msg(_(msg));
+    sprintf(msg, _("Expected value: 9. Received value: %i"), result);
+    push_info_msg(msg);
   }
 }
 

@@ -1,21 +1,3 @@
-/student/student_code.c.tpl: |+
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <errno.h>
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include <unistd.h>
-    #include <string.h>
-
-    int get(char* filename, int index){
-    @    @q1@@
-    }
-
-    void set(char* filename, int index, int value){
-    @    @q2@@
-    }
-
 /student/tests.c: |
     // CTester template
 
@@ -153,8 +135,25 @@
         }
     }
 
+    void test_get_fail() {
+        set_test_metadata("q1", _("Test get out of bound"), 2);
+        gen_file(100);
+        int ret = 0;
+
+        monitored.open = true;
+        failures.open=FAIL_FIRST;
+        failures.open_ret=-1;
+        SANDBOX_BEGIN;
+        ret = get("file.txt", 50);
+        SANDBOX_END;
+
+        if(ret != --1){
+            push_info_msg(_("You do not return -1 when the read() function fails."));
+            CU_FAIL();
+        }
+    }
+
     //TODO:
-    //check if index id bigger than the file
     //check get fail.
     //check if other index are not modified
 
@@ -221,69 +220,69 @@ tags:
         name: Close
         description: This tag validate that your close are correctly performed.
     '1':
-        id: open
         type: 0
         visible: true
+        id: open
         description: This tag validate you are able to open a file.
         name: Open
-    '11':
+    '10':
         type: 1
-        name: Out of bounds
-        description: You try to read outside of the array.
+        id: timeout
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+    '2':
         id: oob
         visible: true
-    '2':
-        id: too_many_op
-        visible: true
-        name: Too many read/write
-        description: You call the read or write function more than necessary.
+        name: Out of bounds
+        description: You try to read outside of the array.
         type: 1
     '3':
         visible: true
-        description: You use some banned functions.
-        id: banned_funcs
-        name: Banned functions
+        description: You call the read or write function more than necessary.
+        id: too_many_op
+        name: Too many read/write
         type: 1
     '4':
-        id: double_free
-        name: Double free
+        id: banned_funcs
+        name: Banned functions
         visible: true
         type: 1
-        description: Your code produced a double free.
+        description: You use some banned functions.
     '5':
         type: 1
-        name: Failure handling
-        id: failure_handling
+        name: Double free
+        id: double_free
         visible: true
-        description: You do not manage failures during the copy properly.
+        description: Your code produced a double free.
     '6':
-        id: sigfpe
+        id: failure_handling
         type: 1
         visible: true
-        description: ''
-        name: Floating Point Exception
+        description: You do not manage failures during the copy properly.
+        name: Failure handling
     '7':
-        name: Memory Exceeded
-        id: memory
+        name: Floating Point Exception
+        id: sigfpe
         visible: true
         description: ''
         type: 1
     '8':
         type: 1
-        name: Not compile
-        visible: true
-        description: You code do not compile.
-        id: not_compile
-    '9':
-        name: Timeout
-        id: timeout
-        type: 1
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-    '10':
-        type: 2
+        name: Memory Exceeded
         visible: true
         description: ''
+        id: memory
+    '9':
+        name: Not compile
+        id: not_compile
+        type: 1
+        description: You code do not compile.
+        visible: true
+    '11':
+        type: 2
         name: File
+        description: ''
+        visible: true
         id: ''
 weight: 1.0

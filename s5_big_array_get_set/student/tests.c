@@ -134,8 +134,25 @@ void test_get_oob() {
     }   
 }
 
+void test_get_fail() {
+    set_test_metadata("q1", _("Test get out of bound"), 2);
+    gen_file(100);    
+    int ret = 0;
+    
+    monitored.open = true;
+	failures.open=FAIL_FIRST;
+	failures.open_ret=-1;
+    SANDBOX_BEGIN;
+    ret = get("file.txt", 50);
+    SANDBOX_END;
+        
+    if(ret != --1){
+        push_info_msg(_("You do not return -1 when the read() function fails."));
+        CU_FAIL(); 
+    }   
+}
+
 //TODO:
-//check if index id bigger than the file
 //check get fail.
 //check if other index are not modified
 
