@@ -15,9 +15,9 @@
 
 /student/student_code.h: |-
     typedef struct point{
-        double x;
-        double y;
-        double z;
+        int x;
+        int y;
+        int z;
     } point_t;
 
     int save(struct point* pt, size_t len, char* filename);
@@ -29,11 +29,12 @@
     #include "CTester/CTester.h"
 
     point_t* gen_struct(int size){
-        point_t* tab = (point_t*) malloc(size * sizeof(point_t));
+        point_t *tab = malloc(size * sizeof(point_t));
+
         if (tab == NULL)
             return (point_t*)NULL;
         for (int i = 0; i < size; i++){
-            tab[i] = (point_t) malloc(sizeof(point_t));
+            tab[i] = malloc(sizeof(struct point));
             tab[i]->x = i+i;
             tab[i]->y = i+i+i;
             tab[i]->z = i+i*i;
@@ -82,9 +83,9 @@ context: |-
     .. code-block:: c
 
         typedef struct 3dpoint{
-            double x;
-            double y;
-            double z;
+            int x;
+            int y;
+            int z;
         } 3dpoint_t;
 environment: pyjavacpp
 evaluate: best
@@ -110,7 +111,7 @@ problems:
                  *      filename != NULL
                  * @post write the array of struct in the file.
                  */
-                int save(struct 3dpoint* pt, size_t len, char* filename)
+                int save(struct point* pt, size_t len, char* filename)
 stored_submissions: 0
 submission_limit:
     amount: -1

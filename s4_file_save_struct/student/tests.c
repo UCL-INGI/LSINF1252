@@ -5,11 +5,12 @@
 #include "CTester/CTester.h"
 
 point_t* gen_struct(int size){
-    point_t* tab = (point_t*) malloc(size * sizeof(point_t));
+    point_t *tab = malloc(size * sizeof(point_t));
+
     if (tab == NULL)
         return (point_t*)NULL;
     for (int i = 0; i < size; i++){
-        tab[i] = (point_t) malloc(sizeof(point_t));
+        tab[i] = malloc(sizeof(struct point));
         tab[i]->x = i+i;
         tab[i]->y = i+i+i;
         tab[i]->z = i+i*i;
