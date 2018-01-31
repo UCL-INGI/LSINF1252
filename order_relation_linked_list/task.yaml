@@ -51,7 +51,7 @@ problems:
                 * @head: first node of the list
                 * @return: 0 if success, -1 otherwise
                 */
-                int insert(node_t** head,int value, (int) (*fun) (int,int)){
+                int insert(node_t** head,int value,int (*fun)(int,int)){
                     //Your code will be inserted here
                 }
         language: c
