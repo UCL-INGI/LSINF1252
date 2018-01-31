@@ -118,16 +118,16 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
 name: '[S5] Save struct into file'
 network_grading: false
 order: 24
 problems:
     q1:
-        language: ''
         type: code
         name: ''
+        language: ''
         header: |-
             .. code-block:: c
 
@@ -143,17 +143,29 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '10':
+        name: Open
+        type: 0
+        id: open
+        visible: true
+        description: This tag validate you are able to open a file.
+    '9':
+        name: Close
+        id: close
+        description: This tag validate that your close are correctly performed.
+        type: 0
+        visible: true
     '0':
-        name: Not compile
         type: 1
+        name: Not compile
         visible: true
         id: not_compile
         description: You code do not compile.
     '1':
-        description: ''
-        id: memory
         type: 1
+        description: ''
         name: Memory Exceeded
+        id: memory
         visible: false
     '2':
         id: sigfpe
@@ -162,27 +174,27 @@ tags:
         type: 1
         visible: true
     '3':
-        visible: true
         description: Your code produced a double free.
+        visible: true
         name: Double free
         id: double_free
         type: 1
     '4':
         id: banned_funcs
         type: 1
-        description: You use some banned functions.
         name: Banned functions
+        description: You use some banned functions.
         visible: false
     '5':
-        id: timeout
-        visible: true
         description: Your code exceeds the maximum allowed time.
+        id: timeout
         type: 1
+        visible: true
         name: Timeout
     '6':
+        name: Segmentation Fault
         id: sigsegv
         type: 1
-        name: Segmentation Fault
         visible: true
         description: ''
     '7':
