@@ -4,19 +4,24 @@
     #include "student_code.h"
 
     int first(int* a){
-        return a[2];
+        int *p = (int *)ptr;
+        p = p+3;
+
+        return *p;
     }
 
     char second(int* a){
-      char* c = (char*) a;
-      return *(c + 5);
+        char *p = (char *)ptr;
+        p = p+6;
+
+        return *p;
     }
 
     int third(int* a){
-      char* c = (char*) a;
-      c = c + 10;
-      int * b = (int*) c;
-      return *b;
+        char *p = (char *)ptr;
+        p = p+45;
+
+        return *(int *)p;
     }
 /student/student_code.c.tpl: |
     #include<stdio.h>
