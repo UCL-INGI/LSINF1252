@@ -1,2 +1,2 @@
-int get(int index);
-void set(int index, int value);
+int get(char* filename, int index);
+void set(char* filename, int index, int value);

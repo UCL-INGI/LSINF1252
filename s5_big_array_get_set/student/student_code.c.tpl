@@ -7,11 +7,11 @@
 #include <unistd.h>
 #include <string.h>
 
-int get(int index) {
+int get(char* filename, int index){
 @    @q1@@
 }
 
-void set(int index, int value) {
+void set(char* filename, int index, int value){
 @    @q2@@
 }
 

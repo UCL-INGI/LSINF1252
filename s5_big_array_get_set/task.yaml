@@ -37,17 +37,25 @@
         set_test_metadata("q1", _("Test with normal file"), 2);
         gen_file(1000);
 
+        int should_count_read = 0;
+        monitored.read = true;
         for(int i = 0; i < 1000; i+=50){
+            should_count_read++;
             int ret = 0;
 
             SANDBOX_BEGIN;
-            ret = get(i);
+            ret = get("file.txt", i);
             SANDBOX_END;
 
             if(ret != get_value_by_index(i)){
                 push_info_msg(_("You do not return the correct value."));
                 CU_FAIL();
             }
+        }
+        if(stats.read.called > should_count_read){
+            set_tag("too_many_op");
+            push_info_msg(_("You perform too many read()."));
+            CU_FAIL();
         }
     }
 
@@ -59,10 +67,19 @@
         set_test_metadata("q2", _("Test with normal file"), 2);
         gen_file(1000);
 
+        int should_count_write = 0;
+        monitored.write = true;
         for(int i = 0; i < 1000; i+=50){
+            should_count_write++;
             SANDBOX_BEGIN;
-            set(i, 2222+i);
+            set("file.txt", i, 2222+i);
             SANDBOX_END;
+        }
+
+        if(stats.write.called > should_count_write){
+            set_tag("too_many_op");
+            push_info_msg(_("You perform too many write()."));
+            CU_FAIL();
         }
 
         int fd = open("file.txt", O_RDONLY);
@@ -86,9 +103,8 @@
         set_test_metadata("q1", _("Test close"), 1);
         monitored.close = true;
         SANDBOX_BEGIN;
-        get(0);
+        get("file.txt", 0);
         SANDBOX_END;
-        printf("Q1:%d\n", stats.close.called);
         if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
@@ -100,9 +116,8 @@
         set_test_metadata("q2", _("Test close"), 1);
         monitored.close = true;
         SANDBOX_BEGIN;
-        set(0,0);
+        set("file.txt", 0,0);
         SANDBOX_END;
-        printf("Q2:%d\n", stats.close.called);
         if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
@@ -131,92 +146,107 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '50'
-    time: '30'
     output: '2'
+    time: '30'
+    memory: '50'
 name: '[S5] Get and set on array in file'
 network_grading: false
 order: 26
 problems:
     q1:
+        name: ''
         type: code
         language: ''
         header: |-
             .. code-block:: c
 
-                int get(int index)
-        name: ''
+                /*
+                 * @pre filename != NULL, index >= 0
+                 * @post return the integer at the index {index} of the array in the file {filename}
+                 */
+                int get(char* filename, int index)
     q2:
-        name: ''
         type: code
         language: ''
+        name: ''
         header: |-
             .. code-block:: c
 
-                void set(int index, int value)
+                /*
+                 * @pre filename != NULL, index >= 0
+                 * @post set the integer present in the file {filename}
+                 *       at index {index} at value {value}
+                 */
+                void set(char* filename, int index, int value)
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        type: 0
+        visible: true
         id: close
-        description: This tag validate that your close are correctly performed.
         name: Close
-        type: 0
-        visible: true
+        description: This tag validate that your close are correctly performed.
     '1':
-        name: Open
         type: 0
-        id: open
         visible: true
+        id: open
         description: This tag validate you are able to open a file.
+        name: Open
+    '10':
+        type: 1
+        id: too_many_op
+        visible: true
+        description: You call the read or write function more than necessary.
+        name: Too many read/write
     '2':
         id: banned_funcs
-        type: 1
+        visible: true
         name: Banned functions
         description: You use some banned functions.
-        visible: true
-    '3':
         type: 1
-        description: Your code produced a double free.
+    '3':
         visible: true
-        name: Double free
+        description: Your code produced a double free.
         id: double_free
+        name: Double free
+        type: 1
     '4':
+        id: failure_handling
+        name: Failure handling
+        visible: true
         type: 1
         description: You do not manage failures during the copy properly.
-        name: Failure handling
-        id: failure_handling
-        visible: true
     '5':
         type: 1
-        visible: true
-        id: sigfpe
         name: Floating Point Exception
+        id: sigfpe
+        visible: true
         description: ''
     '6':
-        description: ''
-        visible: true
         id: memory
+        type: 1
+        visible: true
+        description: ''
         name: Memory Exceeded
-        type: 1
     '7':
-        type: 1
         name: Not compile
         id: not_compile
         visible: true
         description: You code do not compile.
-    '8':
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        visible: true
         type: 1
+    '8':
+        type: 1
+        name: Timeout
+        visible: true
+        description: Your code exceeds the maximum allowed time.
         id: timeout
     '9':
-        type: 2
-        visible: true
         name: File
+        type: 2
         description: ''
+        visible: true
         id: ''
 weight: 1.0

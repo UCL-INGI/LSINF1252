@@ -103,12 +103,14 @@ void set_tag(char *tag)
 void segv_handler(int sig, siginfo_t *unused, void *unused2)
 {
     push_info_msg(_("Your code produced a segfault."));
+    set_tag("sigsegv");
     siglongjmp(segv_jmp, 1);
 }
 
 void alarm_handler(int sig, siginfo_t *unused, void *unused2)
 {
     push_info_msg(_("Your code exceeded the maximal allowed execution time."));
+    set_tag("timeout");
     siglongjmp(segv_jmp, 1);
 }
 
@@ -150,6 +152,7 @@ void sandbox_end()
         if (strstr(buf, "double free or corruption") != NULL) {
             CU_FAIL("Double free or corruption");
             push_info_msg(_("Your code produced a double free."));
+            set_tag("double_free");
         }
         write(STDERR_FILENO, buf, n);
     }
