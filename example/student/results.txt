@@ -1,0 +1,1 @@
+myfunc#SUCCESS#Test si return = n+1#1#Votre fonction n'a pas plantée #Vous avez retourné un nombre pair !
