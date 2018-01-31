@@ -10,8 +10,6 @@ from inginious import feedback, rst, input
 # Switch working directory to student/
 os.chdir("student")
 
-subprocess.run("rm -rf *.o CTester/*.o", shell=True)
-
 # Fetch and save the student code into a file for compilation
 input.parse_template("student_code.c.tpl", "student_code.c")
 
