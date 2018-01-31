@@ -7,9 +7,9 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S4] Order relation on a linked list'
 network_grading: false
 order: 22
@@ -17,11 +17,43 @@ problems:
     order_relation:
         type: code
         name: Order relation
+        header: |-
+            For this subproblem, you are asked to implement the comparison function which rules the order relation of the list.
+
+            .. code-block:: c
+
+                /*
+                * @return: 0 if equals, -1 if @other is greater and 1 if @this is greater
+                */
+                int compare(int this, int other){
+                    //Your code will be inserted here
+                }
         language: c
-        header: ''
     insert:
         name: Insert
-        header: ''
+        header: |-
+            For this subproblem, you have the template of the structure node:
+
+            .. code-block:: c
+
+                typedef struct node{
+                    int val;
+                    node_t* next;
+                } node_t;
+
+            Starting from this structure, you are to implement the following function
+
+            .. code-block:: c
+
+                /*
+                * @value: value to be inserted. If the value is already in the list, don't reinsert it.
+                * @fun: comparison function which rules the order relation of the list
+                * @head: first node of the list
+                * @return: 0 if success, -1 otherwise
+                */
+                int insert(node_t** head,int value, (int) (*fun) (int,int)){
+                    //Your code will be inserted here
+                }
         language: c
         type: code
 stored_submissions: 0
@@ -34,5 +66,11 @@ tags:
         type: 2
         description: Task dealing with data structures and linked list
         visible: true
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: Task about pointers and their use
+        name: Pointer
         id: ''
 weight: 1.0
