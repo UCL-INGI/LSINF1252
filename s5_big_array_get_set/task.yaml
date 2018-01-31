@@ -22,9 +22,10 @@ problems:
 
                 /*
                  * @pre filename != NULL, index >= 0
-                 * @post return the integer at the index {index} of the array in the file {filename}
+                 * @post return the integer at the index {index} of the array in the file {filename}.
+                 *       return -1 in case of error.
                  */
-                int get(char* filename, int index)
+                unsigned int get(char* filename, unsigned int index)
         name: ''
         language: ''
     q2:
@@ -36,9 +37,10 @@ problems:
                 /*
                  * @pre filename != NULL, index >= 0
                  * @post set the integer present in the file {filename}
-                 *       at index {index} at value {value}
+                 *       at index {index} at value {value}.
+                 *       do nothing in case of error.
                  */
-                void set(char* filename, int index, int value)
+                void set(char* filename, unsigned int index, unsigned int value)
         name: ''
 stored_submissions: 0
 submission_limit:
