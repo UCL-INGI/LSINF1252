@@ -33,6 +33,8 @@ void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
     gen_file(1000);
     
+    system("cp file.txt file_copy.txt");
+    
     int should_count_read = 0;
     monitored.read = true; 
     for(int i = 0; i < 1000; i+=50){
@@ -52,6 +54,11 @@ void test_get() {
         set_tag("too_many_op");
         push_info_msg(_("You perform too many read()."));
         CU_FAIL();  
+    }
+    
+    if(system("diff file.txt file_copy.txt") != 0){
+        push_info_msg(_("You have modified the file when reading it..."));
+        CU_FAIL();
     }
 }
 
@@ -120,7 +127,7 @@ void test_close_q2(){
 }
 
 void test_get_oob() {
-    set_test_metadata("q1", _("Test get out of bound"), 2);
+    set_test_metadata("q1", _("Test get out of bound"), 1);
     gen_file(10);    
     int ret = 0;
         
@@ -135,7 +142,7 @@ void test_get_oob() {
 }
 
 void test_get_fail() {
-    set_test_metadata("q1", _("Test get fail"), 2);
+    set_test_metadata("q1", _("Test get fail"), 1);
     gen_file(100);    
     int ret = 0;
     
@@ -153,7 +160,6 @@ void test_get_fail() {
 }
 
 //TODO:
-//check get fail.
 //check if other index are not modified
 
 int main(int argc, char** argv){
