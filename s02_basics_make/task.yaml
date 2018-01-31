@@ -35,8 +35,7 @@
     make_output = p.communicate()[0].decode('utf-8')
     # If compilation failed, exit with "failed" result
     if p.returncode:
-        feedback.set_problem_feedback("The compilation of your code failed. The ``make`` commands output is :", "make_me_less_easy")
-        feedback.set_problem_feedback(rst.get_codeblock('', make_output), True, "make_me_less_easy")
+        feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
     else:
         score += 75
         feedback.set_problem_result("success", "make_me_less_easy")
