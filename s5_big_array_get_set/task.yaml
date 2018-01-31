@@ -1,25 +1,3 @@
-/student/solution.c.sol: ''
-/student/student_code.c.tpl: |+
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <errno.h>
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include <unistd.h>
-    #include <string.h>
-
-    int get(char* filename, int index){
-    @    @q1@@
-    }
-
-    void set(char* filename, int index, int value){
-    @    @q2@@
-    }
-
-/student/student_code.h: |-
-    int get(char* filename, int index);
-    void set(char* filename, int index, int value);
 /student/tests.c: |
     // CTester template
 
@@ -27,7 +5,7 @@
     #include "student_code.h"
     #include "CTester/CTester.h"
 
-    unsigned int get_value_by_index(unsigned int i){
+    int get_value_by_index(int i){
         return (i*i*(i/2))%20000;
     }
 
@@ -36,15 +14,15 @@
      * The content is n int following the formula defined above.
      */
     void gen_file(int n){
-        unsigned int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
+        int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
         if(fd == -1) {
             CU_FAIL("Error, can not initialise test file");
         }
-        unsigned int array[n];
-        unsigned int i = 0;
+        int array[n];
+        int i = 0;
         for (i = 0; i < n; i++){
             array[i] = get_value_by_index(i);
-            if (write(fd, (void *) &array[i], sizeof(unsigned int)) == -1){
+            if (write(fd, (void *) &array[i], sizeof(int)) == -1){
                 CU_FAIL("Error, can not initialise test file");
             }
         }
@@ -60,7 +38,7 @@
         gen_file(1000);
 
         for(int i = 0; i < 1000; i+=50){
-            unsigned int ret = 0;
+            int ret = 0;
 
             SANDBOX_BEGIN;
             ret = get("file.txt", i);
@@ -82,7 +60,7 @@
         gen_file(1000);
 
         monitored.write = true;
-        for(unsigned int i = 0; i < 1000; i+=50){
+        for(int i = 0; i < 1000; i+=50){
             SANDBOX_BEGIN;
             set("file.txt", i, 2222+i);
             SANDBOX_END;
@@ -92,9 +70,9 @@
         if(fd == -1) {
             CU_FAIL("Error, can not initialise test file");
         }
-        for(unsigned int i = 0; i < 1000; i+=50){
+        for(int i = 0; i < 1000; i+=50){
             lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
-            unsigned int res;
+            int res;
             read(fd, (void *) &res, sizeof(int));
             if (res != 2222+i){
                 push_info_msg(_("You do not set the correct value in the file."));
@@ -111,7 +89,6 @@
         SANDBOX_BEGIN;
         get("file.txt", 0);
         SANDBOX_END;
-        printf("Q1:%d\n", stats.close.called);
         if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
@@ -125,7 +102,6 @@
         SANDBOX_BEGIN;
         set("file.txt", 0,0);
         SANDBOX_END;
-        printf("Q2:%d\n", stats.close.called);
         if (stats.close.called != 1){
             push_info_msg(_("You did not close the file."));
             CU_FAIL();
@@ -155,16 +131,16 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '50'
+    time: '30'
 name: '[S5] Get and set on array in file'
 network_grading: false
 order: 26
 problems:
     q1:
-        name: ''
         type: code
         language: ''
+        name: ''
         header: |-
             .. code-block:: c
 
@@ -174,7 +150,6 @@ problems:
                  */
                 int get(char* filename, int index)
     q2:
-        type: code
         language: ''
         name: ''
         header: |-
@@ -186,6 +161,7 @@ problems:
                  *       at index {index} at value {value}
                  */
                 void set(char* filename, int index, int value)
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -193,62 +169,62 @@ submission_limit:
 tags:
     '0':
         type: 0
+        name: Close
         visible: true
         id: close
-        name: Close
         description: This tag validate that your close are correctly performed.
     '1':
         type: 0
-        visible: true
-        id: open
         description: This tag validate you are able to open a file.
         name: Open
+        visible: true
+        id: open
     '2':
         id: banned_funcs
-        visible: true
         name: Banned functions
         description: You use some banned functions.
         type: 1
-    '3':
         visible: true
+    '3':
         description: Your code produced a double free.
-        id: double_free
+        visible: true
         name: Double free
+        id: double_free
         type: 1
     '4':
+        visible: true
+        type: 1
         id: failure_handling
         name: Failure handling
-        visible: true
-        type: 1
         description: You do not manage failures during the copy properly.
     '5':
-        type: 1
-        name: Floating Point Exception
         id: sigfpe
         visible: true
+        type: 1
         description: ''
+        name: Floating Point Exception
     '6':
+        name: Memory Exceeded
         id: memory
         type: 1
         visible: true
-        name: Memory Exceeded
         description: ''
     '7':
-        name: Not compile
         visible: true
-        id: not_compile
+        name: Not compile
         description: You code do not compile.
+        id: not_compile
         type: 1
     '8':
+        visible: true
         type: 1
         name: Timeout
-        visible: true
         description: Your code exceeds the maximum allowed time.
         id: timeout
     '9':
         name: File
-        type: 2
         description: ''
+        type: 2
         visible: true
         id: ''
 weight: 1.0
