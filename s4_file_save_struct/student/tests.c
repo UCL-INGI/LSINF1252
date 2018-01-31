@@ -6,7 +6,6 @@
 
 point_t* gen_struct(int size){
     point_t *tab = malloc(size*sizeof(point_t));
-    
     if (tab == NULL)
         return (point_t*)NULL;
     for (int i = 0; i < size; i++){
@@ -25,10 +24,6 @@ void test() {
     int size = 3;
     int ret = 0;
     point_t* tab = gen_struct(size);
-    
-    monitored.open = true;
-    failures.open = FAIL_TWICE;
-    failures.open_ret = -1;
     
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
