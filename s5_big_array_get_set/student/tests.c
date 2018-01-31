@@ -91,7 +91,8 @@ void test_set() {
         read(fd, (void *) &res, sizeof(int));
         if (res != 2222+i){
             push_info_msg(_("You do not set the correct value in the file."));
-            CU_FAIL(); 
+            CU_FAIL();
+            break;
         }
     }
     for(int i = 0; i < 1000; i++){
@@ -101,7 +102,8 @@ void test_set() {
         	read(fd, (void *) &res, sizeof(int));
         	if (res != get_value_by_index(i)){
             	push_info_msg(_("You have modified some wrong elements in the array"));
-            	CU_FAIL(); 
+            	CU_FAIL();
+                break;
         	}
         }
     }
@@ -159,7 +161,7 @@ void test_get_fail() {
     
     monitored.read = true;
     failures.read=FAIL_FIRST;
-    failures.read_ret=-1;
+    failures.read_ret = -1;
     SANDBOX_BEGIN;
     ret = get("file.txt", 50);
     SANDBOX_END;
@@ -169,9 +171,6 @@ void test_get_fail() {
         CU_FAIL(); 
     }   
 }
-
-//TODO:
-//check if other index are not modified
 
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
