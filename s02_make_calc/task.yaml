@@ -13,9 +13,9 @@ context: |-
             operations.c
             operations.h
 
-    `calc.c` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in `operations.c`.
+    ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
 
-    Unfortunately, the source folder was lost but you still have access to the object files (`.o`).
+    Unfortunately, the source folder was lost but you still have access to the object files.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -29,7 +29,8 @@ problems:
     make_calc_simple:
         name: 'Linking '
         language: Makefile
-        header: Write a *Makefile* to build the executable.
+        header: Write a *Makefile* to build the executable ``calc`` from both object
+            files ``calc.o`` and ``operations.o``.
         type: code
 stored_submissions: 0
 submission_limit:
