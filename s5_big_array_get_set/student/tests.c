@@ -36,7 +36,10 @@ void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
     gen_file(1000);
     
+    int should_count_read = 0;
+    monitored.read = true; 
     for(int i = 0; i < 1000; i+=50){
+        should_count_read++;
         int ret = 0;
         
         SANDBOX_BEGIN;
@@ -48,6 +51,10 @@ void test_get() {
             CU_FAIL(); 
         }   
     }
+    if(stats.read.called > should_count_read){
+        push_info_msg(_("You perform too many read()."));
+        CU_FAIL();  
+    }
 }
 
 
@@ -58,11 +65,18 @@ void test_set() {
     set_test_metadata("q2", _("Test with normal file"), 2);
     gen_file(1000);
     
+    int should_count_write = 0;
     monitored.write = true;        
-    for(int i = 0; i < 1000; i+=50){        
+    for(int i = 0; i < 1000; i+=50){ 
+        should_count_write++;
         SANDBOX_BEGIN;
         set("file.txt", i, 2222+i);
         SANDBOX_END;  
+    }
+    
+    if(stats.write.called > should_count_write){
+        push_info_msg(_("You perform too many write()."));
+        CU_FAIL();  
     }
     
     int fd = open("file.txt", O_RDONLY);
