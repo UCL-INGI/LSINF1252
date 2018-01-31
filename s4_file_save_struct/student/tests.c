@@ -7,6 +7,7 @@
 point_t* gen_struct(int size){
     point_t *tab = malloc(size*sizeof(point_t));
     if (tab == NULL)
+        CU_FAIL("Can not initialize test suite");
         return (point_t*)NULL;
     for (int i = 0; i < size; i++){
         tab[i].x = i+i;
@@ -19,9 +20,9 @@ point_t* gen_struct(int size){
 /*
  * Test with open fail
  */
-void test() {
+void test_ok() {
     set_test_metadata("q1", _("Test write array struct"), 1);
-    int size = 5;
+    int size = 10;
     int ret = 0;
     point_t* tab = gen_struct(size);
 
@@ -41,7 +42,7 @@ void test() {
     point_t s;
     for(int i = 0; i < size; i++){
         int r = read(fd, (void *) &s, sizeof(point_t));
-        if (r < 1){
+        if (r == -1){
             push_info_msg(_("You did not write all content of the array in the file."));
             CU_FAIL();
         }
@@ -51,7 +52,7 @@ void test() {
         }
         //printf("%d %d %d", s.x, s.y, s.z);
     }
-    free(tab);
+    //free(tab);
     close(fd);
     if(ret != 0){
         push_info_msg(_("You did not return 0 when everything occurs fine."));
@@ -63,5 +64,5 @@ void test() {
 
 int main(int argc,char** argv){
     BAN_FUNCS(system);
-    RUN(test);
+    RUN(test_ok);
 }
