@@ -6,5 +6,5 @@ void modem_read(void* buffer, int* buf_len){
 }
 
 int has_42() {
-    @@42@@
+    @@modem@@
 }
