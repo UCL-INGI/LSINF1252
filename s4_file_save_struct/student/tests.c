@@ -59,10 +59,6 @@ void test() {
     }
 }
 
-
-/*
- * Test with some integers in the file with close()
- */
 void test_close() {
     set_test_metadata("q1", _("Test close()."), 1);
     int size = 6;
@@ -82,10 +78,6 @@ void test_close() {
         push_info_msg(_("You did not close() the file."));
         close_ok++;
         CU_FAIL();
-    }if (stats.open.called != 1){
-        push_info_msg(_("The open should be use only once."));
-        close_ok++;
-        CU_FAIL();
     }if(stats.open.last_return != stats.close.last_params.fd){
         push_info_msg(_("The close() does not close the file you opened before."));
         close_ok++;
@@ -95,8 +87,31 @@ void test_close() {
     }
 }
 
+void test_open() {
+    set_test_metadata("q1", _("Test close()."), 1);
+    int size = 6;
+    point_t* tab = gen_struct(size);
+    int ret = 0;
+    
+    monitored.open = true;
+    failures.open = FAIL_FIRST;
+    failures.open_ret = -1;
+    SANDBOX_BEGIN;
+    ret = save(tab, size, "file.txt");
+    SANDBOX_END;
+    
+    free(tab);
+    tab = NULL;
+    
+    if(ret != -1){
+        push_info_msg(_("You do not return -1 when open() fails."));
+        CU_FAIL();
+    }else{
+        set_tag("open");
+    }
+}
 
 int main(int argc,char** argv){
     BAN_FUNCS(system);
-    RUN(test, test_close);
+    RUN(test, test_close, test_open);
 }

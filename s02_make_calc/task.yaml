@@ -1,0 +1,37 @@
+accessible: true
+author: Pablo Gonzalez Alvarez
+context: |-
+    You have just built a calculator, whose source folder has the following structure:
+
+    .. code-block::
+
+        src/
+            calc.c
+            calc.h
+            operations.c
+            operations.h
+
+    `calc.c` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in `operations.c`.
+
+    Unfortunately, the source folder was lost but you still have access to the object files (`.o`).
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: '[S02] make and prerequisites'
+network_grading: false
+problems:
+    make_calc_simple:
+        name: Linking the
+        language: c
+        header: The purpose of these exercise is to .sdads
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
