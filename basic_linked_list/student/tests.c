@@ -208,7 +208,7 @@ void test_add_node_non_empty(){
 
   int val[4] = {16328468, 135166, 97643564, 664872674};
 
-  node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node(*(val+2)), *node3 = init_node(*(val+3));
+  node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node_corr(*(val+2)), *node3 = init_node_corr(*(val+3));
   if (!node1 | !node2 | !node3){
     CU_FAIL("NO MEMORY AVAILABLE");
     return;
@@ -282,7 +282,7 @@ void test_add_node_nomem(){
 
   int val[4] = {16328468, 135166, 97643564, 664872674};
 
-  node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node(*(val+2)), *node3 = init_node(*(val+3));
+  node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node_corr(*(val+2)), *node3 = init_node_corr(*(val+3));
   if (!node1 | !node2 | !node3){
     CU_FAIL("NO MEMORY AVAILABLE");
     return;
