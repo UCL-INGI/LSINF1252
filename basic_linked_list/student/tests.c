@@ -92,7 +92,7 @@ void test_init_node_alloc(){
 }
 
 void test_init_node_value(){
-  set_test_metadata("init_node", _("Check the initialisation of the node"), 1);
+  set_test_metadata("init_node", _("Check the initialisation of the node"), 2);
 
   node_t* ret = NULL;
 
