@@ -51,7 +51,6 @@
                 push_info_msg(_("You did not write the array of struct correctly in the file."));
                 CU_FAIL();
             }
-            //printf("%d %d %d", s.x, s.y, s.z);
         }
         free(tab);
         close(fd);
@@ -62,10 +61,45 @@
     }
 
 
+    /*
+     * Test with some integers in the file with close()
+     */
+    void test_close() {
+        set_test_metadata("q1", _("Test close()."), 1);
+        int size = 6;
+        point_t* tab = gen_struct(size);
+
+        monitored.close = true;
+        monitored.open = true;
+        SANDBOX_BEGIN;
+        save(tab, size, "file.txt");
+        SANDBOX_END;
+
+        free(tab);
+        tab = NULL;
+
+        int close_ok = 0;
+        if (stats.close.called != 1){
+            push_info_msg(_("You did not close() the file."));
+            close_ok++;
+            CU_FAIL();
+        }if (stats.open.called != 1){
+            push_info_msg(_("The open should be use only once."));
+            close_ok++;
+            CU_FAIL();
+        }if(stats.open.last_return != stats.close.last_params.fd){
+            push_info_msg(_("The close() does not close the file you opened before."));
+            close_ok++;
+            CU_FAIL();
+        }if(close_ok == 0){
+            set_tag("close");
+        }
+    }
+
 
     int main(int argc,char** argv){
         BAN_FUNCS(system);
-        RUN(test);
+        RUN(test, test_close);
     }
 accessible: true
 author: Olivier Martin
