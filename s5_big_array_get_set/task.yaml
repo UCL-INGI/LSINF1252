@@ -128,7 +128,6 @@
     }
 
     //TODO:
-    //count read and write
     //check if index id bigger than the file
     //check if other index are not modified
 
@@ -142,6 +141,8 @@ context: |-
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
     Since the array is huge, you can not load it entierly into memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek()``.
+
+    You may want to use `fstat(1) <https://linux.die.net/man/2/fstat>`_ to get informations about the file.
 environment: cpp
 evaluate: best
 groups: false
@@ -162,7 +163,8 @@ problems:
 
                 /*
                  * @pre filename != NULL, index >= 0
-                 * @post return the integer at the index {index} of the array in the file {filename}
+                 * @post return the integer at the index {index} of the array in the file {filename}.
+                 *       return -1 in case of error.
                  */
                 int get(char* filename, int index)
     q2:

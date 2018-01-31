@@ -127,7 +127,6 @@ void test_close_q2(){
 }
 
 //TODO:
-//count read and write
 //check if index id bigger than the file
 //check if other index are not modified
 
