@@ -15,7 +15,16 @@ typedef struct 3dpoint{
  * The content is the bytes in range [0, n[
  */
 int gen_struct(int n){
-
+    3dpoint_t* tab = malloc(n*sizeof(3dpoint_t);
+  	if (tab)
+     	{
+       		p->c = c;
+       		p->x = x;
+       		p->y = y;
+       		return p;
+     	}
+   	else
+   		return (Point*)NULL;
 }
 
 /*

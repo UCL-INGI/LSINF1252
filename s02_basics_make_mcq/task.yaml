@@ -47,8 +47,7 @@ problems:
         choices:
         -   valid: true
             text: A recipe is an action that make carries out.
-        -   valid: true
-            feedback: That is the Answer to the Ultimate Question of Life, the Universe,
+        -   feedback: That is the Answer to the Ultimate Question of Life, the Universe,
                 and Everything.
             text: '42'
         -   text: The recipe is a file that is used as input to create the target.
