@@ -41,13 +41,14 @@ void test() {
     point_t s;
     for(int i = 0; i < size; i++){
         read(fd, (void *) &s, sizeof(point_t));
+        if (tab[i].x != s.x || tab[i].y != s.y || tab[i].z != s.z){
+            push_info_msg(_("You did not write the array of struct correctly in the file."));
+            CU_FAIL();
+        }
+        printf("%d %d %d", s.x, s.y, s.z);
     }
-    printf("%d %d %d", s.x, s.y, s.z);
     close(fd);
-    if (ret != -1){
-        push_info_msg(_("bla"));
-        CU_FAIL();
-    }
+    //ret
 }
 
 
