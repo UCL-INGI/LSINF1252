@@ -47,6 +47,7 @@ void test_get() {
         
         if(ret != get_value_by_index(i)){
             push_info_msg(_("You do not return the correct value."));
+            set_tag("wrong_get_value_returned");
             CU_FAIL(); 
         }   
     }
@@ -105,6 +106,7 @@ void test_set() {
         	if (res != get_value_by_index(i)){
             	push_info_msg(_("You have modified some wrong elements in the array"));
             	CU_FAIL();
+                set_tag("wrong_index_set");
                 break;
         	}
         }
