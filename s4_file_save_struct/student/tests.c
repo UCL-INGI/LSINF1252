@@ -5,15 +5,14 @@
 #include "CTester/CTester.h"
 
 point_t* gen_struct(int size){
-    point_t *tab = malloc(size * sizeof(point_t));
-
-    if (tab == NULL)
-        return (point_t*)NULL;
+    point_t tab[size] = malloc(size*sizeof(point_t));
+    
+    //if (tab == NULL)
+    //    return (point_t*)NULL;
     for (int i = 0; i < size; i++){
-        tab[i] = malloc(sizeof(struct point));
-        /*tab[i]->x = i+i;
-        tab[i]->y = i+i+i;
-        tab[i]->z = i+i*i;*/
+        tab[i].x = i+i;
+        tab[i].y = i+i+i;
+        tab[i].z = i+i*i;
     }
     return tab;
 }
@@ -35,9 +34,6 @@ void test() {
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
     
-    //free
-    for(int i = 0; i < size; i++)
-        free(tab[i]);
     free(tab);
     
     if (ret != -1){
