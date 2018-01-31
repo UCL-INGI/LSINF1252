@@ -43,7 +43,7 @@
 
         point_t s;
         for(int i = 0; i < size; i++){
-            if ((int)read(fd, (void *) &s, sizeof(point_t)) == -1){
+            if ((int)read(fd, (void *) &s, sizeof(point_t)) < 1){
                 push_info_msg(_("You did not write all content of the array in the file."));
                 CU_FAIL();
             }
