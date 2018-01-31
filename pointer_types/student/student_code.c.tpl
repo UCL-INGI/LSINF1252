@@ -6,7 +6,7 @@ int first(int * a){
     @@first@@
 }
 
-int second(int * a){
+char second(int * a){
     @@second@@
 }
 
