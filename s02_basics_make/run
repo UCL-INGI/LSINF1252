@@ -38,12 +38,12 @@ if p.returncode:
 else:
     score += 75
     feedback.set_problem_result("success", "make_me_less_easy")
-    feedback.set_problem_feedback("- Your code compiles.\n", "make_me_less_easy")
-
+    feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
 
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
+# Set score
 feedback.set_grade(score)
 feedback.set_global_result("success" if score >= 80 else "failed")
-feedback.set_global_feedback("Good job" if score >= 80 else "Fail")
+feedback.set_global_feedback("Good job" if score >= 80 else "Try again")
