@@ -6,7 +6,7 @@ char *buf_strcpy(const char *src){
   if (!ret)
     return NULL;
 
-  for(i = 0; i < len+1; i++)
+  for(i = 0; i < len; i++)
     *(ret+i) = *(src+i);
 
   return ret;

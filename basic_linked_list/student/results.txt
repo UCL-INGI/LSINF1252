@@ -1,6 +1,6 @@
-init_node#FAIL#Check memory allocation of the node#1#sigsegv#Your code produced a segfault.#You used more than one call to malloc
+init_node#SUCCESS#Check memory allocation of the node#1#
 init_node#SUCCESS#Check the initialisation of the node#2#
-init_node#FAIL#Check the return value if malloc call fails#1#sigsegv#Your code produced a segfault.#Wrong return value when malloc call fails
+init_node#FAIL#Check the return value if malloc call fails#1##Wrong return value when malloc call fails
 add_node#SUCCESS#Check the behavior of the function when the list is empty#1#
 add_node#SUCCESS#Check the behavior of the function when the list is not empty#1#
-add_node#FAIL#Check the behavior of the function when the malloc call fails#1#sigsegv#Your code produced a segfault.#Your function returns an error in normal case!
+add_node#SUCCESS#Check the behavior of the function when the malloc call fails#1#
