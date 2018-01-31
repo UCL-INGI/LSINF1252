@@ -13,37 +13,37 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S3] Simple stack'
 network_grading: false
 order: 17
 problems:
     push:
-        name: Push
-        type: code
         language: c
+        name: Push
         header: |-
             .. code-block:: c
 
-                int pop(struct node *node){
+                int push(struct node *node){
+        type: code
     pop:
-        language: ''
+        header: |-
+            .. code-block:: c
+
+                int pop(struct node *head, int value){
         type: code
         name: Pop
-        header: |-
-            .. code-block:: c
-
-                int push(int value){
+        language: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        visible: true
         name: Data structures
+        visible: true
         type: 2
         description: Task dealing with data structures and linked list
         id: ''
