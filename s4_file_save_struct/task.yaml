@@ -195,7 +195,7 @@ tags:
         name: Close
         visible: true
     '11':
-        description: You do not manage failures properly.
+        description: You do not manage failures properly during write operations.
         id: failure_handling
         name: Failure handling
         type: 1
