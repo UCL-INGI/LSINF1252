@@ -17,6 +17,8 @@
         if(ret != -1){
             CU_FAIL();
             push_info_msg(_("When the file does not exist, you do not return -1"));
+        }else{
+            set_tag("test_file_exist_not");
         }
     }
 
@@ -32,6 +34,8 @@
         if(ret != 0){
             CU_FAIL();
             push_info_msg(_("When the file exist, you do not return 0"));
+        }else{
+            set_tag("test_file_exist");
         }
     }
 
@@ -48,14 +52,14 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
 name: '[S5] File exists'
 network_grading: false
 problems:
     q1:
-        language: ''
         type: code
+        language: ''
         name: File exist
         header: |-
             .. code-block:: c
@@ -70,15 +74,27 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '10':
+        name: File does not exist
+        type: 0
+        id: test_file_exist_not
+        description: The student is NOT able to determine if a file exist.
+        visible: false
+    '9':
+        name: File exists
+        id: test_file_exist
+        description: The student is able to determine if a file exist.
+        type: 0
+        visible: false
     '2':
         id: banned_funcs
         name: Banned functions
         description: You use some banned functions.
         type: 1
-        visible: false
-    '3':
         visible: true
+    '3':
         description: Your code produced a double free.
+        visible: true
         name: Double free
         id: double_free
         type: 1
@@ -86,18 +102,18 @@ tags:
         visible: true
         id: sigfpe
         type: 1
-        description: ''
         name: Floating Point Exception
+        description: ''
     '5':
         description: ''
         id: memory
+        visible: true
         type: 1
         name: Memory Exceeded
-        visible: false
     '6':
+        name: Not compile
         id: not_compile
         type: 1
-        name: Not compile
         visible: true
         description: You code do not compile.
     '7':
@@ -119,8 +135,8 @@ tags:
         description: ''
         id: ''
     '1':
-        description: ''
         type: 2
+        description: ''
         name: S5
         visible: true
         id: ''
