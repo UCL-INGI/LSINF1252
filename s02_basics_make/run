@@ -8,15 +8,15 @@ import subprocess, shlex, os
 from inginious import feedback, rst, input
 
 # MATCH
-
+score = 0
 match = input.get_input("make_me_easy")
-if match == 'make make_me':
-    feedback.set_problem_result("success", "make_me_easy")
-else:
+if match != 'make make_me':
     feedback.set_problem_result("failed", "make_me_easy")
-    feedback.set_global_result("failed")
-    feedback.set_global_feedback("Fail")
-
+    feedback.set_problem_feedback("You didn't make it!", "make_me_easy")
+else:
+    succes += 25
+    feedback.set_problem_result("success", "make_me_easy")
+    feedback.set_problem_feedback("You made it!", "make_me_easy")
 # CODE
 
 # Switch working directory to student/
@@ -36,6 +36,7 @@ if p.returncode:
     feedback.set_problem_feedback(rst.get_codeblock('', make_output), True)
     exit(0)
 else:
+    succes += 75
     feedback.set_problem_result("success", "make_me_less_easy")
     feedback.set_problem_feedback("- Votre code compile.\n", "make_me_less_easy")
     feedback.set_global_result("success")
@@ -45,6 +46,5 @@ else:
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
-# score = 100*score/(total if not total == 0 else 1)
-# feedback.set_grade(score)
-# feedback.set_global_result("success" if score >= 50 else "failed")
+feedback.set_grade(score)
+feedback.set_global_result("success" if score >= 80 else "failed")
