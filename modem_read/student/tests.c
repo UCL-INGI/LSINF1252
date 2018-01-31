@@ -5,7 +5,7 @@
 int8_t* tab1;
 
 void test_42_right1() {
-    set_test_metadata("42", _("test1 for 42 contained. right trapped"), 1);
+    set_test_metadata("modem", _("test1 for 42 contained. right trapped"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -34,7 +34,7 @@ void test_42_right1() {
 }
 
 void test_42_left1() {
-    set_test_metadata("42", _("test2 for 42 contained, left trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 contained, left trapped"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -63,7 +63,7 @@ void test_42_left1() {
 }
 
 void test_42_right2() {
-    set_test_metadata("42", _("test2 for 42 contained, right trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 contained, right trapped"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -92,7 +92,7 @@ void test_42_right2() {
 }
 
 void test_42_left2() {
-    set_test_metadata("42", _("test2 for 42 contained, left trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 contained, left trapped"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -121,7 +121,7 @@ void test_42_left2() {
 }
 
 void test_no42_right() {
-    set_test_metadata("42", _("test2 for 42 not contained, right trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 not contained, right trapped"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -150,7 +150,7 @@ void test_no42_right() {
 }
 
 void test_no42_left() {
-    set_test_metadata("42", _("test2 for 42 not contained, left trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 not contained, left trapped"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -179,7 +179,7 @@ void test_no42_left() {
 }
 
 void test_fail() {
-    set_test_metadata("42", _("test for malloc failed"), 1);
+    set_test_metadata("modem", _("test for malloc failed"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
