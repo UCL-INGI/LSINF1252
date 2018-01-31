@@ -166,7 +166,7 @@
      */
     void test() {
         set_test_metadata("q1", _("Test fail open"), 1);
-        int size = 3;
+        int size = 5;
         int ret = 0;
         point_t* tab = gen_struct(size);
 

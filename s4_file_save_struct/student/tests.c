@@ -21,10 +21,10 @@ point_t* gen_struct(int size){
  */
 void test() {
     set_test_metadata("q1", _("Test fail open"), 1);
-    int size = 3;
+    int size = 5;
     int ret = 0;
     point_t* tab = gen_struct(size);
-    
+
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
