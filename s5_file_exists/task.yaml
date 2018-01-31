@@ -1,54 +1,6 @@
-/student/tests.c: |-
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    void test_exist_not() {
-        // We run multiples times the test to avoid student returning randomly 1 or 0.
-        for(int i = 0; i < 4; i++){
-            set_test_metadata("q1", _("Test file does not exist"), 1);
-            int ret = 0;
-
-            system("rm file.txt");
-            SANDBOX_BEGIN;
-            ret = file_exists("file.txt");
-            SANDBOX_END;
-
-            if(ret != -1){
-                CU_FAIL();
-                push_info_msg(_("When the file does not exist, you do not return -1"));
-            }else{
-                 set_tag("test_file_exist_not");
-            }
-        }
-    }
-
-    void test_exist() {
-        // We run multiples times the test to avoid student returning randomly 1 or 0.
-        for(int i = 0; i < 4; i++){
-            set_test_metadata("q1", _("Test file exists"), 1);
-            int ret = 0;
-
-            system("touch file.txt");
-            SANDBOX_BEGIN;
-            ret = file_exists("file.txt");
-            SANDBOX_END;
-
-            if(ret != 0){
-                CU_FAIL();
-                push_info_msg(_("When the file exist, you do not return 0"));
-            }else{
-                set_tag("test_file_exist");
-            }
-        }
-    }
-
-    int main(int argc,char** argv){
-        BAN_FUNCS(system, open, set_tag);
-        RUN(test_exist_not, test_exist);
-    }
+/solution.c.sol: |-
+    struct stat buffer;
+    return stat(filename, &buffer);
 accessible: true
 author: ''
 context: Using `fstat(2) <https://linux.die.net/man/2/fstat>`_, determine if a file
@@ -57,16 +9,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '100'
     output: '2'
     time: '30'
-    memory: '100'
 name: '[S5] File exists'
 network_grading: false
 problems:
     q1:
-        type: code
-        language: ''
         name: File exist
+        language: ''
+        type: code
         header: |-
             .. code-block:: c
 
@@ -81,57 +33,57 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 1
         name: Banned functions
-        visible: true
+        type: 1
         id: banned_funcs
+        visible: true
         description: You use some banned functions.
     '1':
         type: 1
-        description: Your code produced a double free.
+        visible: true
         name: Double free
-        visible: true
         id: double_free
+        description: Your code produced a double free.
     '2':
+        visible: true
+        description: ''
         id: sigfpe
+        type: 1
         name: Floating Point Exception
-        description: ''
-        type: 1
-        visible: true
     '3':
-        visible: true
-        description: ''
         name: Memory Exceeded
-        id: memory
-        type: 1
-    '4':
-        visible: true
-        id: not_compile
-        type: 1
-        description: You code do not compile.
-        name: Not compile
-    '5':
-        id: sigsegv
         visible: true
         description: ''
         type: 1
+        id: memory
+    '4':
+        id: not_compile
+        name: Not compile
+        description: You code do not compile.
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: sigsegv
         name: Segmentation Fault
+        type: 1
     '6':
         id: timeout
-        type: 1
         name: Timeout
-        visible: true
+        type: 1
         description: Your code exceeds the maximum allowed time.
-    '7':
         visible: true
-        name: S5
+    '7':
         description: ''
+        visible: true
         type: 2
+        name: S5
         id: ''
     '8':
-        visible: true
         type: 2
-        name: File
         description: ''
+        name: File
+        visible: true
         id: ''
 weight: 1.0
