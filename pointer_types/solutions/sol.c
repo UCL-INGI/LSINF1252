@@ -6,12 +6,14 @@ int first(int* a){
     return a[2];
 }
 
-int second(int* a){
+char second(int* a){
   char* c = (char*) a;
-  return (int) *(c + 4);
+  return *(c + 5);
 }
 
 int third(int* a){
   char* c = (char*) a;
-  return (int) *(c+12);
+  c = c + 10;
+  int * b = (int*) c;
+  return *b;
 }

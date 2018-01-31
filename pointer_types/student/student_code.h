@@ -1,3 +1,3 @@
 int first(int* a);
-int second(int* a);
+char second(int* a);
 int third(int* a);
