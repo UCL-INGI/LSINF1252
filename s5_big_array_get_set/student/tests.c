@@ -58,6 +58,7 @@ void test_set() {
     set_test_metadata("q2", _("Test with normal file"), 2);
     gen_file(1000);
     
+    monitored.write = true;        
     for(unsigned int i = 0; i < 1000; i+=50){        
         SANDBOX_BEGIN;
         set("file.txt", i, 2222+i);
