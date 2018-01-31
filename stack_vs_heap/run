@@ -18,6 +18,7 @@ p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subpr
 make_output = p.communicate()[0].decode('utf-8')
 # If compilation failed, exit with "failed" result
 if p.returncode:
+    feedback.set_tag("not_compile", True)
     feedback.set_global_result("failed")
     feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
     feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
@@ -38,6 +39,7 @@ if banned_funcs:
     readelf_output = p.communicate()[0].decode('utf-8')
     for func in banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
+            feedback.set_tag("banned_funcs", True)
             feedback.set_global_result("failed")
             feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
             exit(0)
@@ -57,15 +59,17 @@ if p.returncode:
     feedback.set_global_result("failed")
     if p.returncode == 256-8:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+        feedback.set_tag("sigfpe", True)
     elif p.returncode == 256-11:
-       montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
     elif p.returncode == 252:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+        feedback.set_tag("memory", True)
     elif p.returncode == 253:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
     else:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
-    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)    
+    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
     exit(0)
 #elif run_output:   
 #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
