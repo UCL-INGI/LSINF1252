@@ -11,9 +11,9 @@ point_t* gen_struct(int size){
         return (point_t*)NULL;
     for (int i = 0; i < size; i++){
         tab[i] = malloc(sizeof(struct point));
-        tab[i]->x = i+i;
+        /*tab[i]->x = i+i;
         tab[i]->y = i+i+i;
-        tab[i]->z = i+i*i;
+        tab[i]->z = i+i*i;*/
     }
     return tab;
 }
