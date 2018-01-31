@@ -137,6 +137,7 @@ void test_cycle_bits(void)
 
 void launch()
 {
+	set_test_metadata("bits_count", _("test the functions ofbits_count"), 1);
 	test_nbits();
 	test_set_bit_to_zero();
 	test_set_bit_to_one();
