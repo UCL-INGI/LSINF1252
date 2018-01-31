@@ -172,7 +172,23 @@ void test_get_fail() {
     }   
 }
 
+void test_open_q1_fail(){
+    set_test_metadata("q1", _("Test open fail"), 1);
+    monitored.open = true;
+    failures.open=FAIL_FIRST;
+    failures.open_ret = -1;   
+    int ret = 0;
+    SANDBOX_BEGIN;
+    ret = get("file_no_exits.txt", 3);
+    SANDBOX_END;
+    
+    if (ret != 1){
+        push_info_msg(_("You do not return -1 when open() fails."));
+        CU_FAIL();
+    }
+}
+
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
-    RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob, test_get_fail);
+    RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob, test_get_fail, test_open_q1_fail);
 }
