@@ -30,7 +30,20 @@ void test() {
     SANDBOX_END;
     
     free(tab);
+    tab = NULL;
     
+    //Regenerate the struct in case student modified it
+    tab = gen_struct(size);
+    int fd = open("file.txt",O_RDONLY); 
+    if(fd == -1) 
+        CU_FAIL("Can not initialize test suite");
+
+    point_t s;
+    for(int i = 0; i < size; i++){
+        read(fd, (void *) &s, sizeof(point_t));
+    }
+    printf("%d %d %d", s.x, s.y, s.z);
+    close(fd);
     if (ret != -1){
         push_info_msg(_("bla"));
         CU_FAIL();
