@@ -5,7 +5,7 @@
 #include "CTester/CTester.h"
 
 void test_exist_not() {
-    set_test_metadata("q1", _("Test write array struct"), 1);
+    set_test_metadata("q1", _("Test file does not exist"), 1);
     int ret = 0;
 
     system("rm file.txt");
@@ -22,7 +22,7 @@ void test_exist_not() {
 }
 
 void test_exist() {
-    set_test_metadata("q1", _("Test write array struct"), 1);
+    set_test_metadata("q1", _("Test file exists"), 1);
     int ret = 0;
 
     system("touch file.txt");
@@ -40,5 +40,5 @@ void test_exist() {
 
 int main(int argc,char** argv){
     BAN_FUNCS(system, open);
-    RUN(test_exist_not, test_exist);
+    RUN(test_exist_not, test_exist_not, test_exist, test_exist);
 }

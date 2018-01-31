@@ -6,7 +6,7 @@
     #include "CTester/CTester.h"
 
     void test_exist_not() {
-        set_test_metadata("q1", _("Test write array struct"), 1);
+        set_test_metadata("q1", _("Test file does not exist"), 1);
         int ret = 0;
 
         system("rm file.txt");
@@ -23,7 +23,7 @@
     }
 
     void test_exist() {
-        set_test_metadata("q1", _("Test write array struct"), 1);
+        set_test_metadata("q1", _("Test file exists"), 1);
         int ret = 0;
 
         system("touch file.txt");
@@ -41,7 +41,7 @@
 
     int main(int argc,char** argv){
         BAN_FUNCS(system, open);
-        RUN(test_exist_not, test_exist);
+        RUN(test_exist_not, test_exist_not, test_exist, test_exist);
     }
 accessible: true
 author: ''
@@ -52,8 +52,8 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S5] File exists'
 network_grading: false
 problems:
@@ -74,70 +74,58 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '10':
-        name: File does not exist
-        type: 0
-        id: test_file_exist_not
-        description: The student is NOT able to determine if a file exist.
-        visible: false
-    '9':
-        name: File exists
-        id: test_file_exist
-        description: The student is able to determine if a file exist.
-        type: 0
-        visible: false
-    '2':
-        id: banned_funcs
+    '0':
+        type: 1
         name: Banned functions
+        visible: true
+        id: banned_funcs
         description: You use some banned functions.
+    '1':
+        type: 1
+        description: Your code produced a double free.
+        name: Double free
+        visible: true
+        id: double_free
+    '2':
+        id: sigfpe
+        name: Floating Point Exception
+        description: ''
         type: 1
         visible: true
     '3':
-        description: Your code produced a double free.
         visible: true
-        name: Double free
-        id: double_free
+        description: ''
+        name: Memory Exceeded
+        id: memory
         type: 1
     '4':
         visible: true
-        id: sigfpe
-        type: 1
-        name: Floating Point Exception
-        description: ''
-    '5':
-        description: ''
-        id: memory
-        visible: true
-        type: 1
-        name: Memory Exceeded
-    '6':
-        name: Not compile
         id: not_compile
         type: 1
-        visible: true
         description: You code do not compile.
-    '7':
-        visible: true
-        name: Segmentation Fault
-        description: ''
+        name: Not compile
+    '5':
         id: sigsegv
-        type: 1
-    '8':
         visible: true
+        description: ''
+        type: 1
+        name: Segmentation Fault
+    '6':
+        id: timeout
         type: 1
         name: Timeout
+        visible: true
         description: Your code exceeds the maximum allowed time.
-        id: timeout
-    '0':
-        name: File
-        type: 2
+    '7':
         visible: true
-        description: ''
-        id: ''
-    '1':
-        type: 2
-        description: ''
         name: S5
+        description: ''
+        type: 2
+        id: ''
+    '8':
         visible: true
+        type: 2
+        name: File
+        description: ''
         id: ''
 weight: 1.0
