@@ -1,0 +1,25 @@
+accessible: true
+author: Tom Rousseaux
+context: Vous allez apprendre à utiliser la commande grep
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: '[S1] grep'
+network_grading: false
+problems:
+    CU_trim_left:
+        answer: Util.h
+        name: CU_trim_left
+        type: match
+        header: Where is defined the function CU_trim_left? Give onnly the name of
+            the file.
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
