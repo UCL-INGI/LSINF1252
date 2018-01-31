@@ -237,7 +237,8 @@ problems:
                 /*
                  * @pre filename != NULL, index >= 0
                  * @post set the integer present in the file {filename}
-                 *       at index {index} at value {value}
+                 *       at index {index} at value {value}.
+                 *       do nothing if something fails.
                  */
                 void set(char* filename, int index, int value)
 stored_submissions: 0
