@@ -111,7 +111,30 @@ void test_open() {
     }
 }
 
+void test_write_fail() {
+    set_test_metadata("q1", _("Test write() fail."), 1);
+    int size = 6;
+    point_t* tab = gen_struct(size);
+    int ret = 0;
+    
+    monitored.write = true;
+    failures.write = FAIL_THIRD;
+    failures.write_ret = -1;
+    SANDBOX_BEGIN;
+    ret = save(tab, size, "file.txt");
+    SANDBOX_END;
+    
+    free(tab);
+    tab = NULL;
+    
+    if(ret != -1){
+        push_info_msg(_("You do not return -1 when write() fails."));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+
 int main(int argc,char** argv){
     BAN_FUNCS(system);
-    RUN(test, test_close, test_open);
+    RUN(test, test_close, test_open, test_write_fail);
 }
