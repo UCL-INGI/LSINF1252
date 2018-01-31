@@ -1,3 +1,6 @@
+/student/student_code.h: |-
+    unsigned int get(char* filename, unsigned int index);
+    void set(char* filename, unsigned int index, unsigned int value);
 accessible: true
 author: Olivier Martin
 context: |-
@@ -9,102 +12,100 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '50'
+    time: '30'
 name: '[S5] Get and set on array in file'
 network_grading: false
 order: 26
 problems:
     q1:
         type: code
+        language: ''
+        name: ''
         header: |-
             .. code-block:: c
 
                 /*
                  * @pre filename != NULL, index >= 0
-                 * @post return the integer at the index {index} of the array in the file {filename}.
-                 *       return -1 in case of error.
+                 * @post return the integer at the index {index} of the array in the file {filename}
                  */
-                unsigned int get(char* filename, unsigned int index)
-        name: ''
-        language: ''
+                int get(char* filename, int index)
     q2:
         language: ''
-        type: code
+        name: ''
         header: |-
             .. code-block:: c
 
                 /*
                  * @pre filename != NULL, index >= 0
                  * @post set the integer present in the file {filename}
-                 *       at index {index} at value {value}.
-                 *       do nothing in case of error.
+                 *       at index {index} at value {value}
                  */
-                void set(char* filename, unsigned int index, unsigned int value)
-        name: ''
+                void set(char* filename, int index, int value)
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        type: 0
         name: Close
-        description: This tag validate that your close are correctly performed.
         visible: true
         id: close
-        type: 0
+        description: This tag validate that your close are correctly performed.
     '1':
+        type: 0
         description: This tag validate you are able to open a file.
         name: Open
         visible: true
-        type: 0
         id: open
     '2':
         id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
         type: 1
         visible: true
-        description: You use some banned functions.
-        name: Banned functions
     '3':
-        name: Double free
         description: Your code produced a double free.
         visible: true
-        type: 1
+        name: Double free
         id: double_free
+        type: 1
     '4':
-        description: You do not manage failures during the copy properly.
+        visible: true
         id: failure_handling
-        visible: true
+        type: 1
         name: Failure handling
-        type: 1
+        description: You do not manage failures during the copy properly.
     '5':
-        name: Floating Point Exception
         id: sigfpe
+        visible: true
         type: 1
         description: ''
-        visible: true
+        name: Floating Point Exception
     '6':
-        description: ''
         name: Memory Exceeded
-        visible: true
-        type: 1
         id: memory
+        type: 1
+        visible: true
+        description: ''
     '7':
+        visible: true
         name: Not compile
         description: You code do not compile.
-        visible: true
         id: not_compile
         type: 1
     '8':
         visible: true
-        id: timeout
+        type: 1
         name: Timeout
         description: Your code exceeds the maximum allowed time.
-        type: 1
+        id: timeout
     '9':
-        type: 2
-        visible: true
         name: File
         description: ''
+        type: 2
+        visible: true
         id: ''
 weight: 1.0
