@@ -182,7 +182,7 @@ void test_open_q1_fail(){
     ret = get("file_no_exits.txt", 3);
     SANDBOX_END;
     
-    if (ret != 1){
+    if (ret != -1){
         push_info_msg(_("You do not return -1 when open() fails."));
         CU_FAIL();
     }
