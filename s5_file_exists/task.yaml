@@ -1,0 +1,36 @@
+accessible: true
+author: ''
+context: ''
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: ''
+network_grading: false
+problems:
+    q1:
+        language: ''
+        type: code
+        name: ''
+        header: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        name: File
+        type: 2
+        description: ''
+        visible: true
+        id: ''
+    '1':
+        description: ''
+        type: 2
+        name: S5
+        visible: true
+        id: ''
+weight: 1.0
