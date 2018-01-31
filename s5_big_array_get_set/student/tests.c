@@ -139,9 +139,9 @@ void test_get_fail() {
     gen_file(100);    
     int ret = 0;
     
-    monitored.open = true;
-	failures.open=FAIL_FIRST;
-	failures.open_ret=-1;
+    monitored.read = true;
+    failures.read=FAIL_FIRST;
+    failures.read_ret=-1;
     SANDBOX_BEGIN;
     ret = get("file.txt", 50);
     SANDBOX_END;
