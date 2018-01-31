@@ -9,6 +9,7 @@ for dir in $DIRS; do
     ls $dir".no_ctester" &> /dev/null
     if [[ $? -ne 0 ]]; then
         cp CTester/run $dir"run"
+        cp CTester/student/Makefile $dir"student/Makefile"
         cp -r CTester/student/CTester/ $dir"student/"
     fi
 done

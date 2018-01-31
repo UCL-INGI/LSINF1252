@@ -14,17 +14,17 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S5] Save struct into file'
 network_grading: false
 order: 24
 problems:
     q1:
         language: ''
-        name: ''
         type: code
+        name: ''
         header: |-
             .. code-block:: c
 
@@ -41,9 +41,15 @@ submission_limit:
     period: -1
 tags:
     '0':
+        name: File
+        type: 2
+        description: ''
+        visible: true
+        id: ''
+    '1':
         description: ''
         type: 2
+        name: S5
         visible: true
-        name: File
         id: ''
 weight: 1.0

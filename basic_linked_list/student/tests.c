@@ -74,8 +74,6 @@ void test_init_node_alloc(){
   monitored.malloc = true;
 
   SANDBOX_BEGIN;
-  char *ptr = (char *)NULL;
-  *ptr = 23;
   ret = init_node(0);
   SANDBOX_END;
 
@@ -137,9 +135,7 @@ void test_init_node_nomem(){
   failures.malloc_ret = NULL;
 
   SANDBOX_BEGIN;
-  //ret = init_node(0);
-  ret = (node_t *) 0x21;
-  ret->next = NULL;
+  ret = init_node(0);
   SANDBOX_END;
 
   CU_ASSERT_PTR_NULL(ret);
@@ -343,6 +339,7 @@ void test_add_node_nomem(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS(calloc);
+    //RUN(test_init_node_alloc);
     RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem);
     //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
 }

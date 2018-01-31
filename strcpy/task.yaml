@@ -28,7 +28,7 @@ problems:
                 * @src: string to be copied
                 * @return: return pointer. if src == NULL or in case of error, return NULL
                 */
-                char *buf_strcpy(char *src) {
+                char *buf_strcpy(const char *src) {
         language: c
         name: buf_strcpy
 stored_submissions: 0

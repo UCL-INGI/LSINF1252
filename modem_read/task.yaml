@@ -10,14 +10,15 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
+    time: '30'
 name: '[S3] Reading from the wire'
 network_grading: false
+order: 12
 problems:
     modem:
-        name: '42'
+        language: c
         header: |-
             You want to know if one e-mail you received contains the byte 42.
             Write the body of the function *has_42*, this function has to use *malloc* to create the buffer :
@@ -25,9 +26,9 @@ problems:
             .. code-block:: c
 
                 /* has_42
-                 * @return: 1 if the modem received a byte containing 42, else 0, -1 if an error has happened.
+                 * @return: 1 if the modem received a byte containing 42, else 0, -1 if an error has happened. */
                 int has_42() {
-        language: c
+        name: '42'
         type: code
 stored_submissions: 0
 submission_limit:
@@ -35,4 +36,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 12
