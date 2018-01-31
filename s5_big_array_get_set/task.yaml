@@ -213,6 +213,7 @@
             read(fd, (void *) &res, sizeof(int));
             if (res != 2222+i){
                 push_info_msg(_("You do not set the correct value in the file."));
+                set_tag("wrong_set_value");
                 CU_FAIL();
                 break;
             }
@@ -390,10 +391,22 @@ tags:
         name: Not compile
     '12':
         description: You have modified the original file.
+        id: original_modif
         name: Original file modified
         type: 1
-        id: original_modif
         visible: true
+    '13':
+        description: The value written in the file has not the correct value.
+        name: Wrong Set Value
+        visible: true
+        id: wrong_set_value
+        type: 1
+    '14':
+        name: Wrong Index Set
+        visible: true
+        id: wrong_index_set
+        type: 1
+        description: A value at an unwanted index was modified.
     '2':
         id: timeout
         visible: true
@@ -402,8 +415,8 @@ tags:
         type: 1
     '3':
         visible: true
-        description: You try to read outside of the array.
         id: oob
+        description: You try to read outside of the array.
         name: Out of bounds
         type: 1
     '4':
@@ -439,8 +452,8 @@ tags:
     '9':
         name: Memory Exceeded
         id: memory
-        type: 1
         description: ''
+        type: 1
         visible: true
     '11':
         type: 2

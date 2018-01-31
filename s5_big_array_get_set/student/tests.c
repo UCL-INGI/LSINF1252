@@ -92,6 +92,7 @@ void test_set() {
         read(fd, (void *) &res, sizeof(int));
         if (res != 2222+i){
             push_info_msg(_("You do not set the correct value in the file."));
+            set_tag("wrong_set_value");
             CU_FAIL();
             break;
         }
