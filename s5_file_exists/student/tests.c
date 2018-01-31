@@ -35,6 +35,6 @@ void test_exist() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system);
+    BAN_FUNCS(system, open);
     RUN(test_exist_not, test_exist);
 }

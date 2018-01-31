@@ -36,7 +36,7 @@
     }
 
     int main(int argc,char** argv){
-        BAN_FUNCS(system);
+        BAN_FUNCS(system, open);
         RUN(test_exist_not, test_exist);
     }
 accessible: true
@@ -47,9 +47,9 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
     time: '30'
+    memory: '100'
 name: '[S5] File exists'
 network_grading: false
 problems:
@@ -70,11 +70,53 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '2':
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        type: 1
+        visible: false
+    '3':
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        id: double_free
+        type: 1
+    '4':
+        visible: true
+        id: sigfpe
+        type: 1
+        description: ''
+        name: Floating Point Exception
+    '5':
+        description: ''
+        id: memory
+        type: 1
+        name: Memory Exceeded
+        visible: false
+    '6':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code do not compile.
+    '7':
+        visible: true
+        name: Segmentation Fault
+        description: ''
+        id: sigsegv
+        type: 1
+    '8':
+        visible: true
+        type: 1
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
     '0':
         name: File
         type: 2
-        description: ''
         visible: true
+        description: ''
         id: ''
     '1':
         description: ''
