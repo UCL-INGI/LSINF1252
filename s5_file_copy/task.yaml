@@ -6,14 +6,15 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '30'
 name: '[S5] File copy'
 network_grading: false
 order: 27
 problems:
     q1:
+        name: ''
         type: code
         language: ''
         header: |-
@@ -29,94 +30,99 @@ problems:
                  *       return 0 if the function terminates with success. -1 in case of errors.
                  */
                 int copy(char* file_name, char* new_file_name)
-        name: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Close
         type: 0
         visible: true
         id: close
+        name: Close
         description: This tag validate that your close are correctly performed.
     '1':
         name: Permission
+        type: 0
+        visible: true
         id: permission
-        type: 0
         description: This tag validate that you are able to copy permission of a file.
-        visible: true
     '2':
-        visible: true
         id: copy
-        type: 0
+        visible: true
         name: Copy
         description: This tag validate you are able to copy a file.
-    '3':
         type: 0
+    '3':
+        visible: true
         description: This tag validate you are able to open a file.
         id: open
-        visible: true
         name: Open
+        type: 0
     '10':
-        description: ''
-        id: memory
-        visible: true
-        type: 1
-        name: Memory Exceeded
-    '11':
-        type: 1
-        visible: true
-        name: Not compile
-        description: You code do not compile.
-        id: not_compile
-    '12':
-        visible: true
-        type: 1
-        name: Double free
-        description: Your code produced a double free.
-        id: double_free
-    '4':
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        type: 1
-        name: Timeout
-        visible: true
-    '5':
-        id: original_modif
-        name: Original file modified
-        type: 1
-        visible: true
-        description: You have modified the original file.
-    '6':
-        visible: true
-        type: 1
-        id: failure_handling
-        description: You do not manage failures during the copy properly.
-        name: Failure handling
-    '7':
-        visible: true
-        name: Floating Point Exception
-        description: ''
         type: 1
         id: sigfpe
-    '8':
-        description: ''
         visible: true
-        id: sigsegv
-        name: Segmentation Fault
+        description: ''
+        name: Floating Point Exception
+    '11':
         type: 1
-    '9':
+        name: Segmentation Fault
+        description: ''
+        id: sigsegv
+        visible: true
+    '12':
+        description: You use some banned functions.
+        name: Banned functions
         type: 1
         id: banned_funcs
-        name: Banned functions
-        description: You use some banned functions.
         visible: false
+    '4':
+        id: memory
+        name: Memory Exceeded
+        visible: true
+        type: 1
+        description: ''
+    '5':
+        type: 1
+        name: Not compile
+        id: not_compile
+        visible: true
+        description: You code do not compile.
+    '6':
+        id: double_free
+        type: 1
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+    '7':
+        name: Timeout
+        id: timeout
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+        type: 1
+    '8':
+        type: 1
+        name: Original file modified
+        visible: true
+        description: You have modified the original file.
+        id: original_modif
+    '9':
+        name: Failure handling
+        id: failure_handling
+        type: 1
+        description: You do not manage failures during the copy properly.
+        visible: true
     '13':
-        type: 2
         description: ''
         name: File
         visible: true
+        type: 2
+        id: ''
+    '14':
+        name: S5
+        visible: true
+        type: 2
+        description: ''
         id: ''
 weight: 1.0

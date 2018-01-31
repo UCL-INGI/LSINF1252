@@ -8,16 +8,16 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
+    time: '30'
 name: '[S3] Sleepy memory'
 network_grading: false
+order: 14
 problems:
     sleep_malloc:
-        language: c
         name: Sleepy malloc
-        type: code
+        language: c
         header: |-
             Write the body of the function *sleepy_malloc*.
 
@@ -30,10 +30,10 @@ problems:
                  * If malloc failed 10 times in a row, return NULL.
                  */
                 void *sleepy_malloc(size_t s) {
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 14

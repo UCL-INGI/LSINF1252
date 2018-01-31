@@ -6,22 +6,22 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
+    time: '30'
 name: '[S2] Exponentially static counter'
 network_grading: false
 order: 7
 problems:
     static_counter:
-        language: c
-        header: |-
+        type: code
+        header: |
             Write the body of the function *stexp* which returns at its *n*th call the value 2^(n-1). Once it has returned the value 4096, the next return should go back to 1.
 
             .. code-block:: c
 
                 unsigned int stexp() {
-        type: code
+        language: c
         name: Static counter
 stored_submissions: 0
 submission_limit:

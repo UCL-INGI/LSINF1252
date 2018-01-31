@@ -20,7 +20,6 @@ int mal = malloced((void*) ret);
 CU_ASSERT_TRUE(mal);
 // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
 if (mal){
-  //printf("%s", ret);
   CU_ASSERT_STRING_EQUAL(ret, src);
   if (strncmp(ret, src, strlen(src)) != 0){
     char msg[80];
@@ -34,7 +33,7 @@ else
 }
 
 void test_strcpy_return() {
-  set_test_metadata("buf_strcpy", _("Check the returned pointer in normal case"), 1);
+  set_test_metadata("strcpy_impl", _("Check the returned pointer in normal case"), 1);
 
   char *ret = NULL;
   char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
@@ -50,7 +49,7 @@ test_alloc(src, ret);
 }
 
 void test_strcpy_nomem() {
-  set_test_metadata("buf_strcpy", _("Check the behavior of the function when the call to malloc fails"), 1);
+  set_test_metadata("strcpy_impl", _("Check the behavior of the function when the call to malloc fails"), 1);
 
   char *ret = NULL;
   char *src = "Chaine de char de test un peu courte mais pas trop quand meme";

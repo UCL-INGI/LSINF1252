@@ -1,151 +1,3 @@
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    /*
-     * Generate a file named "file.txt".
-     * The content is the integers in range [0, n[
-     * The sum of integers in the file is returned.
-     */
-    int gen_file(int n){
-        int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
-        if(fd == -1) {
-            CU_FAIL("Error, can not initialise test file");
-        }
-        int array[n];
-        int i = 0;
-        int sum = 0;
-        for (i = 0; i < n; i++){
-            array[i]=i;
-            sum+=i;
-            if (write(fd, (void *) &array[i], sizeof(int)) == -1){
-                CU_FAIL("Error, can not initialise test file");
-            }
-        }
-        if (close(fd) == -1)
-            CU_FAIL("Error, can not initialise test file");
-        return sum;
-    }
-
-    /*
-     * Test with no file
-     */
-    void test_no_file() {
-        set_test_metadata("q1", _("Test with no file"), 1);
-        int ret = 0;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != -1){
-            push_info_msg(_("When there is no file, your code does not return -1."));
-            CU_FAIL();
-        }else{
-            set_tag("open");
-        }
-    }
-
-    /*
-     * Test with no file
-     */
-    void test_fail_open() {
-        set_test_metadata("q1", _("Test fail open"), 1);
-        int ret = 0;
-
-        monitored.open = true;
-        failures.open = FAIL_FIRST;
-        failures.open_ret = -1;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != -1){
-            push_info_msg(_("When there is no file, your code does not return -1."));
-            CU_FAIL();
-        }else{
-            set_tag("open");
-        }
-    }
-
-
-    /*
-     * Test with no integer in the file
-     */
-    void test_no_integer() {
-        set_test_metadata("q1", _("Test without any integers."), 1);
-        int sum = gen_file(0);
-        int ret = 0;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != sum){
-            push_info_msg(_("When the file does not contain any integers, your code does not return 0."));
-            CU_FAIL();
-        }
-    }
-
-
-    /*
-     * Test with some integers in the file
-     */
-    void test_some_integers() {
-        set_test_metadata("q1", _("Test with some intagers."), 2);
-        int sum = gen_file(12);
-        int ret = 0;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != sum){
-            push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
-            CU_FAIL();
-        }
-    }
-
-    /*
-     * Test with some integers in the file with close()
-     */
-    void test_close() {
-        set_test_metadata("q1", _("Test close()."), 1);
-        gen_file(2);
-
-        monitored.close = true;
-        monitored.open = true;
-        SANDBOX_BEGIN;
-        myfunc("file.txt");
-        SANDBOX_END;
-
-        int close_ok = 0;
-        if (stats.close.called != 1){
-            push_info_msg(_("You did not close() the file."));
-            close_ok++;
-            CU_FAIL();
-        }if (stats.open.called != 1){
-            push_info_msg(_("The open should be use only once."));
-            close_ok++;
-            CU_FAIL();
-        }if(stats.open.last_return != stats.close.last_params.fd){
-            push_info_msg(_("The close() does not close the file you opened before."));
-            close_ok++;
-            CU_FAIL();
-        }if(close_ok == 0){
-            set_tag("close");
-        }
-
-    }
-
-    int main(int argc,char** argv){
-        BAN_FUNCS();
-        RUN(test_no_file, test_fail_open, test_no_integer, test_some_integers, test_close);
-    }
 accessible: true
 author: Olivier Martin
 context: |-
@@ -156,9 +8,9 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S5] File integers reading'
 network_grading: false
 order: 25
@@ -166,6 +18,7 @@ problems:
     q1:
         type: code
         language: c
+        name: Write your code here
         header: |-
             .. code-block:: java
 
@@ -174,70 +27,75 @@ problems:
                  * @post return the sum of all integers present in the file, -1 if an error occurs.
                  */
                 int sum_file(char* filename)
-        name: Write your code here
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: close
+        type: 0
         name: Close
-        type: 0
+        visible: true
+        id: close
         description: This tag validate that your close are correctly performed.
-        visible: true
     '1':
-        name: Open
         type: 0
-        id: open
-        visible: true
         description: This tag validate you are able to open a file.
+        name: Open
+        visible: true
+        id: open
     '2':
         id: banned_funcs
-        type: 1
-        description: You use some banned functions.
         name: Banned functions
+        description: You use some banned functions.
+        type: 1
         visible: false
     '3':
-        type: 1
         description: Your code produced a double free.
         visible: true
         name: Double free
         id: double_free
+        type: 1
     '4':
-        type: 1
-        description: ''
-        name: Floating Point Exception
+        visible: true
         id: sigfpe
-        visible: true
-    '5':
         type: 1
+        name: Floating Point Exception
+        description: ''
+    '5':
+        description: ''
         visible: true
+        type: 1
         id: memory
         name: Memory Exceeded
-        description: ''
     '6':
-        description: You code do not compile.
-        visible: true
-        id: not_compile
         name: Not compile
+        id: not_compile
         type: 1
-    '7':
-        type: 1
-        name: Segmentation Fault
-        id: sigsegv
         visible: true
+        description: You code do not compile.
+    '7':
+        visible: true
+        name: Segmentation Fault
         description: ''
+        id: sigsegv
+        type: 1
     '8':
+        visible: true
+        type: 1
         name: Timeout
         description: Your code exceeds the maximum allowed time.
-        visible: true
-        type: 1
         id: timeout
-    '9':
+    '10':
+        name: S5
         type: 2
         visible: true
         description: ''
+        id: ''
+    '9':
         name: File
+        description: ''
+        type: 2
+        visible: true
         id: ''
 weight: 1.0
