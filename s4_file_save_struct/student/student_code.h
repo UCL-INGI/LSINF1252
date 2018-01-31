@@ -1,1 +1,1 @@
-int save(struct 3dpoint* pt, size_t len, char* filename);
+int save(struct point* pt, size_t len, char* filename);

@@ -4,18 +4,18 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-typedef struct 3dpoint{
+typedef struct point{
     double x;
     double y;
     double z;
-} 3dpoint_t;
+} point_t;
 
-3dpoint_t* gen_struct(int size){
-    3dpoint_t* tab = malloc(size * sizeof(3dpoint_t));
+point_t* gen_struct(int size){
+    point_t* tab = malloc(size * sizeof(point_t));
     if (tab == NULL)
-        return (3dpoint_t*)NULL;
+        return (point_t*)NULL;
     for (int i = 0; i < size; i++){
-        tab[i] = malloc(sizeof(3dpoint_t));
+        tab[i] = (point_t*)malloc(sizeof(point_t));
         tab[i]->x = i+i;
         tab[i]->y = i+i+i;
         tab[i]->z = i+i*i;
@@ -30,7 +30,7 @@ void test() {
     set_test_metadata("q1", _("Test fail open"), 1);
     int size = 3;
     int ret = 0;
-    3dpoint_t* tab = gen_struct(size);
+    point_t* tab = gen_struct(size);
     
     monitored.open = true;
     failures.open = FAIL_TWICE;

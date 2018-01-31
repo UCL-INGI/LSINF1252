@@ -13,6 +13,8 @@ os.chdir("student")
 # Fetch and save the student code into a file for compilation
 input.parse_template("student_code.c.tpl", "student_code.c")
 
+print('foo')
+
 # Compilation
 p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 make_output = p.communicate()[0].decode('utf-8')
@@ -27,6 +29,7 @@ else:
     feedback.set_global_result("success")
     feedback.set_global_feedback("- Votre code compile.\n")
 
+print('bar')
 # Parse banned functions
 try:
     banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")

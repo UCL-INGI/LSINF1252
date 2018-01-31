@@ -7,13 +7,13 @@
 #include <unistd.h>
 #include <string.h>
 
-typedef struct 3dpoint{
+typedef struct point{
     double x;
     double y;
     double z;
-} 3dpoint_t;
+} point_t;
 
-int myfunc(char* file_name, char* new_file_name) {
+int save(struct point* pt, size_t len, char* filename){
 @    @q1@@
 }
 

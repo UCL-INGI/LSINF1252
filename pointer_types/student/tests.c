@@ -64,12 +64,11 @@ void test_tab3() {
     int tab2[4] = {1, 4, 4, 10};
     int tab3[4] = {10, 0, 21, 3};
     int tab4[4] = {10, 456789087, 2121212122, 1672386787};
-    int * a = (void *)tab1;
 
     int ret = -1;
     char *ptr;
 
-    *ptr = (char *)tab1;
+    ptr = (char *)tab1;
     ptr -= 41;
     SANDBOX_BEGIN;
     ret = third((void *)ptr);
@@ -77,21 +76,21 @@ void test_tab3() {
     CU_ASSERT_EQUAL(ret,tab1[1]);
 
 
-    *ptr = (char *)tab2;
+    ptr = (char *)tab2;
     ptr -= 41;
     SANDBOX_BEGIN;
     ret = third((void *)ptr);
     SANDBOX_END;
     CU_ASSERT_EQUAL(ret,tab2[1]);
 
-    *ptr = (char *)tab3;
+    ptr = (char *)tab3;
     ptr -= 41;
     SANDBOX_BEGIN;
     ret = third((void *)ptr);
     SANDBOX_END;
     CU_ASSERT_EQUAL(ret,tab3[1]);
 
-    *ptr = (char *)tab4;
+    ptr = (char *)tab4;
     ptr -= 41;
     SANDBOX_BEGIN;
     ret = third((void *)ptr);
