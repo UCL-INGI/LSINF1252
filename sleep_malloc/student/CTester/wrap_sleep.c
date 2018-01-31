@@ -47,5 +47,8 @@ unsigned int __wrap_sleep(unsigned int time) {
   stats.sleep.last_return=ret;
   return ret;
 }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 063382e8050cbca5ed72278b576fa5591f8a5e4c

@@ -1,5 +1,5 @@
 accessible: true
-author: Mathieu Xhonneux
+author: Mathieu Xhonneux & Maxime Mawait
 context: |-
     The system call malloc may fail, for instance if the OS has no free memory remaining. In this case, it may be possible that some other processes free some memory after some time.
 
