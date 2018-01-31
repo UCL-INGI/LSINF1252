@@ -1,2 +1,2 @@
-unsigned int get(char* filename, unsigned int index);
-void set(char* filename, unsigned int index, unsigned int value);
+int get(char* filename, int index);
+void set(char* filename, int index, int value);
