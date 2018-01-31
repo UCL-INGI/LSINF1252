@@ -203,6 +203,6 @@ int main(int argc,char** argv)
 {
     tab1 = (int8_t*) malloc(64);
     BAN_FUNCS();
-    RUN(test_42_right1, test_42_left1,test_42_left2, test_42_right2, test_no42_left, test_no42_right, test_fail);
+    RUN(test_42_right1,test_42_right2, test_no42_right, test_fail);
     free(tab1);
 }
