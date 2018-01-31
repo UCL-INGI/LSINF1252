@@ -1,7 +1,8 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: Given the provided implementation of a linked list, you are asked to implement
-    the `insert` function based on a specific order relation.
+    the ``insert`` function based on a specific order relation. By succeeding this
+    task, you will be able to make ordered list with a `Comparator`.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -13,25 +14,25 @@ name: '[S4] Order relation on a linked list'
 network_grading: false
 order: 22
 problems:
-    insert:
-        header: ''
-        language: c
-        type: code
-        name: Insert
     order_relation:
+        type: code
+        name: Order relation
+        language: c
+        header: ''
+    insert:
+        name: Insert
+        header: ''
         language: c
         type: code
-        header: ''
-        name: Order relation
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        description: Task dealing with data structures and linked list
-        type: 2
-        visible: true
         name: Data structures
+        type: 2
+        description: Task dealing with data structures and linked list
+        visible: true
         id: ''
 weight: 1.0

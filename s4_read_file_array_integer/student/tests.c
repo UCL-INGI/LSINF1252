@@ -12,7 +12,7 @@
 int gen_file(int n){
     int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
     if(fd == -1) {
-        CU_FAIL("Error, can not initialise test file");
+        CU_FAIL(_("Error, can not initialise test file"));
     }
     int array[n];
     int i = 0;
@@ -21,11 +21,11 @@ int gen_file(int n){
         array[i]=i;
         sum+=i;
         if (write(fd, (void *) &array[i], sizeof(int)) == -1){
-            CU_FAIL("Error, can not initialise test file");
+            CU_FAIL(_("Error, can not initialise test file"));
         }
     }
     if (close(fd) == -1)
-        CU_FAIL("Error, can not initialise test file");
+        CU_FAIL(_("Error, can not initialise test file"));
     return sum;
 }
 

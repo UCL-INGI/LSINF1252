@@ -1,0 +1,7 @@
+42#SUCCESS#test1 for 42 contained. right trapped#1#
+42#FAIL#test2 for 42 contained, left trapped#1#sigsegv#Your code produced a segfault.
+42#FAIL#test2 for 42 contained, left trapped#1#sigsegv#Your code produced a segfault.
+42#SUCCESS#test2 for 42 contained, right trapped#1#
+42#FAIL#test2 for 42 not contained, left trapped#1#sigsegv#Your code produced a segfault.
+42#SUCCESS#test2 for 42 not contained, right trapped#1#
+42#SUCCESS#test for malloc failed#1#

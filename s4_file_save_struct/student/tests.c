@@ -7,7 +7,7 @@
 point_t* gen_struct(int size){
     point_t *tab = malloc(size*sizeof(point_t));
     if (tab == NULL){
-        CU_FAIL("Can not initialize test suite");
+        CU_FAIL(_("Error, can not initialise test file"));
         return (point_t*)NULL;
     }
     for (int i = 0; i < size; i++){
@@ -18,9 +18,6 @@ point_t* gen_struct(int size){
     return tab;
 }
 
-/*
- * Test with open fail
- */
 void test() {
     set_test_metadata("q1", _("Test write array struct"), 1);
     int size = 6;
@@ -38,7 +35,7 @@ void test() {
     tab = gen_struct(size);
     int fd = open("file.txt",O_RDONLY); 
     if(fd == -1) 
-        CU_FAIL("Can not initialize test suite");
+        CU_FAIL(_("Error, can not initialise test file"));
 
     point_t s;
     for(int i = 0; i < size; i++){
