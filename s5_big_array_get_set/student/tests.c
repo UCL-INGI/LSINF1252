@@ -58,6 +58,7 @@ void test_get() {
     
     if(system("diff file.txt file_copy.txt") != 0){
         push_info_msg(_("You have modified the file when reading it..."));
+        set_tag("original_modif");
         CU_FAIL();
     }
 }
@@ -151,6 +152,7 @@ void test_get_oob() {
     if(ret != -2){
         push_info_msg(_("You do not return -2 when index is bigger than the size of the array."));
         CU_FAIL(); 
+        set_tag("oob");
     }   
 }
 
@@ -168,6 +170,7 @@ void test_get_fail() {
     if(ret != -1){
         push_info_msg(_("You do not return -1 when the read() function fails."));
         CU_FAIL(); 
+        set_tag("failure_handling");
     }   
 }
 
@@ -184,6 +187,8 @@ void test_open_q1_fail(){
     if (ret != -1){
         push_info_msg(_("You do not return -1 when open() fails."));
         CU_FAIL();
+    }else{
+        set_tag("open");
     }
 }
 

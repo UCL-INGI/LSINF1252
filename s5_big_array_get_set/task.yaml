@@ -179,6 +179,7 @@
 
         if(system("diff file.txt file_copy.txt") != 0){
             push_info_msg(_("You have modified the file when reading it..."));
+            set_tag("original_modif");
             CU_FAIL();
         }
     }
@@ -272,6 +273,7 @@
         if(ret != -2){
             push_info_msg(_("You do not return -2 when index is bigger than the size of the array."));
             CU_FAIL();
+            set_tag("oob");
         }
     }
 
@@ -289,6 +291,7 @@
         if(ret != -1){
             push_info_msg(_("You do not return -1 when the read() function fails."));
             CU_FAIL();
+            set_tag("failure_handling");
         }
     }
 
@@ -305,6 +308,8 @@
         if (ret != -1){
             push_info_msg(_("You do not return -1 when open() fails."));
             CU_FAIL();
+        }else{
+            set_tag("open");
         }
     }
 
@@ -383,6 +388,12 @@ tags:
         visible: true
         description: You code do not compile.
         name: Not compile
+    '12':
+        description: You have modified the original file.
+        name: Original file modified
+        type: 1
+        id: original_modif
+        visible: true
     '2':
         id: timeout
         visible: true
@@ -417,7 +428,7 @@ tags:
         name: Failure handling
         id: failure_handling
         visible: true
-        description: You do not manage failures during the copy properly.
+        description: You do not manage failures properly.
         type: 1
     '8':
         type: 1
