@@ -15,8 +15,15 @@ problems:
     q1:
         language: ''
         type: code
-        name: ''
-        header: ''
+        name: File exist
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * @pre filename != NULL
+                 * @post return 0 if the file {filename} exist. -1 Otherwise.
+                 */
+                 int file_exists(char* filename)
 stored_submissions: 0
 submission_limit:
     amount: -1

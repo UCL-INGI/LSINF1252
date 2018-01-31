@@ -1,6 +1,8 @@
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
+    *Estimated time: 5 minutes*
+
     You have just built a calculator, whose source folder has the following structure:
 
     .. code-block::
@@ -25,9 +27,9 @@ name: '[S02] make and prerequisites'
 network_grading: false
 problems:
     make_calc_simple:
-        name: Linking the
-        language: c
-        header: The purpose of these exercise is to .sdads
+        name: 'Linking '
+        language: Makefile
+        header: Write a *Makefile* to build the executable.
         type: code
 stored_submissions: 0
 submission_limit:
