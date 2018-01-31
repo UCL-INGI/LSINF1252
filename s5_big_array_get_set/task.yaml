@@ -95,6 +95,17 @@
                 CU_FAIL();
             }
         }
+        for(int i = 0; i < 1000; i++){
+            if (i % 50 != 0){
+                lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
+                int res;
+                read(fd, (void *) &res, sizeof(int));
+                if (res != get_value_by_index(i)){
+                    push_info_msg(_("You have modified some wrong elements in the array"));
+                    CU_FAIL();
+                }
+            }
+        }
         close(fd);
     }
 
