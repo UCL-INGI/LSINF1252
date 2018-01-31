@@ -20,7 +20,7 @@ point_t* gen_struct(int size){
  * Test with open fail
  */
 void test() {
-    set_test_metadata("q1", _("Test fail open"), 1);
+    set_test_metadata("q1", _("Test write array struct"), 1);
     int size = 5;
     int ret = 0;
     point_t* tab = gen_struct(size);
@@ -48,7 +48,10 @@ void test() {
         printf("%d %d %d", s.x, s.y, s.z);
     }
     close(fd);
-    //ret
+    if(ret != 0){
+        push_info_msg(_("You did not return 0 when everything occurs fine."));
+        CU_FAIL(); 
+    }
 }
 
 
