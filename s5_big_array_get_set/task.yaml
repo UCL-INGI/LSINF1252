@@ -29,6 +29,7 @@ problems:
                  * @post return the integer at the index {index}
                  *       of the array in the file {filename}.
                  *       return -1 in case of error.
+                 *       return -2 if index >= length of array.
                  */
                 int get(char* filename, int index)
     q2:
