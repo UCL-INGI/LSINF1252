@@ -102,15 +102,19 @@ void set_tag(char *tag)
 
 void segv_handler(int sig, siginfo_t *unused, void *unused2)
 {
+    wrap_monitoring = false;
     push_info_msg(_("Your code produced a segfault."));
     set_tag("sigsegv");
+    wrap_monitoring = true;
     siglongjmp(segv_jmp, 1);
 }
 
 void alarm_handler(int sig, siginfo_t *unused, void *unused2)
 {
+    wrap_monitoring = false;
     push_info_msg(_("Your code exceeded the maximal allowed execution time."));
     set_tag("timeout");
+    wrap_monitoring = true;
     siglongjmp(segv_jmp, 1);
 }
 
