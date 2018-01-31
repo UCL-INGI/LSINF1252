@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int myfunc(int n) {
-@    @myfunc@@
+int push(struct node **head, int value){
+	@@push@@
 }
 
 

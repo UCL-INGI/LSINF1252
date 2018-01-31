@@ -1,3 +1,12 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    int push(struct node **head, int value){
+        @@push@@
+    }
+
+
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
@@ -26,7 +35,7 @@ problems:
         header: |-
             .. code-block:: c
 
-                int push(struct node *node){
+                int push(struct node **head, int value){
         type: code
     pop:
         header: |-
