@@ -53,6 +53,7 @@
             }
         }
         if(stats.read.called > should_count_read){
+            set_tag("too_many_op");
             push_info_msg(_("You perform too many read()."));
             CU_FAIL();
         }
@@ -76,6 +77,7 @@
         }
 
         if(stats.write.called > should_count_write){
+            set_tag("too_many_op");
             push_info_msg(_("You perform too many write()."));
             CU_FAIL();
         }
@@ -145,16 +147,16 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '50'
     time: '30'
+    memory: '50'
 name: '[S5] Get and set on array in file'
 network_grading: false
 order: 26
 problems:
     q1:
+        name: ''
         type: code
         language: ''
-        name: ''
         header: |-
             .. code-block:: c
 
@@ -164,6 +166,7 @@ problems:
                  */
                 int get(char* filename, int index)
     q2:
+        type: code
         language: ''
         name: ''
         header: |-
@@ -175,7 +178,6 @@ problems:
                  *       at index {index} at value {value}
                  */
                 void set(char* filename, int index, int value)
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -183,62 +185,68 @@ submission_limit:
 tags:
     '0':
         type: 0
-        name: Close
         visible: true
         id: close
+        name: Close
         description: This tag validate that your close are correctly performed.
     '1':
         type: 0
-        description: This tag validate you are able to open a file.
-        name: Open
         visible: true
         id: open
+        description: This tag validate you are able to open a file.
+        name: Open
+    '10':
+        type: 1
+        id: too_many_op
+        visible: true
+        description: You call the read or write function more than necessary.
+        name: Too many read/write
     '2':
         id: banned_funcs
+        visible: true
         name: Banned functions
         description: You use some banned functions.
         type: 1
-        visible: true
     '3':
-        description: Your code produced a double free.
         visible: true
-        name: Double free
+        description: Your code produced a double free.
         id: double_free
+        name: Double free
         type: 1
     '4':
-        visible: true
-        type: 1
         id: failure_handling
         name: Failure handling
-        description: You do not manage failures during the copy properly.
-    '5':
-        id: sigfpe
         visible: true
         type: 1
-        description: ''
+        description: You do not manage failures during the copy properly.
+    '5':
+        type: 1
         name: Floating Point Exception
+        id: sigfpe
+        visible: true
+        description: ''
     '6':
-        name: Memory Exceeded
         id: memory
         type: 1
         visible: true
         description: ''
+        name: Memory Exceeded
     '7':
-        visible: true
         name: Not compile
-        description: You code do not compile.
         id: not_compile
+        visible: true
+        description: You code do not compile.
         type: 1
     '8':
-        visible: true
         type: 1
         name: Timeout
+        visible: true
         description: Your code exceeds the maximum allowed time.
         id: timeout
     '9':
         name: File
-        description: ''
         type: 2
+        description: ''
         visible: true
         id: ''
 weight: 1.0

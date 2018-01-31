@@ -52,6 +52,7 @@ void test_get() {
         }   
     }
     if(stats.read.called > should_count_read){
+        set_tag("too_many_op");
         push_info_msg(_("You perform too many read()."));
         CU_FAIL();  
     }
@@ -75,6 +76,7 @@ void test_set() {
     }
     
     if(stats.write.called > should_count_write){
+        set_tag("too_many_op");
         push_info_msg(_("You perform too many write()."));
         CU_FAIL();  
     }
