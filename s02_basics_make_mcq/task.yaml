@@ -5,9 +5,9 @@ environment: mcq
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '30'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
 order: 11
@@ -15,91 +15,101 @@ problems:
     mcq1:
         choices:
         -   text: The target is the bullseye of a shooting target.
-            valid: true
-        -   text: The target is the name of a file.
+        -   valid: true
+            text: The target is the name of a file.
         -   text: The target can be the name of an action to carry out.
-        -   text: The target is a file that is used as input to create the rule.
+            valid: true
+        -   valid: true
+            text: The target is a file that is used as input to create the rule.
         -   text: A target is an action that make carries out.
+        type: multiple_choice
+        success_message: 'Bullseye, good job! '
+        multiple: true
+        limit: 4
+        name: Find the target
         header: Select all *correct* answers related to the *target* of a Makefile
             rule.
-        multiple: true
-        name: Find the target
-        type: multiple_choice
-        limit: 4
-        success_message: 'Bullseye, good job! '
     mcq2:
-        name: What are the prerequisite?
         choices:
-        -   valid: true
-            text: The prerequisite is a file that is used as input to create the target.
+        -   text: The prerequisite is a file that is used as input to create the target.
+            valid: true
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
+        type: multiple_choice
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
-        type: multiple_choice
+        name: What are the prerequisite?
         multiple: true
         limit: 4
     mcq3:
-        limit: 4
-        choices:
-        -   text: A recipe is an action that make carries out.
-            valid: true
-        -   text: '42'
-            feedback: That is the Answer to the Ultimate Question of Life, the Universe,
-                and Everything.
-            valid: true
-        -   text: The recipe is a file that is used as input to create the target.
-        -   text: The recipe is the name of a file.
-        name: The recipe
-        multiple: true
-        type: multiple_choice
         header: Please select all *correct* answers related to the *recipe* of a Makefile
             rule.
-    mcq4:
         choices:
         -   valid: true
-            text: |
+            text: A recipe is an action that make carries out.
+        -   valid: true
+            feedback: That is the Answer to the Ultimate Question of Life, the Universe,
+                and Everything.
+            text: '42'
+        -   text: The recipe is a file that is used as input to create the target.
+        -   text: The recipe is the name of a file.
+        multiple: true
+        limit: 4
+        name: The recipe
+        type: multiple_choice
+    mcq4:
+        choices:
+        -   text: |4-
+
                 .. code-block:: console
+
                         clean:
-                            @rm -f src/*.o
-        -   text: |
+                        @rm -f src/*.o
+        -   valid: true
+            text: |4-
+
                 .. code-block:: console
-                        cleantests:
-                            @rm -f tests/*.o
 
                     clean:
                     [tab]@rm -f src/*.o
-        -   feedback: There is a missing tab on the second line.
-            text: |+
+        -   text: |4+
+
                 .. code-block:: console
                         clean:
                         @rm -f src/*.o
 
-        -   text: |
+            feedback: There is a missing tab on the second line.
+        -   text: |4-
+
                 .. code-block:: console
-                        cleantests:
-                        @rm -f tests/*.o
 
                     clean:
                     @rm -f src/*.o
-        -   feedback: There is a missing colon after clean.
-            text: |-
+        -   text: |4-
+
                 .. code-block:: console
-                        clean
-                            @rm -f src/*.o
 
                     clean
                     [tab]@rm -f src/*.o
-        -   text: |-
+            feedback: There is a missing colon after clean.
+        -   text: |4-
+
                 .. code-block:: console
+
                         clean:
-                            @rm -f src/*.o
-            feedback: The recipe in a Makefile has to be intended with spaces not
-                tabs.
-        header: Choice all *correct* Makefile *rules*.
+                        [spaces]@rm -f src/*.o
+            feedback: The recipe in a Makefile has to be intended with tabs and not
+                spaces.
         type: multiple_choice
-        limit: 0
         name: Rules syntax
+        limit: 0
+        header: |-
+            Choice all *correct* Makefile *rules*.
+
+            *Note:*
+
+            * ``[tab]`` indicates a tabulation;
+            * ``[spaces]`` indicates 8 white spaces.
         multiple: true
 stored_submissions: 0
 submission_limit:
@@ -107,9 +117,9 @@ submission_limit:
     period: -1
 tags:
     '0':
-        name: make & Makefile
-        id: make
         type: 0
+        id: make
+        name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
         visible: false

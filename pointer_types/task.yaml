@@ -19,9 +19,9 @@ problems:
         language: c
         name: First argument
         header: |-
-            You found a hint from the hacker, telling the first paramater is  located at the 13rd byte after pointer. You have to implement ``first`` function which give that number.
+            You found a hint from the hacker, telling the first paramater is  located at the 12th byte after *ptr*.
 
-            Write the body of the function *first* :
+            Write the body of the function *first* which returns the integer at that position in memory.
 
             .. code-block:: c
 
