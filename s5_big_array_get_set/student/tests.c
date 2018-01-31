@@ -135,7 +135,7 @@ void test_get_oob() {
 }
 
 void test_get_fail() {
-    set_test_metadata("q1", _("Test get out of bound"), 2);
+    set_test_metadata("q1", _("Test get fail"), 2);
     gen_file(100);    
     int ret = 0;
     
@@ -146,7 +146,7 @@ void test_get_fail() {
     ret = get("file.txt", 50);
     SANDBOX_END;
         
-    if(ret != --1){
+    if(ret != -1){
         push_info_msg(_("You do not return -1 when the read() function fails."));
         CU_FAIL(); 
     }   
@@ -158,5 +158,5 @@ void test_get_fail() {
 
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
-    RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob);
+    RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob, test_get_fail);
 }
