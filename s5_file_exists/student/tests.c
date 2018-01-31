@@ -5,6 +5,7 @@
 #include "CTester/CTester.h"
 
 void test_exist_not() {
+    for(int i = 0; i < 4; i++){
     set_test_metadata("q1", _("Test file does not exist"), 1);
     int ret = 0;
 
@@ -19,9 +20,11 @@ void test_exist_not() {
     }else{
         set_tag("test_file_exist_not");
     }
+    }
 }
 
 void test_exist() {
+    for(int i = 0; i < 4; i++){
     set_test_metadata("q1", _("Test file exists"), 1);
     int ret = 0;
 
@@ -36,9 +39,10 @@ void test_exist() {
     }else{
         set_tag("test_file_exist");
     }
+    }
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, open);
-    RUN(test_exist_not, test_exist_not, test_exist, test_exist);
+    BAN_FUNCS(system, open, set_tag);
+    RUN(test_exist_not, test_exist);
 }
