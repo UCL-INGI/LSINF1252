@@ -29,9 +29,6 @@ void gen_file(int n){
         CU_FAIL("Error, can not initialise test file");
 }
 
-/*
- * Test with some int in the file
- */
 void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
     gen_file(1000);
@@ -58,10 +55,6 @@ void test_get() {
     }
 }
 
-
-/*
- * Test with some int in the file
- */
 void test_set() {
     set_test_metadata("q2", _("Test with normal file"), 2);
     gen_file(1000);
@@ -126,11 +119,27 @@ void test_close_q2(){
         set_tag("close");
 }
 
+void test_get_oob() {
+    set_test_metadata("q1", _("Test get out of bound"), 2);
+    gen_file(10);    
+    int ret = 0;
+        
+    SANDBOX_BEGIN;
+    ret = get("file.txt", 200);
+    SANDBOX_END;
+        
+    if(ret != -2){
+        push_info_msg(_("You do not return -2 when index is bigger than the size of the array."));
+        CU_FAIL(); 
+    }   
+}
+
 //TODO:
 //check if index id bigger than the file
+//check get fail.
 //check if other index are not modified
 
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
-    RUN(test_get, test_set, test_close_q1, test_close_q2);
+    RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob);
 }
