@@ -10,7 +10,7 @@ for dir in $DIRS; do
     if [[ $? -ne 0 ]]; then
         cp CTester/run $dir"run"
         cp CTester/student/Makefile $dir"student/Makefile"
-        cp -r CTester/student/CTester/ $dir"student/"
+        cp -r CTester/student/CTester/ $dir"student/CTester/"
     fi
 done
 
