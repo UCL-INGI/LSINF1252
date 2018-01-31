@@ -51,32 +51,22 @@
         SANDBOX_BEGIN;
         ret = first((void *) tab1);
         SANDBOX_END;
-
         CU_ASSERT_EQUAL(ret,9);
 
-        /*a = (void *)tab2;
-
         SANDBOX_BEGIN;
-        ret = first(a);
+        ret = first((void *) tab2);
         SANDBOX_END;
-
         CU_ASSERT_EQUAL(ret,10);
 
-        a = (void *)tab3;
-
         SANDBOX_BEGIN;
-        ret = first(a);
+        ret = first((void *) tab3);
         SANDBOX_END;
-
         CU_ASSERT_EQUAL(ret,3);
 
-        a = (void *)tab4;
-
         SANDBOX_BEGIN;
-        ret = first(a);
+        ret = first((void *) tab4);
         SANDBOX_END;
-
-        CU_ASSERT_EQUAL(ret,1672386787);*/
+        CU_ASSERT_EQUAL(ret,1672386787);
     }
 
     void test_tab2() {
