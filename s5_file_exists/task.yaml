@@ -1,6 +1,7 @@
 accessible: true
 author: ''
-context: ''
+context: Using `fstat(2) <https://linux.die.net/man/2/fstat>`_, determine if a file
+    exists.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -8,7 +9,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: ''
+name: '[S5] File exists'
 network_grading: false
 problems:
     q1:
