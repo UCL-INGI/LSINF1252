@@ -5,7 +5,7 @@
 int8_t* tab1;
 
 void test_42_right1() {
-    set_test_metadata("modem", _("test1 for 42 contained. right trapped"), 1);
+    set_test_metadata("modem", _("test1 for 42 contained"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -16,7 +16,7 @@ void test_42_right1() {
         tab1[i] = i;
     }
 
-    void * p = trap_buffer(64, TRAP_RIGHT, PROT_NONE, (void*) tab1);
+    void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -45,7 +45,7 @@ void test_42_left1() {
         tab1[i] = i;
     }
 
-    void * p = trap_buffer(64, TRAP_LEFT, PROT_NONE, (void*) tab1);
+    void * p = trap_buffer(64, TRAP_LEFT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -55,6 +55,8 @@ void test_42_left1() {
     ret = has_42();
     SANDBOX_END;
 
+    printf("%d\n", ret);
+
     CU_ASSERT_EQUAL(ret,1);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
@@ -63,7 +65,7 @@ void test_42_left1() {
 }
 
 void test_42_right2() {
-    set_test_metadata("modem", _("test2 for 42 contained, right trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 contained"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -74,7 +76,7 @@ void test_42_right2() {
         tab1[i] = 64 - i;
     }
 
-    void * p = trap_buffer(64, TRAP_RIGHT, PROT_NONE, (void*) tab1);
+    void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -103,7 +105,7 @@ void test_42_left2() {
         tab1[i] = 64 - i;
     }
 
-    void * p = trap_buffer(64, TRAP_LEFT, PROT_NONE, (void*) tab1);
+    void * p = trap_buffer(64, TRAP_LEFT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -113,6 +115,8 @@ void test_42_left2() {
     ret = has_42();
     SANDBOX_END;
 
+    printf("%d\n", ret);
+
     CU_ASSERT_EQUAL(ret,1);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
@@ -121,7 +125,7 @@ void test_42_left2() {
 }
 
 void test_no42_right() {
-    set_test_metadata("modem", _("test2 for 42 not contained, right trapped"), 1);
+    set_test_metadata("modem", _("test2 for 42 not contained"), 1);
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
@@ -132,7 +136,7 @@ void test_no42_right() {
         tab1[i] = 128 - i;
     }
 
-    void * p = trap_buffer(64, TRAP_RIGHT, PROT_NONE, (void*) tab1);
+    void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -161,7 +165,7 @@ void test_no42_left() {
         tab1[i] = 128 - i;
     }
 
-    void * p = trap_buffer(64, TRAP_LEFT, PROT_NONE, (void*) tab1);
+    void * p = trap_buffer(64, TRAP_LEFT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -203,6 +207,6 @@ int main(int argc,char** argv)
 {
     tab1 = (int8_t*) malloc(64);
     BAN_FUNCS();
-    RUN(test_42_right1,test_42_right2, test_no42_right, test_fail);
+    RUN(test_42_right1, test_42_right2, test_no42_right, test_fail);
     free(tab1);
 }
