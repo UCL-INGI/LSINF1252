@@ -5,6 +5,7 @@
 #include "CTester/CTester.h"
 
 void test_exist_not() {
+    // We run multiples times the test to avoid student returning randomly 1 or 0.
     for(int i = 0; i < 4; i++){
         set_test_metadata("q1", _("Test file does not exist"), 1);
         int ret = 0;
@@ -24,6 +25,7 @@ void test_exist_not() {
 }
 
 void test_exist() {
+    // We run multiples times the test to avoid student returning randomly 1 or 0.
     for(int i = 0; i < 4; i++){
         set_test_metadata("q1", _("Test file exists"), 1);
         int ret = 0;
