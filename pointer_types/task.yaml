@@ -11,7 +11,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Pointer types - REVIEWED'
+name: '[S3] Pointer arithmetic - REVIEWED'
 network_grading: false
 order: 19
 problems:
