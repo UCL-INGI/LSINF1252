@@ -1,0 +1,24 @@
+accessible: true
+author: ''
+context: Voir projet bonus 2016.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: '[S2] My strlen'
+network_grading: false
+problems:
+    strlen:
+        type: code
+        name: stlren
+        language: c
+        header: strlen
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

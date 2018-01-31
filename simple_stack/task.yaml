@@ -1,37 +1,50 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: You are asked to implement the `pop` and `push` functions of the given stack
-    interface.
+context: |
+    You are asked to implement the `pop` and `push` functions of the given stack interface.
+
+    .. code-block:: c
+
+        struct node{
+            node *next;
+            int value;
+        }
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S3] Simple stack'
 network_grading: false
+order: 17
 problems:
     push:
+        name: Push
         type: code
         language: c
-        header: ''
-        name: Push
+        header: |-
+            .. code-block:: c
+
+                int pop(struct node *node){
     pop:
-        header: ''
-        name: Pop
-        type: code
         language: ''
+        type: code
+        name: Pop
+        header: |-
+            .. code-block:: c
+
+                int push(int value){
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        description: Task dealing with data structures and linked list
-        type: 2
         visible: true
         name: Data structures
+        type: 2
+        description: Task dealing with data structures and linked list
         id: ''
 weight: 1.0
-order: 17

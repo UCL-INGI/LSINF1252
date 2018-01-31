@@ -31,10 +31,7 @@ extern struct wrap_log_t logs;
 
 sigjmp_buf segv_jmp;
 int true_stderr;
-int true_stdout;
-int pipe_stderr[2], usr_pipe_stderr[2];
-int pipe_stdout[2], usr_pipe_stdout[2];
-extern int stdout_cpy, stderr_cpy;
+int pipe_stderr[2];
 struct itimerval it_val;
 
 CU_pSuite pSuite = NULL;
@@ -131,14 +128,8 @@ int sandbox_begin()
     it_val.it_interval.tv_usec = 0;
     setitimer(ITIMER_REAL, &it_val, NULL);
 
-    // Intercepting stdout and stderr
-    dup2(pipe_stdout[1], STDOUT_FILENO);
+    close(STDERR_FILENO);
     dup2(pipe_stderr[1], STDERR_FILENO);
-    // Emptying the user pipes
-    char buf[BUFSIZ];
-    int n;
-    while ((n = read(usr_pipe_stdout[0], buf, BUFSIZ)) > 0);
-    while ((n = read(usr_pipe_stderr[0], buf, BUFSIZ)) > 0);
 
     wrap_monitoring = true;
 
@@ -155,25 +146,18 @@ void sandbox_end()
     wrap_monitoring = false;
 
     // Remapping stderr to the orignal one ...
-    dup2(true_stdout, STDOUT_FILENO); // TODO
+    close(STDERR_FILENO);
     dup2(true_stderr, STDERR_FILENO);
 
     // ... and looking for a double free warning
     char buf[BUFSIZ];
     int n;
-    while ((n = read(pipe_stdout[0], buf, BUFSIZ)) > 0) {
-        write(usr_pipe_stdout[1], buf, n);
-        write(STDOUT_FILENO, buf, n);
-    }
-
-
     while ((n = read(pipe_stderr[0], buf, BUFSIZ)) > 0) {
         if (strstr(buf, "double free or corruption") != NULL) {
             CU_FAIL("Double free or corruption");
             push_info_msg(_("Your code produced a double free."));
             set_tag("double_free");
         }
-        write(usr_pipe_stderr[1], buf, n);
         write(STDERR_FILENO, buf, n);
     }
 
@@ -225,17 +209,9 @@ int run_tests(int argc, char *argv[], void *tests[], int nb_tests) {
     // Code for detecting properly double free errors
     mallopt(M_CHECK_ACTION, 1); // don't abort if double free
     true_stderr = dup(STDERR_FILENO); // preparing a non-blocking pipe for stderr
-    true_stdout = dup(STDOUT_FILENO); // preparing a non-blocking pipe for stderr
-
-    int *pipes[] = {pipe_stderr, pipe_stdout, usr_pipe_stdout, usr_pipe_stderr};
-    for(int i=0; i < 4; i++) { // Configuring pipes to be non-blocking
-        pipe(pipes[i]);
-        int flags = fcntl(pipes[i][0], F_GETFL, 0);
-        fcntl(pipes[i][0], F_SETFL, flags | O_NONBLOCK);
-    }
-    stdout_cpy = usr_pipe_stdout[0]; 
-    stderr_cpy = usr_pipe_stderr[0]; 
-
+    pipe(pipe_stderr);
+    int flags = fcntl(pipe_stderr[0], F_GETFL, 0);
+    fcntl(pipe_stderr[0], F_SETFL, flags | O_NONBLOCK);
     putenv("LIBC_FATAL_STDERR_=2"); // needed otherwise libc doesn't print to program's stderr
 
     /* make sure that we catch segmentation faults */

@@ -36,5 +36,3 @@ struct wrap_stats_t stats;
 struct wrap_monitor_t monitored;
 struct wrap_fail_t failures;
 struct wrap_log_t logs;
-
-int stdout_cpy, stderr_cpy;

@@ -1,0 +1,52 @@
+accessible: true
+author: ''
+context: In this exercise, you will familiarize yourself with the functions *printf*
+    and *sprintf*.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: '[S2] Printing data'
+network_grading: false
+problems:
+    simple:
+        language: c
+        header: Print the string "foo".
+        name: Foo
+        type: code
+    digit:
+        name: Digit
+        language: ''
+        type: code
+        header: Print a number (%d) + text
+    unsigned-string:
+        header: |-
+            Print an unsigned char (%u) + string.
+
+            Add QCM : what happens if we use %d with a char n > 127 ?
+        language: c
+        type: code
+        name: Unsigned + string
+    sprintf:
+        language: c
+        type: code
+        name: sprintf
+        header: |
+            Exemple de sprintf :
+
+            écrire dans buffer :
+
+            sprintf(buffer, "Mister %s %c has %d eggs") -> Mister Olivier B. has 42 eggs
+
+            .. code-block:: c
+
+                char *format(char *buffer, unsigned int d, char *name, char initial) {
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

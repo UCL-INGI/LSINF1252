@@ -1,0 +1,86 @@
+accessible: true
+author: ''
+context: Using `fstat(2) <https://linux.die.net/man/2/fstat>`_, determine if a file
+    exists.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: '[S5] File exists'
+network_grading: false
+problems:
+    q1:
+        name: File exist
+        language: ''
+        type: code
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * @pre filename != NULL
+                 * @post return 0 if the file {filename} exist. -1 Otherwise.
+                 */
+                 int file_exists(char* filename)
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        name: Banned functions
+        type: 1
+        id: banned_funcs
+        visible: true
+        description: You use some banned functions.
+    '1':
+        type: 1
+        visible: true
+        name: Double free
+        id: double_free
+        description: Your code produced a double free.
+    '2':
+        visible: true
+        description: ''
+        id: sigfpe
+        type: 1
+        name: Floating Point Exception
+    '3':
+        name: Memory Exceeded
+        visible: true
+        description: ''
+        type: 1
+        id: memory
+    '4':
+        id: not_compile
+        name: Not compile
+        description: You code do not compile.
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: sigsegv
+        name: Segmentation Fault
+        type: 1
+    '6':
+        id: timeout
+        name: Timeout
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        visible: true
+    '7':
+        description: ''
+        visible: true
+        type: 2
+        name: S5
+        id: ''
+    '8':
+        type: 2
+        description: ''
+        name: File
+        visible: true
+        id: ''
+weight: 1.0

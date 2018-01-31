@@ -1,6 +1,6 @@
 accessible: true
 author: Tom Rousseaux
-context: You'll learn to use the `grep(1) comand <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
+context: You'll learn to use the `grep(1) command <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
     You'll use it on the file architecture downloadable `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_grep/CUnit.tar>`_.
 environment: mcq
 evaluate: best
@@ -15,13 +15,13 @@ problems:
     CU_trim_left:
         answer: Util.h
         name: CU_trim_left
-        header: Where is defined the function CU_trim_left? Give onnly the name of
+        header: Where is defined the function CU_trim_left? Give only the name of
             the file.
         type: match
     CU_UNREFERENCED_PARAMETER_pTest:
         name: CU_UNREFERENCED_PARAMETER(pTest);
         answer: '652'
-        header: What is the number of the line that contains "CU_UNREFERENCED_PARAMETER(pTest);"
+        header: What is the linenumber that contains "CU_UNREFERENCED_PARAMETER(pTest);"
             in Sources/Console/Console.c? (Try with and without the quotes to see
             the difference.)
         type: match

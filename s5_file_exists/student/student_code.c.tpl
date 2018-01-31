@@ -8,7 +8,7 @@
 #include <string.h>
 #include "student_code.h"
 
-int save(point_t* pt, int size, char* filename){
+int file_exists(char* filename){
 @    @q1@@
 }
 

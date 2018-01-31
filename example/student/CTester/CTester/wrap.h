@@ -9,6 +9,7 @@
 #include "wrap_file.h"
 #include "wrap_malloc.h"
 #include "wrap_mutex.h"
+#include "wrap_sleep.h"
 
 // Basic structures for system call wrapper
 // verifies whether the system call needs to be monitored. Each
@@ -35,7 +36,8 @@ struct wrap_monitor_t {
   bool pthread_mutex_unlock;
   bool pthread_mutex_init;
   bool pthread_mutex_destroy;
-} ;
+  bool sleep;
+};
 
 #define MAX_LOG 1000
 
@@ -129,6 +131,9 @@ struct wrap_fail_t {
   int pthread_mutex_destroy_ret;
   int pthread_mutex_destroy_errno;
 
+  uint32_t sleep;
+  unsigned int sleep_ret;
+
 } ;
 
 
@@ -152,4 +157,5 @@ struct wrap_stats_t {
   struct stats_pthread_mutex_unlock_t pthread_mutex_unlock;
   struct stats_pthread_mutex_unlock_t pthread_mutex_init;
   struct stats_pthread_mutex_unlock_t pthread_mutex_destroy;
+  struct stats_sleep_t sleep;
 };
