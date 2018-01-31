@@ -5,10 +5,10 @@
 #include "CTester/CTester.h"
 
 point_t* gen_struct(int size){
-    point_t tab[size] = malloc(size*sizeof(point_t));
+    point_t *tab = malloc(size*sizeof(point_t));
     
-    //if (tab == NULL)
-    //    return (point_t*)NULL;
+    if (tab == NULL)
+        return (point_t*)NULL;
     for (int i = 0; i < size; i++){
         tab[i].x = i+i;
         tab[i].y = i+i+i;
@@ -39,6 +39,7 @@ void test() {
     if (ret != -1){
         push_info_msg(_("bla"));
         CU_FAIL();
+    }
 }
 
 
