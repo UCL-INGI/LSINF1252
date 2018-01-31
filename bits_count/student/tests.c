@@ -1,48 +1,45 @@
 /* Tests unitaires pour bitwise-ops
 
-Adapté en 2018 par Arthur van Stratum
-Copyright (C) 2016  Maxime Wattiaux
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+   Adapté en 2018 par Arthur van Stratum
+   Copyright (C) 2016  Maxime Wattiaux
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-    
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+
 #include <CUnit/Basic.h>
 #include <CUnit/CUnit.h>
-#include <stdint.h>
-#include <stdbool.h>
+#include "CTester/CTester.h"
 #include "student_code.h"
-
-/* FONCTIONS D'INITIALISATION */
-
-int setup(void)
-{
-		return 0;
-}
-
-int teardown(void)
-{
-	return 0;
-}
 
 /* TESTS DE LA METHODE nbits*/
 
 void test_nbits(void)
 {
-	CU_ASSERT_EQUAL(6, nbits(0b1110110100));
-	CU_ASSERT_EQUAL(1, nbits(0b0000010000));
-	CU_ASSERT_EQUAL(1, nbits(0b1000000000000000));
-	CU_ASSERT_EQUAL(0, nbits(0b0000000000000000));
-	if ( 6!= nbits(0b1110110100))||1!= nbits(0b0000010000) ||1!= nbits(0b1000000000000000 ||0!= nbits(0b0000000000000000 )
-	push_info_msg(_("nbits returns the wrong numbers of bits"));
+	int ret1 = -1;
+	int ret2 = -1;
+	int ret3 = -1;
+	int ret4 = -1;
+	SANDBOX_BEGIN;
+	ret1 = nbits(0b1110110100);
+	ret2 = nbits(0b0000010000);
+	ret3 = nbits(0b1000000000000000);
+	ret4 = nbits(0b0000000000000000);
+	SANDBOX_END;
+	CU_ASSERT_EQUAL(6, ret1);
+	CU_ASSERT_EQUAL(1, ret2);
+	CU_ASSERT_EQUAL(1, ret3);
+	CU_ASSERT_EQUAL(0, ret4);
+	if ( 6!= ret1||1!= ret2 ||1!= ret3 ||0!= ret4)
+		push_info_msg(_("nbits returns the wrong numbers of bits"));
 }
 /* TESTS DE LA METHODE set_bit */
 
@@ -50,18 +47,27 @@ void test_nbits(void)
 void test_set_bit_to_zero(void)
 {
 	uint64_t binaryNumber = 0b10110010;
-	uint64_t binaryNumberReturned = set_bit(binaryNumber,2,0);
-	
+	uint64_t binaryNumberReturned;
+	SANDBOX_BEGIN;
+	binaryNumberReturned = set_bit(binaryNumber,2,0);
+	SANDBOX_END;
 	CU_ASSERT_EQUAL(binaryNumberReturned,0b10110000);
+	if ( binaryNumberReturned!=0b10110000)
+		push_info_msg(_("set_bit returns the wrong value"));
 }
 
 // @set_bit:test_set_bit_to_one => [La fonction set_bit ne modifie pas la valeur d'un bit dont la position est passée en argument à 1]
 void test_set_bit_to_one(void)
 {
 	uint64_t binaryNumber = 0b10110010;
-	uint64_t binaryNumberReturned = set_bit(binaryNumber,7,1);
-	
+	uint64_t binaryNumberReturned;
+	SANDBOX_BEGIN;
+	binaryNumberReturned = set_bit(binaryNumber,7,1);
+	SANDBOX_END;
+
 	CU_ASSERT_EQUAL(binaryNumberReturned,0b11110010);
+	if ( binaryNumberReturned!=0b11110010)
+		push_info_msg(_("set_bit returns the wrong value"));
 }
 
 /* TESTS DE LA METHODE get_3_leftmost_bits */
@@ -71,8 +77,12 @@ void test_get_3_leftmost_bits(void)
 {
 	uint32_t binaryNumber = 0b01000000000010101111011101101111;
 	uint8_t leftMostBitsReturned = get_3_leftmost_bits(binaryNumber);
-	
+
+	SANDBOX_BEGIN;
+	SANDBOX_END;
 	CU_ASSERT_EQUAL(leftMostBitsReturned,0b010);
+	if ( leftMostBitsReturned!=0b010)
+		push_info_msg(_("get_3_leftmost_bits returns the wrong value"));
 }
 
 /* TESTS DE LA METHODE get_4_rightmost_bits */
@@ -81,9 +91,14 @@ void test_get_3_leftmost_bits(void)
 void test_get_4_rightmost_bits(void)
 {
 	uint32_t binaryNumber = 0b0111010110110101010001011;
-	uint8_t rightMostBitsReturned = get_4_rightmost_bits(binaryNumber);
-	
+	uint8_t rightMostBitsReturned;
+
+	SANDBOX_BEGIN;
+	rightMostBitsReturned = get_4_rightmost_bits(binaryNumber);
+	SANDBOX_END;
 	CU_ASSERT_EQUAL(rightMostBitsReturned,0b1011);
+	if ( rightMostBitsReturned!=0b1011)
+		push_info_msg(_("get_4_rightmost_bits returns the wrong value"));
 }
 
 /* TESTS DE LA METHODE unset_strong_bit */
@@ -92,9 +107,14 @@ void test_get_4_rightmost_bits(void)
 void test_unset_strong_bit(void)
 {
 	uint32_t binaryNumber = 0b1011011101;
-	uint32_t binaryNumberReturned = unset_strong_bit(binaryNumber);
-	
-	CU_ASSERT_EQUAL(binaryNumberReturned,0b11011101)
+	uint32_t binaryNumberReturned;
+
+	SANDBOX_BEGIN;
+	binaryNumberReturned = unset_strong_bit(binaryNumber);
+	SANDBOX_END;
+	CU_ASSERT_EQUAL(binaryNumberReturned,0b11011101);
+	if ( binaryNumberReturned!=0b11011101)
+		push_info_msg(_("unset_strong_bits returns the wrong value"));
 }
 
 /* TESTS DE LA METHODE cycle_bits */
@@ -103,48 +123,30 @@ void test_unset_strong_bit(void)
 void test_cycle_bits(void)
 {
 	uint32_t binaryNumber = 0b10110110101010001101111111111111;
-	uint32_t binaryNumberReturned = cycle_bits(binaryNumber,6);
-	
+	uint32_t binaryNumberReturned;
+
+	SANDBOX_BEGIN;
+	binaryNumberReturned = cycle_bits(binaryNumber,6);
+	SANDBOX_END;
 	CU_ASSERT_EQUAL(binaryNumberReturned,0b10101010001101111111111111101101);
+	if ( binaryNumberReturned!=0b10101010001101111111111111101101)
+		push_info_msg(_("cycle_bits returns the wrong value"));
 }
 
 /* LANCEMENT DES TESTS UNITAIRES */
 
-int main(int argc, char* argv[])
+void launch()
 {
-	
-	CU_pSuite pSuite = NULL;
+	test_nbits();
+	test_set_bit_to_zero();
+	test_set_bit_to_one();
+	test_get_3_leftmost_bits();
+	test_get_4_rightmost_bits();
+	test_unset_strong_bit();
+	test_cycle_bits();
+}
 
-	/* Initialise le catalogue de suites de test */
-	if (CUE_SUCCESS != CU_initialize_registry())
-	{
-		return CU_get_error();	
-	}
-	
-	/* Ajoute la suite de test "test_bitwise_ops" au catalogue */
-	pSuite = CU_add_suite("test_bitwise_ops", setup, teardown);
-	if (pSuite == NULL)
-	{	
-		CU_cleanup_registry();
-		return CU_get_error();	
-	}
-	
-	/* Ajoute les tests à la suite de test "test_bitwise_ops" */
-	if (	 (NULL == CU_add_test(pSuite, "test_set_bit_to_zero", test_set_bit_to_zero)) ||
-		 (NULL == CU_add_test(pSuite, "test_set_bit_to_one", test_set_bit_to_one)) ||
-		 (NULL == CU_add_test(pSuite, "test_get_3_leftmost_bits", test_get_3_leftmost_bits)) ||
-		 (NULL == CU_add_test(pSuite, "test_get_4_rightmost_bits", test_get_4_rightmost_bits)) ||
-		 (NULL == CU_add_test(pSuite, "test_unset_strong_bit", test_unset_strong_bit)) ||
-		 (NULL == CU_add_test(pSuite, "test_cycle_bits", test_cycle_bits)) )
-	{  
-      CU_cleanup_registry();
-      return CU_get_error();  
-	}
-    
-    /* Exécution des tests, affichage des tests échoués et vidage de la mémoire utilisée par CUnit */
-    CU_basic_run_tests();
-    CU_basic_show_failures(CU_get_failure_list());
-    CU_cleanup_registry();
-    return CU_get_error();
-   
+int main(int argc, char** argv)
+{
+	RUN(launch);
 }

@@ -1,38 +1,35 @@
-#Tests unitaires pour bitwise-ops
+CC=gcc
+EXEC=tests
+LDFLAGS=-lcunit -lm -lpthread -ldl -rdynamic
+SRC=$(wildcard *.c) CTester/wrap_mutex.c CTester/wrap_malloc.c CTester/wrap_file.c CTester/wrap_sleep.c CTester/CTester.c CTester/trap.c
+OBJ=$(SRC:.c=.o)
+CFLAGS=-Wall -Werror -DC99 -std=gnu99 -ICTester
+WRAP=-Wl,-wrap=pthread_mutex_lock -Wl,-wrap=pthread_mutex_unlock -Wl,-wrap=pthread_mutex_trylock -Wl,-wrap=pthread_mutex_init -Wl,-wrap=pthread_mutex_destroy -Wl,-wrap=malloc -Wl,-wrap=free -Wl,-wrap=realloc -Wl,-wrap=calloc -Wl,-wrap=open -Wl,-wrap=creat -Wl,-wrap=close -Wl,-wrap=read -Wl,-wrap=write -Wl,-wrap=stat -Wl,-wrap=fstat -Wl,-wrap=lseek -Wl,-wrap=exit -Wl,-wrap=sleep
 
-#Copyright (C) 2016  Maxime Wattiaux
-#This program is free software: you can redistribute it and/or modify
-#it under the terms of the GNU General Public License as published by
-#the Free Software Foundation, either version 3 of the License, or
-#(at your option) any later version.
+all: $(EXEC)
 
-#This program is distributed in the hope that it will be useful,
-#but WITHOUT ANY WARRANTY; without even the implied warranty of
-#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#GNU General Public License for more details.
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $< 
 
-#You should have received a copy of the GNU General Public License
-#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+$(EXEC): $(OBJ)
+	$(CC) $(WRAP) -o $@ $(OBJ) $(LDFLAGS)
 
-CC = gcc
-OPT = -Werror -Wall
+create-po:
+	mkdir -p po/fr/
+	xgettext --keyword=_ --language=C --add-comments --sort-output --from-code=UTF-8 -o po/tests.pot $(SRC)
+	msginit --input=po/tests.pot --locale=fr_BE.utf8 --output=po/fr/tests.po
 
-PATH1=$(HOME)/local/include
-PATH2=$(HOME)/local/lib
+update-po:
+	xgettext --keyword=_ --language=C --add-comments --sort-output --from-code=UTF-8 -o po/tests.pot $(SRC)
+	msgmerge --update po/fr/tests.po po/tests.pot
 
-all : .PHONY bitwiseops
+compile-mo:
+	msgfmt --no-hash --output-file=po/fr/tests.mo po/fr/tests.po
+	mkdir -p fr/LC_MESSAGES/
+	cp po/fr/tests.mo fr/LC_MESSAGES/tests.mo
 
-bitwiseops : student_code.o tests.o
-	$(CC) $(OPT) -L$(PATH2) student_code.o tests.o -lcunit -o bitwiseops
-	./bitwiseops
+clean:
+	rm -f $(EXEC) $(OBJ)
 
-student_code.o : student_code.c student_code.h
-	$(CC) $(OPT) -c student_code.c
+.PHONY: tests
 
-tests.o : tests.o student_code.h
-	$(CC) $(OPT) -I$(PATH1) -lcunit -c tests.c
-	
-.PHONY : clean 
-
-clean :
-	rm -f *.o bitwiseops
