@@ -16,9 +16,7 @@ int check_list(list_t* list, int *tab, int n){
   int i;
   node_t *run = list->first;
   for(i =  0; i < n; i++){
-    if (!run)
-      return 2;
-    if (run->value != *(tab+i))
+    if (run->value != *(tab+i) || !run)
       return 1;
     run = run->next;
   }
@@ -298,6 +296,8 @@ void test_add_node_nomem(){
   monitored.malloc = true;
   failures.malloc = FAIL_ALWAYS;
   failures.malloc_ret = NULL;
+
+
 
   SANDBOX_BEGIN;
   ret = add_node(list, *val);
