@@ -1,9 +1,9 @@
 accessible: true
 author: Maxime Mawait
 context: |-
-    A hacker wanted to challenge you and encrypted your hard drive. To unlock your drive, he gave you a function ``fun(int a, int b, int c)`` which returns the decryption key if the correct parameters are given.
+    A hacker wanted to challenge you and encrypted your hard drive. To unlock your drive, he gave you a function ``get_key(int a, int b, int c)`` which returns the decryption key if the correct parameters are given.
 
-    He then hid the parameters *a*, *b* and *c* in memory, and gave you a pointer from which you can retrieve the parameters.
+    He then hid the parameters *a*, *b* and *c* in memory, and gave you a pointer from which you can retrieve these parameters.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -19,13 +19,13 @@ problems:
         language: c
         name: First argument
         header: |-
-            The first argument for your function is the integer located at the 13rd Byte of the pointer. You have to implement ``first`` function which give that number.
+            You found a hint from the hacker, telling the first paramater is  located at the 13rd byte after pointer. You have to implement ``first`` function which give that number.
+
+            Write the body of the function *first* :
 
             .. code-block:: c
 
-                int first(int* a){
-                    //Your code will be inserted here
-                }
+                int first(void *ptr) {
         type: code
     second:
         name: Second argument
