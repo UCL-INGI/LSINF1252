@@ -1,147 +1,3 @@
-/run: |
-    #!/bin/python3
-
-    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
-    # Auteurs : Mathieu Xhonneux, Anthony Gégo
-    # Licence : GPLv3
-
-    import subprocess, shlex, re, os
-    from inginious import feedback, rst, input
-
-    # Switch working directory to student/
-    os.chdir("student")
-
-    # Fetch and save the student code into a file for compilation
-    input.parse_template("student_code.c.tpl", "student_code.c")
-
-    # Compilation
-    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    make_output = p.communicate()[0].decode('utf-8')
-    # If compilation failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_tag("not_compile", True)
-        feedback.set_global_result("failed")
-        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
-        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
-        exit(0)
-    else:
-        feedback.set_global_result("success")
-        feedback.set_global_feedback("- Votre code compile.\n")
-
-    # Parse banned functions
-    try:
-        banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-        banned_funcs = list(filter(None, banned_funcs))
-    except IndexError:
-        banned_funcs = []
-
-    if banned_funcs:
-        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-        readelf_output = p.communicate()[0].decode('utf-8')
-        for func in banned_funcs:
-            if re.search("UND {}\n".format(func), readelf_output):
-                feedback.set_tag("banned_funcs", True)
-                feedback.set_global_result("failed")
-                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
-                exit(0)
-
-
-    # Remove source files
-    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
-
-    LANG = input.get_input('@lang')
-
-    # Run the code in a parallel container
-    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    o, e = p.communicate()
-    print(o.decode("utf-8"))
-    # If run failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_global_result("failed")
-        if p.returncode == 256-8:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
-            feedback.set_tag("sigfpe", True)
-        elif p.returncode == 256-11:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
-        elif p.returncode == 252:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
-            feedback.set_tag("memory", True)
-        elif p.returncode == 253:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
-        else:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
-        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
-        exit(0)
-    #elif run_output:
-    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
-
-    # Comment to run the tests
-    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
-    #exit(0)
-
-    # Fetch CUnit test results
-    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
-
-
-    # Produce feedback
-    if all([r['code'] == 'SUCCESS' for r in results]):
-        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
-    else:
-        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
-
-    score = 0
-    total = 0
-    tests_result = {}
-
-    for test in results:
-        total += test['weight']
-        for tag in test['tags']:
-            if tag != "":
-                feedback.set_tag(tag, True)
-        if test['code'] == 'SUCCESS':
-            score += test['weight']
-            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
-                    test['pid'], True)
-            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
-        else:
-            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
-                    test['pid'], True)
-            tests_result[test['pid']] = False
-
-    for pid, result in tests_result.items():
-        if result:
-            feedback.set_problem_result("success", pid)
-        else:
-            feedback.set_problem_result("failed", pid)
-
-    score = 100*score/(total if not total == 0 else 1)
-    feedback.set_grade(score)
-    feedback.set_global_result("success" if score >= 50 else "failed")
-/student/student_code.c.tpl: |+
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <errno.h>
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include <unistd.h>
-    #include <string.h>
-    #include "student_code.h"
-
-    int save(point_t* pt, int size, char* filename){
-    @    @q1@@
-    }
-
-
-/student/student_code.h: |-
-    typedef struct point{
-        int x;
-        int y;
-        int z;
-    } point_t;
-
-    int save(point_t* pt, int size, char* filename);
 /student/tests.c: |
     // CTester template
 
@@ -167,7 +23,7 @@
      */
     void test_ok() {
         set_test_metadata("q1", _("Test write array struct"), 1);
-        int size = 10;
+        int size = 6;
         int ret = 0;
         point_t* tab = gen_struct(size);
 
@@ -186,11 +42,11 @@
 
         point_t s;
         for(int i = 0; i < size; i++){
-            int r = read(fd, (void *) &s, sizeof(point_t));
-            if (r == -1){
+            /*int r = */read(fd, (void *) &s, sizeof(point_t));
+            /*if (r == -1){
                 push_info_msg(_("You did not write all content of the array in the file."));
                 CU_FAIL();
-            }
+            }*/
             if (tab[i].x != s.x || tab[i].y != s.y || tab[i].z != s.z){
                 push_info_msg(_("You did not write the array of struct correctly in the file."));
                 CU_FAIL();
@@ -235,8 +91,8 @@ network_grading: false
 order: 24
 problems:
     q1:
-        type: code
         language: ''
+        type: code
         name: ''
         header: |-
             .. code-block:: c
@@ -253,58 +109,58 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '2':
-        id: not_compile
+    '0':
         name: Not compile
+        type: 1
+        visible: true
+        id: not_compile
         description: You code do not compile.
+    '1':
+        description: ''
+        id: memory
+        type: 1
+        name: Memory Exceeded
+        visible: false
+    '2':
+        id: sigfpe
+        name: Floating Point Exception
+        description: ''
         type: 1
         visible: true
     '3':
-        description: ''
-        name: Memory Exceeded
-        id: memory
-        type: 1
-        visible: false
-    '4':
-        visible: true
-        id: sigfpe
-        type: 1
-        description: ''
-        name: Floating Point Exception
-    '5':
-        id: double_free
         visible: true
         description: Your code produced a double free.
-        type: 1
         name: Double free
-    '6':
+        id: double_free
+        type: 1
+    '4':
         id: banned_funcs
         type: 1
-        name: Banned functions
         description: You use some banned functions.
+        name: Banned functions
         visible: false
-    '7':
-        visible: true
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
+    '5':
         id: timeout
-        type: 1
-    '8':
         visible: true
+        description: Your code exceeds the maximum allowed time.
+        type: 1
+        name: Timeout
+    '6':
+        id: sigsegv
         type: 1
         name: Segmentation Fault
+        visible: true
         description: ''
-        id: sigsegv
-    '0':
+    '7':
+        visible: true
         name: File
-        type: 2
-        visible: true
         description: ''
+        type: 2
         id: ''
-    '1':
-        type: 2
-        description: ''
-        name: S5
+    '8':
         visible: true
+        type: 2
+        name: S5
+        description: ''
         id: ''
 weight: 1.0

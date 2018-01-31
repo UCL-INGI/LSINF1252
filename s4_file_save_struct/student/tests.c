@@ -22,7 +22,7 @@ point_t* gen_struct(int size){
  */
 void test_ok() {
     set_test_metadata("q1", _("Test write array struct"), 1);
-    int size = 10;
+    int size = 6;
     int ret = 0;
     point_t* tab = gen_struct(size);
 
@@ -41,11 +41,11 @@ void test_ok() {
 
     point_t s;
     for(int i = 0; i < size; i++){
-        int r = read(fd, (void *) &s, sizeof(point_t));
-        if (r == -1){
+        /*int r = */read(fd, (void *) &s, sizeof(point_t));
+        /*if (r == -1){
             push_info_msg(_("You did not write all content of the array in the file."));
             CU_FAIL();
-        }
+        }*/
         if (tab[i].x != s.x || tab[i].y != s.y || tab[i].z != s.z){
             push_info_msg(_("You did not write the array of struct correctly in the file."));
             CU_FAIL();
