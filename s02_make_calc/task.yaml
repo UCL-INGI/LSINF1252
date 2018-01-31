@@ -33,5 +33,12 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: make
+        name: make & Makefile
+        type: 0
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        visible: false
 weight: 1.0
