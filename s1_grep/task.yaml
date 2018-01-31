@@ -1,6 +1,7 @@
 accessible: true
 author: Tom Rousseaux
-context: Vous allez apprendre à utiliser la commande grep
+context: You'll learn to use the `grep(1) comand <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
+    You'll use it on the file architecture downloadable `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_grep/CUnit.tar>`_.
 environment: mcq
 evaluate: best
 groups: false

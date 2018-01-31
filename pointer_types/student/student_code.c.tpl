@@ -2,14 +2,14 @@
 #include<stdlib.h>
 #include "student_code.h"
 
-int first(int * a){
+int first(void *ptr){
     @@first@@
 }
 
-char second(int * a){
+char second(void *ptr){
     @@second@@
 }
 
-int third(int * a){
+int third(void *ptr){
     @@third@@
 }
