@@ -168,6 +168,7 @@
 
             if(ret != get_value_by_index(i)){
                 push_info_msg(_("You do not return the correct value."));
+                set_tag("wrong_get_value_returned");
                 CU_FAIL();
             }
         }
@@ -226,6 +227,7 @@
                 if (res != get_value_by_index(i)){
                     push_info_msg(_("You have modified some wrong elements in the array"));
                     CU_FAIL();
+                    set_tag("wrong_index_set");
                     break;
                 }
             }
@@ -384,9 +386,9 @@ tags:
         description: This tag validate you are able to open a file.
         name: Open
     '10':
-        type: 1
         id: not_compile
         visible: true
+        type: 1
         description: You code do not compile.
         name: Not compile
     '12':
@@ -407,6 +409,12 @@ tags:
         id: wrong_index_set
         type: 1
         description: A value at an unwanted index was modified.
+    '15':
+        name: Wrong Get Value Returned
+        description: The get() function did not return the expected value.
+        visible: true
+        type: 1
+        id: wrong_get_value_returned
     '2':
         id: timeout
         visible: true
