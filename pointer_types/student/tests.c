@@ -62,41 +62,41 @@ void test_tab3() {
 
     int tab1[4] = {2, 3 , 5, 9};
     int tab2[4] = {1, 4, 4, 10};
-    int tab3[4] = {10, 4, 21, 3};
+    int tab3[4] = {10, 0, 21, 3};
     int tab4[4] = {10, 456789087, 2121212122, 1672386787};
     int * a = (void *)tab1;
 
-    int ret = 0;
+    int ret = -1;
+    char *ptr;
 
+    *ptr = (char *)tab1;
+    ptr -= 41;
     SANDBOX_BEGIN;
-    ret = third(a);
+    ret = third((void *)ptr);
     SANDBOX_END;
+    CU_ASSERT_EQUAL(ret,tab1[1]);
 
-    CU_ASSERT_EQUAL(ret,589824);
 
-    a = (void *)tab2;
-
+    *ptr = (char *)tab2;
+    ptr -= 41;
     SANDBOX_BEGIN;
-    ret = third(a);
+    ret = third((void *)ptr);
     SANDBOX_END;
+    CU_ASSERT_EQUAL(ret,tab2[1]);
 
-    CU_ASSERT_EQUAL(ret,655360);
-
-    a = (void *)tab3;
-
+    *ptr = (char *)tab3;
+    ptr -= 41;
     SANDBOX_BEGIN;
-    ret = third(a);
+    ret = third((void *)ptr);
     SANDBOX_END;
+    CU_ASSERT_EQUAL(ret,tab3[1]);
 
-    CU_ASSERT_EQUAL(ret,196608);
-
-    a = (void *)tab4;
-
+    *ptr = (char *)tab4;
+    ptr -= 41;
     SANDBOX_BEGIN;
-    ret = third(a);
+    ret = third((void *)ptr);
     SANDBOX_END;
-
-    CU_ASSERT_EQUAL(ret,-1729921425);
+    CU_ASSERT_EQUAL(ret,tab4[1]);
 }
 
 int main(int argc,char** argv)

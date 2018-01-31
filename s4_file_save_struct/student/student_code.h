@@ -1,1 +1,1 @@
-int myfunc(char* file_name, char* new_file_name);
+int save(struct 3dpoint* pt, size_t len, char* filename);
