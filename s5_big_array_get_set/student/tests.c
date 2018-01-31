@@ -165,7 +165,6 @@ void test_get_fail() {
     SANDBOX_BEGIN;
     ret = get("file.txt", 50);
     SANDBOX_END;
-    printf("FFFF %d \n", ret);
     if(ret != -1){
         push_info_msg(_("You do not return -1 when the read() function fails."));
         CU_FAIL(); 
