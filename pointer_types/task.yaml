@@ -42,7 +42,7 @@ problems:
     third:
         language: c
         header: |-
-            For the second argument, you have to find the integer located at the 6th Byte of the pointer. You have to implement ``third`` function which give that number.
+            For the third argument, you have to find the integer located at the 10th Byte of the pointer. You have to implement ``third`` function which give that number.
 
             .. code-block:: c
 
