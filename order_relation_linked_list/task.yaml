@@ -2,7 +2,7 @@ accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: Given the provided implementation of a linked list, you are asked to implement
     the ``insert`` function based on a specific order relation. By succeeding this
-    task, you will be able to make ordered list with a `Comparator` like in `java`.
+    task, you will be able to make ordered list like a `Comparator` in `java`.
 environment: pyjavacpp
 evaluate: best
 groups: false
@@ -25,7 +25,7 @@ problems:
                 /*
                 * @return: 0 if equals, -1 if @other is greater and 1 if @this is greater
                 */
-                int compare(int this, int other){
+                int compare(char this, char other){
                     //Your code will be inserted here
                 }
         language: c
@@ -37,7 +37,7 @@ problems:
             .. code-block:: c
 
                 typedef struct node{
-                    int val;
+                    char val;
                     node_t* next;
                 } node_t;
 
@@ -51,9 +51,11 @@ problems:
                 * @head: first node of the list
                 * @return: 0 if success, -1 otherwise
                 */
-                int insert(node_t** head,int value,int (*fun)(int,int)){
+                int insert(node_t** head, char value, int (*fun)(int,int)){
                     //Your code will be inserted here
                 }
+
+            The result of this question doesn't depend of the precedent question
         language: c
         type: code
 stored_submissions: 0
