@@ -1,9 +1,9 @@
 accessible: true
 author: Maxime Mawait
-context: An integer pointer, ``int* a``, is given to you. You are asked to find special
-    datas from this pointer. A hacker from Anonymous gave you a function, ``fun(int
-    a, int b, int c)``, which can give the answer of life and which takes three arguments
-    you have to find with the pointer.
+context: |-
+    A hacker wanted to challenge you and encrypted your hard drive. To unlock your drive, he gave you a function ``fun(int a, int b, int c)`` which returns the decryption key if the correct parameters are given.
+
+    He then hid the parameters *a*, *b* and *c* in memory, and gave you a pointer from which you can retrieve the parameters.
 environment: pyjavacpp
 evaluate: best
 groups: false
