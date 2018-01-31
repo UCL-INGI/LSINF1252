@@ -8,7 +8,7 @@
 #include <string.h>
 #include "student_code.h"
 
-int save(point_t* pt, size_t len, char* filename){
+int save(point_t* pt, size_t size, char* filename){
 @    @q1@@
 }
 

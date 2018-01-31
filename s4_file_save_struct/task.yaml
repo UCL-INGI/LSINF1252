@@ -129,7 +129,7 @@
     #include <string.h>
     #include "student_code.h"
 
-    int save(point_t* pt, size_t len, char* filename){
+    int save(point_t* pt, size_t size, char* filename){
     @    @q1@@
     }
 
@@ -141,7 +141,7 @@
         int z;
     } point_t;
 
-    int save(point_t* pt, size_t len, char* filename);
+    int save(point_t* pt, size_t size, char* filename);
 /student/tests.c: |
     // CTester template
 
@@ -204,16 +204,16 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
     time: '30'
+    memory: '100'
 name: '[S5] Save struct into file'
 network_grading: false
 order: 24
 problems:
     q1:
-        language: ''
         type: code
+        language: ''
         name: ''
         header: |-
             .. code-block:: c
@@ -230,15 +230,57 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '2':
+        id: not_compile
+        name: Not compile
+        description: You code do not compile.
+        type: 1
+        visible: true
+    '3':
+        description: ''
+        name: Memory Exceeded
+        id: memory
+        type: 1
+        visible: false
+    '4':
+        visible: true
+        id: sigfpe
+        type: 1
+        description: ''
+        name: Floating Point Exception
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        type: 1
+        name: Double free
+    '6':
+        id: banned_funcs
+        type: 1
+        name: Banned functions
+        description: You use some banned functions.
+        visible: false
+    '7':
+        visible: true
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        type: 1
+    '8':
+        visible: true
+        type: 1
+        name: Segmentation Fault
+        description: ''
+        id: sigsegv
     '0':
         name: File
         type: 2
-        description: ''
         visible: true
+        description: ''
         id: ''
     '1':
-        description: ''
         type: 2
+        description: ''
         name: S5
         visible: true
         id: ''

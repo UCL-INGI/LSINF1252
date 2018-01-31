@@ -4,4 +4,4 @@ typedef struct point{
     int z;
 } point_t;
 
-int save(point_t* pt, size_t len, char* filename);
+int save(point_t* pt, size_t size, char* filename);
