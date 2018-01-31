@@ -15,7 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 #include "student_code.h"
-
+uint8_t nbits(uint32_t n)
+{
+	uint8_t ret = 0;
+	ret = 1; //fait échouer nbits
+	for (;n; n = n>>1)
+		if (n&1)
+			ret++;
+	return ret;
+}
 unsigned char get_bit(unsigned int x, unsigned int pos)
 {
 
@@ -24,13 +32,13 @@ unsigned char get_bit(unsigned int x, unsigned int pos)
 	
 	/* la ligne suivante fait échouer le test "test_if_get_bit_return_zero" 
 	 * ainsi que les deux tests des fonctions qui utilisent get_bit dans
-	 * leur implémentation : "test_unset_first_bit" et "test_cycle_bits"
+	 * leur implémentation : "test_unset_strong_bit" et "test_cycle_bits"
 	 */
 	//return 1;
 	
 	/* la ligne suivante fait échouer le test "test_if_get_bit_return_one" 
 	 * ainsi que les deux tests des fonctions qui utilisent get_bit dans
-	 * leur implémentation : "test_unset_first_bit" et "test_cycle_bits"
+	 * leur implémentation : "test_unset_strong_bit" et "test_cycle_bits"
 	 */
 	 //return 0;
 	
@@ -38,11 +46,11 @@ unsigned char get_bit(unsigned int x, unsigned int pos)
 	
 }
 
-unsigned int set_bit(unsigned int x, unsigned int pos, unsigned char value)
+
+uint64_t set_bit(uint64_t x, int pos, bool value)
 {
-	
-	unsigned int mask;
-	unsigned int bitSet;
+	uint64_t mask;
+	uint64_t bitSet;
 	
 	if(value == 1)
 	{
@@ -60,7 +68,7 @@ unsigned int set_bit(unsigned int x, unsigned int pos, unsigned char value)
 		bitSet = x & mask;
 		/* la ligne suivante fait échouer le test "test_set_bit_to_zero" et
 		 * les tests des deux fonctions qui utilisent set_bit pour mettre 
-		 * un bit à zéro : "test_unset_first_bit" et "test_cycle_bits"
+		 * un bit à zéro : "test_unset_strong_bit" et "test_cycle_bits"
 		 */
 		//bitSet = x | mask;
 	}
@@ -69,11 +77,11 @@ unsigned int set_bit(unsigned int x, unsigned int pos, unsigned char value)
 	
 }
 
-unsigned char get_3_leftmost_bits(unsigned int x)
+uint8_t get_3_leftmost_bits(uint32_t x)
 {
 
-	unsigned int bitShift = x >> 29;
-	unsigned char left3bits = (unsigned char) bitShift;
+	uint32_t bitShift = x >> 29;
+	uint8_t left3bits = (uint8_t) bitShift;
 	
 	// la ligne suivante fait échouer le test "test_get_3_leftmost_bits"
 	// return left3bits >> 1;
@@ -81,12 +89,12 @@ unsigned char get_3_leftmost_bits(unsigned int x)
 	
 }
 
-unsigned char get_4_rightmost_bits(unsigned int x)
+uint8_t get_4_rightmost_bits(uint32_t x)
 {
 	
-	unsigned int mask = 0b1111;
-	unsigned int bitShift = x & mask;
-	unsigned char right4bits = (unsigned char) bitShift;
+	uint32_t mask = 0b1111;
+	uint32_t bitShift = x & mask;
+	uint8_t right4bits = (uint8_t) bitShift;
 	
 	// la ligne suivante fait échouer le test "test_get_4_rightmost_bits"
 	//return right4bits << 1;
@@ -94,14 +102,14 @@ unsigned char get_4_rightmost_bits(unsigned int x)
 	
 }
 
-unsigned int unset_first_bit(unsigned int x)
+uint32_t unset_strong_bit(uint32_t x)
 {
 
-	unsigned int unsetBit = x;
+	uint32_t unsetBit = x;
 	
 	for(int i=32; i>0;i--)
 	{
-		// le morceau de code suivant fait échouer le test "test_unset_first_bit"
+		// le morceau de code suivant fait échouer le test "test_unset_strong_bit"
 		/* if(get_bit(x,i+1) == 1)
 		 * {
 		 *	   unsetBit = set_bit(x,i,0);
@@ -121,15 +129,15 @@ unsigned int unset_first_bit(unsigned int x)
 
 }
 
-unsigned int cycle_bits(unsigned int x, unsigned int n)
+uint32_t cycle_bits(uint32_t x, uint32_t n)
 {
 
-	unsigned int bitCycle = x;
+	uint32_t bitCycle = x;
 	
 	for(int i=1;i<=32;i++)
 	{
-		unsigned int position = (i+n)%32;
-		unsigned int bitGet = (unsigned int) get_bit(x,i);
+		uint32_t position = (i+n)%32;
+		uint32_t bitGet = (uint32_t) get_bit(x,i);
  		bitCycle = set_bit(bitCycle,position,bitGet);
 	}
 	

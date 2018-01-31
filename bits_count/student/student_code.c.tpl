@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdint.h>
-#include<stdbool.h>
+
 uint8_t nbits(uint32_t n)
 {
 @    @q1@@
