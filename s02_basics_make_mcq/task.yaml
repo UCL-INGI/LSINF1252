@@ -36,9 +36,9 @@ problems:
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
         type: multiple_choice
+        name: What are the prerequisite?
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
-        name: What are the prerequisite?
         multiple: true
         limit: 4
     mcq3:
@@ -65,6 +65,7 @@ problems:
 
                         clean:
                         @rm -f src/*.o
+            feedback: There is a missing indentation on the second line.
         -   valid: true
             text: |4-
 
@@ -76,9 +77,10 @@ problems:
 
                 .. code-block:: console
 
-                        clean:
-                        @rm -f src/*.o
-            feedback: There is a missing tab on the second line.
+                    clean
+                    [spaces]@rm -f src/*.o
+            feedback: There is a missing colon after clean. The recipe in a Makefile
+                has to be intended with a tab and not spaces.
         -   text: |4-
 
                 .. code-block:: console
@@ -100,6 +102,14 @@ problems:
                         [spaces]@rm -f src/*.o
             feedback: The recipe in a Makefile has to be intended with a tab and not
                 spaces.
+        -   text: |4-
+
+                .. code-block:: console
+
+                        clean
+                        @rm -f src/*.o
+            feedback: There is a missing colon after clean and a missing indendation
+                on the second line.
         type: multiple_choice
         name: Rules syntax
         limit: 0

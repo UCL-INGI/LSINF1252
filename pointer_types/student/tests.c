@@ -18,7 +18,7 @@ void test_tab1() {
 
     CU_ASSERT_EQUAL(ret,5);
 
-    a = (int*) tab2;
+    a = (void *)tab2;
 
     SANDBOX_BEGIN;
     ret = first(a);
@@ -26,7 +26,7 @@ void test_tab1() {
 
     CU_ASSERT_EQUAL(ret,4);
 
-    a = (int*) tab3;
+    a = (void *)tab3;
 
     SANDBOX_BEGIN;
     ret = first(a);
@@ -34,7 +34,7 @@ void test_tab1() {
 
     CU_ASSERT_EQUAL(ret,21);
 
-    a = (int*) tab4;
+    a = (void *)tab4;
 
     SANDBOX_BEGIN;
     ret = first(a);
@@ -50,17 +50,9 @@ void test_tab2() {
     int tab2[4] = {1, 4, 4, 10};
     int tab3[4] = {10, 4, 21, 3};
     int tab4[4] = {10, 456789087, 2121212122, 1672386787};
-    int * a = (int*) tab1;
+    int *a = (void *)tab1;
 
-    int ret = 0;
-
-    SANDBOX_BEGIN;
-    ret = (int) second(a);
-    SANDBOX_END;
-
-    CU_ASSERT_EQUAL(ret,0);
-
-    a = (int*) tab2;
+    char ret = 0;
 
     SANDBOX_BEGIN;
     ret = (int) second(a);
@@ -68,7 +60,15 @@ void test_tab2() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    a = (int*) tab3;
+    a = (void *)tab2;
+
+    SANDBOX_BEGIN;
+    ret = (int) second(a);
+    SANDBOX_END;
+
+    CU_ASSERT_EQUAL(ret,0);
+
+    a = (void *)tab3;
 
     SANDBOX_BEGIN;
     ret =(int) second(a);
@@ -76,7 +76,7 @@ void test_tab2() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    a = (int*) tab4;
+    a = (void *)tab4;
 
     SANDBOX_BEGIN;
     ret =(int) second(a);
@@ -94,7 +94,7 @@ void test_tab3() {
     int tab2[4] = {1, 4, 4, 10};
     int tab3[4] = {10, 4, 21, 3};
     int tab4[4] = {10, 456789087, 2121212122, 1672386787};
-    int * a = (int*) tab1;
+    int * a = (void *)tab1;
 
     int ret = 0;
 
@@ -104,7 +104,7 @@ void test_tab3() {
 
     CU_ASSERT_EQUAL(ret,589824);
 
-    a = (int*) tab2;
+    a = (void *)tab2;
 
     SANDBOX_BEGIN;
     ret = third(a);
@@ -112,7 +112,7 @@ void test_tab3() {
 
     CU_ASSERT_EQUAL(ret,655360);
 
-    a = (int*) tab3;
+    a = (void *)tab3;
 
     SANDBOX_BEGIN;
     ret = third(a);
@@ -120,7 +120,7 @@ void test_tab3() {
 
     CU_ASSERT_EQUAL(ret,196608);
 
-    a = (int*) tab4;
+    a = (void *)tab4;
 
     SANDBOX_BEGIN;
     ret = third(a);
