@@ -1,7 +1,23 @@
+/student/student_code.c.tpl: |
+    #include<stdio.h>
+    #include<stdlib.h>
+    #include "student_code.h"
+
+    int first(void *ptr){
+        @@first@@
+    }
+
+    char second(void *ptr){
+        @@second@@
+    }
+
+    int third(void *ptr){
+        @@third@@
+    }
 accessible: true
 author: Maxime Mawait
 context: |-
-    A hacker wanted to challenge you and encrypted your hard drive. To unlock your drive, he gave you a function ``get_key(int a, int b, int c)`` which returns the decryption key if the correct parameters are given.
+    A hacker wanted to challenge you and encrypted your hard drive. To unlock your drive, he gave you a function ``get_key(int a, char b, int c)`` which returns the decryption key if the correct parameters are given.
 
     He then hid the parameters *a*, *b* and *c* in memory, and gave you a pointer from which you can retrieve these parameters.
 environment: pyjavacpp
@@ -19,7 +35,7 @@ problems:
         language: c
         name: First argument
         header: |-
-            You found a hint from the hacker, telling the first paramater is  located at the 12th byte after *ptr*.
+            You found a hint from the hacker, telling the first parameter is  located at the 12th byte after *ptr*.
 
             Write the body of the function *first* which returns the integer at that position in memory.
 
@@ -30,13 +46,13 @@ problems:
     second:
         name: Second argument
         header: |-
-            For the second argument, you have to find the stocked value at the 6th Byte of the pointer. You have to implement ``second`` function which give that number.
+            The second parameter is a char located 6 bytes after *ptr*.
+
+            Write the body of the function *second* which returns the char at that position in memory.
 
             .. code-block:: c
 
-                int second(int* a){
-                    //Your code will be inserted here
-                }
+                char second(void *ptr) {
         type: code
         language: c
     third:
@@ -44,13 +60,13 @@ problems:
         type: code
         name: Third argument
         header: |-
-            For the third argument, you have to find the integer located at the 11st Byte of the pointer. You have to implement ``third`` function which give that number.
+            The third parameter is an int located 45 bytes after *ptr*.
+
+            Write the body of the function *third* which returns the int at that position in memory.
 
             .. code-block:: c
 
-                int third(int* a){
-                    //Your code will be inserted here
-                }
+                int third(void *ptr) {
 stored_submissions: 0
 submission_limit:
     amount: -1

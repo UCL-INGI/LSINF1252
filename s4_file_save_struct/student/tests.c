@@ -4,26 +4,18 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+typedef struct 3dpoint{
+    double x;
+    double y;
+    double z;
+} 3dpoint_t;
+
 /*
  * Generate a file named "file.txt".
  * The content is the bytes in range [0, n[
  */
-void gen_file(int n){
-    system("rm newfile.txt");
-    int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
-    if(fd == -1) {
-        CU_FAIL("Error, can not initialise test file");
-    }
-    char array[n];
-    int i = 0;
-    for (i = 0; i < n; i++){
-        array[i] = i;
-        if (write(fd, (void *) &array[i], sizeof(char)) == -1){
-            CU_FAIL("Error, can not initialise test file");
-        }
-    }
-    if (close(fd) == -1)
-        CU_FAIL("Error, can not initialise test file");
+int gen_struct(int n){
+
 }
 
 /*

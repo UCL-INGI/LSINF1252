@@ -72,12 +72,12 @@ problems:
 
                     clean:
                     [tab]@rm -f src/*.o
-        -   text: |4+
+        -   text: |4
 
                 .. code-block:: console
+
                         clean:
                         @rm -f src/*.o
-
             feedback: There is a missing tab on the second line.
         -   text: |4-
 
@@ -98,7 +98,7 @@ problems:
 
                         clean:
                         [spaces]@rm -f src/*.o
-            feedback: The recipe in a Makefile has to be intended with tabs and not
+            feedback: The recipe in a Makefile has to be intended with a tab and not
                 spaces.
         type: multiple_choice
         name: Rules syntax

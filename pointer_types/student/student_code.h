@@ -1,3 +1,3 @@
-int first(int* a);
-char second(int* a);
-int third(int* a);
+int first(void *ptr);
+char second(void *ptr);
+int third(void *ptr);
