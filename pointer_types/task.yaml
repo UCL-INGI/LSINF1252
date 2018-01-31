@@ -8,17 +8,16 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
+    time: '30'
 name: '[S3] Pointer types'
 network_grading: false
 order: 19
 problems:
     first:
-        type: code
-        name: First argument
         language: c
+        name: First argument
         header: |-
             The first argument for your function is the integer located at the 13rd Byte of the pointer. You have to implement ``first`` function which give that number.
 
@@ -27,8 +26,8 @@ problems:
                 int first(int* a){
                     //Your code will be inserted here
                 }
+        type: code
     second:
-        language: c
         name: Second argument
         header: |-
             For the second argument, you have to find the stocked value at the 6th Byte of the pointer. You have to implement ``second`` function which give that number.
@@ -39,26 +38,27 @@ problems:
                     //Your code will be inserted here
                 }
         type: code
+        language: c
     third:
         language: c
+        type: code
+        name: Third argument
         header: |-
-            For the third argument, you have to find the integer located at the 10th Byte of the pointer. You have to implement ``third`` function which give that number.
+            For the third argument, you have to find the integer located at the 11st Byte of the pointer. You have to implement ``third`` function which give that number.
 
             .. code-block:: c
 
                 int third(int* a){
                     //Your code will be inserted here
                 }
-        name: Third argument
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 2
         name: Pointer
+        type: 2
         description: Task about pointers and their use
         visible: true
         id: ''

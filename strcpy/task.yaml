@@ -1,3 +1,12 @@
+/student/student_code.c.tpl: |
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    #include "student_code.h"
+
+    char *buf_strcpy(const char *src) {
+      @@strcpy_impl@@
+    }
 accessible: true
 author: Nicolas Rybowski
 context: The classic function ``char *strncpy(char *destination, const char *source,
@@ -8,16 +17,15 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
+    time: '30'
 name: '[S3] Improved strncpy'
 network_grading: false
 order: 13
 problems:
     strcpy_impl:
         type: code
-        name: buf_strcpy
         header: |
             Write the body of the function *buf_strcpy*.
 
@@ -27,10 +35,11 @@ problems:
                 * Create a buffer the same size as src, and copy the content of src to this buffer.
                 *
                 * @src: string to be copied
-                * @return: return pointer. if src == NULL, return NULL
+                * @return: return pointer. if src == NULL or in case of error, return NULL
                 */
                 char *buf_strcpy(char *src) {
         language: c
+        name: buf_strcpy
 stored_submissions: 0
 submission_limit:
     amount: -1

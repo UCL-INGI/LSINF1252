@@ -31,7 +31,7 @@ unsigned int __wrap_sleep(unsigned int time) {
   if(!wrap_monitoring || !monitored.sleep) {
     return __real_sleep(time);
   }
-  
+
   stats.sleep.called++;
   stats.sleep.last_arg = time;
   // being monitored
@@ -47,3 +47,8 @@ unsigned int __wrap_sleep(unsigned int time) {
   stats.sleep.last_return=ret;
   return ret;
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 063382e8050cbca5ed72278b576fa5591f8a5e4c

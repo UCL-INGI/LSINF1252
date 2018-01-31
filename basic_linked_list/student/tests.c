@@ -130,7 +130,7 @@ void test_init_node_nomem(){
 
   node_t* ret = NULL;
 
-  monitored.malloc = true;
+  monitored.malloc = false;
   failures.malloc = FAIL_ALWAYS;
   failures.malloc_ret = NULL;
 
@@ -339,5 +339,7 @@ void test_add_node_nomem(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS(calloc);
+    //RUN(test_init_node_alloc);
     RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem);
+    //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
 }

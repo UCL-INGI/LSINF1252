@@ -29,12 +29,11 @@ void gen_file(int n){
         CU_FAIL("Error, can not initialise test file");
 }
 
-/*
- * Test with some int in the file
- */
 void test_get() {
     set_test_metadata("q1", _("Test with normal file"), 2);
     gen_file(1000);
+    
+    system("cp file.txt file_copy.txt");
     
     int should_count_read = 0;
     monitored.read = true; 
@@ -48,6 +47,7 @@ void test_get() {
         
         if(ret != get_value_by_index(i)){
             push_info_msg(_("You do not return the correct value."));
+            set_tag("wrong_get_value_returned");
             CU_FAIL(); 
         }   
     }
@@ -56,12 +56,14 @@ void test_get() {
         push_info_msg(_("You perform too many read()."));
         CU_FAIL();  
     }
+    
+    if(system("diff file.txt file_copy.txt") != 0){
+        push_info_msg(_("You have modified the file when reading it..."));
+        set_tag("original_modif");
+        CU_FAIL();
+    }
 }
 
-
-/*
- * Test with some int in the file
- */
 void test_set() {
     set_test_metadata("q2", _("Test with normal file"), 2);
     gen_file(1000);
@@ -91,7 +93,22 @@ void test_set() {
         read(fd, (void *) &res, sizeof(int));
         if (res != 2222+i){
             push_info_msg(_("You do not set the correct value in the file."));
-            CU_FAIL(); 
+            set_tag("wrong_set_value");
+            CU_FAIL();
+            break;
+        }
+    }
+    for(int i = 0; i < 1000; i++){
+        if (i % 50 != 0){
+        	lseek(fd, (off_t) i*sizeof(int), SEEK_SET);
+        	int res;
+        	read(fd, (void *) &res, sizeof(int));
+        	if (res != get_value_by_index(i)){
+            	push_info_msg(_("You have modified some wrong elements in the array"));
+            	CU_FAIL();
+                set_tag("wrong_index_set");
+                break;
+        	}
         }
     }
     close(fd);
@@ -126,12 +143,59 @@ void test_close_q2(){
         set_tag("close");
 }
 
-//TODO:
-//count read and write
-//check if index id bigger than the file
-//check if other index are not modified
+void test_get_oob() {
+    set_test_metadata("q1", _("Test get out of bound"), 1);
+    gen_file(10);    
+    int ret = 0;
+        
+    SANDBOX_BEGIN;
+    ret = get("file.txt", 200);
+    SANDBOX_END;
+        
+    if(ret != -2){
+        push_info_msg(_("You do not return -2 when index is bigger than the size of the array."));
+        CU_FAIL(); 
+        set_tag("oob");
+    }   
+}
+
+void test_get_fail() {
+    set_test_metadata("q1", _("Test get fail"), 1);
+    gen_file(100);    
+    int ret = 0;
+    
+    monitored.read = true;
+    failures.read=FAIL_FIRST;
+    failures.read_ret = -1;
+    SANDBOX_BEGIN;
+    ret = get("file.txt", 50);
+    SANDBOX_END;
+    if(ret != -1){
+        push_info_msg(_("You do not return -1 when the read() function fails."));
+        CU_FAIL(); 
+        set_tag("failure_handling");
+    }   
+}
+
+void test_open_q1_fail(){
+    set_test_metadata("q1", _("Test open fail"), 1);
+    monitored.open = true;
+    failures.open=FAIL_FIRST;
+    failures.open_ret = -1;   
+    int ret = 0;
+    SANDBOX_BEGIN;
+    ret = get("file_no_exits.txt", 3);
+    SANDBOX_END;
+    
+    if (ret != -1){
+        push_info_msg(_("You do not return -1 when open() fails."));
+        CU_FAIL();
+    }else{
+        set_tag("open");
+    }
+}
 
 int main(int argc, char** argv){
     BAN_FUNCS(system, set_tag);
-    RUN(test_get, test_set, test_close_q1, test_close_q2);
+    RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob, test_get_fail, test_open_q1_fail);
 }
