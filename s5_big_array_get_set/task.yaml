@@ -166,7 +166,7 @@
         SANDBOX_BEGIN;
         ret = get("file.txt", 50);
         SANDBOX_END;
-
+        printf("FFFF %d \n", ret);
         if(ret != -1){
             push_info_msg(_("You do not return -1 when the read() function fails."));
             CU_FAIL();
@@ -260,57 +260,57 @@ tags:
         name: Open
     '10':
         type: 1
+        id: not_compile
+        visible: true
+        description: You code do not compile.
+        name: Not compile
+    '2':
         id: timeout
         visible: true
-        description: Your code exceeds the maximum allowed time.
         name: Timeout
-    '2':
-        id: oob
-        visible: true
-        name: Out of bounds
-        description: You try to read outside of the array.
+        description: Your code exceeds the maximum allowed time.
         type: 1
     '3':
         visible: true
-        description: You call the read or write function more than necessary.
-        id: too_many_op
-        name: Too many read/write
+        description: You try to read outside of the array.
+        id: oob
+        name: Out of bounds
         type: 1
     '4':
-        id: banned_funcs
-        name: Banned functions
+        id: too_many_op
+        name: Too many read/write
         visible: true
         type: 1
-        description: You use some banned functions.
+        description: You call the read or write function more than necessary.
     '5':
         type: 1
-        name: Double free
-        id: double_free
+        name: Banned functions
+        id: banned_funcs
         visible: true
-        description: Your code produced a double free.
+        description: You use some banned functions.
     '6':
-        id: failure_handling
+        id: double_free
         type: 1
         visible: true
-        description: You do not manage failures during the copy properly.
-        name: Failure handling
+        description: Your code produced a double free.
+        name: Double free
     '7':
-        name: Floating Point Exception
-        id: sigfpe
+        name: Failure handling
+        id: failure_handling
         visible: true
-        description: ''
+        description: You do not manage failures during the copy properly.
         type: 1
     '8':
         type: 1
-        name: Memory Exceeded
+        name: Floating Point Exception
         visible: true
         description: ''
-        id: memory
+        id: sigfpe
     '9':
-        name: Not compile
-        id: not_compile
+        name: Memory Exceeded
+        id: memory
         type: 1
-        description: You code do not compile.
+        description: ''
         visible: true
     '11':
         type: 2
