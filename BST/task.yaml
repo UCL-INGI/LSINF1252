@@ -34,12 +34,12 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '30'
 name: '[S4] Binary Search Tree'
 network_grading: false
-order: 30
+order: 37
 problems:
     contains:
         header: |-
@@ -68,7 +68,13 @@ tags:
     '0':
         name: Data structures
         type: 2
-        description: Task dealing with data structures and linked list
+        description: Task dealing with data structures and linked list.
         visible: true
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: ''
+        name: S4
         id: ''
 weight: 1.0

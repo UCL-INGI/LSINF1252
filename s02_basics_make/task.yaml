@@ -36,10 +36,6 @@
     # If compilation failed, exit with "failed" result
     if p.returncode:
         feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
-    else:
-        score += 75
-        feedback.set_problem_result("success", "make_me_less_easy")
-        feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
 
     # Remove source files
     subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
@@ -50,7 +46,11 @@
 
     # If run failed, exit with "failed" result
     if p.returncode:
-        feedback.set_global_result("failed")
+        feedback.set_problem_feedback("failed", "make_me_less_easy")
+    else:
+        score += 75
+        feedback.set_problem_result("success", "make_me_less_easy")
+        feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
 
     # Set score
     feedback.set_grade(score)
@@ -145,7 +145,7 @@ limits:
     time: '30'
 name: '[S02] Makefile basics - REVIEWED'
 network_grading: false
-order: 16
+order: 22
 problems:
     make_me_easy:
         type: match
