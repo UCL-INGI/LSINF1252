@@ -4,10 +4,10 @@ g++ main.cpp
 pseudo=$(getinput username)
 rep=$(getinput q1)
 stud=$(./a.out $pseudo obo)
-if [ "$stud"=="$rep" ]
+if [ "$stud" == "$rep" ]
 then
 	feedback-result success
 else
 	feedback-result failed
-	feedback-msg -m "Ce n'est pas le bon code, avez vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
+	feedback-msg -m "Ce n'est pas le bon code, avez-vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
 fi
