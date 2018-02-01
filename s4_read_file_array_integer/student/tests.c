@@ -84,7 +84,7 @@ void test_no_integer() {
 
 void test_some_integers() {
     set_test_metadata("q1", _("Test with some integers."), 1);
-    int sum = gen_file(15);
+    int sum = gen_file(300);
     int ret = 0;
     
     SANDBOX_BEGIN;
