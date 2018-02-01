@@ -1,4 +1,4 @@
-int fd = open(filename,O_RDONLY); 
+int fd = open(filename, O_RDONLY); 
 if(fd == -1) {
     return -1;
 }
@@ -11,6 +11,8 @@ while(r >= 1){
     if(r == -1)
         return -2;
 }
-close(fd);
+if (close(fd) < 0)
+    return -3;
+        
 return sum;
 
