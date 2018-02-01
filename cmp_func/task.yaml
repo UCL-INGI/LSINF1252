@@ -1,5 +1,5 @@
 accessible: true
-author: Mathieu Xhonneux
+author: Mathieu Xhonneux & Maxime Mawait
 context: |-
     Pointers to functions can be used to handle functions in a dynamic fashion, and will be of great importance later in this course. It is hence important to grasp how they work.
 
@@ -11,18 +11,18 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
 name: '[S4] Comparing functions'
 network_grading: false
 order: 33
 problems:
     cmp_func:
-        type: code
         language: c
-        name: Compare functions
+        type: code
         header: |
             Write the function *cmp_func* (prototype and body), which receives two pointers to functions (described as above), and returns an int, containing 1 if the functions are equivalent, else 0.
+        name: Compare functions
 stored_submissions: 0
 submission_limit:
     amount: -1
