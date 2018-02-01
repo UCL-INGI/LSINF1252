@@ -194,7 +194,7 @@ limits:
     memory: '100'
 name: '[S3] Sleepy memory'
 network_grading: false
-order: 24
+order: 21
 problems:
     sleep_malloc:
         language: c
