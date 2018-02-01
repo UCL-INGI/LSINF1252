@@ -1,6 +1,6 @@
 accessible: true
 author: Pablo Gonzalez Alvarez
-context: |
+context: |-
     *Estimated time: 15 minutes*
 
     This week, we will see how to automate the testing process.
@@ -61,11 +61,7 @@ context: |
         operations.o: src/operations.c src/operations.h
             $(CC) $(CFLAGS) -c src/operations.{c,h}
 
-        test: test/testing
-            $(CC) $(CFLAGS) -o test test/testing.o -l $(LDFLAGS)
-
-        test/testing: test/testing.o
-            $(CC) $(CFLAGS) -c test/testing.o -l $(LDFLAGS)
+        # YOUR CODE HERE #
 
         # Declare clean, mrproper and help as a phony targets
         .PHONY: clean mrproper help
@@ -84,6 +80,8 @@ context: |
         ## help        : Show different make options
         help: Makefile
             @sed -n 's/^##//p' $<
+
+    To try locally, you can download the project folder `_here <>`
 environment: pyjavacpp
 evaluate: best
 groups: false
