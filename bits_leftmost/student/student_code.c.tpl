@@ -1,8 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include<stdint.h>
 
-int myfunc(int myargs) {
-@    @problem_id@@
+int get_3_leftmost_bits(uint32_t x)
+{
+@    @q1@@
 }
 
 
