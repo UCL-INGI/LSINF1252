@@ -6,6 +6,8 @@ context: |-
     - If ``open()`` fails, return ``-1``.
     - If ``read()`` fails, return ``-2``.
     - If ``close()`` fails, return ``-3``.
+
+    Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
 environment: cpp
 evaluate: best
 groups: false
@@ -58,51 +60,51 @@ tags:
         type: 0
     '10':
         type: 1
-        description: You code does not compile.
-        name: Not compile
-        id: not_compile
+        description: ''
+        name: Memory Exceeded
+        id: memory
         visible: true
     '3':
-        name: Segmentation Fault
+        name: Not compile
         type: 1
         visible: true
-        description: ''
-        id: sigsegv
+        description: You code does not compile.
+        id: not_compile
     '4':
-        description: Your code exceeds the maximum allowed time.
+        description: ''
         type: 1
-        id: timeout
-        name: Timeout
+        id: sigsegv
+        name: Segmentation Fault
         visible: true
     '5':
-        id: failure_handling
-        name: Failure handling
+        id: timeout
+        name: Timeout
         type: 1
-        description: You do not manage failures properly during read operations.
+        description: Your code exceeds the maximum allowed time.
         visible: true
     '6':
-        id: banned_funcs
+        id: failure_handling
         type: 1
-        description: You use some banned functions.
-        name: Banned functions
+        description: You do not manage failures properly during read operations.
+        name: Failure handling
         visible: true
     '7':
-        description: Your code produced a double free.
-        id: double_free
-        name: Double free
+        description: You use some banned functions.
+        id: banned_funcs
+        name: Banned functions
         visible: true
         type: 1
     '8':
-        name: Floating Point Exception
-        id: sigfpe
+        name: Double free
+        id: double_free
         type: 1
-        description: ''
+        description: Your code produced a double free.
         visible: true
     '9':
-        id: memory
+        id: sigfpe
         description: ''
         visible: true
-        name: Memory Exceeded
+        name: Floating Point Exception
         type: 1
     '11':
         name: S5

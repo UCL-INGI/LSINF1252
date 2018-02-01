@@ -1,18 +1,3 @@
-/solution.c.sol: |+
-    int fd = open(filename,O_WRONLY|O_CREAT);
-    if(fd == -1)
-        return -1;
-    for(int i = 0; i < size; i++){
-        if((int)write(fd, (void *) &pt[i], sizeof(point_t)) == -1)
-            return -2;
-    }
-    if(close(fd)<0)
-        return -3;
-    return 0;
-
-
-
-
 accessible: true
 author: Olivier Martin
 context: |-
@@ -25,6 +10,8 @@ context: |-
             int y;
             int z;
         } point_t;
+
+    Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
 environment: cpp
 evaluate: best
 groups: false
@@ -72,11 +59,11 @@ tags:
         description: This tag validate that your close are correctly performed.
         id: close
     '2':
-        name: Failure handling
-        visible: true
         description: You do not manage failures properly during write operations.
+        visible: true
         id: failure_handling
         type: 1
+        name: Failure handling
     '3':
         name: Not compile
         type: 1
@@ -84,11 +71,11 @@ tags:
         description: You code do not compile.
         id: not_compile
     '4':
+        visible: true
         description: ''
         type: 1
         id: memory
         name: Memory Exceeded
-        visible: true
     '5':
         id: sigfpe
         name: Floating Point Exception
@@ -117,18 +104,18 @@ tags:
         id: sigsegv
         description: ''
         visible: true
-        name: Segmentation Fault
         type: 1
+        name: Segmentation Fault
     '10':
+        visible: true
         type: 2
         description: ''
         name: S5
-        visible: true
         id: ''
     '11':
         name: File
-        description: ''
         type: 2
         visible: true
+        description: ''
         id: ''
 weight: 1.0
