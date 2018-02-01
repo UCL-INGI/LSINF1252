@@ -1,6 +1,10 @@
 int fd1 = open(file_name,O_RDONLY); 
-int fd2 = open(new_file_name,O_WRONLY|O_CREAT, S_IRUSR|S_IWUSR); 
 if(fd1 == -1) return -1;
+
+struct stat st;
+stat(file_name, &st);
+
+int fd2 = open(new_file_name,O_WRONLY|O_CREAT, st.st_mode); 
 if(fd2 == -1) return -1;
 
 char c;
@@ -9,8 +13,10 @@ while(read(fd1, (void *) &c, sizeof(char)) >= 1){
     if (w == -1)
         return -1;
 }
-close(fd1);
-close(fd2);
+if(close(fd1)<0)
+    return -1;
+if(close(fd2)<0)
+    return -1;
 return 0;
 
 
