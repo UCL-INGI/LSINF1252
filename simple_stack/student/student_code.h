@@ -1,9 +1,10 @@
+#include <string.h>
+
 struct node{
     struct node *next;
-    int value;
+    char *name;
 };
 
-//struct node *pop(struct node *head);
-int push(struct node **head, int value);
+//int pop(struct node *head, char **result);
 
-struct node *init_node(int value);
+int push(struct node **head, const char *value);
