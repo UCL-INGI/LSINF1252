@@ -142,6 +142,7 @@ void test_init_node_nomem(){
   printf("%p\n", ret);
 
   printf("%p\n", ret);
+  monitored.malloc = false;
   CU_ASSERT_PTR_NULL(ret);
   if (ret)
     push_info_msg(_("Wrong return value when malloc call fails"));

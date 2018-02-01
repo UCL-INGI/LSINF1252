@@ -1,0 +1,32 @@
+accessible: true
+author: ''
+context: '*Estimated time: 15 minutes*'
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[S03] Makefile - multiple choice questions'
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   text: gcc -o test test.o -lcunit
+            valid: true
+        -   text: gcc -c test.o -lcunit
+            valid: true
+        -   feedback: 'The name of the executable is missing and the '
+            text: gcc -o test.o
+        -   text: ''
+        name: Linking
+        type: multiple_choice
+        header: Select all *correct* answers related to the linking of the `CUnit`
+            library in a Makefile recipe.
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
