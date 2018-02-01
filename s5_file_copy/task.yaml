@@ -221,7 +221,8 @@
 accessible: true
 author: Olivier Martin
 context: Given a file containing arbitrary bytes, you are asked to define a function
-    that copy the file. You can not modify the content of the original file.
+    that copy the file. You can not modify the content of the original file. Beware,
+    the copied file should have to same permissions that the original file.
 environment: cpp
 evaluate: best
 groups: false
