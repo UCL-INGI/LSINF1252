@@ -40,19 +40,19 @@ void test_open() {
     failures.open = FAIL_FIRST;
     failures.open_ret = -1;
     
-    SANDBOX_BEGIN;
+    SANDBOX_BEGIN; //
     ret = myfunc("file.txt");
     SANDBOX_END;
 
-    if (ret != -1){
-        push_info_msg(_("When there is no file, your code does not return -1."));
+    if (ret != -1){ /
+        push_info_msg(_("When open() fails, your code does not return -1."));
         CU_FAIL();
         tag_open++;
     }
     
     //Test if open() return a correct file descriptor.
     gen_file(13);
-    monitored.open = true;
+    failures.open = FAIL_NEVER;
     SANDBOX_BEGIN;
     myfunc("file.txt");
     SANDBOX_END;
