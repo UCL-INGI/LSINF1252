@@ -195,7 +195,10 @@ problems:
                  *      size > 0, the length of the array.
                  *      filename != NULL
                  * @post write the array of struct in the file.
-                 *       return 0 is everything occurs fine. -1 otherwise.
+                 *       return 0 is everything occurs fine.
+                 *       -1 if open() fails.
+                 *       -2 if write() fails.
+                 *       -3 if close() fails.
                  */
                 int save(point_t* pt, int size, char* filename)
 stored_submissions: 0
