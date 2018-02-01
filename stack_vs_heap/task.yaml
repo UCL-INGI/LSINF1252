@@ -1,55 +1,7 @@
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include <stdio.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-
-    void test_sum2(){
-      set_test_metadata("version1", _("Check the `result` value"), 1);
-
-      SANDBOX_BEGIN;
-      version1(3, 7);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(result, 10);
-      if (result != 10){
-        char msg[80];
-        sprintf(msg, _("Expected value: 10. Received value: %i"), result);
-        push_info_msg(msg);
-      }
-    }
-
-
-    void test_sum3(){
-      set_test_metadata("version2", _("Check the value of @a"), 1);
-
-      int a = 1, b = 8;
-
-      SANDBOX_BEGIN;
-      version2(&a, &b);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(a, 9);
-      if (a != 9){
-        char msg[80];
-        sprintf(msg, _("Expected value: 9. Received value: %i"), result);
-        push_info_msg(msg);
-      }
-    }
-
-
-    int main(int argc,char** argv)
-    {
-        BAN_FUNCS();
-        RUN(test_sum2, test_sum3);
-    }
 accessible: true
 author: Nicolas Rybowski, Mathieu Xhonneux
 context: |-
-    In a C program, variables are stored across different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will lead you about how global variables, and variables on the stack, are managed.
+    In a C program, variables are stored across different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will show you how global variables, and variables on the stack, are managed.
 
     .. code-block:: c
 
@@ -85,7 +37,7 @@ network_grading: false
 order: 8
 problems:
     value1:
-        type: match
+        answer: '5'
         name: On the stack
         header: |-
             Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
@@ -93,19 +45,17 @@ problems:
             Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
 
             Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
-        answer: '5'
+        type: match
     retour1:
-        header: |-
-            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
-
-            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
-
-            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
         name: On the stack
         type: code_single_line
+        header: |-
+            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
+
+            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
+
+            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
     version1:
-        language: c
-        name: Globalizing
         type: code
         header: |
             From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
@@ -113,10 +63,12 @@ problems:
             .. code-block:: c
 
                 void sum2(int a, int b) {
-    version2:
         language: c
+        name: Globalizing
+    version2:
         name: Passing by reference
         type: code
+        language: c
         header: |
             You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html). What is the link between passing by reference and pointers ?
 
