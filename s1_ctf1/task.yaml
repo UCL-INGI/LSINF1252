@@ -11,7 +11,7 @@
     else
         feedback-result failed
         #feedback-msg -m "Ce n'est pas le bon code, avez-vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
-        feedback-msg -m "lol $pseudo lol"
+        feedback-msg -m "lol $(getinput q1) lol"
     fi
 accessible: true
 author: Tom Rousseaux
