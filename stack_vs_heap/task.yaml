@@ -36,35 +36,26 @@ name: '[S2] Global''n''stack'
 network_grading: false
 order: 8
 problems:
-    value1:
+    return1:
+        header: |-
+            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
+
+            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
+
+            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
         answer: '5'
         name: On the stack
-        header: |-
-            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
-
-            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
-
-            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
         type: match
-    retour1:
-        name: On the stack
-        type: code_single_line
-        header: |-
-            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
-
-            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
-
-            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
     version1:
         type: code
+        language: c
+        name: Globalizing
         header: |
             From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
 
             .. code-block:: c
 
                 void sum2(int a, int b) {
-        language: c
-        name: Globalizing
     version2:
         name: Passing by reference
         type: code
@@ -83,8 +74,8 @@ submission_limit:
 tags:
     '0':
         name: Memory Exceeded
-        type: 1
         id: memory
+        type: 1
         description: ''
         visible: false
 weight: 1.0

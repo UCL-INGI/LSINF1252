@@ -128,7 +128,7 @@ void test_init_node_value(){
 void test_init_node_nomem(){
   set_test_metadata("init_node", _("Check the return value if malloc call fails"), 1);
 
-  node_t* ret = (node_t *) 0x42;
+  node_t* ret = (node_t*) 0x42;
 
   monitored.malloc = true;
   failures.malloc = FAIL_ALWAYS;
