@@ -5,7 +5,7 @@
 #include "CTester/CTester.h"
 
 void test_myfunc_ret() {
-	set_test_metadata("factorial", _("test the function factorial"), 1);
+	set_test_metadata("facto", _("test the function factorial"), 1);
 
 	srand(time(NULL));
 	int i = rand()%12;

@@ -6,7 +6,7 @@
     #include "CTester/CTester.h"
 
     void test_swap() {
-        set_test_metadata("swap", _("Teste que swap échange bien les valeurs"), 1);
+        set_test_metadata("q1", _("Teste que swap échange bien les valeurs"), 1);
         int i = rand();
         int j = rand();
         while (i==j)//to make sure i!=j

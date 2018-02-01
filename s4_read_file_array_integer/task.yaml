@@ -31,7 +31,7 @@
     }
 
     void test_open_fail() {
-        set_test_metadata("q1", _("Return -1 when open fail"), 1);
+        set_test_metadata("q1", _("Return -1 when open fails"), 1);
         system("rm file.txt"); //Be sure the file does not exist
         int ret = 0;
 
@@ -50,9 +50,8 @@
         }
     }
 
-    void test_open_ok() {
-        set_test_metadata("q1", _("Calling open only once"), 1);
-        //Test when open() returns a correct file descriptor.
+    void test_count() {
+        set_test_metadata("q1", _("Calling open, read and close"), 1);
         gen_file(13);
         monitored.open = true;
 
@@ -61,12 +60,18 @@
         SANDBOX_END;
 
         if(stats.open.last_return <= 2){
-            push_info_msg(_("When open() works, your code returns -1."));
+            push_info_msg(_("You didn't call open correctly."));
             CU_FAIL("");
         }
 
-        if (stats.open.called != 1)
+        if (stats.open.called != 1) {
+            push_info_msg(_("Your number of calls to open is not 1."));
             CU_FAIL("");
+        }
+        if (stats.close.called != 1) {
+            push_info_msg(_("Your number of calls to close is not 1."));
+            CU_FAIL("");
+        }
 
         set_tag("open");
     }
