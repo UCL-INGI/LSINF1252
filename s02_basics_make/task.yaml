@@ -43,7 +43,7 @@ context: |-
 
     * ``cc`` stands for *C Compiler*;
     * ``hello.c`` the C program to be compiled;
-    * ``-o ``hello`` an option to place the output of the compilation in the file ``hello``.
+    * ``-o hello`` an option to place the output of the compilation in the file ``hello``.
 
     Now if you type ``ls`` in your command line, you will see that a file ``hello`` appeared. This is the **executable** built by ``make`` from ``hello.c``. Now you can execute it and verify what is printed on the standard output.
 
@@ -94,7 +94,7 @@ problems:
         answer: make make_me
         name: Make me easy
         header: |-
-            After typing ``ls`` in your terminal, it ouputs your folder structure:
+            After typing ``ls`` in your terminal, you see the following folder structure:
 
             .. code-block:: console
 
