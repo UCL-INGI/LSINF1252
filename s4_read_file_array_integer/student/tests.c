@@ -31,8 +31,10 @@ int gen_file(int n){
 
 void test_open() {
     set_test_metadata("q1", _("Test open"), 1);
+    system("rm file.txt"); //Be sure the file does not exist
     int ret = 0;
     int tag_open = 0;
+    
     //Test with open fail
     monitored.open = true;
     failures.open = FAIL_FIRST;
@@ -81,7 +83,7 @@ void test_no_integer() {
 }
 
 void test_some_integers() {
-    set_test_metadata("q1", _("Test with some integers."), 2);
+    set_test_metadata("q1", _("Test with some integers."), 1);
     int sum = gen_file(15);
     int ret = 0;
     
@@ -91,6 +93,26 @@ void test_some_integers() {
     
     if (ret != sum){
         push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
+        CU_FAIL();
+    }
+}
+
+void test_some_integers_fail_read() {
+    set_test_metadata("q1", _("Test with read() fail"), 1);
+    gen_file(9);
+    int ret = 0;
+    
+    monitored.read = true;
+    failures.read = FAIL_THIRD;
+    failures.read_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt");
+    SANDBOX_END;
+    
+    if (ret != -1){
+        push_info_msg(_("When a read() fails, your code does not return -1."));
+        set_tag("failure_handling");
         CU_FAIL();
     }
 }
@@ -121,5 +143,5 @@ void test_close() {
 
 int main(int argc,char** argv){
     BAN_FUNCS();
-    RUN(test_open, test_no_integer, test_some_integers, test_close);
+    RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }

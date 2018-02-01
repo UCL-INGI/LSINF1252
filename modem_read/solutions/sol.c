@@ -7,11 +7,13 @@ void modem_read(void* buffer, int* buf_len){
 
 int has_42() {
     void * buf = malloc(256);
+    if (!buf) return -1;
     int a = 0;
     modem_read(buf,&a);
-    int i;
+    int i, res;
+    int8_t* b = (int8_t*) buf;
     for(i = 0 ; i < a; i ++){
-        if((int res = *((int8_t*) (buf + i))_ == 42) {
+        if(( res = *(b + i)) == 42) {
             free(buf);
             return 1;
         }

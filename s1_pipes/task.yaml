@@ -16,7 +16,7 @@ problems:
     file:
         allowed_exts:
         - .txt
-        header: ''
+        header: Redirect the standard output in a file.txt and post it here.
         name: ''
         type: file
 stored_submissions: 0
