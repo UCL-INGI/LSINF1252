@@ -34,6 +34,7 @@ void test_open() {
     system("rm file.txt"); //Be sure the file does not exist
     int ret = 0;
     int tag_open = 0;
+    
     //Test with open fail
     monitored.open = true;
     failures.open = FAIL_FIRST;
@@ -97,8 +98,8 @@ void test_some_integers() {
 }
 
 void test_some_integers_fail_read() {
-    set_test_metadata("q1", _("Test with some integers (read() fail)"), 1);
-    gen_file(8);
+    set_test_metadata("q1", _("Test with read() fail"), 1);
+    gen_file(9);
     int ret = 0;
     
     monitored.read = true;
