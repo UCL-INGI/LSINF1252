@@ -83,11 +83,10 @@ void test_push_param_nomem() {
   ret = push(&head, 164684);
   SANDBOX_END;
     
+  CU_ASSERT_EQUAL(1, ret);
   if (ret)
      push_info_msg(_("Wrong return code if wrong args"));
   
-  CU_ASSERT_EQUAL(1, ret);
-
   free(head);
 }
 
@@ -150,7 +149,6 @@ void test_push_general() {
 
   CU_PASS("");
 
-  CU_ASSERT_TRUE(!ret);
   free_stack(stack);
 
 }

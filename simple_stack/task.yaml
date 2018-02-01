@@ -84,10 +84,9 @@
       ret = push(&head, 164684);
       SANDBOX_END;
 
+      CU_ASSERT_EQUAL(1, ret);
       if (ret)
          push_info_msg(_("Wrong return code if wrong args"));
-
-      CU_ASSERT_EQUAL(1, ret);
 
       free(head);
     }
@@ -151,7 +150,6 @@
 
       CU_PASS("");
 
-      CU_ASSERT_TRUE(!ret);
       free_stack(stack);
 
     }
