@@ -10,10 +10,15 @@ context: |
             char *value;
         }
 
-     *hints*
-     -------
-     `strlen <https://linux.die.net/man/3/strlen>`_
-     -- sltren does not count the '\0' character
+
+
+    *Hints*
+    =======
+    - `strlen <https://linux.die.net/man/3/strlen>`_
+
+        -- sltren does not count the '\\0' character
+
+    - @value is also a pointer
 environment: cpp
 evaluate: best
 groups: false
