@@ -29,6 +29,8 @@ problems:
                 *
                 * @src: string to be copied
                 * @return: return pointer. if src == NULL or in case of error, return NULL
+                *
+                * Take care of '\0' and the working of strlen() (if you use it).
                 */
                 char *buf_strcpy(const char *src) {
 stored_submissions: 0
