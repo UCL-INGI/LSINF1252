@@ -4,8 +4,8 @@
 
 node_t* init_node(int value){
   node_t* ret = malloc(sizeof(node_t));
-  if (!ret)
-    return NULL;
+  /*if (!ret)
+    return NULL;*/
 
   ret->next = NULL;
   ret->value = value;

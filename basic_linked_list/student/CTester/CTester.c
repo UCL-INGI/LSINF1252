@@ -103,8 +103,8 @@ void set_tag(char *tag)
         strncpy(test_metadata.tags[test_metadata.nb_tags++], tag, TAGS_LEN_MAX);
 }
 
-void segv_handler(int sig, siginfo_t *unused, void *unused2)
-{
+void segv_handler(int sig, siginfo_t *unused, void *unused2) {
+    printf("segv\n");
     wrap_monitoring = false;
     push_info_msg(_("Your code produced a segfault."));
     set_tag("sigsegv");
@@ -233,8 +233,8 @@ int run_tests(int argc, char *argv[], void *tests[], int nb_tests) {
         int flags = fcntl(pipes[i][0], F_GETFL, 0);
         fcntl(pipes[i][0], F_SETFL, flags | O_NONBLOCK);
     }
-    stdout_cpy = usr_pipe_stdout[0]; 
-    stderr_cpy = usr_pipe_stderr[0]; 
+    stdout_cpy = usr_pipe_stdout[0];
+    stderr_cpy = usr_pipe_stderr[0];
 
     putenv("LIBC_FATAL_STDERR_=2"); // needed otherwise libc doesn't print to program's stderr
 
