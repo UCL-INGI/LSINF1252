@@ -68,8 +68,8 @@ void test_open() {
     SANDBOX_BEGIN;
     myfunc("file.txt");
     SANDBOX_END;
-    
-    if(stats.open.last_return == -1){
+    printf("LOL, %d\n", stats.open.last_return);
+    if(stats.open.last_return <= 2){
         push_info_msg(_("When the open() should be fine, your code returns -1."));
         CU_FAIL();
     }
