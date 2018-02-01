@@ -41,7 +41,7 @@ elif os.path.exists("make_me"):
     feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
 else:
 	feedback_set_problem_result("fail", "make_me_less_easy")
-    feedback.set_problem_feedback("You didn't make it!", "make_me_less_easy")                   
+    #feedback.set_problem_feedback("You didn't make it!", "make_me_less_easy")                   
 
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
@@ -50,7 +50,7 @@ subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
 #has_file = os.path.exists("make_me")
 #if has_file == False:
-    feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
+# feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
 
 # Set score
 feedback.set_grade(score)
