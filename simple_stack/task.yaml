@@ -20,7 +20,7 @@ context: |
 
     - `strlen <https://linux.die.net/man/3/strlen>`_
 
-    -- strlen does not count the '\\0' character
+        -- strlen does not count the '\\0' character
 environment: cpp
 evaluate: best
 groups: false
