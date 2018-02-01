@@ -161,11 +161,7 @@ void test_close() {
     
     int close_tag = 0;
     if (stats.close.called != 2){
-        push_info_msg(_("You did not close() the file."));
-        close_tag++;
-        CU_FAIL();
-    }if (stats.open.called != 2){
-        push_info_msg(_("The open should be use two times."));
+        push_info_msg(_("You did not close() the two files."));
         close_tag++;
         CU_FAIL();
     }
@@ -174,7 +170,7 @@ void test_close() {
     gen_file(3);
     int ret = 0;
     monitored.close = true;
-    failures.close = FAIL_SECOND;
+    failures.close = FAIL_TWICE;
     failures.close_ret = -1;
     SANDBOX_BEGIN;
     ret = myfunc("file.txt", "newfile.txt");
