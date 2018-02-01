@@ -10,7 +10,7 @@ limits:
     memory: '100'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
-order: 17
+order: 23
 problems:
     mcq1:
         header: Select all *correct* answers related to the *target* of a Makefile

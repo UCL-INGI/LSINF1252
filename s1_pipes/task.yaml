@@ -1,17 +1,3 @@
-/out: '#aaron#aback#abate#abbot#abel#abort#about#accrue#acorn#acorn#acute#addis#aegis#aeneid#affix#affix#aim#ain''t#airman#akin#alaska#alba#alec#aleck#aleph#alias#alice#allen#alley#allis#alloy#allure#altar#alter#am#amen#amman#amman#ample#amra#anent#angie#angle#angry#angst#angus#annie#annoy#anode#anus#anvil#ap#apathy#aq#ar#archer#arena#argive#argot#arhat#arhat#arid#arise#arlen#army#arnold#array#arrow#arrow#artery#assay#asset#ate#aural#aural#avail#ave#aviate#avow#avow#aw#aware#awl#ax#axon#b#baby#bach#bacon#bacon#bah#balm#balsa#banish#barfly#barton#baste#bat#bauer#bayda#bbb#bbbb#bd#beak#becalm#beech#beefy#b''s'
-/run: |
-    #! /bin/bash
-
-    getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2
-    diff out out2
-    if [ $? -ne 0 ]
-    then
-        feedback-result failed
-        feedback-msg -m "The file does not contain the correct list of hashtag."
-    else
-        feedback-result success
-        feedbach-msg -m "Fine"
-    fi
 accessible: true
 author: Tom Rousseaux
 context: |-
@@ -21,22 +7,34 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
 name: '[S1] Pipes'
 network_grading: false
+order: 10
 problems:
     file:
+        header: Redirect the standard output in a file.txt and post it here.
+        type: file
         allowed_exts:
         - .txt
-        header: Redirect the standard output in a file.txt and post it here.
         name: ''
-        type: file
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: S1
+        visible: true
+        type: 2
+        description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: ''
+        name: Command line
+        id: ''
 weight: 1.0
-order: 4

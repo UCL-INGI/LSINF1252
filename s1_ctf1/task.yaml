@@ -12,11 +12,12 @@ limits:
     memory: '100'
 name: '[S1] CTF1 - REVIEWED'
 network_grading: false
+order: 4
 problems:
     q1:
+        header: ''
         name: Entrez le code ici
         type: match
-        header: ''
         answer: ''
 stored_submissions: 0
 submission_limit:
@@ -28,5 +29,11 @@ tags:
         visible: true
         type: 2
         description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: ''
+        name: Command line
         id: ''
 weight: 1.0

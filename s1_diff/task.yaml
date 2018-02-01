@@ -12,26 +12,39 @@ environment: mcq
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S1] Diff'
 network_grading: false
+order: 8
 problems:
     q1:
-        type: multiple_choice
         choices:
         -   text: Student 1
         -   text: Student 2
-        -   text: Student 3
-            valid: true
-        multiple: true
+        -   valid: true
+            text: Student 3
         name: Which students are innocents?
+        multiple: true
+        limit: 0
+        type: multiple_choice
         header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: S1
+        type: 2
+        visible: true
+        description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        name: Command line
+        description: ''
+        id: ''
 weight: 1.0
-order: 2

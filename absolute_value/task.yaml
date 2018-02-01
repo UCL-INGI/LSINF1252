@@ -2,27 +2,27 @@ accessible: true
 author: ''
 context: The absolute value of a number is defined as *|n| = n* if *n >= 0*, *|n|
     = -n* else.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '100'
     time: '30'
     output: '2'
-    memory: '100'
-name: '[S2] Absolute value'
+name: '[S2] Absolute value - REVIEWED'
 network_grading: false
-order: 6
+order: 12
 problems:
     absval:
-        language: c
+        type: code
         header: |-
             Write the body of the function *absval* returning the absolute value of *i*.
 
             .. code-block:: c
 
                 int absval(int i) {
+        language: c
         name: Absolute value
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -170,7 +170,7 @@ limits:
     time: '30'
 name: '[S3] Global''n''stack'
 network_grading: false
-order: 18
+order: 24
 problems:
     return1:
         type: match

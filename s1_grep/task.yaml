@@ -6,36 +6,48 @@ environment: mcq
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S1] grep'
 network_grading: false
+order: 9
 problems:
     CU_trim_left:
-        answer: Util.h
         name: CU_trim_left
         header: Where is defined the function CU_trim_left? Give only the name of
             the file.
+        answer: Util.h
         type: match
     CU_UNREFERENCED_PARAMETER_pTest:
         name: CU_UNREFERENCED_PARAMETER(pTest);
         answer: '652'
+        type: match
         header: What is the linenumber that contains "CU_UNREFERENCED_PARAMETER(pTest);"
             in Sources/Console/Console.c? (Try with and without the quotes to see
             the difference.)
-        type: match
     assert:
-        type: match
         header: |-
             How many times does "assert" come up in all the files of the working directory?
             (Hint: use `wc(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/wc.1.html>`_)
         answer: '349'
         name: assert
+        type: match
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        type: 2
+        name: Command line
+        visible: true
+        description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        name: S1
+        description: ''
+        id: ''
 weight: 1.0
-order: 3

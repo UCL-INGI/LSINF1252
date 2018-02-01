@@ -23,7 +23,7 @@ limits:
     memory: '100'
 name: '[S5] Save struct into file'
 network_grading: false
-order: 34
+order: 42
 problems:
     q1:
         type: code
