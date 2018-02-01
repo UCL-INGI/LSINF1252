@@ -34,8 +34,9 @@
     p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     make_output = p.communicate()[0].decode('utf-8')
     # If compilation failed, exit with "failed" result
-    if p.returncode and not os.path.exists("make_me"):
-        feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
+    if p.returncode:
+        if not os.path.exists("make_me"):
+            feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
     else:
         score += 75
         feedback.set_problem_result("success", "make_me_less_easy")
