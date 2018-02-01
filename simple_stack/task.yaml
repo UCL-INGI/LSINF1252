@@ -1,3 +1,18 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    #include "student_code.h"
+
+    int push(struct node **head, char *name){
+        @@push@@
+    }
+
+    /*int pop(struct node *head, char **name){
+        @@pop@@
+    }*/
+
+
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
@@ -23,16 +38,14 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S3] Simple stack'
 network_grading: false
 order: 31
 problems:
     push:
-        language: c
-        name: Push
         header: |-
             .. code-block:: c
 
@@ -46,8 +59,12 @@ problems:
                 */
 
                 int push(struct node **head, char *name){
+        language: c
+        name: Push
         type: code
     pop:
+        name: Pop
+        language: ''
         header: |-
             .. code-block:: c
 
@@ -62,9 +79,9 @@ problems:
 
                 int pop(struct node *head, char **name){
         type: code
-        name: Pop
-        language: ''
     free_node:
+        language: c
+        name: <OPTIONAL> free_node
         header: |-
             You can use this question to implement a ``free_node`` function
 
@@ -76,8 +93,6 @@ problems:
                 void free_node(struct node *node){
         optional: 'on'
         type: code
-        name: <OPTIONAL> free_node
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -85,8 +100,8 @@ submission_limit:
 tags:
     '0':
         name: Data structures
+        description: Task dealing with data structures and linked list
         type: 2
         visible: true
-        description: Task dealing with data structures and linked list
         id: ''
 weight: 1.0
