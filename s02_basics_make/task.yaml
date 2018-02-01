@@ -59,7 +59,9 @@ context: |-
     * https://sites.uclouvain.be/SystInfo/notes/Outils/html/make.html
     * https://www.gnu.org/software/make/manual/
 
-    The You have the following folder structure:
+
+
+    You have the following folder structure:
 
     .. code-block:: console
 
