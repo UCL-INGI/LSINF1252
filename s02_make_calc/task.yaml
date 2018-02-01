@@ -16,7 +16,7 @@ context: |-
     ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
 
     Unfortunately, the source folder was lost but you still have access to the object files.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -25,6 +25,7 @@ limits:
     memory: '100'
 name: '[S02] make and prerequisites'
 network_grading: false
+order: 14
 problems:
     make_calc_simple:
         name: 'Linking '
@@ -45,4 +46,3 @@ tags:
             Makefile.
         visible: false
 weight: 1.0
-order: 14

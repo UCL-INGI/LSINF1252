@@ -59,9 +59,7 @@ context: |-
     * https://sites.uclouvain.be/SystInfo/notes/Outils/html/make.html
     * https://www.gnu.org/software/make/manual/
 
-
-
-    You have the following folder structure:
+    The You have the following folder structure:
 
     .. code-block:: console
 
@@ -70,7 +68,7 @@ context: |-
             make_me.h
 
     To try the following questions locally, you can download a zip file of the above given folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>`_.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:

@@ -1,83 +1,3 @@
-/student/student_code.c: |
-    #include "student_code.h"
-
-
-    void version1(int a, int b){
-      result = a + b;
-    }
-
-    void version2(int *a, int *b, int *r){
-      *r =  *a + *b;
-    }
-/student/student_code.c.tpl: |
-    #include<stdio.h>
-    #include<stdlib.h>
-
-    #include "student_code.h"
-
-    void version1(int a, int b){
-      @@version1@@
-    }
-
-    void version2(int *a, int *b, int *r){
-      @@version2@@
-    }
-/student/student_code.h: |
-    int result, a;
-
-    int retour1(void);
-
-    void version1(int a, int b);
-
-    void version2(int *a, int *b, int *r);
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include <stdio.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-
-    void test_sum2(){
-      set_test_metadata("version1", _("Check the `result` value"), 1);
-
-      SANDBOX_BEGIN;
-      version1(3, 7);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(result, 10);
-      if (result != 10){
-        char msg[80];
-        sprintf(msg, _("Expected value: 10. Received value: %i"), result);
-        push_info_msg(msg);
-      }
-    }
-
-
-    void test_sum3(){
-      set_test_metadata("version2", _("Check the value of @r"), 1);
-
-      int a = 1, b = 8, r;
-
-      SANDBOX_BEGIN;
-      version2(&a, &b, &r);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(r, 9);
-      if (r != 9){
-        char msg[80];
-        sprintf(msg, _("Expected value: 9. Received value: %i"), result);
-        push_info_msg(msg);
-      }
-    }
-
-
-    int main(int argc,char** argv)
-    {
-        BAN_FUNCS();
-        RUN(test_sum2, test_sum3);
-    }
 accessible: true
 author: Nicolas Rybowski, Mathieu Xhonneux
 context: |-
@@ -105,7 +25,7 @@ context: |-
             sum3(&a3, &b3);
             printf("sum3: %d\n", a3);
         }
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -128,14 +48,14 @@ problems:
         type: match
     version1:
         type: code
+        language: c
+        name: Globalizing
         header: |
             From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
 
             .. code-block:: c
 
                 void sum2(int a, int b) {
-        language: c
-        name: Globalizing
     version2:
         name: Passing by reference
         type: code
@@ -156,8 +76,8 @@ submission_limit:
 tags:
     '0':
         name: Memory Exceeded
-        type: 1
         id: memory
+        type: 1
         description: ''
         visible: false
 weight: 1.0

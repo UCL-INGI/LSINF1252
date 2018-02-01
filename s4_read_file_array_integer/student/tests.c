@@ -161,6 +161,6 @@ void test_close() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, set_tag);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
     RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }

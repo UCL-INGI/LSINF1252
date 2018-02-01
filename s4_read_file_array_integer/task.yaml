@@ -1,3 +1,170 @@
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    /*
+     * Generate a file named "file.txt".
+     * The content is the integers in range [0, n[
+     * The sum of integers in the file is returned.
+     */
+    int gen_file(int n){
+        int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
+        if(fd == -1) {
+            CU_FAIL(_("Error, can not initialise test file"));
+        }
+        int array[n];
+        int i = 0;
+        int sum = 0;
+        for (i = 0; i < n; i++){
+            array[i]=i;
+            sum+=i;
+            if (write(fd, (void *) &array[i], sizeof(int)) == -1){
+                CU_FAIL(_("Error, can not initialise test file"));
+            }
+        }
+        if (close(fd) == -1)
+            CU_FAIL(_("Error, can not initialise test file"));
+        return sum;
+    }
+
+    void test_open() {
+        set_test_metadata("q1", _("Test open"), 1);
+        system("rm file.txt"); //Be sure the file does not exist
+        int ret = 0;
+        int tag_open = 0;
+
+        //Test with open fail
+        monitored.open = true;
+        failures.open = FAIL_FIRST;
+        failures.open_ret = -1;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if (ret != -1){
+            push_info_msg(_("When there is no file, your code does not return -1."));
+            CU_FAIL();
+            tag_open++;
+        }
+
+        //Test if open() return a correct file descriptor.
+        gen_file(13);
+        monitored.open = true;
+        SANDBOX_BEGIN;
+        myfunc("file.txt");
+        SANDBOX_END;
+
+        if(stats.open.last_return <= 2){
+            push_info_msg(_("When the open() should be fine, your code returns -1."));
+            CU_FAIL();
+            tag_open++;
+        }
+        if(tag_open == 0){
+            set_tag("open");
+        }
+    }
+
+    void test_no_integer() {
+        set_test_metadata("q1", _("Test without any integers."), 1);
+        int sum = gen_file(0); //Empty file
+        int ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if (ret != sum){
+            push_info_msg(_("When the file does not contain any integers, your code does not return 0."));
+            CU_FAIL();
+        }
+    }
+
+    void test_some_integers() {
+        set_test_metadata("q1", _("Test with some integers."), 1);
+        int sum = gen_file(300);
+        int ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if (ret != sum){
+            push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
+            CU_FAIL();
+        }else{
+            set_tag("sum");
+        }
+    }
+
+    void test_some_integers_fail_read() {
+        set_test_metadata("q1", _("Test with read() fail"), 1);
+        gen_file(9);
+        int ret = 0;
+
+        monitored.read = true;
+        failures.read = FAIL_THIRD;
+        failures.read_ret = -1;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if (ret != -2){
+            push_info_msg(_("When a read() fails, your code does not return -2."));
+            set_tag("failure_handling");
+            CU_FAIL();
+        }
+    }
+
+    void test_close() {
+        set_test_metadata("q1", _("Test close()."), 1);
+        gen_file(0);
+
+        monitored.close = true;
+        monitored.open = true;
+        SANDBOX_BEGIN;
+        myfunc("file.txt");
+        SANDBOX_END;
+
+        int close_ok = 0;
+        if (stats.close.called == 0){
+            push_info_msg(_("You did not close() the file."));
+            close_ok++;
+            CU_FAIL();
+        }if(stats.open.last_return != stats.close.last_params.fd){
+            push_info_msg(_("The close() does not close the file you opened before."));
+            close_ok++;
+            CU_FAIL();
+        }
+
+        //We fail the close()
+        gen_file(0);
+        int ret = 0;
+        monitored.close = true;
+        failures.close = FAIL_FIRST;
+        failures.close_ret = -1;
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if(ret != -3){
+            push_info_msg(_("When close() fails, your code does not return -3."));
+            close_ok++;
+            CU_FAIL();
+        }
+        if(close_ok == 0){
+            set_tag("close");
+        }
+    }
+
+    int main(int argc,char** argv){
+        BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
+        RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
+    }
 accessible: true
 author: Olivier Martin
 context: |-
@@ -6,6 +173,8 @@ context: |-
     - If ``open()`` fails, return ``-1``.
     - If ``read()`` fails, return ``-2``.
     - If ``close()`` fails, return ``-3``.
+
+    Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
 environment: cpp
 evaluate: best
 groups: false
@@ -51,64 +220,64 @@ tags:
             with open().
         id: open
     '2':
-        name: Sum
-        visible: true
         description: The student has correctly computed and returned the sum.
         id: sum
-        type: 0
-    '10':
-        type: 1
-        description: You code does not compile.
-        name: Not compile
-        id: not_compile
         visible: true
+        type: 0
+        name: Sum
+    '10':
+        visible: true
+        type: 1
+        description: ''
+        name: Floating Point Exception
+        id: sigfpe
     '3':
-        name: Segmentation Fault
+        name: Memory Exceeded
         type: 1
         visible: true
         description: ''
-        id: sigsegv
+        id: memory
     '4':
-        description: Your code exceeds the maximum allowed time.
+        description: You code does not compile.
         type: 1
-        id: timeout
-        name: Timeout
+        id: not_compile
+        name: Not compile
         visible: true
     '5':
-        id: failure_handling
-        name: Failure handling
+        id: sigsegv
+        name: Segmentation Fault
         type: 1
-        description: You do not manage failures properly during read operations.
+        description: ''
         visible: true
     '6':
-        id: banned_funcs
+        id: timeout
         type: 1
-        description: You use some banned functions.
-        name: Banned functions
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
         visible: true
     '7':
-        description: Your code produced a double free.
-        id: double_free
-        name: Double free
+        description: You do not manage failures properly during read operations.
+        id: failure_handling
+        name: Failure handling
         visible: true
         type: 1
     '8':
-        name: Floating Point Exception
-        id: sigfpe
+        name: Banned functions
+        id: banned_funcs
         type: 1
-        description: ''
+        description: You use some banned functions.
         visible: true
     '9':
-        id: memory
-        description: ''
+        id: double_free
+        description: Your code produced a double free.
         visible: true
-        name: Memory Exceeded
+        name: Double free
         type: 1
     '11':
         name: S5
+        visible: true
         description: ''
         type: 2
-        visible: true
         id: ''
     '12':
         visible: true

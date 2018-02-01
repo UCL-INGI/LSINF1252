@@ -4,7 +4,7 @@
 # Auteurs : Mathieu Xhonneux, Anthony Gégo
 # Licence : GPLv3
 
-import subprocess, shlex, re, os
+import subprocess, shlex, re, os, yaml
 from inginious import feedback, rst, input
 
 # Switch working directory to student/
@@ -114,7 +114,7 @@ for pid, result in tests_result.items():
     else:
         feedback.set_problem_result("failed", pid)
 
-with open("task.yaml", 'r') as stream:
+with open("../task.yaml", 'r') as stream:
     problems = yaml.load(stream)['problems']
     
     for name, meta in problems.items():

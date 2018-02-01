@@ -214,6 +214,6 @@ void test_original_integrity() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
     RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_original_integrity, test_close);
 }
