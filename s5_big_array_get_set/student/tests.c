@@ -68,7 +68,7 @@ void test_get() {
         push_info_msg(_("The number of calls to close() isn't 1."));
         CU_FAIL(); 
     }
-    if (stats.lseek.called != 1) {
+    if (stats.lseek.called > 0) {
         push_info_msg(_("lseek() should at least be called once."));
         CU_FAIL(); 
     }
