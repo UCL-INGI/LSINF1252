@@ -1,15 +1,29 @@
+/out: '#aaron#aback#abate#abbot#abel#abort#about#accrue#acorn#acorn#acute#addis#aegis#aeneid#affix#affix#aim#ain''t#airman#akin#alaska#alba#alec#aleck#aleph#alias#alice#allen#alley#allis#alloy#allure#altar#alter#am#amen#amman#amman#ample#amra#anent#angie#angle#angry#angst#angus#annie#annoy#anode#anus#anvil#ap#apathy#aq#ar#archer#arena#argive#argot#arhat#arhat#arid#arise#arlen#army#arnold#array#arrow#arrow#artery#assay#asset#ate#aural#aural#avail#ave#aviate#avow#avow#aw#aware#awl#ax#axon#b#baby#bach#bacon#bacon#bah#balm#balsa#banish#barfly#barton#baste#bat#bauer#bayda#bbb#bbbb#bd#beak#becalm#beech#beefy#b''s'
+/run: |
+    #! /bin/bash
+
+    getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2
+    diff out out2
+    if [ $? -ne 0 ]
+    then
+        feedback-result failed
+        feedback-msg -m "The file does not contain the correct list of hashtag."
+    else
+        feedback-result success
+        feedbach-msg -m "Fine"
+    fi
 accessible: true
 author: Tom Rousseaux
 context: |-
     In this exercise you will learn to use pipes, refer to `this section <https://sites.uclouvain.be/SystInfo/notes/Theorie/html/intro.html#shell>`_ for their use.
-    You get and `input <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_pipes/input.txt>`_ from where you want to extract an ordered exhaustive list of unique hashtags. For this, you should use pipes. To extract hashtags from the text you can either use ``sed '/[^{#}]/d'`` or `grep(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
+    You get and `input <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_pipes/input.txt>`_ from where you want to extract an ordered exhaustive list of unique hashtags. For this, you should use pipes. To extract hashtags from the text you can either use ``sed '/ [^{#}]/d'`` or `grep(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    output: '2'
     memory: '100'
     time: '30'
-    output: '2'
 name: '[S1] Pipes'
 network_grading: false
 problems:

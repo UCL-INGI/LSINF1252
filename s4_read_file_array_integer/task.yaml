@@ -95,6 +95,8 @@
         if (ret != sum){
             push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
             CU_FAIL();
+        }else{
+            set_tag("sum");
         }
     }
 
@@ -111,8 +113,8 @@
         ret = myfunc("file.txt");
         SANDBOX_END;
 
-        if (ret != -1){
-            push_info_msg(_("When a read() fails, your code does not return -1."));
+        if (ret != -2){
+            push_info_msg(_("When a read() fails, your code does not return -2."));
             set_tag("failure_handling");
             CU_FAIL();
         }
@@ -137,13 +139,30 @@
             push_info_msg(_("The close() does not close the file you opened before."));
             close_ok++;
             CU_FAIL();
-        }if(close_ok == 0){
+        }
+
+        //We fail the close()
+        gen_file(3);
+        int ret = 0;
+        monitored.close = true;
+        failures.close = FAIL_FIRST;
+        failures.close_ret = -1;
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if(ret != -3){
+            push_info_msg(_("When close() fails, your code does not return -3."));
+            close_ok++;
+            CU_FAIL();
+        }
+        if(close_ok == 0){
             set_tag("close");
         }
     }
 
     int main(int argc,char** argv){
-        BAN_FUNCS();
+        BAN_FUNCS(system, set_tag);
         RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
     }
 accessible: true
@@ -151,7 +170,8 @@ author: Olivier Martin
 context: |-
     Given a file containing some (possibly none) positive integers (``int``), write a code that computes the sum of all integers present in the file. The sum have to be returned.
 
-    If an error occurs, return ``-1``.
+    - If ``open()`` fails, return ``-1``.
+    - If ``read()`` fails, return ``-2``.
 environment: cpp
 evaluate: best
 groups: false
@@ -171,7 +191,9 @@ problems:
 
                 /*
                  * @pre filename != NULL, name of the file
-                 * @post return the sum of all integers present in the file, -1 if an error occurs.
+                 * @post return the sum of all integers present in the file.
+                 *       return -1 if the file can not be open.
+                 *       return -2 if an error occurs during reading
                  */
                 int sum_file(char* filename)
         language: c
@@ -194,63 +216,69 @@ tags:
             with open().
         id: open
     '2':
-        description: You do not manage failures properly during write operations.
-        id: failure_handling
-        visible: true
-        type: 1
-        name: Failure handling
-    '3':
-        name: Banned functions
-        type: 1
-        description: You use some banned functions.
-        id: banned_funcs
+        name: Sum
+        description: The student has correctly computed and returned the sum.
+        id: sum
+        type: 0
         visible: false
-    '4':
-        visible: true
-        description: Your code produced a double free.
+    '10':
         type: 1
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        id: timeout
+        visible: true
+    '3':
+        name: Failure handling
+        type: 1
+        visible: true
+        description: You do not manage failures properly during read operations.
+        id: failure_handling
+    '4':
+        description: You use some banned functions.
+        type: 1
+        id: banned_funcs
+        name: Banned functions
+        visible: true
+    '5':
         id: double_free
         name: Double free
-    '5':
-        id: sigfpe
-        name: Floating Point Exception
         type: 1
-        description: ''
+        description: Your code produced a double free.
         visible: true
     '6':
-        id: memory
+        id: sigfpe
         type: 1
         description: ''
-        name: Memory Exceeded
+        name: Floating Point Exception
         visible: true
     '7':
-        description: You code do not compile.
-        id: not_compile
-        name: Not compile
+        description: ''
+        id: memory
+        name: Memory Exceeded
         visible: true
         type: 1
     '8':
-        name: Segmentation Fault
-        id: sigsegv
+        name: Not compile
+        id: not_compile
         type: 1
-        description: ''
+        description: You code does not compile.
         visible: true
     '9':
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-        type: 1
-        name: Timeout
-    '10':
-        visible: true
-        type: 2
+        id: sigsegv
         description: ''
-        name: S5
-        id: ''
+        visible: true
+        name: Segmentation Fault
+        type: 1
     '11':
+        name: S5
+        visible: true
+        description: ''
+        type: 2
+        id: ''
+    '12':
+        visible: true
         name: File
         type: 2
-        visible: true
         description: ''
         id: ''
 weight: 1.0

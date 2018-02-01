@@ -94,6 +94,8 @@ void test_some_integers() {
     if (ret != sum){
         push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
         CU_FAIL();
+    }else{
+        set_tag("sum");
     }
 }
 
@@ -110,8 +112,8 @@ void test_some_integers_fail_read() {
     ret = myfunc("file.txt");
     SANDBOX_END;
     
-    if (ret != -1){
-        push_info_msg(_("When a read() fails, your code does not return -1."));
+    if (ret != -2){
+        push_info_msg(_("When a read() fails, your code does not return -2."));
         set_tag("failure_handling");
         CU_FAIL();
     }
@@ -136,12 +138,29 @@ void test_close() {
         push_info_msg(_("The close() does not close the file you opened before."));
         close_ok++;
         CU_FAIL();
-    }if(close_ok == 0){
+    }
+    
+    //We fail the close()
+    gen_file(3);
+    int ret = 0;
+    monitored.close = true;
+    failures.close = FAIL_FIRST;
+    failures.close_ret = -1;
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt");
+    SANDBOX_END;
+    
+    if(ret != -3){
+        push_info_msg(_("When close() fails, your code does not return -3."));
+        close_ok++;
+        CU_FAIL(); 
+    }
+    if(close_ok == 0){
         set_tag("close");
     }
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS();
+    BAN_FUNCS(system, set_tag);
     RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }

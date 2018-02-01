@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include"student_code.h"
 
 uint8_t nbits(uint32_t n)
 {
@@ -15,7 +16,7 @@ uint8_t get_3_leftmost_bits(uint32_t x)
 }
 uint8_t get_4_rightmost_bits(uint32_t x)
 {
-@    @get_4_leftmost_bits@@
+@    @get_4_rightmost_bits@@
 }
 uint32_t unset_strong_bit(uint32_t x)
 {

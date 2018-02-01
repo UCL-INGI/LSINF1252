@@ -1,0 +1,42 @@
+accessible: true
+author: ''
+context: '*Estimated time: 15 minutes*'
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S03] Makefile - multiple choice questions'
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            text: gcc -o test test.o -lcunit
+        -   text: gcc -c test.o -lcunit
+            valid: true
+        -   text: gcc -o test.o
+            feedback: 'The name of the executable is missing and the '
+        -   text: ''
+        name: Linking
+        type: multiple_choice
+        header: Select all *correct* answers related to the linking of the `CUnit`
+            library in a Makefile recipe.
+    q2:
+        answer: '  valgrind --leak-check=full --show-leak-kinds=all program'
+        type: match
+        header: |-
+            You want to check for leaks in your code ``program`` with valgrind. What option(s) do you use to report all possible memory leaks of ``program`` in full detail?
+
+            Write the whole command you want to output, for instance     :
+
+            ``valgrind --option-name program``
+        name: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
