@@ -7,8 +7,13 @@ context: |
 
         struct node{
             node *next;
-            int value;
+            char *value;
         }
+
+     *hints*
+     -------
+     `strlen <https://linux.die.net/man/3/strlen>`_
+     -- sltren does not count the '\0' character
 environment: cpp
 evaluate: best
 groups: false
