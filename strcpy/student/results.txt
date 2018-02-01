@@ -1,2 +1,2 @@
-strcpy_impl#SUCCESS#Check the returned pointer in normal case#1#
+strcpy_impl#FAIL#Check the returned pointer in normal case#1#
 strcpy_impl#SUCCESS#Check the behavior of the function when the call to malloc fails#1#

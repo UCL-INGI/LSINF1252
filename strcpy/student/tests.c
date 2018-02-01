@@ -5,10 +5,15 @@
 #include "CTester/CTester.h"
 
 void test_strcpy_return() {
-  set_test_metadata("strcpy_impl", _("Check the returned pointer in normal case"), 1);
+  set_test_metadata("strcpy_impl", _("Check if the string is correctly put in memory"), 1);
 
   char *ret = NULL;
-  const char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
+
+  const char *stack_src = "Chaine de char de test un peu courte mais pas trop quand meme";
+  char *src = (char *)malloc(strlen(stack_src)+1);
+  if (src == NULL)
+      CU_FAIL("no mem");
+  strcpy(src, stack_src);
 
   monitored.malloc = true;
 
@@ -30,22 +35,14 @@ void test_strcpy_return() {
   CU_ASSERT_TRUE(mal);
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
   if (mal){
-      CU_ASSERT_EQUAL(ret[strlen(src)],'\0');
-      if (ret[strlen(src)== '\0']){
-          CU_ASSERT_STRING_EQUAL(ret, src);
-          if (strncmp(ret, src, 62) != 0){
-              char msg[80];
-              sprintf(msg, _("The strings are different.\nExpected string: %s. Received value: %s"), src, ret);
-              push_info_msg(msg);
-          }
+      if (strncmp(ret, src, strlen(src) + 1) != 0){
+          CU_FAIL("wrong string");
       }
-      else
-          push_info_msg(_("The returned pointer is does not finish by \0"));
+      free(ret);
   }
-  else
+  else {
     push_info_msg(_("The returned pointer is not malloced"));
-
-free(ret);
+  }
 
 }
 
