@@ -49,6 +49,7 @@ void test_open() {
     }
     
     //Test if open() return a correct file descriptor.
+    gen_file(13);
     monitored.open = true;
     SANDBOX_BEGIN;
     myfunc("file.txt");
@@ -66,7 +67,7 @@ void test_open() {
 
 void test_no_integer() {
     set_test_metadata("q1", _("Test without any integers."), 1);
-    int sum = gen_file(0);
+    int sum = gen_file(0); //Empty file
     int ret = 0;
     
     SANDBOX_BEGIN;
@@ -81,7 +82,7 @@ void test_no_integer() {
 
 void test_some_integers() {
     set_test_metadata("q1", _("Test with some integers."), 2);
-    int sum = gen_file(12);
+    int sum = gen_file(15);
     int ret = 0;
     
     SANDBOX_BEGIN;
@@ -90,6 +91,26 @@ void test_some_integers() {
     
     if (ret != sum){
         push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
+        CU_FAIL();
+    }
+}
+
+void test_some_integers_fail_read() {
+    set_test_metadata("q1", _("Test with some integers (read() fail)"), 1);
+    gen_file(8);
+    int ret = 0;
+    
+    monitored.read = true;
+    failures.read = FAIL_THIRD;
+    failures.read_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt");
+    SANDBOX_END;
+    
+    if (ret != -1){
+        push_info_msg(_("When a read() fails, your code does not return -1."));
+        set_tag("failure_handling");
         CU_FAIL();
     }
 }
@@ -120,5 +141,5 @@ void test_close() {
 
 int main(int argc,char** argv){
     BAN_FUNCS();
-    RUN(test_open, test_no_integer, test_some_integers, test_close);
+    RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }
