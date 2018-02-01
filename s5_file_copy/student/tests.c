@@ -170,7 +170,7 @@ void test_close() {
         CU_FAIL();
     }
     
-    //We fail the close()
+    //We fail a close()
     gen_file(3);
     int ret = 0;
     monitored.close = true;
