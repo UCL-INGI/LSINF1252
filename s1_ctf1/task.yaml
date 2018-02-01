@@ -8,9 +8,9 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
-name: '[S1] CTF1'
+    memory: '100'
+name: '[S1] CTF1 - REVIEWED'
 network_grading: false
 problems:
     q1:
@@ -22,5 +22,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: S1
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0

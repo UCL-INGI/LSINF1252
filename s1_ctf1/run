@@ -1,7 +1,7 @@
 #! /bin/bash
 
 g++ main.cpp
-pseudo=$(getinput username)
+pseudo=$(getinput @username)
 rep=$(getinput q1)
 stud=$(./a.out $pseudo obo)
 if [ "$stud" == "$rep" ]
