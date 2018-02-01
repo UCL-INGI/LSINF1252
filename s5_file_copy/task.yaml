@@ -1,22 +1,21 @@
 accessible: true
 author: Olivier Martin
-context: Given a file containing arbitrary binary bytes, you are asked to define a
-    function that copy the file. You can not modify the content of the original file.
+context: Given a file containing arbitrary bytes, you are asked to define a function
+    that copy the file. You can not modify the content of the original file.
 environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
 name: '[S5] File copy'
 network_grading: false
 order: 37
 problems:
     q1:
-        name: ''
         type: code
-        language: ''
+        name: ''
         header: |-
             Write here the body of the function
 
@@ -30,99 +29,100 @@ problems:
                  *       return 0 if the function terminates with success. -1 in case of errors.
                  */
                 int copy(char* file_name, char* new_file_name)
+        language: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 0
-        visible: true
-        id: close
         name: Close
+        type: 0
+        visible: true
         description: This tag validate that your close are correctly performed.
+        id: close
     '1':
+        type: 0
+        visible: true
         name: Permission
-        type: 0
-        visible: true
-        id: permission
         description: This tag validate that you are able to copy permission of a file.
+        id: permission
     '2':
-        id: copy
-        visible: true
-        name: Copy
         description: This tag validate you are able to copy a file.
+        visible: true
+        id: copy
         type: 0
+        name: Copy
     '3':
+        name: Open
+        type: 0
         visible: true
         description: This tag validate you are able to open a file.
         id: open
-        name: Open
-        type: 0
     '10':
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        id: timeout
+    '11':
+        name: Original file modified
+        id: original_modif
+        visible: true
+        description: You have modified the original file.
+        type: 1
+    '12':
+        visible: true
+        id: failure_handling
+        name: Failure handling
+        description: You do not manage failures during the copy properly.
+        type: 1
+    '4':
+        description: ''
         type: 1
         id: sigfpe
-        visible: true
-        description: ''
         name: Floating Point Exception
-    '11':
-        type: 1
-        name: Segmentation Fault
-        description: ''
-        id: sigsegv
         visible: true
-    '12':
+    '5':
+        id: sigsegv
+        name: Segmentation Fault
+        type: 1
+        description: ''
+        visible: true
+    '6':
+        id: banned_funcs
+        type: 1
         description: You use some banned functions.
         name: Banned functions
-        type: 1
-        id: banned_funcs
-        visible: false
-    '4':
+        visible: true
+    '7':
+        description: ''
         id: memory
         name: Memory Exceeded
         visible: true
         type: 1
-        description: ''
-    '5':
-        type: 1
+    '8':
         name: Not compile
         id: not_compile
-        visible: true
-        description: You code do not compile.
-    '6':
-        id: double_free
         type: 1
+        description: You code does not compile.
         visible: true
-        description: Your code produced a double free.
-        name: Double free
-    '7':
-        name: Timeout
-        id: timeout
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        type: 1
-    '8':
-        type: 1
-        name: Original file modified
-        visible: true
-        description: You have modified the original file.
-        id: original_modif
     '9':
-        name: Failure handling
-        id: failure_handling
-        type: 1
-        description: You do not manage failures during the copy properly.
+        id: double_free
+        description: Your code produced a double free.
         visible: true
+        name: Double free
+        type: 1
     '13':
         description: ''
         name: File
-        visible: true
         type: 2
+        visible: true
         id: ''
     '14':
         name: S5
-        visible: true
         type: 2
+        visible: true
         description: ''
         id: ''
 weight: 1.0
