@@ -1,0 +1,49 @@
+#!/bin/python3
+
+# Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+# Auteurs : Pablo Gonzalez Alvarez
+# Licence : GPLv3
+
+import subprocess, shlex, os
+from inginious import feedback, rst, input
+
+# Student final score
+score = 0
+
+# MATCH
+
+match = input.get_input("make_me_easy")
+if match != 'make make_me':
+    feedback.set_problem_result("failed", "make_me_easy")
+    feedback.set_problem_feedback("You didn't make it!", "make_me_easy")
+else:
+    score += 25
+    feedback.set_problem_result("success", "make_me_easy")
+    feedback.set_problem_feedback("You made it!", "make_me_easy")
+
+# CODE
+
+# Switch working directory to student/
+os.chdir("student")
+
+# Fetch and save the student code into a file for compilation
+input.parse_template("Makefile.tpl", "Makefile")
+
+# Compilation
+p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+make_output = p.communicate()[0].decode('utf-8')
+# If compilation failed, exit with "failed" result
+if p.returncode:
+    feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
+else:
+    score += 75
+    feedback.set_problem_result("success", "make_me_less_easy")
+    feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
+
+# Remove source files
+subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+# Set score
+feedback.set_grade(score)
+feedback.set_global_result("success" if score >= 80 else "failed")
+feedback.set_global_feedback("Good job" if score >= 80 else "Try again")
