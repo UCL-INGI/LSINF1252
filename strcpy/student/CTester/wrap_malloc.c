@@ -151,8 +151,12 @@ void __wrap_free(void *ptr) {
   stats.free.called++;
   stats.free.last_params.ptr=ptr;
   if(ptr!=NULL) {
-      stats.memory.used-=malloc_free_ptr(ptr);
-    __real_free(ptr);
+    stats.memory.used-=malloc_free_ptr(ptr);
+
+    if (FAIL(failures.free))
+      failures.free=NEXT(failures.free);
+    else
+      __real_free(ptr);
   }
 }
 

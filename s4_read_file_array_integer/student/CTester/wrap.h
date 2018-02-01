@@ -111,6 +111,8 @@ struct wrap_fail_t {
   uint32_t realloc;
   void *realloc_ret;
 
+  uint32_t free;
+
   uint32_t pthread_mutex_lock;
   int pthread_mutex_lock_ret;
   int pthread_mutex_lock_errno;
