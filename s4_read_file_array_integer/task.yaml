@@ -280,17 +280,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S5] File integers reading'
 network_grading: false
 order: 25
 problems:
     q1:
-        name: Write your code here
-        language: c
         type: code
+        name: Write your code here
         header: |-
             .. code-block:: java
 
@@ -299,6 +298,7 @@ problems:
                  * @post return the sum of all integers present in the file, -1 if an error occurs.
                  */
                 int sum_file(char* filename)
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -307,68 +307,74 @@ tags:
     '0':
         name: Close
         type: 0
-        id: close
         visible: true
         description: This tag validate that your close are correctly performed.
+        id: close
     '1':
         type: 0
         visible: true
         name: Open
-        id: open
         description: This tag validate you are able to open a file and handle errors
             with open().
+        id: open
+    '11':
+        name: Failure handling
+        id: failure_handling
+        visible: true
+        description: You do not manage failures properly during write operations.
+        type: 1
     '2':
         name: Banned functions
-        id: banned_funcs
         description: You use some banned functions.
+        id: banned_funcs
         type: 1
         visible: false
     '3':
         name: Double free
+        type: 1
         visible: true
         description: Your code produced a double free.
-        type: 1
         id: double_free
     '4':
+        description: ''
+        type: 1
         id: sigfpe
         name: Floating Point Exception
-        description: ''
         visible: true
-        type: 1
     '5':
-        visible: true
         id: memory
         name: Memory Exceeded
         type: 1
         description: ''
+        visible: true
     '6':
         id: not_compile
-        name: Not compile
         type: 1
         description: You code do not compile.
+        name: Not compile
         visible: true
     '7':
         description: ''
+        id: sigsegv
+        name: Segmentation Fault
         visible: true
         type: 1
-        name: Segmentation Fault
-        id: sigsegv
     '8':
+        name: Timeout
         id: timeout
         type: 1
         description: Your code exceeds the maximum allowed time.
-        name: Timeout
         visible: true
     '10':
-        name: S5
         type: 2
         description: ''
+        name: S5
         visible: true
         id: ''
     '9':
-        visible: true
-        name: File
-        type: 2
         description: ''
+        visible: true
+        type: 2
+        name: File
         id: ''
 weight: 1.0
