@@ -114,6 +114,20 @@ for pid, result in tests_result.items():
     else:
         feedback.set_problem_result("failed", pid)
 
+with open("task.yaml", 'r') as stream:
+    problems = yaml.load(stream)['problems']
+    
+    for name, meta in problems.items():
+        if meta['type'] == 'match':
+            answer = input.get_input(name)
+            if answer == meta['answer']:
+                feedback.set_problem_result("success", pid)
+                score += 1
+            else:
+                feedback.set_problem_result("failed", pid)
+
+            total += 1
+
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)
 feedback.set_global_result("success" if score >= 50 else "failed")
