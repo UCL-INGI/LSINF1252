@@ -41,7 +41,7 @@ subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
 # Check whether make
 
-if(os.path.isfile("./make_me"))
+if(os.path.isfile("./student/make_me"))
     # Run the code in a parallel container
     p = subprocess.Popen("./make_me", stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     p.communicate()

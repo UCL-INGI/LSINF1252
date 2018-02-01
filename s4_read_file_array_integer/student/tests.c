@@ -43,7 +43,7 @@ void test_open_fail() {
     ret = myfunc("file.txt");
     SANDBOX_END;
 
-    if (ret != -1){ /
+    if (ret != -1){ 
         push_info_msg(_("When open() fails, your code does not return -1."));
         CU_FAIL("");
     }
