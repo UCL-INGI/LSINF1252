@@ -1,8 +1,8 @@
 accessible: true
 author: Tom Rousseaux
 context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf1/archive.tar.gz>`_,
-    ouvez first mission et suivez les insctruction. Un code individuel vous sera fourni
-    à la fin du CTF rentrez-le ci-dessous.
+    ouvez ``FirstMission`` et suivez les insctructions. Un code individuel vous sera
+    fourni à la fin du CTF rentrez-le ci-dessous.
 environment: cpp
 evaluate: best
 groups: false
