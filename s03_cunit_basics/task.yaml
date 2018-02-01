@@ -21,5 +21,12 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: CUnit
+        id: cunit
+        type: 0
+        description: |
+            A unit testing framework for C
+        visible: false
 weight: 1.0
