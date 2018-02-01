@@ -5,7 +5,7 @@
     # Auteurs : Mathieu Xhonneux, Anthony Gégo
     # Licence : GPLv3
 
-    import subprocess, shlex, re, os
+    import subprocess, shlex, re, os, yaml
     from inginious import feedback, rst, input
 
     # Switch working directory to student/
