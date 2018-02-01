@@ -49,6 +49,7 @@ void test_open() {
     }
     
     //Test if open() return a correct file descriptor.
+    gen_file(13);
     monitored.open = true;
     SANDBOX_BEGIN;
     myfunc("file.txt");
