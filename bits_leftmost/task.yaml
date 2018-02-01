@@ -21,7 +21,7 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: Leftist bits
+name: '[S2] Leftist bits'
 network_grading: false
 problems:
     q1:
