@@ -91,12 +91,13 @@
             set_tag("open");
         }
 
+        monitored.open = true;
         SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
+        myfunc("file.txt");
         SANDBOX_END;
 
         if(stats.open.last_return == -1){
-            push_info_msg(_("When the open should be fine, your code returns -1."));
+            push_info_msg(_("When the open() should be fine, your code returns -1."));
             CU_FAIL();
         }
     }
