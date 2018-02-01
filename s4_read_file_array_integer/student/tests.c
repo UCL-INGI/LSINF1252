@@ -138,7 +138,24 @@ void test_close() {
         push_info_msg(_("The close() does not close the file you opened before."));
         close_ok++;
         CU_FAIL();
-    }if(close_ok == 0){
+    }
+    
+    //We fail the close()
+    gen_file(3);
+    int ret = 0;
+    monitored.close = true;
+    failures.close = FAIL_FIRST;
+    failures.close_ret = -1;
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt");
+    SANDBOX_END;
+    
+    if(ret != -3){
+        push_info_msg(_("When close() fails, your code does not return -3."));
+        close_ok++;
+        CU_FAIL(); 
+    }
+    if(close_ok == 0){
         set_tag("close");
     }
 }
