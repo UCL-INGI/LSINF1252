@@ -2,7 +2,7 @@ accessible: true
 author: Arthur van Stratum
 context: 'Palindrome are strings of text which reads the same backward as forward,
     i.e. : "racecar", or "a man a plan a canal panama".'
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
