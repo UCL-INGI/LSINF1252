@@ -22,22 +22,34 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S01] tar'
 network_grading: false
 order: 11
 problems:
     archive:
+        name: ''
         allowed_exts:
         - .gz
         type: file
-        name: ''
         header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: S1
+        type: 2
+        description: ''
+        visible: true
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: ''
+        name: Command line
+        id: ''
 weight: 1.0
