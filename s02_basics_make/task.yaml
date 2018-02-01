@@ -71,7 +71,10 @@ context: |-
 
     To try the following questions locally, you can download a zip file of the questions folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/make_me.zip>`_.
 
-    *References:*
+    ----
+
+    References
+    ----------
 
     * https://sites.uclouvain.be/SystInfo/notes/Outils/html/make.html
     * https://www.gnu.org/software/make/manual/
