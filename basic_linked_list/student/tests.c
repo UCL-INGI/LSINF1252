@@ -139,10 +139,7 @@ void test_init_node_nomem(){
   SANDBOX_BEGIN;
   ret = init_node(42);
   SANDBOX_END;
-  printf("%p\n", ret);
 
-  push_info_msg("test");
-  monitored.malloc = false;
   CU_ASSERT_PTR_NULL(ret);
   if (ret)
     push_info_msg(_("Wrong return value when malloc call fails"));

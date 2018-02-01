@@ -23,16 +23,16 @@ void test_sum2(){
 
 
 void test_sum3(){
-  set_test_metadata("version2", _("Check the value of @a"), 1);
+  set_test_metadata("version2", _("Check the value of @r"), 1);
 
-  int a = 1, b = 8;
+  int a = 1, b = 8, r;
 
   SANDBOX_BEGIN;
-  version2(&a, &b);
+  version2(&a, &b, &r);
   SANDBOX_END;
 
-  CU_ASSERT_EQUAL(a, 9);
-  if (a != 9){
+  CU_ASSERT_EQUAL(r, 9);
+  if (r != 9){
     char msg[80];
     sprintf(msg, _("Expected value: 9. Received value: %i"), result);
     push_info_msg(msg);
