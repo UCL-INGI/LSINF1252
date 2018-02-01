@@ -108,7 +108,7 @@ problems:
         header: |-
             Suppose you cannot use what you did in the above question. Write a Makefile that compiles the above given code and builds an executable ``make_me``. You can reuse the ``Makefile`` given in the above given zip file.
 
-            **Hint:** If you haven't already, read `sections 2.1 to 2.3. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_.
+            **Hint:** If you have no idea where to start, read `sections 2.1 to 2.3. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_.
         type: code
         language: Makefile
 stored_submissions: 0
