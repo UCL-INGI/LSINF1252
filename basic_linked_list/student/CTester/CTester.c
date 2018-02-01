@@ -109,6 +109,7 @@ void segv_handler(int sig, siginfo_t *unused, void *unused2)
     push_info_msg(_("Your code produced a segfault."));
     set_tag("sigsegv");
     wrap_monitoring = true;
+    CU_FAIL("Segmentation Fault");
     siglongjmp(segv_jmp, 1);
 }
 
@@ -117,6 +118,7 @@ void alarm_handler(int sig, siginfo_t *unused, void *unused2)
     wrap_monitoring = false;
     push_info_msg(_("Your code exceeded the maximal allowed execution time."));
     set_tag("timeout");
+    CU_FAIL("Timeout");
     wrap_monitoring = true;
     siglongjmp(segv_jmp, 1);
 }
@@ -147,7 +149,6 @@ int sandbox_begin()
 
 void sandbox_fail()
 {
-    CU_FAIL("Segmentation Fault or Timeout");
 }
 
 void sandbox_end()
