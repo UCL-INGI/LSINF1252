@@ -20,9 +20,8 @@ int add_node(list_t* list, int value){
   if (!node)
     return 1;
 
-    node->next = list->first;
-    list->first = node;
-
+  node->next = list->first;
+  list->first = node;
 
   list->size++;
 
