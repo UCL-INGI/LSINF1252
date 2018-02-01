@@ -1,6 +1,6 @@
 #! /bin/bash
 
-getinput "file" | sed 's/ //g' < out | sed ':a;N;$!ba;s/\n//g' > out2
+getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2
 diff out out2
 if [ $? -ne 0 ]
 then

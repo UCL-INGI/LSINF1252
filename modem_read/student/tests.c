@@ -20,6 +20,7 @@ void test_42_right1() {
 
     monitored.malloc = true;
     monitored.free = true;
+    failures.free = FAIL_ALWAYS;
     failures.malloc = 1;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
@@ -31,6 +32,8 @@ void test_42_right1() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,1);
+
+    free_trap(p,64);
 }
 
 void test_42_left1() {
@@ -49,6 +52,7 @@ void test_42_left1() {
 
     monitored.malloc = true;
     monitored.free = true;
+    failures.free = FAIL_ALWAYS;
     failures.malloc = 1;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
@@ -62,6 +66,8 @@ void test_42_left1() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,1);
+
+    free_trap(p,64);
 }
 
 void test_42_right2() {
@@ -80,6 +86,7 @@ void test_42_right2() {
 
     monitored.malloc = true;
     monitored.free = true;
+    failures.free = FAIL_ALWAYS;
     failures.malloc = 1;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
@@ -91,6 +98,8 @@ void test_42_right2() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,1);
+
+    free_trap(p,64);
 }
 
 void test_42_left2() {
@@ -109,6 +118,7 @@ void test_42_left2() {
 
     monitored.malloc = true;
     monitored.free = true;
+    failures.free = FAIL_ALWAYS;
     failures.malloc = 1;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
@@ -122,6 +132,8 @@ void test_42_left2() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,1);
+
+    free_trap(p,64);
 }
 
 void test_no42_right() {
@@ -129,7 +141,7 @@ void test_no42_right() {
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
-    int ret = 0;
+    int ret = 1;
 
     int i;
     for(i = 0; i < 64; i++){
@@ -140,6 +152,7 @@ void test_no42_right() {
 
     monitored.malloc = true;
     monitored.free = true;
+    failures.free = FAIL_ALWAYS;
     failures.malloc = 1;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
@@ -151,6 +164,8 @@ void test_no42_right() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,1);
+
+    free_trap(p,64);
 }
 
 void test_no42_left() {
@@ -158,7 +173,7 @@ void test_no42_left() {
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
-    int ret = 0;
+    int ret = 1;
 
     int i;
     for(i = 0; i < 64; i++){
@@ -169,6 +184,7 @@ void test_no42_left() {
 
     monitored.malloc = true;
     monitored.free = true;
+    failures.free = FAIL_ALWAYS;
     failures.malloc = 1;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
@@ -180,6 +196,8 @@ void test_no42_left() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,1);
+
+    free_trap(p,64);
 }
 
 void test_fail() {
@@ -187,7 +205,7 @@ void test_fail() {
 
     if(!tab1) CU_FAIL(_("malloc failed"));
 
-    int ret = 0;
+    int ret = 1;
 
     monitored.malloc = true;
     monitored.free = true;
@@ -207,6 +225,6 @@ int main(int argc,char** argv)
 {
     tab1 = (int8_t*) malloc(64);
     BAN_FUNCS();
-    RUN(test_42_right1, test_42_right2, test_no42_right, test_fail);
+    RUN(test_42_right1, test_42_right2, test_no42_right, test_fail, test_42_left2, test_no42_left, test_42_left1);
     free(tab1);
 }
