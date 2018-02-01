@@ -6,7 +6,7 @@
 
 void test_myfunc_ret()
 {
-	set_test_metadata("pal", _("Test the function palindrome"), 1);
+	set_test_metadata("q1", _("Test the function palindrome"), 1);
 
 	int ret1 = -2;
 	int ret2 = -2;

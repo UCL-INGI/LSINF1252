@@ -4,7 +4,7 @@
 # Auteurs : Pablo Gonzalez Alvarez
 # Licence : GPLv3
 
-import subprocess, shlex, os
+import subprocess, shlex, os, os.path.isfile
 from inginious import feedback, rst, input
 
 # Student final score
@@ -35,26 +35,18 @@ make_output = p.communicate()[0].decode('utf-8')
 # If compilation failed, exit with "failed" result
 if p.returncode:
     feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
+else:
+	score += 75
+	feedback.set_problem_result("success", "make_me_less_easy")
+	feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
 
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
-# Check whether make
+# Check whether make builds the correct executable
 
-if(os.path.isfile("./student/make_me"))
-    # Run the code in a parallel container
-    p = subprocess.Popen("./make_me", stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    p.communicate()
-
-    # If run failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_problem_feedback("failed", "make_me_less_easy")
-    else:
-        score += 75
-        feedback.set_problem_result("success", "make_me_less_easy")
-        feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
-else:
-    feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
+if( !os.path.isfile("./student/make_me"))
+	feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
 
 # Set score
 feedback.set_grade(score)
