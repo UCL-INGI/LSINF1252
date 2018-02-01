@@ -4,6 +4,17 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+struct node *init_node(int value){
+  struct node *node = (struct node*) malloc(sizeof(struct node));
+  if (!node)
+    return NULL;
+
+  node->next = NULL;
+  node->value = value;
+
+  return node;
+}
+
 void free_stack(struct node *head){
   if (!head)
     return;
@@ -48,8 +59,10 @@ void test_push_param_nomem() {
 
   int ret;
 
+  srandom(614646841);
+
   SANDBOX_BEGIN;
-  ret = push(NULL, 614646841);
+  ret = push(NULL, random());
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(1, ret);
@@ -67,7 +80,7 @@ void test_push_param_nomem() {
   SANDBOX_BEGIN;
   ret = push(&head, 164684);
   SANDBOX_END;
-
+  
   CU_ASSERT_EQUAL(1, ret);
 
   free(head);
@@ -89,13 +102,13 @@ void test_push_general() {
   ret = push(&stack, value);
   SANDBOX_END;
 
-  //printf("stack head %i\n", stack->value);
-
   // check if only one call to malloc
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
   if (ms > 1)
     push_info_msg(_("You used more than one call to malloc"));
+
+  printf("%i", ret);
 
   // check if new element is malloced
   int mal = malloced((void*) stack);
@@ -109,15 +122,20 @@ void test_push_general() {
   else
     push_info_msg(_("The returned pointer is not malloced"));
 
+  if (!stack && !stack->next){
+    CU_FAIL("The node after the head node is not correctly initialised");
+    return;
+  }
+
 
   *(array+5) = value;
 
   int i;
 
   struct node *run = stack;
-  for (i = 0; i < 6; i++){
+  for (i = 0; i < 2; i++){
     //printf("array: %i => run->value: %i\n", *(array+5-i), run->value);
-    if (*(array+5-i) != run->value){
+    if (!run || *(array+5-i) != run->value){
       CU_FAIL("The structure of the stack has changed");
       push_info_msg(_("The structure of the stack has changed"));
       return;

@@ -134,9 +134,12 @@ void test_init_node_nomem(){
   failures.malloc = FAIL_ALWAYS;
   failures.malloc_ret = NULL;
 
+  srandom(881468468);
+
   SANDBOX_BEGIN;
-  ret = init_node(0);
+  ret = init_node(42);
   SANDBOX_END;
+  printf("%p\n", ret);
 
   printf("%p\n", ret);
   CU_ASSERT_PTR_NULL(ret);
@@ -199,17 +202,17 @@ void test_add_node_empty(){
 
 void test_add_node_wrong_args(){
       set_test_metadata("add_node", _("Check the return code of the function if wrong args"), 1);
-    
+
     int ret;
     srandom(47826786);
-    
+
     SANDBOX_BEGIN;
     ret = add_node(NULL, random());
     SANDBOX_END;
-    
+
     CU_ASSERT_TRUE(ret);
     if (!ret)
-         push_info_msg(_("Wrong return value when wrong args"));    
+         push_info_msg(_("Wrong return value when wrong args"));
 }
 
 void test_add_node_non_empty(){

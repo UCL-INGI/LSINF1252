@@ -41,7 +41,7 @@ problems:
                     node_t* next;
                 } node_t;
 
-            Starting from this structure, you are to implement the following function
+            Starting from this structure, you are asked to implement the following function
 
             .. code-block:: c
 
@@ -51,11 +51,9 @@ problems:
                 * @head: first node of the list
                 * @return: 0 if success, -1 otherwise
                 */
-                int insert(node_t** head, char value, int (*fun)(int,int)){
+                int insert(node_t** head, char value, int (*fun)(char,char)){
                     //Your code will be inserted here
                 }
-
-            The result of this question doesn't depend of the precedent question
         language: c
         type: code
 stored_submissions: 0

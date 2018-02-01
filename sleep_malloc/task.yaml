@@ -1,52 +1,183 @@
-/student/CTester/wrap_sleep.c: |
-    #include <sys/types.h>
-    #include <unistd.h>
+/student/tests.c: |
+    #include <stdlib.h>
     #include <stdio.h>
-    #include "wrap.h" // system call wrapper
+    #include <unistd.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
 
-    // unsigned int sleep(unsigned int seconds);
+    void test_success() {
+        set_test_metadata("sleep_malloc", _("Malloc always success"), 1);
 
-    unsigned int __real_sleep(unsigned int);
+        void* ret = NULL;
 
-    extern bool wrap_monitoring;
-    extern struct wrap_stats_t stats;
-    extern struct wrap_monitor_t monitored;
-    extern struct wrap_fail_t failures;
+        monitored.malloc = true;
+        failures.malloc = FAIL_NEVER;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
 
+        CU_ASSERT_PTR_NOT_NULL(ret);
 
-    void init_sleep() {
-      // nothing to do
+        CU_ASSERT_TRUE(malloced(ret));
+
+        CU_ASSERT_EQUAL(stats.malloc.called,1)
+        if(stats.malloc.called > 1) push_info_msg(_("Why did you call malloc more then once?"));
+
+        free(ret);
     }
 
-    void clean_sleep() {
-      // nothing to do
+    void test_fail_first() {
+        set_test_metadata("sleep_malloc", _("Malloc fails first"), 1);
+
+        void* ret = NULL;
+
+        monitored.malloc = true;
+        failures.malloc = FAIL_FIRST;
+        monitored.sleep = true;
+        failures.sleep = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
+
+        CU_ASSERT_PTR_NOT_NULL(ret);
+
+        CU_ASSERT_TRUE(malloced(ret));
+
+        CU_ASSERT_EQUAL(stats.malloc.called,2)
+        if(stats.malloc.called > 2) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        CU_ASSERT_EQUAL(stats.sleep.called,1)
+        if(stats.sleep.called > 1) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        free(ret);
     }
 
-    void resetstats_sleep() {
-      stats.sleep.called=0;
-      stats.sleep.last_return=0;
-      stats.sleep.last_arg=0;
+    void test_fail_twice() {
+        set_test_metadata("sleep_malloc", _("Malloc fails twice"), 1);
+
+        void* ret = NULL;
+
+        monitored.malloc = true;
+        failures.malloc = FAIL_TWICE;
+        monitored.sleep = true;
+        failures.sleep = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
+
+        CU_ASSERT_PTR_NOT_NULL(ret);
+
+        CU_ASSERT_TRUE(malloced(ret));
+
+        CU_ASSERT_EQUAL(stats.malloc.called,3)
+        if(stats.malloc.called > 3) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        CU_ASSERT_EQUAL(stats.sleep.called,2)
+        if(stats.sleep.called > 2) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        free(ret);
     }
 
-    unsigned int __wrap_sleep(unsigned int time) {
-      if(!wrap_monitoring || !monitored.sleep) {
-        return __real_sleep(time);
-      }
+    void test_fail_five() {
+        set_test_metadata("sleep_malloc", _("Malloc fails five first times"), 1);
 
-      stats.sleep.called++;
-      stats.sleep.last_arg = time;
-      // being monitored
-      if (FAIL(failures.sleep)) {
-        failures.sleep=NEXT(failures.sleep);
-        stats.sleep.last_return=failures.sleep_ret;
-        return failures.sleep_ret;
-      }
-      failures.sleep=NEXT(failures.sleep);
-      // did not fail
+        void* ret = NULL;
 
-      unsigned int ret=__real_sleep(time);
-      stats.sleep.last_return=ret;
-      return ret;
+        monitored.malloc = true;
+        failures.malloc = 0x1f;
+        monitored.sleep = true;
+        failures.sleep = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
+
+        CU_ASSERT_PTR_NOT_NULL(ret);
+
+        CU_ASSERT_TRUE(malloced(ret));
+
+        CU_ASSERT_EQUAL(stats.malloc.called,6)
+        if(stats.malloc.called > 6) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        CU_ASSERT_EQUAL(stats.sleep.called,5)
+        if(stats.sleep.called > 5) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        free(ret);
+    }
+
+    void test_fail_eight() {
+        set_test_metadata("sleep_malloc", _("Malloc fails eight first times"), 1);
+
+        void* ret = NULL;
+
+        monitored.malloc = true;
+        failures.malloc = 0xff;
+        monitored.sleep = true;
+        failures.sleep = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
+
+        CU_ASSERT_PTR_NOT_NULL(ret);
+
+        CU_ASSERT_TRUE(malloced(ret));
+
+        CU_ASSERT_EQUAL(stats.malloc.called,9)
+        if(stats.malloc.called > 9) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        CU_ASSERT_EQUAL(stats.sleep.called,8)
+        if(stats.sleep.called > 8) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        free(ret);
+    }
+
+    void test_fail_ten() {
+        set_test_metadata("sleep_malloc", _("Malloc fails ten first times"), 1);
+
+        void* ret = (void*) 0x86;
+
+        monitored.malloc = true;
+        failures.malloc = 0x3ff;
+        monitored.sleep = true;
+        failures.sleep = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
+
+        CU_ASSERT_PTR_NULL(ret);
+
+        CU_ASSERT_EQUAL(stats.malloc.called,10)
+        if(stats.malloc.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        CU_ASSERT_EQUAL(stats.sleep.called,10)
+        if(stats.sleep.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    }
+
+    void test_fail_always() {
+        set_test_metadata("sleep_malloc", _("Malloc fails always"), 1);
+
+        void* ret = (void*) 0x86;
+
+        monitored.malloc = true;
+        failures.malloc = FAIL_ALWAYS;
+        monitored.sleep = true;
+        failures.sleep = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = sleep_malloc(16);
+        SANDBOX_END;
+
+        CU_ASSERT_PTR_NULL(ret);
+
+        CU_ASSERT_EQUAL(stats.malloc.called,10)
+        if(stats.malloc.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+
+        CU_ASSERT_EQUAL(stats.sleep.called,10)
+        if(stats.sleep.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS();
+        RUN(test_success,test_fail_first,test_fail_twice,test_fail_five,test_fail_eight,test_fail_ten,test_fail_always);
     }
 accessible: true
 author: Mathieu Xhonneux & Maxime Mawait
@@ -58,16 +189,17 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S3] Sleepy memory'
 network_grading: false
 order: 14
 problems:
     sleep_malloc:
-        name: Sleepy malloc
         language: c
+        name: Sleepy malloc
+        type: code
         header: |-
             Write the body of the function *sleepy_malloc*.
 
@@ -80,7 +212,6 @@ problems:
                  * If malloc failed 10 times in a row, return NULL.
                  */
                 void *sleepy_malloc(size_t s) {
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1

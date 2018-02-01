@@ -1,29 +1,3 @@
-/student/solution.c.sol: |+
-    //Open
-    int fd1 = open(file_name,O_RDONLY);
-    int fd2 = open(new_file_name,O_WRONLY|O_CREAT);
-    if(fd1 == -1) return -1;
-    if(fd2 == -1) return -1;
-
-    //Permissions
-    struct stat st;
-    stat(file_name, &st);
-    chmod(new_file_name, st.st_mode);
-
-    //Copy
-    char c;
-    while(read(fd1, (void *) &c, sizeof(char)) >= 1){
-        if ((int)write(fd2, (void *) &c, sizeof(char)) == -1)
-            return -1;
-    }
-
-    //Close
-    close(fd1);
-    close(fd2);
-    return 0;
-
-
-
 /student/tests.c: |
     // CTester template
 
@@ -56,32 +30,13 @@
         return sum;
     }
 
-    /*
-     * Test with no file
-     */
-    void test_no_file() {
-        set_test_metadata("q1", _("Test with no file"), 1);
+    void test_open() {
+        set_test_metadata("q1", _("Test open"), 1);
+        system("rm file.txt"); //Be sure the file does not exist
         int ret = 0;
+        int tag_open = 0;
 
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != -1){
-            push_info_msg(_("When there is no file, your code does not return -1."));
-            CU_FAIL();
-        }else{
-            set_tag("open");
-        }
-    }
-
-    /*
-     * Test with no file
-     */
-    void test_fail_open() {
-        set_test_metadata("q1", _("Test fail open"), 1);
-        int ret = 0;
-
+        //Test with open fail
         monitored.open = true;
         failures.open = FAIL_FIRST;
         failures.open_ret = -1;
@@ -93,18 +48,29 @@
         if (ret != -1){
             push_info_msg(_("When there is no file, your code does not return -1."));
             CU_FAIL();
-        }else{
+            tag_open++;
+        }
+
+        //Test if open() return a correct file descriptor.
+        gen_file(13);
+        monitored.open = true;
+        SANDBOX_BEGIN;
+        myfunc("file.txt");
+        SANDBOX_END;
+
+        if(stats.open.last_return <= 2){
+            push_info_msg(_("When the open() should be fine, your code returns -1."));
+            CU_FAIL();
+            tag_open++;
+        }
+        if(tag_open == 0){
             set_tag("open");
         }
     }
 
-
-    /*
-     * Test with no integer in the file
-     */
     void test_no_integer() {
         set_test_metadata("q1", _("Test without any integers."), 1);
-        int sum = gen_file(0);
+        int sum = gen_file(0); //Empty file
         int ret = 0;
 
         SANDBOX_BEGIN;
@@ -117,13 +83,9 @@
         }
     }
 
-
-    /*
-     * Test with some integers in the file
-     */
     void test_some_integers() {
-        set_test_metadata("q1", _("Test with some intagers."), 2);
-        int sum = gen_file(12);
+        set_test_metadata("q1", _("Test with some integers."), 1);
+        int sum = gen_file(15);
         int ret = 0;
 
         SANDBOX_BEGIN;
@@ -133,12 +95,31 @@
         if (ret != sum){
             push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
             CU_FAIL();
+        }else{
+            set_tag("sum");
         }
     }
 
-    /*
-     * Test with some integers in the file with close()
-     */
+    void test_some_integers_fail_read() {
+        set_test_metadata("q1", _("Test with read() fail"), 1);
+        gen_file(9);
+        int ret = 0;
+
+        monitored.read = true;
+        failures.read = FAIL_THIRD;
+        failures.read_ret = -1;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt");
+        SANDBOX_END;
+
+        if (ret != -2){
+            push_info_msg(_("When a read() fails, your code does not return -2."));
+            set_tag("failure_handling");
+            CU_FAIL();
+        }
+    }
+
     void test_close() {
         set_test_metadata("q1", _("Test close()."), 1);
         gen_file(2);
@@ -150,12 +131,8 @@
         SANDBOX_END;
 
         int close_ok = 0;
-        if (stats.close.called != 1){
+        if (stats.close.called == 0){
             push_info_msg(_("You did not close() the file."));
-            close_ok++;
-            CU_FAIL();
-        }if (stats.open.called != 1){
-            push_info_msg(_("The open should be use only once."));
             close_ok++;
             CU_FAIL();
         }if(stats.open.last_return != stats.close.last_params.fd){
@@ -165,42 +142,44 @@
         }if(close_ok == 0){
             set_tag("close");
         }
-
     }
 
     int main(int argc,char** argv){
-        BAN_FUNCS();
-        RUN(test_no_file, test_fail_open, test_no_integer, test_some_integers, test_close);
+        BAN_FUNCS(system, set_tag);
+        RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
     }
 accessible: true
 author: Olivier Martin
 context: |-
     Given a file containing some (possibly none) positive integers (``int``), write a code that computes the sum of all integers present in the file. The sum have to be returned.
 
-    If an error occurs, return ``-1``.
+    - If ``open()`` fails, return ``-1``.
+    - If ``read()`` fails, return ``-2``.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S5] File integers reading'
 network_grading: false
 order: 25
 problems:
     q1:
-        name: Write your code here
-        language: c
         type: code
+        name: Write your code here
         header: |-
             .. code-block:: java
 
                 /*
                  * @pre filename != NULL, name of the file
-                 * @post return the sum of all integers present in the file, -1 if an error occurs.
+                 * @post return the sum of all integers present in the file.
+                 *       return -1 if the file can not be open.
+                 *       return -2 if an error occurs during reading
                  */
                 int sum_file(char* filename)
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -209,67 +188,80 @@ tags:
     '0':
         name: Close
         type: 0
-        id: close
         visible: true
         description: This tag validate that your close are correctly performed.
+        id: close
     '1':
         type: 0
         visible: true
         name: Open
+        description: This tag validate you are able to open a file and handle errors
+            with open().
         id: open
-        description: This tag validate you are able to open a file.
-    '2':
-        name: Banned functions
-        id: banned_funcs
-        description: You use some banned functions.
-        type: 1
+    '12':
+        id: sum
+        name: Sum
+        type: 0
+        description: The student has correctly computed and returned the sum.
         visible: false
-    '3':
-        name: Double free
+    '2':
+        name: Failure handling
+        description: You do not manage failures properly during read operations.
+        id: failure_handling
         visible: true
+        type: 1
+    '3':
+        name: Banned functions
+        type: 1
+        visible: true
+        description: You use some banned functions.
+        id: banned_funcs
+    '4':
         description: Your code produced a double free.
         type: 1
         id: double_free
-    '4':
+        name: Double free
+        visible: true
+    '5':
         id: sigfpe
         name: Floating Point Exception
-        description: ''
-        visible: true
-        type: 1
-    '5':
-        visible: true
-        id: memory
-        name: Memory Exceeded
         type: 1
         description: ''
+        visible: true
     '6':
-        id: not_compile
-        name: Not compile
+        id: memory
         type: 1
-        description: You code do not compile.
+        description: ''
+        name: Memory Exceeded
         visible: true
     '7':
-        description: ''
+        description: You code does not compile.
+        id: not_compile
+        name: Not compile
         visible: true
         type: 1
+    '8':
         name: Segmentation Fault
         id: sigsegv
-    '8':
-        id: timeout
         type: 1
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
+        description: ''
         visible: true
+    '9':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        visible: true
+        name: Timeout
+        type: 1
     '10':
-        name: S5
         type: 2
         description: ''
+        name: S5
         visible: true
         id: ''
-    '9':
-        visible: true
+    '11':
         name: File
-        type: 2
+        visible: true
         description: ''
+        type: 2
         id: ''
 weight: 1.0

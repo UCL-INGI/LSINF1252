@@ -1,0 +1,12 @@
+#! /bin/bash
+
+getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2
+diff out out2
+if [ $? -ne 0 ]
+then
+	feedback-result failed
+	feedback-msg -m "The file does not contain the correct list of hashtag."
+else
+	feedback-result success
+	feedbach-msg -m "Fine"
+fi
