@@ -40,7 +40,7 @@ if p.returncode:
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
 # Run the code in a parallel container
-p = subprocess.Popen("./make_me"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+p = subprocess.Popen("./make_me", stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 p.communicate()
 
 # If run failed, exit with "failed" result
