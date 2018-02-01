@@ -1,12 +1,26 @@
 #! /bin/bash
 
 getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2
-diff out out2
-if [ $? -ne 0 ]
+diff out2 error1
+if [ $? -eq 0 ]
 then
 	feedback-result failed
-	feedback-msg -m "The file does not contain the correct list of hashtag."
+	feedback-mes -m "Check the order of the different utilities you call"
 else
-	feedback-result success
-	feedbach-msg -m "Fine"
+	diff out2 error2
+	if [ $? -eq 0 ]
+	then
+		feedback-result failed
+		feedback-mes -m "You have to do this exercise on Linux!"
+	else
+		diff out out2
+		if [ $? -ne 0 ]
+		then
+			feedback-result failed
+			feedback-msg -m "The file does not contain the correct list of hashtag."
+		else
+			feedback-result success
+			feedbach-msg -m "Fine"
+		fi
+	fi
 fi
