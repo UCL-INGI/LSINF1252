@@ -4,7 +4,7 @@
 # Auteurs : Pablo Gonzalez Alvarez
 # Licence : GPLv3
 
-import subprocess, shlex, os, os.path.isfile
+import subprocess, shlex, os
 from inginious import feedback, rst, input
 
 # Student final score
@@ -45,8 +45,8 @@ subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
 # Check whether make builds the correct executable
 
-if( !os.path.isfile("./student/make_me"))
-	feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
+#if( !os.path.exists("make_me"))
+#	feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
 
 # Set score
 feedback.set_grade(score)

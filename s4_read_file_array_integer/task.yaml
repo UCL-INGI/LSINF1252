@@ -48,6 +48,7 @@
             push_info_msg(_("When open() fails, your code does not return -1."));
             CU_FAIL("");
         }
+    }
 
     void test_open_ok() {
         set_test_metadata("q1", _("Calling open only once"), 1);
