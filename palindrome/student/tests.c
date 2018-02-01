@@ -32,7 +32,12 @@ void test_myfunc_ret()
 	ret6 = pal(NULL);
 	ret7 = pal(str6);
 	SANDBOX_END;
-
+	free_trap(str1,44);
+    free_trap(str2,40);
+    free_trap(str3,1);
+    free_trap(str4,25);
+    free_trap(str5,22);
+    free_trap(str6,2);
 	CU_ASSERT_EQUAL(ret1,0);
 	CU_ASSERT_EQUAL(ret2,1);
 	CU_ASSERT_EQUAL(ret3,1);

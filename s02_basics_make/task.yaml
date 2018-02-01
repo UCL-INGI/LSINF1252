@@ -36,22 +36,17 @@
     # If compilation failed, exit with "failed" result
     if p.returncode:
         feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
-    elif os.path.exists("make_me"):
+    elif os.path.exists("make_me"): # Check make builds the correct exec
         score += 75
         feedback.set_problem_result("success", "make_me_less_easy")
         feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
     else:
-        feedback_set_problem_result("fail", "make_me_less_easy")
-        #feedback.set_problem_feedback("You didn't make it!", "make_me_less_easy")
+        feedback.set_problem_result("failed", "make_me_less_easy")
+        feedback.set_problem_feedback("You didn't make it!", "make_me_less_easy")
 
     # Remove source files
     subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
-    # Check whether make builds the correct executable
-
-    #has_file = os.path.exists("make_me")
-    #if has_file == False:
-    # feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
 
     # Set score
     feedback.set_grade(score)
