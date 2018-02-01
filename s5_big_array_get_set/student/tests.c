@@ -196,6 +196,6 @@ void test_open_q1_fail(){
 }
 
 int main(int argc, char** argv){
-    BAN_FUNCS(system, set_tag);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
     RUN(test_get, test_set, test_close_q1, test_close_q2, test_get_oob, test_get_fail, test_open_q1_fail);
 }

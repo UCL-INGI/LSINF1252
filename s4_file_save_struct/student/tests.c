@@ -173,6 +173,6 @@ void test_write_fail() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
     RUN(test, test_close, test_open, test_write_fail);
 }
