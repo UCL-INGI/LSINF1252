@@ -1,3 +1,18 @@
+/run: |
+    #! /bin/bash
+
+    g++ main.cpp
+    pseudo=$(getinput username)
+    echo $pseudo
+    rep=$(getinput q1)
+    stud=$(./a.out $pseudo obo)
+    if [ "$stud" == "$rep" ]
+    then
+        feedback-result success
+    else
+        feedback-result failed
+        feedback-msg -m "Ce n'est pas le bon code, avez-vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
+    fi
 accessible: true
 author: Tom Rousseaux
 context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf1/archive.tar.gz>`_,

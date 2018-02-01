@@ -2,6 +2,7 @@
 
 g++ main.cpp
 pseudo=$(getinput username)
+echo $pseudo
 rep=$(getinput q1)
 stud=$(./a.out $pseudo obo)
 if [ "$stud" == "$rep" ]
