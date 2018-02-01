@@ -53,6 +53,7 @@ void test_count() {
     set_test_metadata("q1", _("Calling open, read and close"), 1);
     gen_file(13);
     monitored.open = true;
+    monitored.close = true;
 
     SANDBOX_BEGIN;
     myfunc("file.txt");
