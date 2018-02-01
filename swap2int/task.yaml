@@ -1,21 +1,21 @@
 accessible: true
 author: Arthur van Stratum
 context: ''
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S2] Swap my integers'
 network_grading: false
 order: 15
 problems:
     q1:
-        type: code
         language: c
         name: Swap
+        type: code
         header: |-
             Write the body of the function *swap* which swaps the values pointed by *i* and *j*.
 
