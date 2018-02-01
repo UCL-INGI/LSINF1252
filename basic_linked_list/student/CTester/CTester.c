@@ -29,7 +29,8 @@ extern struct wrap_monitor_t monitored;
 extern struct wrap_fail_t failures;
 extern struct wrap_log_t logs;
 
-sigjmp_buf segv_jmp;
+extern sigjmp_buf segv_jmp;
+
 int true_stderr;
 int true_stdout;
 int pipe_stderr[2], usr_pipe_stderr[2];
@@ -104,12 +105,10 @@ void set_tag(char *tag)
 }
 
 void segv_handler(int sig, siginfo_t *unused, void *unused2) {
-    printf("segv\n");
     wrap_monitoring = false;
     push_info_msg(_("Your code produced a segfault."));
     set_tag("sigsegv");
     wrap_monitoring = true;
-    CU_FAIL("Segmentation Fault");
     siglongjmp(segv_jmp, 1);
 }
 
@@ -118,7 +117,6 @@ void alarm_handler(int sig, siginfo_t *unused, void *unused2)
     wrap_monitoring = false;
     push_info_msg(_("Your code exceeded the maximal allowed execution time."));
     set_tag("timeout");
-    CU_FAIL("Timeout");
     wrap_monitoring = true;
     siglongjmp(segv_jmp, 1);
 }
@@ -143,12 +141,12 @@ int sandbox_begin()
     while ((n = read(usr_pipe_stderr[0], buf, BUFSIZ)) > 0);
 
     wrap_monitoring = true;
-
-    return (sigsetjmp(segv_jmp,1) == 0);
+    return 0;
 }
 
 void sandbox_fail()
 {
+    CU_FAIL("Segfault or timeout");
 }
 
 void sandbox_end()

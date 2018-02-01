@@ -121,7 +121,7 @@ void test_some_integers_fail_read() {
 
 void test_close() {
     set_test_metadata("q1", _("Test close()."), 1);
-    gen_file(2);
+    gen_file(0);
     
     monitored.close = true;
     monitored.open = true;
@@ -141,7 +141,7 @@ void test_close() {
     }
     
     //We fail the close()
-    gen_file(3);
+    gen_file(0);
     int ret = 0;
     monitored.close = true;
     failures.close = FAIL_FIRST;

@@ -4,13 +4,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-struct stats_getpid_t {
+struct stats_sleep_t {
   int called;           // number of times the system call has been called
-  pid_t last_return;    // last return value for getpid
-
+  unsigned int last_return;    // last return value for sleep
+  unsigned int last_arg;    // last return value for sleep
 };
 
-void init_getpid();
-void clean_getpid();
-void resetstats_getpid();
+void init_sleep();
+void clean_sleep();
+void resetstats_sleep();
 
