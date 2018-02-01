@@ -23,7 +23,7 @@ context: |-
 
     Now write a simple hello world program, which you will save into a file called ``hello.c``. This programs will print the following on the standard output:
 
-     .. code-block::
+    .. code-block::
 
          Hello make
 
@@ -93,18 +93,18 @@ problems:
         header: |-
             After typing ``ls`` in your terminal, it ouputs your folder structure:
 
-                .. code-block:: console
+            .. code-block:: console
 
-                        make_me.c       make_me.h
+                make_me.c       make_me.h
 
             You want to build an executable ``make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
 
             **Hint:** you do not need to write a *Makefile*.
     make_me_less_easy:
         name: Make me less easy
-        header: |-
-            Suppose you cannot use what you did in the above question. Write a
-            Makefile that compiles the above given code and builds an executable ``make_me``. You can reuse the ``Makefile`` given in the above given zip file.
+        header: Suppose you cannot use what you did in the above question. Write a
+            Makefile that compiles the above given code and builds an executable ``make_me``.
+            You can reuse the ``Makefile`` given in the above given zip file.
         type: code
         language: Makefile
 stored_submissions: 0
