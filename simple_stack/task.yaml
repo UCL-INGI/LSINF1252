@@ -1,14 +1,14 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
-    You are asked to implement the `pop` and `push` functions of the given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface.
+    You are asked to implement the ``pop`` and ``push`` functions of the given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface.
 
     .. code-block:: c
 
-        struct node{
+        struct node {
             node *next;
             char *value;
-        }
+        };
 
 
 
@@ -35,7 +35,8 @@ problems:
         name: Push
         header: |-
             .. code-block:: c
-                /*
+
+                /**
                 * Add @name at the "head" of the stack.
                 *
                 * @head : pointer to the head of the stack
@@ -49,8 +50,10 @@ problems:
     pop:
         header: |-
             .. code-block:: c
-                /*
+
+                /**
                 * Remove the "head" element of the stack and return it's content.
+                *
                 * @head : pointer to the head of the stack
                 * @name : pointer to store the popped element
                 *
