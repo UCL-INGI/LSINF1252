@@ -29,32 +29,11 @@ int gen_file(int n){
     return sum;
 }
 
-/*
- * Test with no file
- */
-void test_no_file() {
-    set_test_metadata("q1", _("Test with no file"), 1);
+void test_open() {
+    set_test_metadata("q1", _("Test open"), 1);
     int ret = 0;
-
-    SANDBOX_BEGIN;
-    ret = myfunc("file.txt");
-    SANDBOX_END;
-    
-    if (ret != -1){
-        push_info_msg(_("When there is no file, your code does not return -1."));
-        CU_FAIL();
-    }else{
-        set_tag("open");
-    }
-}
-
-/*
- * Test with no file
- */
-void test_fail_open() {
-    set_test_metadata("q1", _("Test fail open"), 1);
-    int ret = 0;
-    
+    int tag_open = 0;
+    //Test with open fail
     monitored.open = true;
     failures.open = FAIL_FIRST;
     failures.open_ret = -1;
@@ -66,15 +45,26 @@ void test_fail_open() {
     if (ret != -1){
         push_info_msg(_("When there is no file, your code does not return -1."));
         CU_FAIL();
-    }else{
+        tag_open++;
+    }
+    
+    //Test if open() return a correct file descriptor.
+    gen_file(13);
+    monitored.open = true;
+    SANDBOX_BEGIN;
+    myfunc("file.txt");
+    SANDBOX_END;
+
+    if(stats.open.last_return <= 2){
+        push_info_msg(_("When the open() should be fine, your code returns -1."));
+        CU_FAIL();
+        tag_open++;
+    }
+    if(tag_open == 0){
         set_tag("open");
     }
 }
 
-
-/*
- * Test with no integer in the file
- */
 void test_no_integer() {
     set_test_metadata("q1", _("Test without any integers."), 1);
     int sum = gen_file(0);
@@ -90,12 +80,8 @@ void test_no_integer() {
     }
 }
 
-
-/*
- * Test with some integers in the file
- */
 void test_some_integers() {
-    set_test_metadata("q1", _("Test with some intagers."), 2);
+    set_test_metadata("q1", _("Test with some integers."), 2);
     int sum = gen_file(12);
     int ret = 0;
     
@@ -109,9 +95,6 @@ void test_some_integers() {
     }
 }
 
-/*
- * Test with some integers in the file with close()
- */
 void test_close() {
     set_test_metadata("q1", _("Test close()."), 1);
     gen_file(2);
@@ -123,12 +106,8 @@ void test_close() {
     SANDBOX_END;
     
     int close_ok = 0;
-    if (stats.close.called != 1){
+    if (stats.close.called == 0){
         push_info_msg(_("You did not close() the file."));
-        close_ok++;
-        CU_FAIL();
-    }if (stats.open.called != 1){
-        push_info_msg(_("The open should be use only once."));
         close_ok++;
         CU_FAIL();
     }if(stats.open.last_return != stats.close.last_params.fd){
@@ -138,10 +117,9 @@ void test_close() {
     }if(close_ok == 0){
         set_tag("close");
     }
-
 }
 
 int main(int argc,char** argv){
     BAN_FUNCS();
-    RUN(test_no_file, test_fail_open, test_no_integer, test_some_integers, test_close);
+    RUN(test_open, test_no_integer, test_some_integers, test_close);
 }

@@ -1,3 +1,149 @@
+/run: |
+    #!/bin/python3
+
+    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+    # Auteurs : Mathieu Xhonneux, Anthony Gégo
+    # Licence : GPLv3
+
+    import subprocess, shlex, re, os
+    from inginious import feedback, rst, input
+
+    # Switch working directory to student/
+    os.chdir("student")
+
+    # Fetch and save the student code into a file for compilation
+    input.parse_template("student_code.c.tpl", "student_code.c")
+
+    # Compilation
+    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    make_output = p.communicate()[0].decode('utf-8')
+    # If compilation failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_tag("not_compile", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
+
+    # Parse banned functions
+    try:
+        banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+        banned_funcs = list(filter(None, banned_funcs))
+    except IndexError:
+        banned_funcs = []
+
+    if banned_funcs:
+        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        readelf_output = p.communicate()[0].decode('utf-8')
+        for func in banned_funcs:
+            if re.search("UND {}\n".format(func), readelf_output):
+                feedback.set_tag("banned_funcs", True)
+                feedback.set_global_result("failed")
+                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
+                exit(0)
+
+
+    # Remove source files
+    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+    LANG = input.get_input('@lang')
+
+    # Run the code in a parallel container
+    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    o, e = p.communicate()
+    print(o.decode("utf-8"))
+    # If run failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_global_result("failed")
+        if p.returncode == 256-8:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+            feedback.set_tag("sigfpe", True)
+        elif p.returncode == 256-11:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+        elif p.returncode == 252:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+            feedback.set_tag("memory", True)
+        elif p.returncode == 253:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
+        else:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
+        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
+        exit(0)
+    #elif run_output:
+    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
+
+    # Comment to run the tests
+    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
+    #exit(0)
+
+    # Fetch CUnit test results
+    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
+    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
+
+
+    # Produce feedback
+    if all([r['code'] == 'SUCCESS' for r in results]):
+        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
+    else:
+        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+
+    score = 0
+    total = 0
+    tests_result = {}
+
+    for test in results:
+        total += test['weight']
+        for tag in test['tags']:
+            if tag != "":
+                feedback.set_tag(tag, True)
+        if test['code'] == 'SUCCESS':
+            score += test['weight']
+            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
+        else:
+            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = False
+
+    for pid, result in tests_result.items():
+        if result:
+            feedback.set_problem_result("success", pid)
+        else:
+            feedback.set_problem_result("failed", pid)
+
+    score = 100*score/(total if not total == 0 else 1)
+    feedback.set_grade(score)
+    feedback.set_global_result("success" if score >= 50 else "failed")
+/student/solution.c.sol: |+
+    //Open
+    int fd1 = open(file_name,O_RDONLY);
+    int fd2 = open(new_file_name,O_WRONLY|O_CREAT);
+    if(fd1 == -1) return -1;
+    if(fd2 == -1) return -1;
+
+    //Permissions
+    struct stat st;
+    stat(file_name, &st);
+    chmod(new_file_name, st.st_mode);
+
+    //Copy
+    char c;
+    while(read(fd1, (void *) &c, sizeof(char)) >= 1){
+        if ((int)write(fd2, (void *) &c, sizeof(char)) == -1)
+            return -1;
+    }
+
+    //Close
+    close(fd1);
+    close(fd2);
+    return 0;
+
+
+
 /student/tests.c: |
     // CTester template
 
@@ -30,32 +176,11 @@
         return sum;
     }
 
-    /*
-     * Test with no file
-     */
-    void test_no_file() {
-        set_test_metadata("q1", _("Test with no file"), 1);
+    void test_open() {
+        set_test_metadata("q1", _("Test open"), 1);
         int ret = 0;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != -1){
-            push_info_msg(_("When there is no file, your code does not return -1."));
-            CU_FAIL();
-        }else{
-            set_tag("open");
-        }
-    }
-
-    /*
-     * Test with no file
-     */
-    void test_fail_open() {
-        set_test_metadata("q1", _("Test fail open"), 1);
-        int ret = 0;
-
+        int tag_open = 0;
+        //Test with open fail
         monitored.open = true;
         failures.open = FAIL_FIRST;
         failures.open_ret = -1;
@@ -67,15 +192,26 @@
         if (ret != -1){
             push_info_msg(_("When there is no file, your code does not return -1."));
             CU_FAIL();
-        }else{
+            tag_open++;
+        }
+
+        //Test if open() return a correct file descriptor.
+        gen_file(13);
+        monitored.open = true;
+        SANDBOX_BEGIN;
+        myfunc("file.txt");
+        SANDBOX_END;
+
+        if(stats.open.last_return <= 2){
+            push_info_msg(_("When the open() should be fine, your code returns -1."));
+            CU_FAIL();
+            tag_open++;
+        }
+        if(tag_open == 0){
             set_tag("open");
         }
     }
 
-
-    /*
-     * Test with no integer in the file
-     */
     void test_no_integer() {
         set_test_metadata("q1", _("Test without any integers."), 1);
         int sum = gen_file(0);
@@ -91,12 +227,8 @@
         }
     }
 
-
-    /*
-     * Test with some integers in the file
-     */
     void test_some_integers() {
-        set_test_metadata("q1", _("Test with some intagers."), 2);
+        set_test_metadata("q1", _("Test with some integers."), 2);
         int sum = gen_file(12);
         int ret = 0;
 
@@ -110,9 +242,6 @@
         }
     }
 
-    /*
-     * Test with some integers in the file with close()
-     */
     void test_close() {
         set_test_metadata("q1", _("Test close()."), 1);
         gen_file(2);
@@ -124,12 +253,8 @@
         SANDBOX_END;
 
         int close_ok = 0;
-        if (stats.close.called != 1){
+        if (stats.close.called == 0){
             push_info_msg(_("You did not close() the file."));
-            close_ok++;
-            CU_FAIL();
-        }if (stats.open.called != 1){
-            push_info_msg(_("The open should be use only once."));
             close_ok++;
             CU_FAIL();
         }if(stats.open.last_return != stats.close.last_params.fd){
@@ -139,12 +264,11 @@
         }if(close_ok == 0){
             set_tag("close");
         }
-
     }
 
     int main(int argc,char** argv){
         BAN_FUNCS();
-        RUN(test_no_file, test_fail_open, test_no_integer, test_some_integers, test_close);
+        RUN(test_open, test_no_integer, test_some_integers, test_close);
     }
 accessible: true
 author: Olivier Martin
@@ -156,17 +280,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S5] File integers reading'
 network_grading: false
 order: 25
 problems:
     q1:
-        type: code
-        language: c
         name: Write your code here
+        language: c
+        type: code
         header: |-
             .. code-block:: java
 
@@ -181,69 +305,70 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 0
         name: Close
-        visible: true
+        type: 0
         id: close
+        visible: true
         description: This tag validate that your close are correctly performed.
     '1':
         type: 0
-        description: This tag validate you are able to open a file.
-        name: Open
         visible: true
+        name: Open
         id: open
+        description: This tag validate you are able to open a file and handle errors
+            with open().
     '2':
-        id: banned_funcs
         name: Banned functions
+        id: banned_funcs
         description: You use some banned functions.
         type: 1
         visible: false
     '3':
-        description: Your code produced a double free.
-        visible: true
         name: Double free
-        id: double_free
-        type: 1
-    '4':
         visible: true
-        id: sigfpe
+        description: Your code produced a double free.
         type: 1
+        id: double_free
+    '4':
+        id: sigfpe
         name: Floating Point Exception
         description: ''
-    '5':
-        description: ''
         visible: true
         type: 1
+    '5':
+        visible: true
         id: memory
         name: Memory Exceeded
+        type: 1
+        description: ''
     '6':
-        name: Not compile
         id: not_compile
+        name: Not compile
         type: 1
-        visible: true
         description: You code do not compile.
+        visible: true
     '7':
+        description: ''
         visible: true
+        type: 1
         name: Segmentation Fault
-        description: ''
         id: sigsegv
-        type: 1
     '8':
-        visible: true
-        type: 1
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
         id: timeout
-    '10':
-        name: File
-        type: 2
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
         visible: true
+    '10':
+        name: S5
+        type: 2
         description: ''
+        visible: true
         id: ''
     '9':
-        name: S5
-        description: ''
-        type: 2
         visible: true
+        name: File
+        type: 2
+        description: ''
         id: ''
 weight: 1.0

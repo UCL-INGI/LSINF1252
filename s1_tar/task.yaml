@@ -1,27 +1,3 @@
-/run: |
-    #!/bin/bash
-
-    mkdir folder
-    getinput "archive" > archive.tar.gz
-    tar zxvf archive.tar.gz -C folder
-    if [ $? -ne 0 ]
-    then
-        feedback-result failed
-        feedback-msg -m "The decompression of your archive failed, did you give the right arguments to tar(1)?"
-    else
-        ls folder -R > file2.txt
-        diff -q file.txt file2.txt
-        if [ $? -ne 0 ]
-        then
-            feedback-result failed
-            feedback-msg -m "The decompressed archive does not correspond with the original?"
-        else
-            feedback-result success
-            feedback-msg -m "Fine"
-        fi
-        rm file2.txt
-    fi
-    rm folder -R
 accessible: true
 author: Tom Rousseaux
 context: |
@@ -46,19 +22,19 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
+    output: '2'
     memory: '100'
 name: '[S01] tar'
 network_grading: false
 order: 1
 problems:
     archive:
-        header: ''
-        name: ''
-        type: file
         allowed_exts:
         - .gz
+        type: file
+        name: ''
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

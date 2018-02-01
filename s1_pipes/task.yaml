@@ -1,0 +1,25 @@
+accessible: true
+author: Tom Rousseaux
+context: ''
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[S1] Pipes'
+network_grading: false
+problems:
+    file:
+        allowed_exts:
+        - .txt
+        header: ''
+        name: ''
+        type: file
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
