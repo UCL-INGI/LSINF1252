@@ -1,7 +1,7 @@
 #!/bin/python3
 
-# Script d'interface entre INGInious et des tests unitaires Ã©crits Ã  l'aide de CUnit
-# Auteurs : Mathieu Xhonneux, Anthony GÃ©go
+# Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+# Auteurs : Mathieu Xhonneux, Anthony Gégo
 # Licence : GPLv3
 
 import subprocess, shlex, re, os
@@ -20,7 +20,7 @@ make_output = p.communicate()[0].decode('utf-8')
 if p.returncode:
     feedback.set_tag("not_compile", True)
     feedback.set_global_result("failed")
-    feedback.set_global_feedback("La compilation de votre code a Ã©chouÃ©. Voici le message de sortie de la commande ``make`` :")
+    feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
     feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
     exit(0)
 else:
@@ -41,7 +41,7 @@ if banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
             feedback.set_tag("banned_funcs", True)
             feedback.set_global_result("failed")
-            feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisÃ©e.".format(func))
+            feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
             exit(0)
 
 
@@ -58,24 +58,24 @@ p.communicate()
 if p.returncode:
     feedback.set_global_result("failed")
     if p.returncode == 256-8:
-        montest_output = rst.get_admonition("warning", "**Erreur d'exÃ©cution**", "Votre code a produit une erreur. Le signal SIGFPE a Ã©tÃ© envoyÃ© : *Floating Point Exception*.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
         feedback.set_tag("sigfpe", True)
     elif p.returncode == 256-11:
-        montest_output = rst.get_admonition("warning", "**Erreur d'exÃ©cution**", "Votre code a produit une erreur. Le signal SIGSEGV a Ã©tÃ© envoyÃ© : *Segmentation Fault*.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
     elif p.returncode == 252:
-        montest_output = rst.get_admonition("warning", "**Erreur d'exÃ©cution**", "Votre code a tentÃ© d'allouer plus de mÃ©moire que disponible.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
         feedback.set_tag("memory", True)
     elif p.returncode == 253:
-        montest_output = rst.get_admonition("warning", "**Erreur d'exÃ©cution**", "Votre code a pris trop de temps pour s'exÃ©cuter.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
     else:
-        montest_output = rst.get_admonition("warning", "**Erreur d'exÃ©cution**", "Votre code a produit une erreur.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
     feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
     exit(0)
 #elif run_output:   
-#    feedback.set_global_feedback("- Sortie de votre mÃ©thode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
+#    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
 
 # Comment to run the tests
-#feedback.set_global_feedback("- **Cette note n'est pas finale.** Une sÃ©rie de tests sera exÃ©cutÃ©e sur votre code aprÃ¨s l'examen.\n", True)
+#feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
 #exit(0)
 
 # Fetch CUnit test results
@@ -85,7 +85,7 @@ results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[
 
 # Produce feedback
 if all([r['code'] == 'SUCCESS' for r in results]):
-    feedback.set_global_feedback("\n- Votre code a passÃ© tous les tests.", True)
+    feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
 else:
     feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
 
@@ -100,11 +100,11 @@ for test in results:
             feedback.set_tag(tag, True)
     if test['code'] == 'SUCCESS':
         score += test['weight']
-        feedback.set_problem_feedback("* {desc}\n\n  => rÃ©ussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" â€” ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+        feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
                 test['pid'], True)
         tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
     else:
-        feedback.set_problem_feedback("* {desc}\n\n  => Ã©chouÃ© (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" â€” ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+        feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
                 test['pid'], True)
         tests_result[test['pid']] = False
         
