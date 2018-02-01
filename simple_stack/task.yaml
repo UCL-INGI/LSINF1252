@@ -14,11 +14,11 @@ context: |
 
     *Hints*
     =======
+    - @value is also a pointer, it must be allocated.
+
+    - `strncpy <https://linux.die.net/man/3/strncpy>`_
+
     - `strlen <https://linux.die.net/man/3/strlen>`_
-
-        -- sltren does not count the '\\0' character
-
-    - @value is also a pointer
 environment: cpp
 evaluate: best
 groups: false
