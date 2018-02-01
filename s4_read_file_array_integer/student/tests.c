@@ -108,7 +108,7 @@ void test_some_integers() {
 }
 
 void test_some_integers_fail_read() {
-    set_test_metadata("q1", _("Test with read() fail"), 1);
+    set_test_metadata("q1", _("Test when read() fails"), 1);
     gen_file(9);
     int ret = 0;
     
@@ -128,7 +128,7 @@ void test_some_integers_fail_read() {
 }
 
 void test_close() {
-    set_test_metadata("q1", _("Test close()."), 1);
+    set_test_metadata("q1", _("Test close()"), 1);
     gen_file(0);
     
     monitored.close = true;
@@ -170,5 +170,5 @@ void test_close() {
 
 int main(int argc,char** argv){
     BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-    RUN(test_open_ok, test_open_fail, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
+    RUN(test_count, test_open_fail, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }

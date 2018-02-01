@@ -109,7 +109,7 @@
     }
 
     void test_some_integers_fail_read() {
-        set_test_metadata("q1", _("Test with read() fail"), 1);
+        set_test_metadata("q1", _("Test when read() fails"), 1);
         gen_file(9);
         int ret = 0;
 
@@ -129,7 +129,7 @@
     }
 
     void test_close() {
-        set_test_metadata("q1", _("Test close()."), 1);
+        set_test_metadata("q1", _("Test close()"), 1);
         gen_file(0);
 
         monitored.close = true;
@@ -171,7 +171,7 @@
 
     int main(int argc,char** argv){
         BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-        RUN(test_open_ok, test_open_fail, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
+        RUN(test_count, test_open_fail, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
     }
 accessible: true
 author: Olivier Martin
@@ -192,7 +192,7 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S5] File integers reading'
+name: '[S5] File integers reading - REVIEWED'
 network_grading: false
 order: 40
 problems:
@@ -209,7 +209,7 @@ problems:
                  *       return -2 if an error occurs during reading
                  *       return -3 if close() fails.
                  */
-                int sum_file(char* filename) {
+                int sum_file(char *filename) {
         language: c
 stored_submissions: 0
 submission_limit:
