@@ -5,13 +5,13 @@ diff out2 error1
 if [ $? -eq 0 ]
 then
 	feedback-result failed
-	feedback-mes -m "Check the order of the different utilities you call"
+	feedback-msg -m "Check the order of the different utilities you call"
 else
 	diff out2 error2
 	if [ $? -eq 0 ]
 	then
 		feedback-result failed
-		feedback-mes -m "You have to do this exercise on Linux!"
+		feedback-msg -m "You have to do this exercise on Linux!"
 	else
 		diff out out2
 		if [ $? -ne 0 ]
