@@ -1,8 +1,8 @@
 accessible: true
 author: Arthur van Stratum
 context: 'Palindrome are strings of text which reads the same backward as forward,
-    i.e. : "racecar", or "A man, a plan, a canal, Panama!".'
-environment: pyjavacpp
+    i.e. : "racecar", or "a man a plan a canal panama".'
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -18,10 +18,11 @@ problems:
         language: c
         name: ''
         header: |-
-            Write the body of the function *pal* which tells if the given string is a palindrome or not.
+            Write the body of the function *pal* which tells if the given string is a palindrome or not. Ignore spaces. An empty string is considered a palindrome. You have access to the functions of *string.h*
 
             .. code-block:: c
 
+                #include <string.h>
                 /*
                 * @return: return 1 if a str is a palindrome, -1 if str is NULL, else 0.
                 */
