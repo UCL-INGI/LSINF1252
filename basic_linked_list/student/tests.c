@@ -181,7 +181,6 @@ void test_add_node_empty(){
   else
     push_info_msg(_("The new node is not allocated"));
 
-
   // check the return code in normal case (expected 0)
   CU_ASSERT_EQUAL(ret, 0);
   if (ret != 0)
@@ -195,6 +194,21 @@ void test_add_node_empty(){
   //-----------------------------------------------------------------
 
   free_list_corr(list);
+}
+
+void test_add_node_wrong_args(){
+      set_test_metadata("add_node", _("Check the return code of the function if wrong args"), 1);
+    
+    int ret;
+    srandom(47826786);
+    
+    SANDBOX_BEGIN;
+    ret = add_node(NULL, random());
+    SANDBOX_END;
+    
+    CU_ASSERT_TRUE(ret);
+    if (!ret)
+         push_info_msg(_("Wrong return value when wrong args"));    
 }
 
 void test_add_node_non_empty(){
@@ -340,6 +354,6 @@ int main(int argc,char** argv)
 {
     BAN_FUNCS(calloc);
     //RUN(test_init_node_alloc);
-    RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem);
+    RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem, test_add_node_wrong_args);
     //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
 }
