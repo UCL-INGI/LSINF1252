@@ -112,7 +112,7 @@ void test_push_param_nomem() {
 
   // check return value when null arg
   CU_ASSERT_EQUAL(1, ret);
-  if (ret)
+  if (!ret)
       push_info_msg(_("Wrong return code if wrong args"));
 
   // check the return value if malloc call fails
@@ -131,7 +131,7 @@ void test_push_param_nomem() {
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(1, ret);
-  if (ret)
+  if (!ret)
      push_info_msg(_("Wrong return code if wrong args"));
 
   free(head);
@@ -163,7 +163,7 @@ void test_push_changing_param(){
   printf("src = %s, src_cpy = %s\n", src, src_cpy);
   int cmp = strcmp((const char*) src, (const char*) src_cpy);
   CU_ASSERT_TRUE(!cmp);
-  if (!cmp)
+  if (cmp != 0)
     push_info_msg(_("The function changed the value of @value"));
 
   free_stack(head);
@@ -203,8 +203,12 @@ void test_push_general() {
   if (mal){
     //printf("src = %s, name = %s\n", src, stack->name);
     CU_ASSERT_STRING_EQUAL(src, stack->name);
-    if (!strcmp(src, stack->name))
-      push_info_msg(_("The pushed value differ from the expected one"));
+    if (!strcmp(src, stack->name)){
+      char *tmp[100];
+      sprintf(tmp, _("The pushed value differ from the expected one\nWaited : %s\nReceived : %s\n"), src, stack->name);
+      push_info_msg(tmp);
+    }
+
   }
   else
     push_info_msg(_("The returned pointer is not malloced"));
@@ -224,7 +228,7 @@ void test_push_general() {
   // if correct struct, @stru = 0
   int stru =check_stack(stack, a, 7);
   CU_ASSERT_TRUE(!stru);
-  if (!stru)
+  if (stru)
     push_info_msg(_("The structure of the stack has changed"));
 
   // check the return value of the function
