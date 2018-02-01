@@ -4,7 +4,7 @@
 
     #include "student_code.h"
 
-    int push(struct node **head, char *name){
+    int push(struct node **head, const char *name){
         @@push@@
     }
 
@@ -13,6 +13,17 @@
     }*/
 
 
+/student/student_code.h: |
+    #include <string.h>
+
+    struct node{
+        struct node *next;
+        char *name;
+    };
+
+    //int pop(struct node *head, char **result);
+
+    int push(struct node **head, const char *value);
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
@@ -58,7 +69,7 @@ problems:
                 * @return 0 if no error, 1 else.
                 */
 
-                int push(struct node **head, char *name){
+                int push(struct node **head, const char *name){
         language: c
         name: Push
         type: code
@@ -81,7 +92,6 @@ problems:
         type: code
     free_node:
         language: c
-        name: <OPTIONAL> free_node
         header: |-
             You can use this question to implement a ``free_node`` function
 
@@ -93,6 +103,7 @@ problems:
                 void free_node(struct node *node){
         optional: 'on'
         type: code
+        name: <OPTIONAL> free_node
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -100,8 +111,8 @@ submission_limit:
 tags:
     '0':
         name: Data structures
-        description: Task dealing with data structures and linked list
         type: 2
+        description: Task dealing with data structures and linked list
         visible: true
         id: ''
 weight: 1.0

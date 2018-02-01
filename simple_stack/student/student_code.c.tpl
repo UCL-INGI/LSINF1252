@@ -3,7 +3,7 @@
 
 #include "student_code.h"
 
-int push(struct node **head, char *name){
+int push(struct node **head, const char *name){
 	@@push@@
 }
 
