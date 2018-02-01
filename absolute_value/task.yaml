@@ -11,7 +11,7 @@ limits:
     memory: '100'
 name: '[S2] Absolute value'
 network_grading: false
-order: 9
+order: 6
 problems:
     absval:
         language: c

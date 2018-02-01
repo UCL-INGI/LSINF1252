@@ -69,7 +69,7 @@ limits:
     memory: '100'
 name: '[S2] Factorial'
 network_grading: false
-order: 11
+order: 8
 problems:
     facto:
         header: |-

@@ -10,7 +10,7 @@ limits:
     memory: '100'
 name: '[S2] Swap my integers'
 network_grading: false
-order: 19
+order: 15
 problems:
     q1:
         type: code

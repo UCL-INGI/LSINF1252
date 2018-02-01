@@ -27,7 +27,7 @@ limits:
     memory: '100'
 name: '[S01] tar'
 network_grading: false
-order: 8
+order: 5
 problems:
     archive:
         allowed_exts:

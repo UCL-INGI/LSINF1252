@@ -10,7 +10,7 @@ limits:
     memory: '100'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
-order: 21
+order: 17
 problems:
     mcq1:
         limit: 4

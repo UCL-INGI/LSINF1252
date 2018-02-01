@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S3] Pointer arithmetic - REVIEWED'
 network_grading: false
-order: 30
+order: 26
 problems:
     first:
         language: c
