@@ -110,8 +110,8 @@ void test_some_integers_fail_read() {
     ret = myfunc("file.txt");
     SANDBOX_END;
     
-    if (ret != -1){
-        push_info_msg(_("When a read() fails, your code does not return -1."));
+    if (ret != -2){
+        push_info_msg(_("When a read() fails, your code does not return -2."));
         set_tag("failure_handling");
         CU_FAIL();
     }
@@ -142,6 +142,6 @@ void test_close() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS();
+    BAN_FUNCS(system, set_tag);
     RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }
