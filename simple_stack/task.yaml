@@ -1,41 +1,109 @@
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    #include "student_code.h"
+
+    int push(struct node **head, const char *name){
+        @@push@@
+    }
+
+    /*int pop(struct node *head, char **name){
+        @@pop@@
+    }*/
+
+
+/student/student_code.h: |
+    #include <string.h>
+
+    struct node{
+        struct node *next;
+        char *name;
+    };
+
+    //int pop(struct node *head, char **result);
+
+    int push(struct node **head, const char *value);
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
-    You are asked to implement the `pop` and `push` functions of the given stack interface.
+    You are asked to implement the ``pop`` and ``push`` functions of the given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface.
 
     .. code-block:: c
 
-        struct node{
+        struct node {
             node *next;
-            int value;
-        }
+            char *value;
+        };
+
+
+
+    *Hints*
+    =======
+    - @value is also a pointer, it must be allocated.
+
+    - `strncpy <https://linux.die.net/man/3/strncpy>`_
+
+    - `strlen <https://linux.die.net/man/3/strlen>`_
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S3] Simple stack'
 network_grading: false
 order: 31
 problems:
     push:
+        header: |-
+            .. code-block:: c
+
+                /**
+                * Add @name at the "head" of the stack.
+                *
+                * @head : pointer to the head of the stack
+                * @name : pointer to store the popped element
+                *
+                * @return 0 if no error, 1 else.
+                */
+
+                int push(struct node **head, const char *name){
         language: c
         name: Push
-        header: |-
-            .. code-block:: c
-
-                int push(struct node **head, int value){
         type: code
     pop:
+        name: Pop
+        language: ''
         header: |-
             .. code-block:: c
 
-                int pop(struct node *head, int value){
+                /**
+                * Remove the "head" element of the stack and return it's content.
+                *
+                * @head : pointer to the head of the stack
+                * @name : pointer to store the popped element
+                *
+                * @return 0 if no error, 1 else.
+                */
+
+                int pop(struct node *head, char **name){
         type: code
-        name: Pop
-        language: ''
+    free_node:
+        language: c
+        header: |-
+            You can use this question to implement a ``free_node`` function
+
+            .. code-block:: c
+
+                /*
+                * Free @node
+                */
+                void free_node(struct node *node){
+        optional: 'on'
+        type: code
+        name: <OPTIONAL> free_node
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -43,8 +111,8 @@ submission_limit:
 tags:
     '0':
         name: Data structures
-        visible: true
         type: 2
         description: Task dealing with data structures and linked list
+        visible: true
         id: ''
 weight: 1.0
