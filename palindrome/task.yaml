@@ -11,7 +11,7 @@ limits:
     memory: '100'
 name: '[S2] Palindrome'
 network_grading: false
-order: 6
+order: 15
 problems:
     q1:
         type: code
