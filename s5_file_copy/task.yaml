@@ -1,3 +1,227 @@
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    /*
+     * Generate a file named "file.txt".
+     * The content is the bytes in range [0, n[
+     */
+    void gen_file(int n){
+        system("rm newfile.txt");
+        int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
+        if(fd == -1) {
+            CU_FAIL("Error, can not initialise test file");
+        }
+        char array[n];
+        int i = 0;
+        for (i = 0; i < n; i++){
+            array[i] = i;
+            if (write(fd, (void *) &array[i], sizeof(char)) == -1){
+                CU_FAIL("Error, can not initialise test file");
+            }
+        }
+        if (close(fd) == -1)
+            CU_FAIL("Error, can not initialise test file");
+    }
+
+    /*
+     * Test with open fail
+     */
+    void test_fail_open() {
+        set_test_metadata("q1", _("Test fail open"), 1);
+        int ret = 0;
+
+        monitored.open = true;
+        failures.open = FAIL_TWICE;
+        failures.open_ret = -1;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file_that_does_not_exists.txt", "newfile_that_should_not_be_create.txt");
+        SANDBOX_END;
+
+        if (ret != -1){
+            push_info_msg(_("When the open() function fails, your code does not return -1."));
+            CU_FAIL();
+        }else{
+            set_tag("open");
+        }
+    }
+
+
+    /*
+     * Test with an empty file
+     */
+    void test_empty_file() {
+        set_test_metadata("q1", _("Test with empty file."), 1);
+        gen_file(0);
+        int ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        system("chmod 644 newfile.txt"); //If student does not set permission correctly, we set it to avoid test error
+        if (system("diff file.txt newfile.txt") != 0){
+            push_info_msg(_("You copy is not identical."));
+            CU_FAIL();
+        }
+        if (ret != 0){
+            push_info_msg(_("When the file is empty, your copy is not identical."));
+            CU_FAIL();
+        }
+    }
+
+
+    /*
+     * Test with some bytes in the file
+     */
+    void test_file_permission() {
+        set_test_metadata("q1", _("Test permissions equal"), 1);
+        gen_file(122);
+
+        SANDBOX_BEGIN;
+        myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        system("ls -al file.txt | head -c 10 > PERM_A.txt");
+        system("ls -al newfile.txt | head -c 10 > PERM_B.txt");
+        if (system("diff PERM_A.txt PERM_B.txt") != 0){
+            push_info_msg(_("The permission of the two files are not equals."));
+            CU_FAIL();
+        }else{
+            set_tag("permission");
+        }
+    }
+
+
+
+    /*
+     * Test with some bytes in the file
+     */
+    void test_file() {
+        set_test_metadata("q1", _("Test with normal file"), 2);
+        gen_file(122);
+        int ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        system("chmod 644 newfile.txt"); //If student does not set permission correctly, we set it to avoid test error
+        // S_IRUSR|S_IWUSR = 644
+        if (system("diff file.txt newfile.txt") != 0){
+            push_info_msg(_("You copy is not identical."));
+            CU_FAIL();
+        }else{
+            set_tag("copy");
+        }
+        if (ret != 0){
+            push_info_msg(_("You do not return 0 when the copy should be successful."));
+            CU_FAIL();
+        }
+    }
+
+    /*
+     * Test with some bytes in the file
+     */
+    void test_file_write_fail() {
+        set_test_metadata("q1", _("Test with normal file (with some failures)"), 1);
+        gen_file(125);
+        int ret = 0;
+
+        monitored.write = true;
+        failures.write = FAIL_THIRD;
+        failures.write_ret = -1;
+
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        if (ret != -1){
+            push_info_msg(_("You do not return -1 when a fail occurs with read() or write()"));
+            set_tag("failure_handling");
+            CU_FAIL();
+        }
+    }
+
+    /*
+     * Test with some bytes in the file with close()
+     */
+    void test_close() {
+        set_test_metadata("q1", _("Test close()."), 1);
+        gen_file(2);
+
+        monitored.close = true;
+        monitored.open = true;
+        SANDBOX_BEGIN;
+        myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        int close_tag = 0;
+        if (stats.close.called != 2){
+            push_info_msg(_("You did not close() the file."));
+            close_tag++;
+            CU_FAIL();
+        }if (stats.open.called != 2){
+            push_info_msg(_("The open should be use two times."));
+            close_tag++;
+            CU_FAIL();
+        }
+
+        //We fail the close()
+        gen_file(3);
+        int ret = 0;
+        monitored.close = true;
+        failures.close = FAIL_SECOND;
+        failures.close_ret = -1;
+        SANDBOX_BEGIN;
+        ret = myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        if(ret != -1){
+            push_info_msg(_("When close() fails, your code does not return -1."));
+            close_tag++;
+            CU_FAIL();
+        }
+        if(close_tag == 0){
+            set_tag("close");
+        }
+    }
+
+
+    /*
+     * Test original file not modified (content and permissions)
+     */
+    void test_original_integrity() {
+        set_test_metadata("q1", _("Test original file not modified"), 1);
+        gen_file(70);
+        system("cp file.txt file_original.txt");
+        system("ls -al file.txt | head -c 10 > PERM_FILE_1.txt");
+
+        SANDBOX_BEGIN;
+        myfunc("file.txt", "newfile.txt");
+        SANDBOX_END;
+
+        if (system("diff file.txt file_original.txt") != 0){
+            push_info_msg(_("You can not modify the original file"));
+            CU_FAIL();
+            set_tag("original_modif");
+        }
+        system("ls -al file.txt | head -c 10 > PERM_FILE_2.txt");
+        if (system("diff PERM_FILE_1.txt PERM_FILE_2.txt") != 0){
+            push_info_msg(_("You can not modify the permissions of the original file."));
+            CU_FAIL();
+            set_tag("original_modif");
+        }
+    }
+
+    int main(int argc,char** argv){
+        BAN_FUNCS(system);
+        RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_original_integrity, test_close);
+    }
 accessible: true
 author: Olivier Martin
 context: Given a file containing arbitrary bytes, you are asked to define a function
@@ -48,8 +272,8 @@ tags:
         description: This tag validate that you are able to copy permission of a file.
         id: permission
     '2':
-        description: This tag validate you are able to copy a file.
         visible: true
+        description: This tag validate you are able to copy a file.
         id: copy
         type: 0
         name: Copy
@@ -62,56 +286,56 @@ tags:
     '10':
         visible: true
         type: 1
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-        id: timeout
+        description: ''
+        name: Memory Exceeded
+        id: memory
     '11':
-        name: Original file modified
-        id: original_modif
+        name: Not compile
+        id: not_compile
+        description: You code does not compile.
         visible: true
-        description: You have modified the original file.
         type: 1
     '12':
         visible: true
-        id: failure_handling
-        name: Failure handling
-        description: You do not manage failures during the copy properly.
+        id: double_free
+        name: Double free
+        description: Your code produced a double free.
         type: 1
     '4':
-        description: ''
+        description: Your code exceeds the maximum allowed time.
         type: 1
-        id: sigfpe
-        name: Floating Point Exception
+        id: timeout
+        name: Timeout
         visible: true
     '5':
-        id: sigsegv
-        name: Segmentation Fault
+        id: original_modif
+        name: Original file modified
         type: 1
-        description: ''
+        description: You have modified the original file.
         visible: true
     '6':
-        id: banned_funcs
+        id: failure_handling
         type: 1
-        description: You use some banned functions.
-        name: Banned functions
+        description: You do not manage failures during the copy properly.
+        name: Failure handling
         visible: true
     '7':
         description: ''
-        id: memory
-        name: Memory Exceeded
+        id: sigfpe
+        name: Floating Point Exception
         visible: true
         type: 1
     '8':
-        name: Not compile
-        id: not_compile
+        name: Segmentation Fault
+        id: sigsegv
         type: 1
-        description: You code does not compile.
+        description: ''
         visible: true
     '9':
-        id: double_free
-        description: Your code produced a double free.
+        id: banned_funcs
+        description: You use some banned functions.
         visible: true
-        name: Double free
+        name: Banned functions
         type: 1
     '13':
         description: ''
