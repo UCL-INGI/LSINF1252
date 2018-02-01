@@ -1,3 +1,29 @@
+/student/solution.c.sol: |+
+    //Open
+    int fd1 = open(file_name,O_RDONLY);
+    int fd2 = open(new_file_name,O_WRONLY|O_CREAT);
+    if(fd1 == -1) return -1;
+    if(fd2 == -1) return -1;
+
+    //Permissions
+    struct stat st;
+    stat(file_name, &st);
+    chmod(new_file_name, st.st_mode);
+
+    //Copy
+    char c;
+    while(read(fd1, (void *) &c, sizeof(char)) >= 1){
+        if ((int)write(fd2, (void *) &c, sizeof(char)) == -1)
+            return -1;
+    }
+
+    //Close
+    close(fd1);
+    close(fd2);
+    return 0;
+
+
+
 /student/tests.c: |
     // CTester template
 
@@ -156,17 +182,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S5] File integers reading'
 network_grading: false
 order: 25
 problems:
     q1:
-        type: code
-        language: c
         name: Write your code here
+        language: c
+        type: code
         header: |-
             .. code-block:: java
 
@@ -181,69 +207,69 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 0
         name: Close
-        visible: true
+        type: 0
         id: close
+        visible: true
         description: This tag validate that your close are correctly performed.
     '1':
         type: 0
-        description: This tag validate you are able to open a file.
-        name: Open
         visible: true
+        name: Open
         id: open
+        description: This tag validate you are able to open a file.
     '2':
-        id: banned_funcs
         name: Banned functions
+        id: banned_funcs
         description: You use some banned functions.
         type: 1
         visible: false
     '3':
-        description: Your code produced a double free.
-        visible: true
         name: Double free
-        id: double_free
-        type: 1
-    '4':
         visible: true
-        id: sigfpe
+        description: Your code produced a double free.
         type: 1
+        id: double_free
+    '4':
+        id: sigfpe
         name: Floating Point Exception
         description: ''
-    '5':
-        description: ''
         visible: true
         type: 1
+    '5':
+        visible: true
         id: memory
         name: Memory Exceeded
+        type: 1
+        description: ''
     '6':
-        name: Not compile
         id: not_compile
+        name: Not compile
         type: 1
-        visible: true
         description: You code do not compile.
+        visible: true
     '7':
+        description: ''
         visible: true
+        type: 1
         name: Segmentation Fault
-        description: ''
         id: sigsegv
-        type: 1
     '8':
-        visible: true
-        type: 1
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
         id: timeout
-    '10':
-        name: File
-        type: 2
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
         visible: true
+    '10':
+        name: S5
+        type: 2
         description: ''
+        visible: true
         id: ''
     '9':
-        name: S5
-        description: ''
-        type: 2
         visible: true
+        name: File
+        type: 2
+        description: ''
         id: ''
 weight: 1.0
