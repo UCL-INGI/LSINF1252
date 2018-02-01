@@ -122,13 +122,30 @@ void test_open() {
     
     free(tab);
     tab = NULL;
-    
+    int tag_open = 0;
     if(ret != -1){
         push_info_msg(_("You do not return -1 when open() fails."));
         CU_FAIL();
-    }else{
+        tag_open++;
+    }
+    
+    //Test if open() return a correct file descriptor.
+    tab = gen_struct(size);
+    monitored.open = true;
+    SANDBOX_BEGIN;
+    ret = save(tab, size, "file.txt");
+    SANDBOX_END;
+
+    if(stats.open.last_return <= 2){
+        push_info_msg(_("When the open() should be fine, your code returns -1."));
+        CU_FAIL();
+        tag_open++;
+    }
+    if(tag_open == 0){
         set_tag("open");
     }
+    free(tab);
+    tab = NULL;
 }
 
 void test_write_fail() {
