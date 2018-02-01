@@ -132,7 +132,7 @@ void test_fail_eight() {
 void test_fail_ten() {
     set_test_metadata("sleep_malloc", _("Malloc fails ten first times"), 1);
 
-    void* ret = NULL;
+    void* ret = (void*) 0x86;
 
     monitored.malloc = true;
     failures.malloc = 0x3ff;
@@ -154,7 +154,7 @@ void test_fail_ten() {
 void test_fail_always() {
     set_test_metadata("sleep_malloc", _("Malloc fails always"), 1);
 
-    void* ret = NULL;
+    void* ret = (void*) 0x86;
 
     monitored.malloc = true;
     failures.malloc = FAIL_ALWAYS;
