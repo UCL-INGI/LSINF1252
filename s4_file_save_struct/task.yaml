@@ -1,185 +1,8 @@
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    point_t* gen_struct(int size){
-        point_t *tab = malloc(size*sizeof(point_t));
-        if (tab == NULL){
-            CU_FAIL(_("Error, can not initialise test file"));
-            return (point_t*)NULL;
-        }
-        for (int i = 0; i < size; i++){
-            tab[i].x = i+i;
-            tab[i].y = i+i+i;
-            tab[i].z = i+i*i;
-        }
-        return tab;
-    }
-
-    void test() {
-        set_test_metadata("q1", _("Test write array struct"), 1);
-        int size = 6;
-        int ret = 0;
-        point_t* tab = gen_struct(size);
-
-        SANDBOX_BEGIN;
-        ret = save(tab, size, "file.txt");
-        SANDBOX_END;
-        system("chmod 644 file.txt");
-
-
-        free(tab);
-        tab = NULL;
-
-        //Regenerate the struct in case student modified it
-        tab = gen_struct(size);
-        int fd = open("file.txt",O_RDONLY);
-        if(fd == -1)
-            CU_FAIL(_("Error, can not initialise test file"));
-
-        point_t s;
-        for(int i = 0; i < size; i++){
-            if ((int)read(fd, (void *) &s, sizeof(point_t)) < 1){
-                push_info_msg(_("You did not write all content of the array in the file."));
-                CU_FAIL();
-            }
-            if (tab[i].x != s.x || tab[i].y != s.y || tab[i].z != s.z){
-                push_info_msg(_("You did not write the array of struct correctly in the file."));
-                CU_FAIL();
-            }
-        }
-        free(tab);
-        close(fd);
-        if(ret != 0){
-            push_info_msg(_("You did not return 0 when everything occurs fine."));
-            CU_FAIL();
-        }
-    }
-
-    void test_close() {
-        set_test_metadata("q1", _("Test close()."), 1);
-        int size = 6;
-        point_t* tab = gen_struct(size);
-
-        monitored.close = true;
-        monitored.open = true;
-        SANDBOX_BEGIN;
-        save(tab, size, "file.txt");
-        SANDBOX_END;
-        system("chmod 644 file.txt");
-
-        free(tab);
-        tab = NULL;
-
-        int close_ok = 0;
-        if (stats.close.called != 1){
-            push_info_msg(_("You did not close() the file."));
-            close_ok++;
-            CU_FAIL();
-        }if(stats.open.last_return != stats.close.last_params.fd){
-            push_info_msg(_("The close() does not close the file you opened before."));
-            close_ok++;
-            CU_FAIL();
-        }
-
-        //We fail the close()
-        tab = gen_struct(size);
-        int ret = 0;
-        monitored.close = true;
-        failures.close = FAIL_FIRST;
-        failures.close_ret = -1;
-        SANDBOX_BEGIN;
-        ret = save(tab, size, "file.txt");
-        SANDBOX_END;
-
-        if(ret != -3){
-            push_info_msg(_("When close() fails, your code does not return -3."));
-            close_ok++;
-            CU_FAIL();
-        }
-        if(close_ok == 0){
-            set_tag("close");
-        }
-        free(tab);
-        tab = NULL;
-    }
-
-    void test_open() {
-        set_test_metadata("q1", _("Test close()."), 1);
-        int size = 6;
-        point_t* tab = gen_struct(size);
-        int ret = 0;
-
-        monitored.open = true;
-        failures.open = FAIL_FIRST;
-        failures.open_ret = -1;
-        SANDBOX_BEGIN;
-        ret = save(tab, size, "file.txt");
-        SANDBOX_END;
-        system("chmod 644 file.txt");
-
-        free(tab);
-        tab = NULL;
-        int tag_open = 0;
-        if(ret != -1){
-            push_info_msg(_("You do not return -1 when open() fails."));
-            CU_FAIL();
-            tag_open++;
-        }
-
-        //Test if open() return a correct file descriptor.
-        tab = gen_struct(size);
-        monitored.open = true;
-        SANDBOX_BEGIN;
-        ret = save(tab, size, "file.txt");
-        SANDBOX_END;
-
-        if(stats.open.last_return <= 2){
-            push_info_msg(_("When the open() should be fine, your code returns -1."));
-            CU_FAIL();
-            tag_open++;
-        }
-        if(tag_open == 0){
-            set_tag("open");
-        }
-        free(tab);
-        tab = NULL;
-    }
-
-    void test_write_fail() {
-        set_test_metadata("q1", _("Test write() fail."), 1);
-        int size = 6;
-        point_t* tab = gen_struct(size);
-        int ret = 0;
-
-        monitored.write = true;
-        failures.write = FAIL_THIRD;
-        failures.write_ret = -1;
-        SANDBOX_BEGIN;
-        ret = save(tab, size, "file.txt");
-        SANDBOX_END;
-        system("chmod 644 file.txt");
-
-        free(tab);
-        tab = NULL;
-
-        if(ret != -2){
-            push_info_msg(_("You do not return -2 when write() fails."));
-            set_tag("failure_handling");
-            CU_FAIL();
-        }
-    }
-
-    int main(int argc,char** argv){
-        BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
-        RUN(test, test_close, test_open, test_write_fail);
-    }
 accessible: true
 author: Olivier Martin
 context: |-
+    *Estimated time: 25 minutes*
+
     Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file.
 
     .. code-block:: c
@@ -238,11 +61,11 @@ tags:
         description: This tag validate that your close are correctly performed.
         id: close
     '2':
-        name: Failure handling
-        visible: true
         description: You do not manage failures properly during write operations.
+        visible: true
         id: failure_handling
         type: 1
+        name: Failure handling
     '3':
         name: Not compile
         type: 1
@@ -250,11 +73,11 @@ tags:
         description: You code do not compile.
         id: not_compile
     '4':
+        visible: true
         description: ''
         type: 1
         id: memory
         name: Memory Exceeded
-        visible: true
     '5':
         id: sigfpe
         name: Floating Point Exception
@@ -283,18 +106,18 @@ tags:
         id: sigsegv
         description: ''
         visible: true
-        name: Segmentation Fault
         type: 1
+        name: Segmentation Fault
     '10':
+        visible: true
         type: 2
         description: ''
         name: S5
-        visible: true
         id: ''
     '11':
         name: File
+        type: 2
         visible: true
         description: ''
-        type: 2
         id: ''
 weight: 1.0

@@ -1,7 +1,7 @@
 accessible: true
 author: Olivier Martin
 context: |-
-    *Estimated time: 20 minutes*
+    *Estimated time: 30 minutes*
 
     Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
 
