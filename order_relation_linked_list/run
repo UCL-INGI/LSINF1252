@@ -4,7 +4,7 @@
 # Auteurs : Mathieu Xhonneux, Anthony Gégo
 # Licence : GPLv3
 
-import subprocess, shlex, re, os, yaml
+import subprocess, shlex, re, os
 from inginious import feedback, rst, input
 
 # Switch working directory to student/
@@ -71,7 +71,7 @@ if p.returncode:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
     feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
     exit(0)
-#elif run_output:   
+#elif run_output:
 #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
 
 # Comment to run the tests
@@ -107,7 +107,7 @@ for test in results:
         feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
                 test['pid'], True)
         tests_result[test['pid']] = False
-        
+
 for pid, result in tests_result.items():
     if result:
         feedback.set_problem_result("success", pid)
@@ -116,7 +116,7 @@ for pid, result in tests_result.items():
 
 with open("../task.yaml", 'r') as stream:
     problems = yaml.load(stream)['problems']
-    
+
     for name, meta in problems.items():
         if meta['type'] == 'match':
             answer = input.get_input(name)
