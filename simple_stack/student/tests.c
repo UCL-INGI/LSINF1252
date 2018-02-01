@@ -66,6 +66,8 @@ void test_push_param_nomem() {
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(1, ret);
+  if (ret)
+      push_info_msg(_("Wrong return code if wrong args"));
 
   struct node *head = (struct node*) malloc(sizeof(struct node));
   if (!head)
@@ -80,9 +82,11 @@ void test_push_param_nomem() {
   SANDBOX_BEGIN;
   ret = push(&head, 164684);
   SANDBOX_END;
-  
+    
   CU_ASSERT_EQUAL(1, ret);
-
+  if (ret)
+     push_info_msg(_("Wrong return code if wrong args"));
+  
   free(head);
 }
 
@@ -145,7 +149,6 @@ void test_push_general() {
 
   CU_PASS("");
 
-  CU_ASSERT_TRUE(!ret);
   free_stack(stack);
 
 }

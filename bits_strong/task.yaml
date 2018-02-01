@@ -11,7 +11,7 @@ context: |-
 
     This exercise will introduce some non-standard data types which guarantee that the variable has a fixed number of bits. Indeed, on some machines, a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise operations, we have to know first on how many bits we are working.
 
-    To do so, we introduce a new classe of variable type :
+    To do so, we introduce a new classe of variable types :
 
     * *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>).
 environment: pyjavacpp
@@ -21,23 +21,22 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S2] Summing bits'
+name: '[S2] Killing strong bits'
 network_grading: false
-order: 1
 problems:
     q1:
         language: c
         name: ''
         type: code
         header: |-
-            Write the body of a function that returns the number of bits set to 1 in *i* :
+            Write the body of a function *unset_strong_bit*, which sets to 0 the strongest bit set to 1 it founds, and does nothing if there's no bit set to 0.
 
-            e.g. *nbits(0b100) = 1, nbits(0b111) = 3, nbits(0b1010) = 2*
+            e.g. unset_strong_bit(0b000111010101010)=0b000011010101010
 
             .. code-block:: c
 
                 #include <stdint.h>
-                uint8_t nbits(uint32_t n) {
+                uint32_t unset_strong_bit(uint32_t x) {
 stored_submissions: 0
 submission_limit:
     amount: -1
