@@ -21,6 +21,7 @@ problems:
             feedback: 'The name of the executable is missing and the '
         name: Linking
         multiple: true
+        limit: 0
         type: multiple_choice
         header: Select all *correct* answers related to the linking of the `CUnit`
             library in a Makefile recipe.
