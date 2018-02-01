@@ -40,17 +40,22 @@
     # Remove source files
     subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
-    # Run the code in a parallel container
-    p = subprocess.Popen("./make_me", stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    p.communicate()
+    # Check whether make
 
-    # If run failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_problem_feedback("failed", "make_me_less_easy")
+    if(os.path.isfile("./make_me"))
+        # Run the code in a parallel container
+        p = subprocess.Popen("./make_me", stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        p.communicate()
+
+        # If run failed, exit with "failed" result
+        if p.returncode:
+            feedback.set_problem_feedback("failed", "make_me_less_easy")
+        else:
+            score += 75
+            feedback.set_problem_result("success", "make_me_less_easy")
+            feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
     else:
-        score += 75
-        feedback.set_problem_result("success", "make_me_less_easy")
-        feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
+        feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
 
     # Set score
     feedback.set_grade(score)

@@ -1,3 +1,14 @@
+/student/student_code.c.tpl: |+
+    #include<string.h>
+
+    int pal(char *str)
+    {
+    @    @q1@@
+    }
+
+
+/student/student_code.h: |
+    int pal(char *str);
 accessible: true
 author: Arthur van Stratum
 context: 'Palindrome are strings of text which reads the same backward as forward,
@@ -6,17 +17,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S2] Palindrome'
 network_grading: false
 order: 18
 problems:
     q1:
-        type: code
         language: c
         name: ''
+        type: code
         header: |-
             Write the body of the function *pal* which tells if the given string is a palindrome or not. Ignore spaces. An empty string is considered a palindrome. You have access to the functions of *string.h*
 

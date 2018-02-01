@@ -1,6 +1,6 @@
 #include<string.h>
 
-int pal(char *string)
+int pal(char *str)
 {
 @    @q1@@
 }

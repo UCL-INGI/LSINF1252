@@ -30,15 +30,14 @@
         return sum;
     }
 
-    void test_open() {
-        set_test_metadata("q1", _("Test open"), 1);
+    void test_open_fail() {
+        set_test_metadata("q1", _("Return -1 when open fail"), 1);
         system("rm file.txt"); //Be sure the file does not exist
         int ret = 0;
-        int tag_open = 0;
 
         //Test with open fail
         monitored.open = true;
-        failures.open = FAIL_FIRST;
+        failures.open = FAIL_ALWAYS;
         failures.open_ret = -1;
 
         SANDBOX_BEGIN; //
@@ -47,25 +46,28 @@
 
         if (ret != -1){ /
             push_info_msg(_("When open() fails, your code does not return -1."));
-            CU_FAIL();
-            tag_open++;
+            CU_FAIL("");
         }
 
-        //Test if open() return a correct file descriptor.
+    void test_open_ok() {
+        set_test_metadata("q1", _("Calling open only once"), 1);
+        //Test when open() returns a correct file descriptor.
         gen_file(13);
-        failures.open = FAIL_NEVER;
+        monitored.open = true;
+
         SANDBOX_BEGIN;
         myfunc("file.txt");
         SANDBOX_END;
 
         if(stats.open.last_return <= 2){
-            push_info_msg(_("When the open() should be fine, your code returns -1."));
-            CU_FAIL();
-            tag_open++;
+            push_info_msg(_("When open() works, your code returns -1."));
+            CU_FAIL("");
         }
-        if(tag_open == 0){
-            set_tag("open");
-        }
+
+        if (stats.open.called != 1)
+            CU_FAIL("");
+
+        set_tag("open");
     }
 
     void test_no_integer() {
@@ -163,7 +165,7 @@
 
     int main(int argc,char** argv){
         BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-        RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
+        RUN(test_open_ok, test_open_fail, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
     }
 accessible: true
 author: Olivier Martin
