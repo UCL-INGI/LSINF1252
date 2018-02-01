@@ -52,63 +52,63 @@ tags:
         id: open
     '2':
         name: Sum
+        visible: true
         description: The student has correctly computed and returned the sum.
         id: sum
         type: 0
-        visible: false
     '10':
         type: 1
-        description: ''
-        name: Segmentation Fault
-        id: sigsegv
+        description: You code does not compile.
+        name: Not compile
+        id: not_compile
         visible: true
     '3':
-        name: Timeout
+        name: Segmentation Fault
         type: 1
         visible: true
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
+        description: ''
+        id: sigsegv
     '4':
-        description: You do not manage failures properly during read operations.
+        description: Your code exceeds the maximum allowed time.
         type: 1
-        id: failure_handling
-        name: Failure handling
+        id: timeout
+        name: Timeout
         visible: true
     '5':
-        id: banned_funcs
-        name: Banned functions
+        id: failure_handling
+        name: Failure handling
         type: 1
-        description: You use some banned functions.
+        description: You do not manage failures properly during read operations.
         visible: true
     '6':
-        id: double_free
+        id: banned_funcs
         type: 1
-        description: Your code produced a double free.
-        name: Double free
+        description: You use some banned functions.
+        name: Banned functions
         visible: true
     '7':
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
+        description: Your code produced a double free.
+        id: double_free
+        name: Double free
         visible: true
         type: 1
     '8':
-        name: Memory Exceeded
-        id: memory
+        name: Floating Point Exception
+        id: sigfpe
         type: 1
         description: ''
         visible: true
     '9':
-        id: not_compile
-        description: You code does not compile.
+        id: memory
+        description: ''
         visible: true
-        name: Not compile
+        name: Memory Exceeded
         type: 1
     '11':
         name: S5
-        visible: true
         description: ''
         type: 2
+        visible: true
         id: ''
     '12':
         visible: true
