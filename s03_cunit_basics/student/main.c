@@ -25,8 +25,9 @@
  *                      asserts       5       5       5       0
  */
 
-
-#include "max_tests.h"
+#include <stdio.h>
+#include <string.h>
+#include "CUnit/Basic.h"
 
 /* Pointer to the file used by the tests. */
 static FILE* temp_file = NULL;
