@@ -8,17 +8,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     time: '30'
     output: '2'
+    memory: '100'
 name: '[S3] Improved strncpy'
 network_grading: false
 order: 20
 problems:
     strcpy_impl:
         name: buf_strcpy
-        language: c
         type: code
+        language: c
         header: |
             Write the body of the function *buf_strcpy*.
 
@@ -37,5 +37,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: S3
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0
