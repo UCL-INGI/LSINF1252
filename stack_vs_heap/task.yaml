@@ -61,12 +61,14 @@ problems:
         type: code
         language: c
         header: |
-            You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html). What is the link between passing by reference and pointers ?
+            You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html).
+            You can use the @r arg for this.
+            What is the link between passing by reference and pointers ?
 
             .. code-block:: c
 
                 /* sum3: updates the value pointed by a, to the sum of the values pointed by a and b */
-                void sum3 (int *a, int *b) {
+                void sum3 (int *a, int *b, int *r) {
 stored_submissions: 0
 submission_limit:
     amount: -1

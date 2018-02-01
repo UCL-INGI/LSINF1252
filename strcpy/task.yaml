@@ -5,39 +5,11 @@
     #include "student_code.h"
     #include "CTester/CTester.h"
 
-    void test_alloc(const char* src, const char* ret){
-
-    // Tests
-    //-----------------------------------------------------------------
-
-    // check if only one call to malloc
-    int ms = stats.malloc.called;
-    CU_ASSERT_EQUAL(ms, 1);
-    if (ms > 1)
-      push_info_msg(_("You used more than one call to malloc"));
-
-    // check if new element is malloced
-    int mal = malloced((void*) ret);
-    CU_ASSERT_TRUE(mal);
-    // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-    if (mal){
-      CU_ASSERT_STRING_EQUAL(ret, src);
-      if (strncmp(ret, src, strlen(src)) != 0){
-        char msg[80];
-        sprintf(msg, _("The strings are different.\nExpected string: %s. Received value: %s"), src, ret);
-        push_info_msg(msg);
-      }
-    }
-    else
-      push_info_msg(_("The returned pointer is not malloced"));
-
-    }
-
     void test_strcpy_return() {
       set_test_metadata("strcpy_impl", _("Check the returned pointer in normal case"), 1);
 
       char *ret = NULL;
-      char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
+      const char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
 
       monitored.malloc = true;
 
@@ -45,7 +17,36 @@
       ret = buf_strcpy(src);
       SANDBOX_END;
 
-    test_alloc(src, ret);
+      // Tests
+      //-----------------------------------------------------------------
+
+      // check if only one call to malloc
+      int ms = stats.malloc.called;
+      CU_ASSERT_EQUAL(ms, 1);
+      if (ms > 1)
+        push_info_msg(_("You used more than one call to malloc"));
+
+      // check if new element is malloced
+      int mal = malloced((void*) ret);
+      CU_ASSERT_TRUE(mal);
+      // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
+      if (mal){
+          CU_ASSERT_EQUAL(ret[strlen(src)],'\0');
+          if (ret[strlen(src)== '\0']){
+              CU_ASSERT_STRING_EQUAL(ret, src);
+              if (strncmp(ret, src, 62) != 0){
+                  char msg[80];
+                  sprintf(msg, _("The strings are different.\nExpected string: %s. Received value: %s"), src, ret);
+                  push_info_msg(msg);
+              }
+          }
+          else
+              push_info_msg(_("The returned pointer is does not finish by \0"));
+      }
+      else
+        push_info_msg(_("The returned pointer is not malloced"));
+
+    free(ret);
 
     }
 
@@ -57,6 +58,7 @@
 
       monitored.malloc = true;
       failures.malloc = FAIL_ALWAYS;
+      failures.malloc_ret = NULL;
 
       SANDBOX_BEGIN;
       ret = buf_strcpy(src);
@@ -65,6 +67,8 @@
       CU_ASSERT_PTR_NULL(ret);
       if (ret)
         push_info_msg(_("The return value of your implementation is wrong"));
+
+      free(ret);
 
     }
 
@@ -84,13 +88,15 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
 name: '[S3] Improved strncpy'
 network_grading: false
 order: 13
 problems:
     strcpy_impl:
+        name: buf_strcpy
+        language: c
         type: code
         header: |
             Write the body of the function *buf_strcpy*.
@@ -104,8 +110,6 @@ problems:
                 * @return: return pointer. if src == NULL or in case of error, return NULL
                 */
                 char *buf_strcpy(const char *src) {
-        language: c
-        name: buf_strcpy
 stored_submissions: 0
 submission_limit:
     amount: -1
