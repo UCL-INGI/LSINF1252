@@ -35,14 +35,29 @@ problems:
         name: Push
         header: |-
             .. code-block:: c
+                /*
+                * Add @name at the "head" of the stack.
+                *
+                * @head : pointer to the head of the stack
+                * @name : pointer to store the popped element
+                *
+                * @return 0 if no error, 1 else.
+                */
 
-                int push(struct node **head, int value){
+                int push(struct node **head, char *name){
         type: code
     pop:
         header: |-
             .. code-block:: c
+                /*
+                * Remove the "head" element of the stack and return it's content.
+                * @head : pointer to the head of the stack
+                * @name : pointer to store the popped element
+                *
+                * @return 0 if no error, 1 else.
+                */
 
-                int pop(struct node *head, int value){
+                int pop(struct node *head, char **name){
         type: code
         name: Pop
         language: ''
