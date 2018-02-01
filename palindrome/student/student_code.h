@@ -1,1 +1,1 @@
-int myfunc(int myargs);
+int pal(char *str);
