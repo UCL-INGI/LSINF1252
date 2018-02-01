@@ -34,6 +34,8 @@ problems:
 
             .. code-block:: c
 
+                #include <stdint.h>
+                #include <stdbool.h>
                 uint64_t set_bit(uint64_t x, int pos, bool val) {
 stored_submissions: 0
 submission_limit:
