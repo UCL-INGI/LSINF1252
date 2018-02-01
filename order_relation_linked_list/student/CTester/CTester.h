@@ -1,6 +1,5 @@
 #include <sys/mman.h>
 #include <CUnit/CUnit.h>
-#include <setjmp.h>
 
 #include "wrap.h"
 #include "trap.h"
@@ -11,7 +10,7 @@
 
 #define RUN(...) void *ptr_tests[] = {__VA_ARGS__}; return run_tests(argc, argv, ptr_tests, sizeof(ptr_tests)/sizeof(void*))
 #define BAN_FUNCS(...) 
-#define SANDBOX_BEGIN sandbox_begin(); if(sigsetjmp(segv_jmp,1) == 0) { (void)0
+#define SANDBOX_BEGIN if(sandbox_begin()) { (void)0
 #define SANDBOX_END } else { \
                              sandbox_fail(); \
                            } \
@@ -39,5 +38,3 @@ struct wrap_fail_t failures;
 struct wrap_log_t logs;
 
 int stdout_cpy, stderr_cpy;
-
-sigjmp_buf segv_jmp;
