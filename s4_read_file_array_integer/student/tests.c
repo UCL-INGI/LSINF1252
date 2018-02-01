@@ -95,6 +95,26 @@ void test_some_integers() {
     }
 }
 
+void test_some_integers_fail_read() {
+    set_test_metadata("q1", _("Test with some integers (read() fail)"), 1);
+    gen_file(8);
+    int ret = 0;
+    
+    monitored.read = true;
+    failures.read = FAIL_THIRD;
+    failures.read_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt");
+    SANDBOX_END;
+    
+    if (ret != -1){
+        push_info_msg(_("When a read() fails, your code does not return -1."));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+
 void test_close() {
     set_test_metadata("q1", _("Test close()."), 1);
     gen_file(2);
@@ -121,5 +141,5 @@ void test_close() {
 
 int main(int argc,char** argv){
     BAN_FUNCS();
-    RUN(test_open, test_no_integer, test_some_integers, test_close);
+    RUN(test_open, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
 }
