@@ -45,8 +45,9 @@ subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
 # Check whether make builds the correct executable
 
-#if( !os.path.exists("make_me"))
-#	feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
+has_file = os.path.exists("make_me")
+if has_file == false:
+    feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:", "make_me_less_easy")
 
 # Set score
 feedback.set_grade(score)

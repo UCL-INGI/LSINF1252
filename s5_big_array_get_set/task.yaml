@@ -3,9 +3,9 @@ author: Olivier Martin
 context: |-
     *Estimated time: 30 minutes*
 
-    Given a file containing a huge array of integers, you are asked to write a function to edit a value of the array and another to retrieve a value from the array.
+    Given a file containing a huge array of integers, you are asked to write a function to edit an integer inside the array, and another function to retrieve a specific integer from this array.
 
-    Since the array is huge, you can not load it entierly into memory. Consequently, you have to naviguate directly through the array in the file by using `lseek(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/lseek.2.html>`_.
+    Since the array is huge, you can not load it entirely into memory. Consequently, you have to naviguate directly through the array in the file by using `lseek(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/lseek.2.html>`_.
 
     You may want to use `fstat(2) <https://linux.die.net/man/2/fstat>`_ to get informations about the file.
 
@@ -33,9 +33,9 @@ problems:
                  *       return -1 in case of error.
                  *       return -2 if index >= length of array.
                  */
-                int get(char* filename, int index)
+                int get(char *filename, int index) {
         name: ''
-        language: ''
+        language: c
     q2:
         header: |-
             .. code-block:: c
@@ -46,10 +46,10 @@ problems:
                  *       at index {index} at value {value}.
                  *       do nothing if something fails.
                  */
-                void set(char* filename, int index, int value)
+                void set(char *filename, int index, int value) {
         name: ''
         type: code
-        language: ''
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -70,86 +70,86 @@ tags:
     '10':
         visible: true
         type: 1
-        description: You call the read or write function more than necessary.
-        name: Too many read/write
-        id: too_many_op
+        description: You have modified the original file.
+        name: Original file modified
+        id: original_modif
     '11':
-        name: Segmentation Fault
-        id: sigsegv
-        description: ''
+        name: Wrong Set Value
+        id: wrong_set_value
+        description: The value written in the file has not the correct value.
         type: 1
         visible: true
     '12':
         visible: true
-        id: banned_funcs
-        name: Banned functions
-        description: You use some banned functions.
+        id: wrong_index_set
+        name: Wrong Index Set
+        description: A value at an unwanted index was modified.
         type: 1
     '13':
-        description: Your code produced a double free.
-        name: Double free
+        description: The get() function did not return the expected value.
+        name: Wrong Get Value Returned
         type: 1
         visible: true
-        id: double_free
+        id: wrong_get_value_returned
     '14':
         type: 1
-        name: Failure handling
-        description: You do not manage failures properly.
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
         visible: true
-        id: failure_handling
+        id: timeout
     '15':
         visible: true
-        id: sigfpe
-        name: Floating Point Exception
+        id: oob
+        name: Out of bounds
         type: 1
-        description: ''
+        description: You try to read outside of the array.
     '2':
         visible: true
-        description: ''
-        id: memory
+        description: You call the read or write function more than necessary.
+        id: too_many_op
         type: 1
-        name: Memory Exceeded
+        name: Too many read/write
     '3':
-        name: Not compile
+        name: Segmentation Fault
         type: 1
         visible: true
-        description: You code do not compile.
-        id: not_compile
+        description: ''
+        id: sigsegv
     '4':
-        id: original_modif
-        description: You have modified the original file.
+        id: banned_funcs
+        description: You use some banned functions.
         type: 1
-        name: Original file modified
+        name: Banned functions
         visible: true
     '5':
-        id: wrong_set_value
+        id: double_free
         type: 1
-        name: Wrong Set Value
-        description: The value written in the file has not the correct value.
+        name: Double free
+        description: Your code produced a double free.
         visible: true
     '6':
-        id: wrong_index_set
+        id: failure_handling
         type: 1
-        description: A value at an unwanted index was modified.
-        name: Wrong Index Set
+        description: You do not manage failures properly.
+        name: Failure handling
         visible: true
     '7':
-        description: The get() function did not return the expected value.
-        id: wrong_get_value_returned
-        name: Wrong Get Value Returned
+        description: ''
+        id: sigfpe
+        name: Floating Point Exception
         visible: true
         type: 1
     '8':
-        name: Timeout
-        id: timeout
+        name: Memory Exceeded
+        id: memory
         type: 1
-        description: Your code exceeds the maximum allowed time.
+        description: ''
         visible: true
     '9':
-        id: oob
-        description: You try to read outside of the array.
+        id: not_compile
+        description: You code do not compile.
         visible: true
-        name: Out of bounds
+        name: Not compile
         type: 1
     '16':
         name: File
