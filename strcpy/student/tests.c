@@ -30,12 +30,17 @@ void test_strcpy_return() {
   CU_ASSERT_TRUE(mal);
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
   if (mal){
-    CU_ASSERT_STRING_EQUAL(ret, src);
-    if (strncmp(ret, src, 62) != 0){
-      char msg[80];
-      sprintf(msg, _("The strings are different.\nExpected string: %s. Received value: %s"), src, ret);
-      push_info_msg(msg);
-    }
+      CU_ASSERT_EQUAL(ret[strlen(src)],'\0');
+      if (ret[strlen(src)== '\0']){
+          CU_ASSERT_STRING_EQUAL(ret, src);
+          if (strncmp(ret, src, 62) != 0){
+              char msg[80];
+              sprintf(msg, _("The strings are different.\nExpected string: %s. Received value: %s"), src, ret);
+              push_info_msg(msg);
+          }
+      }
+      else
+          push_info_msg(_("The returned pointer is does not finish by \0"));
   }
   else
     push_info_msg(_("The returned pointer is not malloced"));
