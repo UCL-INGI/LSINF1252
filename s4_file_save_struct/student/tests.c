@@ -82,9 +82,28 @@ void test_close() {
         push_info_msg(_("The close() does not close the file you opened before."));
         close_ok++;
         CU_FAIL();
-    }if(close_ok == 0){
+    }
+    
+    //We fail the close()
+    tab = gen_struct(size);
+    int ret = 0;
+    monitored.close = true;
+    failures.close = FAIL_FIRST;
+    failures.close_ret = -1;
+    SANDBOX_BEGIN;
+    ret = save(tab, size, "file.txt");
+    SANDBOX_END;
+    
+    if(ret != -3){
+        push_info_msg(_("When close() fails, your code does not return -3."));
+        close_ok++;
+        CU_FAIL(); 
+    }
+    if(close_ok == 0){
         set_tag("close");
     }
+    free(tab);
+    tab = NULL;
 }
 
 void test_open() {
@@ -129,8 +148,8 @@ void test_write_fail() {
     free(tab);
     tab = NULL;
     
-    if(ret != -1){
-        push_info_msg(_("You do not return -1 when write() fails."));
+    if(ret != -2){
+        push_info_msg(_("You do not return -2 when write() fails."));
         set_tag("failure_handling");
         CU_FAIL();
     }
