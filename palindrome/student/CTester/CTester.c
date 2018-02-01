@@ -29,8 +29,7 @@ extern struct wrap_monitor_t monitored;
 extern struct wrap_fail_t failures;
 extern struct wrap_log_t logs;
 
-extern sigjmp_buf segv_jmp;
-
+sigjmp_buf segv_jmp;
 int true_stderr;
 int true_stdout;
 int pipe_stderr[2], usr_pipe_stderr[2];
@@ -104,7 +103,8 @@ void set_tag(char *tag)
         strncpy(test_metadata.tags[test_metadata.nb_tags++], tag, TAGS_LEN_MAX);
 }
 
-void segv_handler(int sig, siginfo_t *unused, void *unused2) {
+void segv_handler(int sig, siginfo_t *unused, void *unused2)
+{
     wrap_monitoring = false;
     push_info_msg(_("Your code produced a segfault."));
     set_tag("sigsegv");
@@ -141,12 +141,13 @@ int sandbox_begin()
     while ((n = read(usr_pipe_stderr[0], buf, BUFSIZ)) > 0);
 
     wrap_monitoring = true;
-    return 0;
+
+    return (sigsetjmp(segv_jmp,1) == 0);
 }
 
 void sandbox_fail()
 {
-    CU_FAIL("Segfault or timeout");
+    CU_FAIL("Segmentation Fault or Timeout");
 }
 
 void sandbox_end()
@@ -232,8 +233,8 @@ int run_tests(int argc, char *argv[], void *tests[], int nb_tests) {
         int flags = fcntl(pipes[i][0], F_GETFL, 0);
         fcntl(pipes[i][0], F_SETFL, flags | O_NONBLOCK);
     }
-    stdout_cpy = usr_pipe_stdout[0];
-    stderr_cpy = usr_pipe_stderr[0];
+    stdout_cpy = usr_pipe_stdout[0]; 
+    stderr_cpy = usr_pipe_stderr[0]; 
 
     putenv("LIBC_FATAL_STDERR_=2"); // needed otherwise libc doesn't print to program's stderr
 

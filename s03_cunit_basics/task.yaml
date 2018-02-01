@@ -1,7 +1,7 @@
 accessible: true
 author: ''
 context: '*Estimated time: 5 minutes*'
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -10,6 +10,7 @@ limits:
     time: '30'
 name: '[S03] Cunit basics'
 network_grading: false
+order: 29
 problems:
     q1:
         name: CUnit linker
@@ -30,4 +31,3 @@ tags:
             A unit testing framework for C
         visible: false
 weight: 1.0
-order: 29

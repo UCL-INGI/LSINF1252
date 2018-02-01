@@ -1,2 +1,0 @@
-sum2#SUCCESS#Check the `result` value#1#
-sum3#SUCCESS#Check the value of @a#1#
