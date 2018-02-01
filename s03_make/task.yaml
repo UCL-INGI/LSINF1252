@@ -15,10 +15,11 @@ name: '[S03] Makefile and testing'
 network_grading: false
 problems:
     make_test:
-        header: ''
-        language: ''
+        header: |
+            You have the above given ``Makefile``. You want to add a target to build the test that use the library **CUnit**. You will call this target ``test``.
+        language: Makefile
         type: code
-        name: ''
+        name: Make test
 stored_submissions: 0
 submission_limit:
     amount: -1
