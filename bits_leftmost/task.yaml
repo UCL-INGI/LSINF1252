@@ -1,5 +1,5 @@
 accessible: true
-author: ''
+author: Arthur van Stratum
 context: |-
     In this exercise, we will work with operation on bits. When we speak about the position of a bit, the index 0 corresponds to weakest bit, 1 to the second-weakest bit, ...
 
@@ -25,7 +25,7 @@ name: Leftist bits
 network_grading: false
 problems:
     q1:
-        language: ''
+        language: c
         name: ''
         type: code
         header: |-
@@ -33,6 +33,7 @@ problems:
 
             .. code-block:: c
 
+                #include <stdint.h>
                 uint8_t get_3_leftmost_bits(uint32_t x) {
 stored_submissions: 0
 submission_limit:
