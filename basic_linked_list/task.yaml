@@ -1,365 +1,137 @@
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    #include<stdio.h>
-
-    /**
-    * Check if the @list correspond to the expected list represented by @tab
-    */
-    int check_list(list_t* list, int *tab, int n){
-      if (!list | !tab | (n < 0))
-        return 2;
-
-      int i;
-      node_t *run = list->first;
-      for(i =  0; i < n; i++){
-        if (run->value != *(tab+i) || !run)
-          return 1;
-        run = run->next;
-      }
-      return 0;
-    }
-
-    node_t* init_node_corr(int value){
-      node_t* ret = malloc(sizeof(node_t));
-      if (!ret)
-        return NULL;
-
-      ret->next = NULL;
-      ret->value = value;
-      return ret;
-    }
-
-    list_t* init_list_corr(){
-      list_t *list = malloc(sizeof(list_t));
-      if (!list)
-        return NULL;
-      list->first = NULL;
-      list->size = 0;
-      return list;
-    }
-
-    void free_node_corr(node_t* node){
-      if (!node)
-        return;
-
-      if (!node->next)
-        free(node->next);
-
-      free(node);
-    }
-
-    void free_list_corr(list_t* list){
-      if (!list)
-        return;
-
-      node_t* run = list->first, *tmp;
-      while(run){
-        tmp = run;
-        run = run->next;
-        free_node_corr(tmp);
-      }
-
-      free(list);
-    }
-
-    void test_init_node_alloc(){
-      set_test_metadata("init_node", _("Check memory allocation of the node"), 1);
-
-      node_t* ret = NULL;
-
-      monitored.malloc = true;
-
-      SANDBOX_BEGIN;
-      ret = init_node(0);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(stats.malloc.called, 1);
-      if (!stats.malloc.called)
-        push_info_msg(_("You used more than one call to malloc"));
-
-      CU_ASSERT_TRUE(malloced((void*) ret));
-
-      CU_ASSERT_PTR_NOT_NULL(ret);
-
-      free_node_corr(ret);
-
-    }
-
-    void test_init_node_value(){
-      set_test_metadata("init_node", _("Check the initialisation of the node"), 2);
-
-      node_t* ret = NULL;
-
-      SANDBOX_BEGIN;
-      ret = init_node(10);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(ret->value, 10);
-      if (ret->value != 10)
-        push_info_msg(_("The value of the node is not the expected one"));
-
-      CU_ASSERT_PTR_NULL(ret->next);
-      if (ret->next)
-        push_info_msg(_("The 'next' pointer is not correctly initialised"));
-
-      free_node_corr(ret);
-
-      int val = 25136984;
-
-      SANDBOX_BEGIN;
-      ret = init_node(val);
-      SANDBOX_END;
-
-      CU_ASSERT_EQUAL(ret->value, val);
-      if (ret->value != val)
-        push_info_msg(_("The value of the node is not the expected one"));
-
-      CU_ASSERT_PTR_NULL(ret->next);
-      if (ret->next)
-        push_info_msg(_("The 'next' pointer is not correctly initialised"));
-
-      free_node_corr(ret);
-    }
-
-    void test_init_node_nomem(){
-      set_test_metadata("init_node", _("Check the return value if malloc call fails"), 1);
-
-      node_t* ret = (node_t *)0x42;
-
-      monitored.malloc = true;
-      failures.malloc = FAIL_ALWAYS;
-      failures.malloc_ret = NULL;
-
-      srandom(881468468);
-
-      SANDBOX_BEGIN;
-      ret = init_node(42);
-      SANDBOX_END;
-
-      CU_ASSERT_PTR_NULL(ret);
-      if (ret)
-        push_info_msg(_("Wrong return value when malloc call fails"));
-    }
-
-    void test_add_node_empty(){
-      set_test_metadata("add_node", _("Check the behavior of the function when the list is empty"), 1);
-
-      list_t *list = init_list_corr();
-      if (!list)
-        return;
-
-      int ret = 0;
-
-      monitored.malloc = true;
-      int value = 16328468;
-
-      SANDBOX_BEGIN;
-      ret = add_node(list, value);
-      SANDBOX_END;
-
-      // Tests
-      //-----------------------------------------------------------------
-
-      // check if only one call to malloc
-      int ms = stats.malloc.called;
-      CU_ASSERT_EQUAL(ms, 1);
-      if (ms != 1)
-        push_info_msg(_("You used more than one call to malloc"));
-
-      // check if new element is malloced
-      int mal = malloced((void*) list->first);
-      CU_ASSERT_TRUE(mal);
-      // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-      if (mal){
-        int val = list->first->value;
-        CU_ASSERT_EQUAL(val, value);
-        if (val != value)
-          push_info_msg(_("The inserted value does not correspond to the waited one"));
-      }
-      else
-        push_info_msg(_("The new node is not allocated"));
-
-      // check the return code in normal case (expected 0)
-      CU_ASSERT_EQUAL(ret, 0);
-      if (ret != 0)
-        push_info_msg(_("Your function returns an error in normal case!"));
-
-      // check the update of the list size
-      CU_ASSERT_EQUAL(list->size, 1);
-      if (list->size != 1)
-        push_info_msg(_("Wrong update of the list size."));
-
-      //-----------------------------------------------------------------
-
-      free_list_corr(list);
-    }
-
-    void test_add_node_wrong_args(){
-          set_test_metadata("add_node", _("Check the return code of the function if wrong args"), 1);
-
-        int ret;
-        srandom(47826786);
-
-        SANDBOX_BEGIN;
-        ret = add_node(NULL, random());
-        SANDBOX_END;
-
-        CU_ASSERT_TRUE(ret);
-        if (!ret)
-             push_info_msg(_("Wrong return value when wrong args"));
-    }
-
-    void test_add_node_non_empty(){
-      set_test_metadata("add_node", _("Check the behavior of the function when the list is not empty"), 1);
-
-      list_t *list = init_list_corr();
-      if (!list)
-        return;
-
-      int val[4] = {16328468, 135166, 97643564, 664872674};
-
-      node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node_corr(*(val+2)), *node3 = init_node_corr(*(val+3));
-      if (!node1 | !node2 | !node3){
-        CU_FAIL("NO MEMORY AVAILABLE");
-        return;
-      }
-
-      node1->next = node2;
-      node2->next = node3;
-      list->first = node1;
-      list->size = 3;
-
-      int ret = 0;
-
-      monitored.malloc = true;
-
-      SANDBOX_BEGIN;
-      ret = add_node(list, *val);
-      SANDBOX_END;
-
-      // Tests
-      //-----------------------------------------------------------------
-
-      // check if only one call to malloc
-      int ms = stats.malloc.called;
-      CU_ASSERT_EQUAL(ms, 1);
-      if (ms != 1)
-        push_info_msg(_("You used more than one call to malloc"));
-
-      // check if new element is malloced
-      int mal = malloced((void*) list->first);
-      CU_ASSERT_TRUE(mal);
-      // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-      if (mal){
-        int valf = list->first->value;
-        CU_ASSERT_EQUAL(valf, *val);
-        if (valf != *val)
-          push_info_msg(_("The inserted value does not correspond to the waited one"));
-      }
-      else
-        push_info_msg(_("The new node is not allocated"));
-
-      // check if the structure if the list changed
-      int cl = check_list(list, val, 4);
-      CU_ASSERT_EQUAL(cl, 0);
-      if (cl == 1)
-        push_info_msg(_("The new linked list does not correspond to the waited one"));
-      else if (cl == 2)
-        push_info_msg(_("SCRIPT ERROR"));
-
-      // check the return code in normal case (expected 0)
-      CU_ASSERT_EQUAL(ret, 0);
-      if (ret != 0)
-        push_info_msg(_("Your function returns an error in normal case!"));
-
-      // check the update of the list size
-      CU_ASSERT_EQUAL(list->size, 4);
-      if (list->size != 4)
-        push_info_msg(_("Wrong update of the list size."));
-
-      //-----------------------------------------------------------------
-
-
-      free_list_corr(list);
-    }
-
-    void test_add_node_nomem(){
-      set_test_metadata("add_node", _("Check the behavior of the function when the malloc call fails"), 1);
-
-      list_t *list = init_list_corr();
-      if (!list)
-        return;
-
-      int val[4] = {16328468, 135166, 97643564, 664872674};
-
-      node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node_corr(*(val+2)), *node3 = init_node_corr(*(val+3));
-      if (!node1 | !node2 | !node3){
-        CU_FAIL("NO MEMORY AVAILABLE");
-        return;
-      }
-
-      node1->next = node2;
-      node2->next = node3;
-      list->first = node1;
-      list->size = 3;
-
-      int ret = 0;
-
-      monitored.malloc = true;
-      failures.malloc = FAIL_ALWAYS;
-      failures.malloc_ret = NULL;
-
-
-
-      SANDBOX_BEGIN;
-      ret = add_node(list, *val);
-      SANDBOX_END;
-
-      // Tests
-      //-----------------------------------------------------------------
-
-      // check if only one call to malloc
-      int ms = stats.malloc.called;
-      CU_ASSERT_EQUAL(ms, 1);
-      if (ms != 1)
-        push_info_msg(_("You used more than one call to malloc"));
-
-      // check if the structure if the list changed
-      int *new_vals = (val+1);
-      int cl = check_list(list, new_vals, 3);
-      CU_ASSERT_EQUAL(cl, 0);
-      if (cl == 1)
-        push_info_msg(_("The new linked list does not correspond to the waited one"));
-      else if (cl == 2)
-        push_info_msg(_("SCRIPT ERROR"));
-
-      // check the return code in normal case (expected 0)
-      CU_ASSERT_EQUAL(ret, 1);
-      if (ret != 1)
-        push_info_msg(_("Your function returns an error in normal case!"));
-
-      // check the update of the list size
-      CU_ASSERT_EQUAL(list->size, 3);
-      if (list->size != 3)
-        push_info_msg(_("Wrong update of the list size."));
-
-      //-----------------------------------------------------------------
-
-      free_list_corr(list);
-    }
-
-    int main(int argc,char** argv)
-    {
-        BAN_FUNCS(calloc);
-        //RUN(test_init_node_alloc);
-        RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem, test_add_node_wrong_args);
-        //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
-    }
+/run: |
+    #!/bin/python3
+
+    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+    # Auteurs : Mathieu Xhonneux, Anthony Gégo
+    # Licence : GPLv3
+
+    import subprocess, shlex, re, os
+    from inginious import feedback, rst, input
+
+    # Switch working directory to student/
+    os.chdir("student")
+
+    # Fetch and save the student code into a file for compilation
+    input.parse_template("student_code.c.tpl", "student_code.c")
+
+    # Compilation
+    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    make_output = p.communicate()[0].decode('utf-8')
+    # If compilation failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_tag("not_compile", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
+
+    # Parse banned functions
+    try:
+        banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+        banned_funcs = list(filter(None, banned_funcs))
+    except IndexError:
+        banned_funcs = []
+
+    if banned_funcs:
+        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        readelf_output = p.communicate()[0].decode('utf-8')
+        for func in banned_funcs:
+            if re.search("UND {}\n".format(func), readelf_output):
+                feedback.set_tag("banned_funcs", True)
+                feedback.set_global_result("failed")
+                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
+                exit(0)
+
+
+    # Remove source files
+    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+    LANG = input.get_input('@lang')
+
+    # Run the code in a parallel container
+    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    p.communicate()
+
+    # If run failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_global_result("failed")
+        if p.returncode == 256-8:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+            feedback.set_tag("sigfpe", True)
+        elif p.returncode == 256-11:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+        elif p.returncode == 252:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+            feedback.set_tag("memory", True)
+        elif p.returncode == 253:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
+        else:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
+        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
+        exit(0)
+    #elif run_output:
+    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
+
+    # Comment to run the tests
+    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
+    #exit(0)
+
+    # Fetch CUnit test results
+    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
+    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
+
+
+    # Produce feedback
+    if all([r['code'] == 'SUCCESS' for r in results]):
+        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
+    else:
+        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+
+    score = 0
+    total = 0
+    tests_result = {}
+
+    for test in results:
+        total += test['weight']
+        for tag in test['tags']:
+            if tag != "":
+                feedback.set_tag(tag, True)
+        if test['code'] == 'SUCCESS':
+            score += test['weight']
+            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
+        else:
+            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = False
+
+    for pid, result in tests_result.items():
+        if result:
+            feedback.set_problem_result("success", pid)
+        else:
+            feedback.set_problem_result("failed", pid)
+
+    with open("../task.yaml", 'r') as stream:
+        problems = yaml.load(stream)['problems']
+
+        for name, meta in problems.items():
+            if meta['type'] == 'match':
+                answer = input.get_input(name)
+                if answer == meta['answer']:
+                    feedback.set_problem_result("success", pid)
+                    score += 1
+                else:
+                    feedback.set_problem_result("failed", pid)
+
+                total += 1
+
+    score = 100*score/(total if not total == 0 else 1)
+    feedback.set_grade(score)
+    feedback.set_global_result("success" if score >= 50 else "failed")
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |+
