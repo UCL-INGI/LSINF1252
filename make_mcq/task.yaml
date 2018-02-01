@@ -12,6 +12,7 @@ name: '[S03] Makefile - multiple choice questions'
 network_grading: false
 problems:
     q1:
+        multiple: true
         choices:
         -   valid: true
             text: gcc -o test test.o -lcunit
@@ -20,11 +21,10 @@ problems:
         -   text: gcc -o test.o
             feedback: 'The name of the executable is missing and the '
         name: Linking
-        multiple: true
-        limit: 0
-        type: multiple_choice
         header: Select all *correct* answers related to the linking of the `CUnit`
             library in a Makefile recipe.
+        limit: 0
+        type: multiple_choice
     q2:
         answer: '  valgrind --leak-check=full --show-leak-kinds=all program'
         type: match
@@ -39,5 +39,12 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: make & Makefile
+        type: 0
+        id: make
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        visible: false
 weight: 1.0

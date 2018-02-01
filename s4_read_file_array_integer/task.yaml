@@ -172,6 +172,7 @@ context: |-
 
     - If ``open()`` fails, return ``-1``.
     - If ``read()`` fails, return ``-2``.
+    - If ``close()`` fails, return ``-3``.
 environment: cpp
 evaluate: best
 groups: false
@@ -194,6 +195,7 @@ problems:
                  * @post return the sum of all integers present in the file.
                  *       return -1 if the file can not be open.
                  *       return -2 if an error occurs during reading
+                 *       return -3 if close() fails.
                  */
                 int sum_file(char* filename)
         language: c
