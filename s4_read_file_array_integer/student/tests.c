@@ -94,6 +94,8 @@ void test_some_integers() {
     if (ret != sum){
         push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
         CU_FAIL();
+    }else{
+        set_tag("sum");
     }
 }
 

@@ -1,0 +1,27 @@
+accessible: true
+author: ''
+context: |-
+    *Estimated time: 15 minutes*
+
+    This week, we will see how to automate the testing process.
+environment: pyjavacpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[S03] Makefile and testing'
+network_grading: false
+problems:
+    make_test:
+        header: ''
+        language: ''
+        type: code
+        name: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
