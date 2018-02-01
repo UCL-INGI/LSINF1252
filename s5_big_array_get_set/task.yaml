@@ -38,6 +38,9 @@
 
         int should_count_read = 0;
         monitored.read = true;
+        monitored.open = true;
+        monitored.close = true;
+        monitored.lseek = true;
         for(int i = 0; i < 1000; i+=50){
             should_count_read++;
             int ret = 0;
@@ -57,6 +60,20 @@
             push_info_msg(_("You perform too many read()."));
             CU_FAIL();
         }
+
+        if (stats.open.called != 1) {
+            push_info_msg(_("The number of calls to open() isn't 1."));
+            CU_FAIL();
+        }
+        if (stats.close.called != 1) {
+            push_info_msg(_("The number of calls to close() isn't 1."));
+            CU_FAIL();
+        }
+        if (stats.lseek.called != 1) {
+            push_info_msg(_("lseek() should at least be called once."));
+            CU_FAIL();
+        }
+
 
         if(system("diff file.txt file_copy.txt") != 0){
             push_info_msg(_("You have modified the file when reading it..."));
