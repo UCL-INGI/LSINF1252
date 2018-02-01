@@ -27,7 +27,7 @@ context: |-
 
          Hello make
 
-    Now, fire up your terminal, use ``cd path/to/hello/folder/`` to go to the directory which contains ``hello.c`` and type: ``make hello``
+    Now, fire up your terminal, use ``cd path/to/hello/folder/`` to go to the directory which contains ``hello.c`` (an example can be downloaded `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_basics_make/hello.c>`_) and type: ``make hello``
 
     Now the ``make`` comes alive and tells you something like:
 
