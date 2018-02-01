@@ -43,6 +43,14 @@ else:
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
+# Run the code in a parallel container
+p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./make_me LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+p.communicate()
+
+# If run failed, exit with "failed" result
+if p.returncode:
+    feedback.set_global_result("failed")
+
 # Set score
 feedback.set_grade(score)
 feedback.set_global_result("success" if score >= 80 else "failed")
