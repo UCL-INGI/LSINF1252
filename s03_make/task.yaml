@@ -18,7 +18,7 @@ context: |-
             operations_test.c
         Makefile
 
-    The Makefile is partially done, but somehow the target ``test`` for building the tests was lost.
+    The ``Makefile`` is partially done, but somehow the target ``test`` for building the tests was lost.
 
     .. code-block::
 
@@ -81,7 +81,7 @@ context: |-
         help: Makefile
             @sed -n 's/^##//p' $<
 
-    To try locally, you can download the project folder `_here <>`
+    To try locally, you can download the project folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s03_make/make_test.zip>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
