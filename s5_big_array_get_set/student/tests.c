@@ -201,8 +201,9 @@ void test_lseek_q1_fail(){
     failures.lseek=FAIL_FIRST;
     failures.lseek_ret = 0;   
     int ret = 0;
+    gen_file(10);
     SANDBOX_BEGIN;
-    ret = get("file_no_exits.txt", 3);
+    ret = get("file.txt", 3);
     SANDBOX_END;
     
     if (ret != -1){
