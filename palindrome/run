@@ -4,7 +4,7 @@
 # Auteurs : Mathieu Xhonneux, Anthony Gégo
 # Licence : GPLv3
 
-import subprocess, shlex, re, os, yaml
+import subprocess, shlex, re, os
 from inginious import feedback, rst, input
 
 # Switch working directory to student/
@@ -113,20 +113,6 @@ for pid, result in tests_result.items():
         feedback.set_problem_result("success", pid)
     else:
         feedback.set_problem_result("failed", pid)
-
-with open("../task.yaml", 'r') as stream:
-    problems = yaml.load(stream)['problems']
-    
-    for name, meta in problems.items():
-        if meta['type'] == 'match':
-            answer = input.get_input(name)
-            if answer == meta['answer']:
-                feedback.set_problem_result("success", pid)
-                score += 1
-            else:
-                feedback.set_problem_result("failed", pid)
-
-            total += 1
 
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)
