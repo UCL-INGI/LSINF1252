@@ -45,8 +45,8 @@ void test_no_file() {
     }
 }
 
-void test_fail_open() {
-    set_test_metadata("q1", _("Test fail open"), 1);
+void test_open() {
+    set_test_metadata("q1", _("Test open"), 1);
     int ret = 0;
     
     monitored.open = true;
@@ -62,6 +62,15 @@ void test_fail_open() {
         CU_FAIL();
     }else{
         set_tag("open");
+    }
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt");
+    SANDBOX_END;
+    
+    if(stats.open.last_return == -1){
+        push_info_msg(_("When the open should be fine, your code returns -1."));
+        CU_FAIL();
     }
 }
 
@@ -121,5 +130,5 @@ void test_close() {
 
 int main(int argc,char** argv){
     BAN_FUNCS();
-    RUN(test_no_file, test_fail_open, test_no_integer, test_some_integers, test_close);
+    RUN(test_no_file, test_open, test_no_integer, test_some_integers, test_close);
 }
