@@ -121,10 +121,12 @@ with open("../task.yaml", 'r') as stream:
         if meta['type'] == 'match':
             answer = input.get_input(name)
             if answer == meta['answer']:
-                feedback.set_problem_result("success", pid)
+                feedback.set_problem_result("success", name)
+                feedback.set_problem_feedback("Votre réponse est correcte. (1/1 pts)", name, True)
                 score += 1
             else:
-                feedback.set_problem_result("failed", pid)
+                feedback.set_problem_result("failed", name)
+                feedback.set_problem_feedback("Votre réponse est incorrecte. (0/1 pts)", name, True)
 
             total += 1
 

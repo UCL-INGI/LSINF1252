@@ -1,4 +1,4 @@
-#include "make_me.h"
+#include "make_me.h"            /* header file */
 
 int main() {
         print_make_me();
