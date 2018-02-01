@@ -1,7 +1,7 @@
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
-    *Estimated time: 10 minutes*
+    *Estimated time: 20 minutes*
 
     ``make`` is a task runner for targets described in a `Makefile`. It is mostly used to control the compilation of an executable from source code. Thus, you can use it to automate the tidious task of compiling your c code, or even automate the compilation of a report made with LaTeX.
 
@@ -65,7 +65,7 @@ context: |-
 
     Thats it, you made your first experiences with ``make``.
 
-    Now I strongly recommend you read `sections 2.1 to 2.3. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_. It will only take you 10 minutes and will help you understand how to ``make`` magic happen.
+    Now I strongly recommend you read `sections 2.1 to 2.3. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_. It will only take you 10 minutes (included in the above given estimated time) and will help you understand how to ``make`` magic happen.
 
     Once you read these 3 sections, let us practice a bit.
 
