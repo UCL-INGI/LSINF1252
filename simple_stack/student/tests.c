@@ -204,7 +204,7 @@ void test_push_general() {
     //printf("src = %s, name = %s\n", src, stack->name);
     CU_ASSERT_STRING_EQUAL(src, stack->name);
     if (!strcmp(src, stack->name)){
-      char *tmp[100];
+      char tmp[100];
       sprintf(tmp, _("The pushed value differ from the expected one\nWaited : %s\nReceived : %s\n"), src, stack->name);
       push_info_msg(tmp);
     }
