@@ -1,1 +1,0 @@
-int myfunc(int myargs);

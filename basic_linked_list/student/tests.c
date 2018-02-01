@@ -137,9 +137,9 @@ void test_init_node_nomem(){
   srandom(881468468);
 
   SANDBOX_BEGIN;
-  ret = init_node(random());
+  ret = init_node(42);
   SANDBOX_END;
-
+  printf("%p\n", ret);
 
   CU_ASSERT_PTR_NULL(ret);
   if (ret)
