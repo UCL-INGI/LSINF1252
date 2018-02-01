@@ -1,7 +1,7 @@
 accessible: true
 author: ''
 context: '*Estimated time: 15 minutes*'
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -10,6 +10,7 @@ limits:
     time: '30'
 name: '[S03] Makefile - multiple choice questions'
 network_grading: false
+order: 27
 problems:
     q1:
         multiple: true
@@ -48,4 +49,3 @@ tags:
             Makefile.
         visible: false
 weight: 1.0
-order: 27

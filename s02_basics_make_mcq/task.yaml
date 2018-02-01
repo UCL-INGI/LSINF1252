@@ -13,6 +13,8 @@ network_grading: false
 order: 17
 problems:
     mcq1:
+        header: Select all *correct* answers related to the *target* of a Makefile
+            rule.
         limit: 4
         choices:
         -   text: The target is the bullseye of a shooting target.
@@ -27,8 +29,6 @@ problems:
         multiple: true
         name: Find the target
         type: multiple_choice
-        header: Select all *correct* answers related to the *target* of a Makefile
-            rule.
     mcq2:
         limit: 4
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
@@ -87,14 +87,14 @@ problems:
                     clean
                     [tab]@rm -f src/*.o
             feedback: There is a missing colon.
-        -   feedback: The recipe in a Makefile has to be intended with a tab and not
-                spaces.
-            text: |4-
+        -   text: |4-
 
                 .. code-block:: console
 
                         clean:
                         [spaces]@rm -f src/*.o
+            feedback: The recipe in a Makefile has to be intended with a tab and not
+                spaces.
         -   feedback: There is a missing colon. There is a missing indendation.
             text: |4-
 
