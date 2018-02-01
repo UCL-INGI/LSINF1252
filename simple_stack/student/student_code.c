@@ -11,11 +11,12 @@
 }*/
 
 int push(struct node **head, int value){
-  struct node *node = (struct node*) malloc(sizeof(struct node));
-  if (!node || !head)
+  if (!head)
+    return 1;
+  struct node *node = init_node(value);
+  if (!node)
     return 1;
 
-  node->value = value;
   node->next = *head;
   *head = node;
 
