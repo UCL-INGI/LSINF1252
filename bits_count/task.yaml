@@ -1,3 +1,31 @@
+/student/student_code.c.tpl: |
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    uint8_t nbits(uint32_t n)
+    {
+    @    @q1@@
+    }
+    uint64_t set_bit(uint64_t x, int pos, bool value)
+    {
+    @    @set_bit@@
+    }
+    uint8_t get_3_leftmost_bits(uint32_t x)
+    {
+    @    @get_3_leftmost_bits@@
+    }
+    uint8_t get_4_rightmost_bits(uint32_t x)
+    {
+    @    @get_4_rightmost_bits@@
+    }
+    uint32_t unset_strong_bit(uint32_t x)
+    {
+    @    @unset_strong_bit@@
+    }
+    uint32_t cycle_bits(uint32_t x, uint32_t n)
+    {
+    @    @cycle_bits@@
+    }
 accessible: true
 author: Arthur van Stratum & Mathieu Xhonneux
 context: |-
@@ -21,8 +49,7 @@ network_grading: false
 order: 4
 problems:
     q1:
-        type: code
-        language: c
+        name: sum_bits
         header: |-
             Write the body of a function that returns the number of bits set to 1 in *i* :
 
@@ -31,11 +58,12 @@ problems:
             .. code-block:: c
 
                 uint8_t nbits(uint32_t n) {
-        name: sum_bits
+        language: c
+        type: code
     set_bit:
         name: set_bit
-        type: code
         language: c
+        type: code
         header: |-
             Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *val*.
 
@@ -44,7 +72,6 @@ problems:
                 uint64_t set_bit(uint64_t x, int pos, bool val) {
     get_3_leftmost_bits:
         name: get_3_leftmost_bits
-        language: ''
         type: code
         header: |-
             Write the body of a function *get_3_leftmost_bits* that returns the 3 strongest bits of *x*. For instance, with *x=11011001...*, the function should return a *uint8_t* containing 00000110.
@@ -52,10 +79,11 @@ problems:
             .. code-block:: c
 
                 uint8_t get_3_leftmost_bits(uint32_t x) {
+        language: ''
     get_4_rightmost_bits:
-        name: Get the 4 weakest bits
         type: code
         language: ''
+        name: Get the 4 weakest bits
         header: |+
             Write the body of a function *get_4_rightmost_bits* that returns the 4 weakest bits of *x*.
 
@@ -67,23 +95,23 @@ problems:
     unset_strong_bit:
         name: Unset the strongest bit
         language: c
+        type: code
         header: |-
             Write the body of a function *unset_strong_bit*, which sets to 0 the strongest bit set to 1 it founds, and does nothing if there's no bit set to 0.
 
             .. code-block:: c
 
                 uint32_t unset_strong_bit(uint32_t x) {
-        type: code
     cycle_bits:
-        type: code
-        language: c
         header: |-
             Write the body of a function *cycle_bits*, which moves all bits from *n* places to the left, according to the formula *x[(i+n)%32] = x[i]*, where *x[i]* is the i-iest bit of *x*.
 
             .. code-block:: c
 
                 uint32_t cycle_bits(uint32_t x, uint32_t n) {
+        type: code
         name: Cycle bits
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
