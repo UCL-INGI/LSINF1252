@@ -1,7 +1,7 @@
 accessible: true
 author: Olivier Martin
 context: |-
-    Given an array of ``struct 3dpoint`` defined below, write a C code to write the array of struct into a file named ``save.txt``. You have to write all elements sequentially.
+    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file.
 
     .. code-block:: c
 
