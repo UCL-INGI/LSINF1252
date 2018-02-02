@@ -1,9 +1,52 @@
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
-    *Estimated time: 15 minutes*
+    *Estimated time: 20 minutes*
 
-    Read `sections 2.4 to 2.7. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Variables-Simplify>`_. It will only take you 10 minutes (included in the above given estimated time) and will help you understand how to ``make`` more magic happen.
+    First, read `sections 2.4 to 2.7. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Variables-Simplify>`_. It will only take you 10 minutes (included in the above given estimated time) and will help you understand how to ``make`` more magic happen.
+
+    As you have just read, one very useful use of Makefiles is to use variables. You can use a variable to define the C compiler you will use and the flags you want it to use.
+
+    For instance, let us consider the following Makefile:
+
+    .. code-block:: console
+
+        # CC variable for C compiler
+        # You can replace gcc by clang if you prefer
+        CC = gcc
+        # CFLAGS variable for gcc/clang flags
+        # See gcc/clang manual to understand all flags
+        CFLAGS += -std=c99 # Define which version of the C standard to use
+        CFLAGS += -Wall # Enable the 'all' set of warnings
+        CFLAGS += -Werror # Treat all warnings as error
+        CFLAGS += -Wshadow # Warn when shadowing variables
+        CFLAGS += -Wextra # Enable additional warnings
+        CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
+        CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
+
+        OBJ = calc.o operations.o
+
+        calc: $(OBJ)
+            $(CC) $(CFLAGS) -o calc $(OBJ)
+
+        calc.o: calc.c calc.h operations.h
+            $(CC) $(CFLAGS) -c calc.c
+
+        operations.o: operations.c operations.h
+            $(CC) $(CFLAGS) -c operations.c
+
+        .PHONY: clean mrproper
+
+        clean:
+            rm -f $(OBJ)
+
+        mrproper: clean
+            rm  -f calc
+
+
+    In this file we used 3 variables: ``CC`` to define the C Compiler; ``CFLAGS`` to define the C Compiler flags; ``OBJ`` to define the object files. This is a common use of variables to both simplify the Makefile and easily change the settings of the compiler.
+
+    Notice the use of two ``.PHONY`` targets: ``clean`` which will remove auto-generated files, e.g. object files; ``mrproper`` which will remove both auto-generated & built files, e.g. executable files.
 environment: cpp
 evaluate: best
 groups: false
