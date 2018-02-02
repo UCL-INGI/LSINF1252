@@ -68,6 +68,11 @@ int size = 6;
             return;
         }
     }
+    
+    if ((int)read(fd, (void *) &s, 1) > 0) {
+        CU_FAIL();
+        push_info_msg(_("There's data in the file, after the end of the array."));
+    }
     free(tab);
     close(fd);
     if(ret != 0){
@@ -85,7 +90,7 @@ void test_no_file() {
 void test_with_file() {
     set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
     system("rm file.txt");
-    system("echo \"FOOBAR\" > file.txt");
+    system("echo \"FOOBARxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" > file.txt");
     _test();
 }
 
