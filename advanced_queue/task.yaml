@@ -1,4 +1,4 @@
-accessible: true
+accessible: false
 author: Maxime Mawait & Nicolas Rybowski
 context: |-
     You are asked to implement `enqueue` and `dequeue` functions of a `Queue` with doubly circular linked list.
@@ -18,30 +18,30 @@ evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
 name: '[S4] Queue avancée'
 network_grading: false
 order: 36
 problems:
     enqueue:
         language: c
-        header: ''
         type: code
         name: Enqueue
-    dequeue:
-        type: code
         header: ''
+    dequeue:
         name: Dequeue
+        type: code
         language: c
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Data structures
         type: 2
+        name: Data structures
         description: Task dealing with data structures and linked list
         visible: false
         id: ''
