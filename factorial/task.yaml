@@ -1,6 +1,6 @@
 accessible: true
 author: Mathieu Xhonneux
-context: The factorial of a number *n!* is defined as ``n! = 1*2*3*...*(n-1)*n``,
+context: The factorial of an integer *n!* is defined as ``n! = 1*2*3*...*(n-1)*n``,
     with *0! = 1*.
 environment: cpp
 evaluate: best
@@ -14,68 +14,64 @@ network_grading: false
 order: 8
 problems:
     facto:
-        name: Factorial
-        header: |-
-            Write your own function factorial, who shall follow this prototype :
-
-            .. code-block:: c
-
-                int factorial(int n);
-
-            You don't have to define any headers, just the function itself.
         type: code
         language: c
+        name: Factorial
+        header: |-
+            Write your own function ``factorial`` which takes as parameter an integer and returns and integer value. Your function must be named ``factorial``.
+
+            Provide below the signature and the body of this function.
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
-        type: 1
-        visible: true
-        name: Timeout
+    '0':
         id: timeout
+        name: Timeout
+        visible: true
+        type: 1
         description: Your code exceeds the maximum allowed time.
-    '2':
-        visible: true
-        description: ''
+    '1':
         id: sigsegv
-        type: 1
-        name: Segmentation Fault
-    '4':
-        id: not_compile
-        name: Not compile
-        description: You code does not compile.
-        visible: true
-        type: 1
-    '5':
-        visible: true
         description: ''
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
         id: memory
+        visible: true
+        type: 1
         name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        type: 1
+        visible: true
+        id: sigfpe
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
         type: 1
     '6':
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-        description: ''
-        visible: true
-    '7':
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
-        type: 1
-        name: Double free
-    '8':
         id: banned_funcs
-        type: 1
         description: You use some banned functions.
-        name: Banned functions
+        type: 1
         visible: true
-    '0':
+        name: Banned functions
+    '7':
         name: S2
+        description: ''
         type: 2
         visible: true
-        description: ''
         id: ''
 weight: 1.0

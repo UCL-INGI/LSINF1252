@@ -10,24 +10,72 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S4] Comparing functions - REVIEWED'
 network_grading: false
 order: 39
 problems:
     cmp_func:
         name: Compare functions
-        language: c
-        type: code
         header: |
             Write the function *cmp_func* (prototype and body), which receives two pointers to functions (described as above), and returns an int, containing 1 if the functions are equivalent, else 0. Test the comparison for all the values
 
             Reminder: value of an *uint8_t* is between 0 and 255.
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        visible: true
+        type: 1
+    '2':
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+        visible: true
+        description: ''
+    '3':
+        id: not_compile
+        visible: true
+        type: 1
+        name: Not compile
+        description: You code does not compile.
+    '4':
+        description: ''
+        name: Memory Exceeded
+        visible: true
+        id: memory
+        type: 1
+    '5':
+        description: ''
+        id: sigfpe
+        visible: true
+        name: Floating Point Exception
+        type: 1
+    '6':
+        id: double_free
+        description: Your code produced a double free.
+        type: 1
+        visible: true
+        name: Double free
+    '7':
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        type: 1
+        visible: true
+    '0':
+        name: S4
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0
