@@ -8,9 +8,9 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S03] Makefile - multiple choice questions'
+name: '[S3] Makefile more basics - multiple choice questions'
 network_grading: false
-order: 34
+order: 32
 problems:
     q1:
         multiple: true
@@ -36,6 +36,18 @@ problems:
 
             ``valgrind --option-name program``
         name: ''
+    m1:
+        header: |-
+            In your Makefile, you have the following variable definition:
+
+            .. code-block:: console
+
+                CC = gcc
+
+            What do you type to use it in other parts of your Makefile?
+        answer: $(CC)$
+        name: Variables
+        type: match
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -8,17 +8,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
-name: '[S3] Pointer arithmetic - REVIEWED'
+    output: '2'
+    time: '30'
+name: '[S4] Pointer arithmetic - REVIEWED'
 network_grading: false
-order: 33
+order: 37
 problems:
     first:
-        language: c
-        type: code
         name: First argument
+        type: code
+        language: c
         header: |-
             You found a hint from the hacker, telling the first parameter is  located at the 12th byte after *ptr*. An int is guaranteed to be 4 bytes long.
 
@@ -28,7 +28,6 @@ problems:
 
                 int first(void *ptr) {
     second:
-        type: code
         header: |-
             The second parameter is a char located 6 bytes after *ptr*.
 
@@ -37,11 +36,12 @@ problems:
             .. code-block:: c
 
                 char second(void *ptr) {
+        type: code
         name: Second argument
         language: c
     third:
-        name: Third argument
         type: code
+        name: Third argument
         language: c
         header: |-
             The third parameter is an int located 45 bytes after *ptr*.
@@ -57,9 +57,57 @@ submission_limit:
     period: -1
 tags:
     '0':
-        name: Pointer
-        type: 2
+        name: Timeout
+        type: 1
         visible: true
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        type: 1
+        name: Segmentation Fault
+        id: sigsegv
+        description: ''
+        visible: true
+    '2':
+        description: You code does not compile.
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+    '3':
+        name: Memory Exceeded
+        visible: true
+        description: ''
+        type: 1
+        id: memory
+    '4':
+        id: sigfpe
+        type: 1
+        description: ''
+        name: Floating Point Exception
+        visible: true
+    '5':
+        visible: true
+        description: Your code produced a double free.
+        id: double_free
+        name: Double free
+        type: 1
+    '6':
+        id: banned_funcs
+        name: Banned functions
+        type: 1
+        description: You use some banned functions.
+        visible: true
+    '7':
         description: Task about pointers and their use
+        name: Pointer
+        visible: true
+        type: 2
+        id: ''
+    '8':
+        type: 2
+        description: ''
+        name: S3
+        visible: true
         id: ''
 weight: 1.0

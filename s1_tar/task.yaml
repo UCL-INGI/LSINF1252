@@ -25,9 +25,9 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S01] tar'
+name: '[S1] tar'
 network_grading: false
-order: 11
+order: 4
 problems:
     archive:
         name: ''

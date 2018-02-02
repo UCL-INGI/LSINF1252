@@ -1,0 +1,145 @@
+accessible: true
+author: ''
+context: '*Estimated time: 5 minutes*'
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[S2] Makefile basics - multiple choice questions'
+network_grading: false
+order: 22
+problems:
+    mcq1:
+        header: Select all *correct* answers related to the *target* of a Makefile
+            rule.
+        limit: 2
+        choices:
+        -   text: The target is the bullseye of a shooting target.
+        -   valid: true
+            text: The target is the name of a file.
+        success_message: 'Bullseye, good job! '
+        multiple: true
+        name: Find the target
+        type: multiple_choice
+    mcq2:
+        limit: 2
+        header: Select all *correct* answers related to the *prerequisite* of a Makefile
+            rule.
+        success_message: Good job!
+        error_message: Try again!
+        name: What are the prerequisite?
+        choices:
+        -   valid: true
+            text: The prerequisite is a file that is used as input to create the target.
+        -   text: The prerequisite is to have good marksmanship skills to hit the
+                target.
+        multiple: true
+        type: multiple_choice
+    mcq3:
+        error_message: Try again!
+        choices:
+        -   valid: true
+            text: A recipe is an action that make carries out.
+        -   text: '42'
+            feedback: That is the Answer to the Ultimate Question of Life, the Universe,
+                and Everything.
+        -   text: The recipe is a file that is used as input to create the target.
+        -   text: The recipe is the name of a file.
+        limit: 2
+        multiple: true
+        type: multiple_choice
+        name: The recipe
+        success_message: Good job!
+        header: Please select all *correct* answers related to the *recipe* of a Makefile
+            rule.
+    mcq4:
+        type: multiple_choice
+        choices:
+        -   valid: true
+            text: |4-
+
+                .. code-block:: console
+
+                        clean:
+                        @rm -f src/*.o
+        -   text: |4-
+
+                .. code-block:: console
+
+                    clean:
+                    [tab]@rm -f src/*.o
+        -   valid: true
+            text: |4
+
+                .. code-block:: console
+
+                    clean
+                    [spaces]@rm -f src/*.o
+        -   text: |4-
+
+                .. code-block:: console
+
+                    clean
+                    [tab]@rm -f src/*.o
+            valid: true
+        -   text: |4-
+
+                .. code-block:: console
+
+                        clean:
+                        [spaces]@rm -f src/*.o
+            valid: true
+        -   text: |4-
+
+                .. code-block:: console
+
+                        clean
+                        @rm -f src/*.o
+            valid: true
+        success_message: Good job!
+        multiple: true
+        header: |-
+            Choice all *wrong* Makefile *rules*.
+
+            *Note:*
+
+            * ``[tab]`` indicates a tabulation;
+            * ``[spaces]`` indicates 8 white spaces.
+        limit: 0
+        name: Rules syntax
+        error_message: Try again!
+    match1:
+        header: In a Makefile, what is the character you can use to split a long line?
+        type: match
+        name: Break
+        answer: \
+    mcq5:
+        choices:
+        -   valid: true
+            text: At the beginning of every recipe line, you put a tab indentation
+        -   text: At the beginning of every recipe line, you put a 8 white spaces
+                indentation.
+        -   text: At the beginning of every recipe line, you put no indentation.
+        limit: 2
+        error_message: Try again!
+        success_message: Good job!
+        header: Choice all the *correct* answers.
+        multiple: true
+        type: multiple_choice
+        name: Recipes indentation
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        name: make & Makefile
+        type: 0
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        id: make
+        visible: false
+weight: 1.0

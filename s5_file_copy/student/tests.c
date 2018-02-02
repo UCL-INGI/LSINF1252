@@ -30,7 +30,7 @@ void gen_file(int n){
  * Test with open fail
  */
 void test_fail_open() {
-    set_test_metadata("q1", _("Test fail open"), 1);
+    set_test_metadata("q1", _("Test when open() fails"), 1);
     int ret = 0;
     
     monitored.open = true;
@@ -54,7 +54,7 @@ void test_fail_open() {
  * Test with an empty file
  */
 void test_empty_file() {
-    set_test_metadata("q1", _("Test with empty file."), 1);
+    set_test_metadata("q1", _("Test with empty file"), 1);
     gen_file(0);
     int ret = 0;
     
@@ -78,7 +78,7 @@ void test_empty_file() {
  * Test with some bytes in the file
  */
 void test_file_permission() {
-    set_test_metadata("q1", _("Test permissions equal"), 1);
+    set_test_metadata("q1", _("Test if permissions are equal"), 1);
     gen_file(122);
     
     SANDBOX_BEGIN;
@@ -101,7 +101,7 @@ void test_file_permission() {
  * Test with some bytes in the file
  */
 void test_file() {
-    set_test_metadata("q1", _("Test with normal file"), 2);
+    set_test_metadata("q1", _("Test with non-empty file"), 2);
     gen_file(122);
     int ret = 0;
     
@@ -127,7 +127,7 @@ void test_file() {
  * Test with some bytes in the file
  */
 void test_file_write_fail() {
-    set_test_metadata("q1", _("Test with normal file (with some failures)"), 1);
+    set_test_metadata("q1", _("Test with normal file (with some syscall failures)"), 1);
     gen_file(125);
     int ret = 0;
     
@@ -141,6 +141,26 @@ void test_file_write_fail() {
 
     if (ret != -1){
         push_info_msg(_("You do not return -1 when a fail occurs with read() or write()"));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+
+void test_stat_fail() {
+    set_test_metadata("q1", _("Test return value when stat() fails"), 1);
+    gen_file(125);
+    int ret = 0;
+    
+    monitored.stat = true;
+    failures.stat = FAIL_ALWAYS;
+    failures.stat_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt", "newfile.txt");
+    SANDBOX_END;
+
+    if (ret != -1){
+        push_info_msg(_("You do not return -1 when a fail occurs with stat()"));
         set_tag("failure_handling");
         CU_FAIL();
     }
@@ -214,6 +234,6 @@ void test_original_integrity() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
-    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_original_integrity, test_close);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose, fstat);
+    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_stat_fail, test_original_integrity, test_close);
 }

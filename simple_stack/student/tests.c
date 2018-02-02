@@ -221,15 +221,14 @@ void test_push_general() {
   // add src to the array stack
   *(a+6) = src;
 
-  /*print_array_as_stack(a ,7);
+  print_array_as_stack(a ,7);
   print_stack(stack , 7);
-  printf("%i\n", ret);*/
 
   // if correct struct, @stru = 0
-  int stru =check_stack(stack, a, 7);
+  int stru = check_stack(stack, a, 7);
   CU_ASSERT_TRUE(!stru);
   if (stru)
-    push_info_msg(_("The structure of the stack has changed"));
+    push_info_msg(_("The structure of the stack changed or is not the expected one"));
 
   // check the return value of the function
   CU_ASSERT_TRUE(!ret);

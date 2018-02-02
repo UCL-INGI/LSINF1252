@@ -7,14 +7,13 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    time: '30'
     output: '2'
+    time: '30'
 name: '[S2] Absolute value - REVIEWED'
 network_grading: false
-order: 12
+order: 6
 problems:
     absval:
-        type: code
         header: |-
             Write the body of the function *absval* returning the absolute value of *i*.
 
@@ -22,10 +21,59 @@ problems:
 
                 int absval(int i) {
         language: c
+        type: code
         name: Absolute value
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        type: 1
+        visible: true
+        name: Timeout
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+    '2':
+        visible: true
+        description: ''
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+    '3':
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+        type: 1
+        id: not_compile
+    '4':
+        id: memory
+        name: Memory Exceeded
+        description: ''
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+    '6':
+        id: double_free
+        name: Double free
+        type: 1
+        description: Your code produced a double free.
+        visible: true
+    '7':
+        id: banned_funcs
+        description: You use some banned functions.
+        visible: true
+        type: 1
+        name: Banned functions
+    '0':
+        name: S2
+        type: 2
+        visible: true
+        description: ''
+        id: ''
 weight: 1.0

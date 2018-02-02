@@ -10,6 +10,12 @@ context: |
             char *value;
         };
 
+    .. image:: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png
+            :align: right
+            :height: 540px
+            :width: 773px
+            :scale: 50%
+
 
 
     *Hints*
@@ -21,6 +27,8 @@ context: |
     - `strlen <https://linux.die.net/man/3/strlen>`_
 
         -- strlen does not count the '\\0' character
+
+    - Don't forget to free **all** the allocated space when popping one element.
 environment: cpp
 evaluate: best
 groups: false
@@ -30,7 +38,7 @@ limits:
     memory: '100'
 name: '[S3] Simple stack'
 network_grading: false
-order: 31
+order: 29
 problems:
     push:
         language: c

@@ -1,25 +1,39 @@
 accessible: true
 author: Tom Rousseaux
-context: Téléchargez `cette archive <>`_, mettez son contenu dans un dossier de votre
-    choix, lisez FirstMission et respectez les consignes.
+context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf2/CTF2.tar.gz>`_,
+    mettez son contenu dans un dossier de votre choix, lisez FirstMission et respectez
+    les consignes.
 environment: cpp
 evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S1] CTF2'
 network_grading: false
 problems:
     q1:
+        header: ''
         name: ''
         type: match
-        header: ''
         answer: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: Command line
+        visible: true
+        type: 2
+        description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: ''
+        name: S1
+        id: ''
 weight: 1.0
+order: 5

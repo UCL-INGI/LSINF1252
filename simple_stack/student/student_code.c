@@ -23,8 +23,12 @@ int push(struct node **head, const char *value){
   if (!node)
     return 1;
 
-  int len = strlen(value);
+  int len = strlen(value)+1;
   node->name = (char*) malloc(len);
+  if (!node->name){
+    free(node);
+    return 1;
+  }
   strncpy(node->name, value, len);
 
   node->next = *head;
