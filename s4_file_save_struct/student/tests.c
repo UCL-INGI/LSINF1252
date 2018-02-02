@@ -90,7 +90,7 @@ void test_no_file() {
 void test_with_file() {
     set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
     system("rm file.txt");
-    system("echo \"FOOBARxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" > file.txt");
+    system("echo \"INTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZ\" > file.txt");
     _test();
 }
 

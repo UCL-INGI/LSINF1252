@@ -106,7 +106,7 @@
     void test_with_file() {
         set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
         system("rm file.txt");
-        system("echo \"FOOBARxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" > file.txt");
+        system("echo \"INTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZ\" > file.txt");
         _test();
     }
 
@@ -233,7 +233,7 @@ author: Olivier Martin
 context: |-
     *Estimated time: 25 minutes*
 
-    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file. The file may already exist or not. After the execution of the function, the file should only contain the array. If the file has to be created, the user who created it must has
+    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file. The file may already exist or not. After the execution of the function, the file should only contain the array. If the file has to be created, the user who created it must have the permission to read it.
 
     .. code-block:: c
 
@@ -253,7 +253,7 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S5] Save struct into file'
+name: '[S5] Save struct into file - REVIEWED'
 network_grading: false
 order: 44
 problems:
@@ -264,7 +264,7 @@ problems:
             .. code-block:: c
 
                 /*
-                 * @pre pt != NULL
+                 * @pre pt != NULL, pointer to the first point_t in the array
                  *      size > 0, the length of the array.
                  *      filename != NULL
                  * @post write the array of struct in the file.
@@ -273,7 +273,7 @@ problems:
                  *       -2 if write() fails.
                  *       -3 if close() fails.
                  */
-                int save(point_t *pt, int size, char *filename)
+                int save(point_t *pt, int size, char *filename) {
         language: c
 stored_submissions: 0
 submission_limit:

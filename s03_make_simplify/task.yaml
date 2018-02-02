@@ -4,7 +4,6 @@ context: |-
     *Estimated time: 15 minutes*
 
     Read `sections 2.4 to 2.7. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_. It will only take you 10 minutes (included in the above given estimated time) and will help you understand how to ``make`` more magic happen.
-
 environment: cpp
 evaluate: best
 groups: false
@@ -32,7 +31,7 @@ submission_limit:
     period: -1
 tags:
     '0':
-        name: make & Makefiles
+        name: make & Makefile
         id: make
         type: 0
         description: Tasks related to the make task runner for targets described in
