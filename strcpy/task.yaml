@@ -1,9 +1,12 @@
 accessible: true
 author: Nicolas Rybowski
-context: The classic function ``char *strncpy(char *destination, const char *source,
-    size_t num);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination
-    buffer where the source string is copied. We ask you to code a function which
-    allocates a buffer itself, and then proceeds to the copy.
+context: |-
+    The classic function ``char *strncpy(char *destination, const char *source, size_t num);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then proceeds to the copy.
+
+    *Hint*
+    ======
+
+    Use `malloc <https://linux.die.net/man/3/malloc>`_
 environment: cpp
 evaluate: best
 groups: false
