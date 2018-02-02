@@ -45,7 +45,6 @@ int check_stack(struct node *head, char** array, int len){
     src = *(array+l-i);
     st = run->name;
 
-    //printf("array = %s, name = %s ", src, st);
     if (!run || strcmp(src, st) != 0){
       return 1;
     }
@@ -201,11 +200,11 @@ void test_push_general() {
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
   if (mal){
     //printf("src = %s, name = %s ", src, stack->name);
-    CU_ASSERT_STRING_EQUAL(src, stack->name);
-    if (!strcmp(src, stack->name)){
+    if (strcmp(src, stack->name)){
       char tmp[100];
-      sprintf(tmp, _("The pushed value differ from the expected one Waited : %s Received : %s "), src, stack->name);
+      sprintf(tmp, _("The pushed value differ from the expected one. Expected : %s Received : %s "), src, stack->name);
       push_info_msg(tmp);
+      CU_FAIL();
     }
 
   }
@@ -226,7 +225,7 @@ void test_push_general() {
     int stru = check_stack(stack, a, 7);
     CU_ASSERT_TRUE(!stru);
     if (stru)
-      push_info_msg(_("The structure of the stack changed or is not the expected one"));
+      push_info_msg(_("The new structure of the stack or is not the expected one"));
 
     // check the return value of the function
     CU_ASSERT_TRUE(!ret);
@@ -237,13 +236,13 @@ void test_push_general() {
 }
 
 void test_pop_args(){
-    set_test_metadata("pop", _("Check the behavior of the function when passing wrong args"), 1);
+    set_test_metadata("pop", _("Check the behavior of the function when passing NULL @head arg"), 1);
 
     int ret;
     char *result = NULL;
 
     SANDBOX_BEGIN;
-    ret = pop(NULL, &result);
+    ret = pop(NULL, result);
     SANDBOX_END;
 
     CU_ASSERT_TRUE(ret);
@@ -255,13 +254,14 @@ void test_pop_value(){
   set_test_metadata("pop", _("Check the behavior of the function in normal case"), 1);
 
   int ret;
-  char *result = NULL;
+  char *result = (char*) malloc(sizeof(char)*50);
 
   char *a[6] = {"fqgrsrfgfg", "moty;oe26rbgs",
   "i;rvqr6tgbsecr26", "5qvf15rg5g", "42",
    "r157g1srq7v16zs6"};
 
   struct node *stack, *tmp_head;
+  char *name_head;
 
   //print_stack(stack, 6);
 
@@ -271,7 +271,8 @@ void test_pop_value(){
   SANDBOX_BEGIN;
   stack =  generate_stack(a, 6);
   tmp_head = stack;
-  ret = pop(&stack, &result);
+  name_head = tmp_head->name;
+  ret = pop(&stack, result);
   SANDBOX_END;
 
   monitored.free = false;
@@ -297,19 +298,27 @@ void test_pop_value(){
   int cmp2 = strncmp((const char*) stack->name, (const char*) src2, strlen(src2));
   CU_ASSERT_TRUE(!cmp2);
   if (cmp2)
-    push_info_msg(_("The head is not the waited one "));
+    push_info_msg(_("The head is not the wanted one "));
 
-  // check if the function free the first node (not the string inside !)
+  // check if the function free the first node
   int ml = stats.free.called;
-  CU_ASSERT_EQUAL(ml, 1);
-  if (ml != 1)
-    push_info_msg(_("The function never call free"));
+  CU_ASSERT_EQUAL(ml,2);
+  if (ml != 2)
+    push_info_msg(_("You should call free twice"));
 
   void *last_ptr = (void*) stats.free.last_params.ptr;
   void *ptr = (void*) tmp_head;
   CU_ASSERT_EQUAL(ptr, last_ptr);
   if (ptr != last_ptr)
-    push_info_msg(_("The previous head is not freed "));
+    push_info_msg(_("The last free you should do is on the struct"));
+
+  int ml3 = malloced(name_head);
+  if (ml3) {
+    CU_FAIL("Char* not freed");
+    // push info TODO
+  }
+
+  printf("ml3 = %i, %s",ml3, name_head);
 
   // check the structure if the stack after popped
   if (!stack && !stack->next){
@@ -342,13 +351,13 @@ void test_pop_empty(){
   strncpy(head->name, src, 10);
 
   head->next = NULL;
-  char *dst;
+  char *dst = (char*) malloc(sizeof(char)*50);
   int ret;
 
   monitored.malloc = true;
 
   SANDBOX_BEGIN;
-  ret = pop(&head, &dst);
+  ret = pop(&head, dst);
   SANDBOX_END;
 
   CU_ASSERT_TRUE(!ret);
@@ -365,7 +374,5 @@ void test_pop_empty(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    // warning, test_push_general return and kill other tests
-    // TODO: find why
-    RUN( test_pop_value, test_push_param_nomem, test_push_changing_param, test_pop_args, test_pop_empty, test_push_general);
+    RUN(test_pop_value, test_push_param_nomem, test_push_changing_param, test_pop_args, test_pop_empty, test_push_general);
 }

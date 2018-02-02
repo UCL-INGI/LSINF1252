@@ -28,4 +28,4 @@ clean:
 	rm -f $(OBJ)
 
 mrproper: clean
-	rm  -f calc
+	rm -f calc

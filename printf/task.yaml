@@ -9,7 +9,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S2] Printing data'
+name: '[S2] Printing data - REVIEWED'
 network_grading: false
 order: 7
 problems:

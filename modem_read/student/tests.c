@@ -16,7 +16,7 @@ void test_42_right1() {
         tab1[i] = i;
     }
 
-    void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+    void *p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
@@ -28,9 +28,7 @@ void test_42_right1() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
-
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-
     CU_ASSERT_EQUAL(stats.free.called,1);
 
     free_trap(p,64);
@@ -59,13 +57,22 @@ void test_42_left1() {
     ret = has_42();
     SANDBOX_END;
 
-    printf("%d\n", ret);
-
     CU_ASSERT_EQUAL(ret,1);
-
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-
-    CU_ASSERT_EQUAL(stats.free.called,1);
+    
+    if (stats.malloc.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call malloc()."));
+    }
+    
+    if (stats.free.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call free()."));
+    }
+    
+    if (stats.malloc.last_params.size != 256) { 
+        CU_FAIL();
+        push_info_msg(_("You didn't malloc() with the right size"));
+    }
 
     free_trap(p,64);
 }
@@ -94,9 +101,7 @@ void test_42_right2() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
-
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-
     CU_ASSERT_EQUAL(stats.free.called,1);
 
     free_trap(p,64);
@@ -125,12 +130,9 @@ void test_42_left2() {
     ret = has_42();
     SANDBOX_END;
 
-    printf("%d\n", ret);
 
     CU_ASSERT_EQUAL(ret,1);
-
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-
     CU_ASSERT_EQUAL(stats.free.called,1);
 
     free_trap(p,64);
@@ -148,22 +150,32 @@ void test_no42_right() {
         tab1[i] = 128 - i;
     }
 
-    void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+    void *p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
     failures.free = FAIL_ALWAYS;
-    failures.malloc = 1;
+    failures.malloc = FAIL_ALWAYS;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
     ret = has_42();
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,0);
-
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-
-    CU_ASSERT_EQUAL(stats.free.called,1);
+    if (stats.malloc.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call malloc()."));
+    }
+    
+    if (stats.free.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call free()."));
+    }
+    
+    if (stats.malloc.last_params.size != 256) { 
+        CU_FAIL();
+        push_info_msg(_("You didn't malloc() with the right size"));
+    }
 
     free_trap(p,64);
 }

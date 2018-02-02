@@ -1,0 +1,135 @@
+#!/bin/python3
+
+# Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+# Auteurs : Mathieu Xhonneux, Anthony Gégo
+# Licence : GPLv3
+
+import subprocess, shlex, re, os, yaml
+from inginious import feedback, rst, input
+
+# Switch working directory to student/
+os.chdir("student")
+
+# Fetch and save the student code into a file for compilation
+input.parse_template("student_code.c.tpl", "student_code.c")
+
+# Compilation
+p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+make_output = p.communicate()[0].decode('utf-8')
+# If compilation failed, exit with "failed" result
+if p.returncode:
+    feedback.set_tag("not_compile", True)
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
+    feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
+    exit(0)
+else:
+    feedback.set_global_result("success")
+    feedback.set_global_feedback("- Votre code compile.\n")
+
+# Parse banned functions
+try:
+    banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+    banned_funcs = list(filter(None, banned_funcs))
+except IndexError:
+    banned_funcs = []
+
+if banned_funcs:
+    p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    readelf_output = p.communicate()[0].decode('utf-8')
+    for func in banned_funcs:
+        if re.search("UND {}\n".format(func), readelf_output):
+            feedback.set_tag("banned_funcs", True)
+            feedback.set_global_result("failed")
+            feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
+            exit(0)
+
+
+# Remove source files
+subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+LANG = input.get_input('@lang')
+
+# Run the code in a parallel container
+p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+p.communicate()
+
+# If run failed, exit with "failed" result
+if p.returncode:
+    feedback.set_global_result("failed")
+    if p.returncode == 256-8:
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+        feedback.set_tag("sigfpe", True)
+    elif p.returncode == 256-11:
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+    elif p.returncode == 252:
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+        feedback.set_tag("memory", True)
+    elif p.returncode == 253:
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
+    else:
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
+    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
+    exit(0)
+#elif run_output:   
+#    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
+
+# Comment to run the tests
+#feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
+#exit(0)
+
+# Fetch CUnit test results
+results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
+results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
+
+
+# Produce feedback
+if all([r['code'] == 'SUCCESS' for r in results]):
+    feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
+else:
+    feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+
+score = 0
+total = 0
+tests_result = {}
+
+for test in results:
+    total += test['weight']
+    for tag in test['tags']:
+        if tag != "":
+            feedback.set_tag(tag, True)
+    if test['code'] == 'SUCCESS':
+        score += test['weight']
+        feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                test['pid'], True)
+        tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
+    else:
+        feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                test['pid'], True)
+        tests_result[test['pid']] = False
+        
+for pid, result in tests_result.items():
+    if result:
+        feedback.set_problem_result("success", pid)
+    else:
+        feedback.set_problem_result("failed", pid)
+
+with open("../task.yaml", 'r') as stream:
+    problems = yaml.load(stream)['problems']
+    
+    for name, meta in problems.items():
+        if meta['type'] == 'match':
+            answer = input.get_input(name)
+            if answer == meta['answer']:
+                feedback.set_problem_result("success", name)
+                feedback.set_problem_feedback("Votre réponse est correcte. (1/1 pts)", name, True)
+                score += 1
+            else:
+                feedback.set_problem_result("failed", name)
+                feedback.set_problem_feedback("Votre réponse est incorrecte. (0/1 pts)", name, True)
+
+            total += 1
+
+score = 100*score/(total if not total == 0 else 1)
+feedback.set_grade(score)
+feedback.set_global_result("success" if score >= 50 else "failed")

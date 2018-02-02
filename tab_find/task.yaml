@@ -1,10 +1,17 @@
+/solution/solution.c.sol: |-
+    for(int i = 0; i < len; i++){
+        if(tab[i] == elem)
+            return i;
+    }
+    return -1;
 accessible: true
-author: ''
+author: Olivier Martin
 context: |-
     In C, an array is a set of variables sharing the same data type : ``int array[3] = {42, 1337, 0};``.
 
-    An item of an array can be retrived through its index : ``array[1]``.
-environment: pyjavacpp
+    An item of an array can be retrived through its index.
+    For example ``array[1]`` gives the second element of the array (here ``1337``).
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -16,9 +23,6 @@ network_grading: false
 order: 10
 problems:
     tab_find:
-        name: Find the index
-        type: code
-        language: c
         header: |-
             Write the body of the function *tab_find* :
 
@@ -31,9 +35,61 @@ problems:
                 @elem : the elem looked for
                 @return : return the index at which elem is found, else returns -1 if not found. */
                 int tab_find(int tab[], int len, int elem)
+        name: Find the index
+        language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: timeout
+        name: Timeout
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        id: sigsegv
+        description: You probably try to access an index outside of the bounds of
+            the array.
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        id: banned_funcs
+        description: You use some banned functions.
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
+        name: S2
+        description: ''
+        type: 2
+        visible: true
+        id: ''
 weight: 1.0

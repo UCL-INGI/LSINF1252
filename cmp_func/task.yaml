@@ -10,19 +10,21 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
 name: '[S4] Comparing functions'
 network_grading: false
 order: 39
 problems:
     cmp_func:
+        name: Compare functions
         language: c
         type: code
         header: |
-            Write the function *cmp_func* (prototype and body), which receives two pointers to functions (described as above), and returns an int, containing 1 if the functions are equivalent, else 0.
-        name: Compare functions
+            Write the function *cmp_func* (prototype and body), which receives two pointers to functions (described as above), and returns an int, containing 1 if the functions are equivalent, else 0. Test the comparison for all the values
+
+            Reminder: value of an *uint8_t* is between 0 and 255.
 stored_submissions: 0
 submission_limit:
     amount: -1
