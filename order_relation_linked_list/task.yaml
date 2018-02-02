@@ -2,8 +2,7 @@ accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: Given the provided implementation of a linked list, you are asked to implement
     the ``insert`` function based on a specific order relation. By succeeding this
-    task, you will be able to make ordered list like a `LinkedList` with a `Comparator`
-    in `java`.
+    task, you will be able to make ordered list like a `LinkedList` with a `Comparator` in `java`.
 environment: cpp
 evaluate: best
 groups: false
