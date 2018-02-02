@@ -2,7 +2,7 @@ accessible: true
 author: Mathieu Xhonneux
 context: A variable declared inside a function with the keyword *static* implies that
     the value of this variable will be kept across the different calls to this function.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -14,18 +14,66 @@ network_grading: false
 order: 13
 problems:
     static_counter:
+        name: Static counter
+        language: c
         type: code
         header: |
-            Write the body of the function *stexp* which returns at its *n*th call the value 2^(n-1). Once it has returned the value 4096, the next return should go back to 1.
+            Write the body of the function *stexp* which returns at its *n*th call the value ``2^(n-1)``. Once it has returned the value 4096, the next return should go back to 1.
 
             .. code-block:: c
 
                 unsigned int stexp() {
-        language: c
-        name: Static counter
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        visible: true
+        type: 1
+    '2':
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+        visible: true
+        description: ''
+    '3':
+        id: not_compile
+        visible: true
+        type: 1
+        name: Not compile
+        description: You code does not compile.
+    '4':
+        name: Memory Exceeded
+        description: ''
+        visible: true
+        id: memory
+        type: 1
+    '5':
+        id: sigfpe
+        visible: true
+        description: ''
+        name: Floating Point Exception
+        type: 1
+    '6':
+        id: double_free
+        description: Your code produced a double free.
+        type: 1
+        visible: true
+        name: Double free
+    '7':
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        type: 1
+        visible: true
+    '0':
+        name: S2
+        type: 2
+        description: ''
+        visible: true
+        id: ''
 weight: 1.0
