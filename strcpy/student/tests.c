@@ -34,7 +34,13 @@ void test_strcpy_return() {
   int mal = malloced((void*) ret);
   CU_ASSERT_TRUE(mal);
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-  if (mal){
+  if (mal) {
+      if(stats.malloc.last_params.size != strlen(src)+1) {
+          CU_FAIL("wrong malloc size");
+          push_info_msg(_("The allocated memory has not the correct size."));
+          set_tag("malloc_fail");
+          return;
+      }
       if (strncmp(ret, src, strlen(src) + 1) != 0){
           CU_FAIL("wrong string");
       }
@@ -42,8 +48,8 @@ void test_strcpy_return() {
   }
   else {
     push_info_msg(_("The returned pointer is not malloced"));
+    set_tag("malloc_fail");
   }
-
 }
 
 void test_strcpy_nomem() {
@@ -61,8 +67,10 @@ void test_strcpy_nomem() {
   SANDBOX_END;
 
   CU_ASSERT_PTR_NULL(ret);
-  if (ret)
+  if (ret){
     push_info_msg(_("The return value of your implementation is wrong"));
+    set_tag("malloc_fail");
+  }
 
   free(ret);
 

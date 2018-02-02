@@ -1,13 +1,13 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
-    You are asked to implement the ``pop`` and ``push`` functions of the given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface.
+    You are asked to implement the ``pop`` and ``push`` functions of the following `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface :
 
     .. code-block:: c
 
         struct node {
             node *next;
-            char *value;
+            char *name;
         };
 
     .. image:: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png
@@ -18,8 +18,8 @@ context: |
 
 
 
-    *Hints*
-    =======
+    *Hints* :
+
     - @value is also a pointer, it must be allocated.
 
     - `strncpy <https://linux.die.net/man/3/strncpy>`_
@@ -33,16 +33,15 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
+    time: '30'
 name: '[S3] Simple stack'
 network_grading: false
-order: 32
+order: 29
 problems:
     push:
-        language: c
-        name: Push
+        type: code
         header: |-
             .. code-block:: c
 
@@ -55,9 +54,11 @@ problems:
                 * @return 0 if no error, 1 else.
                 */
 
-                int push(struct node **head, const char *name){
-        type: code
+                int push(struct node **head, const char *value){
+        name: Push
+        language: c
     pop:
+        language: ''
         header: |-
             .. code-block:: c
 
@@ -65,16 +66,21 @@ problems:
                 * Remove the "head" element of the stack and return it's content.
                 *
                 * @head : pointer to the head of the stack
-                * @name : pointer to store the popped element
+                * @result : pointer to store the popped element
                 *
                 * @return 0 if no error, 1 else.
+                *
+                * pre : @result is a buffer correctly allocated
+                * post : @result contains the string @name from the head of the stack
                 */
 
-                int pop(struct node *head, char **name){
+                int pop(struct node **head, char *result){
         type: code
         name: Pop
-        language: ''
     free_node:
+        name: <OPTIONAL> free_node
+        type: code
+        language: c
         header: |-
             You can use this question to implement a ``free_node`` function
 
@@ -85,18 +91,57 @@ problems:
                 */
                 void free_node(struct node *node){
         optional: 'on'
-        type: code
-        name: <OPTIONAL> free_node
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        id: timeout
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+    '1':
+        id: sigsegv
+        description: ''
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        description: ''
+        name: Memory Exceeded
+        visible: true
+        type: 1
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        description: You use some banned functions.
+        id: banned_funcs
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
         name: Data structures
+        description: Task dealing with data structures and linked list
         type: 2
         visible: true
-        description: Task dealing with data structures and linked list
         id: ''
 weight: 1.0

@@ -1,2 +1,5 @@
-struct stat buffer;
-return stat(filename, &buffer);
+int fd = open(filename, O_RDONLY); 
+if(fd == -1) {
+    return -1;
+}
+return 0;

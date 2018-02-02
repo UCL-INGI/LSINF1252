@@ -2,18 +2,20 @@
 #include <stdlib.h>
 #include<stdio.h>
 
-/*int pop(struct node *head, char **result){
+int pop(struct node **head, char *result){
   if (!head)
     return 1;
 
-  struct node* tmp = head;
-  head = head->next;
+  struct node* tmp = *head;
+  *head = tmp->next;
 
-  *result = tmp->value;
+  strncpy(result, tmp->name, strlen(tmp->name)+1);
+
+  //free(tmp->name);
   free(tmp);
 
   return 0;
-}*/
+}
 
 int push(struct node **head, const char *value){
   if (!head)

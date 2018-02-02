@@ -1,3 +1,405 @@
+/solution/student_code.c: |
+    #include<stdio.h>
+    #include<stdlib.h>
+    #include "student_code.h"
+
+    node_t* init_node(int value){
+      node_t* ret = malloc(sizeof(node_t));
+      if (!ret)
+        return NULL;
+
+      ret->next = NULL;
+      ret->value = value;
+      return ret;
+    }
+
+    int add_node(list_t* list, int value){
+      if (!list)
+        return 1;
+
+      node_t* node = init_node(value);
+      if (!node)
+        return 1;
+
+      if(list->size == 0)
+        list->first = node;
+      else{
+        node->next = list->first;
+        list->first = node;
+      }
+
+      list->size++;
+
+      return 0;
+
+    }
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    #include<stdio.h>
+
+    /**
+    * Check if the @list correspond to the expected list represented by @tab
+    */
+    int check_list(list_t* list, int *tab, int n){
+      if (!list | !tab | (n < 0))
+        return 2;
+
+      int i;
+      node_t *run = list->first;
+      for(i =  0; i < n; i++){
+        if (run->value != *(tab+i) || !run)
+          return 1;
+        run = run->next;
+      }
+      return 0;
+    }
+
+    node_t* init_node_corr(int value){
+      node_t* ret = malloc(sizeof(node_t));
+      if (!ret)
+        return NULL;
+
+      ret->next = NULL;
+      ret->value = value;
+      return ret;
+    }
+
+    list_t* init_list_corr(){
+      list_t *list = malloc(sizeof(list_t));
+      if (!list)
+        return NULL;
+      list->first = NULL;
+      list->size = 0;
+      return list;
+    }
+
+    void free_node_corr(node_t* node){
+      if (!node)
+        return;
+
+      if (!node->next)
+        free(node->next);
+
+      free(node);
+    }
+
+    void free_list_corr(list_t* list){
+      if (!list)
+        return;
+
+      node_t* run = list->first, *tmp;
+      while(run){
+        tmp = run;
+        run = run->next;
+        free_node_corr(tmp);
+      }
+
+      free(list);
+    }
+
+    void test_init_node_alloc(){
+      set_test_metadata("init_node", _("Check memory allocation of the node"), 1);
+
+      node_t* ret = NULL;
+
+      monitored.malloc = true;
+
+      SANDBOX_BEGIN;
+      ret = init_node(0);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(stats.malloc.called, 1);
+      if (!stats.malloc.called)
+        push_info_msg(_("You used more than one call to malloc"));
+      if(stats.malloc.last_params.size != sizeof(node_t)) {
+          CU_FAIL("wrong malloc size");
+          push_info_msg(_("The allocated memory has not the correct size."));
+          set_tag("malloc_fail_memory_size");
+          return;
+      }
+      CU_ASSERT_TRUE(malloced((void*) ret));
+
+      CU_ASSERT_PTR_NOT_NULL(ret);
+
+      free_node_corr(ret);
+
+    }
+
+    void test_init_node_value(){
+      set_test_metadata("init_node", _("Check the initialisation of the node"), 2);
+
+      node_t* ret = NULL;
+
+      SANDBOX_BEGIN;
+      ret = init_node(10);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(ret->value, 10);
+      if (ret->value != 10)
+        push_info_msg(_("The value of the node is not the expected one"));
+
+      CU_ASSERT_PTR_NULL(ret->next);
+      if (ret->next)
+        push_info_msg(_("The 'next' pointer is not correctly initialised"));
+
+      free_node_corr(ret);
+
+      int val = 25136984;
+
+      SANDBOX_BEGIN;
+      ret = init_node(val);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(ret->value, val);
+      if (ret->value != val)
+        push_info_msg(_("The value of the node is not the expected one"));
+
+      CU_ASSERT_PTR_NULL(ret->next);
+      if (ret->next)
+        push_info_msg(_("The 'next' pointer is not correctly initialised"));
+
+      free_node_corr(ret);
+    }
+
+    void test_init_node_nomem(){
+      set_test_metadata("init_node", _("Check the return value if malloc call fails"), 1);
+
+      node_t* ret = (node_t *)0x42;
+
+      monitored.malloc = true;
+      failures.malloc = FAIL_ALWAYS;
+      failures.malloc_ret = NULL;
+
+      srandom(881468468);
+
+      SANDBOX_BEGIN;
+      ret = init_node(42);
+      SANDBOX_END;
+
+      CU_ASSERT_PTR_NULL(ret);
+      if (ret)
+        push_info_msg(_("Wrong return value when malloc call fails"));
+    }
+
+    void test_add_node_empty(){
+      set_test_metadata("add_node", _("Check the behavior of the function when the list is empty"), 1);
+
+      list_t *list = init_list_corr();
+      if (!list)
+        return;
+
+      int ret = 0;
+
+      monitored.malloc = true;
+      int value = 16328468;
+
+      SANDBOX_BEGIN;
+      ret = add_node(list, value);
+      SANDBOX_END;
+
+      // Tests
+      //-----------------------------------------------------------------
+
+      // check if only one call to malloc
+      int ms = stats.malloc.called;
+      CU_ASSERT_EQUAL(ms, 1);
+      if (ms != 1)
+        push_info_msg(_("You used more than one call to malloc"));
+
+      // check if new element is malloced
+      int mal = malloced((void*) list->first);
+      CU_ASSERT_TRUE(mal);
+      // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
+      if (mal){
+        int val = list->first->value;
+        CU_ASSERT_EQUAL(val, value);
+        if (val != value)
+          push_info_msg(_("The inserted value does not correspond to the waited one"));
+      }
+      else
+        push_info_msg(_("The new node is not allocated"));
+
+      // check the return code in normal case (expected 0)
+      CU_ASSERT_EQUAL(ret, 0);
+      if (ret != 0)
+        push_info_msg(_("Your function returns an error in normal case!"));
+
+      // check the update of the list size
+      CU_ASSERT_EQUAL(list->size, 1);
+      if (list->size != 1)
+        push_info_msg(_("Wrong update of the list size."));
+
+      //-----------------------------------------------------------------
+
+      free_list_corr(list);
+    }
+
+    void test_add_node_wrong_args(){
+          set_test_metadata("add_node", _("Check the return code of the function if wrong args"), 1);
+
+        int ret;
+        srandom(47826786);
+
+        SANDBOX_BEGIN;
+        ret = add_node(NULL, random());
+        SANDBOX_END;
+
+        CU_ASSERT_TRUE(ret);
+        if (!ret)
+             push_info_msg(_("Wrong return value when wrong args"));
+    }
+
+    void test_add_node_non_empty(){
+      set_test_metadata("add_node", _("Check the behavior of the function when the list is not empty"), 1);
+
+      list_t *list = init_list_corr();
+      if (!list)
+        return;
+
+      int val[4] = {16328468, 135166, 97643564, 664872674};
+
+      node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node_corr(*(val+2)), *node3 = init_node_corr(*(val+3));
+      if (!node1 | !node2 | !node3){
+        CU_FAIL("NO MEMORY AVAILABLE");
+        return;
+      }
+
+      node1->next = node2;
+      node2->next = node3;
+      list->first = node1;
+      list->size = 3;
+
+      int ret = 0;
+
+      monitored.malloc = true;
+
+      SANDBOX_BEGIN;
+      ret = add_node(list, *val);
+      SANDBOX_END;
+
+      // Tests
+      //-----------------------------------------------------------------
+
+      // check if only one call to malloc
+      int ms = stats.malloc.called;
+      CU_ASSERT_EQUAL(ms, 1);
+      if (ms != 1)
+        push_info_msg(_("You used more than one call to malloc"));
+
+      // check if new element is malloced
+      int mal = malloced((void*) list->first);
+      CU_ASSERT_TRUE(mal);
+      // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
+      if (mal){
+        int valf = list->first->value;
+        CU_ASSERT_EQUAL(valf, *val);
+        if (valf != *val)
+          push_info_msg(_("The inserted value does not correspond to the waited one"));
+      }
+      else
+        push_info_msg(_("The new node is not allocated"));
+
+      // check if the structure if the list changed
+      int cl = check_list(list, val, 4);
+      CU_ASSERT_EQUAL(cl, 0);
+      if (cl == 1)
+        push_info_msg(_("The new linked list does not correspond to the waited one"));
+      else if (cl == 2)
+        push_info_msg(_("SCRIPT ERROR"));
+
+      // check the return code in normal case (expected 0)
+      CU_ASSERT_EQUAL(ret, 0);
+      if (ret != 0)
+        push_info_msg(_("Your function returns an error in normal case!"));
+
+      // check the update of the list size
+      CU_ASSERT_EQUAL(list->size, 4);
+      if (list->size != 4)
+        push_info_msg(_("Wrong update of the list size."));
+
+      //-----------------------------------------------------------------
+
+
+      free_list_corr(list);
+    }
+
+    void test_add_node_nomem(){
+      set_test_metadata("add_node", _("Check the behavior of the function when the malloc call fails"), 1);
+
+      list_t *list = init_list_corr();
+      if (!list)
+        return;
+
+      int val[4] = {16328468, 135166, 97643564, 664872674};
+
+      node_t *node1 = init_node_corr(*(val+1)), *node2 = init_node_corr(*(val+2)), *node3 = init_node_corr(*(val+3));
+      if (!node1 | !node2 | !node3){
+        CU_FAIL("NO MEMORY AVAILABLE");
+        return;
+      }
+
+      node1->next = node2;
+      node2->next = node3;
+      list->first = node1;
+      list->size = 3;
+
+      int ret = 0;
+
+      monitored.malloc = true;
+      failures.malloc = FAIL_ALWAYS;
+      failures.malloc_ret = NULL;
+
+
+
+      SANDBOX_BEGIN;
+      ret = add_node(list, *val);
+      SANDBOX_END;
+
+      // Tests
+      //-----------------------------------------------------------------
+
+      // check if only one call to malloc
+      int ms = stats.malloc.called;
+      CU_ASSERT_EQUAL(ms, 1);
+      if (ms != 1)
+        push_info_msg(_("You used more than one call to malloc"));
+
+      // check if the structure if the list changed
+      int *new_vals = (val+1);
+      int cl = check_list(list, new_vals, 3);
+      CU_ASSERT_EQUAL(cl, 0);
+      if (cl == 1)
+        push_info_msg(_("The new linked list does not correspond to the waited one"));
+      else if (cl == 2)
+        push_info_msg(_("SCRIPT ERROR"));
+
+      // check the return code in normal case (expected 0)
+      CU_ASSERT_EQUAL(ret, 1);
+      if (ret != 1)
+        push_info_msg(_("Your function returns an error in normal case!"));
+
+      // check the update of the list size
+      CU_ASSERT_EQUAL(list->size, 3);
+      if (list->size != 3)
+        push_info_msg(_("Wrong update of the list size."));
+
+      //-----------------------------------------------------------------
+
+      free_list_corr(list);
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS(calloc, set_tag);
+        //RUN(test_init_node_alloc);
+        RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem, test_add_node_wrong_args);
+        //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
+    }
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |+
@@ -37,14 +439,13 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Basic linked list - CHANGE REQUESTED - malloc(1)'
+name: '[S3] Basic linked list - REVIEWED'
 network_grading: false
-order: 29
+order: 28
 problems:
     init_node:
-        name: Node initialisation
-        language: c
         type: code
+        name: Node initialisation
         header: |
             .. code-block:: c
 
@@ -55,10 +456,10 @@ problems:
                 * @return: return the pointer to the new node, or NULL if a failure occured.
                 */
                 node_t *init_node(int value) {
+        language: c
     add_node:
         type: code
         language: c
-        name: Adding a node
         header: |
             .. code-block:: c
 
@@ -71,63 +472,70 @@ problems:
                 * @return: 0 if success, 1 else
                 */
                 int add_node(list_t *list, int value);
+        name: Adding a node
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Timeout
-        type: 1
         id: timeout
+        name: Timeout
         visible: true
+        type: 1
         description: Your code exceeds the maximum allowed time.
     '1':
-        type: 1
-        visible: true
-        name: Segmentation Fault
         id: sigsegv
         description: ''
-    '2':
+        name: Segmentation Fault
         visible: true
-        description: You code does not compile.
+        type: 1
+    '2':
         id: not_compile
         type: 1
         name: Not compile
-    '3':
-        name: Memory Exceeded
         visible: true
+        description: You code does not compile.
+    '3':
         description: ''
-        type: 1
         id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
     '4':
-        id: sigfpe
         name: Floating Point Exception
         description: ''
         visible: true
+        id: sigfpe
         type: 1
     '5':
+        id: double_free
         visible: true
         description: Your code produced a double free.
-        id: double_free
         name: Double free
         type: 1
     '6':
         id: banned_funcs
-        name: Banned functions
-        type: 1
         description: You use some banned functions.
+        type: 1
+        name: Banned functions
         visible: true
+    '9':
+        name: Malloc bad size
+        description: The size of the allocated memory is not correct.
+        type: 1
+        id: malloc_fail_memory_size
+        visible: false
     '7':
-        description: Task dealing with data structures and linked list
-        visible: true
-        type: 2
         name: Data structures
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
         id: ''
     '8':
         name: S3
-        type: 2
-        description: ''
         visible: true
+        description: ''
+        type: 2
         id: ''
 weight: 1.0

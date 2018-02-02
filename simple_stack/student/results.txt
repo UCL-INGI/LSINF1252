@@ -1,2 +1,0 @@
-push#SUCCESS#Check the behavior of the function if the given @head is NULL or if the malloc call fails#1#
-push#SUCCESS#Check if the function change @value#1#

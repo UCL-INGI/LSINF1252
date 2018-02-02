@@ -1,0 +1,98 @@
+/run: |
+    #!/bin/bash
+
+    #getinput "make_calc_simple" > student/Makefile.tpl
+
+    parsetemplate --output student/Makefile student/Makefile.tpl
+
+    make
+
+    if test -e student/calc
+    then
+        diff reference/calc student/calc
+        if [ $? -ne 0 ]
+        then
+            feedback-result failed
+            feedback-msg -m "Your Makefile is not correct."
+        else
+            feedback-result success
+            feedback-msg -m "You made it!"
+        fi
+    else
+        feedback-result failed
+        feedback-msg -m "The executable file calc was not detected."
+    fi
+
+    make mrproper
+/student/Makefile: ''
+/student/Makefile.tpl: |
+    # CC variable for C compiler
+    # You can replace gcc by clang if you prefer
+    CC = gcc
+    # CFLAGS variable for gcc/clang flags
+    # See gcc/clang manual to understand all flags
+    CFLAGS += -std=c99 # Define which version of the C standard to use
+    CFLAGS += -Wall # Enable the 'all' set of warnings
+    CFLAGS += -Werror # Treat all warnings as error
+    CFLAGS += -Wshadow # Warn when shadowing variables
+    CFLAGS += -Wextra # Enable additional warnings
+    CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
+    CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
+
+    @@make_calc_simple@@
+
+    .PHONY: clean mrproper
+
+    clean:
+        rm -f *.o
+
+    mrproper: clean
+        rm -f calc
+accessible: true
+author: Pablo Gonzalez Alvarez
+context: |-
+    *Estimated time: 5 minutes*
+
+    You have just built a simple calculator. When typing ``ls`` in your command line, the source folder has the following structure:
+
+    .. code-block:: console
+
+        calc.c    calc.h    operations.c    operations.h
+
+    ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
+
+    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``.
+
+    These headers contain the function prototypes and specifications. For instance ``double add(double a, double b);``.
+
+    Unfortunately, the source folder was lost but you still have access to the object files.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: '[S2] make basics - headers and prerequisites'
+network_grading: false
+order: 23
+problems:
+    make_calc_simple:
+        type: code
+        header: Write a *Makefile* to build the executable ``calc`` from both object
+            files ``calc.o`` and ``operations.o``.
+        language: Makefile
+        name: 'Linking '
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        id: make
+        type: 0
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        name: make & Makefile
+        visible: false
+weight: 1.0

@@ -1,3 +1,139 @@
+/run: |
+    #!/bin/python3
+
+    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+    # Auteurs : Mathieu Xhonneux, Anthony Gégo
+    # Licence : GPLv3
+
+    import subprocess, shlex, re, os, yaml
+    from inginious import feedback, rst, input
+
+    # Switch working directory to student/
+    os.chdir("student")
+
+    # Fetch and save the student code into a file for compilation
+    input.parse_template("student_code.c.tpl", "student_code.c")
+
+    # Compilation
+    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    make_output = p.communicate()[0].decode('utf-8')
+    # If compilation failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_tag("not_compile", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
+
+    # Parse banned functions
+    try:
+        banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+        banned_funcs = list(filter(None, banned_funcs))
+    except IndexError:
+        banned_funcs = []
+
+    if banned_funcs:
+        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        readelf_output = p.communicate()[0].decode('utf-8')
+        for func in banned_funcs:
+            if re.search("UND {}\n".format(func), readelf_output):
+                feedback.set_tag("banned_funcs", True)
+                feedback.set_global_result("failed")
+                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
+                exit(0)
+
+
+    # Remove source files
+    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+    LANG = input.get_input('@lang')
+
+    # Run the code in a parallel container
+    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    p.communicate()
+
+    # If run failed, exit with "failed" result
+    if p.returncode:
+        feedback.set_global_result("failed")
+        if p.returncode == 256-8:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+            feedback.set_tag("sigfpe", True)
+        elif p.returncode == 256-11:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+        elif p.returncode == 252:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+            feedback.set_tag("memory", True)
+        elif p.returncode == 253:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
+        else:
+            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
+        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
+        exit(0)
+    #elif run_output:
+    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
+
+    # Comment to run the tests
+    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
+    #exit(0)
+
+    # Fetch CUnit test results
+    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
+    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
+
+
+    # Produce feedback
+    if all([r['code'] == 'SUCCESS' for r in results]):
+        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
+    else:
+        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+
+    score = 0
+    total = 0
+    tests_result = {}
+
+    for test in results:
+        total += test['weight']
+        for tag in test['tags']:
+            if tag != "":
+                feedback.set_tag(tag, True)
+        if test['code'] == 'SUCCESS':
+            score += test['weight']
+            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
+        else:
+            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+                    test['pid'], True)
+            tests_result[test['pid']] = False
+
+    for pid, result in tests_result.items():
+        if result:
+            feedback.set_problem_result("success", pid)
+        else:
+            feedback.set_problem_result("failed", pid)
+
+    with open("../task.yaml", 'r') as stream:
+        problems = yaml.load(stream)['problems']
+
+        for name, meta in problems.items():
+            if meta['type'] == 'match':
+                answer = input.get_input(name)
+                if answer == meta['answer']:
+                    feedback.set_problem_result("success", name)
+                    feedback.set_problem_feedback("Votre réponse est correcte. (1/1 pts)", name, True)
+                    score += 1
+                else:
+                    feedback.set_problem_result("failed", name)
+                    feedback.set_problem_feedback("Votre réponse est incorrecte. (0/1 pts)", name, True)
+
+                total += 1
+
+    score = 100*score/(total if not total == 0 else 1)
+    feedback.set_grade(score)
+    feedback.set_global_result("success" if score >= 50 else "failed")
 /student/tests.c: |
     // CTester template
 
@@ -239,9 +375,8 @@
 
         if (ret != -1){
             push_info_msg(_("You do not return -1 when lseek() fails."));
+            set_tag("failure_handling");
             CU_FAIL();
-        }else{
-            set_tag("lseek");
         }
     }
 
@@ -265,14 +400,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '50'
     output: '2'
     time: '30'
-    memory: '50'
 name: '[S5] Get and set on array in file - REVIEWED'
 network_grading: false
-order: 43
+order: 42
 problems:
     q1:
+        language: c
+        name: ''
         type: code
         header: |-
             .. code-block:: c
@@ -285,9 +422,10 @@ problems:
                  *       return -2 if index >= length of array.
                  */
                 int get(char *filename, int index) {
-        name: ''
-        language: c
     q2:
+        language: c
+        name: ''
+        type: code
         header: |-
             .. code-block:: c
 
@@ -298,9 +436,6 @@ problems:
                  *       do nothing if something fails.
                  */
                 void set(char *filename, int index, int value) {
-        name: ''
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -309,109 +444,109 @@ tags:
     '0':
         name: Close
         type: 0
+        id: close
         visible: true
         description: This tag validate that your close are correctly performed.
-        id: close
     '1':
+        id: open
+        description: This tag validate you are able to open a file.
         visible: true
         name: Open
-        description: This tag validate you are able to open a file.
         type: 0
-        id: open
     '10':
-        visible: true
         type: 1
-        description: A value at an unwanted index was modified.
-        name: Wrong Index Set
-        id: wrong_index_set
+        id: sigfpe
+        description: ''
+        visible: true
+        name: Floating Point Exception
     '11':
-        name: Wrong Get Value Returned
-        id: wrong_get_value_returned
-        description: The get() function did not return the expected value.
-        visible: true
         type: 1
-    '12':
         visible: true
-        id: timeout
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
+        id: memory
+        name: Memory Exceeded
+        description: ''
+    '12':
+        name: Not compile
+        description: You code do not compile.
+        visible: true
+        id: not_compile
         type: 1
     '13':
-        description: You try to read outside of the array.
-        name: Out of bounds
         type: 1
+        id: original_modif
+        description: You have modified the original file.
+        name: Original file modified
         visible: true
-        id: oob
     '14':
         type: 1
-        name: Too many read/write
+        name: Wrong Set Value
+        visible: true
+        id: wrong_set_value
+        description: The value written in the file has not the correct value.
+    '16':
+        name: Wrong Index Set
+        description: A value at an unwanted index was modified.
+        id: wrong_index_set
+        type: 1
+        visible: true
+    '2':
+        type: 1
+        id: wrong_get_value_returned
+        name: Wrong Get Value Returned
+        description: The get() function did not return the expected value.
+        visible: true
+    '3':
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        visible: true
+        type: 1
+        name: Timeout
+    '4':
+        description: You try to read outside of the array.
+        visible: true
+        type: 1
+        id: oob
+        name: Out of bounds
+    '5':
         description: You call the read or write function more than necessary.
         visible: true
         id: too_many_op
-    '15':
-        visible: true
+        name: Too many read/write
+        type: 1
+    '6':
         id: sigsegv
-        name: Segmentation Fault
         type: 1
         description: ''
-    '2':
         visible: true
-        description: You use some banned functions.
+        name: Segmentation Fault
+    '7':
         id: banned_funcs
-        type: 1
         name: Banned functions
-    '3':
-        name: Double free
-        type: 1
         visible: true
-        description: Your code produced a double free.
+        type: 1
+        description: You use some banned functions.
+    '8':
+        type: 1
         id: double_free
-    '4':
+        name: Double free
+        description: Your code produced a double free.
+        visible: true
+    '9':
         id: failure_handling
         description: You do not manage failures properly.
         type: 1
+        visible: true
         name: Failure handling
-        visible: true
-    '5':
-        id: sigfpe
-        type: 1
-        name: Floating Point Exception
-        description: ''
-        visible: true
-    '6':
-        id: memory
-        type: 1
-        description: ''
-        name: Memory Exceeded
-        visible: true
-    '7':
-        description: You code do not compile.
-        id: not_compile
-        name: Not compile
-        visible: true
-        type: 1
-    '8':
-        name: Original file modified
-        id: original_modif
-        type: 1
-        description: You have modified the original file.
-        visible: true
-    '9':
-        id: wrong_set_value
-        description: The value written in the file has not the correct value.
-        visible: true
-        name: Wrong Set Value
-        type: 1
-    '16':
-        name: File
-        visible: true
-        type: 2
-        description: ''
-        id: ''
     '17':
+        name: File
+        description: ''
+        type: 2
+        visible: true
+        id: ''
+    '18':
+        visible: true
         description: ''
         name: S5
-        visible: true
         type: 2
         id: ''
 weight: 1.0

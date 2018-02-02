@@ -1,18 +1,3 @@
-/solution.c.sol: |+
-    int fd = open(filename,O_WRONLY|O_CREAT);
-    if(fd == -1)
-        return -1;
-    for(int i = 0; i < size; i++){
-        if((int)write(fd, (void *) &pt[i], sizeof(point_t)) == -1)
-            return -2;
-    }
-    if(close(fd)<0)
-        return -3;
-    return 0;
-
-
-
-
 /student/tests.c: |
     // CTester template
 
@@ -34,8 +19,7 @@
         return tab;
     }
 
-    void test() {
-        set_test_metadata("q1", _("Test write array struct"), 1);
+    void _test() {
         int size = 6;
         int ret = 0;
         point_t* tab = gen_struct(size);
@@ -46,7 +30,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -58,6 +41,7 @@
         if (stats.write.called != 1) {
             CU_FAIL();
             push_info_msg(_("You should call write() only once."));
+            set_tag("too_many_op");
         }
         if (stats.close.called != 1) {
             CU_FAIL();
@@ -86,6 +70,11 @@
                 return;
             }
         }
+
+        if ((int)read(fd, (void *) &s, 1) > 0) {
+            CU_FAIL();
+            push_info_msg(_("There's data in the file, after the end of the array."));
+        }
         free(tab);
         close(fd);
         if(ret != 0){
@@ -94,17 +83,30 @@
         }
     }
 
+    void test_no_file() {
+        set_test_metadata("q1", _("Test writing the struct, no file already created"), 2);
+        system("rm file.txt");
+        _test();
+    }
+
+    void test_with_file() {
+        set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
+        system("rm file.txt");
+        system("echo \"INTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZ\" > file.txt");
+        _test();
+    }
+
     void test_close() {
         set_test_metadata("q1", _("Test close()."), 1);
         int size = 6;
         point_t* tab = gen_struct(size);
+        system("rm file.txt");
 
         monitored.close = true;
         monitored.open = true;
         SANDBOX_BEGIN;
         save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -147,6 +149,7 @@
         int size = 6;
         point_t* tab = gen_struct(size);
         int ret = 0;
+        system("rm file.txt");
 
         monitored.open = true;
         failures.open = FAIL_FIRST;
@@ -154,7 +157,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -189,6 +191,7 @@
         int size = 6;
         point_t* tab = gen_struct(size);
         int ret = 0;
+        system("rm file.txt");
 
         monitored.write = true;
         failures.write = FAIL_ALWAYS;
@@ -196,7 +199,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -210,24 +212,26 @@
 
     int main(int argc,char** argv){
         BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-        RUN(test, test_close, test_open, test_write_fail);
+        RUN(test_no_file, test_with_file, test_close, test_open, test_write_fail);
     }
 accessible: true
 author: Olivier Martin
 context: |-
     *Estimated time: 25 minutes*
 
-    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file. The file may already exist or not. After the execution of the function, the file should only contain the array.
+    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file. The file may already exist or not. After the execution of the function, the file should only contain the array. If the file has to be created, the user who created it must have the permission to read it.
 
     .. code-block:: c
 
-        typedef struct point{
+        typedef struct point {
             int x;
             int y;
             int z;
         } point_t;
 
     Use only ``open(2)``, ``write(2)`` and ``close(2)``. You can only call ``write(2)`` once.
+
+    Hint : read carefully the man page of ``open(2)`` to manage all the  cases mentionned here above.
 environment: cpp
 evaluate: best
 groups: false
@@ -235,9 +239,9 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S5] Save struct into file'
+name: '[S5] Save struct into file - REVIEWED'
 network_grading: false
-order: 44
+order: 43
 problems:
     q1:
         type: code
@@ -246,7 +250,7 @@ problems:
             .. code-block:: c
 
                 /*
-                 * @pre pt != NULL
+                 * @pre pt != NULL, pointer to the first point_t in the array
                  *      size > 0, the length of the array.
                  *      filename != NULL
                  * @post write the array of struct in the file.
@@ -255,7 +259,7 @@ problems:
                  *       -2 if write() fails.
                  *       -3 if close() fails.
                  */
-                int save(point_t *pt, int size, char *filename)
+                int save(point_t *pt, int size, char *filename) {
         language: c
 stored_submissions: 0
 submission_limit:
@@ -274,12 +278,18 @@ tags:
         name: Close
         description: This tag validate that your close are correctly performed.
         id: close
-    '2':
-        name: Failure handling
+    '12':
         visible: true
+        id: too_many_op
+        name: Too many read/write
+        type: 1
+        description: You call the read or write function more than necessary.
+    '2':
         description: You do not manage failures properly during write operations.
         id: failure_handling
+        visible: true
         type: 1
+        name: Failure handling
     '3':
         name: Not compile
         type: 1
@@ -320,13 +330,13 @@ tags:
         id: sigsegv
         description: ''
         visible: true
-        type: 1
         name: Segmentation Fault
+        type: 1
     '10':
+        visible: true
         type: 2
         description: ''
         name: S5
-        visible: true
         id: ''
     '11':
         name: File

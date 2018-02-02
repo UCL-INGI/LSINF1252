@@ -11,28 +11,78 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    time: '30'
     output: '2'
-name: '[S3] Reading from the wire'
+    time: '30'
+name: '[S3] Reading from the wire - REVIEWED'
 network_grading: false
-order: 26
+order: 25
 problems:
     modem:
+        language: c
+        type: code
         header: |-
             You want to know if one e-mail you received contains the byte 42.
             Write the body of the function *has_42*, this function has to use *malloc* to create the buffer :
 
             .. code-block:: c
 
-                /* has_42
-                 * @return: 1 if the modem received a byte containing 42, else 0, -1 if an error has happened.
+                /*
+                 * @return: 1 if the modem received a byte containing 42
+                 *         else 0, -1 if an error has happened.
+                 */
                 int has_42() {
-        language: c
-        type: code
         name: '42'
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: timeout
+        name: Timeout
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        id: sigsegv
+        description: ''
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        id: banned_funcs
+        description: You use some banned functions.
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
+        name: S3
+        description: ''
+        type: 2
+        visible: true
+        id: ''
 weight: 1.0

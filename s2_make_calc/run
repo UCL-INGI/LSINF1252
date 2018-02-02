@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#getinput "make_calc_simple" > student/Makefile.tpl
+
+parsetemplate --output student/Makefile student/Makefile.tpl
+
+make
+
+if test -e student/calc
+then
+    diff reference/calc student/calc
+    if [ $? -ne 0 ]
+    then
+        feedback-result failed
+        feedback-msg -m "Your Makefile is not correct."
+    else
+        feedback-result success
+        feedback-msg -m "You made it!"
+    fi
+else
+    feedback-result failed
+    feedback-msg -m "The executable file calc was not detected."
+fi
+
+make mrproper

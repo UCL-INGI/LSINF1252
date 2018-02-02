@@ -18,19 +18,17 @@ point_t* gen_struct(int size){
     return tab;
 }
 
-void test() {
-    set_test_metadata("q1", _("Test write array struct"), 1);
+void _test() {
     int size = 6;
     int ret = 0;
     point_t* tab = gen_struct(size);
-
+    
     monitored.open = true;
     monitored.close = true;
     monitored.write = true;
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
 
     free(tab);
     tab = NULL;
@@ -42,6 +40,7 @@ void test() {
     if (stats.write.called != 1) {
         CU_FAIL();
         push_info_msg(_("You should call write() only once."));
+        set_tag("too_many_op");
     }
     if (stats.close.called != 1) {
         CU_FAIL();
@@ -70,25 +69,43 @@ void test() {
             return;
         }
     }
+    
+    if ((int)read(fd, (void *) &s, 1) > 0) {
+        CU_FAIL();
+        push_info_msg(_("There's data in the file, after the end of the array."));
+    }
     free(tab);
     close(fd);
     if(ret != 0){
         push_info_msg(_("You did not return 0 when everything should work."));
         CU_FAIL(); 
-    }
+    }   
+}
+
+void test_no_file() {
+    set_test_metadata("q1", _("Test writing the struct, no file already created"), 2);
+    system("rm file.txt");
+    _test();
+}
+
+void test_with_file() {
+    set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
+    system("rm file.txt");
+    system("echo \"INTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZINTXINTYINTZ\" > file.txt");
+    _test();
 }
 
 void test_close() {
     set_test_metadata("q1", _("Test close()."), 1);
     int size = 6;
     point_t* tab = gen_struct(size);
+    system("rm file.txt");
     
     monitored.close = true;
     monitored.open = true;
     SANDBOX_BEGIN;
     save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;
@@ -131,6 +148,7 @@ void test_open() {
     int size = 6;
     point_t* tab = gen_struct(size);
     int ret = 0;
+    system("rm file.txt");
     
     monitored.open = true;
     failures.open = FAIL_FIRST;
@@ -138,7 +156,6 @@ void test_open() {
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;
@@ -173,6 +190,7 @@ void test_write_fail() {
     int size = 6;
     point_t* tab = gen_struct(size);
     int ret = 0;
+    system("rm file.txt");
     
     monitored.write = true;
     failures.write = FAIL_ALWAYS;
@@ -180,7 +198,6 @@ void test_write_fail() {
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;
@@ -194,5 +211,5 @@ void test_write_fail() {
 
 int main(int argc,char** argv){
     BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-    RUN(test, test_close, test_open, test_write_fail);
+    RUN(test_no_file, test_with_file, test_close, test_open, test_write_fail);
 }

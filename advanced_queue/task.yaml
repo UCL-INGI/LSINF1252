@@ -1,4 +1,4 @@
-accessible: true
+accessible: false
 author: Maxime Mawait & Nicolas Rybowski
 context: |-
     You are asked to implement `enqueue` and `dequeue` functions of a `Queue` with doubly circular linked list.
@@ -17,134 +17,32 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
 name: '[S4] Queue avancée'
 network_grading: false
+order: 36
 problems:
     enqueue:
-        header: ''
+        language: c
+        type: code
         name: Enqueue
-        language: c
-        type: code
-    dequeue:
         header: ''
+    dequeue:
         name: Dequeue
-        language: c
         type: code
+        language: c
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
-        description: Task dealing with data structures and linked list
-        type: 2
-        name: Data structures
-        visible: false
-        id: ''
-    '10':
-        description: Task dealing with data structures and linked list
-        type: 2
-        name: Data structures
-        visible: false
-        id: ''
-    '11':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        type: 2
-        visible: false
-        id: ''
-    '12':
+    '0':
         type: 2
         name: Data structures
         description: Task dealing with data structures and linked list
-        visible: false
-        id: ''
-    '13':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        type: 2
-        visible: false
-        id: ''
-    '14':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        type: 2
-        visible: false
-        id: ''
-    '15':
-        type: 2
-        name: Data structures
-        description: Task dealing with data structures and linked list
-        visible: false
-        id: ''
-    '16':
-        name: Data structures
-        description: Task dealing with data structures and linked list
-        type: 2
-        visible: false
-        id: ''
-    '17':
-        description: Task dealing with data structures and linked list
-        type: 2
-        name: Data structures
-        visible: false
-        id: ''
-    '18':
-        description: Task dealing with data structures and linked list
-        type: 2
-        name: Data structures
-        visible: false
-        id: ''
-    '2':
-        name: Data structures
-        type: 2
-        description: Task dealing with data structures and linked list
-        visible: false
-        id: ''
-    '3':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        type: 2
-        visible: false
-        id: ''
-    '4':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        type: 2
-        visible: false
-        id: ''
-    '5':
-        name: Data structures
-        description: Task dealing with data structures and linked list
-        type: 2
-        visible: false
-        id: ''
-    '6':
-        description: Task dealing with data structures and linked list
-        type: 2
-        name: Data structures
-        visible: false
-        id: ''
-    '7':
-        type: 2
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        visible: false
-        id: ''
-    '8':
-        name: Data structures
-        description: Task dealing with data structures and linked list
-        type: 2
-        visible: false
-        id: ''
-    '9':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        type: 2
         visible: false
         id: ''
 weight: 1.0
-order: 40

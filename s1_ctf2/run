@@ -1,0 +1,19 @@
+#! /bin/bash
+
+g++ main.cpp
+last=$(getinput @username | sha256sum)
+
+for i in {1..5}
+do
+	last=$(echo $last | sha256sum)
+done
+
+rep=$(getinput q1)
+
+if [ "$rep" == "$last" ]
+then
+	feedback-result success
+else
+	feedback-result failed
+	feedback-msg -m "Ce n'est pas le bon code, avez-vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
+fi
