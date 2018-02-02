@@ -5,7 +5,7 @@
 
 
 void test_foo() {
-    set_test_metadata("simple", _("printf OK"), 1);
+    set_test_metadata("simple", _("Test simple printf"), 1);
 
     SANDBOX_BEGIN;
     print_foo();
@@ -18,7 +18,7 @@ void test_foo() {
 }
 
 void test_digit() {
-    set_test_metadata("simple", _("printf OK"), 1);
+    set_test_metadata("digit", _("Test digit formatting"), 1);
 
     SANDBOX_BEGIN;
     print_digit(21);
@@ -39,6 +39,8 @@ void test_digit() {
 }
 
 void test_sprintf() {
+    set_test_metadata("sprintf", _("Test sprintf"), 1);
+    
     char buf[50];
     format_str(buf, 42, "Olivier", 'B');
     CU_ASSERT_TRUE(!strncmp(buf, "Mister Olivier B. has 42 eggs", 30));

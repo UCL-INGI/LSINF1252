@@ -2,13 +2,13 @@
 #include<stdio.h>
 
 void print_foo() {
-    @@simple@@
+@    @simple@@
 }
 
 void print_digit(int number) {
-    @@digit@@
+@    @digit@@
 }
 
 void format_str(char *buffer, unsigned int d, char *name, char initial) {
-    @@sprintft@@
+@    @sprintf@@
 }

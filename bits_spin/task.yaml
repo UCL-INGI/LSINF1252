@@ -18,26 +18,26 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
-name: '[S2] Spinning bits'
+    memory: '100'
+    output: '2'
+name: '[S2] Spinning bits - TO REVIEW'
 network_grading: false
+order: 17
 problems:
     q1:
         language: c
-        name: ''
-        type: code
         header: |-
             Write the body of a function *cycle_bits*, which moves all bits from *n* places to the left, according to the formula *x[(i+n)%32] = x[i]*, where *x[i]* is the i-iest bit of *x*.
 
             .. code-block:: c
 
                 uint32_t cycle_bits(uint32_t x, uint8_t n) {
+        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 17
