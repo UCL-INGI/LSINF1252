@@ -1,76 +1,3 @@
-/student/student_code.c.tpl: |
-    #include<stdlib.h>
-    #include<stdio.h>
-
-    void print_foo() {
-    @    @simple@@
-    }
-
-    void print_digit(int number) {
-    @    @digit@@
-    }
-
-    void format_str(char *buffer, unsigned int d, char *name, char initial) {
-    @    @sprintf@@
-    }
-/student/tests.c: |
-    #include <stdlib.h>
-    #include <fcntl.h>
-    #include "CTester/CTester.h"
-    #include "student_code.h"
-
-
-    void test_foo() {
-        set_test_metadata("simple", _("Test simple printf"), 1);
-
-        SANDBOX_BEGIN;
-        print_foo();
-        SANDBOX_END;
-
-        char buf[4];
-        int n = read(stdout_cpy, buf, 4);
-        CU_ASSERT_EQUAL(n, 4);
-        CU_ASSERT_TRUE(!strncmp(buf, "foo\n", 4));
-    }
-
-    void test_digit() {
-        set_test_metadata("digit", _("Test digit formatting"), 1);
-
-        SANDBOX_BEGIN;
-        print_digit(21);
-        SANDBOX_END;
-
-        char buf[24];
-        int n = read(stdout_cpy, buf, 24);
-        CU_ASSERT_EQUAL(n, 24);
-        CU_ASSERT_TRUE(!strncmp(buf, "The magic number is 21.\n", 24));
-
-        SANDBOX_BEGIN;
-        print_digit(42);
-        SANDBOX_END;
-
-        n = read(stdout_cpy, buf, 24);
-        CU_ASSERT_EQUAL(n, 24);
-        CU_ASSERT_TRUE(!strncmp(buf, "The magic number is 42.\n", 24));
-    }
-
-    void test_sprintf() {
-        set_test_metadata("sprintf", _("Test sprintf"), 1);
-
-        char buf[50];
-        format_str(buf, 42, "Olivier", 'B');
-        CU_ASSERT_TRUE(!strncmp(buf, "Mister Olivier B. has 42 eggs", 30));
-
-        format_str(buf, 1, "A", 'G');
-        CU_ASSERT_TRUE(!strncmp(buf, "Mister A G. has 1 eggs", 23));
-    }
-
-
-    int main(int argc,char** argv)
-    {
-        BAN_FUNCS(fprintf);
-        RUN(test_foo, test_digit, test_sprintf);
-    }
 accessible: true
 author: Mathieu Xhonneux
 context: In this exercise, you will familiarize yourself with the functions ``printf(3)``
@@ -79,15 +6,14 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
-name: '[S2] Printing data'
+name: '[S2] Printing data - REVIEWED'
 network_grading: false
 order: 7
 problems:
     simple:
-        type: code
         header: |-
             The function ``printf`` writes data to the standard output stream (*stdout*).
 
@@ -97,6 +23,7 @@ problems:
 
                 void print_foo() {
         name: Foo
+        type: code
         language: c
     digit:
         name: Digital
@@ -115,6 +42,7 @@ problems:
         type: code
     example:
         name: Floating away
+        answer: '3.1415'
         header: |
             ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
 
@@ -125,11 +53,10 @@ problems:
                 float PI = 3.1415926;
                 printf("pi = %.4f", PI);
         type: match
-        answer: '3.1415'
     sprintf:
-        type: code
-        name: sprintf
         language: c
+        name: sprintf
+        type: code
         header: |
             ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
 
