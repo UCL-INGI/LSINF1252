@@ -25,16 +25,25 @@ void test_sum2(){
 void test_sum3(){
   set_test_metadata("version2", _("Check the value of @r"), 1);
 
-  int a = 1, b = 8, r;
+  int a = 1, b = 8, r=-1;
+  int a2 = 10, b2 = 88, r2=-1;
+
 
   SANDBOX_BEGIN;
   version2(&a, &b, &r);
+  version2(&a2, &b2, &r2);
   SANDBOX_END;
 
-  CU_ASSERT_EQUAL(r, 9);
-  if (r != 9){
+  CU_ASSERT_EQUAL(r, a+b);
+  CU_ASSERT_EQUAL(r2, a2+b2);
+  if (r != a+b){
     char msg[80];
-    sprintf(msg, _("Expected value: 9. Received value: %i"), result);
+    sprintf(msg, _("Expected value: %d. Received value: %i"), a+b,result);
+    push_info_msg(msg);
+  }
+  if (r2 != a2+b2){
+    char msg[80];
+    sprintf(msg, _("Expected value: %d. Received value: %i"), a2+b2,result);
     push_info_msg(msg);
   }
 }

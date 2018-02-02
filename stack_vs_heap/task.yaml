@@ -1,3 +1,60 @@
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+
+    void test_sum2(){
+      set_test_metadata("version1", _("Check the `result` value"), 1);
+
+      SANDBOX_BEGIN;
+      version1(3, 7);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(result, 10);
+      if (result != 10){
+        char msg[80];
+        sprintf(msg, _("Expected value: 10. Received value: %i"), result);
+        push_info_msg(msg);
+      }
+    }
+
+
+    void test_sum3(){
+      set_test_metadata("version2", _("Check the value of @r"), 1);
+
+      int a = 1, b = 8, r=-1;
+      int a2 = 10, b2 = 88, r2=-1;
+
+
+      SANDBOX_BEGIN;
+      version2(&a, &b, &r);
+      version2(&a2, &b2, &r2);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(r, a+b);
+      CU_ASSERT_EQUAL(r2, a2+b2);
+      if (r != a+b){
+        char msg[80];
+        sprintf(msg, _("Expected value: %d. Received value: %i"), a+b,result);
+        push_info_msg(msg);
+      }
+      if (r2 != a2+b2){
+        char msg[80];
+        sprintf(msg, _("Expected value: %d. Received value: %i"), a2+b2,result);
+        push_info_msg(msg);
+      }
+    }
+
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS();
+        RUN(test_sum2, test_sum3);
+    }
 accessible: true
 author: Nicolas Rybowski, Mathieu Xhonneux
 context: |-
@@ -29,37 +86,34 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '100'
     output: '2'
     time: '30'
-    memory: '100'
 name: '[S3] Global''n''stack - CHANGE REQUESTED - q3:*r = 9;'
 network_grading: false
 order: 24
 problems:
     return1:
-        name: On the stack
+        type: match
         header: |-
             Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
 
             Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
 
             Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
+        name: On the stack
         answer: '5'
-        type: match
     version1:
-        type: code
+        name: Globalizing
         header: |
             From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
 
             .. code-block:: c
 
                 void sum2(int a, int b) {
-        language: c
-        name: Globalizing
-    version2:
-        name: Passing by reference
         type: code
         language: c
+    version2:
         header: |
             You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html).
             You can use the @r arg for this.
@@ -69,57 +123,60 @@ problems:
 
                 /* sum3: updates the value pointed by r, to the sum of the values pointed by a and b */
                 void sum3 (int *a, int *b, int *r) {
+        name: Passing by reference
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        id: memory
         name: Memory Exceeded
         type: 1
-        visible: true
-        id: memory
         description: ''
-    '1':
         visible: true
-        name: Timeout
-        type: 1
+    '1':
         id: timeout
         description: Your code exceeds the maximum allowed time.
-    '2':
+        name: Timeout
         visible: true
-        description: ''
-        name: Segmentation Fault
+        type: 1
+    '2':
         id: sigsegv
         type: 1
-    '3':
-        name: Not compile
-        description: You code does not compile.
+        name: Segmentation Fault
         visible: true
-        type: 1
+        description: ''
+    '3':
+        description: You code does not compile.
         id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
     '4':
-        id: sigfpe
+        name: Floating Point Exception
         description: ''
         visible: true
-        name: Floating Point Exception
+        id: sigfpe
         type: 1
     '5':
+        id: double_free
         visible: true
         description: Your code produced a double free.
-        id: double_free
         name: Double free
         type: 1
     '6':
         id: banned_funcs
-        type: 1
         name: Banned functions
         description: You use some banned functions.
+        type: 1
         visible: true
     '7':
-        description: ''
         name: S3
         visible: true
+        description: ''
         type: 2
         id: ''
 weight: 1.0
