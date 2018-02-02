@@ -6,8 +6,8 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
 name: '[S2] make basics - multiple choice questions - REVIEWED'
 network_grading: false
 order: 22
@@ -108,9 +108,9 @@ problems:
 
             * ``[tab]`` indicates a tabulation;
             * ``[spaces]`` indicates 8 white spaces.
-        multiple: true
         error_message: Try again!
         type: multiple_choice
+        multiple: true
     match1:
         header: In a Makefile, what is the character you can use to split a long line?
         answer: \
@@ -126,9 +126,9 @@ problems:
         limit: 2
         header: Choice all the *correct* answers.
         success_message: Good job!
+        multiple: true
         error_message: Try again!
         name: Recipes indentation
-        multiple: true
         type: multiple_choice
 stored_submissions: 0
 submission_limit:
@@ -138,8 +138,14 @@ tags:
     '0':
         name: make & Makefile
         id: make
+        visible: true
         description: Tasks related to the make task runner for targets described in
             Makefile.
         type: 0
-        visible: false
+    '1':
+        description: ''
+        name: S2
+        visible: true
+        type: 2
+        id: ''
 weight: 1.0

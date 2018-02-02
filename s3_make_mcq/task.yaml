@@ -15,7 +15,6 @@ problems:
     m1:
         answer: $(CC)
         type: match
-        name: Using a variable in a Makefile
         header: |-
             In your Makefile, you have the following variable definition:
 
@@ -24,6 +23,7 @@ problems:
                 CC = gcc
 
             What do you type to use it in other parts of your Makefile?
+        name: Using a variable in a Makefile
     q1:
         choices:
         -   text: gcc -o test test.o -lcunit
@@ -56,8 +56,14 @@ tags:
     '0':
         id: make
         name: make & Makefile
-        type: 0
         description: Tasks related to the make task runner for targets described in
             Makefile.
-        visible: false
+        visible: true
+        type: 0
+    '1':
+        visible: true
+        type: 2
+        description: ''
+        name: S3
+        id: ''
 weight: 1.0

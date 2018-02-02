@@ -118,9 +118,15 @@ submission_limit:
 tags:
     '0':
         id: make
+        visible: true
         type: 0
         name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
-        visible: false
+    '1':
+        name: S2
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0

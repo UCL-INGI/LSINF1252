@@ -94,14 +94,27 @@ network_grading: false
 order: 33
 problems:
     make_test:
-        language: Makefile
         name: Make test
         header: |
             You have the above given ``Makefile``. You want to add a target to build the test that use the library **CUnit**. You will call this target ``test``.
         type: code
+        language: Makefile
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: make
+        visible: true
+        type: 0
+        name: make & Makefile
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+    '1':
+        name: S3
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0
