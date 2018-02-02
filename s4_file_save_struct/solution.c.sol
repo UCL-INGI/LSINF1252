@@ -1,4 +1,4 @@
-int fd = open(filename,O_WRONLY|O_CREAT); 
+int fd = open(filename,O_WRONLY|O_CREAT|O_TRUNC, 0666); 
 if(fd == -1) 
     return -1;
 for(int i = 0; i < size; i++){
