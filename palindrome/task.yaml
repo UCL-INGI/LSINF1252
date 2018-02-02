@@ -1,65 +1,3 @@
-/student/tests.c: |+
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    void test_myfunc_ret()
-    {
-        set_test_metadata("q1", _("Test the function palindrome"), 1);
-
-        int ret1 = -2;
-        int ret2 = -2;
-        int ret3 = -2;
-        int ret4 = -2;
-        int ret5 = -2;
-        int ret6 = -2;
-        int ret7 = -2;
-
-        char *str1 = trap_buffer(44, TRAP_RIGHT, PROT_WRITE, "Tityre tu patulae recubans sub tegmine fagi");
-        char *str2 = trap_buffer(40, TRAP_RIGHT, PROT_WRITE, "tu l as trop ecrase cesar ce port salut");
-        char *str3 = trap_buffer(1, TRAP_RIGHT, PROT_WRITE, "");
-        char *str4 = trap_buffer(25, TRAP_RIGHT, PROT_WRITE, "azertyuioppptpoiuytreza");
-        char *str5 = trap_buffer(22, TRAP_RIGHT, PROT_WRITE, "qsdfghjklmmlkjhgfdsq");
-        char *str6 = trap_buffer(2, TRAP_RIGHT, PROT_WRITE, "e");
-
-        SANDBOX_BEGIN;
-        ret1 = pal(str1);
-        ret2 = pal(str2);
-        ret3 = pal(str3);
-        ret4 = pal(str4);
-        ret5 = pal(str5);
-        ret6 = pal(NULL);
-        ret7 = pal(str6);
-        SANDBOX_END;
-        free_trap(str1,44);
-        free_trap(str2,40);
-        free_trap(str3,1);
-        free_trap(str4,25);
-        free_trap(str5,22);
-        free_trap(str6,2);
-        CU_ASSERT_EQUAL(ret1,0);
-        CU_ASSERT_EQUAL(ret2,1);
-        CU_ASSERT_EQUAL(ret3,1);
-        CU_ASSERT_EQUAL(ret4,0);
-        CU_ASSERT_EQUAL(ret5,1);
-        CU_ASSERT_EQUAL(ret6,-1);
-        CU_ASSERT_EQUAL(ret7,1);
-        if (ret1!=0 || ret4!=0)
-            push_info_msg(_("Your function doesn't work for strings that are not palindromes"));
-        if (ret2!=1 || ret3!=1 || ret5!=1 || ret7!=1)
-            push_info_msg(_("Your function doesn't work for strings that are palindromes"));
-        if (ret6!=-1)
-            push_info_msg(_("Your function doesn't work for NULL strings"));
-    }
-
-    int main(int argc,char** argv)
-    {
-        BAN_FUNCS();
-        RUN(test_myfunc_ret);
-    }
-
 accessible: true
 author: Arthur van Stratum
 context: 'Palindrome are strings of text which reads the same backward as forward,
@@ -68,16 +6,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S2] Palindrome'
 network_grading: false
 order: 19
 problems:
     q1:
-        language: c
         name: ''
+        language: c
         type: code
         header: |-
             Write the body of the function *pal* which tells if the given string is a palindrome or not. Ignore spaces. An empty string is considered a palindrome. You have access to the functions of *string.h*
@@ -93,5 +31,53 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        type: 1
+        visible: true
+        name: Timeout
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+    '2':
+        visible: true
+        description: ''
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+    '3':
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+        type: 1
+        id: not_compile
+    '4':
+        id: memory
+        name: Memory Exceeded
+        description: ''
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+    '6':
+        id: double_free
+        name: Double free
+        type: 1
+        description: Your code produced a double free.
+        visible: true
+    '7':
+        description: You use some banned functions.
+        visible: true
+        id: banned_funcs
+        type: 1
+        name: Banned functions
+    '0':
+        name: S2
+        type: 2
+        visible: true
+        description: ''
+        id: ''
 weight: 1.0

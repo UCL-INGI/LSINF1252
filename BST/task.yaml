@@ -1,3 +1,218 @@
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    bt_t* tree = NULL;
+
+    void free_bst(node_t* node){
+        if(node){
+            free_bst(node->right);
+            free_bst(node->left);
+            free(node);
+        }
+    }
+
+    void test_contains_retok1() {
+        set_test_metadata("contains", _("Test contained value"), 1);
+
+        if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+
+        int ret = 12320;
+
+        monitored.malloc = true;
+        monitored.free = true;
+        SANDBOX_BEGIN;
+        ret = contains(tree,3);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+
+        ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = contains(tree,0);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+
+        ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = contains(tree,6);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+        CU_ASSERT_EQUAL(stats.malloc.called, 0);
+        if (stats.malloc.called) {
+          push_info_msg(_("Why did you use malloc ?"));
+        }
+        CU_ASSERT_EQUAL(stats.free.called, 0);
+        if (stats.free.called) {
+          push_info_msg(_("Why did you use free ?"));
+        };
+    }
+
+    void test_contains_retok2() {
+        set_test_metadata("contains", _("Test complex contained value"), 1);
+
+        if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+
+        int ret = 1213120;
+
+        monitored.malloc = true;
+        monitored.free = true;
+        SANDBOX_BEGIN;
+        ret = contains(tree,5);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+
+        ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = contains(tree,2);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+        CU_ASSERT_EQUAL(stats.malloc.called, 0);
+        if (stats.malloc.called) {
+          push_info_msg(_("Why did you use malloc ?"));
+        }
+        CU_ASSERT_EQUAL(stats.free.called, 0);
+        if (stats.free.called) {
+          push_info_msg(_("Why did you use free ?"));
+        }
+    }
+
+    void test_contains_retnok() {
+        set_test_metadata("contains", _("Test not contained value"), 1);
+
+        if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+
+        int ret = 122320;
+
+        monitored.malloc = true;
+        monitored.free = true;
+        printf("%d NB MALLOC\n", stats.malloc.called);
+        SANDBOX_BEGIN;
+        printf("%d NB MALLOC avant contains\n", stats.malloc.called);
+        ret = contains(tree,-2);
+        printf("%d NB MALLOC apres contains\n", stats.malloc.called);
+        SANDBOX_END;
+        printf("%d NB MALLOC\n", stats.malloc.called);
+
+        printf("%d NB MALLOC\n", stats.malloc.called);
+        CU_ASSERT_EQUAL(ret,0);
+
+        ret = 0;
+
+        SANDBOX_BEGIN;
+        ret = contains(tree,10);
+        SANDBOX_END;
+
+        printf("%d NB MALLOC\n", stats.malloc.called);
+        CU_ASSERT_EQUAL(ret,0);
+        printf("%d NB MALLOC\n", stats.malloc.called);
+
+        CU_ASSERT_EQUAL(stats.malloc.called, 0);
+        if (stats.malloc.called) {
+          push_info_msg(_("Why did you use malloc ?"));
+        }
+        CU_ASSERT_EQUAL(stats.free.called, 0);
+        if (stats.free.called) {
+          push_info_msg(_("Why did you use free ?"));
+        }
+    }
+
+    void test_contains_retnull() {
+        set_test_metadata("contains", _("Test for empty or null tree"), 1);
+
+        if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+
+        bt_t* tree = (bt_t*) malloc(sizeof(bt_t));
+        tree->root = 0;
+
+        int ret = 0;
+
+        monitored.malloc = true;
+        monitored.free = true;
+        SANDBOX_BEGIN;
+        ret = contains(tree,0);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,0);
+
+        free(tree);
+        tree = 0;
+
+        SANDBOX_BEGIN;
+        ret = contains(tree,0);
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,0);
+
+        CU_ASSERT_EQUAL(stats.malloc.called, 0);
+        if (stats.malloc.called) {
+          push_info_msg(_("Why did you use malloc ?"));
+        }
+        CU_ASSERT_EQUAL(stats.free.called, 0);
+        if (stats.free.called) {
+          push_info_msg(_("Why did you use free ?"));
+        }
+    }
+
+    int main(int argc,char** argv)
+    {
+        tree = (bt_t*) malloc(sizeof(bt_t));
+        if(!tree) tree = NULL;
+        else {
+          node_t* root = (node_t*) malloc(sizeof(node_t));
+          node_t* node1 = (node_t*) malloc(sizeof(node_t));
+          node_t* node2 = (node_t*) malloc(sizeof(node_t));
+          node_t* node3 = (node_t*) malloc(sizeof(node_t));
+          node_t* node4 = (node_t*) malloc(sizeof(node_t));
+          node_t* node5 = (node_t*) malloc(sizeof(node_t));
+          node_t* node6 = (node_t*) malloc(sizeof(node_t));
+          if(!root || !node1 || !node2 || !node3 || !node4 || !node5 || !node6){
+              if(root) free(root);
+              if(node1) free(node1);
+              if(node2) free(node2);
+              if(node3) free(node3);
+              if(node4) free(node4);
+              if(node5) free(node5);
+              if(node6) free(node6);
+              root = NULL; node1 = NULL; node2 = NULL; node3 = NULL; node4 = NULL;
+              node5 = NULL; node6 = NULL;
+              free(tree);
+              tree = NULL;
+          }
+          else {
+              root->value = 3;
+              node1->value = 1;
+              node2->value = 5;
+              root->left = node1;
+              root->right = node2;
+              tree->root = root;
+              node3->value = 0;
+              node4->value = 2;
+              node1->left = node3;
+              node1->right = node4;
+              node5->value = 4;
+              node6->value = 6;
+              node2->left = node5;
+              node2->right = node6;
+            }
+        }
+
+        BAN_FUNCS();
+        RUN(test_contains_retok1,test_contains_retok2,test_contains_retnok,test_contains_retnull);
+
+        free_bst(tree->root);
+        free(tree);
+    }
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
@@ -35,9 +250,9 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    time: '30'
     memory: '100'
-name: '[S4] Binary Search Tree'
+    time: '30'
+name: '[S4] Binary Search Tree - REVIEWED'
 network_grading: false
 order: 38
 problems:
@@ -65,58 +280,58 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '0':
+        name: Timeout
+        type: 1
+        visible: true
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        type: 1
+        visible: true
+        name: Segmentation Fault
+        id: sigsegv
+        description: ''
     '2':
         visible: true
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
+        description: You code does not compile.
+        id: not_compile
         type: 1
-        name: Timeout
+        name: Not compile
     '3':
-        name: Segmentation Fault
+        name: Memory Exceeded
         visible: true
         description: ''
         type: 1
-        id: sigsegv
+        id: memory
     '4':
-        id: not_compile
-        name: Not compile
-        description: You code does not compile.
+        id: sigfpe
+        name: Floating Point Exception
+        description: ''
         visible: true
         type: 1
     '5':
         visible: true
-        description: ''
-        id: memory
-        name: Memory Exceeded
-        type: 1
-    '6':
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-        description: ''
-        visible: true
-    '7':
         description: Your code produced a double free.
-        visible: true
-        type: 1
         id: double_free
         name: Double free
-    '8':
+        type: 1
+    '6':
         id: banned_funcs
+        name: Banned functions
         type: 1
         description: You use some banned functions.
-        name: Banned functions
         visible: true
-    '0':
-        name: Data structures
-        type: 2
-        visible: true
+    '7':
         description: Task dealing with data structures and linked list.
-        id: ''
-    '1':
-        type: 2
         visible: true
-        name: S4
+        type: 2
+        name: Data structures
+        id: ''
+    '8':
+        type: 2
         description: ''
+        name: S4
+        visible: true
         id: ''
 weight: 1.0

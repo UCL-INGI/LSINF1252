@@ -8,7 +8,7 @@ limits:
     output: '2'
     time: '30'
     memory: '100'
-name: '[S03] Make basics'
+name: '[S03] Make more basics'
 network_grading: false
 problems:
     m1:
@@ -25,5 +25,12 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: make & Makefiles
+        id: make
+        type: 0
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        visible: false
 weight: 1.0
