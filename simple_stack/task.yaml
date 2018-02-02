@@ -7,7 +7,7 @@ context: |
 
         struct node {
             node *next;
-            char *value;
+            char *name;
         };
 
     .. image:: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png
@@ -34,15 +34,14 @@ evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
 name: '[S3] Simple stack'
 network_grading: false
 order: 29
 problems:
     push:
-        language: c
-        name: Push
+        type: code
         header: |-
             .. code-block:: c
 
@@ -55,9 +54,11 @@ problems:
                 * @return 0 if no error, 1 else.
                 */
 
-                int push(struct node **head, const char *name){
-        type: code
+                int push(struct node **head, const char *value){
+        language: c
+        name: Push
     pop:
+        language: ''
         header: |-
             .. code-block:: c
 
@@ -70,11 +71,12 @@ problems:
                 * @return 0 if no error, 1 else.
                 */
 
-                int pop(struct node *head, char **name){
-        type: code
+                int pop(struct node **head, char **result){
         name: Pop
-        language: ''
+        type: code
     free_node:
+        name: <OPTIONAL> free_node
+        language: c
         header: |-
             You can use this question to implement a ``free_node`` function
 
@@ -86,17 +88,15 @@ problems:
                 void free_node(struct node *node){
         optional: 'on'
         type: code
-        name: <OPTIONAL> free_node
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Data structures
-        type: 2
         visible: true
+        type: 2
         description: Task dealing with data structures and linked list
+        name: Data structures
         id: ''
 weight: 1.0

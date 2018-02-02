@@ -1,7 +1,7 @@
 accessible: true
 author: Tom Rousseaux
 context: |
-    You have to **compress** the following file system
+    You have to **compress** (*.tar.gz* file) the following file system
 
     .. code-block:: console
 
