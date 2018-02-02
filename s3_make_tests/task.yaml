@@ -86,19 +86,19 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
-name: '[S3] Makefile and testing'
+name: '[S3] make tests'
 network_grading: false
 order: 33
 problems:
     make_test:
+        language: Makefile
+        name: Make test
         header: |
             You have the above given ``Makefile``. You want to add a target to build the test that use the library **CUnit**. You will call this target ``test``.
-        language: Makefile
         type: code
-        name: Make test
 stored_submissions: 0
 submission_limit:
     amount: -1
