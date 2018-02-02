@@ -59,8 +59,16 @@
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(ret,1);
-        CU_ASSERT_EQUAL(stats.malloc.called,1);
-        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        if (stats.malloc.called != 1) {
+            CU_FAIL();
+            push_info_msg(_("You didn't call malloc()."));
+        }
+
+        if (stats.free.called != 1) {
+            CU_FAIL();
+            push_info_msg(_("You didn't call free()."));
+        }
 
         if (stats.malloc.last_params.size != 256) {
             CU_FAIL();

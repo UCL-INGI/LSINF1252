@@ -1,6 +1,6 @@
 #!/bin/bash
 
-getinput "make_calc_simple" > student/Makefile.tpl
+#getinput "make_calc_simple" > student/Makefile.tpl
 
 parsetemplate --output student/Makefile student/Makefile.tpl
 
