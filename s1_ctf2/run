@@ -3,22 +3,13 @@
 g++ main.cpp
 last=$(getinput @username | sha256sum)
 
-f=$(echo oboroxx | sha256sum)
-last=$(./a.out $f $last)
-
-f=$(echo systeminfocestgenial | sha256sum)
-last=$(./a.out $f $last)
-
-f=$(echo batman | sha256sum)
-last=$(./a.out $f $last)
-
-f=$(echo bisounours | sha256sum)
-last=$(./a.out $f $last)
-
-f=$(echo foobar | sha256sum)
-last=$(./a.out $f $last)
+for i in {1..5}
+do
+	last=$(echo $last | sha256sum)
+done
 
 rep=$(getinput q1)
+
 if [ "$rep" == "$last" ]
 then
 	feedback-result success
