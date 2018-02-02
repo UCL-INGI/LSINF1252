@@ -19,14 +19,15 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S2] Bit setting - TO REVIEW'
 network_grading: false
 order: 16
 problems:
     q1:
+        type: code
         language: c
         header: |-
             Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *val*.
@@ -37,10 +38,57 @@ problems:
                 #include <stdbool.h>
                 uint64_t set_bit(uint64_t x, int pos, bool val) {
         name: ''
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        visible: true
+        type: 1
+    '2':
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+        visible: true
+        description: ''
+    '3':
+        id: not_compile
+        visible: true
+        type: 1
+        name: Not compile
+        description: You code does not compile.
+    '4':
+        name: Memory Exceeded
+        description: ''
+        visible: true
+        id: memory
+        type: 1
+    '5':
+        id: sigfpe
+        visible: true
+        description: ''
+        name: Floating Point Exception
+        type: 1
+    '6':
+        id: double_free
+        description: Your code produced a double free.
+        type: 1
+        visible: true
+        name: Double free
+    '7':
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        type: 1
+        visible: true
+    '0':
+        name: S2
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0
