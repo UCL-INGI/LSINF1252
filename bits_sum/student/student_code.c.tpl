@@ -1,8 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include"student_code.h"
 
-int myfunc(int myargs) {
-@    @problem_id@@
+uint8_t nbits(uint32_t n)
+{
+@    @q1@@
 }
-
-
