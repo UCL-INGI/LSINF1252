@@ -39,11 +39,11 @@ submission_limit:
     period: -1
 tags:
     '0':
+        id: timeout
         name: Timeout
         visible: true
         type: 1
         description: Your code exceeds the maximum allowed time.
-        id: timeout
     '1':
         id: sigsegv
         description: ''
@@ -57,11 +57,11 @@ tags:
         visible: true
         description: You code does not compile.
     '3':
+        description: ''
         name: Memory Exceeded
         id: memory
         visible: true
         type: 1
-        description: ''
     '4':
         name: Floating Point Exception
         description: ''
@@ -91,5 +91,11 @@ tags:
         description: ''
         visible: true
         type: 2
+        id: ''
+    '9':
+        visible: true
+        type: 2
+        description: Usage of malloc()
+        name: Malloc
         id: ''
 weight: 1.0
