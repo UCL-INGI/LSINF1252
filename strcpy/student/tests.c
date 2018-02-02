@@ -34,10 +34,12 @@ void test_strcpy_return() {
   int mal = malloced((void*) ret);
   CU_ASSERT_TRUE(mal);
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-  if (mal){
-      int alloc = malloc_allocated();
-      printf("MALOCCED : %d", alloc);
-      if(alloc != strlen(src)+1){
+  if (mal) {
+      int malloc_size_ok = stats.malloc.last_params.size == strlen(src)+1;
+      CU_ASSERT_TRUE(malloc_size_ok);
+      /*int alloc = malloc_allocated();
+      printf("MALOCCED : %d", alloc);*/
+      if(!malloc_size_ok){
           CU_FAIL("wrong malloc size");
           push_info_msg(_("The allocated memory has not the correct size."));
           set_tag("malloc_fail");
