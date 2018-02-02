@@ -14,20 +14,15 @@ network_grading: false
 problems:
     q1:
         language: c
-        header: |-
-            Write the complete file containing the function main, including the *#includes*. This program will output all uneven arguments given.
+        header: |
+            Write a complete C program containing a *main*. Your program should print one argument out of two (starting with the first), and return 0.
 
-            e.g. ./myProg a b c d e f g
+            Example :
 
-            will output
+            ..code-block:: console
 
-            a
-
-            c
-
-            e
-
-            g
+                ./myProg a b c d e f g
+                a c e g
         name: ''
         type: code
 stored_submissions: 0
