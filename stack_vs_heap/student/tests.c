@@ -38,12 +38,12 @@ void test_sum3(){
   CU_ASSERT_EQUAL(r2, a2+b2);
   if (r != a+b){
     char msg[80];
-    sprintf(msg, _("Expected value: %d. Received value: %i"), a+b,result);
+    sprintf(msg, _("Expected value: %d. Received value: %i"), a+b,r);
     push_info_msg(msg);
   }
   if (r2 != a2+b2){
     char msg[80];
-    sprintf(msg, _("Expected value: %d. Received value: %i"), a2+b2,result);
+    sprintf(msg, _("Expected value: %d. Received value: %i"), a2+b2,r2);
     push_info_msg(msg);
   }
 }
@@ -51,6 +51,6 @@ void test_sum3(){
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS();
+    BAN_FUNCS(set_tag);
     RUN(test_sum2, test_sum3);
 }
