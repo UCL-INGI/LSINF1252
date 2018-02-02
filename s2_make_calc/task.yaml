@@ -34,7 +34,7 @@ problems:
         header: |-
             Unfortunately, the source folder was lost but you still have access to the object files.
 
-            Write a *Makefile* rule to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``.
+            Write a *Makefile* rule to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``. That is, you want to link the object files into the executable.
 
             **Hints:** You do not need to write the rules for ``operations.o`` and ``calc.o``. Do not forget the prerequisites of your rule.
         language: Makefile
