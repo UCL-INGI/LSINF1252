@@ -5,38 +5,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S3] Makefile more basics - multiple choice questions'
 network_grading: false
 order: 32
 problems:
-    q1:
-        multiple: true
-        choices:
-        -   valid: true
-            text: gcc -o test test.o -lcunit
-        -   text: gcc -c test.o -lcunit
-            valid: true
-        -   text: gcc -o test.o
-            feedback: 'The name of the executable is missing and the '
-        name: Linking
-        header: Select all *correct* answers related to the linking of the `CUnit`
-            library in a Makefile recipe.
-        limit: 0
-        type: multiple_choice
-    q2:
-        answer: '  valgrind --leak-check=full --show-leak-kinds=all program'
-        type: match
-        header: |-
-            You want to check for leaks in your code ``program`` with valgrind. What option(s) do you use to report all possible memory leaks of ``program`` in full detail?
-
-            Write the whole command you want to output, for instance     :
-
-            ``valgrind --option-name program``
-        name: ''
     m1:
+        answer: $(CC)
+        type: match
+        name: Using a variable in a Makefile
         header: |-
             In your Makefile, you have the following variable definition:
 
@@ -45,8 +24,29 @@ problems:
                 CC = gcc
 
             What do you type to use it in other parts of your Makefile?
-        answer: $(CC)$
-        name: Variables
+    q1:
+        choices:
+        -   text: gcc -o test test.o -lcunit
+            valid: true
+        -   valid: true
+            text: gcc -c test.o -lcunit
+        -   text: gcc -o test.o
+            feedback: 'The name of the executable is missing and the '
+        limit: 0
+        header: Select all *correct* answers related to the linking of the `CUnit`
+            library in a Makefile recipe.
+        name: Linking
+        multiple: true
+        type: multiple_choice
+    q2:
+        answer: '  valgrind --leak-check=full --show-leak-kinds=all program'
+        name: ''
+        header: |-
+            You want to check for leaks in your code ``program`` with valgrind. What option(s) do you use to report all possible memory leaks of ``program`` in full detail?
+
+            Write the whole command you want to output, for instance     :
+
+            ``valgrind --option-name program``
         type: match
 stored_submissions: 0
 submission_limit:
@@ -54,9 +54,9 @@ submission_limit:
     period: -1
 tags:
     '0':
+        id: make
         name: make & Makefile
         type: 0
-        id: make
         description: Tasks related to the make task runner for targets described in
             Makefile.
         visible: false

@@ -75,7 +75,7 @@ void test_empty_file() {
 
 
 /*
- * Test with some bytes in the file
+ * Test permission
  */
 void test_file_permission() {
     set_test_metadata("q1", _("Test if permissions are equal"), 1);

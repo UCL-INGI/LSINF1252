@@ -18,17 +18,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
-name: '[S2] Leftist bits'
+name: '[S2] Leftist bits - REVIEWED'
 network_grading: false
 order: 14
 problems:
     q1:
-        language: c
-        name: ''
         type: code
+        language: c
         header: |-
             Write the body of a function *get_3_leftmost_bits* that returns the 3 strongest bits of *x*. For instance, with *x=0b11011001...*, the function should return a *uint8_t* containing 0b00000110.
 
@@ -36,9 +35,58 @@ problems:
 
                 #include <stdint.h>
                 uint8_t get_3_leftmost_bits(uint32_t x) {
+        name: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: timeout
+        name: Timeout
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        id: sigsegv
+        description: ''
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        id: banned_funcs
+        description: You use some banned functions.
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
+        name: S2
+        description: ''
+        type: 2
+        visible: true
+        id: ''
 weight: 1.0

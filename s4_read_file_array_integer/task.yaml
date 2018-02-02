@@ -1,315 +1,22 @@
-/run: |
-    #!/bin/python3
-
-    # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
-    # Auteurs : Mathieu Xhonneux, Anthony Gégo
-    # Licence : GPLv3
-
-    import subprocess, shlex, re, os, yaml
-    from inginious import feedback, rst, input
-
-    # Switch working directory to student/
-    os.chdir("student")
-
-    # Fetch and save the student code into a file for compilation
-    input.parse_template("student_code.c.tpl", "student_code.c")
-
-    # Compilation
-    p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    make_output = p.communicate()[0].decode('utf-8')
-    # If compilation failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_tag("not_compile", True)
-        feedback.set_global_result("failed")
-        feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
-        feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
-        exit(0)
-    else:
-        feedback.set_global_result("success")
-        feedback.set_global_feedback("- Votre code compile.\n")
-
-    # Parse banned functions
-    try:
-        banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-        banned_funcs = list(filter(None, banned_funcs))
-    except IndexError:
-        banned_funcs = []
-
-    if banned_funcs:
-        p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-        readelf_output = p.communicate()[0].decode('utf-8')
-        for func in banned_funcs:
-            if re.search("UND {}\n".format(func), readelf_output):
-                feedback.set_tag("banned_funcs", True)
-                feedback.set_global_result("failed")
-                feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
-                exit(0)
-
-
-    # Remove source files
-    subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
-
-    LANG = input.get_input('@lang')
-
-    # Run the code in a parallel container
-    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    p.communicate()
-
-    # If run failed, exit with "failed" result
-    if p.returncode:
-        feedback.set_global_result("failed")
-        if p.returncode == 256-8:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
-            feedback.set_tag("sigfpe", True)
-        elif p.returncode == 256-11:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
-        elif p.returncode == 252:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
-            feedback.set_tag("memory", True)
-        elif p.returncode == 253:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
-        else:
-            montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
-        feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
-        exit(0)
-    #elif run_output:
-    #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
-
-    # Comment to run the tests
-    #feedback.set_global_feedback("- **Cette note n'est pas finale.** Une série de tests sera exécutée sur votre code après l'examen.\n", True)
-    #exit(0)
-
-    # Fetch CUnit test results
-    results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-    results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
-
-
-    # Produce feedback
-    if all([r['code'] == 'SUCCESS' for r in results]):
-        feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
-    else:
-        feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
-
-    score = 0
-    total = 0
-    tests_result = {}
-
-    for test in results:
-        total += test['weight']
-        for tag in test['tags']:
-            if tag != "":
-                feedback.set_tag(tag, True)
-        if test['code'] == 'SUCCESS':
-            score += test['weight']
-            feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
-                    test['pid'], True)
-            tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
-        else:
-            feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
-                    test['pid'], True)
-            tests_result[test['pid']] = False
-
-    for pid, result in tests_result.items():
-        if result:
-            feedback.set_problem_result("success", pid)
-        else:
-            feedback.set_problem_result("failed", pid)
-
-    with open("../task.yaml", 'r') as stream:
-        problems = yaml.load(stream)['problems']
-
-        for name, meta in problems.items():
-            if meta['type'] == 'match':
-                answer = input.get_input(name)
-                if answer == meta['answer']:
-                    feedback.set_problem_result("success", name)
-                    feedback.set_problem_feedback("Votre réponse est correcte. (1/1 pts)", name, True)
-                    score += 1
-                else:
-                    feedback.set_problem_result("failed", name)
-                    feedback.set_problem_feedback("Votre réponse est incorrecte. (0/1 pts)", name, True)
-
-                total += 1
-
-    score = 100*score/(total if not total == 0 else 1)
-    feedback.set_grade(score)
-    feedback.set_global_result("success" if score >= 50 else "failed")
-/student/tests.c: |
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    /*
-     * Generate a file named "file.txt".
-     * The content is the integers in range [0, n[
-     * The sum of integers in the file is returned.
-     */
-    int gen_file(int n){
-        int fd = open("file.txt",O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR);
-        if(fd == -1) {
-            CU_FAIL(_("Error, can not initialise test file"));
-        }
-        int array[n];
-        int i = 0;
-        int sum = 0;
-        for (i = 0; i < n; i++){
-            array[i]=i;
-            sum+=i;
-            if (write(fd, (void *) &array[i], sizeof(int)) == -1){
-                CU_FAIL(_("Error, can not initialise test file"));
-            }
-        }
-        if (close(fd) == -1)
-            CU_FAIL(_("Error, can not initialise test file"));
-        return sum;
+/student/solution.c.sol: |+
+    int fd = open(filename, O_RDONLY);
+    if(fd == -1) {
+        return -1;
     }
-
-    void test_open_fail() {
-        set_test_metadata("q1", _("Return -1 when open fails"), 1);
-        system("rm file.txt"); //Be sure the file does not exist
-        int ret = 0;
-
-        //Test with open fail
-        monitored.open = true;
-        failures.open = FAIL_ALWAYS;
-        failures.open_ret = -1;
-
-        SANDBOX_BEGIN; //
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != -1){
-            push_info_msg(_("When open() fails, your code does not return -1."));
-            CU_FAIL("");
-        }
+    int sum = 0;
+    int n2 = 0;
+    int r = 1;
+    while(r >= 1){
+        sum = sum + n2;
+        r = read(fd, (void *) &n2, sizeof(int));
+        if(r == -1)
+            return -2;
     }
+    if (close(fd) < 0)
+        return -3;
 
-    void test_count() {
-        set_test_metadata("q1", _("Calling open, read and close"), 1);
-        gen_file(13);
-        monitored.open = true;
-        monitored.close = true;
+    return sum;
 
-        SANDBOX_BEGIN;
-        myfunc("file.txt");
-        SANDBOX_END;
-
-        if(stats.open.last_return <= 2){
-            push_info_msg(_("You didn't call open correctly."));
-            CU_FAIL("");
-        }
-
-        if (stats.open.called != 1) {
-            push_info_msg(_("Your number of calls to open is not 1."));
-            CU_FAIL("");
-        }
-        if (stats.close.called != 1) {
-            push_info_msg(_("Your number of calls to close is not 1."));
-            CU_FAIL("");
-        }
-
-        set_tag("open");
-    }
-
-    void test_no_integer() {
-        set_test_metadata("q1", _("Test without any integers."), 1);
-        int sum = gen_file(0); //Empty file
-        int ret = 0;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != sum){
-            push_info_msg(_("When the file does not contain any integers, your code does not return 0."));
-            CU_FAIL();
-        }
-    }
-
-    void test_some_integers() {
-        set_test_metadata("q1", _("Test with some integers."), 1);
-        int sum = gen_file(300);
-        int ret = 0;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != sum){
-            push_info_msg(_("When the file contains some integers, your code does not return the correct sum."));
-            CU_FAIL();
-        }else{
-            set_tag("sum");
-        }
-    }
-
-    void test_some_integers_fail_read() {
-        set_test_metadata("q1", _("Test when read() fails"), 1);
-        gen_file(9);
-        int ret = 0;
-
-        monitored.read = true;
-        failures.read = FAIL_THIRD;
-        failures.read_ret = -1;
-
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if (ret != -2){
-            push_info_msg(_("When a read() fails, your code does not return -2."));
-            set_tag("failure_handling");
-            CU_FAIL();
-        }
-    }
-
-    void test_close() {
-        set_test_metadata("q1", _("Test close()"), 1);
-        gen_file(0);
-
-        monitored.close = true;
-        monitored.open = true;
-        SANDBOX_BEGIN;
-        myfunc("file.txt");
-        SANDBOX_END;
-
-        int close_ok = 0;
-        if (stats.close.called == 0){
-            push_info_msg(_("You did not close() the file."));
-            close_ok++;
-            CU_FAIL();
-        }if(stats.open.last_return != stats.close.last_params.fd){
-            push_info_msg(_("The close() does not close the file you opened before."));
-            close_ok++;
-            CU_FAIL();
-        }
-
-        //We fail the close()
-        gen_file(0);
-        int ret = 0;
-        monitored.close = true;
-        failures.close = FAIL_FIRST;
-        failures.close_ret = -1;
-        SANDBOX_BEGIN;
-        ret = myfunc("file.txt");
-        SANDBOX_END;
-
-        if(ret != -3){
-            push_info_msg(_("When close() fails, your code does not return -3."));
-            close_ok++;
-            CU_FAIL();
-        }
-        if(close_ok == 0){
-            set_tag("close");
-        }
-    }
-
-    int main(int argc,char** argv){
-        BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-        RUN(test_count, test_open_fail, test_no_integer, test_some_integers, test_some_integers_fail_read, test_close);
-    }
 accessible: true
 author: Olivier Martin
 context: |-
@@ -327,15 +34,16 @@ evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
+    output: '2'
 name: '[S5] File integers reading - REVIEWED'
 network_grading: false
 order: 41
 problems:
     q1:
-        type: code
+        language: c
         name: Write your code here
+        type: code
         header: |-
             .. code-block:: java
 
@@ -347,7 +55,6 @@ problems:
                  *       return -3 if close() fails.
                  */
                 int sum_file(char *filename) {
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -356,80 +63,80 @@ tags:
     '0':
         name: Close
         type: 0
+        id: close
         visible: true
         description: This tag validate that your close are correctly performed.
-        id: close
     '1':
-        type: 0
-        visible: true
-        name: Open
+        id: open
         description: This tag validate you are able to open a file and handle errors
             with open().
-        id: open
-    '2':
-        description: The student has correctly computed and returned the sum.
-        id: sum
+        name: Open
         visible: true
         type: 0
+    '2':
+        type: 0
+        description: The student has correctly computed and returned the sum.
+        id: sum
         name: Sum
-    '10':
         visible: true
+    '10':
+        id: failure_handling
         type: 1
+        visible: true
+        description: You do not manage failures properly during read operations.
+        name: Failure handling
+    '3':
         description: You use some banned functions.
         name: Banned functions
         id: banned_funcs
-    '3':
-        name: Double free
-        type: 1
         visible: true
-        description: Your code produced a double free.
-        id: double_free
-    '4':
-        description: ''
         type: 1
+    '4':
+        description: Your code produced a double free.
+        visible: true
+        type: 1
+        id: double_free
+        name: Double free
+    '5':
+        visible: true
+        description: ''
         id: sigfpe
         name: Floating Point Exception
-        visible: true
-    '5':
-        id: memory
-        name: Memory Exceeded
         type: 1
-        description: ''
-        visible: true
     '6':
-        id: not_compile
+        id: memory
+        description: ''
         type: 1
-        description: You code does not compile.
+        visible: true
+        name: Memory Exceeded
+    '7':
+        id: not_compile
         name: Not compile
         visible: true
-    '7':
-        description: ''
-        id: sigsegv
-        name: Segmentation Fault
-        visible: true
         type: 1
+        description: You code does not compile.
     '8':
-        name: Timeout
-        id: timeout
+        id: sigsegv
         type: 1
-        description: Your code exceeds the maximum allowed time.
+        name: Segmentation Fault
+        description: ''
         visible: true
     '9':
-        id: failure_handling
-        description: You do not manage failures properly during read operations.
-        visible: true
-        name: Failure handling
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
         type: 1
-    '11':
-        name: S5
         visible: true
-        description: ''
+        name: Timeout
+    '11':
         type: 2
+        visible: true
+        name: S5
+        description: ''
         id: ''
     '12':
-        visible: true
-        name: File
-        type: 2
         description: ''
+        name: File
+        visible: true
+        type: 2
         id: ''
 weight: 1.0
