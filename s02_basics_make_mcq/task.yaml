@@ -30,7 +30,7 @@ problems:
         name: Find the target
         type: multiple_choice
     mcq2:
-        limit: 4
+        limit: 2
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
         choices:
@@ -51,28 +51,29 @@ problems:
         -   text: The recipe is a file that is used as input to create the target.
         -   text: The recipe is the name of a file.
         type: multiple_choice
-        limit: 4
+        limit: 2
         name: The recipe
         multiple: true
         header: Please select all *correct* answers related to the *recipe* of a Makefile
             rule.
     mcq4:
         choices:
-        -   text: |4-
+        -   valid: true
+            text: |4-
 
                 .. code-block:: console
 
                         clean:
                         @rm -f src/*.o
             feedback: There is a missing indentation.
-        -   valid: true
-            text: |4-
+        -   text: |4-
 
                 .. code-block:: console
 
                     clean:
                     [tab]@rm -f src/*.o
-        -   text: |4
+        -   valid: true
+            text: |4
 
                 .. code-block:: console
 
@@ -86,6 +87,7 @@ problems:
 
                     clean
                     [tab]@rm -f src/*.o
+            valid: true
             feedback: There is a missing colon.
         -   text: |4-
 
@@ -95,6 +97,7 @@ problems:
                         [spaces]@rm -f src/*.o
             feedback: The recipe in a Makefile has to be intended with a tab and not
                 spaces.
+            valid: true
         -   feedback: There is a missing colon. There is a missing indendation.
             text: |4-
 
@@ -102,9 +105,10 @@ problems:
 
                         clean
                         @rm -f src/*.o
+            valid: true
         multiple: true
         header: |-
-            Choice all *correct* Makefile *rules*.
+            Choice all *wrong* Makefile *rules*.
 
             *Note:*
 

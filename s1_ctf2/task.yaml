@@ -1,7 +1,8 @@
 accessible: true
 author: Tom Rousseaux
-context: Téléchargez `cette archive <>`_, mettez son contenu dans un dossier de votre
-    choix, lisez FirstMission et respectez les consignes.
+context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf2/CTF2.tar.gz>`_,
+    mettez son contenu dans un dossier de votre choix, lisez FirstMission et respectez
+    les consignes.
 environment: cpp
 evaluate: best
 groups: false
