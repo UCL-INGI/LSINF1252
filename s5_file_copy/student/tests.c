@@ -146,6 +146,26 @@ void test_file_write_fail() {
     }
 }
 
+void test_stat_fail() {
+    set_test_metadata("q1", _("Test return value when stat() fails"), 1);
+    gen_file(125);
+    int ret = 0;
+    
+    monitored.stat = true;
+    failures.stat = FAIL_ALWAYS;
+    failures.stat_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt", "newfile.txt");
+    SANDBOX_END;
+
+    if (ret != -1){
+        push_info_msg(_("You do not return -1 when a fail occurs with stat()"));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+
 /*
  * Test with some bytes in the file with close()
  */
@@ -214,6 +234,6 @@ void test_original_integrity() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
-    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_original_integrity, test_close);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose, fstat);
+    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_stat_fail, test_original_integrity, test_close);
 }

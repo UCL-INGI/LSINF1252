@@ -10,7 +10,7 @@ limits:
     time: '30'
 name: '[S03] Makefile more basics - multiple choice questions'
 network_grading: false
-order: 36
+order: 35
 problems:
     q1:
         multiple: true

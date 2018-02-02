@@ -5,9 +5,10 @@
 #include "CTester/CTester.h"
 
 void test_exist_not() {
+    set_test_metadata("q1", _("Test file does not exist"), 1);
+
     // We run multiples times the test to avoid student returning randomly 1 or 0.
     for(int i = 0; i < 4; i++){
-        set_test_metadata("q1", _("Test file does not exist"), 1);
         int ret = 0;
 
         system("rm file.txt");
@@ -25,9 +26,10 @@ void test_exist_not() {
 }
 
 void test_exist() {
+    set_test_metadata("q1", _("Test file exists"), 1);
+
     // We run multiples times the test to avoid student returning randomly 1 or 0.
     for(int i = 0; i < 4; i++){
-        set_test_metadata("q1", _("Test file exists"), 1);
         int ret = 0;
 
         system("touch file.txt");
@@ -45,6 +47,6 @@ void test_exist() {
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose);
+    BAN_FUNCS(system, fopen, fread, fwrite, fclose, stat);
     RUN(test_exist_not, test_exist);
 }
