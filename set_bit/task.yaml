@@ -15,20 +15,19 @@ context: |-
 
     * *bool* (from <stdbool.h>), which is 1-bit long, hence either 0 or 1
     * *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>).
-environment: cpp
+environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
-name: '[S2] Bit setting'
+    memory: '100'
+    output: '2'
+name: '[S2] Bit setting - TO REVIEW'
 network_grading: false
+order: 16
 problems:
     q1:
         language: c
-        name: ''
-        type: code
         header: |-
             Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *val*.
 
@@ -37,10 +36,11 @@ problems:
                 #include <stdint.h>
                 #include <stdbool.h>
                 uint64_t set_bit(uint64_t x, int pos, bool val) {
+        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 16

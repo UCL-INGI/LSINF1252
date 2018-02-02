@@ -20,29 +20,30 @@ problems:
         header: |-
             For this subproblem, you are asked to implement the comparison function which rules the order relation of the list.
 
+            Write the body of the function *compare*.
+
             .. code-block:: c
 
                 /*
-                * @return: 0 if equals, negative number if @b is greater and positive number otherwise
+                * @return: 0 if equals, negative number if @b is greater,
+                * and positive number otherwise
                 */
-                int compare(char a, char b){
-                    //Your code will be inserted here
-                }
+                int compare(char a, char b) {
         type: code
     insert:
         name: Insert
         type: code
-        header: |-
-            For this subproblem, you have the template of the structure node:
+        header: |
+            Given the following linked list structure :
 
             .. code-block:: c
 
                 typedef struct node{
                     char val;
-                    node_t* next;
+                    node_t *next;
                 } node_t;
 
-            Starting from this structure, you are asked to implement the following function
+            Write the body of the function *insert*.
 
             .. code-block:: c
 
@@ -52,9 +53,7 @@ problems:
                 * @head: first node of the list, head != NULL
                 * @return: 0 if success, -1 otherwise
                 */
-                int insert(node_t** head, char val, int (*cmp)(char,char)){
-                    //Your code will be inserted here
-                }
+                int insert(node_t **head, char val, int (*cmp)(char,char)) {
         language: c
 stored_submissions: 0
 submission_limit:
