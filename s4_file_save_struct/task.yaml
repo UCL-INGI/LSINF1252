@@ -94,11 +94,13 @@
 
     void test_no_file() {
         set_test_metadata("q1", _("Test writing the struct, no file already created"), 2);
+        system("rm file.txt");
         _test();
     }
 
     void test_with_file() {
         set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
+        system("rm file.txt");
         system("echo \"FOOBAR\" > file.txt");
         _test();
     }
@@ -107,6 +109,7 @@
         set_test_metadata("q1", _("Test close()."), 1);
         int size = 6;
         point_t* tab = gen_struct(size);
+        system("rm file.txt");
 
         monitored.close = true;
         monitored.open = true;
@@ -155,6 +158,7 @@
         int size = 6;
         point_t* tab = gen_struct(size);
         int ret = 0;
+        system("rm file.txt");
 
         monitored.open = true;
         failures.open = FAIL_FIRST;
@@ -196,6 +200,7 @@
         int size = 6;
         point_t* tab = gen_struct(size);
         int ret = 0;
+        system("rm file.txt");
 
         monitored.write = true;
         failures.write = FAIL_ALWAYS;
@@ -203,7 +208,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
