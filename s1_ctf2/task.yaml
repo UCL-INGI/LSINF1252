@@ -10,7 +10,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S1] Capture The Flag 2'
+name: '[S1] Capture The Flag 2 - REVIEWED'
 network_grading: false
 order: 5
 problems:

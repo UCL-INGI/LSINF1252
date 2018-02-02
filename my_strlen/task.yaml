@@ -1,25 +1,73 @@
 accessible: true
 author: 'Nicolas Rybowski, '
 context: You are asked to implement `strlen <https://linux.die.net/man/3/strlen>`_.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
-name: '[S2] My strlen'
+    time: '30'
+name: '[S2] My strlen - REVIEWED'
 network_grading: false
 order: 11
 problems:
     my_stlren:
         name: my_stlren
-        language: ''
+        language: c
         header: Write here your code for ``my_strlen``
         type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: timeout
+        name: Timeout
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        id: sigsegv
+        name: Segmentation Fault
+        visible: true
+        description: ''
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        description: You use some banned functions.
+        id: banned_funcs
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
+        name: S2
+        type: 2
+        description: ''
+        visible: true
+        id: ''
 weight: 1.0

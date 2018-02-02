@@ -35,7 +35,7 @@ void test(){
 }
 
 int main(int argc,char** argv) {
-    BAN_FUNCS(syetem, set_tag);
+    BAN_FUNCS(system, set_tag);
     RUN(test);
 }
 

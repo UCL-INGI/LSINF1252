@@ -85,4 +85,10 @@ tags:
         type: 2
         visible: true
         id: ''
+    '8':
+        name: Pointer
+        description: Task about pointers and their use
+        visible: true
+        type: 2
+        id: ''
 weight: 1.0

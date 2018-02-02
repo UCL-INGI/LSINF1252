@@ -128,4 +128,10 @@ tags:
         type: 2
         visible: true
         id: ''
+    '8':
+        name: S3
+        description: ''
+        type: 2
+        visible: true
+        id: ''
 weight: 1.0

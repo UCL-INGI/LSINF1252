@@ -1,1 +1,1 @@
-int file_exists(char* filename);
+unsigned int stexp();

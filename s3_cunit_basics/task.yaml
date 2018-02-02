@@ -1,33 +1,39 @@
-accessible: true
+accessible: false
 author: ''
 context: '*Estimated time: 5 minutes*'
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S3] Cunit basics'
 network_grading: false
 order: 34
 problems:
     q1:
-        name: CUnit linker
-        type: match
+        answer: -lcunit
         header: What is the name of the library you need to link when you compile
             a unit test with ``CUnit``?
-        answer: -lcunit
+        name: CUnit linker
+        type: match
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: CUnit
         id: cunit
+        visible: true
         type: 0
+        name: CUnit
         description: |
             A unit testing framework for C
-        visible: false
+    '1':
+        name: S3
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0

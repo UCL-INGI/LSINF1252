@@ -1,7 +1,7 @@
 accessible: true
-author: Mathieu Xhonneux
+author: Mathieu Xhonneux, Nicolas Rybowski
 context: |-
-    We have a linked list, built with *struct node*.
+    We have a linked list, built with ``struct node``.
 
     .. code-block:: c
 
@@ -21,15 +21,20 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S3] Filtering a linked list'
 network_grading: false
 order: 30
 problems:
-    filter:
+    includes:
+        header: Here you can add your includes for this task. We strongly recommend
+            you to read the manpage given in question 2 !
+        language: ''
         type: code
+        name: Includes
+    filter:
         header: |-
             We want to filter this list and only take the elements with a pair index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
@@ -47,11 +52,60 @@ problems:
                  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
                  */
                 struct node *pair_filter(struct node *head) {
-        language: c
         name: Filtering
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '1':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        visible: true
+        type: 1
+    '2':
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+        visible: true
+        description: ''
+    '3':
+        id: not_compile
+        visible: true
+        type: 1
+        name: Not compile
+        description: You code does not compile.
+    '4':
+        description: ''
+        name: Memory Exceeded
+        visible: true
+        id: memory
+        type: 1
+    '5':
+        id: sigfpe
+        visible: true
+        description: ''
+        name: Floating Point Exception
+        type: 1
+    '6':
+        description: Your code produced a double free.
+        id: double_free
+        type: 1
+        visible: true
+        name: Double free
+    '7':
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        type: 1
+        visible: true
+    '0':
+        name: S3
+        visible: true
+        type: 2
+        description: ''
+        id: ''
 weight: 1.0
