@@ -42,6 +42,7 @@ void test_strcpy_return() {
   }
   else {
     push_info_msg(_("The returned pointer is not malloced"));
+    set_tag("malloc_fail");
   }
 
 }
@@ -61,8 +62,10 @@ void test_strcpy_nomem() {
   SANDBOX_END;
 
   CU_ASSERT_PTR_NULL(ret);
-  if (ret)
+  if (ret){
     push_info_msg(_("The return value of your implementation is wrong"));
+    set_tag("malloc_fail");
+  }
 
   free(ret);
 
