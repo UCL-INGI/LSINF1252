@@ -80,7 +80,12 @@ void test_init_node_alloc(){
   CU_ASSERT_EQUAL(stats.malloc.called, 1);
   if (!stats.malloc.called)
     push_info_msg(_("You used more than one call to malloc"));
-
+  if(stats.malloc.last_params.size != sizeof(node_t)) {
+      CU_FAIL("wrong malloc size");
+      push_info_msg(_("The allocated memory has not the correct size."));
+      set_tag("malloc_fail");
+      return;
+  }
   CU_ASSERT_TRUE(malloced((void*) ret));
 
   CU_ASSERT_PTR_NOT_NULL(ret);
