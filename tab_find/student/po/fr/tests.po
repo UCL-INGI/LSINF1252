@@ -1,0 +1,39 @@
+# French translations for LSINF package
+# Traductions françaises du paquet LSINF.
+# Copyright (C) 2018 THE LSINF'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the LSINF package.
+#  <m.xhonneux@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: LSINF 1252\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-02 14:29+0100\n"
+"PO-Revision-Date: 2018-02-02 14:29+0100\n"
+"Last-Translator:  <m.xhonneux@gmail.com>\n"
+"Language-Team: French\n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: tests.c:16
+msgid "Test function tab find"
+msgstr "Test de la fonction tab_find"
+
+#: CTester/CTester.c:118
+msgid "Your code exceeded the maximal allowed execution time."
+msgstr "Votre code a dépassé la limite maximale de temps."
+
+#: CTester/CTester.c:172
+msgid "Your code produced a double free."
+msgstr "Votre code a produit un double free."
+
+#: CTester/CTester.c:109
+msgid "Your code produced a segfault."
+msgstr "Votre code a fait un segfault."
+
+#: tests.c:29
+msgid "Your function does not return the correct index."
+msgstr "Votre code n'a pas renvoyé le bon index."

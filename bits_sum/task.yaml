@@ -14,7 +14,7 @@ context: |-
     To do so, we introduce a new classe of variable type :
 
     * *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>).
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
