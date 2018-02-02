@@ -200,9 +200,9 @@ void test_push_general() {
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
   if (mal){
     //printf("src = %s, name = %s ", src, stack->name);
-    if (!strcmp(src, stack->name)){
+    if (strcmp(src, stack->name)){
       char tmp[100];
-      sprintf(tmp, _("The pushed value differ from the expected one. Expexcted : %s Received : %s "), src, stack->name);
+      sprintf(tmp, _("The pushed value differ from the expected one. Expected : %s Received : %s "), src, stack->name);
       push_info_msg(tmp);
       CU_FAIL();
     }
