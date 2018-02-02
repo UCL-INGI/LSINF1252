@@ -10,6 +10,7 @@ limits:
     memory: '100'
 name: '[S03] Make more basics'
 network_grading: false
+order: 35
 problems:
     m1:
         type: match
@@ -34,4 +35,3 @@ tags:
             Makefile.
         visible: false
 weight: 1.0
-order: 35
