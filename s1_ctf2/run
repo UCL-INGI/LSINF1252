@@ -1,6 +1,5 @@
 #! /bin/bash
 
-g++ main.cpp
 last=$(getinput @username | sha256sum)
 
 for i in {1..5}
