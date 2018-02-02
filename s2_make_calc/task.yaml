@@ -36,7 +36,7 @@ problems:
 
             Write a *Makefile* rule to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``.
 
-            **Hint:** You do not need to write the rules for ``operations.o`` and ``calc.o``.
+            **Hints:** You do not need to write the rules for ``operations.o`` and ``calc.o``. Do not forget the prerequisites of your rule.
         language: Makefile
         name: 'Linking '
 stored_submissions: 0
