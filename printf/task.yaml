@@ -1,26 +1,27 @@
 accessible: true
-author: ''
-context: In this exercise, you will familiarize yourself with the functions *printf*
-    and *sprintf*.
+author: Mathieu Xhonneux
+context: In this exercise, you will familiarize yourself with the functions ``printf(3)``
+    and ``sprintf(3)``.
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
 name: '[S2] Printing data'
 network_grading: false
+order: 7
 problems:
     simple:
-        language: c
         header: Print the string "foo".
         name: Foo
         type: code
+        language: c
     digit:
+        type: code
         name: Digit
         language: ''
-        type: code
         header: Print a number (%d) + text
     unsigned-string:
         header: |-
@@ -31,9 +32,9 @@ problems:
         type: code
         name: Unsigned + string
     sprintf:
+        name: sprintf
         language: c
         type: code
-        name: sprintf
         header: |
             Exemple de sprintf :
 
@@ -50,4 +51,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 7
