@@ -6,9 +6,9 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    time: '30'
     output: '2'
-name: '[S2] Makefile basics - multiple choice questions'
+    time: '30'
+name: '[S2] Makefile basics - multiple choice questions - REVIEWED'
 network_grading: false
 order: 22
 problems:
@@ -18,53 +18,52 @@ problems:
         limit: 2
         choices:
         -   text: The target is the bullseye of a shooting target.
-        -   valid: true
-            text: The target is the name of a file.
-        success_message: 'Bullseye, good job! '
+        -   text: The target is the name of a file.
+            valid: true
         multiple: true
-        name: Find the target
+        success_message: 'Bullseye, good job! '
         type: multiple_choice
+        name: Find the target
     mcq2:
-        limit: 2
-        header: Select all *correct* answers related to the *prerequisite* of a Makefile
-            rule.
-        success_message: Good job!
-        error_message: Try again!
+        multiple: true
         name: What are the prerequisite?
         choices:
         -   valid: true
             text: The prerequisite is a file that is used as input to create the target.
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
-        multiple: true
+        header: Select all *correct* answers related to the *prerequisite* of a Makefile
+            rule.
         type: multiple_choice
-    mcq3:
         error_message: Try again!
+        success_message: Good job!
+        limit: 2
+    mcq3:
         choices:
-        -   valid: true
-            text: A recipe is an action that make carries out.
+        -   text: A recipe is an action that make carries out.
+            valid: true
         -   text: '42'
             feedback: That is the Answer to the Ultimate Question of Life, the Universe,
                 and Everything.
         -   text: The recipe is a file that is used as input to create the target.
         -   text: The recipe is the name of a file.
-        limit: 2
-        multiple: true
         type: multiple_choice
-        name: The recipe
         success_message: Good job!
+        error_message: Try again!
+        name: The recipe
+        multiple: true
         header: Please select all *correct* answers related to the *recipe* of a Makefile
             rule.
+        limit: 2
     mcq4:
-        type: multiple_choice
         choices:
-        -   valid: true
-            text: |4-
+        -   text: |4-
 
                 .. code-block:: console
 
                         clean:
                         @rm -f src/*.o
+            valid: true
         -   text: |4-
 
                 .. code-block:: console
@@ -100,7 +99,8 @@ problems:
                         @rm -f src/*.o
             valid: true
         success_message: Good job!
-        multiple: true
+        limit: 0
+        name: Rules syntax
         header: |-
             Choice all *wrong* Makefile *rules*.
 
@@ -108,14 +108,14 @@ problems:
 
             * ``[tab]`` indicates a tabulation;
             * ``[spaces]`` indicates 8 white spaces.
-        limit: 0
-        name: Rules syntax
+        multiple: true
         error_message: Try again!
+        type: multiple_choice
     match1:
         header: In a Makefile, what is the character you can use to split a long line?
-        type: match
-        name: Break
         answer: \
+        name: Break
+        type: match
     mcq5:
         choices:
         -   valid: true
@@ -124,12 +124,12 @@ problems:
                 indentation.
         -   text: At the beginning of every recipe line, you put no indentation.
         limit: 2
-        error_message: Try again!
-        success_message: Good job!
         header: Choice all the *correct* answers.
+        success_message: Good job!
+        error_message: Try again!
+        name: Recipes indentation
         multiple: true
         type: multiple_choice
-        name: Recipes indentation
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -137,9 +137,9 @@ submission_limit:
 tags:
     '0':
         name: make & Makefile
-        type: 0
+        id: make
         description: Tasks related to the make task runner for targets described in
             Makefile.
-        id: make
+        type: 0
         visible: false
 weight: 1.0
