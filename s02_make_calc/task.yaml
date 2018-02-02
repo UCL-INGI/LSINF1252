@@ -21,27 +21,27 @@ evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
-name: '[S02] Makefile basics - headers and prerequisites'
+    output: '2'
+name: '[S2] Makefile basics - headers and prerequisites'
 network_grading: false
 order: 23
 problems:
     make_calc_simple:
-        name: 'Linking '
-        language: Makefile
-        type: code
         header: Write a *Makefile* to build the executable ``calc`` from both object
             files ``calc.o`` and ``operations.o``.
+        language: Makefile
+        name: 'Linking '
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: make & Makefile
         id: make
         type: 0
+        name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
         visible: false
