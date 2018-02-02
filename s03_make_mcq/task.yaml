@@ -8,7 +8,7 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S03] Makefile more basics - multiple choice questions'
+name: '[S3] Makefile more basics - multiple choice questions'
 network_grading: false
 order: 32
 problems:

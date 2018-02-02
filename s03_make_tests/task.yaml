@@ -89,7 +89,7 @@ limits:
     memory: '100'
     time: '30'
     output: '2'
-name: '[S03] Makefile and testing'
+name: '[S3] Makefile and testing'
 network_grading: false
 order: 33
 problems:

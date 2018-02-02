@@ -23,7 +23,7 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S02] Makefile basics - prerequisites'
+name: '[S2] Makefile basics - prerequisites'
 network_grading: false
 order: 23
 problems:
