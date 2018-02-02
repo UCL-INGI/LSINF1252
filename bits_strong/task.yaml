@@ -1,3 +1,28 @@
+/student/tests.c: |+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    void test_myfunc_ret() {
+        set_test_metadata("q1", _("Test unset_strong_bits"), 1);
+        uint32_t binaryNumber = 0b1011011101;
+        uint32_t binaryNumberReturned;
+
+        SANDBOX_BEGIN;
+        binaryNumberReturned = unset_strong_bit(binaryNumber);
+        SANDBOX_END;
+        CU_ASSERT_EQUAL(binaryNumberReturned,0b11011101);
+        if ( binaryNumberReturned!=0b11011101)
+            push_info_msg(_("unset_strong_bits returns the wrong value"));
+
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS();
+        RUN(test_myfunc_ret);
+    }
+
 accessible: true
 author: Arthur van Stratum
 context: |-
@@ -18,16 +43,15 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S2] Killing strong bits'
 network_grading: false
+order: 19
 problems:
     q1:
         language: c
-        name: ''
-        type: code
         header: |-
             Write the body of a function *unset_strong_bit*, which sets to 0 the strongest bit set to 1 it founds, and does nothing if there's no bit set to 0.
 
@@ -37,10 +61,11 @@ problems:
 
                 #include <stdint.h>
                 uint32_t unset_strong_bit(uint32_t x) {
+        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags: {}
 weight: 1.0
-order: 19

@@ -3,7 +3,7 @@
 #include "CTester/CTester.h"
 
 void test_myfunc_ret() {
-	set_test_metadata("q", _("Test unset_strong_bits"), 1);
+	set_test_metadata("q1", _("Test unset_strong_bits"), 1);
 	uint32_t binaryNumber = 0b1011011101;
 	uint32_t binaryNumberReturned;
 
