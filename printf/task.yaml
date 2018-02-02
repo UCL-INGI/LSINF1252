@@ -1,3 +1,76 @@
+/student/student_code.c.tpl: |
+    #include<stdlib.h>
+    #include<stdio.h>
+
+    void print_foo() {
+    @    @simple@@
+    }
+
+    void print_digit(int number) {
+    @    @digit@@
+    }
+
+    void format_str(char *buffer, unsigned int d, char *name, char initial) {
+    @    @sprintf@@
+    }
+/student/tests.c: |
+    #include <stdlib.h>
+    #include <fcntl.h>
+    #include "CTester/CTester.h"
+    #include "student_code.h"
+
+
+    void test_foo() {
+        set_test_metadata("simple", _("Test simple printf"), 1);
+
+        SANDBOX_BEGIN;
+        print_foo();
+        SANDBOX_END;
+
+        char buf[4];
+        int n = read(stdout_cpy, buf, 4);
+        CU_ASSERT_EQUAL(n, 4);
+        CU_ASSERT_TRUE(!strncmp(buf, "foo\n", 4));
+    }
+
+    void test_digit() {
+        set_test_metadata("digit", _("Test digit formatting"), 1);
+
+        SANDBOX_BEGIN;
+        print_digit(21);
+        SANDBOX_END;
+
+        char buf[24];
+        int n = read(stdout_cpy, buf, 24);
+        CU_ASSERT_EQUAL(n, 24);
+        CU_ASSERT_TRUE(!strncmp(buf, "The magic number is 21.\n", 24));
+
+        SANDBOX_BEGIN;
+        print_digit(42);
+        SANDBOX_END;
+
+        n = read(stdout_cpy, buf, 24);
+        CU_ASSERT_EQUAL(n, 24);
+        CU_ASSERT_TRUE(!strncmp(buf, "The magic number is 42.\n", 24));
+    }
+
+    void test_sprintf() {
+        set_test_metadata("sprintf", _("Test sprintf"), 1);
+
+        char buf[50];
+        format_str(buf, 42, "Olivier", 'B');
+        CU_ASSERT_TRUE(!strncmp(buf, "Mister Olivier B. has 42 eggs", 30));
+
+        format_str(buf, 1, "A", 'G');
+        CU_ASSERT_TRUE(!strncmp(buf, "Mister A G. has 1 eggs", 23));
+    }
+
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS(fprintf);
+        RUN(test_foo, test_digit, test_sprintf);
+    }
 accessible: true
 author: Mathieu Xhonneux
 context: In this exercise, you will familiarize yourself with the functions ``printf(3)``
@@ -18,7 +91,7 @@ problems:
         header: |-
             The function ``printf`` writes data to the standard output stream (*stdout*).
 
-            Write the body of the function *print_foo* which will print "foo\n" (without the quotes, the symbol '\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
+            Write the body of the function *print_foo* which will print "foo\\n" (without the quotes, the symbol '\\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
 
             .. code-block:: c
 
@@ -26,6 +99,7 @@ problems:
         name: Foo
         language: c
     digit:
+        name: Digital
         language: c
         header: |-
             ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
@@ -39,7 +113,6 @@ problems:
                  */
                 void print_digit(int number) {
         type: code
-        name: Digital
     example:
         name: Floating away
         header: |
@@ -53,28 +126,23 @@ problems:
                 printf("pi = %.4f", PI);
         type: match
         answer: '3.1415'
-    unsigned-string:
-        header: |-
-            Print an unsigned char (%u) + string.
-
-            Add QCM : what happens if we use %d with a char n > 127 ?
-        name: Unsigned + string
-        language: c
-        type: code
     sprintf:
         type: code
         name: sprintf
         language: c
         header: |
-            Exemple de sprintf :
+            ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
 
-            écrire dans buffer :
-
-            sprintf(buffer, "Mister %s %c has %d eggs") -> Mister Olivier B. has 42 eggs
+            Write the body of the function *format_str*.
 
             .. code-block:: c
 
-                char *format(char *buffer, unsigned int d, char *name, char initial) {
+                /* format_str, example:
+                 * format_str(buf, 42, "Olivier", 'B') will write into buf
+                 * the string "Mister Olivier B. has 42 eggs" (no line feed)
+                 * The given buffer is guaranteed to be big enough
+                 */
+                void format_str(char *buffer, unsigned int d, char *name, char initial) {
 stored_submissions: 0
 submission_limit:
     amount: -1

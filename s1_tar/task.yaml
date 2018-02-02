@@ -1,7 +1,7 @@
 accessible: true
 author: Tom Rousseaux
 context: |
-    You have to **compress** the following file system
+    You have to **compress** (*.tar.gz* file) the following file system
 
     .. code-block:: console
 
@@ -16,16 +16,16 @@ context: |
                 fime2.h
                 file3.h
 
-    For this, use `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.htmlp>`_, feel free to check the arguments of this utility wherever you want.
+    For this, use `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_, feel free to check the arguments of this utility wherever you want.
     You can download the file system `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
-name: '[S1] tar'
+name: '[S1] tar - REVIEWED'
 network_grading: false
 order: 4
 problems:
@@ -41,15 +41,15 @@ submission_limit:
     period: -1
 tags:
     '0':
-        name: S1
-        type: 2
-        description: ''
         visible: true
+        type: 2
+        name: S1
+        description: ''
         id: ''
     '1':
-        type: 2
-        visible: true
-        description: ''
         name: Command line
+        type: 2
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
