@@ -34,16 +34,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '100'
     output: '2'
     time: '30'
-    memory: '100'
 name: '[S3] Basic linked list'
 network_grading: false
 order: 28
 problems:
     init_node:
-        language: c
         name: Node initialisation
+        language: c
         type: code
         header: |
             .. code-block:: c
@@ -56,8 +56,9 @@ problems:
                 */
                 node_t *init_node(int value) {
     add_node:
-        name: Adding a node
         type: code
+        language: c
+        name: Adding a node
         header: |
             .. code-block:: c
 
@@ -70,16 +71,63 @@ problems:
                 * @return: 0 if success, 1 else
                 */
                 int add_node(list_t *list, int value);
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
+    '2':
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        type: 1
+        name: Timeout
+    '3':
+        name: Segmentation Fault
+        visible: true
+        description: ''
+        type: 1
+        id: sigsegv
+    '4':
+        id: not_compile
+        name: Not compile
+        description: You code does not compile.
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: memory
+        name: Memory Exceeded
+        type: 1
+    '6':
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+        description: ''
+        visible: true
+    '7':
+        id: double_free
+        description: Your code produced a double free.
+        visible: true
+        type: 1
+        name: Double free
+    '8':
+        id: banned_funcs
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        visible: true
     '0':
         name: Data structures
-        visible: true
         type: 2
+        visible: true
         description: Task dealing with data structures and linked list
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        name: S3
+        description: ''
         id: ''
 weight: 1.0
