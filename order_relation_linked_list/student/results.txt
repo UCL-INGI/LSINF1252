@@ -1,4 +1,0 @@
-order_relation#SUCCESS#Comparison of equals char#1#
-order_relation#SUCCESS#Comparison with a > b#1#
-order_relation#SUCCESS#Comparison with a < b#1#
-insert#SUCCESS#Insertion in an empty list#1#
