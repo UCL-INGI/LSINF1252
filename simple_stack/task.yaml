@@ -21,6 +21,8 @@ context: |
     - `strlen <https://linux.die.net/man/3/strlen>`_
 
         -- strlen does not count the '\\0' character
+
+    - Don't forget to free **all** the allocated space when popping one element.
 environment: cpp
 evaluate: best
 groups: false
