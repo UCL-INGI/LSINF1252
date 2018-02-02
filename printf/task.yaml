@@ -17,7 +17,7 @@ problems:
         header: |-
             The function ``printf`` writes data to the standard output stream (*stdout*).
 
-            Write the body of the function *print_foo* which will print "foo\n" (without the quotes, the symbol '\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
+            Write the body of the function *print_foo* which will print "foo\\n" (without the quotes, the symbol '\\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
 
             .. code-block:: c
 
@@ -67,9 +67,9 @@ problems:
                 /* format_str, example:
                  * format_str(buf, 42, "Olivier", 'B') will write into buf
                  * the string "Mister Olivier B. has 42 eggs" (no line feed)
-                 * The given buffer is guaranteed to be big enough.
+                 * The given buffer is guaranteed to be big enough
                  */
-                char *format_str(char *buffer, unsigned int d, char *name, char initial) {
+                void format_str(char *buffer, unsigned int d, char *name, char initial) {
 stored_submissions: 0
 submission_limit:
     amount: -1
