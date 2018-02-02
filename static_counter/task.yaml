@@ -1,3 +1,18 @@
+/student/student_code.c.tpl: |+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <unistd.h>
+    #include "student_code.h"
+
+    unsigned int stexp(){
+    @    @static_counter@@
+    }
+
+
+/student/student_code.h: unsigned int stexp();
 accessible: true
 author: Mathieu Xhonneux
 context: |-
@@ -40,9 +55,9 @@ tags:
         visible: true
     '1':
         id: sigsegv
-        description: ''
         name: Segmentation Fault
         visible: true
+        description: ''
         type: 1
     '2':
         id: not_compile
@@ -76,8 +91,8 @@ tags:
         name: Banned functions
     '7':
         name: S2
-        description: ''
         type: 2
+        description: ''
         visible: true
         id: ''
 weight: 1.0
