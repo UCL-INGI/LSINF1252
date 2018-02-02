@@ -18,17 +18,15 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
-name: '[S2] Summing bits'
+    memory: '100'
+    output: '2'
+name: '[S2] Summing bits - TO REVIEW'
 network_grading: false
 order: 18
 problems:
     q1:
         language: c
-        name: ''
-        type: code
         header: |-
             Write the body of a function that returns the number of bits set to 1 in *i* :
 
@@ -38,6 +36,8 @@ problems:
 
                 #include <stdint.h>
                 uint8_t nbits(uint32_t n) {
+        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1

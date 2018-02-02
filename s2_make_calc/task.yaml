@@ -1,56 +1,64 @@
-/run: |
-    #!/bin/bash
-
-    # Get student code and parse it in the template
-    parsetemplate -o student/Makefile student/Makefile.tpl
-
-    # Try to compile student code
-    make
-
-    # Does file exist? If yes, check for diffs with working code
-    if test -e student/calc
-    then
-        diff reference/calc student/calc
-        if [ $? -ne 0 ]
-        then
-            feedback-result failed
-            feedback-msg -m "Your Makefile is not correct."
-        else
-            feedback-result success
-            feedback-msg -m "You made it!"
-        fi
-    else
-        feedback-result failed
-        feedback-msg -m "The executable file calc was not detected."
-    fi
-
-    make mrproper
-/student/Makefile.tpl: |
+/reference/Makefile: |
     # CC variable for C compiler
     # You can replace gcc by clang if you prefer
-    CC = gcc
+    # CC = gcc
     # CFLAGS variable for gcc/clang flags
     # See gcc/clang manual to understand all flags
-    CFLAGS += -std=c99 # Define which version of the C standard to use
-    CFLAGS += -Wall # Enable the 'all' set of warnings
-    CFLAGS += -Werror # Treat all warnings as error
-    CFLAGS += -Wshadow # Warn when shadowing variables
-    CFLAGS += -Wextra # Enable additional warnings
-    CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
-    CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
+    # CFLAGS += -std=c99 # Define which version of the C standard to use
+    # CFLAGS += -Wall # Enable the 'all' set of warnings
+    # CFLAGS += -Werror # Treat all warnings as error
+    # CFLAGS += -Wshadow # Warn when shadowing variables
+    # CFLAGS += -Wextra # Enable additional warnings
+    # CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
+    # CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
 
-    @@make_calc_simple@@
+    OBJ = calc.o operations.o
+
+    calc: $(OBJ)
+
+    calc.o: calc.c calc.h operations.h
+
+    operations.o: operations.c operations.h
 
     .PHONY: clean mrproper
 
     clean:
-        rm -f *.o
+        rm -f $(OBJ)
+
+    mrproper: clean
+        rm -f calc
+/student/Makefile.tpl: |-
+    # CC variable for C compiler
+    # You can replace gcc by clang if you prefer
+    # CC = gcc
+    # CFLAGS variable for gcc/clang flags
+    # See gcc/clang manual to understand all flags
+    # CFLAGS += -std=c99 # Define which version of the C standard to use
+    # CFLAGS += -Wall # Enable the 'all' set of warnings
+    # CFLAGS += -Werror # Treat all warnings as error
+    # CFLAGS += -Wshadow # Warn when shadowing variables
+    # CFLAGS += -Wextra # Enable additional warnings
+    # CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
+    # CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
+
+    OBJ = calc.o operations.o
+
+    @@make_calc_simple@@
+
+    calc.o: calc.c calc.h operations.h
+
+    operations.o: operations.c operations.h
+
+    .PHONY: clean mrproper
+
+    clean:
+        rm -f $(OBJ)
 
     mrproper: clean
         rm -f calc
 accessible: true
 author: Pablo Gonzalez Alvarez
-context: |-
+context: |
     *Estimated time: 5 minutes*
 
     You have just built a simple calculator. When typing ``ls`` in your command line, the source folder has the following structure:
@@ -61,13 +69,13 @@ context: |-
 
     ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
 
-    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``.
-
-    These headers contain the function prototypes and specifications. For more on that, see.f
+    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``. These headers contain the function prototypes and specifications. They can also contain ``extern`` declarations of variables. For more on that, see `this page <https://www.tutorialspoint.com/cprogramming/c_header_files.htm>`_ or chapter 4 in [kernighan2006c]_.
 
     When compiling this calculator, you need to specify in the Makefile rules the header files needed by ``calc.c``, that is both ``calc.h`` and ``operations.h``.
 
-    # Unfortunately, the source folder was lost but you still have access to the object files.
+    ----
+
+    .. [kernighan2006c] Kernighan, B. W., & Ritchie, D. M. (2006). The C programming language.
 environment: cpp
 evaluate: best
 groups: false
@@ -81,8 +89,12 @@ order: 23
 problems:
     make_calc_simple:
         type: code
-        header: Write a *Makefile* to build the executable ``calc`` from both object
-            files ``calc.o`` and ``operations.o``.
+        header: |-
+            Unfortunately, the source folder was lost but you still have access to the object files.
+
+            Write a *Makefile* to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``.
+
+            **Hint:** You do not need to write the rules for ``operations.o`` and ``calc.o``.
         language: Makefile
         name: 'Linking '
 stored_submissions: 0
@@ -93,8 +105,8 @@ tags:
     '0':
         id: make
         type: 0
+        name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
-        name: make & Makefile
         visible: false
 weight: 1.0

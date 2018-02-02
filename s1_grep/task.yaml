@@ -1,7 +1,12 @@
 accessible: true
 author: Tom Rousseaux
-context: You'll learn to use the `grep(1) command <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
-    You'll use it on the file architecture downloadable `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_grep/CUnit.tar>`_.
+context: The `grep(1) command <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_
+    can be use to detect or extract lots of information from text files. When working
+    with source code,  You'll use it on the file architecture downloadable `grep(1)
+    <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_ can help you
+    to find in which files some functions or constants have been defined. For this
+    exercise, we will use the source code of the `CUnit <http://cunit.sourceforge.net>`_
+    testing framework that you can download as a `tar archive  <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_grep/CUnit.tar>`_.
 environment: mcq
 evaluate: best
 groups: false
@@ -16,20 +21,19 @@ problems:
     CU_trim_left:
         type: match
         answer: Util.h
-        header: Where is defined the function CU_trim_left? Give only the name of
-            the file.
+        header: In which file has the ``CU_trim_left`` been defined ? Answer with
+            the name of the file.
         name: CU_trim_left
     CU_UNREFERENCED_PARAMETER_pTest:
-        header: What is the linenumber that contains "CU_UNREFERENCED_PARAMETER(pTest);"
-            in Sources/Console/Console.c? (Try with and without the quotes to see
-            the difference.)
+        header: '``CU_UNREFERENCED_PARAMETER(pTest)`` appears in file ``Sources/Console/Console.c``
+            Can you indicate the line number of this command ?'
         answer: '652'
         name: CU_UNREFERENCED_PARAMETER(pTest);
         type: match
     assert:
         answer: '349'
         header: |-
-            How many times does "assert" come up in all the files of the working directory?
+            The function ``assert`` is frequently used in the CUnit source code. Can you count the number of lines where ``assert`` appears in all the files of the working directory?
             (Hint: use `wc(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/wc.1.html>`_)
         type: match
         name: assert

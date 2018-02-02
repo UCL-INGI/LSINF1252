@@ -1,5 +1,5 @@
 accessible: true
-author: Mathieu Xhonneux
+author: Mathieu Xhonneux, Nicolas Rybowski
 context: |-
     We have a linked list, built with *struct node*.
 
@@ -16,24 +16,26 @@ context: |-
             short flow;
             char *parent;
             void *fifo;
-        }
+        };
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
     memory: '100'
+    output: '2'
 name: '[S3] Filtering a linked list'
 network_grading: false
+order: 30
 problems:
     filter:
+        type: code
         header: |-
             We want to filter this list and only take the elements with a pair index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
             Write the body of the function *pair_filter*.
 
-            Hint : man 3 memcpy.
+            Hint : You have to use `memcpy <https://linux.die.net/man/3/memcpy>`_ to do this
 
             .. code-block:: c
 
@@ -46,7 +48,6 @@ problems:
                  */
                 struct node *pair_filter(struct node *head) {
         language: c
-        type: code
         name: Filtering
 stored_submissions: 0
 submission_limit:
@@ -54,4 +55,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 30
