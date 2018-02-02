@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Get student code and parse it in the template
 parsetemplate -o student/Makefile student/Makefile.tpl
 
 # Try to compile student code

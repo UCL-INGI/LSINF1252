@@ -1,6 +1,7 @@
 #! /bin/bash
 
-last=$(getinput @username | sha256sum)
+usr=$(getinput @username)
+last=$(echo $usr | sha256sum)
 
 for i in {1..5}
 do

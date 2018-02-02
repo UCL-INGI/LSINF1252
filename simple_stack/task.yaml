@@ -75,20 +75,6 @@ problems:
                 int pop(struct node **head, char *result){
         type: code
         name: Pop
-    free_node:
-        name: <OPTIONAL> free_node
-        type: code
-        language: c
-        header: |-
-            You can use this question to implement a ``free_node`` function
-
-            .. code-block:: c
-
-                /*
-                * Free @node
-                */
-                void free_node(struct node *node){
-        optional: 'on'
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -96,10 +82,10 @@ submission_limit:
 tags:
     '0':
         id: timeout
+        name: Timeout
         visible: true
         type: 1
         description: Your code exceeds the maximum allowed time.
-        name: Timeout
     '1':
         id: sigsegv
         description: ''
@@ -114,10 +100,10 @@ tags:
         description: You code does not compile.
     '3':
         id: memory
-        description: ''
-        name: Memory Exceeded
         visible: true
         type: 1
+        name: Memory Exceeded
+        description: ''
     '4':
         name: Floating Point Exception
         description: ''
@@ -131,9 +117,9 @@ tags:
         name: Double free
         type: 1
     '6':
+        type: 1
         description: You use some banned functions.
         id: banned_funcs
-        type: 1
         visible: true
         name: Banned functions
     '7':

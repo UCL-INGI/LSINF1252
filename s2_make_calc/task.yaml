@@ -1,7 +1,7 @@
-/Makefile.tpl: ''
 /run: |
     #!/bin/bash
 
+    # Get student code and parse it in the template
     parsetemplate -o student/Makefile student/Makefile.tpl
 
     # Try to compile student code
@@ -25,29 +25,6 @@
     fi
 
     make mrproper
-/student/Makefile: |
-    # CC variable for C compiler
-    # You can replace gcc by clang if you prefer
-    CC = gcc
-    # CFLAGS variable for gcc/clang flags
-    # See gcc/clang manual to understand all flags
-    CFLAGS += -std=c99 # Define which version of the C standard to use
-    CFLAGS += -Wall # Enable the 'all' set of warnings
-    CFLAGS += -Werror # Treat all warnings as error
-    CFLAGS += -Wshadow # Warn when shadowing variables
-    CFLAGS += -Wextra # Enable additional warnings
-    CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
-    CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
-
-    @@make_calc_simple@@
-
-    .PHONY: clean mrproper
-
-    clean:
-        rm -f *.o
-
-    mrproper: clean
-        rm -f calc
 /student/Makefile.tpl: |
     # CC variable for C compiler
     # You can replace gcc by clang if you prefer
@@ -93,9 +70,9 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
 name: '[S2] make basics - headers and prerequisites'
 network_grading: false
 order: 23
