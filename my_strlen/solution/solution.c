@@ -3,12 +3,9 @@
 
 
 size_t my_strlen(const char* s){
-  int i = 0;
-  char tmp = *s;
+  size_t i;
 
-  while(tmp != '\0'){
-    tmp = *(s+i+1);
-  }
+  for(i=0; *(s+i) != 0; i++){}
 
-  return (size_t) i;
+  return i;
 }
