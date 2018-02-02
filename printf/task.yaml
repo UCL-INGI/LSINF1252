@@ -18,7 +18,7 @@ problems:
         header: |-
             The function ``printf`` writes data to the standard output stream (*stdout*).
 
-            Write the body of the function *print_foo* which will print "foo" (without the quotes) to *stdout*.
+            Write the body of the function *print_foo* which will print "foo\n" (without the quotes, the symbol '\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
 
             .. code-block:: c
 
@@ -26,15 +26,33 @@ problems:
         name: Foo
         language: c
     digit:
-        language: ''
-        header: Print a number (%d) + text
+        language: c
+        header: |-
+            ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
+
+            .. code-block:: c
+
+                /* print_digit
+                 * @n: an integer
+                 *
+                 * result: print to stdout "The magic number is NUMBER.\n"
+                 */
+                void print_digit(int number) {
         type: code
-        name: Digit
+        name: Digital
     example:
-        name: ''
-        header: ''
+        name: Floating away
+        header: |
+            ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
+
+            What would the following call print to *stdout* ?
+
+            .. code-block:: c
+
+                float PI = 3.1415926;
+                printf("pi = %.4f", PI);
         type: match
-        answer: ''
+        answer: '3.1415'
     unsigned-string:
         header: |-
             Print an unsigned char (%u) + string.
