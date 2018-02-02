@@ -119,7 +119,7 @@
       if(stats.malloc.last_params.size != sizeof(node_t)) {
           CU_FAIL("wrong malloc size");
           push_info_msg(_("The allocated memory has not the correct size."));
-          set_tag("malloc_fail");
+          set_tag("malloc_fail_memory_size");
           return;
       }
       CU_ASSERT_TRUE(malloced((void*) ret));
@@ -395,7 +395,7 @@
 
     int main(int argc,char** argv)
     {
-        BAN_FUNCS(calloc);
+        BAN_FUNCS(calloc, set_tag);
         //RUN(test_init_node_alloc);
         RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem, test_add_node_wrong_args);
         //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
@@ -439,7 +439,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Basic linked list - CHANGE REQUESTED - malloc(1)'
+name: '[S3] Basic linked list - REVIEWED'
 network_grading: false
 order: 28
 problems:
@@ -520,6 +520,12 @@ tags:
         type: 1
         name: Banned functions
         visible: true
+    '9':
+        name: Malloc bad size
+        description: The size of the allocated memory is not correct.
+        type: 1
+        id: malloc_fail_memory_size
+        visible: false
     '7':
         name: Data structures
         description: Task dealing with data structures and linked list

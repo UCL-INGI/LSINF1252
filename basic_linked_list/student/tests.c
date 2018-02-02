@@ -83,7 +83,7 @@ void test_init_node_alloc(){
   if(stats.malloc.last_params.size != sizeof(node_t)) {
       CU_FAIL("wrong malloc size");
       push_info_msg(_("The allocated memory has not the correct size."));
-      set_tag("malloc_fail");
+      set_tag("malloc_fail_memory_size");
       return;
   }
   CU_ASSERT_TRUE(malloced((void*) ret));
@@ -359,7 +359,7 @@ void test_add_node_nomem(){
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS(calloc);
+    BAN_FUNCS(calloc, set_tag);
     //RUN(test_init_node_alloc);
     RUN(test_init_node_alloc, test_init_node_value, test_init_node_nomem, test_add_node_empty, test_add_node_non_empty, test_add_node_nomem, test_add_node_wrong_args);
     //RUN(test_init_node_alloc, test_init_node_nomem, test_init_node_alloc);
