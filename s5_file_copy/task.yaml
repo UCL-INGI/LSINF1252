@@ -27,9 +27,9 @@ author: Olivier Martin
 context: |-
     *Estimated time: 30 minutes*
 
-    Given a file containing arbitrary bytes, you are asked to define a function that copy the file. You can not modify the content of the original file. Beware, the copied file should have to same permissions that the original file.
+    Given a file containing arbitrary bytes, you are asked to define a function that copy the file. You can not modify the content of the original file. Beware, the copied file should have the same permissions as the original file.
 
-    Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
+    Use only ``open(2)``, ``read(2)``, ``write(2)``, ``stat(2)`` and ``close(2)``.
 environment: cpp
 evaluate: best
 groups: false
@@ -91,55 +91,55 @@ tags:
         visible: true
         type: 1
         description: ''
-        name: Memory Exceeded
-        id: memory
+        name: Floating Point Exception
+        id: sigfpe
     '11':
-        name: Not compile
-        id: not_compile
+        name: Segmentation Fault
+        id: sigsegv
         visible: true
-        description: You code does not compile.
+        description: ''
         type: 1
     '12':
         visible: true
-        id: double_free
-        name: Double free
-        description: Your code produced a double free.
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
         type: 1
     '4':
-        description: Your code exceeds the maximum allowed time.
+        description: ''
         type: 1
+        id: memory
+        name: Memory Exceeded
+        visible: true
+    '5':
+        id: not_compile
+        name: Not compile
+        type: 1
+        description: You code does not compile.
+        visible: true
+    '6':
+        id: double_free
+        type: 1
+        description: Your code produced a double free.
+        name: Double free
+        visible: true
+    '7':
+        description: Your code exceeds the maximum allowed time.
         id: timeout
         name: Timeout
         visible: true
-    '5':
-        id: original_modif
+        type: 1
+    '8':
         name: Original file modified
+        id: original_modif
         type: 1
         description: You have modified the original file.
         visible: true
-    '6':
-        id: failure_handling
-        type: 1
-        description: You do not manage failures during the copy properly.
-        name: Failure handling
-        visible: true
-    '7':
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
-        visible: true
-        type: 1
-    '8':
-        name: Segmentation Fault
-        id: sigsegv
-        type: 1
-        description: ''
-        visible: true
     '9':
-        id: banned_funcs
-        description: You use some banned functions.
+        id: failure_handling
+        description: You do not manage failures during the copy properly.
         visible: true
-        name: Banned functions
+        name: Failure handling
         type: 1
     '13':
         description: ''
