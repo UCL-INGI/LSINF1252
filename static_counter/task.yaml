@@ -1,8 +1,60 @@
+/student/student_code.c.tpl: |+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <unistd.h>
+    #include "student_code.h"
+
+    unsigned int stexp(){
+    @    @static_counter@@
+    }
+
+
+/student/student_code.h: unsigned int stexp();
+/student/tests.c: |-
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    void test() {
+        set_test_metadata("static_counter", _("Test"), 1);
+        int count = 1;
+
+        // We run multiples times the test to avoid student returning randomly 1 or 0.
+        for(int i = 0; i < 20; i++){
+            int ret = 0;
+
+            SANDBOX_BEGIN;
+            ret = stexp();
+            SANDBOX_END;
+
+            if(ret != count){
+                CU_FAIL();
+                push_info_msg(_("Your counter is not correct."));
+                break;
+            }
+            count *= 2;
+            if(count > 4096)
+                count = 1;
+        }
+    }
+
+
+    int main(int argc,char** argv){
+        BAN_FUNCS(system, set_tag);
+        RUN(test);
+    }
 accessible: true
 author: Mathieu Xhonneux
-context: A variable declared inside a function with the keyword *static* implies that
-    the value of this variable will be kept across the different calls to this function.
-environment: pyjavacpp
+context: |-
+    A variable declared inside a function with the keyword *static* implies that the value of this variable will be kept across the different calls to this function.
+
+    For example, the first call to your function should return ``1``. The next call ``2``, then ``4``, etc.
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -14,18 +66,68 @@ network_grading: false
 order: 13
 problems:
     static_counter:
+        name: Static counter
+        language: c
         type: code
-        header: |
-            Write the body of the function *stexp* which returns at its *n*th call the value 2^(n-1). Once it has returned the value 4096, the next return should go back to 1.
+        header: |-
+            Write the body of the function *stexp* which returns at its ``*n*th`` call the value ``2^(n-1)``. Once it has returned the value 4096, the next return should go back to 1.
+
+            You have to use a static variable.
 
             .. code-block:: c
 
                 unsigned int stexp() {
-        language: c
-        name: Static counter
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        id: timeout
+        name: Timeout
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        visible: true
+    '1':
+        id: sigsegv
+        description: ''
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        id: banned_funcs
+        description: You use some banned functions.
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
+        name: S2
+        description: ''
+        type: 2
+        visible: true
+        id: ''
 weight: 1.0

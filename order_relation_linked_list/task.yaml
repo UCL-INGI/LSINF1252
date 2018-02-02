@@ -2,20 +2,21 @@ accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: Given the provided implementation of a linked list, you are asked to implement
     the ``insert`` function based on a specific order relation. By succeeding this
-    task, you will be able to make ordered list like a `LinkedList` with a `Comparator` in `java`.
+    task, you will be able to make ordered list like a `LinkedList` with a `Comparator`
+    in `java`.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S4] Order relation on a linked list'
 network_grading: false
 order: 38
 problems:
     order_relation:
-        type: code
+        language: c
         name: Order relation
         header: |-
             For this subproblem, you are asked to implement the comparison function which rules the order relation of the list.
@@ -28,9 +29,10 @@ problems:
                 int compare(char a, char b){
                     //Your code will be inserted here
                 }
-        language: c
+        type: code
     insert:
         name: Insert
+        type: code
         header: |-
             For this subproblem, you have the template of the structure node:
 
@@ -55,22 +57,69 @@ problems:
                     //Your code will be inserted here
                 }
         language: c
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
+    '3':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        visible: true
+        type: 1
+    '4':
+        name: Segmentation Fault
+        description: ''
+        visible: true
+        id: sigsegv
+        type: 1
+    '5':
+        id: not_compile
+        visible: true
+        description: You code does not compile.
+        name: Not compile
+        type: 1
+    '6':
+        id: memory
+        description: ''
+        name: Memory Exceeded
+        type: 1
+        visible: true
+    '7':
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+        description: ''
+        visible: true
+    '8':
+        type: 1
+        name: Double free
+        id: double_free
+        description: Your code produced a double free.
+        visible: true
+    '9':
+        visible: true
+        type: 1
+        id: banned_funcs
+        description: You use some banned functions.
+        name: Banned functions
     '0':
         name: Data structures
-        type: 2
-        description: Task dealing with data structures and linked list
         visible: true
+        description: Task dealing with data structures and linked list
+        type: 2
         id: ''
     '1':
-        type: 2
-        visible: true
         description: Task about pointers and their use
         name: Pointer
+        visible: true
+        type: 2
+        id: ''
+    '2':
+        type: 2
+        name: S4
+        visible: true
+        description: ''
         id: ''
 weight: 1.0

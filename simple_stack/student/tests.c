@@ -45,7 +45,6 @@ int check_stack(struct node *head, char** array, int len){
     src = *(array+l-i);
     st = run->name;
 
-    //printf("array = %s, name = %s ", src, st);
     if (!run || strcmp(src, st) != 0){
       return 1;
     }
@@ -201,11 +200,11 @@ void test_push_general() {
   // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
   if (mal){
     //printf("src = %s, name = %s ", src, stack->name);
-    CU_ASSERT_STRING_EQUAL(src, stack->name);
-    if (!strcmp(src, stack->name)){
+    if (strcmp(src, stack->name)){
       char tmp[100];
-      sprintf(tmp, _("The pushed value differ from the expected one Waited : %s Received : %s "), src, stack->name);
+      sprintf(tmp, _("The pushed value differ from the expected one. Expected : %s Received : %s "), src, stack->name);
       push_info_msg(tmp);
+      CU_FAIL();
     }
 
   }
@@ -226,7 +225,7 @@ void test_push_general() {
     int stru = check_stack(stack, a, 7);
     CU_ASSERT_TRUE(!stru);
     if (stru)
-      push_info_msg(_("The structure of the stack changed or is not the expected one"));
+      push_info_msg(_("The new structure of the stack or is not the expected one"));
 
     // check the return value of the function
     CU_ASSERT_TRUE(!ret);
@@ -375,7 +374,5 @@ void test_pop_empty(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    // warning, test_push_general return and kill other tests
-    // TODO: find why
-    RUN( test_pop_value, test_push_param_nomem, test_push_changing_param, test_pop_args, test_pop_empty, test_push_general);
+    RUN(test_pop_value, test_push_param_nomem, test_push_changing_param, test_pop_args, test_pop_empty, test_push_general);
 }

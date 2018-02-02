@@ -20,7 +20,7 @@ void test(){
     int *tab = trap_buffer(size*sizeof(int), TRAP_RIGHT, PROT_WRITE, array);
     int ret = 0;
     
-    for(int i = 0; i < size+10; i++){
+    for(int i = -5; i < size+5; i++){
         SANDBOX_BEGIN;
         ret = tab_find(tab, size, i);
         SANDBOX_END;
@@ -28,6 +28,7 @@ void test(){
         if(ret != tab_find_correct(tab, size, i)){
             push_info_msg(_("Your function does not return the correct index."));
             CU_FAIL();
+            break;
         }
     }
     free_trap(tab,size*sizeof(int));

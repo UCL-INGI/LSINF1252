@@ -12,11 +12,11 @@ name: '[S2] My strlen'
 network_grading: false
 order: 11
 problems:
-    strlen:
+    my_stlren:
+        name: my_stlren
+        language: ''
+        header: Write here your code for ``my_strlen``
         type: code
-        name: stlren
-        header: Write here your code for ``strlen``
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1

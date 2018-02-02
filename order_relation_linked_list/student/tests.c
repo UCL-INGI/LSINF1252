@@ -666,7 +666,7 @@ void test_insert_first_decresc(){
     int ret = 1;
     node_t* l = (node_t*) malloc(sizeof(node_t));
     if(!l) { CU_FAIL(_("no mem")); return;}
-    l->val = 'a';
+    l->val = 'y';
     l->next = NULL;
     node_t** h = &l;
 
