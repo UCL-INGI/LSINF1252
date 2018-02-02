@@ -56,7 +56,7 @@ problems:
         name: Push
         language: c
     pop:
-        language: ''
+        language: c
         header: |-
             .. code-block:: c
 

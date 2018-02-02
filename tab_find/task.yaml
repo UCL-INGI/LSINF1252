@@ -87,7 +87,8 @@ tags:
         description: Your code exceeds the maximum allowed time.
     '1':
         id: sigsegv
-        description: ''
+        description: You probably try to access an index outside of the bounds of
+            the array.
         name: Segmentation Fault
         visible: true
         type: 1

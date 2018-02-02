@@ -1,10 +1,11 @@
 #!/bin/bash
 
-getinput "make_calc_simple" > Makefile.tpl
-parsetemplate -o student/Makefile Makefile.tpl
+parsetemplate -o student/Makefile student/Makefile.tpl
 
+# Try to compile student code
 make
 
+# Does file exist? If yes, check for diffs with working code
 if test -e student/calc
 then
     diff reference/calc student/calc
