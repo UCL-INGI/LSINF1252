@@ -33,7 +33,7 @@ problems:
 
             .. code-block:: c
 
-                uint32_t cycle_bits(uint32_t x, uint32_t n) {
+                uint32_t cycle_bits(uint32_t x, uint8_t n) {
 stored_submissions: 0
 submission_limit:
     amount: -1
