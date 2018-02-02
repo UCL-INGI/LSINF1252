@@ -1,0 +1,2559 @@
+# English translations for PROJECT.
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-02-02 14:22+0100\n"
+"PO-Revision-Date: 2018-02-02 14:24+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#. name
+#: course.yaml
+msgid "[LSINF1252] Systèmes informatiques - 2018"
+msgstr ""
+
+#. author
+#: BST/task.yaml advanced_queue/task.yaml basic_linked_list/task.yaml
+#: order_relation_linked_list/task.yaml simple_stack/task.yaml
+msgid "Maxime Mawait & Nicolas Rybowski"
+msgstr ""
+
+#. context
+#: BST/task.yaml
+msgid ""
+"For this task, you will implement a binary search on a binary tree. A "
+"binary tree has the following structure:\n"
+"\n"
+".. image:: BST/bst.png\n"
+"    :height: 340px\n"
+"    :width: 540px\n"
+"    :scale: 100%\n"
+"\n"
+"\n"
+"For this, you have the code of the node stucture:\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * Node has a value, @value, and two children, @left and @right.\n"
+"    * All the children of @left and himself have a smaller value then the"
+" node and all the children of @right and himself have a bigger value then"
+" node\n"
+"    */\n"
+"    typedef struct node{\n"
+"        int value;\n"
+"        struct node* left;\n"
+"        struct node* right;\n"
+"    } node_t;\n"
+"\n"
+"And you have the code of the binary structure:\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    typedef struct bt{\n"
+"        struct node* root;\n"
+"    } bt_t;\n"
+msgstr ""
+
+#. name
+#: BST/task.yaml
+msgid "[S4] Binary Search Tree - REVIEWED"
+msgstr ""
+
+#. name, contains, name
+#: BST/task.yaml
+msgid "Methode contains"
+msgstr ""
+
+#. name, contains, header
+#: BST/task.yaml
+msgid ""
+"Write the body of contains method. If you use submethods, write them in "
+"the location below.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * Return 1 if @value is in @tree or 0 if it isn't.\n"
+"    */\n"
+"    int contains(bt_t* tree, int value){"
+msgstr ""
+
+#. name, other, name
+#: BST/task.yaml
+msgid "Helpfull submethods"
+msgstr ""
+
+#. name, other, header
+#: BST/task.yaml
+msgid "Write here the submethods used by the contains method."
+msgstr ""
+
+#. context
+#: absolute_value/task.yaml
+msgid ""
+"The absolute value of a number is defined as *|n| = n* if *n >= 0*, *|n| "
+"= -n* else."
+msgstr ""
+
+#. name
+#: absolute_value/task.yaml
+msgid "[S2] Absolute value - REVIEWED"
+msgstr ""
+
+#. name, absval, name
+#: absolute_value/task.yaml
+msgid "Absolute value"
+msgstr ""
+
+#. name, absval, header
+#: absolute_value/task.yaml
+msgid ""
+"Write the body of the function *absval* returning the absolute value of "
+"*i*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    int absval(int i) {"
+msgstr ""
+
+#. context
+#: advanced_queue/task.yaml
+msgid ""
+"You are asked to implement `enqueue` and `dequeue` functions of a `Queue`"
+" with doubly circular linked list.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    typedef struct node{\n"
+"      struct node* next;\n"
+"      int value;\n"
+"    } node_t;\n"
+"\n"
+"    typedef struct queue{\n"
+"      struct node* head;\n"
+"    } queue_t  ;"
+msgstr ""
+
+#. name
+#: advanced_queue/task.yaml
+msgid "[S4] Queue avancée"
+msgstr ""
+
+#. name, enqueue, name
+#: advanced_queue/task.yaml
+msgid "Enqueue"
+msgstr ""
+
+#. name, dequeue, name
+#: advanced_queue/task.yaml
+msgid "Dequeue"
+msgstr ""
+
+#. context
+#: basic_linked_list/task.yaml
+msgid ""
+"We ask you to write two primitives needed to implement a simple linked "
+"list.\n"
+"\n"
+"**In your functions, you cannot use the function \\``calloc\\``**\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /**\n"
+"    * Structure node\n"
+"    *\n"
+"    * @next: pointer to the next node in the list, NULL if last node_t\n"
+"    * @value: value of the node\n"
+"    */\n"
+"    typedef struct node {\n"
+"      struct node *next;\n"
+"      int value;\n"
+"    } node_t;\n"
+"\n"
+"    /**\n"
+"    * Structure list\n"
+"    *\n"
+"    * @first: first node of the list, NULL if empty\n"
+"    * @size: number of nodes in the list\n"
+"    */\n"
+"    typedef struct list {\n"
+"      struct node *first;\n"
+"      int *size;\n"
+"    } list_t;\n"
+"\n"
+"\n"
+msgstr ""
+
+#. name
+#: basic_linked_list/task.yaml
+msgid "[S3] Basic linked list - CHANGE REQUESTED - malloc(1)"
+msgstr ""
+
+#. name, init_node, name
+#: basic_linked_list/task.yaml
+msgid "Node initialisation"
+msgstr ""
+
+#. name, init_node, header
+#: basic_linked_list/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * Create a new node in memory with the value @value.\n"
+"    *\n"
+"    * @value: value of the node\n"
+"    * @return: return the pointer to the new node, or NULL if a failure "
+"occured.\n"
+"    */\n"
+"    node_t *init_node(int value) {\n"
+msgstr ""
+
+#. name, add_node, name
+#: basic_linked_list/task.yaml
+msgid "Adding a node"
+msgstr ""
+
+#. name, add_node, header
+#: basic_linked_list/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * Add an element to the head of the list @list and update its member "
+"`size`\n"
+"    *\n"
+"    * @l: list of integers\n"
+"    * @value: value to add to the list\n"
+"    *\n"
+"    * @return: 0 if success, 1 else\n"
+"    */\n"
+"    int add_node(list_t *list, int value);\n"
+msgstr ""
+
+#. author
+#: bits_count/task.yaml
+msgid "Arthur van Stratum & Mathieu Xhonneux"
+msgstr ""
+
+#. context
+#: bits_count/task.yaml
+msgid ""
+"In this exercise, we will work with operation on bits. When we speak "
+"about the position of a bit, the index 0 corresponds to weakest bit, 1 to"
+" the second-weakest bit, ...\n"
+"\n"
+"This exercise will introduce some non-standard data types which guarantee"
+" that the variable has a fixed number of bits. Indeed, on some machines, "
+"a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise "
+"operations, we have to know first on how many bits we are working.\n"
+"\n"
+"To do so, we introduce two new classes of variable types :\n"
+"\n"
+"* *bool* (from <stdbool.h>), which is 1-bit long, hence either 0 or 1\n"
+"* *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 "
+"bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* "
+"or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>)."
+msgstr ""
+
+#. name
+#: bits_count/task.yaml
+msgid "[S2] Working with bits"
+msgstr ""
+
+#. name, q1, name
+#: bits_count/task.yaml
+msgid "sum_bits"
+msgstr ""
+
+#. name, q1, header
+#: bits_count/task.yaml
+msgid ""
+"Write the body of a function that returns the number of bits set to 1 in "
+"*i* :\n"
+"\n"
+"e.g. *nbits(4) = 1, nbits(7) = 3, nbits(-2) = 2*\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    uint8_t nbits(uint32_t n) {"
+msgstr ""
+
+#. name, set_bit, name
+#: bits_count/task.yaml
+msgid "set_bit"
+msgstr ""
+
+#. name, set_bit, header
+#: bits_count/task.yaml
+msgid ""
+"Write the body of a function that returns the variable *x*, but with the "
+"*pos*-est bit set to *val*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    uint64_t set_bit(uint64_t x, int pos, bool val) {"
+msgstr ""
+
+#. name, get_3_leftmost_bits, name
+#: bits_count/task.yaml
+msgid "get_3_leftmost_bits"
+msgstr ""
+
+#. name, get_3_leftmost_bits, header
+#: bits_count/task.yaml
+msgid ""
+"Write the body of a function *get_3_leftmost_bits* that returns the 3 "
+"strongest bits of *x*. For instance, with *x=11011001...*, the function "
+"should return a *uint8_t* containing 00000110.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    uint8_t get_3_leftmost_bits(uint32_t x) {"
+msgstr ""
+
+#. name, get_4_rightmost_bits, name
+#: bits_count/task.yaml
+msgid "Get the 4 weakest bits"
+msgstr ""
+
+#. name, get_4_rightmost_bits, header
+#: bits_count/task.yaml
+msgid ""
+"Write the body of a function *get_4_rightmost_bits* that returns the 4 "
+"weakest bits of *x*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    uint8_t get_4_rightmost_bits(uint32_t x) {\n"
+"\n"
+"\n"
+msgstr ""
+
+#. name, unset_strong_bit, name
+#: bits_count/task.yaml
+msgid "Unset the strongest bit"
+msgstr ""
+
+#. name, unset_strong_bit, header
+#: bits_count/task.yaml
+msgid ""
+"Write the body of a function *unset_strong_bit*, which sets to 0 the "
+"strongest bit set to 1 it founds, and does nothing if there's no bit set "
+"to 0.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    uint32_t unset_strong_bit(uint32_t x) {"
+msgstr ""
+
+#. name, cycle_bits, name
+#: bits_count/task.yaml
+msgid "Cycle bits"
+msgstr ""
+
+#. name, cycle_bits, header
+#. name, q1, header
+#: bits_count/task.yaml bits_spin/task.yaml
+msgid ""
+"Write the body of a function *cycle_bits*, which moves all bits from *n* "
+"places to the left, according to the formula *x[(i+n)%32] = x[i]*, where "
+"*x[i]* is the i-iest bit of *x*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    uint32_t cycle_bits(uint32_t x, uint32_t n) {"
+msgstr ""
+
+#. author
+#: bits_leftmost/task.yaml bits_rightmost/task.yaml bits_spin/task.yaml
+#: bits_strong/task.yaml bits_sum/task.yaml palindrome/task.yaml
+#: set_bit/task.yaml swap2int/task.yaml
+msgid "Arthur van Stratum"
+msgstr ""
+
+#. context
+#: bits_leftmost/task.yaml bits_rightmost/task.yaml bits_spin/task.yaml
+#: bits_strong/task.yaml
+msgid ""
+"In this exercise, we will work with operation on bits. When we speak "
+"about the position of a bit, the index 0 corresponds to weakest bit, 1 to"
+" the second-weakest bit, ...\n"
+"\n"
+"In c, you can write a number in a binary (base 2) form by prefixing it "
+"via 0b.\n"
+"e.g. 0b11010 = 26 (base 10)\n"
+"\n"
+"Note: numbers begin by 0 are stored in octal (base 8).\n"
+"e.g. 022 (base 8) = 18 (base 10)\n"
+"\n"
+"This exercise will introduce some non-standard data types which guarantee"
+" that the variable has a fixed number of bits. Indeed, on some machines, "
+"a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise "
+"operations, we have to know first on how many bits we are working.\n"
+"\n"
+"To do so, we introduce a new classe of variable types :\n"
+"\n"
+"* *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 "
+"bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* "
+"or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>)."
+msgstr ""
+
+#. name
+#: bits_leftmost/task.yaml
+msgid "[S2] Leftist bits - REVIEWED"
+msgstr ""
+
+#. name, q1, header
+#: bits_leftmost/task.yaml
+msgid ""
+"Write the body of a function *get_3_leftmost_bits* that returns the 3 "
+"strongest bits of *x*. For instance, with *x=0b11011001...*, the function"
+" should return a *uint8_t* containing 0b00000110.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    #include <stdint.h>\n"
+"    uint8_t get_3_leftmost_bits(uint32_t x) {"
+msgstr ""
+
+#. name
+#: bits_rightmost/task.yaml
+msgid "[S2] Right bits - REVIEWED"
+msgstr ""
+
+#. name, q1, header
+#: bits_rightmost/task.yaml
+msgid ""
+"Write the body of a function *get_4_rightmost_bits* that returns the 4 "
+"weakest bits of *x*. For instance, with *x=0b...11011001*, the function "
+"should return a *uint8_t* containing 0b00001001.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    #include <stdint.h>\n"
+"    uint8_t get_4_rightmost_bits(uint32_t x) {\n"
+msgstr ""
+
+#. name
+#: bits_spin/task.yaml
+msgid "[S2] Spinning bits"
+msgstr ""
+
+#. name
+#: bits_strong/task.yaml
+msgid "[S2] Killing strong bits"
+msgstr ""
+
+#. name, q1, header
+#: bits_strong/task.yaml
+msgid ""
+"Write the body of a function *unset_strong_bit*, which sets to 0 the "
+"strongest bit set to 1 it founds, and does nothing if there's no bit set "
+"to 0.\n"
+"\n"
+"e.g. unset_strong_bit(0b000111010101010)=0b000011010101010\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    #include <stdint.h>\n"
+"    uint32_t unset_strong_bit(uint32_t x) {"
+msgstr ""
+
+#. context
+#: bits_sum/task.yaml
+msgid ""
+"In this exercise, we will work with operation on bits. When we speak "
+"about the position of a bit, the index 0 corresponds to weakest bit, 1 to"
+" the second-weakest bit, ...\n"
+"\n"
+"In c, you can write a number in a binary (base 2) form by prefixing it "
+"via 0b.\n"
+"e.g. 0b11010 = 26 (base 10)\n"
+"\n"
+"Note: numbers begin by 0 are stored in octal (base 8).\n"
+"e.g. 022 (base 8) = 18 (base 10)\n"
+"\n"
+"This exercise will introduce some non-standard data types which guarantee"
+" that the variable has a fixed number of bits. Indeed, on some machines, "
+"a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise "
+"operations, we have to know first on how many bits we are working.\n"
+"\n"
+"To do so, we introduce a new classe of variable type :\n"
+"\n"
+"* *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 "
+"bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* "
+"or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>)."
+msgstr ""
+
+#. name
+#: bits_sum/task.yaml
+msgid "[S2] Summing bits"
+msgstr ""
+
+#. name, q1, header
+#: bits_sum/task.yaml
+msgid ""
+"Write the body of a function that returns the number of bits set to 1 in "
+"*i* :\n"
+"\n"
+"e.g. *nbits(0b100) = 1, nbits(0b111) = 3, nbits(0b1010) = 2*\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    #include <stdint.h>\n"
+"    uint8_t nbits(uint32_t n) {"
+msgstr ""
+
+#. author
+#: cmp_func/task.yaml modem_read/task.yaml sleep_malloc/task.yaml
+msgid "Mathieu Xhonneux & Maxime Mawait"
+msgstr ""
+
+#. context
+#: cmp_func/task.yaml
+msgid ""
+"Pointers to functions can be used to handle functions in a dynamic "
+"fashion, and will be of great importance later in this course. It is "
+"hence important to grasp how they work.\n"
+"\n"
+"In this exercise, you will code a function which receives pointers to two"
+" functions, to determine if these functions are equivalent. Two functions"
+" are equivalent if they produce the same output for the same input.\n"
+"\n"
+"The functions passed by pointers will be of the form ``uint8_t "
+"func(uint8_t n)``."
+msgstr ""
+
+#. name
+#: cmp_func/task.yaml
+msgid "[S4] Comparing functions"
+msgstr ""
+
+#. name, cmp_func, name
+#: cmp_func/task.yaml
+msgid "Compare functions"
+msgstr ""
+
+#. name, cmp_func, header
+#: cmp_func/task.yaml
+msgid ""
+"Write the function *cmp_func* (prototype and body), which receives two "
+"pointers to functions (described as above), and returns an int, "
+"containing 1 if the functions are equivalent, else 0.\n"
+msgstr ""
+
+#. author
+#: factorial/task.yaml linked_structs/task.yaml printf/task.yaml
+#: static_counter/task.yaml
+msgid "Mathieu Xhonneux"
+msgstr ""
+
+#. context
+#: factorial/task.yaml
+msgid ""
+"The factorial of a number *n!* is defined as ``n! = 1*2*3*...*(n-1)*n``, "
+"with *0! = 1*."
+msgstr ""
+
+#. name
+#: factorial/task.yaml
+msgid "[S2] Factorial - REVIEWED"
+msgstr ""
+
+#. name, facto, name
+#: factorial/task.yaml
+msgid "Factorial"
+msgstr ""
+
+#. name, facto, header
+#: factorial/task.yaml
+msgid ""
+"Write your own function factorial, who shall follow this prototype :\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    int factorial(int n);\n"
+"\n"
+"You don't have to define any headers, just the function itself."
+msgstr ""
+
+#. context
+#: linked_structs/task.yaml
+msgid ""
+"We have a linked list, built with *struct node*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    struct node {\n"
+"        struct node *next;\n"
+"        int hash;\n"
+"        int id;\n"
+"        char name[20];\n"
+"        char buffer[100];\n"
+"        unsigned int timestamp;\n"
+"        char acl;\n"
+"        short flow;\n"
+"        char *parent;\n"
+"        void *fifo;\n"
+"    }"
+msgstr ""
+
+#. name
+#: linked_structs/task.yaml
+msgid "[S3] Filtering a linked list"
+msgstr ""
+
+#. name, filter, name
+#: linked_structs/task.yaml
+msgid "Filtering"
+msgstr ""
+
+#. name, filter, header
+#: linked_structs/task.yaml
+msgid ""
+"We want to filter this list and only take the elements with a pair index "
+"(the index starts at 0, hence the first, the third, the fifth, ... "
+"elements of the linked list have to be taken), without modifying the "
+"initial list.\n"
+"\n"
+"Write the body of the function *pair_filter*.\n"
+"\n"
+"Hint : man 3 memcpy.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /* pair_filter\n"
+"     * Make a copy of the linked list starting at head,\n"
+"     * only taking one element out of two\n"
+"     *\n"
+"     * @head : head of a linked list, possibly NULL\n"
+"     * @return: pointer to the filtered linked list, return NULL if error"
+" or if head == NULL\n"
+"     */\n"
+"    struct node *pair_filter(struct node *head) {"
+msgstr ""
+
+#. context
+#: modem_read/task.yaml
+msgid ""
+"You are in 1977 and want to read your e-mail with your freshly bought "
+"Apple II. You are connected to the ARPANET through a modem, but "
+"unfortunately the modem's manufacturer has only given a single function "
+"`modem_read`, to read the data received by the modem, with the following "
+"prototype :\n"
+"\n"
+"``void modem_read(void *buffer, int *buf_len);``\n"
+"\n"
+"It fills the given buffer with the data received from the modem, and "
+"writes the number of bytes written to the value pointed by *buf_len*. It "
+"can write up to maximum 256 bytes in a single call. This function is "
+"guaranteed to succeed."
+msgstr ""
+
+#. name
+#: modem_read/task.yaml
+msgid "[S3] Reading from the wire"
+msgstr ""
+
+#. name, modem, name
+#. name, mcq3, text
+#: modem_read/task.yaml s2_make_mcq/task.yaml
+msgid "42"
+msgstr ""
+
+#. name, modem, header
+#: modem_read/task.yaml
+msgid ""
+"You want to know if one e-mail you received contains the byte 42.\n"
+"Write the body of the function *has_42*, this function has to use "
+"*malloc* to create the buffer :\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"     * @return: 1 if the modem received a byte containing 42\n"
+"     *         else 0, -1 if an error has happened.\n"
+"     */\n"
+"    int has_42() {"
+msgstr ""
+
+#. context
+#: my_strlen/task.yaml
+msgid "Voir projet bonus 2016."
+msgstr ""
+
+#. name
+#: my_strlen/task.yaml
+msgid "[S2] My strlen"
+msgstr ""
+
+#. name, strlen, name
+#: my_strlen/task.yaml
+msgid "stlren"
+msgstr ""
+
+#. name, strlen, header
+#: my_strlen/task.yaml
+msgid "strlen"
+msgstr ""
+
+#. context
+#: order_relation_linked_list/task.yaml
+msgid ""
+"Given the provided implementation of a linked list, you are asked to "
+"implement the ``insert`` function based on a specific order relation. By "
+"succeeding this task, you will be able to make ordered list like a "
+"`LinkedList` with a `Comparator` in `java`."
+msgstr ""
+
+#. name
+#: order_relation_linked_list/task.yaml
+msgid "[S4] Order relation on a linked list"
+msgstr ""
+
+#. name, order_relation, name
+#: order_relation_linked_list/task.yaml
+msgid "Order relation"
+msgstr ""
+
+#. name, order_relation, header
+#: order_relation_linked_list/task.yaml
+msgid ""
+"For this subproblem, you are asked to implement the comparison function "
+"which rules the order relation of the list.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * @return: 0 if equals, negative number if @b is greater and positive"
+" number otherwise\n"
+"    */\n"
+"    int compare(char a, char b){\n"
+"        //Your code will be inserted here\n"
+"    }"
+msgstr ""
+
+#. name, insert, name
+#: order_relation_linked_list/task.yaml
+msgid "Insert"
+msgstr ""
+
+#. name, insert, header
+#: order_relation_linked_list/task.yaml
+msgid ""
+"For this subproblem, you have the template of the structure node:\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    typedef struct node{\n"
+"        char val;\n"
+"        node_t* next;\n"
+"    } node_t;\n"
+"\n"
+"Starting from this structure, you are asked to implement the following "
+"function\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * @value: value to be inserted. If the value is already in the list, "
+"don't reinsert it.\n"
+"    * @fun: comparison function which rules the order relation of the "
+"list\n"
+"    * @head: first node of the list, head != NULL\n"
+"    * @return: 0 if success, -1 otherwise\n"
+"    */\n"
+"    int insert(node_t** head, char val, int (*cmp)(char,char)){\n"
+"        //Your code will be inserted here\n"
+"    }"
+msgstr ""
+
+#. context
+#: palindrome/task.yaml
+msgid ""
+"Palindrome are strings of text which reads the same backward as forward, "
+"i.e. : \"racecar\", or \"a man a plan a canal panama\"."
+msgstr ""
+
+#. name
+#: palindrome/task.yaml
+msgid "[S2] Palindrome - REVIEWED"
+msgstr ""
+
+#. name, q1, header
+#: palindrome/task.yaml
+msgid ""
+"Write the body of the function *pal* which tells if the given string is a"
+" palindrome or not. Ignore spaces. An empty string is considered a "
+"palindrome. You have access to the functions of *string.h*\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    #include <string.h>\n"
+"    /*\n"
+"    * @return: return 1 if a str is a palindrome, -1 if str is NULL, else"
+" 0.\n"
+"    */\n"
+"    int pal(char *str) {"
+msgstr ""
+
+#. author
+#: pointer_types/task.yaml
+msgid "Maxime Mawait"
+msgstr ""
+
+#. context
+#: pointer_types/task.yaml
+msgid ""
+"A hacker wanted to challenge you and encrypted your hard drive. To unlock"
+" your drive, he gave you a function ``get_key(int a, char b, int c)`` "
+"which returns the decryption key if the correct parameters are given.\n"
+"\n"
+"He then hid the parameters *a*, *b* and *c* in memory, and gave you a "
+"pointer from which you can retrieve these parameters."
+msgstr ""
+
+#. name
+#: pointer_types/task.yaml
+msgid "[S4] Pointer arithmetic - REVIEWED"
+msgstr ""
+
+#. name, first, name
+#: pointer_types/task.yaml
+msgid "First argument"
+msgstr ""
+
+#. name, first, header
+#: pointer_types/task.yaml
+msgid ""
+"You found a hint from the hacker, telling the first parameter is  located"
+" at the 12th byte after *ptr*. An int is guaranteed to be 4 bytes long.\n"
+"\n"
+"Write the body of the function *first* which returns the integer at that "
+"position in memory.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    int first(void *ptr) {"
+msgstr ""
+
+#. name, second, name
+#: pointer_types/task.yaml
+msgid "Second argument"
+msgstr ""
+
+#. name, second, header
+#: pointer_types/task.yaml
+msgid ""
+"The second parameter is a char located 6 bytes after *ptr*.\n"
+"\n"
+"Write the body of the function *second* which returns the char at that "
+"position in memory.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    char second(void *ptr) {"
+msgstr ""
+
+#. name, third, name
+#: pointer_types/task.yaml
+msgid "Third argument"
+msgstr ""
+
+#. name, third, header
+#: pointer_types/task.yaml
+msgid ""
+"The third parameter is an int located 45 bytes after *ptr*.\n"
+"\n"
+"Write the body of the function *third* which returns the int at that "
+"position in memory.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    int third(void *ptr) {"
+msgstr ""
+
+#. context
+#: printf/task.yaml
+msgid ""
+"In this exercise, you will familiarize yourself with the functions "
+"``printf(3)`` (printing in the terminal) and ``sprintf(3)`` (text "
+"formatting)."
+msgstr ""
+
+#. name
+#: printf/task.yaml
+msgid "[S2] Printing data"
+msgstr ""
+
+#. name, simple, name
+#: printf/task.yaml
+msgid "Foo"
+msgstr ""
+
+#. name, simple, header
+#: printf/task.yaml
+msgid ""
+"The function ``printf`` writes data to the standard output stream "
+"(*stdout*).\n"
+"\n"
+"Write the body of the function *print_foo* which will print \"foo\\\\n\" "
+"(without the quotes, the symbol '\\\\n' represents a **line feed**, i.e. "
+"the end of a line) to *stdout*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    void print_foo() {"
+msgstr ""
+
+#. name, digit, name
+#: printf/task.yaml
+msgid "Digital"
+msgstr ""
+
+#. name, digit, header
+#: printf/task.yaml
+msgid ""
+"``printf`` can also print the content of a variable. Write the body of "
+"the function *print_digit*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /* print_digit\n"
+"     * @n: an integer\n"
+"     *\n"
+"     * result: print to stdout \"The magic number is NUMBER.\\n\"\n"
+"     */\n"
+"    void print_digit(int number) {"
+msgstr ""
+
+#. name, example, name
+#: printf/task.yaml
+msgid "Floating away"
+msgstr ""
+
+#. name, example, header
+#: printf/task.yaml
+#, python-format
+msgid ""
+"``printf`` is a powerful formatting tool which can handle several data "
+"types, and several formatting parameters.\n"
+"\n"
+"What would the following call print to *stdout* ?\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    float PI = 3.1415926;\n"
+"    printf(\"pi = %.4f\", PI);\n"
+msgstr ""
+
+#. name, sprintf, name
+#: printf/task.yaml
+msgid "sprintf"
+msgstr ""
+
+#. name, sprintf, header
+#: printf/task.yaml
+msgid ""
+"``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to "
+"*stdout*, but instead writes to a *buffer*.\n"
+"\n"
+"Write the body of the function *format_str*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /* format_str, example:\n"
+"     * format_str(buf, 42, \"Olivier\", 'B') will write into buf\n"
+"     * the string \"Mister Olivier B. has 42 eggs\" (no line feed)\n"
+"     * The given buffer is guaranteed to be big enough.\n"
+"     */\n"
+"    char *format_str(char *buffer, unsigned int d, char *name, char "
+"initial) {\n"
+msgstr ""
+
+#. author
+#: s1_ctf1/task.yaml s1_ctf2/task.yaml s1_diff/task.yaml s1_grep/task.yaml
+#: s1_pipes/task.yaml s1_tar/task.yaml
+msgid "Tom Rousseaux"
+msgstr ""
+
+#. context
+#: s1_ctf1/task.yaml
+msgid ""
+"Téléchargez `cette archive "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf1/archive.tar.gz>`_,"
+" ouvez ``FirstMission`` et suivez les insctructions. Un code individuel "
+"vous sera fourni à la fin du CTF rentrez-le ci-dessous."
+msgstr ""
+
+#. name
+#: s1_ctf1/task.yaml
+msgid "[S1] CTF1 - REVIEWED"
+msgstr ""
+
+#. name, q1, name
+#: s1_ctf1/task.yaml
+msgid "Entrez le code ici"
+msgstr ""
+
+#. context
+#: s1_ctf2/task.yaml
+msgid ""
+"Téléchargez `cette archive "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf2/CTF2.tar.gz>`_,"
+" mettez son contenu dans un dossier de votre choix, lisez FirstMission et"
+" respectez les consignes."
+msgstr ""
+
+#. name
+#: s1_ctf2/task.yaml
+msgid "[S1] CTF2"
+msgstr ""
+
+#. context
+#: s1_diff/task.yaml
+msgid ""
+"3 students are suspected of doing illegal things with computer of the "
+"university. They know that computers send logs to the server and so hid "
+"their activity to the server. But they don't know that logs are also "
+"saved on the different computers.\n"
+"There are the logs from the server and from the students, use `diff(1) "
+"<https://sites.uclouvain.be/SystInfo/manpages/man1/diff.1.html>`_ to "
+"compare them and find which student are innocent.\n"
+"\n"
+"- `syslog "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/syslog.log>`_"
+"\n"
+"- `student 1 "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student1.log>`_"
+"\n"
+"- `student 2 "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student2.log>`_"
+"\n"
+"- `student 3 "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student3.log>`_"
+msgstr ""
+
+#. name
+#: s1_diff/task.yaml
+msgid "[S1] Diff"
+msgstr ""
+
+#. name, q1, name
+#: s1_diff/task.yaml
+msgid "Which students are innocents?"
+msgstr ""
+
+#. name, q1, text
+#: s1_diff/task.yaml
+msgid "Student 1"
+msgstr ""
+
+#. name, q1, text
+#: s1_diff/task.yaml
+msgid "Student 2"
+msgstr ""
+
+#. name, q1, text
+#: s1_diff/task.yaml
+msgid "Student 3"
+msgstr ""
+
+#. context
+#: s1_grep/task.yaml
+msgid ""
+"You'll learn to use the `grep(1) command "
+"<https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_. You'll"
+" use it on the file architecture downloadable `here "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_grep/CUnit.tar>`_."
+msgstr ""
+
+#. name
+#: s1_grep/task.yaml
+msgid "[S1] grep"
+msgstr ""
+
+#. name, CU_trim_left, name
+#: s1_grep/task.yaml
+msgid "CU_trim_left"
+msgstr ""
+
+#. name, CU_trim_left, header
+#: s1_grep/task.yaml
+msgid ""
+"Where is defined the function CU_trim_left? Give only the name of the "
+"file."
+msgstr ""
+
+#. name, CU_UNREFERENCED_PARAMETER_pTest, name
+#: s1_grep/task.yaml
+msgid "CU_UNREFERENCED_PARAMETER(pTest);"
+msgstr ""
+
+#. name, CU_UNREFERENCED_PARAMETER_pTest, header
+#: s1_grep/task.yaml
+msgid ""
+"What is the linenumber that contains "
+"\"CU_UNREFERENCED_PARAMETER(pTest);\" in Sources/Console/Console.c? (Try "
+"with and without the quotes to see the difference.)"
+msgstr ""
+
+#. name, assert, name
+#: s1_grep/task.yaml
+msgid "assert"
+msgstr ""
+
+#. name, assert, header
+#: s1_grep/task.yaml
+msgid ""
+"How many times does \"assert\" come up in all the files of the working "
+"directory?\n"
+"(Hint: use `wc(1) "
+"<https://sites.uclouvain.be/SystInfo/manpages/man1/wc.1.html>`_)"
+msgstr ""
+
+#. context
+#: s1_pipes/task.yaml
+msgid ""
+"In this exercise you will learn to use pipes, refer to `this section "
+"<https://sites.uclouvain.be/SystInfo/notes/Theorie/html/intro.html#shell>`_"
+" for their use.\n"
+"You get and `input "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_pipes/input.txt>`_"
+" from where you want to extract an ordered exhaustive list of unique "
+"hashtags. For this, you should use pipes. To extract hashtags from the "
+"text you can either use ``sed '/ [^{#}]/d'`` or `grep(1) "
+"<https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_."
+msgstr ""
+
+#. name
+#: s1_pipes/task.yaml
+msgid "[S1] Pipes"
+msgstr ""
+
+#. name, file, header
+#: s1_pipes/task.yaml
+msgid "Redirect the standard output in a file.txt and post it here."
+msgstr ""
+
+#. context
+#: s1_tar/task.yaml
+msgid ""
+"You have to **compress** (*.tar.gz* file) the following file system\n"
+"\n"
+".. code-block:: console\n"
+"\n"
+"    /\n"
+"        file\n"
+"        folder1/\n"
+"            file1.c\n"
+"            file2.c\n"
+"            file3.c\n"
+"        folder2/\n"
+"            file1.h\n"
+"            fime2.h\n"
+"            file3.h\n"
+"\n"
+"For this, use `tar(1) "
+"<https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_, feel "
+"free to check the arguments of this utility wherever you want.\n"
+"You can download the file system `here "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_."
+"\n"
+msgstr ""
+
+#. name
+#: s1_tar/task.yaml
+msgid "[S1] tar"
+msgstr ""
+
+#. author
+#: s2_make/task.yaml s2_make_calc/task.yaml s3_make/task.yaml
+#: s3_make_tests/task.yaml
+msgid "Pablo Gonzalez Alvarez"
+msgstr ""
+
+#. context
+#: s2_make/task.yaml
+msgid ""
+"*Estimated time: 20 minutes*\n"
+"\n"
+"``make`` is a task runner for targets described in a `Makefile`. It is "
+"mostly used to control the compilation of an executable from source code."
+" Thus, you can use it to automate the tidious task of compiling your c "
+"code, or even automate the compilation of a report made with LaTeX.\n"
+"\n"
+"``make`` a new beginning\n"
+"------------------------\n"
+"\n"
+"To give you a first taste, open up a *terminal* and type the following "
+"command: ``make``.\n"
+"\n"
+"``make`` will great you with the following message:\n"
+"\n"
+".. code-block::\n"
+"\n"
+"    make: *** No targets specified and no makefile found.  Stop.\n"
+"\n"
+"So what happened? ``make`` first start to search in your *current "
+"directory* for a file called ``Makefile``. This file contains "
+"*instructions*, aka *rules*, that tell ``make`` what to do.  Since there "
+"are no such file, ``make`` stops almost instantly.\n"
+"\n"
+"``make`` it simple\n"
+"------------------\n"
+"\n"
+"Now write a simple hello world program, which you will save into a file "
+"called ``hello.c``. This programs will print the following on the "
+"standard output:\n"
+"\n"
+".. code-block::\n"
+"\n"
+"     Hello make\n"
+"\n"
+"Now, fire up your terminal, use ``cd path/to/hello/folder/`` to go to the"
+" directory which contains ``hello.c`` (`download hello.c "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s2_make/hello.c>`_"
+" to compare with what you did) and type: ``make hello``\n"
+"\n"
+"Now the ``make`` comes alive and tells you something like:\n"
+"\n"
+".. code-block::\n"
+"\n"
+"    cc     hello.c   -o hello\n"
+"\n"
+"Wow! What happened? When you typed ``make hello``, ``hello`` is what is "
+"called a **target**. A **target** is usually the name of a file that is "
+"generated by a program; examples of targets are executable or object "
+"files.\n"
+"\n"
+"Basically, ``make`` will search for a file named ``hello`` and detect "
+"from that file what programming language it uses. For most languages, "
+"``make`` has some basic builtin recipes, called **implicit rules**, to "
+"compile it. Here the **recipe** is given in the above output.\n"
+"\n"
+"In that output:\n"
+"\n"
+"* ``cc`` stands for *C Compiler*;\n"
+"* ``hello.c`` the C program to be compiled;\n"
+"* ``-o hello`` an option to place the output of the compilation in the "
+"file ``hello``.\n"
+"\n"
+"Now if you type ``ls`` in your command line, you will see that a file "
+"``hello`` appeared. This is the **executable** built by ``make`` from "
+"``hello.c``. Now you can execute it and verify what is printed on the "
+"standard output.\n"
+"\n"
+"If you type again ``make hello`` in your command line, it will tell you:\n"
+"\n"
+".. code-block::\n"
+"\n"
+"    make: 'hello' is up to date.\n"
+"\n"
+"That is because ``make`` only builds the files that are changed. If "
+"``hello`` is more recent than its source file ``hello.c``, ``make`` will "
+"skip the compilation process.\n"
+"\n"
+"To see this, modify ``hello.c`` to write the following on the standard "
+"output:\n"
+"\n"
+".. code-block::\n"
+"\n"
+"    Hello, make!\n"
+"\n"
+"Finally, run ``make hello`` again. Since ``hello.c`` is more recent than "
+"``hello``, ``make`` will compile the source file again.\n"
+"\n"
+"Thats it, you made your first experiences with ``make``.\n"
+"\n"
+"Now I strongly recommend you read `sections 2.1 to 2.3. in the GNU make "
+"manual "
+"<https://www.gnu.org/software/make/manual/make.html#Introduction>`_. It "
+"will only take you 10 minutes (included in the above given estimated "
+"time) and will help you understand how to ``make`` magic happen.\n"
+"\n"
+"Once you read these 3 sections, let us practice a bit.\n"
+"\n"
+"To try the following questions locally, you can download a zip file of "
+"the questions folder `here "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s2_make/make_me.zip>`_."
+"\n"
+"\n"
+"----\n"
+"\n"
+"References\n"
+"----------\n"
+"\n"
+"* https://sites.uclouvain.be/SystInfo/notes/Outils/html/make.html\n"
+"* https://www.gnu.org/software/make/manual/"
+msgstr ""
+
+#. name
+#: s2_make/task.yaml
+msgid "[S2] make basics - REVIEWED"
+msgstr ""
+
+#. name, make_me_easy, name
+#: s2_make/task.yaml
+msgid "Make me easy"
+msgstr ""
+
+#. name, make_me_easy, header
+#: s2_make/task.yaml
+msgid ""
+"After typing ``ls`` in your terminal, you see the following folder "
+"structure:\n"
+"\n"
+".. code-block:: console\n"
+"\n"
+"    make_me.c       make_me.h\n"
+"\n"
+"You want to build an executable ``make_me`` from the above source thanks "
+"to ``make``. What do you type in the terminal to do that?\n"
+"\n"
+"**Hint:** you do not need to write a *Makefile*."
+msgstr ""
+
+#. name, make_me_less_easy, name
+#: s2_make/task.yaml
+msgid "Make me less easy"
+msgstr ""
+
+#. name, make_me_less_easy, header
+#: s2_make/task.yaml
+msgid ""
+"Suppose you cannot use what you did in the above question. Write a "
+"Makefile that compiles the above given code and builds an executable "
+"``make_me``. You can reuse the ``Makefile`` given in the above given zip "
+"file.\n"
+"\n"
+"**Hint:** If you have no idea where to start, read `sections 2.1 to 2.3. "
+"in the GNU make manual "
+"<https://www.gnu.org/software/make/manual/make.html#Introduction>`_."
+msgstr ""
+
+#. context
+#: s2_make_calc/task.yaml
+msgid ""
+"*Estimated time: 5 minutes*\n"
+"\n"
+"You have just built a simple calculator. When typing ``ls`` in your "
+"command line, the source folder has the following structure:\n"
+"\n"
+".. code-block:: console\n"
+"\n"
+"    calc.c    calc.h    operations.c    operations.h\n"
+"\n"
+"``calc.c`` contains the calculator which handles the 4 basic operations: "
+"addition, substraction, multiplication, and division. These 4 operations "
+"are implemented in ``operations.c``.\n"
+"\n"
+"As you might have noticed, there are also two other files: ``calc.h`` and"
+" ``operations.h``. These are the corresponding **header** files of "
+"``calc.c`` and ``operations.c``.\n"
+"\n"
+"These headers contain the function prototypes and specifications. For "
+"instance ``double add(double a, double b);``.\n"
+"\n"
+"Unfortunately, the source folder was lost but you still have access to "
+"the object files."
+msgstr ""
+
+#. name
+#: s2_make_calc/task.yaml
+msgid "[S2] make basics - headers and prerequisites"
+msgstr ""
+
+#. name, make_calc_simple, name
+#: s2_make_calc/task.yaml
+msgid "Linking "
+msgstr ""
+
+#. name, make_calc_simple, header
+#: s2_make_calc/task.yaml
+msgid ""
+"Write a *Makefile* to build the executable ``calc`` from both object "
+"files ``calc.o`` and ``operations.o``."
+msgstr ""
+
+#. context
+#: s2_make_mcq/task.yaml s3_cunit_basics/task.yaml
+msgid "*Estimated time: 5 minutes*"
+msgstr ""
+
+#. name
+#: s2_make_mcq/task.yaml
+msgid "[S2] make basics - multiple choice questions - REVIEWED"
+msgstr ""
+
+#. name, mcq1, name
+#: s2_make_mcq/task.yaml
+msgid "Find the target"
+msgstr ""
+
+#. name, mcq1, header
+#: s2_make_mcq/task.yaml
+msgid "Select all *correct* answers related to the *target* of a Makefile rule."
+msgstr ""
+
+#. name, mcq1, success_message
+#: s2_make_mcq/task.yaml
+msgid "Bullseye, good job! "
+msgstr ""
+
+#. name, mcq1, text
+#: s2_make_mcq/task.yaml
+msgid "The target is the bullseye of a shooting target."
+msgstr ""
+
+#. name, mcq1, text
+#: s2_make_mcq/task.yaml
+msgid "The target is the name of a file."
+msgstr ""
+
+#. name, mcq2, name
+#: s2_make_mcq/task.yaml
+msgid "What are the prerequisite?"
+msgstr ""
+
+#. name, mcq2, header
+#: s2_make_mcq/task.yaml
+msgid ""
+"Select all *correct* answers related to the *prerequisite* of a Makefile "
+"rule."
+msgstr ""
+
+#. name, mcq2, success_message
+#. name, mcq3, success_message
+#. name, mcq4, success_message
+#. name, mcq5, success_message
+#: s2_make_mcq/task.yaml
+msgid "Good job!"
+msgstr ""
+
+#. name, mcq2, error_message
+#. name, mcq3, error_message
+#. name, mcq4, error_message
+#. name, mcq5, error_message
+#: s2_make_mcq/task.yaml
+msgid "Try again!"
+msgstr ""
+
+#. name, mcq2, text
+#: s2_make_mcq/task.yaml
+msgid "The prerequisite is a file that is used as input to create the target."
+msgstr ""
+
+#. name, mcq2, text
+#: s2_make_mcq/task.yaml
+msgid "The prerequisite is to have good marksmanship skills to hit the target."
+msgstr ""
+
+#. name, mcq3, name
+#: s2_make_mcq/task.yaml
+msgid "The recipe"
+msgstr ""
+
+#. name, mcq3, header
+#: s2_make_mcq/task.yaml
+msgid ""
+"Please select all *correct* answers related to the *recipe* of a Makefile"
+" rule."
+msgstr ""
+
+#. name, mcq3, text
+#: s2_make_mcq/task.yaml
+msgid "A recipe is an action that make carries out."
+msgstr ""
+
+#. name, mcq3, feedback
+#: s2_make_mcq/task.yaml
+msgid ""
+"That is the Answer to the Ultimate Question of Life, the Universe, and "
+"Everything."
+msgstr ""
+
+#. name, mcq3, text
+#: s2_make_mcq/task.yaml
+msgid "The recipe is a file that is used as input to create the target."
+msgstr ""
+
+#. name, mcq3, text
+#: s2_make_mcq/task.yaml
+msgid "The recipe is the name of a file."
+msgstr ""
+
+#. name, mcq4, name
+#: s2_make_mcq/task.yaml
+msgid "Rules syntax"
+msgstr ""
+
+#. name, mcq4, header
+#: s2_make_mcq/task.yaml
+msgid ""
+"Choice all *wrong* Makefile *rules*.\n"
+"\n"
+"*Note:*\n"
+"\n"
+"* ``[tab]`` indicates a tabulation;\n"
+"* ``[spaces]`` indicates 8 white spaces."
+msgstr ""
+
+#. name, mcq4, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"\n"
+".. code-block:: console\n"
+"\n"
+"        clean:\n"
+"        @rm -f src/*.o"
+msgstr ""
+
+#. name, mcq4, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"\n"
+".. code-block:: console\n"
+"\n"
+"    clean:\n"
+"    [tab]@rm -f src/*.o"
+msgstr ""
+
+#. name, mcq4, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"\n"
+".. code-block:: console\n"
+"\n"
+"    clean\n"
+"    [spaces]@rm -f src/*.o\n"
+msgstr ""
+
+#. name, mcq4, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"\n"
+".. code-block:: console\n"
+"\n"
+"    clean\n"
+"    [tab]@rm -f src/*.o"
+msgstr ""
+
+#. name, mcq4, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"\n"
+".. code-block:: console\n"
+"\n"
+"        clean:\n"
+"        [spaces]@rm -f src/*.o"
+msgstr ""
+
+#. name, mcq4, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"\n"
+".. code-block:: console\n"
+"\n"
+"        clean\n"
+"        @rm -f src/*.o"
+msgstr ""
+
+#. name, match1, name
+#: s2_make_mcq/task.yaml
+msgid "Break"
+msgstr ""
+
+#. name, match1, header
+#: s2_make_mcq/task.yaml
+msgid "In a Makefile, what is the character you can use to split a long line?"
+msgstr ""
+
+#. name, mcq5, name
+#: s2_make_mcq/task.yaml
+msgid "Recipes indentation"
+msgstr ""
+
+#. name, mcq5, header
+#: s2_make_mcq/task.yaml
+msgid "Choice all the *correct* answers."
+msgstr ""
+
+#. name, mcq5, text
+#: s2_make_mcq/task.yaml
+msgid "At the beginning of every recipe line, you put a tab indentation"
+msgstr ""
+
+#. name, mcq5, text
+#: s2_make_mcq/task.yaml
+msgid ""
+"At the beginning of every recipe line, you put a 8 white spaces "
+"indentation."
+msgstr ""
+
+#. name, mcq5, text
+#: s2_make_mcq/task.yaml
+msgid "At the beginning of every recipe line, you put no indentation."
+msgstr ""
+
+#. name
+#: s3_cunit_basics/task.yaml
+msgid "[S3] Cunit basics"
+msgstr ""
+
+#. name, q1, name
+#: s3_cunit_basics/task.yaml
+msgid "CUnit linker"
+msgstr ""
+
+#. name, q1, header
+#: s3_cunit_basics/task.yaml
+msgid ""
+"What is the name of the library you need to link when you compile a unit "
+"test with ``CUnit``?"
+msgstr ""
+
+#. context
+#: s3_make/task.yaml
+msgid ""
+"*Estimated time: 20 minutes*\n"
+"\n"
+"First, read `sections 2.4 to 2.7. in the GNU make manual "
+"<https://www.gnu.org/software/make/manual/make.html#Variables-"
+"Simplify>`_. It will only take you 10 minutes (included in the above "
+"given estimated time) and will help you understand how to ``make`` more "
+"magic happen.\n"
+"\n"
+"As you have just read, one very useful use of Makefiles is to use "
+"variables. You can use a variable to define the C compiler you will use "
+"and the flags you want it to use.\n"
+"\n"
+"For instance, let us consider the following Makefile:\n"
+"\n"
+".. code-block:: console\n"
+"\n"
+"    # CC variable for C compiler\n"
+"    # You can replace gcc by clang if you prefer\n"
+"    CC = gcc\n"
+"    # CFLAGS variable for gcc/clang flags\n"
+"    # See gcc/clang manual to understand all flags\n"
+"    CFLAGS += -std=c99 # Define which version of the C standard to use\n"
+"    CFLAGS += -Wall # Enable the 'all' set of warnings\n"
+"    CFLAGS += -Werror # Treat all warnings as error\n"
+"    CFLAGS += -Wshadow # Warn when shadowing variables\n"
+"    CFLAGS += -Wextra # Enable additional warnings\n"
+"    CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect "
+"buffer overflows\n"
+"    CFLAGS += -fstack-protector-all # Add canary code to detect stack "
+"smashing\n"
+"\n"
+"    OBJ = calc.o operations.o\n"
+"\n"
+"    calc: $(OBJ)\n"
+"        $(CC) $(CFLAGS) -o calc $(OBJ)\n"
+"\n"
+"    calc.o: calc.c calc.h operations.h\n"
+"        $(CC) $(CFLAGS) -c calc.c\n"
+"\n"
+"    operations.o: operations.c operations.h\n"
+"        $(CC) $(CFLAGS) -c operations.c\n"
+"\n"
+"    .PHONY: clean mrproper\n"
+"\n"
+"    clean:\n"
+"        rm -f $(OBJ)\n"
+"\n"
+"    mrproper: clean\n"
+"        rm  -f calc\n"
+"\n"
+"\n"
+"In this file we used 3 variables: ``CC`` to define the C Compiler; "
+"``CFLAGS`` to define the C Compiler flags; ``OBJ`` to define the object "
+"files. This is a common use of variables to both simplify the Makefile "
+"and easily change the settings of the compiler.\n"
+"\n"
+"Notice the use of two ``.PHONY`` targets: ``clean`` which will remove "
+"auto-generated files, e.g. object files; ``mrproper`` which will remove "
+"both auto-generated & built files, e.g. executable files."
+msgstr ""
+
+#. name
+#: s3_make/task.yaml
+msgid "[S3] make more basics"
+msgstr ""
+
+#. name, m1, name
+#: s3_make/task.yaml
+msgid "Calculator variable"
+msgstr ""
+
+#. name, m1, header
+#: s3_make/task.yaml
+msgid ""
+"Remember the  `calculator "
+"<https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_make_calc>`_ "
+"you had to make last week?\n"
+"\n"
+"When you typed ``ls`` you had the following folder structure:\n"
+"\n"
+".. code-block:: console\n"
+"\n"
+"    calc.c    calc.h    operations.c    operations.h\n"
+"\n"
+"Write a variable called ``OBJ`` to simplify the compilation process in "
+"the Makefile."
+msgstr ""
+
+#. name, c1, name
+#: s3_make/task.yaml
+msgid "Make "
+msgstr ""
+
+#. name, c1, header
+#: s3_make/task.yaml
+msgid "Remember the calculator"
+msgstr ""
+
+#. context
+#: s3_make_mcq/task.yaml
+msgid "*Estimated time: 15 minutes*"
+msgstr ""
+
+#. name
+#: s3_make_mcq/task.yaml
+msgid "[S3] make more basics - multiple choice questions"
+msgstr ""
+
+#. name, m1, name
+#: s3_make_mcq/task.yaml
+msgid "Using a variable in a Makefile"
+msgstr ""
+
+#. name, m1, header
+#: s3_make_mcq/task.yaml
+msgid ""
+"In your Makefile, you have the following variable definition:\n"
+"\n"
+".. code-block:: console\n"
+"\n"
+"    CC = gcc\n"
+"\n"
+"What do you type to use it in other parts of your Makefile?"
+msgstr ""
+
+#. name, q1, name
+#: s3_make_mcq/task.yaml
+msgid "Linking"
+msgstr ""
+
+#. name, q1, header
+#: s3_make_mcq/task.yaml
+msgid ""
+"Select all *correct* answers related to the linking of the `CUnit` "
+"library in a Makefile recipe."
+msgstr ""
+
+#. name, q1, text
+#: s3_make_mcq/task.yaml
+msgid "gcc -o test test.o -lcunit"
+msgstr ""
+
+#. name, q1, text
+#: s3_make_mcq/task.yaml
+msgid "gcc -c test.o -lcunit"
+msgstr ""
+
+#. name, q1, text
+#: s3_make_mcq/task.yaml
+msgid "gcc -o test.o"
+msgstr ""
+
+#. name, q1, feedback
+#: s3_make_mcq/task.yaml
+msgid "The name of the executable is missing and the "
+msgstr ""
+
+#. name, q2, header
+#: s3_make_mcq/task.yaml
+msgid ""
+"You want to check for leaks in your code ``program`` with valgrind. What "
+"option(s) do you use to report all possible memory leaks of ``program`` "
+"in full detail?\n"
+"\n"
+"Write the whole command you want to output, for instance     :\n"
+"\n"
+"``valgrind --option-name program``"
+msgstr ""
+
+#. context
+#: s3_make_tests/task.yaml
+msgid ""
+"*Estimated time: 15 minutes*\n"
+"\n"
+"This week, we will see how to automate the testing process.\n"
+"You have the following project folder structure:\n"
+"\n"
+".. code-block::\n"
+"\n"
+"    src/\n"
+"        calc.c\n"
+"        calc.h\n"
+"        operations.c\n"
+"        operations.h\n"
+"    test/\n"
+"        calc_test.c\n"
+"        operations_test.c\n"
+"    Makefile\n"
+"\n"
+"The ``Makefile`` is partially done, but somehow the target ``test`` for "
+"building the tests was lost.\n"
+"\n"
+".. code-block::\n"
+"\n"
+"    CC = gcc\n"
+"    # See gcc/clang manual to understand all flags\n"
+"    CFLAGS += -std=c99 # Define which version of the C standard to use\n"
+"    CFLAGS += -Wall # Enable the 'all' set of warnings\n"
+"    CFLAGS += -Werror # Treat all warnings as error\n"
+"    CFLAGS += -Wshadow # Warn when shadowing variables\n"
+"    CFLAGS += -Wextra # Enable additional warnings\n"
+"    CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect "
+"buffer overflows\n"
+"    CFLAGS += -fstack-protector-all # Add canary code to detect stack "
+"smashing\n"
+"\n"
+"    # We have no libraries to link against except libc, but we want to "
+"keep\n"
+"    # the symbols for debugging\n"
+"    LDFLAGS= -rdynamic -lcunit\n"
+"\n"
+"    ## all        : Build calc (by default)\n"
+"    # Default target\n"
+"    all: calc\n"
+"\n"
+"    ## debug        : Build calc in debug mode\n"
+"    # If we run `make debug` instead, keep the debug symbols for gdb\n"
+"    # and define the DEBUG macro.\n"
+"    debug: CFLAGS += -g -DDEBUG -Wno-unused-parameter -fno-omit-frame-"
+"pointer\n"
+"    debug: clean calc\n"
+"\n"
+"    ## calc        : Build calc\n"
+"    # We use an implicit rule: look for the files "
+"{calc,operations}.{c,h},\n"
+"    # compile them and link the resulting *.o into an executable named "
+"calc\n"
+"    calc: calc.o operations.o\n"
+"        $(CC) $(CFLAGS)  -o calc {calc,operations}.o\n"
+"\n"
+"    # We use an implicit rule: look for the files calc.{c,h},\n"
+"    # compile them w/out linking\n"
+"    calc.o: src/calc.c src/calc.h\n"
+"        $(CC) $(CFLAGS) -c src/calc.{c,h}\n"
+"    # We use an implicit rule: look for the files operations.{c,h},\n"
+"    # compile them w/out linking\n"
+"    operations.o: src/operations.c src/operations.h\n"
+"        $(CC) $(CFLAGS) -c src/operations.{c,h}\n"
+"\n"
+"    # YOUR CODE HERE #\n"
+"\n"
+"    # Declare clean, mrproper and help as a phony targets\n"
+"    .PHONY: clean mrproper help\n"
+"\n"
+"    ## clean        : Remove auto-generated files from build\n"
+"    clean:\n"
+"        @rm -f *.o\n"
+"\n"
+"    ## clean-debug        : Removve auto-generated files from debug mode "
+"build\n"
+"    clean-debug:\n"
+"        @rm -f src/*.gch\n"
+"    ## mrproper    : Remove both auto-generated & built files\n"
+"    mrproper: clean clean-debug\n"
+"        @rm -f calc\n"
+"\n"
+"    ## help        : Show different make options\n"
+"    help: Makefile\n"
+"        @sed -n 's/^##//p' $<\n"
+"\n"
+"To try locally, you can download the project folder `_here <>`"
+msgstr ""
+
+#. name
+#: s3_make_tests/task.yaml
+msgid "[S3] make tests"
+msgstr ""
+
+#. name, make_test, name
+#: s3_make_tests/task.yaml
+msgid "Make test"
+msgstr ""
+
+#. name, make_test, header
+#: s3_make_tests/task.yaml
+msgid ""
+"You have the above given ``Makefile``. You want to add a target to build "
+"the test that use the library **CUnit**. You will call this target "
+"``test``.\n"
+msgstr ""
+
+#. author
+#: s4_file_save_struct/task.yaml s4_read_file_array_integer/task.yaml
+#: s5_big_array_get_set/task.yaml s5_file_copy/task.yaml
+#: s5_file_exists/task.yaml
+msgid "Olivier Martin"
+msgstr ""
+
+#. context
+#: s4_file_save_struct/task.yaml
+msgid ""
+"*Estimated time: 25 minutes*\n"
+"\n"
+"Given an array of ``struct point`` defined below, write a C code to write"
+" the array of struct into a file. The file may already exist or not. "
+"After the execution of the function, the file should only contain the "
+"array. If the file has to be created, the user who created it must have "
+"the permission to read it.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    typedef struct point {\n"
+"        int x;\n"
+"        int y;\n"
+"        int z;\n"
+"    } point_t;\n"
+"\n"
+"Use only ``open(2)``, ``write(2)`` and ``close(2)``. You can only call "
+"``write(2)`` once.\n"
+"\n"
+"Hint : read carefully the man page of ``open(2)`` to manage all the  "
+"cases mentionned here above."
+msgstr ""
+
+#. name
+#: s4_file_save_struct/task.yaml
+msgid "[S5] Save struct into file - REVIEWED"
+msgstr ""
+
+#. name, q1, header
+#: s4_file_save_struct/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"     * @pre pt != NULL, pointer to the first point_t in the array\n"
+"     *      size > 0, the length of the array.\n"
+"     *      filename != NULL\n"
+"     * @post write the array of struct in the file.\n"
+"     *       return 0 is everything occurs fine.\n"
+"     *       -1 if open() fails.\n"
+"     *       -2 if write() fails.\n"
+"     *       -3 if close() fails.\n"
+"     */\n"
+"    int save(point_t *pt, int size, char *filename) {"
+msgstr ""
+
+#. context
+#: s4_read_file_array_integer/task.yaml
+msgid ""
+"*Estimated time: 25 minutes*\n"
+"\n"
+"Given a file containing some (possibly none) positive integers (``int``),"
+" write a code that computes the sum of all integers present in the file. "
+"The sum have to be returned.\n"
+"\n"
+"- If ``open()`` fails, return ``-1``.\n"
+"- If ``read()`` fails, return ``-2``.\n"
+"- If ``close()`` fails, return ``-3``.\n"
+"\n"
+"Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``."
+msgstr ""
+
+#. name
+#: s4_read_file_array_integer/task.yaml
+msgid "[S5] File integers reading - REVIEWED"
+msgstr ""
+
+#. name, q1, name
+#: s4_read_file_array_integer/task.yaml
+msgid "Write your code here"
+msgstr ""
+
+#. name, q1, header
+#: s4_read_file_array_integer/task.yaml
+msgid ""
+".. code-block:: java\n"
+"\n"
+"    /*\n"
+"     * @pre filename != NULL, name of the file\n"
+"     * @post return the sum of all integers present in the file.\n"
+"     *       return -1 if the file can not be open.\n"
+"     *       return -2 if an error occurs during reading\n"
+"     *       return -3 if close() fails.\n"
+"     */\n"
+"    int sum_file(char *filename) {"
+msgstr ""
+
+#. context
+#: s5_big_array_get_set/task.yaml
+msgid ""
+"*Estimated time: 30 minutes*\n"
+"\n"
+"Given a file containing a huge array of integers, you are asked to write "
+"a function to edit an integer inside the array, and another function to "
+"retrieve a specific integer from this array.\n"
+"\n"
+"Since the array is huge, you can not load it entirely into memory. "
+"Consequently, you have to naviguate directly through the array in the "
+"file by using `lseek(2) "
+"<https://sites.uclouvain.be/SystInfo/manpages/man2/lseek.2.html>`_.\n"
+"\n"
+"You may want to use `fstat(2) <https://linux.die.net/man/2/fstat>`_ to "
+"get informations about the file.\n"
+"\n"
+"Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``."
+msgstr ""
+
+#. name
+#: s5_big_array_get_set/task.yaml
+msgid "[S5] Get and set on array in file - REVIEWED"
+msgstr ""
+
+#. name, q1, header
+#: s5_big_array_get_set/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"     * @pre filename != NULL, index >= 0\n"
+"     * @post return the integer at the index {index}\n"
+"     *       of the array in the file {filename}.\n"
+"     *       return -1 in case of error.\n"
+"     *       return -2 if index >= length of array.\n"
+"     */\n"
+"    int get(char *filename, int index) {"
+msgstr ""
+
+#. name, q2, header
+#: s5_big_array_get_set/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"     * @pre filename != NULL, index >= 0\n"
+"     * @post set the integer present in the file {filename}\n"
+"     *       at index {index} at value {value}.\n"
+"     *       do nothing if something fails.\n"
+"     */\n"
+"    void set(char *filename, int index, int value) {"
+msgstr ""
+
+#. context
+#: s5_file_copy/task.yaml
+msgid ""
+"*Estimated time: 30 minutes*\n"
+"\n"
+"Given a file containing arbitrary bytes, you are asked to define a "
+"function that copy the file. You can not modify the content of the "
+"original file. Beware, the copied file should have the same permissions "
+"as the original file.\n"
+"\n"
+"Use only ``open(2)``, ``read(2)``, ``write(2)``, ``stat(2)`` and "
+"``close(2)``."
+msgstr ""
+
+#. name
+#: s5_file_copy/task.yaml
+msgid "[S5] File copy - REVIEWED"
+msgstr ""
+
+#. name, q1, header
+#: s5_file_copy/task.yaml
+msgid ""
+"Write here the body of the function\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"     * @pre file_name != NULL, name of the original file\n"
+"     *      new_file_name != NULL, name of the new file (the copy)\n"
+"     *\n"
+"     * @post copy the content of {file_name} to {new_file_name}.\n"
+"     *       return 0 if the function terminates with success. -1 in case"
+" of errors.\n"
+"     */\n"
+"    int copy(char *file_name, char *new_file_name) {"
+msgstr ""
+
+#. context
+#: s5_file_exists/task.yaml
+msgid ""
+"*Estimated time: 10 minutes*\n"
+"\n"
+"Using `open(2) "
+"<https://sites.uclouvain.be/SystInfo/manpages/man2/open.2.html>`_, "
+"determine if a file exists.\n"
+"\n"
+msgstr ""
+
+#. name
+#: s5_file_exists/task.yaml
+msgid "[S5] File exists - REVIEWED"
+msgstr ""
+
+#. name, q1, name
+#: s5_file_exists/task.yaml
+msgid "File exist"
+msgstr ""
+
+#. name, q1, header
+#: s5_file_exists/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"     * @pre filename != NULL\n"
+"     * @post return 0 if the file {filename} exist. -1 Otherwise.\n"
+"     */\n"
+"     int file_exists(char *filename)"
+msgstr ""
+
+#. context
+#: set_bit/task.yaml
+msgid ""
+"In this exercise, we will work with operation on bits. When we speak "
+"about the position of a bit, the index 0 corresponds to weakest bit, 1 to"
+" the second-weakest bit, ...\n"
+"\n"
+"In c, you can write a number in a binary (base 2) form by prefixing it "
+"via 0b.\n"
+"e.g. 0b11010 = 26 (base 10)\n"
+"\n"
+"Note: numbers begin by 0 are stored in octal (base 8).\n"
+"e.g. 022 (base 8) = 18 (base 10)\n"
+"\n"
+"This exercise will introduce some non-standard data types which guarantee"
+" that the variable has a fixed number of bits. Indeed, on some machines, "
+"a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise "
+"operations, we have to know first on how many bits we are working.\n"
+"\n"
+"To do so, we introduce two new classes of variable types :\n"
+"\n"
+"* *bool* (from <stdbool.h>), which is 1-bit long, hence either 0 or 1\n"
+"* *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 "
+"bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* "
+"or *int* with bit-lengths 8, 16, 32 and 64). (from <stdint.h>)."
+msgstr ""
+
+#. name
+#: set_bit/task.yaml
+msgid "[S2] Bit setting"
+msgstr ""
+
+#. name, q1, header
+#: set_bit/task.yaml
+msgid ""
+"Write the body of a function that returns the variable *x*, but with the "
+"*pos*-est bit set to *val*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    #include <stdint.h>\n"
+"    #include <stdbool.h>\n"
+"    uint64_t set_bit(uint64_t x, int pos, bool val) {"
+msgstr ""
+
+#. context
+#: simple_stack/task.yaml
+msgid ""
+"You are asked to implement the ``pop`` and ``push`` functions of the "
+"given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_"
+" interface.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    struct node {\n"
+"        node *next;\n"
+"        char *value;\n"
+"    };\n"
+"\n"
+".. image:: "
+"https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png\n"
+"        :align: right\n"
+"        :height: 540px\n"
+"        :width: 773px\n"
+"        :scale: 50%\n"
+"\n"
+"\n"
+"\n"
+"*Hints*\n"
+"=======\n"
+"- @value is also a pointer, it must be allocated.\n"
+"\n"
+"- `strncpy <https://linux.die.net/man/3/strncpy>`_\n"
+"\n"
+"- `strlen <https://linux.die.net/man/3/strlen>`_\n"
+"\n"
+"    -- strlen does not count the '\\\\0' character\n"
+"\n"
+"- Don't forget to free **all** the allocated space when popping one "
+"element.\n"
+msgstr ""
+
+#. name
+#: simple_stack/task.yaml
+msgid "[S3] Simple stack"
+msgstr ""
+
+#. name, push, name
+#: simple_stack/task.yaml
+msgid "Push"
+msgstr ""
+
+#. name, push, header
+#: simple_stack/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /**\n"
+"    * Add @name at the \"head\" of the stack.\n"
+"    *\n"
+"    * @head : pointer to the head of the stack\n"
+"    * @name : pointer to store the popped element\n"
+"    *\n"
+"    * @return 0 if no error, 1 else.\n"
+"    */\n"
+"\n"
+"    int push(struct node **head, const char *name){"
+msgstr ""
+
+#. name, pop, name
+#: simple_stack/task.yaml
+msgid "Pop"
+msgstr ""
+
+#. name, pop, header
+#: simple_stack/task.yaml
+msgid ""
+".. code-block:: c\n"
+"\n"
+"    /**\n"
+"    * Remove the \"head\" element of the stack and return it's content.\n"
+"    *\n"
+"    * @head : pointer to the head of the stack\n"
+"    * @name : pointer to store the popped element\n"
+"    *\n"
+"    * @return 0 if no error, 1 else.\n"
+"    */\n"
+"\n"
+"    int pop(struct node *head, char **name){"
+msgstr ""
+
+#. name, free_node, name
+#: simple_stack/task.yaml
+msgid "<OPTIONAL> free_node"
+msgstr ""
+
+#. name, free_node, header
+#: simple_stack/task.yaml
+msgid ""
+"You can use this question to implement a ``free_node`` function\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * Free @node\n"
+"    */\n"
+"    void free_node(struct node *node){"
+msgstr ""
+
+#. context
+#: sleep_malloc/task.yaml
+msgid ""
+"The system call malloc may fail, for instance if the OS has no free "
+"memory remaining. In this case, it may be possible that some other "
+"processes free some memory after some time.\n"
+"\n"
+"In our program, instead of reporting an error immediately if no free "
+"memory is available, we will wait some time to see if the OS can free "
+"memory for us."
+msgstr ""
+
+#. name
+#: sleep_malloc/task.yaml
+msgid "[S3] Sleepy memory - REVIEWED"
+msgstr ""
+
+#. name, sleep_malloc, name
+#: sleep_malloc/task.yaml
+msgid "Sleepy malloc"
+msgstr ""
+
+#. name, sleep_malloc, header
+#: sleep_malloc/task.yaml
+msgid ""
+"Write the body of the function *sleepy_malloc*.\n"
+"\n"
+"Hint : think about static variables.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /* Wrapper to the malloc system call.\n"
+"     * If malloc fails, sleep for 5 seconds, and re-try.\n"
+"     * If malloc failed 10 times in a row, return NULL.\n"
+"     */\n"
+"    void *sleepy_malloc(size_t s) {"
+msgstr ""
+
+#. author
+#: stack_vs_heap/task.yaml
+msgid "Nicolas Rybowski, Mathieu Xhonneux"
+msgstr ""
+
+#. context
+#: stack_vs_heap/task.yaml
+#, python-format
+msgid ""
+"In a C program, variables are stored across different regions in memory, "
+"depending on where the variables have been initialized. Each memory "
+"region has different properties about how the variables can be accessed, "
+"modified, ... This exercise will show you how global variables, and "
+"variables on the stack, are managed.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    int result;\n"
+"\n"
+"    void sum1(a1, b1) {\n"
+"        a1 = a1 + b1;\n"
+"    }\n"
+"\n"
+"    void main(int argc, char **argv) {\n"
+"        int a1 = 5, b1 = 6;\n"
+"\n"
+"        sum1(a1, b1);\n"
+"        printf(\"sum1: %d\\n\", a1);\n"
+"\n"
+"        int a2 = 3, b2 = 7;\n"
+"        sum2(a2, b2)\n"
+"        printf(\"sum2: %d\\n\", result);\n"
+"\n"
+"        int a3 = 1, b3 = 8;\n"
+"        sum3(&a3, &b3);\n"
+"        printf(\"sum3: %d\\n\", a3);\n"
+"    }"
+msgstr ""
+
+#. name
+#: stack_vs_heap/task.yaml
+msgid "[S3] Global'n'stack - REVIEWED"
+msgstr ""
+
+#. name, return1, name
+#: stack_vs_heap/task.yaml
+msgid "On the stack"
+msgstr ""
+
+#. name, return1, header
+#: stack_vs_heap/task.yaml
+msgid ""
+"Variables which are declared inside functions are put on the program's "
+"stack. These variables are only accessible by the function in which they "
+"are declared.\n"
+"\n"
+"Moreover, passing arguments to functions, and returning values from a "
+"function, also use the stack, and use the mechanism of passing by value "
+"(see http://courses.washington.edu/css342/zander/css332/passby.html for "
+"more details). Once a variable is passed by value, a copy of it is made "
+"on the stack.\n"
+"\n"
+"Consider the ``main`` function here above. Knowing this, what number "
+"would the first call to ``printf`` print ?"
+msgstr ""
+
+#. name, version1, name
+#: stack_vs_heap/task.yaml
+msgid "Globalizing"
+msgstr ""
+
+#. name, version1, header
+#: stack_vs_heap/task.yaml
+msgid ""
+"From what you have learned in the first question, write the body of the "
+"function *sum2* which uses the global variable *result*. Why does it work"
+" with a global variable ?\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    void sum2(int a, int b) {\n"
+msgstr ""
+
+#. name, version2, name
+#: stack_vs_heap/task.yaml
+msgid "Passing by reference"
+msgstr ""
+
+#. name, version2, header
+#: stack_vs_heap/task.yaml
+msgid ""
+"You are now asked to return the result of the sum, not by using the "
+"*return* keyword, nor by using a global variable, but using the mechanism"
+" of passing by reference (see again "
+"http://courses.washington.edu/css342/zander/css332/passby.html).\n"
+"You can use the @r arg for this.\n"
+"What is the link between passing by reference and pointers ?\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /* sum3: updates the value pointed by r, to the sum of the values "
+"pointed by a and b */\n"
+"    void sum3 (int *a, int *b, int *r) {\n"
+msgstr ""
+
+#. context
+#: static_counter/task.yaml
+msgid ""
+"A variable declared inside a function with the keyword *static* implies "
+"that the value of this variable will be kept across the different calls "
+"to this function."
+msgstr ""
+
+#. name
+#: static_counter/task.yaml
+msgid "[S2] Exponentially static counter"
+msgstr ""
+
+#. name, static_counter, name
+#: static_counter/task.yaml
+msgid "Static counter"
+msgstr ""
+
+#. name, static_counter, header
+#: static_counter/task.yaml
+msgid ""
+"Write the body of the function *stexp* which returns at its *n*th call "
+"the value 2^(n-1). Once it has returned the value 4096, the next return "
+"should go back to 1.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    unsigned int stexp() {\n"
+msgstr ""
+
+#. author
+#: strcpy/task.yaml
+msgid "Nicolas Rybowski"
+msgstr ""
+
+#. context
+#: strcpy/task.yaml
+msgid ""
+"The classic function ``char *strcpy(char *destination, const char "
+"*source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a "
+"destination buffer where the source string is copied. We ask you to code "
+"a function which allocates a buffer itself, and then proceeds to the "
+"copy.\n"
+"\n"
+"*Hint* : use `malloc <https://linux.die.net/man/3/malloc>`_"
+msgstr ""
+
+#. name
+#: strcpy/task.yaml
+msgid "[S3] Improved strcpy - REVIEWED"
+msgstr ""
+
+#. name, strcpy_impl, name
+#: strcpy/task.yaml
+msgid "buf_strcpy"
+msgstr ""
+
+#. name, strcpy_impl, header
+#: strcpy/task.yaml
+msgid ""
+"Write the body of the function *buf_strcpy*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /*\n"
+"    * Create a buffer the same size as src, and copy the content of src "
+"to this buffer.\n"
+"    *\n"
+"    * @src: string to be copied\n"
+"    * @return: return pointer. if src == NULL or in case of error, return"
+" NULL\n"
+"    *\n"
+"    * Take care of '\\0' and the working of strlen() (if you use it).\n"
+"    */\n"
+"    char *buf_strcpy(const char *src) {\n"
+msgstr ""
+
+#. name
+#: swap2int/task.yaml
+msgid "[S2] Swap my integers - REVIEWED"
+msgstr ""
+
+#. name, q1, name
+#: swap2int/task.yaml
+msgid "Swap"
+msgstr ""
+
+#. name, q1, header
+#: swap2int/task.yaml
+msgid ""
+"Write the body of the function *swap* which swaps the values pointed by "
+"*i* and *j*.\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    void swap(int *i, int *j) {"
+msgstr ""
+
+#. context
+#: tab_find/task.yaml
+msgid ""
+"In C, an array is a set of variables sharing the same data type : ``int "
+"array[3] = {42, 1337, 0};``.\n"
+"\n"
+"An item of an array can be retrived through its index : ``array[1]``."
+msgstr ""
+
+#. name
+#: tab_find/task.yaml
+msgid "[S2] Through the array"
+msgstr ""
+
+#. name, tab_find, name
+#: tab_find/task.yaml
+msgid "Find the index"
+msgstr ""
+
+#. name, tab_find, header
+#: tab_find/task.yaml
+msgid ""
+"Write the body of the function *tab_find* :\n"
+"\n"
+".. code-block:: c\n"
+"\n"
+"    /* tab_find\n"
+"\n"
+"    @tab : an array of int\n"
+"    @len : the number of int in tab\n"
+"    @elem : the elem looked for\n"
+"    @return : return the index at which elem is found, else returns -1 if"
+" not found. */\n"
+"    int tab_find(int tab[], int len, int elem)"
+msgstr ""
+
