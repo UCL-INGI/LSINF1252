@@ -63,9 +63,11 @@ context: |-
 
     As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``.
 
-    These headers contain the function prototypes and specifications. For instance ``double add(double a, double b);``.
+    These headers contain the function prototypes and specifications. For more on that, see.f
 
-    Unfortunately, the source folder was lost but you still have access to the object files.
+    When compiling this calculator, you need to specify in the Makefile rules the header files needed by ``calc.c``, that is both ``calc.h`` and ``operations.h``.
+
+    # Unfortunately, the source folder was lost but you still have access to the object files.
 environment: cpp
 evaluate: best
 groups: false
@@ -73,7 +75,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S2] make basics - headers and prerequisites'
+name: '[S2] make basics - calculator'
 network_grading: false
 order: 23
 problems:

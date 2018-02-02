@@ -51,7 +51,6 @@ subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 LANG = input.get_input('@lang')
 
 # Run the code in a parallel container
-print(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)))
 p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 p.communicate()
 
@@ -134,4 +133,3 @@ with open("../task.yaml", 'r') as stream:
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)
 feedback.set_global_result("success" if score >= 50 else "failed")
-
