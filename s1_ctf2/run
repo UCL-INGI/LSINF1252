@@ -3,19 +3,19 @@
 g++ main.cpp
 last=$(getinput @username | sha256sum)
 
-f=$(sha256sum oboroxx)
+f=$(echo oboroxx | sha256sum)
 last=$(./a.out $f $last)
 
-f=$(sha256sum systeminfocestgenial)
+f=$(echo systeminfocestgenial | sha256sum)
 last=$(./a.out $f $last)
 
-f=$(sha256sum batman)
+f=$(echo batman | sha256sum)
 last=$(./a.out $f $last)
 
-f=$(sha256sum bisounours)
+f=$(echo bisounours | sha256sum)
 last=$(./a.out $f $last)
 
-f=$(sha256sum foobar)
+f=$(echo foobar | sha256sum)
 last=$(./a.out $f $last)
 
 rep=$(getinput q1)
