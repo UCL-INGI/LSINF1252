@@ -157,7 +157,7 @@ void test_write_fail() {
     int ret = 0;
     
     monitored.write = true;
-    failures.write = FAIL_THIRD;
+    failures.write = FAIL_ALWAYS;
     failures.write_ret = -1;
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
