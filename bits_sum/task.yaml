@@ -23,7 +23,7 @@ limits:
     time: '30'
 name: '[S2] Summing bits'
 network_grading: false
-order: 8
+order: 18
 problems:
     q1:
         language: c

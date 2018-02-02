@@ -254,7 +254,7 @@ limits:
     time: '30'
 name: '[S4] Binary Search Tree - REVIEWED'
 network_grading: false
-order: 37
+order: 35
 problems:
     contains:
         header: |-
