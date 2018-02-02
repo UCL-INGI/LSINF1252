@@ -15,7 +15,7 @@ void test() {
         SANDBOX_BEGIN;
         ret = stexp();
         SANDBOX_END;
-    
+        printf("%d %d\n", ret, count);
         if(ret != count){
             CU_FAIL();
             push_info_msg(_("Your counter is not correct."));

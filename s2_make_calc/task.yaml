@@ -58,7 +58,7 @@
         rm -f calc
 accessible: true
 author: Pablo Gonzalez Alvarez
-context: |-
+context: |
     *Estimated time: 5 minutes*
 
     You have just built a simple calculator. When typing ``ls`` in your command line, the source folder has the following structure:
@@ -69,11 +69,13 @@ context: |-
 
     ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
 
-    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``.
-
-    These headers contain the function prototypes and specifications. For more on that, see this page `here <https://www.tutorialspoint.com/cprogramming/c_header_files.htm>`_.
+    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``. These headers contain the function prototypes and specifications. They can also contain ``extern`` declarations of variables. For more on that, see `this page <https://www.tutorialspoint.com/cprogramming/c_header_files.htm>`_ or chapter 4 in [kernighan2006c]_.
 
     When compiling this calculator, you need to specify in the Makefile rules the header files needed by ``calc.c``, that is both ``calc.h`` and ``operations.h``.
+
+    ----
+
+    .. [kernighan2006c] Kernighan, B. W., & Ritchie, D. M. (2006). The C programming language.
 environment: cpp
 evaluate: best
 groups: false

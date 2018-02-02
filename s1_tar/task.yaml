@@ -1,7 +1,7 @@
 accessible: true
 author: Tom Rousseaux
-context: |
-    You have to **compress** (*.tar.gz* file) the following file system
+context: |+
+    Unix users often need to backup files and directories or send them over the Internet. `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_ is a very useful tool which can be used to create compressed archives of directories and all the files that they contain. At the end of a project, you have created the following files (you can download them from `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_)
 
     .. code-block:: console
 
@@ -16,8 +16,8 @@ context: |
                 fime2.h
                 file3.h
 
-    For this, use `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_, feel free to check the arguments of this utility wherever you want.
-    You can download the file system `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_tar/Enonce.zip>`_.
+    Using `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_, create a ``.tar.gz`` compressed archive which contains all these files and directories and submit it below.
+
 environment: pyjavacpp
 evaluate: best
 groups: false
