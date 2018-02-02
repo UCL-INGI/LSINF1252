@@ -4,49 +4,31 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-void test_exist_not() {
-    set_test_metadata("q1", _("Test file does not exist"), 1);
-
+void test() {
+    set_test_metadata("static_counter", _("Test"), 1);
+    int count = 1;
+    
     // We run multiples times the test to avoid student returning randomly 1 or 0.
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 20; i++){
         int ret = 0;
 
-        system("rm file.txt");
         SANDBOX_BEGIN;
-        ret = file_exists("file.txt");
+        ret = stexp();
         SANDBOX_END;
     
-        if(ret != -1){
+        if(ret != count){
             CU_FAIL();
-            push_info_msg(_("When the file does not exist, you do not return -1"));
-        }else{
-             set_tag("test_file_exist_not");
+            push_info_msg(_("Your counter is not correct."));
+            break;
         }
+        count *= 2;
+        if(count > 4096)
+            count = 1;
     }
 }
 
-void test_exist() {
-    set_test_metadata("q1", _("Test file exists"), 1);
-
-    // We run multiples times the test to avoid student returning randomly 1 or 0.
-    for(int i = 0; i < 4; i++){
-        int ret = 0;
-
-        system("touch file.txt");
-        SANDBOX_BEGIN;
-        ret = file_exists("file.txt");
-        SANDBOX_END;
-    
-        if(ret != 0){
-            CU_FAIL();
-            push_info_msg(_("When the file exist, you do not return 0"));
-        }else{
-            set_tag("test_file_exist");
-        }
-    }
-}
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, fopen, fread, fwrite, fclose, stat);
-    RUN(test_exist_not, test_exist);
+    BAN_FUNCS(system, set_tag);
+    RUN(test);
 }

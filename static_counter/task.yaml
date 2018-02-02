@@ -13,12 +13,47 @@
 
 
 /student/student_code.h: unsigned int stexp();
+/student/tests.c: |-
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    void test() {
+        set_test_metadata("static_counter", _("Test"), 1);
+        int count = 1;
+
+        // We run multiples times the test to avoid student returning randomly 1 or 0.
+        for(int i = 0; i < 20; i++){
+            int ret = 0;
+
+            SANDBOX_BEGIN;
+            ret = stexp();
+            SANDBOX_END;
+
+            if(ret != count){
+                CU_FAIL();
+                push_info_msg(_("Your counter is not correct."));
+                break;
+            }
+            count *= 2;
+            if(count > 4096)
+                count = 1;
+        }
+    }
+
+
+    int main(int argc,char** argv){
+        BAN_FUNCS(system, set_tag);
+        RUN(test);
+    }
 accessible: true
 author: Mathieu Xhonneux
 context: |-
     A variable declared inside a function with the keyword *static* implies that the value of this variable will be kept across the different calls to this function.
 
-    For example, the first call to your function should return ``-1``. The next call ``-2``, then ``-4``, etc.
+    For example, the first call to your function should return ``1``. The next call ``2``, then ``4``, etc.
 environment: cpp
 evaluate: best
 groups: false
@@ -55,9 +90,9 @@ tags:
         visible: true
     '1':
         id: sigsegv
+        description: ''
         name: Segmentation Fault
         visible: true
-        description: ''
         type: 1
     '2':
         id: not_compile
@@ -91,8 +126,8 @@ tags:
         name: Banned functions
     '7':
         name: S2
-        type: 2
         description: ''
+        type: 2
         visible: true
         id: ''
 weight: 1.0
