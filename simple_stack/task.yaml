@@ -20,13 +20,11 @@ context: |
 
     *Hints* :
 
-    - @value is also a pointer, it must be allocated.
+    - ``char *name`` is also a pointer, memory must be allocated for it.
 
     - `strncpy <https://linux.die.net/man/3/strncpy>`_
 
-    - `strlen <https://linux.die.net/man/3/strlen>`_
-
-        -- strlen does not count the '\\0' character
+    - `strlen <https://linux.die.net/man/3/strlen>`_ (strlen does not count the '\\0' character)
 
     - Don't forget to free **all** the allocated space when popping one element.
 environment: cpp
