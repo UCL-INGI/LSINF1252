@@ -1,0 +1,28 @@
+#! /bin/bash
+
+g++ main.cpp
+last=$(getinput @username | sha256sum)
+
+f=$(sha256sum oboroxx)
+last=$(./a.out $f $last)
+
+f=$(sha256sum systeminfocestgenial)
+last=$(./a.out $f $last)
+
+f=$(sha256sum batman)
+last=$(./a.out $f $last)
+
+f=$(sha256sum bisounours)
+last=$(./a.out $f $last)
+
+f=$(sha256sum foobar)
+last=$(./a.out $f $last)
+
+rep=$(getinput q1)
+if [ "$rep" == "$last" ]
+then
+	feedback-result success
+else
+	feedback-result failed
+	feedback-msg -m "Ce n'est pas le bon code, avez-vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
+fi
