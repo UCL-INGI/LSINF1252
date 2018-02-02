@@ -1,34 +1,31 @@
 /solution.c.sol: |-
     //q1
     int fd = open(filename, O_RDONLY);
-    if(fd == -1) {
+    if (fd < 0)
         return -1;
-    }
 
-    struct stat buf;
-    fstat(fd, &buf);
-    if(index > buf.st_size){
+    struct stat d;
+    if (fstat(fd, &d) != 0)
+        return -1;
+
+    if (sizeof(int)*index > d.st_size)
         return -2;
-    }
 
-    lseek(fd, (off_t) index*sizeof(int), SEEK_SET);
-    unsigned int n2;
-    int r = read(fd, (void *) &n2, sizeof(int));
-    if (r == -1)
+    if (lseek(fd,sizeof(int)*index, SEEK_SET) != sizeof(int)*index)
         return -1;
+    int r;
+    int n = read(fd, &r,  sizeof(int));
+    if (n != sizeof(int))
+        return -1;
+
     close(fd);
-    return n2;
-
-
+    return r;
 
 
     //q2
     int fd = open(filename, O_WRONLY);
-    if(fd == -1) {
-        return;
-    }
-    lseek(fd, (off_t) index*sizeof(unsigned int), SEEK_SET);
-    write(fd, (void *) &value, sizeof(unsigned int));
+    lseek(fd,sizeof(int)*index, SEEK_SET);
+    write(fd, &value, sizeof(int));
     close(fd);
 /student/tests.c: |
     // CTester template
@@ -296,14 +293,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '50'
     output: '2'
     time: '30'
-    memory: '50'
 name: '[S5] Get and set on array in file - REVIEWED'
 network_grading: false
 order: 42
 problems:
     q1:
+        language: c
+        name: ''
         type: code
         header: |-
             .. code-block:: c
@@ -316,9 +315,10 @@ problems:
                  *       return -2 if index >= length of array.
                  */
                 int get(char *filename, int index) {
-        name: ''
-        language: c
     q2:
+        language: c
+        name: ''
+        type: code
         header: |-
             .. code-block:: c
 
@@ -329,9 +329,6 @@ problems:
                  *       do nothing if something fails.
                  */
                 void set(char *filename, int index, int value) {
-        name: ''
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -340,115 +337,115 @@ tags:
     '0':
         name: Close
         type: 0
+        id: close
         visible: true
         description: This tag validate that your close are correctly performed.
-        id: close
     '1':
-        visible: true
+        id: open
         name: Open
         description: This tag validate you are able to open a file.
+        visible: true
         type: 0
-        id: open
     '10':
-        visible: true
         type: 1
-        description: You do not manage failures properly.
-        name: Failure handling
-        id: failure_handling
-    '11':
-        name: Floating Point Exception
-        id: sigfpe
-        description: ''
-        visible: true
-        type: 1
-    '12':
-        visible: true
-        id: memory
-        name: Memory Exceeded
-        description: ''
-        type: 1
-    '13':
-        description: You code do not compile.
-        name: Not compile
-        type: 1
-        visible: true
-        id: not_compile
-    '14':
-        type: 1
-        name: Original file modified
-        id: original_modif
-        visible: true
-        description: You have modified the original file.
-    '15':
-        visible: true
-        id: wrong_set_value
-        name: Wrong Set Value
-        type: 1
-        description: The value written in the file has not the correct value.
-    '18':
-        description: ''
-        id: failure_handling_lseek
-        type: 1
-        name: Failure handling (lseek)
-        visible: false
-    '2':
-        description: A value at an unwanted index was modified.
-        visible: true
-        id: wrong_index_set
-        type: 1
-        name: Wrong Index Set
-    '3':
-        name: Wrong Get Value Returned
-        type: 1
-        visible: true
-        description: The get() function did not return the expected value.
         id: wrong_get_value_returned
-    '4':
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
+        description: The get() function did not return the expected value.
+        visible: true
+        name: Wrong Get Value Returned
+    '11':
         type: 1
         visible: true
-    '5':
+        id: timeout
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+    '12':
+        name: Out of bounds
+        description: You try to read outside of the array.
+        visible: true
         id: oob
         type: 1
-        name: Out of bounds
-        visible: true
-        description: You try to read outside of the array.
-    '6':
-        id: too_many_op
+    '13':
         type: 1
+        id: too_many_op
         description: You call the read or write function more than necessary.
         name: Too many read/write
         visible: true
-    '7':
-        description: ''
-        id: sigsegv
+    '14':
+        type: 1
         name: Segmentation Fault
         visible: true
-        type: 1
-    '8':
-        name: Banned functions
+        id: sigsegv
+        description: ''
+    '15':
+        visible: true
         id: banned_funcs
         type: 1
+        name: Banned functions
         description: You use some banned functions.
-        visible: true
-    '9':
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
-        name: Double free
-        type: 1
     '16':
+        name: Double free
+        description: Your code produced a double free.
+        id: double_free
+        type: 1
         visible: true
-        type: 2
+    '2':
+        type: 1
+        id: failure_handling
+        name: Failure handling
+        description: You do not manage failures properly.
+        visible: true
+    '3':
+        description: ''
+        id: sigfpe
+        visible: true
+        type: 1
+        name: Floating Point Exception
+    '4':
+        description: ''
+        visible: true
+        type: 1
+        id: memory
+        name: Memory Exceeded
+    '5':
+        description: You code do not compile.
+        visible: true
+        id: not_compile
+        name: Not compile
+        type: 1
+    '6':
+        description: You have modified the original file.
+        id: original_modif
+        type: 1
+        name: Original file modified
+        visible: true
+    '7':
+        id: wrong_set_value
+        name: Wrong Set Value
+        visible: true
+        type: 1
+        description: The value written in the file has not the correct value.
+    '8':
+        id: failure_handling_lseek
+        name: Failure handling (lseek)
+        description: ''
+        type: 1
+        visible: false
+    '9':
+        id: wrong_index_set
+        description: A value at an unwanted index was modified.
+        type: 1
+        visible: true
+        name: Wrong Index Set
+    '17':
         name: File
         description: ''
+        type: 2
+        visible: true
         id: ''
-    '17':
-        description: ''
-        name: S5
+    '18':
         visible: true
         type: 2
+        description: ''
+        name: S5
         id: ''
 weight: 1.0

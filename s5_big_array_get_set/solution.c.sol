@@ -1,31 +1,28 @@
 //q1
-int fd = open(filename, O_RDONLY); 
-if(fd == -1) {
+int fd = open(filename, O_RDONLY);
+if (fd < 0)
     return -1;
-}
 
-struct stat buf;
-fstat(fd, &buf);
-if(index > buf.st_size){
+struct stat d;
+if (fstat(fd, &d) != 0)
+    return -1;
+
+if (sizeof(int)*index > d.st_size)
     return -2;
-}
 
-lseek(fd, (off_t) index*sizeof(int), SEEK_SET);
-unsigned int n2;
-int r = read(fd, (void *) &n2, sizeof(int));
-if (r == -1)
+if (lseek(fd,sizeof(int)*index, SEEK_SET) != sizeof(int)*index)
     return -1;
+int r;
+int n = read(fd, &r,  sizeof(int));
+if (n != sizeof(int))
+    return -1;
+
 close(fd);
-return n2;
-
-
+return r;
 
 
 //q2
-int fd = open(filename, O_WRONLY); 
-if(fd == -1) {
-    return;
-}
-lseek(fd, (off_t) index*sizeof(unsigned int), SEEK_SET);
-write(fd, (void *) &value, sizeof(unsigned int));
+int fd = open(filename, O_WRONLY);
+lseek(fd,sizeof(int)*index, SEEK_SET);
+write(fd, &value, sizeof(int));
 close(fd);
