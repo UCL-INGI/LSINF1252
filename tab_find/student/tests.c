@@ -13,11 +13,11 @@ void test()
 
     int ret = 0;
     SANDBOX_BEGIN;
-    ret = tab_find(tab, 10, 2);
+    ret = tab_find(tab, 10, 1);
     SANDBOX_END;
         
     free_trap(tab,10);
-    if(ret != 9){
+    if(ret != 0){
         push_info_msg(_("Your function does not return the correct index."));
         CU_FAIL();
     }

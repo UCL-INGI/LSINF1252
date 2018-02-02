@@ -1,7 +1,7 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
-    You are asked to implement the ``pop`` and ``push`` functions of the given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface.
+    You are asked to implement the ``pop`` and ``push`` functions of the following `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface :
 
     .. code-block:: c
 
@@ -18,8 +18,8 @@ context: |
 
 
 
-    *Hints*
-    =======
+    *Hints* :
+
     - @value is also a pointer, it must be allocated.
 
     - `strncpy <https://linux.die.net/man/3/strncpy>`_
