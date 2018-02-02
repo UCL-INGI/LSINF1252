@@ -148,12 +148,12 @@ void test_no42_right() {
         tab1[i] = 128 - i;
     }
 
-    void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+    void *p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
     monitored.malloc = true;
     monitored.free = true;
     failures.free = FAIL_ALWAYS;
-    failures.malloc = 1;
+    failures.malloc = FAIL_ALWAYS;
     failures.malloc_ret = p;
     SANDBOX_BEGIN;
     ret = has_42();
@@ -162,7 +162,6 @@ void test_no42_right() {
     CU_ASSERT_EQUAL(ret,0);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-
     CU_ASSERT_EQUAL(stats.free.called,1);
 
     free_trap(p,64);

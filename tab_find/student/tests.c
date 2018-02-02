@@ -4,7 +4,7 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-void test_myfunc_ret()
+void test()
 {
     set_test_metadata("q1", _("Test function tab find"), 1);
 
@@ -19,13 +19,13 @@ void test_myfunc_ret()
     free_trap(tab,10);
         
     if(ret != 9){
-        CU_FAIL();
         push_info_msg(_("Your function does not return the correct index."));
+        CU_FAIL();
     }
 }
 
 int main(int argc,char** argv) {
     BAN_FUNCS(syetem, set_tag);
-    RUN(test_myfunc_ret);
+    RUN(test);
 }
 
