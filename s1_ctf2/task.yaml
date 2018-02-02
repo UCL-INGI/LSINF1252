@@ -7,19 +7,31 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S1] CTF2'
 network_grading: false
 problems:
     q1:
+        header: ''
         name: ''
         type: match
-        header: ''
         answer: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        name: Command line
+        visible: true
+        type: 2
+        description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        description: ''
+        name: S1
+        id: ''
 weight: 1.0
