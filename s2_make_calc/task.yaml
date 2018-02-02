@@ -69,7 +69,7 @@ context: |
 
     ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
 
-    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``. These headers contain the function prototypes and specifications. They can also contain ``extern`` declarations of variables. For more on that, see `this page <https://www.tutorialspoint.com/cprogramming/c_header_files.htm>`_ or chapter 4 in [kernighan2006c]_.
+    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``. These headers contain the function prototypes and specifications, but not their definitions. They can also contain ``extern`` declarations of variables. For more on that, see `this page <https://www.tutorialspoint.com/cprogramming/c_header_files.htm>`_ or chapter 4 in [kernighan2006c]_.
 
     When compiling this calculator, you need to specify in the Makefile rules the header files needed by ``calc.c``, that is both ``calc.h`` and ``operations.h``.
 
@@ -92,7 +92,7 @@ problems:
         header: |-
             Unfortunately, the source folder was lost but you still have access to the object files.
 
-            Write a *Makefile* to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``.
+            Write a *Makefile* rule to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``.
 
             **Hint:** You do not need to write the rules for ``operations.o`` and ``calc.o``.
         language: Makefile
