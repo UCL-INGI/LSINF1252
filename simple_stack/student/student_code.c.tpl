@@ -7,8 +7,6 @@ int push(struct node **head, const char *value){
 	@@push@@
 }
 
-int pop(struct node **head, char **result){
+int pop(struct node **head, char *result){
 	@@pop@@
 }
-
-
