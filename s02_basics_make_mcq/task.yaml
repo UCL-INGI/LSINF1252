@@ -5,9 +5,9 @@ environment: mcq
 evaluate: best
 groups: false
 limits:
+    memory: '100'
     time: '30'
     output: '2'
-    memory: '100'
 name: '[S02] Makefile basics - multiple choice questions'
 network_grading: false
 order: 23
@@ -28,30 +28,31 @@ problems:
         limit: 2
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
+        name: What are the prerequisite?
         choices:
         -   valid: true
             text: The prerequisite is a file that is used as input to create the target.
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
-        name: What are the prerequisite?
         multiple: true
         type: multiple_choice
     mcq3:
         choices:
-        -   text: A recipe is an action that make carries out.
-            valid: true
+        -   valid: true
+            text: A recipe is an action that make carries out.
         -   text: '42'
             feedback: That is the Answer to the Ultimate Question of Life, the Universe,
                 and Everything.
         -   text: The recipe is a file that is used as input to create the target.
         -   text: The recipe is the name of a file.
-        type: multiple_choice
         limit: 2
-        name: The recipe
         multiple: true
+        type: multiple_choice
+        name: The recipe
         header: Please select all *correct* answers related to the *recipe* of a Makefile
             rule.
     mcq4:
+        type: multiple_choice
         choices:
         -   valid: true
             text: |4-
@@ -110,13 +111,24 @@ problems:
             * ``[tab]`` indicates a tabulation;
             * ``[spaces]`` indicates 8 white spaces.
         limit: 0
-        type: multiple_choice
         name: Rules syntax
     match1:
         header: In a Makefile, what is the character you can use to split a long line?
         type: match
         name: Break
         answer: \
+    mcq5:
+        choices:
+        -   valid: true
+            text: At the beginning of every recipe line, you put a tab indentation
+        -   text: At the beginning of every recipe line, you put a 8 white spaces
+                indentation.
+        -   text: At the beginning of every recipe line, you put no indentation.
+        limit: 2
+        header: Choice all the *correct* answers.
+        multiple: true
+        type: multiple_choice
+        name: Recipes indentation
 stored_submissions: 0
 submission_limit:
     amount: -1

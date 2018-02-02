@@ -43,7 +43,11 @@ void test_get() {
     for(int i = 0; i < 1000; i+=50){
         should_count_read++;
         int ret = 0;
+        int err = 0;
         
+        stats.open.called = 0;
+        stats.close.called = 0;
+        stats.lseek.called = 0;
         SANDBOX_BEGIN;
         ret = get("file.txt", i);
         SANDBOX_END;
@@ -52,7 +56,27 @@ void test_get() {
             push_info_msg(_("You do not return the correct value."));
             set_tag("wrong_get_value_returned");
             CU_FAIL(); 
+            err++;
         }   
+        
+        if (stats.open.called != 1) {
+            push_info_msg(_("The number of calls to open() isn't 1."));
+            CU_FAIL(); 
+            err++;
+        }
+        if (stats.close.called != 1) {
+            push_info_msg(_("The number of calls to close() isn't 1."));
+            CU_FAIL(); 
+            err++;
+        }
+        if (stats.lseek.called < 1) {
+            push_info_msg(_("lseek() should at least be called once."));
+            CU_FAIL(); 
+            err++;
+        }
+        
+        if (err)
+            return;
     }
     if(stats.read.called > should_count_read){
         set_tag("too_many_op");
@@ -60,18 +84,7 @@ void test_get() {
         CU_FAIL();  
     }
     
-    if (stats.open.called != 1) {
-        push_info_msg(_("The number of calls to open() isn't 1."));
-        CU_FAIL(); 
-    }
-    if (stats.close.called != 1) {
-        push_info_msg(_("The number of calls to close() isn't 1."));
-        CU_FAIL(); 
-    }
-    if (stats.lseek.called < 1) {
-        push_info_msg(_("lseek() should at least be called once."));
-        CU_FAIL(); 
-    }
+    
     
     
     if(system("diff file.txt file_copy.txt") != 0){

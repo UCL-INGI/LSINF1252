@@ -37,7 +37,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Basic linked list'
+name: '[S3] Basic linked list - CHANGE REQUESTED'
 network_grading: false
 order: 28
 problems:
@@ -76,58 +76,58 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '2':
+    '0':
+        name: Timeout
+        type: 1
+        id: timeout
         visible: true
         description: Your code exceeds the maximum allowed time.
-        id: timeout
+    '1':
         type: 1
-        name: Timeout
-    '3':
+        visible: true
         name: Segmentation Fault
+        id: sigsegv
+        description: ''
+    '2':
+        visible: true
+        description: You code does not compile.
+        id: not_compile
+        type: 1
+        name: Not compile
+    '3':
+        name: Memory Exceeded
         visible: true
         description: ''
         type: 1
-        id: sigsegv
+        id: memory
     '4':
-        id: not_compile
-        name: Not compile
-        description: You code does not compile.
+        id: sigfpe
+        name: Floating Point Exception
+        description: ''
         visible: true
         type: 1
     '5':
         visible: true
-        description: ''
-        id: memory
-        name: Memory Exceeded
+        description: Your code produced a double free.
+        id: double_free
+        name: Double free
         type: 1
     '6':
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-        description: ''
-        visible: true
-    '7':
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
-        type: 1
-        name: Double free
-    '8':
         id: banned_funcs
+        name: Banned functions
         type: 1
         description: You use some banned functions.
-        name: Banned functions
         visible: true
-    '0':
-        name: Data structures
-        type: 2
-        visible: true
+    '7':
         description: Task dealing with data structures and linked list
-        id: ''
-    '1':
-        type: 2
         visible: true
+        type: 2
+        name: Data structures
+        id: ''
+    '8':
         name: S3
+        type: 2
         description: ''
+        visible: true
         id: ''
 weight: 1.0

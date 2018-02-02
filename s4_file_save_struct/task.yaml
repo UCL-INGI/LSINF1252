@@ -41,8 +41,8 @@ problems:
                  *       -2 if write() fails.
                  *       -3 if close() fails.
                  */
-                int save(point_t* pt, int size, char* filename)
-        language: ''
+                int save(point_t *pt, int size, char *filename)
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
