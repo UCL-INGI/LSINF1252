@@ -28,6 +28,8 @@ problems:
         limit: 2
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
+        success_message: Good job!
+        error_message: Try again!
         name: What are the prerequisite?
         choices:
         -   valid: true
@@ -37,6 +39,7 @@ problems:
         multiple: true
         type: multiple_choice
     mcq3:
+        error_message: Try again!
         choices:
         -   valid: true
             text: A recipe is an action that make carries out.
@@ -49,6 +52,7 @@ problems:
         multiple: true
         type: multiple_choice
         name: The recipe
+        success_message: Good job!
         header: Please select all *correct* answers related to the *recipe* of a Makefile
             rule.
     mcq4:
@@ -61,7 +65,6 @@ problems:
 
                         clean:
                         @rm -f src/*.o
-            feedback: There is a missing indentation.
         -   text: |4-
 
                 .. code-block:: console
@@ -75,8 +78,6 @@ problems:
 
                     clean
                     [spaces]@rm -f src/*.o
-            feedback: There is a missing colon. The recipe in a Makefile has to be
-                intended with a tab and not spaces.
         -   text: |4-
 
                 .. code-block:: console
@@ -84,7 +85,6 @@ problems:
                     clean
                     [tab]@rm -f src/*.o
             valid: true
-            feedback: There is a missing colon.
         -   text: |4-
 
                 .. code-block:: console
@@ -92,16 +92,14 @@ problems:
                         clean:
                         [spaces]@rm -f src/*.o
             valid: true
-            feedback: The recipe in a Makefile has to be intended with a tab and not
-                spaces.
-        -   feedback: There is a missing colon. There is a missing indendation.
-            text: |4-
+        -   text: |4-
 
                 .. code-block:: console
 
                         clean
                         @rm -f src/*.o
             valid: true
+        success_message: Good job!
         multiple: true
         header: |-
             Choice all *wrong* Makefile *rules*.
@@ -112,6 +110,7 @@ problems:
             * ``[spaces]`` indicates 8 white spaces.
         limit: 0
         name: Rules syntax
+        error_message: Try again!
     match1:
         header: In a Makefile, what is the character you can use to split a long line?
         type: match
@@ -125,6 +124,8 @@ problems:
                 indentation.
         -   text: At the beginning of every recipe line, you put no indentation.
         limit: 2
+        error_message: Try again!
+        success_message: Good job!
         header: Choice all the *correct* answers.
         multiple: true
         type: multiple_choice
