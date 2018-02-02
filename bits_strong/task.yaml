@@ -21,7 +21,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S2] Killing strong bits - TO REVIEW'
+name: '[S2] Killing too strong bits - TO REVIEW'
 network_grading: false
 order: 19
 problems:

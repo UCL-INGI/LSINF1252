@@ -21,20 +21,19 @@ problems:
     CU_trim_left:
         type: match
         answer: Util.h
-        header: In which file has the `CU_trim_left` been defined ? Answer with the
-            name of the file.
+        header: In which file has the ``CU_trim_left`` been defined ? Answer with
+            the name of the file.
         name: CU_trim_left
     CU_UNREFERENCED_PARAMETER_pTest:
-        header: What is the linenumber that contains "CU_UNREFERENCED_PARAMETER(pTest);"
-            in Sources/Console/Console.c? (Try with and without the quotes to see
-            the difference.)
+        header: '``CU_UNREFERENCED_PARAMETER(pTest)`` appears in file ``Sources/Console/Console.c``
+            Can you indicate the line number of this command ?'
         answer: '652'
         name: CU_UNREFERENCED_PARAMETER(pTest);
         type: match
     assert:
         answer: '349'
         header: |-
-            How many times does "assert" come up in all the files of the working directory?
+            The function ``assert`` is frequently used in the CUnit source code. Can you count the number of lines where ``assert`` appears in all the files of the working directory?
             (Hint: use `wc(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/wc.1.html>`_)
         type: match
         name: assert
