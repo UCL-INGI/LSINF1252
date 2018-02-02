@@ -1,7 +1,7 @@
 accessible: true
 author: Arthur van Stratum
-context: When you execute a c program, the function *main()* is called with the arguments
-    you gave it.
+context: When you execute a C program, its function *main()* is called with, as parameters,
+    the arguments after the executable's name.
 environment: cpp
 evaluate: best
 groups: false
