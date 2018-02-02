@@ -1,12 +1,13 @@
 /run: |
     #!/bin/bash
 
-    getinput "make_calc_simple" > student/Makefile.tpl
+    # Get student code and parse it in the template
+    parsetemplate -o student/Makefile student/Makefile.tpl
 
-    parsetemplate --output student/Makefile student/Makefile.tpl
-
+    # Try to compile student code
     make
 
+    # Does file exist? If yes, check for diffs with working code
     if test -e student/calc
     then
         diff reference/calc student/calc
@@ -24,6 +25,29 @@
     fi
 
     make mrproper
+/student/Makefile.tpl: |
+    # CC variable for C compiler
+    # You can replace gcc by clang if you prefer
+    CC = gcc
+    # CFLAGS variable for gcc/clang flags
+    # See gcc/clang manual to understand all flags
+    CFLAGS += -std=c99 # Define which version of the C standard to use
+    CFLAGS += -Wall # Enable the 'all' set of warnings
+    CFLAGS += -Werror # Treat all warnings as error
+    CFLAGS += -Wshadow # Warn when shadowing variables
+    CFLAGS += -Wextra # Enable additional warnings
+    CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
+    CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
+
+    @@make_calc_simple@@
+
+    .PHONY: clean mrproper
+
+    clean:
+        rm -f *.o
+
+    mrproper: clean
+        rm -f calc
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-

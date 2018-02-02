@@ -1,3 +1,23 @@
+/run: |
+    #! /bin/bash
+
+    usr=$(getinput @username)
+    last=$(echo $usr | sha256sum)
+
+    for i in {1..5}
+    do
+        last=$(echo $last | sha256sum)
+    done
+
+    rep=$(getinput q1)
+
+    if [ "$rep" == "$last" ]
+    then
+        feedback-result success
+    else
+        feedback-result failed
+        feedback-msg -m "Ce n'est pas le bon code, avez-vous entré votre pseudo inginious et pas ucl ? Ce n'est pas d'office le même."
+    fi
 accessible: true
 author: Tom Rousseaux
 context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf2/CTF2.tar.gz>`_,
@@ -7,11 +27,12 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
     memory: '100'
+    output: '2'
 name: '[S1] CTF2'
 network_grading: false
+order: 5
 problems:
     q1:
         header: ''
@@ -24,16 +45,15 @@ submission_limit:
     period: -1
 tags:
     '0':
-        name: Command line
         visible: true
         type: 2
+        name: Command line
         description: ''
         id: ''
     '1':
-        type: 2
-        visible: true
-        description: ''
         name: S1
+        visible: true
+        type: 2
+        description: ''
         id: ''
 weight: 1.0
-order: 5

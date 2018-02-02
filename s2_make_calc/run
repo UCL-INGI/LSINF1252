@@ -1,11 +1,12 @@
 #!/bin/bash
 
-getinput "make_calc_simple" > student/Makefile.tpl
+# Get student code and parse it in the template
+parsetemplate -o student/Makefile student/Makefile.tpl
 
-parsetemplate --output student/Makefile student/Makefile.tpl
-
+# Try to compile student code
 make
 
+# Does file exist? If yes, check for diffs with working code
 if test -e student/calc
 then
     diff reference/calc student/calc

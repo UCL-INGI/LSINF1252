@@ -52,8 +52,8 @@ LANG = input.get_input('@lang')
 
 # Run the code in a parallel container
 p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-o, e = p.communicate()
-print(o.decode("utf-8"))
+p.communicate()
+
 # If run failed, exit with "failed" result
 if p.returncode:
     feedback.set_global_result("failed")
@@ -133,3 +133,4 @@ with open("../task.yaml", 'r') as stream:
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)
 feedback.set_global_result("success" if score >= 50 else "failed")
+
