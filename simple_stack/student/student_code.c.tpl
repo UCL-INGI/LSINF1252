@@ -3,11 +3,11 @@
 
 #include "student_code.h"
 
-int push(struct node **head, const char *value){
+int push(struct node **head, const char *name){
 	@@push@@
 }
 
-/*int pop(struct node *head, char **value){
+/*int pop(struct node *head, char **name){
 	@@pop@@
 }*/
 
