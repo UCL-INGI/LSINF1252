@@ -10,7 +10,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S4] Order relation on a linked list'
+name: '[S4] Order relation on a linked list - REVIEWED'
 network_grading: false
 order: 38
 problems:
