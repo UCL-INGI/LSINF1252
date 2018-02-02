@@ -29,7 +29,6 @@ int size = 6;
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
 
     free(tab);
     tab = NULL;
@@ -98,7 +97,6 @@ void test_close() {
     SANDBOX_BEGIN;
     save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;
@@ -148,7 +146,6 @@ void test_open() {
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;

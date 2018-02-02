@@ -45,7 +45,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -114,7 +113,6 @@
         SANDBOX_BEGIN;
         save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -164,7 +162,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
