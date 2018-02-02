@@ -15,7 +15,7 @@ problems:
     q1:
         language: c
         header: |
-            Write a complete C program containing a *main*. Your program should print one argument out of two (starting with the first), and return 0.
+            Write a complete C program containing a *main*. Your program should print one argument out of two (starting with the first), and return 0. Each argument shall be separated by a space, and th output terminated by a newmline.
 
             Example :
 
