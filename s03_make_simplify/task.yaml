@@ -17,14 +17,24 @@ order: 35
 problems:
     m1:
         type: match
-        header: ''
-        answer: ''
-        name: ''
+        header: |-
+            Remember the `calculator <
+            https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_make_calc>`_ you had to make last week?
+
+            When you typed ``ls`` you had the following folder structure:
+
+            .. code-block:: console
+
+                calc.c    calc.h    operations.c    operations.h
+
+            Write a variable called ``OBJ`` to simplify the compilation process in the Makefile.
+        answer: OBJ = calc.o operations.o
+        name: Calculator variable
     c1:
         type: code
-        header: ''
-        name: ''
-        language: ''
+        header: Remember the calculator
+        name: 'Make '
+        language: Makefile
 stored_submissions: 0
 submission_limit:
     amount: -1

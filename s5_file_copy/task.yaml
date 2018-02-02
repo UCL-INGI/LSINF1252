@@ -53,7 +53,7 @@ problems:
                  * @pre file_name != NULL, name of the original file
                  *      new_file_name != NULL, name of the new file (the copy)
                  *
-                 * @post copy the content of {file_name} in {new_file_name}.
+                 * @post copy the content of {file_name} to {new_file_name}.
                  *       return 0 if the function terminates with success. -1 in case of errors.
                  */
                 int copy(char *file_name, char *new_file_name) {
@@ -90,56 +90,56 @@ tags:
     '10':
         visible: true
         type: 1
-        description: ''
-        name: Floating Point Exception
-        id: sigfpe
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        id: timeout
     '11':
-        name: Segmentation Fault
-        id: sigsegv
+        name: Original file modified
+        id: original_modif
         visible: true
-        description: ''
+        description: You have modified the original file.
         type: 1
     '12':
         visible: true
-        id: banned_funcs
-        name: Banned functions
-        description: You use some banned functions.
+        id: failure_handling
+        name: Failure handling
+        description: You do not manage failures during the copy properly.
         type: 1
     '4':
         description: ''
         type: 1
+        id: sigfpe
+        name: Floating Point Exception
+        visible: true
+    '5':
+        id: sigsegv
+        name: Segmentation Fault
+        type: 1
+        description: ''
+        visible: true
+    '6':
+        id: banned_funcs
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        visible: true
+    '7':
+        description: ''
         id: memory
         name: Memory Exceeded
         visible: true
-    '5':
-        id: not_compile
+        type: 1
+    '8':
         name: Not compile
+        id: not_compile
         type: 1
         description: You code does not compile.
         visible: true
-    '6':
-        id: double_free
-        type: 1
-        description: Your code produced a double free.
-        name: Double free
-        visible: true
-    '7':
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        name: Timeout
-        visible: true
-        type: 1
-    '8':
-        name: Original file modified
-        id: original_modif
-        type: 1
-        description: You have modified the original file.
-        visible: true
     '9':
-        id: failure_handling
-        description: You do not manage failures during the copy properly.
+        id: double_free
+        description: Your code produced a double free.
         visible: true
-        name: Failure handling
+        name: Double free
         type: 1
     '13':
         description: ''
