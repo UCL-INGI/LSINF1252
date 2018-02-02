@@ -3,17 +3,17 @@ author: Pablo Gonzalez Alvarez
 context: |-
     *Estimated time: 5 minutes*
 
-    You have just built a calculator, whose source folder has the following structure:
+    You have just built a simple calculator. When typing ``ls`` in your command line, the source folder has the following structure:
 
-    .. code-block::
+    .. code-block:: console
 
-        src/
-            calc.c
-            calc.h
-            operations.c
-            operations.h
+        calc.c    calc.h    operations.c    operations.h
 
     ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
+
+    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``.
+
+    These headers contain the function prototypes and specifications. For instance ``double add(double a, double b);``.
 
     Unfortunately, the source folder was lost but you still have access to the object files.
 environment: cpp
@@ -23,7 +23,7 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S2] Makefile basics - prerequisites'
+name: '[S02] Makefile basics - headers and prerequisites'
 network_grading: false
 order: 23
 problems:
