@@ -15,7 +15,7 @@ limits:
     output: '2'
 name: '[S3] Reading from the wire'
 network_grading: false
-order: 25
+order: 26
 problems:
     modem:
         header: |-

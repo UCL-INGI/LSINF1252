@@ -10,7 +10,7 @@ limits:
     memory: '100'
 name: Exemple d'exercice
 network_grading: false
-order: 6
+order: 7
 problems:
     myfunc:
         name: My function

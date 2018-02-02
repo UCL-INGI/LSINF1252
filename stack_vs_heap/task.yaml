@@ -34,7 +34,7 @@ limits:
     memory: '100'
 name: '[S3] Global''n''stack - CHANGE REQUESTED - q3:*r = 9;'
 network_grading: false
-order: 24
+order: 25
 problems:
     return1:
         name: On the stack

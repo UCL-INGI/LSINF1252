@@ -73,7 +73,7 @@ limits:
     time: '30'
 name: '[S2] Palindrome'
 network_grading: false
-order: 18
+order: 19
 problems:
     q1:
         language: c

@@ -11,7 +11,7 @@ limits:
     time: '30'
 name: '[S1] grep'
 network_grading: false
-order: 9
+order: 10
 problems:
     CU_trim_left:
         name: CU_trim_left

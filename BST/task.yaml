@@ -39,7 +39,7 @@ limits:
     memory: '100'
 name: '[S4] Binary Search Tree'
 network_grading: false
-order: 37
+order: 38
 problems:
     contains:
         header: |-

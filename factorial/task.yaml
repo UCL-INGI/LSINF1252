@@ -11,7 +11,7 @@ limits:
     time: '30'
 name: '[S2] Factorial - REVIEWED'
 network_grading: false
-order: 14
+order: 15
 problems:
     facto:
         name: Factorial

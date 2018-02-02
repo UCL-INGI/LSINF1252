@@ -44,10 +44,12 @@ void test() {
         if ((int)read(fd, (void *) &s, sizeof(point_t)) < 1){
             push_info_msg(_("You did not write all content of the array in the file."));
             CU_FAIL();
+            return;
         }
-        if (tab[i].x != s.x || tab[i].y != s.y || tab[i].z != s.z){
+        else if (tab[i].x != s.x || tab[i].y != s.y || tab[i].z != s.z){
             push_info_msg(_("You did not write the array of struct correctly in the file."));
             CU_FAIL();
+            return;
         }
     }
     free(tab);

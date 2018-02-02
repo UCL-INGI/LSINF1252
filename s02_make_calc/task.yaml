@@ -23,9 +23,9 @@ limits:
     time: '30'
     output: '2'
     memory: '100'
-name: '[S02] make and prerequisites'
+name: '[S02] Makefile basics - prerequisites'
 network_grading: false
-order: 20
+order: 24
 problems:
     make_calc_simple:
         name: 'Linking '
