@@ -1,3 +1,121 @@
+/solution/solution.c: |
+    #include "student_code.h"
+    #include <stdlib.h>
+    #include<stdio.h>
+
+    int pop(struct node **head, char **result){
+      if (!head)
+        return 1;
+
+      struct node* tmp = *head;
+      *head = tmp->next;
+
+      *result = tmp->name;
+      free(tmp);
+
+      return 0;
+    }
+
+    int push(struct node **head, const char *value){
+      if (!head)
+        return 1;
+
+      struct node *node = (struct node*) malloc(sizeof(struct node));
+      if (!node)
+        return 1;
+
+      int len = strlen(value)+1;
+      node->name = (char*) malloc(len);
+      if (!node->name){
+        free(node);
+        return 1;
+      }
+      strncpy(node->name, value, len);
+
+      node->next = *head;
+      *head = node;
+
+      //char* test = (char*) value;
+      //printf("%p\n", &test);
+      //printf("%p\n", test);
+      //*(test) = 'u';
+
+      //*value = 'u';
+
+      return 0;
+    }
+/student/student_code.c: |
+    #include "student_code.h"
+    #include <stdlib.h>
+    #include<stdio.h>
+
+    int pop(struct node **head, char **result){
+      if (!head)
+        return 1;
+
+      struct node* tmp = *head;
+      *head = tmp->next;
+
+      *result = tmp->name;
+      free(tmp);
+
+      return 0;
+    }
+
+    int push(struct node **head, const char *value){
+      if (!head)
+        return 1;
+
+      struct node *node = (struct node*) malloc(sizeof(struct node));
+      if (!node)
+        return 1;
+
+      int len = strlen(value)+1;
+      node->name = (char*) malloc(len);
+      if (!node->name){
+        free(node);
+        return 1;
+      }
+      strncpy(node->name, value, len);
+
+      node->next = *head;
+      *head = node;
+
+      //char* test = (char*) value;
+      //printf("%p\n", &test);
+      //printf("%p\n", test);
+      //*(test) = 'u';
+
+      //*value = 'u';
+
+      return 0;
+    }
+/student/student_code.c.tpl: |+
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    #include "student_code.h"
+
+    int push(struct node **head, const char *value){
+        @@push@@
+    }
+
+    /*int pop(struct node *head, char **value){
+        @@pop@@
+    }*/
+
+
+/student/student_code.h: |
+    #include <string.h>
+
+    struct node{
+        struct node *next;
+        char *name;
+    };
+
+    int pop(struct node **head, char **result);
+
+    int push(struct node **head, const char *value);
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
@@ -33,9 +151,9 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S3] Simple stack'
 network_grading: false
 order: 29
@@ -55,8 +173,8 @@ problems:
                 */
 
                 int push(struct node **head, const char *value){
-        language: c
         name: Push
+        language: c
     pop:
         language: ''
         header: |-
@@ -72,11 +190,12 @@ problems:
                 */
 
                 int pop(struct node **head, char **result){
-        name: Pop
         type: code
+        name: Pop
     free_node:
-        name: <OPTIONAL> free_node
         language: c
+        type: code
+        name: <OPTIONAL> free_node
         header: |-
             You can use this question to implement a ``free_node`` function
 
@@ -87,12 +206,53 @@ problems:
                 */
                 void free_node(struct node *node){
         optional: 'on'
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
+    '1':
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        visible: true
+        type: 1
+    '2':
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
+        visible: true
+        description: ''
+    '3':
+        id: not_compile
+        description: You code does not compile.
+        visible: true
+        type: 1
+        name: Not compile
+    '4':
+        description: ''
+        name: Memory Exceeded
+        visible: true
+        id: memory
+        type: 1
+    '5':
+        id: sigfpe
+        visible: true
+        description: ''
+        name: Floating Point Exception
+        type: 1
+    '6':
+        description: Your code produced a double free.
+        id: double_free
+        type: 1
+        visible: true
+        name: Double free
+    '7':
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
+        type: 1
+        visible: true
     '0':
         visible: true
         type: 2

@@ -1,6 +1,0 @@
-pop#FAIL#Check the behavior of the function in normal case#1##The previous head is not freed 
-push#SUCCESS#Check the behavior of the function if the given @head is NULL or if the malloc call fails#1#
-push#SUCCESS#Check if the function change @value#1#
-pop#SUCCESS#Check the behavior of the function when passing wrong args#1#
-pop#SUCCESS#Check the behavior of the function when popping last elemennt#1#
-push#SUCCESS#Check if the insertion of the new node is correct#1##The pushed value differ from the expected one Waited : e5f1vq6f8e81E Received : e5f1vq6f8e81E 
