@@ -1,29 +1,9 @@
-/solution.c.sol: |-
-    int fd = open(filename, O_RDONLY);
-    if(fd == -1) {
-        return -1;
-    }
-    return 0;
-
-    //This also works
-    //struct stat buffer;
-    //return stat(filename, &buffer);
-/student/solution.c.sol: |-
-    int fd = open(filename, O_RDONLY);
-    if(fd == -1) {
-        return -1;
-    }
-    return 0;
-
-    //This also works
-    //struct stat buffer;
-    //return stat(filename, &buffer);
 accessible: true
 author: Olivier Martin
 context: |+
     *Estimated time: 10 minutes*
 
-    Using `fstat(2) <https://linux.die.net/man/2/fstat>`_ or `open(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/open.2.html>`_, determine if a file exists.
+    Using `open(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/open.2.html>`_, determine if a file exists.
 
 environment: cpp
 evaluate: best
