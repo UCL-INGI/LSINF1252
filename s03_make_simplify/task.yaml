@@ -1,0 +1,29 @@
+accessible: true
+author: ''
+context: ''
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: '[S03] Make basics'
+network_grading: false
+problems:
+    m1:
+        type: match
+        header: ''
+        answer: ''
+        name: ''
+    c1:
+        type: code
+        header: ''
+        name: ''
+        language: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
