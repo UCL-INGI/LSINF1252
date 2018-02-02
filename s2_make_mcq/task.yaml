@@ -8,7 +8,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Makefile basics - multiple choice questions - REVIEWED'
+name: '[S2] make basics - multiple choice questions - REVIEWED'
 network_grading: false
 order: 22
 problems:
