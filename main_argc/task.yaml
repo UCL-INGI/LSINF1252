@@ -19,7 +19,7 @@ problems:
 
             Example :
 
-            ..code-block:: console
+            .. code-block:: bash
 
                 ./myProg a b c d e f g
                 a c e g
