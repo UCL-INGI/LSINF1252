@@ -56,8 +56,8 @@ problems:
                  * @post copy the content of {file_name} in {new_file_name}.
                  *       return 0 if the function terminates with success. -1 in case of errors.
                  */
-                int copy(char* file_name, char* new_file_name)
-        language: ''
+                int copy(char *file_name, char *new_file_name) {
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
