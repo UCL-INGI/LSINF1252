@@ -18,8 +18,7 @@ problems:
     m1:
         type: match
         header: |-
-            Remember the `calculator <
-            https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_make_calc>`_ you had to make last week?
+            Remember the  `calculator <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_make_calc>`_ you had to make last week?
 
             When you typed ``ls`` you had the following folder structure:
 
