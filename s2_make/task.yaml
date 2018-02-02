@@ -85,7 +85,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Makefile basics - REVIEWED'
+name: '[S2] make basics - REVIEWED'
 network_grading: false
 order: 21
 problems:
