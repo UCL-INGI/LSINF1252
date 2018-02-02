@@ -24,20 +24,38 @@ void test() {
     int ret = 0;
     point_t* tab = gen_struct(size);
 
+    monitored.open = true;
+    monitored.close = true;
+    monitored.write = true;
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
     system("chmod 644 file.txt");
 
-
     free(tab);
     tab = NULL;
+    
+    if (stats.open.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You should call open() only once."));
+    }
+    if (stats.write.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You should call write() only once."));
+    }
+    if (stats.close.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You should call close() only once."));
+    }
     
     //Regenerate the struct in case student modified it
     tab = gen_struct(size);
     int fd = open("file.txt",O_RDONLY); 
-    if(fd == -1) 
+    if(fd == -1) { 
         CU_FAIL(_("Error, can not initialise test file"));
+        push_info_msg(_("You didn't create the file."));
+        return;
+    }
 
     point_t s;
     for(int i = 0; i < size; i++){
@@ -55,7 +73,7 @@ void test() {
     free(tab);
     close(fd);
     if(ret != 0){
-        push_info_msg(_("You did not return 0 when everything occurs fine."));
+        push_info_msg(_("You did not return 0 when everything should work."));
         CU_FAIL(); 
     }
 }
