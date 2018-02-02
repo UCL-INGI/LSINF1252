@@ -1,3 +1,35 @@
+/solution.c.sol: |-
+    //q1
+    int fd = open(filename, O_RDONLY);
+    if(fd == -1) {
+        return -1;
+    }
+
+    struct stat buf;
+    fstat(fd, &buf);
+    if(index > buf.st_size){
+        return -2;
+    }
+
+    lseek(fd, (off_t) index*sizeof(int), SEEK_SET);
+    unsigned int n2;
+    int r = read(fd, (void *) &n2, sizeof(int));
+    if (r == -1)
+        return -1;
+    close(fd);
+    return n2;
+
+
+
+
+    //q2
+    int fd = open(filename, O_WRONLY);
+    if(fd == -1) {
+        return;
+    }
+    lseek(fd, (off_t) index*sizeof(unsigned int), SEEK_SET);
+    write(fd, (void *) &value, sizeof(unsigned int));
+    close(fd);
 /student/tests.c: |
     // CTester template
 
@@ -239,9 +271,8 @@
 
         if (ret != -1){
             push_info_msg(_("You do not return -1 when lseek() fails."));
+            set_tag("failure_handling_lseek");
             CU_FAIL();
-        }else{
-            set_tag("lseek");
         }
     }
 
@@ -321,91 +352,97 @@ tags:
     '10':
         visible: true
         type: 1
-        description: A value at an unwanted index was modified.
-        name: Wrong Index Set
-        id: wrong_index_set
+        description: You do not manage failures properly.
+        name: Failure handling
+        id: failure_handling
     '11':
-        name: Wrong Get Value Returned
-        id: wrong_get_value_returned
-        description: The get() function did not return the expected value.
+        name: Floating Point Exception
+        id: sigfpe
+        description: ''
         visible: true
         type: 1
     '12':
         visible: true
-        id: timeout
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
+        id: memory
+        name: Memory Exceeded
+        description: ''
         type: 1
     '13':
-        description: You try to read outside of the array.
-        name: Out of bounds
+        description: You code do not compile.
+        name: Not compile
         type: 1
         visible: true
-        id: oob
+        id: not_compile
     '14':
         type: 1
-        name: Too many read/write
-        description: You call the read or write function more than necessary.
+        name: Original file modified
+        id: original_modif
         visible: true
-        id: too_many_op
+        description: You have modified the original file.
     '15':
         visible: true
-        id: sigsegv
-        name: Segmentation Fault
+        id: wrong_set_value
+        name: Wrong Set Value
         type: 1
+        description: The value written in the file has not the correct value.
+    '18':
         description: ''
+        id: failure_handling_lseek
+        type: 1
+        name: Failure handling (lseek)
+        visible: false
     '2':
+        description: A value at an unwanted index was modified.
         visible: true
-        description: You use some banned functions.
-        id: banned_funcs
+        id: wrong_index_set
         type: 1
-        name: Banned functions
+        name: Wrong Index Set
     '3':
-        name: Double free
+        name: Wrong Get Value Returned
         type: 1
         visible: true
-        description: Your code produced a double free.
-        id: double_free
+        description: The get() function did not return the expected value.
+        id: wrong_get_value_returned
     '4':
-        id: failure_handling
-        description: You do not manage failures properly.
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
         type: 1
-        name: Failure handling
         visible: true
     '5':
-        id: sigfpe
+        id: oob
         type: 1
-        name: Floating Point Exception
-        description: ''
+        name: Out of bounds
         visible: true
+        description: You try to read outside of the array.
     '6':
-        id: memory
+        id: too_many_op
         type: 1
-        description: ''
-        name: Memory Exceeded
+        description: You call the read or write function more than necessary.
+        name: Too many read/write
         visible: true
     '7':
-        description: You code do not compile.
-        id: not_compile
-        name: Not compile
+        description: ''
+        id: sigsegv
+        name: Segmentation Fault
         visible: true
         type: 1
     '8':
-        name: Original file modified
-        id: original_modif
+        name: Banned functions
+        id: banned_funcs
         type: 1
-        description: You have modified the original file.
+        description: You use some banned functions.
         visible: true
     '9':
-        id: wrong_set_value
-        description: The value written in the file has not the correct value.
+        id: double_free
+        description: Your code produced a double free.
         visible: true
-        name: Wrong Set Value
+        name: Double free
         type: 1
     '16':
-        name: File
         visible: true
         type: 2
+        name: File
         description: ''
         id: ''
     '17':
