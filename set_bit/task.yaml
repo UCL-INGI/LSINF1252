@@ -1,3 +1,14 @@
+/student/student_code.c.tpl: |
+    #include"student_code.h"
+
+    uint64_t set_bit(uint64_t x, int pos, bool value)
+    {
+    @    @q1@@
+    }
+/student/student_code.h: |
+    #include<stdint.h>
+    #include<stdbool.h>
+    uint64_t set_bit(uint64_t x, int pos, bool value);
 accessible: true
 author: Arthur van Stratum
 context: |-
@@ -26,13 +37,13 @@ problems:
         type: code
         language: c
         header: |-
-            Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *val*.
+            Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *value*.
 
             .. code-block:: c
 
                 #include <stdint.h>
                 #include <stdbool.h>
-                uint64_t set_bit(uint64_t x, int pos, bool val) {
+                uint64_t set_bit(uint64_t x, int pos, bool value) {
         name: ''
 stored_submissions: 0
 submission_limit:

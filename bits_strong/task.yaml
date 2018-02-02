@@ -1,16 +1,3 @@
-/student/solutions/student_code.c: |
-    #include <stdio.h>
-    #include"student_code.h"
-
-    uint32_t unset_strong_bit(uint32_t x)
-    {
-        if (!x)
-            return 0;
-        for (short i = 1; i<32; i++)
-            if (!(x>>i))
-                return x - (1<<(i-1));
-        return x;
-    }
 accessible: true
 author: Arthur van Stratum
 context: |-
@@ -34,7 +21,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Killing too strong bits - TO REVIEW'
+name: '[S2] Killing too strong bits - REVIEWED'
 network_grading: false
 order: 19
 problems:
@@ -64,10 +51,10 @@ tags:
         description: Your code exceeds the maximum allowed time.
     '1':
         id: sigsegv
-        type: 1
         description: ''
         name: Segmentation Fault
         visible: true
+        type: 1
     '2':
         id: not_compile
         type: 1
