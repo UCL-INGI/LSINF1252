@@ -1,7 +1,16 @@
+/student/student_code.c.tpl: |
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    #include "student_code.h"
+
+    size_t my_strlen(const char* s) {
+      @@my_stlren@@
+    }
 accessible: true
 author: 'Nicolas Rybowski, '
 context: You are asked to implement `strlen <https://linux.die.net/man/3/strlen>`_.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -14,7 +23,7 @@ order: 11
 problems:
     my_stlren:
         name: my_stlren
-        language: ''
+        language: c
         header: Write here your code for ``my_strlen``
         type: code
 stored_submissions: 0
