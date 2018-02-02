@@ -1,4 +1,4 @@
-# CC variable for C compiler
+# CC variable for used C compiler
 # You can replace gcc by clang if you prefer
 CC = gcc
 # CFLAGS variable for gcc/clang flags
@@ -11,21 +11,11 @@ CFLAGS += -Wextra # Enable additional warnings
 CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
 CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
 
-OBJ = calc.o operations.o
+# Write your makefile instruction under these comments.
+# You do not need to modify the other lines and files.
 
-calc: $(OBJ)
-	$(CC) $(CFLAGS) -o calc $(OBJ)
+@@make_calc_simple@@
 
-calc.o: calc.c calc.h operations.h
-	$(CC) $(CFLAGS) -c calc.c
+calc.o:
 
-operations.o: operations.c operations.h
-	$(CC) $(CFLAGS) -c operations.c
-
-.PHONY: clean mrproper
-
-clean:
-	rm -f $(OBJ)
-
-mrproper: clean
-	rm -f calc
+operations.o:
