@@ -1,7 +1,6 @@
 #include<string.h>
 
-int pal(char *str)
-{
+int tab_find(int tab[], int len, int elem){
 @    @q1@@
 }
 

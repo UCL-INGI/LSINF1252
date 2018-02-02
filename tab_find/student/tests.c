@@ -55,7 +55,7 @@ void test_myfunc_ret()
 
 int main(int argc,char** argv)
 {
-	BAN_FUNCS();
+	BAN_FUNCS(syetem, set_tag);
 	RUN(test_myfunc_ret);
 }
 
