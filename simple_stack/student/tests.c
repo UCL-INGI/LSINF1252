@@ -361,34 +361,6 @@ void test_pop_empty(){
     push_info_msg(_("The previous head is not freed "));
 }
 
-//void test_pop
-
-/*void test_push_empty(){
-  set_test_metadata("push", _("Check if the insertion of a new node into an empty list"), 1);
-
-  struct node *head = (struct node*) malloc(sizeof(struct node));
-  if (!head)
-    return;
-
-  head->next = NULL;
-  head->value = 0;
-
- int ret;
-
- srandom(646415654);
-
- SANDBOX_BEGIN;
- ret = push(&head, random());
- SANDBOX_END;
-
- CU_ASSERT_EQUAL(ret, 0);
- if (!ret)
-  push_info_msg(_("You detected an error in normal case"));
-
-
-
-  free_stack(head);
-}*/
 
 int main(int argc,char** argv)
 {
