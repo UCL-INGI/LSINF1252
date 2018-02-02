@@ -13,9 +13,9 @@ network_grading: false
 order: 32
 problems:
     m1:
-        answer: $(CC)$
+        answer: $(CC)
         type: match
-        name: Variables
+        name: Using a variable in a Makefile
         header: |-
             In your Makefile, you have the following variable definition:
 
