@@ -1,3 +1,4 @@
+/Makefile.tpl: ''
 /run: |
     #!/bin/bash
 
@@ -23,8 +24,7 @@
     fi
 
     make mrproper
-/student/Makefile: ''
-/student/Makefile.tpl: |
+/student/Makefile: |
     # CC variable for C compiler
     # You can replace gcc by clang if you prefer
     CC = gcc
@@ -47,6 +47,7 @@
 
     mrproper: clean
         rm -f calc
+/student/Makefile.tpl: ''
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-

@@ -1,8 +1,21 @@
+/student/student_code.c.tpl: |-
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include "student_code.h"
+
+    int compare(char a, char b){
+        @@order_relation@@
+    }
+
+    int insert(node_t** head, char val, int (*cmp) (char,char)){
+        @@insert@@
+    }
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: Given the provided implementation of a linked list, you are asked to implement
     the ``insert`` function based on a specific order relation. By succeeding this
-    task, you will be able to make ordered list like a `LinkedList` with a `Comparator` in `java`.
+    task, you will be able to make ordered list like a `LinkedList` with a `Comparator`
+    in `java`.
 environment: cpp
 evaluate: best
 groups: false
@@ -15,7 +28,6 @@ network_grading: false
 order: 38
 problems:
     order_relation:
-        type: code
         name: Order relation
         header: |-
             For this subproblem, you are asked to implement the comparison function which rules the order relation of the list.
@@ -29,6 +41,7 @@ problems:
                     //Your code will be inserted here
                 }
         language: c
+        type: code
     insert:
         name: Insert
         header: |-
@@ -54,23 +67,23 @@ problems:
                 int insert(node_t** head, char val, int (*cmp)(char,char)){
                     //Your code will be inserted here
                 }
-        language: c
         type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Data structures
-        type: 2
-        description: Task dealing with data structures and linked list
         visible: true
+        type: 2
+        name: Data structures
+        description: Task dealing with data structures and linked list
         id: ''
     '1':
-        type: 2
-        visible: true
-        description: Task about pointers and their use
         name: Pointer
+        visible: true
+        type: 2
+        description: Task about pointers and their use
         id: ''
 weight: 1.0
