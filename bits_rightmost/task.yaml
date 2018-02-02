@@ -1,3 +1,27 @@
+/student/tests.c: |
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    void test_get_4_rightmost_bits(void)
+    {
+        set_test_metadata("q1", _("Test the function get_4_rightmost_bits"), 1);
+
+        uint32_t binaryNumber = 0b0111010110110101010001011;
+        uint8_t rightMostBitsReturned;
+
+        SANDBOX_BEGIN;
+        rightMostBitsReturned = get_4_rightmost_bits(binaryNumber);
+        SANDBOX_END;
+        CU_ASSERT_EQUAL(rightMostBitsReturned,0b1011);
+        if ( rightMostBitsReturned!=0b1011)
+            push_info_msg(_("get_4_rightmost_bits returns the wrong value"));
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS(set_tag);
+        RUN(test_get_4_rightmost_bits);
+    }
 accessible: true
 author: Arthur van Stratum
 context: |-
@@ -18,14 +42,15 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S2] Right bits'
 network_grading: false
 order: 15
 problems:
     q1:
+        type: code
         language: c
         header: |
             Write the body of a function *get_4_rightmost_bits* that returns the 4 weakest bits of *x*. For instance, with *x=0b...11011001*, the function should return a *uint8_t* containing 0b00001001.
@@ -35,16 +60,57 @@ problems:
                 #include <stdint.h>
                 uint8_t get_4_rightmost_bits(uint32_t x) {
         name: ''
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 2
-        name: S2
+        id: timeout
+        name: Timeout
         visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        id: sigsegv
         description: ''
+        name: Segmentation Fault
+        visible: true
+        type: 1
+    '2':
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
+        type: 1
+    '5':
+        id: double_free
+        visible: true
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+    '6':
+        id: banned_funcs
+        description: You use some banned functions.
+        type: 1
+        visible: true
+        name: Banned functions
+    '7':
+        name: S2
+        description: ''
+        type: 2
+        visible: true
         id: ''
 weight: 1.0

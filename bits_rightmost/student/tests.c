@@ -18,6 +18,6 @@ void test_get_4_rightmost_bits(void)
 
 int main(int argc,char** argv)
 {
-	BAN_FUNCS();
+	BAN_FUNCS(set_tag);
 	RUN(test_get_4_rightmost_bits);
 }
