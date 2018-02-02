@@ -17,7 +17,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Bitwise operation: Summing bits - REVIEWED'
+name: '[S2] Bitwise operation: summing bits - REVIEWED'
 network_grading: false
 order: 18
 problems:
