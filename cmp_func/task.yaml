@@ -6,7 +6,7 @@ context: |-
     In this exercise, you will code a function which receives pointers to two functions, to determine if these functions are equivalent. Two functions are equivalent if they produce the same output for the same input.
 
     The functions passed by pointers will be of the form ``uint8_t func(uint8_t n)``.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
