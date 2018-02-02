@@ -10,7 +10,7 @@ limits:
     time: '30'
 name: '[S03] Cunit basics'
 network_grading: false
-order: 38
+order: 37
 problems:
     q1:
         name: CUnit linker

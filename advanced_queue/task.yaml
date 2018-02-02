@@ -22,7 +22,7 @@ limits:
     memory: '100'
 name: '[S4] Queue avancée'
 network_grading: false
-order: 40
+order: 39
 problems:
     enqueue:
         language: c
