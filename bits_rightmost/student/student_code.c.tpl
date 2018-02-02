@@ -1,8 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include"student_code.h"
 
-int myfunc(int myargs) {
-@    @problem_id@@
+uint8_t get_4_rightmost_bits(uint32_t x)
+{
+@    @q1@@
 }
 
 
