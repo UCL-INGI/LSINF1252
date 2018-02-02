@@ -58,10 +58,9 @@ problems:
         name: sprintf
         type: code
         header: |
-            ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead write to a ¨*buffer*.
+            ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
 
             Write the body of the function *format_str*.
-            sprintf(buffer, "Mister %s %c has %d eggs") -> Mister Olivier B. has 42 eggs
 
             .. code-block:: c
 
