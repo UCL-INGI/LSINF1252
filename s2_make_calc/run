@@ -1,5 +1,9 @@
 #!/bin/bash
 
+getinput "make_calc" > student/Makefile.tpl
+
+parsetemplate --output student/Makefile student/Makefile.tpl
+
 make
 
 if test -e student/calc
