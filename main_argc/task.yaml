@@ -14,8 +14,20 @@ network_grading: false
 problems:
     q1:
         language: c
-        header: Write the complete file containing the function main, including the
-            *#includes*
+        header: |-
+            Write the complete file containing the function main, including the *#includes*. This program will output all uneven arguments given.
+
+            e.g. ./myProg a b c d e f g
+
+            will output
+
+            a
+
+            c
+
+            e
+
+            g
         name: ''
         type: code
 stored_submissions: 0
