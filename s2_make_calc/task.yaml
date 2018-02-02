@@ -1,0 +1,48 @@
+accessible: true
+author: Pablo Gonzalez Alvarez
+context: |-
+    *Estimated time: 5 minutes*
+
+    You have just built a simple calculator. When typing ``ls`` in your command line, the source folder has the following structure:
+
+    .. code-block:: console
+
+        calc.c    calc.h    operations.c    operations.h
+
+    ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
+
+    As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``.
+
+    These headers contain the function prototypes and specifications. For instance ``double add(double a, double b);``.
+
+    Unfortunately, the source folder was lost but you still have access to the object files.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[S2] Makefile basics - headers and prerequisites'
+network_grading: false
+order: 23
+problems:
+    make_calc_simple:
+        header: Write a *Makefile* to build the executable ``calc`` from both object
+            files ``calc.o`` and ``operations.o``.
+        language: Makefile
+        name: 'Linking '
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags:
+    '0':
+        id: make
+        type: 0
+        name: make & Makefile
+        description: Tasks related to the make task runner for targets described in
+            Makefile.
+        visible: false
+weight: 1.0

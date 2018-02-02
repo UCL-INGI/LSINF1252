@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S3] Sleepy memory - REVIEWED'
 network_grading: false
-order: 28
+order: 27
 problems:
     sleep_malloc:
         language: c

@@ -1,3 +1,82 @@
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    void test_strcpy_return() {
+      set_test_metadata("strcpy_impl", _("Check if the string is correctly put in memory"), 1);
+
+      char *ret = NULL;
+
+      const char *stack_src = "Chaine de char de test un peu courte mais pas trop quand meme";
+      char *src = (char *)malloc(strlen(stack_src)+1);
+      if (src == NULL)
+          CU_FAIL("no mem");
+      strcpy(src, stack_src);
+
+      monitored.malloc = true;
+
+      SANDBOX_BEGIN;
+      ret = buf_strcpy(src);
+      SANDBOX_END;
+
+      // Tests
+      //-----------------------------------------------------------------
+
+      // check if only one call to malloc
+      int ms = stats.malloc.called;
+      CU_ASSERT_EQUAL(ms, 1);
+      if (ms > 1)
+        push_info_msg(_("You used more than one call to malloc"));
+
+      // check if new element is malloced
+      int mal = malloced((void*) ret);
+      CU_ASSERT_TRUE(mal);
+      // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
+      if (mal){
+          if (strncmp(ret, src, strlen(src) + 1) != 0){
+              CU_FAIL("wrong string");
+          }
+          free(ret);
+      }
+      else {
+        push_info_msg(_("The returned pointer is not malloced"));
+        set_tag("malloc_fail");
+      }
+
+    }
+
+    void test_strcpy_nomem() {
+      set_test_metadata("strcpy_impl", _("Check the behavior of the function when the call to malloc fails"), 1);
+
+      char *ret = NULL;
+      char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
+
+      monitored.malloc = true;
+      failures.malloc = FAIL_ALWAYS;
+      failures.malloc_ret = NULL;
+
+      SANDBOX_BEGIN;
+      ret = buf_strcpy(src);
+      SANDBOX_END;
+
+      CU_ASSERT_PTR_NULL(ret);
+      if (ret){
+        push_info_msg(_("The return value of your implementation is wrong"));
+        set_tag("malloc_fail");
+      }
+
+      free(ret);
+
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS();
+        RUN(test_strcpy_return, test_strcpy_nomem);
+    }
 accessible: true
 author: Nicolas Rybowski
 context: |-
@@ -16,12 +95,12 @@ limits:
     time: '30'
 name: '[S3] Improved strncpy - CHANGE REQUESTED - malloc(1)'
 network_grading: false
-order: 27
+order: 26
 problems:
     strcpy_impl:
+        type: code
         name: buf_strcpy
         language: c
-        type: code
         header: |
             Write the body of the function *buf_strcpy*.
 
@@ -42,57 +121,63 @@ submission_limit:
     period: -1
 tags:
     '0':
-        name: Timeout
-        type: 1
         id: timeout
+        name: Timeout
         visible: true
+        type: 1
         description: Your code exceeds the maximum allowed time.
     '1':
-        type: 1
-        visible: true
-        name: Segmentation Fault
         id: sigsegv
         description: ''
-    '2':
+        name: Segmentation Fault
         visible: true
-        description: You code does not compile.
+        type: 1
+    '2':
         id: not_compile
         type: 1
         name: Not compile
-    '3':
-        name: Memory Exceeded
         visible: true
+        description: You code does not compile.
+    '3':
         description: ''
-        type: 1
+        name: Memory Exceeded
         id: memory
+        visible: true
+        type: 1
     '4':
-        id: sigfpe
         name: Floating Point Exception
         description: ''
         visible: true
+        id: sigfpe
         type: 1
     '5':
+        id: double_free
         visible: true
         description: Your code produced a double free.
-        id: double_free
         name: Double free
         type: 1
     '6':
         id: banned_funcs
-        name: Banned functions
-        type: 1
         description: You use some banned functions.
+        type: 1
         visible: true
+        name: Banned functions
+    '9':
+        visible: true
+        description: You do not manage the case where malloc() fails.
+        type: 1
+        id: malloc_fail
+        name: Malloc fail
     '7':
-        description: ''
-        visible: true
-        type: 2
         name: S3
+        description: ''
+        type: 2
+        visible: true
         id: ''
     '8':
-        type: 2
-        description: ''
         name: S3
+        description: ''
         visible: true
+        type: 2
         id: ''
 weight: 1.0

@@ -238,9 +238,8 @@ void test_lseek_q1_fail(){
     
     if (ret != -1){
         push_info_msg(_("You do not return -1 when lseek() fails."));
+        set_tag("failure_handling");
         CU_FAIL();
-    }else{
-        set_tag("lseek");
     }
 }
 

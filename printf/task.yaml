@@ -1,8 +1,8 @@
 accessible: true
-author: ''
-context: In this exercise, you will familiarize yourself with the functions *printf*
-    and *sprintf*.
-environment: pyjavacpp
+author: Mathieu Xhonneux
+context: In this exercise, you will familiarize yourself with the functions ``printf(3)``
+    (printing in the terminal) and ``sprintf(3)`` (text formatting).
+environment: cpp
 evaluate: best
 groups: false
 limits:
@@ -11,29 +11,60 @@ limits:
     time: '30'
 name: '[S2] Printing data'
 network_grading: false
+order: 7
 problems:
     simple:
-        language: c
-        header: Print the string "foo".
+        type: code
+        header: |-
+            The function ``printf`` writes data to the standard output stream (*stdout*).
+
+            Write the body of the function *print_foo* which will print "foo\n" (without the quotes, the symbol '\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
+
+            .. code-block:: c
+
+                void print_foo() {
         name: Foo
-        type: code
+        language: c
     digit:
-        name: Digit
-        language: ''
+        language: c
+        header: |-
+            ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
+
+            .. code-block:: c
+
+                /* print_digit
+                 * @n: an integer
+                 *
+                 * result: print to stdout "The magic number is NUMBER.\n"
+                 */
+                void print_digit(int number) {
         type: code
-        header: Print a number (%d) + text
+        name: Digital
+    example:
+        name: Floating away
+        header: |
+            ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
+
+            What would the following call print to *stdout* ?
+
+            .. code-block:: c
+
+                float PI = 3.1415926;
+                printf("pi = %.4f", PI);
+        type: match
+        answer: '3.1415'
     unsigned-string:
         header: |-
             Print an unsigned char (%u) + string.
 
             Add QCM : what happens if we use %d with a char n > 127 ?
+        name: Unsigned + string
         language: c
         type: code
-        name: Unsigned + string
     sprintf:
-        language: c
         type: code
         name: sprintf
+        language: c
         header: |
             Exemple de sprintf :
 
@@ -50,4 +81,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 14

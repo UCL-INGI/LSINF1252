@@ -12,7 +12,7 @@ limits:
     memory: '100'
 name: '[S1] CTF1 - REVIEWED'
 network_grading: false
-order: 5
+order: 0
 problems:
     q1:
         header: ''
