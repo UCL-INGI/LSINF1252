@@ -7,33 +7,33 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     time: '30'
     memory: '100'
-name: '[S1] CTF1 - REVIEWED'
+    output: '2'
+name: '[S1] Capture The Flag 1 - REVIEWED'
 network_grading: false
 order: 0
 problems:
     q1:
+        answer: ''
         header: ''
         name: Entrez le code ici
         type: match
-        answer: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: S1
         visible: true
         type: 2
+        name: S1
         description: ''
         id: ''
     '1':
-        type: 2
-        visible: true
-        description: ''
         name: Command line
+        visible: true
+        type: 2
+        description: ''
         id: ''
 weight: 1.0

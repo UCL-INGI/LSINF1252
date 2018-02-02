@@ -1,10 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "student_code.h"
 
-void modem_read(void* buffer, int* buf_len){
-    *buf_len = 64;
+int compare(char a, char b){
+    @@order_relation@@
 }
 
-int has_42() {
-    @@modem@@
+int insert(node_t** head, char val, int (*cmp) (char,char)){
+    @@insert@@
 }

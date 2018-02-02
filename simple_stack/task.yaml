@@ -1,7 +1,7 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
-    You are asked to implement the ``pop`` and ``push`` functions of the given `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface.
+    You are asked to implement the ``pop`` and ``push`` functions of the following `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface :
 
     .. code-block:: c
 
@@ -18,15 +18,13 @@ context: |
 
 
 
-    *Hints*
-    =======
-    - @value is also a pointer, it must be allocated.
+    *Hints* :
+
+    - ``char *name`` is also a pointer, memory must be allocated for it.
 
     - `strncpy <https://linux.die.net/man/3/strncpy>`_
 
-    - `strlen <https://linux.die.net/man/3/strlen>`_
-
-        -- strlen does not count the '\\0' character
+    - `strlen <https://linux.die.net/man/3/strlen>`_ (strlen does not count the '\\0' character)
 
     - Don't forget to free **all** the allocated space when popping one element.
 environment: cpp
@@ -36,7 +34,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Simple stack'
+name: '[S3] Simple stack - REVIEWED'
 network_grading: false
 order: 29
 problems:
@@ -58,7 +56,7 @@ problems:
         name: Push
         language: c
     pop:
-        language: ''
+        language: c
         header: |-
             .. code-block:: c
 
@@ -77,20 +75,6 @@ problems:
                 int pop(struct node **head, char *result){
         type: code
         name: Pop
-    free_node:
-        name: <OPTIONAL> free_node
-        type: code
-        language: c
-        header: |-
-            You can use this question to implement a ``free_node`` function
-
-            .. code-block:: c
-
-                /*
-                * Free @node
-                */
-                void free_node(struct node *node){
-        optional: 'on'
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -98,10 +82,10 @@ submission_limit:
 tags:
     '0':
         id: timeout
+        name: Timeout
         visible: true
         type: 1
         description: Your code exceeds the maximum allowed time.
-        name: Timeout
     '1':
         id: sigsegv
         description: ''
@@ -116,10 +100,10 @@ tags:
         description: You code does not compile.
     '3':
         id: memory
-        description: ''
-        name: Memory Exceeded
         visible: true
         type: 1
+        name: Memory Exceeded
+        description: ''
     '4':
         name: Floating Point Exception
         description: ''
@@ -133,9 +117,9 @@ tags:
         name: Double free
         type: 1
     '6':
+        type: 1
         description: You use some banned functions.
         id: banned_funcs
-        type: 1
         visible: true
         name: Banned functions
     '7':

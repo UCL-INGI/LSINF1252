@@ -1,4 +1,4 @@
-/run: |
+/run: |+
     #!/bin/python3
 
     # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
@@ -52,9 +52,10 @@
     LANG = input.get_input('@lang')
 
     # Run the code in a parallel container
-    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    o, e = p.communicate()
-    print(o.decode("utf-8"))
+    print(shlex.split("run_student --time 20 --hard-time 60 \"./tests LANGUAGE={}\"".format(LANG)))
+    p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 \"./tests LANGUAGE={}\"".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    p.communicate()
+
     # If run failed, exit with "failed" result
     if p.returncode:
         feedback.set_global_result("failed")
@@ -134,82 +135,6 @@
     score = 100*score/(total if not total == 0 else 1)
     feedback.set_grade(score)
     feedback.set_global_result("success" if score >= 50 else "failed")
-/student/Makefile: |+
-    CC=gcc
-    EXEC=tests
-    LDFLAGS=-lcunit -lm -lpthread -ldl -rdynamic
-    SRC=$(wildcard *.c) CTester/wrap_mutex.c CTester/wrap_malloc.c CTester/wrap_file.c CTester/wrap_sleep.c CTester/CTester.c CTester/trap.c
-    OBJ=$(SRC:.c=.o)
-    CFLAGS=-Wall -Werror -DC99 -std=gnu99 -ICTester
-    WRAP=-Wl,-wrap=pthread_mutex_lock -Wl,-wrap=pthread_mutex_unlock -Wl,-wrap=pthread_mutex_trylock -Wl,-wrap=pthread_mutex_init -Wl,-wrap=pthread_mutex_destroy -Wl,-wrap=malloc -Wl,-wrap=free -Wl,-wrap=realloc -Wl,-wrap=calloc -Wl,-wrap=open -Wl,-wrap=creat -Wl,-wrap=close -Wl,-wrap=read -Wl,-wrap=write -Wl,-wrap=stat -Wl,-wrap=fstat -Wl,-wrap=lseek -Wl,-wrap=exit -Wl,-wrap=sleep
-
-    all: $(EXEC)
-
-    %.o: %.c
-        $(CC) $(CFLAGS) -c -o $@ $<
-
-    $(EXEC): $(OBJ)
-        $(CC) $(WRAP) -o $@ $(OBJ) $(LDFLAGS)
-
-    create-po:
-        mkdir -p po/fr/
-        xgettext --keyword=_ --language=C --add-comments --sort-output --from-code=UTF-8 -o po/tests.pot $(SRC)
-        msginit --input=po/tests.pot --locale=fr_BE.utf8 --output=po/fr/tests.po
-
-    update-po:
-        xgettext --keyword=_ --language=C --add-comments --sort-output --from-code=UTF-8 -o po/tests.pot $(SRC)
-        msgmerge --update po/fr/tests.po po/tests.pot
-
-    compile-mo:
-        msgfmt --no-hash --output-file=po/fr/tests.mo po/fr/tests.po
-        mkdir -p fr/LC_MESSAGES/
-        cp po/fr/tests.mo fr/LC_MESSAGES/tests.mo
-
-    clean:
-        rm -f $(EXEC) $(OBJ)
-
-    .PHONY: tests
-
-/student/student_code.c.tpl: |+
-    #include<string.h>
-
-    int tab_find(int tab[], int len, int elem){
-    @    @tab_find@@
-    }
-
-
-/student/student_code.h: int tab_find(int tab[], int len, int elem);
-/student/tests.c: |+
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    void test()
-    {
-        set_test_metadata("q1", _("Test function tab find"), 1);
-
-        int array[10] = {1,3,5,7,9,0,8,6,4,2};
-        int *tab = trap_buffer(10, TRAP_RIGHT, PROT_WRITE, array);
-
-        int ret = 0;
-        SANDBOX_BEGIN;
-        ret = tab_find(tab, 10, 2);
-        SANDBOX_END;
-
-        free_trap(tab,10);
-        ret++;
-        //if(ret != 9){
-            push_info_msg(_("Your function does not return the correct index."));
-            CU_FAIL();
-        //}
-    }
-
-    int main(int argc,char** argv) {
-        BAN_FUNCS(syetem, set_tag);
-        RUN(test);
-    }
 
 accessible: true
 author: Olivier Martin
@@ -253,14 +178,15 @@ tags:
     '0':
         id: timeout
         name: Timeout
+        visible: true
         type: 1
         description: Your code exceeds the maximum allowed time.
-        visible: true
     '1':
         id: sigsegv
+        description: You probably try to access an index outside of the bounds of
+            the array.
         name: Segmentation Fault
         visible: true
-        description: ''
         type: 1
     '2':
         id: not_compile
@@ -294,8 +220,8 @@ tags:
         name: Banned functions
     '7':
         name: S2
-        type: 2
         description: ''
+        type: 2
         visible: true
         id: ''
 weight: 1.0
