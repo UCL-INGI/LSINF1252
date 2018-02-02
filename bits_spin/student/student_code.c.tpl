@@ -1,8 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include"student_code.h"
 
-int myfunc(int myargs) {
-@    @problem_id@@
+uint32_t cycle_bits(uint32_t x, uint32_t n)
+{
+@    @q1@@
 }
-
-
