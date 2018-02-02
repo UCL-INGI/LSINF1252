@@ -11,17 +11,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
+    time: '30'
     memory: '100'
-name: '[S3] Improved strncpy'
+name: '[S3] Improved strncpy - CHANGE REQUESTED'
 network_grading: false
 order: 26
 problems:
     strcpy_impl:
         name: buf_strcpy
-        type: code
         language: c
+        type: code
         header: |
             Write the body of the function *buf_strcpy*.
 
@@ -41,10 +41,58 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '2':
+        type: 1
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        name: Timeout
+    '3':
+        name: Segmentation Fault
+        visible: true
+        description: ''
+        type: 1
+        id: sigsegv
+    '4':
+        id: not_compile
+        name: Not compile
+        description: You code does not compile.
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: memory
+        name: Memory Exceeded
+        type: 1
+    '6':
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+        description: ''
+        visible: true
+    '7':
+        id: double_free
+        description: Your code produced a double free.
+        visible: true
+        type: 1
+        name: Double free
+    '8':
+        id: banned_funcs
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        visible: true
     '0':
         name: S3
-        visible: true
         type: 2
+        visible: true
+        description: ''
+        id: ''
+    '1':
+        type: 2
+        visible: true
+        name: S3
         description: ''
         id: ''
 weight: 1.0

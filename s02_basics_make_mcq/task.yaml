@@ -13,6 +13,8 @@ network_grading: false
 order: 23
 problems:
     mcq1:
+        header: Select all *correct* answers related to the *target* of a Makefile
+            rule.
         limit: 2
         choices:
         -   text: The target is the bullseye of a shooting target.
@@ -22,17 +24,15 @@ problems:
         multiple: true
         name: Find the target
         type: multiple_choice
-        header: Select all *correct* answers related to the *target* of a Makefile
-            rule.
     mcq2:
-        choices:
-        -   text: The prerequisite is a file that is used as input to create the target.
-            valid: true
-        -   text: The prerequisite is to have good marksmanship skills to hit the
-                target.
         limit: 2
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
+        choices:
+        -   valid: true
+            text: The prerequisite is a file that is used as input to create the target.
+        -   text: The prerequisite is to have good marksmanship skills to hit the
+                target.
         name: What are the prerequisite?
         multiple: true
         type: multiple_choice
@@ -112,6 +112,11 @@ problems:
         limit: 0
         type: multiple_choice
         name: Rules syntax
+    match1:
+        header: In a Makefile, what is the character you can use to split a long line?
+        type: match
+        name: Break
+        answer: \
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -8,17 +8,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
+    time: '30'
     memory: '100'
 name: '[S3] Pointer arithmetic - REVIEWED'
 network_grading: false
 order: 33
 problems:
     first:
-        language: c
-        type: code
         name: First argument
+        type: code
+        language: c
         header: |-
             You found a hint from the hacker, telling the first parameter is  located at the 12th byte after *ptr*. An int is guaranteed to be 4 bytes long.
 
@@ -28,7 +28,6 @@ problems:
 
                 int first(void *ptr) {
     second:
-        type: code
         header: |-
             The second parameter is a char located 6 bytes after *ptr*.
 
@@ -37,11 +36,12 @@ problems:
             .. code-block:: c
 
                 char second(void *ptr) {
+        type: code
         name: Second argument
         language: c
     third:
-        name: Third argument
         type: code
+        name: Third argument
         language: c
         header: |-
             The third parameter is an int located 45 bytes after *ptr*.
@@ -56,10 +56,58 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '2':
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        visible: true
+        name: Timeout
+    '3':
+        name: Segmentation Fault
+        visible: true
+        description: ''
+        type: 1
+        id: sigsegv
+    '4':
+        id: not_compile
+        type: 1
+        description: You code does not compile.
+        name: Not compile
+        visible: true
+    '5':
+        visible: true
+        description: ''
+        id: memory
+        name: Memory Exceeded
+        type: 1
+    '6':
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+        description: ''
+        visible: true
+    '7':
+        id: double_free
+        description: Your code produced a double free.
+        name: Double free
+        visible: true
+        type: 1
+    '8':
+        id: banned_funcs
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        visible: true
     '0':
         name: Pointer
         type: 2
         visible: true
         description: Task about pointers and their use
+        id: ''
+    '1':
+        type: 2
+        name: S3
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
