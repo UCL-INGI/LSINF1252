@@ -13,31 +13,26 @@ network_grading: false
 order: 23
 problems:
     mcq1:
-        header: Select all *correct* answers related to the *target* of a Makefile
-            rule.
-        limit: 4
+        limit: 2
         choices:
         -   text: The target is the bullseye of a shooting target.
         -   valid: true
             text: The target is the name of a file.
-        -   text: The target can be the name of an action to carry out.
-            valid: true
-        -   valid: true
-            text: The target is a file that is used as input to create the rule.
-        -   text: A target is an action that make carries out.
         success_message: 'Bullseye, good job! '
         multiple: true
         name: Find the target
         type: multiple_choice
+        header: Select all *correct* answers related to the *target* of a Makefile
+            rule.
     mcq2:
+        choices:
+        -   text: The prerequisite is a file that is used as input to create the target.
+            valid: true
+        -   text: The prerequisite is to have good marksmanship skills to hit the
+                target.
         limit: 2
         header: Select all *correct* answers related to the *prerequisite* of a Makefile
             rule.
-        choices:
-        -   valid: true
-            text: The prerequisite is a file that is used as input to create the target.
-        -   text: The prerequisite is to have good marksmanship skills to hit the
-                target.
         name: What are the prerequisite?
         multiple: true
         type: multiple_choice
@@ -95,9 +90,9 @@ problems:
 
                         clean:
                         [spaces]@rm -f src/*.o
+            valid: true
             feedback: The recipe in a Makefile has to be intended with a tab and not
                 spaces.
-            valid: true
         -   feedback: There is a missing colon. There is a missing indendation.
             text: |4-
 
