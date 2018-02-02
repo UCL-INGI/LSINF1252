@@ -3,11 +3,7 @@ author: Arthur van Stratum
 context: |-
     In this exercise, we will work with operation on bits. When we speak about the position of a bit, the index 0 corresponds to weakest bit, 1 to the second-weakest bit, ...
 
-    In c, you can write a number in a binary (base 2) form by prefixing it via 0b.
-    e.g. 0b11010 = 26 (base 10)
-
-    Note: numbers begin by 0 are stored in octal (base 8).
-    e.g. 022 (base 8) = 18 (base 10)
+    In C, you can write a number in binary (base 2) by prefixing it via 0b., e.g. 0b11010 = 26.
 
     This exercise will introduce some non-standard data types which guarantee that the variable has a fixed number of bits. Indeed, on some machines, a *int* could be 2, 4 or 8 bytes. Hence, if we want to do bitwise operations, we have to know first on how many bits we are working.
 
@@ -22,7 +18,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Bit setting - TO REVIEW'
+name: '[S2] Bitwise operation: setting a bit- REVIEWED'
 network_grading: false
 order: 16
 problems:
@@ -43,52 +39,52 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
+    '0':
         id: timeout
-        description: Your code exceeds the maximum allowed time.
         name: Timeout
         visible: true
         type: 1
-    '2':
+        description: Your code exceeds the maximum allowed time.
+    '1':
         id: sigsegv
-        type: 1
+        description: ''
         name: Segmentation Fault
         visible: true
-        description: ''
-    '3':
+        type: 1
+    '2':
         id: not_compile
-        visible: true
         type: 1
         name: Not compile
+        visible: true
         description: You code does not compile.
-    '4':
+    '3':
+        id: memory
+        visible: true
+        type: 1
         name: Memory Exceeded
         description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
         visible: true
-        id: memory
+        id: sigfpe
         type: 1
     '5':
-        id: sigfpe
+        id: double_free
         visible: true
-        description: ''
-        name: Floating Point Exception
+        description: Your code produced a double free.
+        name: Double free
         type: 1
     '6':
-        id: double_free
-        description: Your code produced a double free.
-        type: 1
-        visible: true
-        name: Double free
-    '7':
         id: banned_funcs
-        name: Banned functions
         description: You use some banned functions.
         type: 1
         visible: true
-    '0':
+        name: Banned functions
+    '7':
         name: S2
-        visible: true
-        type: 2
         description: ''
+        type: 2
+        visible: true
         id: ''
 weight: 1.0
