@@ -19,7 +19,7 @@ point_t* gen_struct(int size){
 }
 
 void _test() {
-int size = 6;
+    int size = 6;
     int ret = 0;
     point_t* tab = gen_struct(size);
     
@@ -40,6 +40,7 @@ int size = 6;
     if (stats.write.called != 1) {
         CU_FAIL();
         push_info_msg(_("You should call write() only once."));
+        set_tag("too_many_op");
     }
     if (stats.close.called != 1) {
         CU_FAIL();

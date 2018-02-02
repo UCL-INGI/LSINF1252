@@ -11,7 +11,7 @@ limits:
     time: '30'
 name: '[S2] Palindrome - REVIEWED'
 network_grading: false
-order: 19
+order: 18
 problems:
     q1:
         name: ''

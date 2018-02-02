@@ -39,7 +39,7 @@ limits:
     time: '30'
 name: '[S3] Basic linked list - CHANGE REQUESTED - malloc(1)'
 network_grading: false
-order: 29
+order: 28
 problems:
     init_node:
         name: Node initialisation

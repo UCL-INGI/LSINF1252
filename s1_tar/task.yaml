@@ -27,7 +27,7 @@ limits:
     time: '30'
 name: '[S01] tar'
 network_grading: false
-order: 12
+order: 11
 problems:
     archive:
         name: ''

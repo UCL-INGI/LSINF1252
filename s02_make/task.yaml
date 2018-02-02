@@ -141,7 +141,7 @@ limits:
     time: '30'
 name: '[S02] Makefile basics - REVIEWED'
 network_grading: false
-order: 22
+order: 21
 problems:
     make_me_easy:
         type: match

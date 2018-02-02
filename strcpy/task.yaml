@@ -16,7 +16,7 @@ limits:
     time: '30'
 name: '[S3] Improved strncpy - CHANGE REQUESTED - malloc(1)'
 network_grading: false
-order: 27
+order: 26
 problems:
     strcpy_impl:
         name: buf_strcpy

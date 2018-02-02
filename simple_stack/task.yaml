@@ -38,7 +38,7 @@ limits:
     memory: '100'
 name: '[S3] Simple stack'
 network_grading: false
-order: 31
+order: 30
 problems:
     push:
         language: c

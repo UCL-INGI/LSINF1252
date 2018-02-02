@@ -12,7 +12,7 @@ limits:
     memory: '100'
 name: '[S1] Pipes'
 network_grading: false
-order: 11
+order: 10
 problems:
     file:
         header: Redirect the standard output in a file.txt and post it here.

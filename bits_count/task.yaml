@@ -56,7 +56,7 @@ limits:
     memory: '100'
 name: '[S2] Working with bits'
 network_grading: false
-order: 16
+order: 15
 problems:
     q1:
         name: sum_bits

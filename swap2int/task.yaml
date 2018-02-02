@@ -10,7 +10,7 @@ limits:
     time: '30'
 name: '[S2] Swap my integers - REVIEWED'
 network_grading: false
-order: 21
+order: 20
 problems:
     q1:
         name: Swap
