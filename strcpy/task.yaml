@@ -1,12 +1,9 @@
 accessible: true
 author: Nicolas Rybowski
 context: |-
-    The classic function ``char *strncpy(char *destination, const char *source, size_t num);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then proceeds to the copy.
+    The classic function ``char *strcpy(char *destination, const char *source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then proceeds to the copy.
 
-    *Hint*
-    ======
-
-    Use `malloc <https://linux.die.net/man/3/malloc>`_
+    *Hint* : use `malloc <https://linux.die.net/man/3/malloc>`_
 environment: cpp
 evaluate: best
 groups: false
@@ -14,7 +11,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Improved strncpy - CHANGE REQUESTED - malloc(1)'
+name: '[S3] Improved strcpy - REVIEWED'
 network_grading: false
 order: 26
 problems:
@@ -42,11 +39,11 @@ submission_limit:
     period: -1
 tags:
     '0':
-        id: timeout
         name: Timeout
         visible: true
         type: 1
         description: Your code exceeds the maximum allowed time.
+        id: timeout
     '1':
         id: sigsegv
         description: ''
@@ -60,11 +57,11 @@ tags:
         visible: true
         description: You code does not compile.
     '3':
-        description: ''
         name: Memory Exceeded
         id: memory
         visible: true
         type: 1
+        description: ''
     '4':
         name: Floating Point Exception
         description: ''
@@ -89,10 +86,10 @@ tags:
         description: You do not manage the case where malloc() fails.
         type: 1
         visible: true
-    '9':
+    '8':
+        name: S3
+        description: ''
         visible: true
         type: 2
-        description: ''
-        name: S3
         id: ''
 weight: 1.0
