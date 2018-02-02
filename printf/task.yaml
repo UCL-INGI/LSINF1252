@@ -6,15 +6,14 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
 name: '[S2] Printing data'
 network_grading: false
 order: 7
 problems:
     simple:
-        type: code
         header: |-
             The function ``printf`` writes data to the standard output stream (*stdout*).
 
@@ -24,8 +23,10 @@ problems:
 
                 void print_foo() {
         name: Foo
+        type: code
         language: c
     digit:
+        name: Digital
         language: c
         header: |-
             ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
@@ -39,9 +40,9 @@ problems:
                  */
                 void print_digit(int number) {
         type: code
-        name: Digital
     example:
         name: Floating away
+        answer: '3.1415'
         header: |
             ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
 
@@ -52,29 +53,23 @@ problems:
                 float PI = 3.1415926;
                 printf("pi = %.4f", PI);
         type: match
-        answer: '3.1415'
-    unsigned-string:
-        header: |-
-            Print an unsigned char (%u) + string.
-
-            Add QCM : what happens if we use %d with a char n > 127 ?
-        name: Unsigned + string
-        language: c
-        type: code
     sprintf:
-        type: code
-        name: sprintf
         language: c
+        name: sprintf
+        type: code
         header: |
-            Exemple de sprintf :
+            ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
 
-            écrire dans buffer :
-
-            sprintf(buffer, "Mister %s %c has %d eggs") -> Mister Olivier B. has 42 eggs
+            Write the body of the function *format_str*.
 
             .. code-block:: c
 
-                char *format(char *buffer, unsigned int d, char *name, char initial) {
+                /* format_str, example:
+                 * format_str(buf, 42, "Olivier", 'B') will write into buf
+                 * the string "Mister Olivier B. has 42 eggs" (no line feed)
+                 * The given buffer is guaranteed to be big enough.
+                 */
+                char *format_str(char *buffer, unsigned int d, char *name, char initial) {
 stored_submissions: 0
 submission_limit:
     amount: -1
