@@ -17,7 +17,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Leftist bits - REVIEWED'
+name: '[S2] Bitwise operation: weakest bits - REVIEWED'
 network_grading: false
 order: 14
 problems:
