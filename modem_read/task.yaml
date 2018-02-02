@@ -1,3 +1,226 @@
+/student/tests.c: |
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    int8_t* tab1;
+
+    void test_42_right1() {
+        set_test_metadata("modem", _("test1 for 42 contained"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 0;
+
+        int i;
+        for(i = 0; i < 64; i++){
+            tab1[i] = i;
+        }
+
+        void *p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.free = FAIL_ALWAYS;
+        failures.malloc = 1;
+        failures.malloc_ret = p;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        free_trap(p,64);
+    }
+
+    void test_42_left1() {
+        set_test_metadata("modem", _("test2 for 42 contained, left trapped"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 0;
+
+        int i;
+        for(i = 0; i < 64; i++){
+            tab1[i] = i;
+        }
+
+        void * p = trap_buffer(64, TRAP_LEFT, PROT_READ, (void*) tab1);
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.free = FAIL_ALWAYS;
+        failures.malloc = 1;
+        failures.malloc_ret = p;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        if (stats.malloc.last_params.size != 256) {
+            CU_FAIL();
+            push_info_msg(_("You didn't malloc() with the right size"));
+        }
+
+        free_trap(p,64);
+    }
+
+    void test_42_right2() {
+        set_test_metadata("modem", _("test2 for 42 contained"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 0;
+
+        int i;
+        for(i = 0; i < 64; i++){
+            tab1[i] = 64 - i;
+        }
+
+        void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.free = FAIL_ALWAYS;
+        failures.malloc = 1;
+        failures.malloc_ret = p;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,1);
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        free_trap(p,64);
+    }
+
+    void test_42_left2() {
+        set_test_metadata("modem", _("test2 for 42 contained, left trapped"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 0;
+
+        int i;
+        for(i = 0; i < 64; i++){
+            tab1[i] = 64 - i;
+        }
+
+        void * p = trap_buffer(64, TRAP_LEFT, PROT_READ, (void*) tab1);
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.free = FAIL_ALWAYS;
+        failures.malloc = 1;
+        failures.malloc_ret = p;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+
+        CU_ASSERT_EQUAL(ret,1);
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        free_trap(p,64);
+    }
+
+    void test_no42_right() {
+        set_test_metadata("modem", _("test2 for 42 not contained"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 1;
+
+        int i;
+        for(i = 0; i < 64; i++){
+            tab1[i] = 128 - i;
+        }
+
+        void *p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.free = FAIL_ALWAYS;
+        failures.malloc = FAIL_ALWAYS;
+        failures.malloc_ret = p;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,0);
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        free_trap(p,64);
+    }
+
+    void test_no42_left() {
+        set_test_metadata("modem", _("test2 for 42 not contained, left trapped"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 1;
+
+        int i;
+        for(i = 0; i < 64; i++){
+            tab1[i] = 128 - i;
+        }
+
+        void * p = trap_buffer(64, TRAP_LEFT, PROT_READ, (void*) tab1);
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.free = FAIL_ALWAYS;
+        failures.malloc = 1;
+        failures.malloc_ret = p;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,0);
+
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+
+        CU_ASSERT_EQUAL(stats.free.called,1);
+
+        free_trap(p,64);
+    }
+
+    void test_fail() {
+        set_test_metadata("modem", _("test for malloc failed"), 1);
+
+        if(!tab1) CU_FAIL(_("malloc failed"));
+
+        int ret = 1;
+
+        monitored.malloc = true;
+        monitored.free = true;
+        failures.malloc = FAIL_ALWAYS;
+        SANDBOX_BEGIN;
+        ret = has_42();
+        SANDBOX_END;
+
+        CU_ASSERT_EQUAL(ret,-1);
+
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+
+        CU_ASSERT_EQUAL(stats.free.called,0);
+    }
+
+    int main(int argc,char** argv)
+    {
+        tab1 = (int8_t*) malloc(64);
+        BAN_FUNCS();
+        RUN(test_42_right1, test_42_right2, test_no42_right, test_fail, test_42_left2, test_no42_left, test_42_left1);
+        free(tab1);
+    }
 accessible: true
 author: Mathieu Xhonneux & Maxime Mawait
 context: |-
@@ -10,15 +233,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    memory: '100'
     output: '2'
     time: '30'
-    memory: '100'
 name: '[S3] Reading from the wire'
 network_grading: false
 order: 25
 problems:
     modem:
         language: c
+        type: code
         header: |-
             You want to know if one e-mail you received contains the byte 42.
             Write the body of the function *has_42*, this function has to use *malloc* to create the buffer :
@@ -30,59 +254,58 @@ problems:
                  *         else 0, -1 if an error has happened.
                  */
                 int has_42() {
-        type: code
         name: '42'
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
-        type: 1
-        visible: true
-        name: Timeout
+    '0':
         id: timeout
+        name: Timeout
+        visible: true
+        type: 1
         description: Your code exceeds the maximum allowed time.
-    '2':
+    '1':
+        id: sigsegv
+        name: Segmentation Fault
         visible: true
         description: ''
-        id: sigsegv
         type: 1
-        name: Segmentation Fault
-    '3':
+    '2':
+        id: not_compile
+        type: 1
         name: Not compile
         visible: true
         description: You code does not compile.
-        type: 1
-        id: not_compile
-    '4':
+    '3':
         id: memory
+        visible: true
+        type: 1
         name: Memory Exceeded
         description: ''
-        visible: true
-        type: 1
-    '5':
+    '4':
+        name: Floating Point Exception
+        description: ''
         visible: true
         id: sigfpe
-        name: Floating Point Exception
         type: 1
-        description: ''
-    '6':
+    '5':
         id: double_free
+        visible: true
+        description: Your code produced a double free.
         name: Double free
         type: 1
-        description: Your code produced a double free.
-        visible: true
-    '7':
+    '6':
         id: banned_funcs
         description: You use some banned functions.
-        visible: true
         type: 1
+        visible: true
         name: Banned functions
-    '0':
+    '7':
         name: S3
         type: 2
-        visible: true
         description: ''
+        visible: true
         id: ''
 weight: 1.0

@@ -1,3 +1,29 @@
+/run: |
+    #!/bin/bash
+
+    getinput "make_calc_simple" > student/Makefile.tpl
+
+    parsetemplate --output student/Makefile student/Makefile.tpl
+
+    make
+
+    if test -e student/calc
+    then
+        diff reference/calc student/calc
+        if [ $? -ne 0 ]
+        then
+            feedback-result failed
+            feedback-msg -m "Your Makefile is not correct."
+        else
+            feedback-result success
+            feedback-msg -m "You made it!"
+        fi
+    else
+        feedback-result failed
+        feedback-msg -m "The executable file calc was not detected."
+    fi
+
+    make mrproper
 accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
@@ -28,11 +54,11 @@ network_grading: false
 order: 23
 problems:
     make_calc_simple:
+        type: code
         header: Write a *Makefile* to build the executable ``calc`` from both object
             files ``calc.o`` and ``operations.o``.
         language: Makefile
         name: 'Linking '
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -41,8 +67,8 @@ tags:
     '0':
         id: make
         type: 0
-        name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
+        name: make & Makefile
         visible: false
 weight: 1.0

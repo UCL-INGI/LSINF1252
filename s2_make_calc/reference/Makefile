@@ -11,12 +11,21 @@ CFLAGS += -Wextra # Enable additional warnings
 CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
 CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
 
-@@make_calc_simple@@
+OBJ = calc.o operations.o
+
+calc: $(OBJ)
+	$(CC) $(CFLAGS) -o calc $(OBJ)
+
+calc.o: calc.c calc.h operations.h
+	$(CC) $(CFLAGS) -c calc.c
+
+operations.o: operations.c operations.h
+	$(CC) $(CFLAGS) -c operations.c
 
 .PHONY: clean mrproper
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ)
 
 mrproper: clean
 	rm -f calc
