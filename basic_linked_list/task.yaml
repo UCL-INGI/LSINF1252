@@ -37,7 +37,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S3] Basic linked list - CHANGE REQUESTED'
+name: '[S3] Basic linked list - CHANGE REQUESTED - malloc(1)'
 network_grading: false
 order: 28
 problems:

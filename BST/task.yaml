@@ -35,8 +35,8 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S4] Binary Search Tree'
 network_grading: false
 order: 37
@@ -51,30 +51,72 @@ problems:
                 * Return 1 if @value is in @tree or 0 if it isn't.
                 */
                 int contains(bt_t* tree, int value){
-        name: Methode contains
         type: code
         language: c
+        name: Methode contains
     other:
-        header: Write here the submethods used by the contains method.
-        name: Helpfull submethods
         type: code
-        optional: 'on'
+        header: Write here the submethods used by the contains method.
         language: ''
+        optional: 'on'
+        name: Helpfull submethods
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
+    '2':
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        type: 1
+        name: Timeout
+    '3':
+        name: Segmentation Fault
+        visible: true
+        description: ''
+        type: 1
+        id: sigsegv
+    '4':
+        id: not_compile
+        name: Not compile
+        description: You code does not compile.
+        visible: true
+        type: 1
+    '5':
+        visible: true
+        description: ''
+        id: memory
+        name: Memory Exceeded
+        type: 1
+    '6':
+        id: sigfpe
+        name: Floating Point Exception
+        type: 1
+        description: ''
+        visible: true
+    '7':
+        description: Your code produced a double free.
+        visible: true
+        type: 1
+        id: double_free
+        name: Double free
+    '8':
+        id: banned_funcs
+        type: 1
+        description: You use some banned functions.
+        name: Banned functions
+        visible: true
     '0':
         name: Data structures
         type: 2
-        description: Task dealing with data structures and linked list.
         visible: true
+        description: Task dealing with data structures and linked list.
         id: ''
     '1':
         type: 2
         visible: true
-        description: ''
         name: S4
+        description: ''
         id: ''
 weight: 1.0
