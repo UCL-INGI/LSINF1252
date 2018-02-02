@@ -2,39 +2,40 @@ accessible: true
 author: Tom Rousseaux
 context: |-
     In this exercise you will learn to use pipes, refer to `this section <https://sites.uclouvain.be/SystInfo/notes/Theorie/html/intro.html#shell>`_ for their use.
-    You get and `input <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_pipes/input.txt>`_ from where you want to extract an ordered exhaustive list of unique hashtags. For this, you should use pipes. To extract hashtags from the text you can either use ``sed '/ [^{#}]/d'`` or `grep(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
+
+    Downloand the following `input <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_pipes/input.txt>`_ from where you want to extract an alphabetically **sorted** list of **unique** hashtags. This can easily be done with pipes. To only select hashtags from the input, you can either use ``sed '/ [^{#}]/d'`` or `grep(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_.
 environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
-name: '[S1] Pipes'
+    output: '2'
+name: '[S1] Pipes - REVIEWED'
 network_grading: false
 order: 2
 problems:
     file:
-        header: Redirect the standard output in a file.txt and post it here.
         type: file
         allowed_exts:
         - .txt
         name: ''
+        header: Redirect the standard output in a file.txt and post it here.
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: S1
         visible: true
         type: 2
+        name: S1
         description: ''
         id: ''
     '1':
-        type: 2
-        visible: true
-        description: ''
         name: Command line
+        visible: true
+        type: 2
+        description: ''
         id: ''
 weight: 1.0
