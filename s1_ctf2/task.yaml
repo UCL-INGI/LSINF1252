@@ -1,0 +1,25 @@
+accessible: true
+author: Tom Rousseaux
+context: Téléchargez `cette archive <>`_, mettez son contenu dans un dossier de votre
+    choix, lisez FirstMission et respectez les consignes.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[S1] CTF2'
+network_grading: false
+problems:
+    q1:
+        name: ''
+        type: match
+        header: ''
+        answer: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2
+getinput "file" | sed 's/ //g' | sed ':a;N;$!ba;s/\n//g' > out2 #remove spaces and newlines
 diff out2 error1
 if [ $? -eq 0 ]
 then
