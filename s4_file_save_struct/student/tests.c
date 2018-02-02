@@ -18,9 +18,8 @@ point_t* gen_struct(int size){
     return tab;
 }
 
-void test() {
-    set_test_metadata("q1", _("Test write array struct"), 1);
-    int size = 6;
+void _test() {
+int size = 6;
     int ret = 0;
     point_t* tab = gen_struct(size);
 
@@ -30,7 +29,6 @@ void test() {
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
 
     free(tab);
     tab = NULL;
@@ -75,7 +73,18 @@ void test() {
     if(ret != 0){
         push_info_msg(_("You did not return 0 when everything should work."));
         CU_FAIL(); 
-    }
+    }   
+}
+
+void test_no_file() {
+    set_test_metadata("q1", _("Test writing the struct, no file already created"), 2);
+    _test();
+}
+
+void test_with_file() {
+    set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
+    system("echo \"FOOBAR\" > file.txt");
+    _test();
 }
 
 void test_close() {
@@ -88,7 +97,6 @@ void test_close() {
     SANDBOX_BEGIN;
     save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;
@@ -138,7 +146,6 @@ void test_open() {
     SANDBOX_BEGIN;
     ret = save(tab, size, "file.txt");
     SANDBOX_END;
-    system("chmod 644 file.txt");
     
     free(tab);
     tab = NULL;
@@ -194,5 +201,5 @@ void test_write_fail() {
 
 int main(int argc,char** argv){
     BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-    RUN(test, test_close, test_open, test_write_fail);
+    RUN(test_no_file, test_with_file, test_close, test_open, test_write_fail);
 }

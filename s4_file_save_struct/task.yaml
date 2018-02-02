@@ -1,5 +1,5 @@
 /solution.c.sol: |+
-    int fd = open(filename,O_WRONLY|O_CREAT);
+    int fd = open(filename,O_WRONLY|O_CREAT|O_TRUNC, 0666);
     if(fd == -1)
         return -1;
     for(int i = 0; i < size; i++){
@@ -34,9 +34,8 @@
         return tab;
     }
 
-    void test() {
-        set_test_metadata("q1", _("Test write array struct"), 1);
-        int size = 6;
+    void _test() {
+    int size = 6;
         int ret = 0;
         point_t* tab = gen_struct(size);
 
@@ -46,7 +45,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -94,6 +92,17 @@
         }
     }
 
+    void test_no_file() {
+        set_test_metadata("q1", _("Test writing the struct, no file already created"), 2);
+        _test();
+    }
+
+    void test_with_file() {
+        set_test_metadata("q1", _("Test writing the struct, with file already created"), 1);
+        system("echo \"FOOBAR\" > file.txt");
+        _test();
+    }
+
     void test_close() {
         set_test_metadata("q1", _("Test close()."), 1);
         int size = 6;
@@ -104,7 +113,6 @@
         SANDBOX_BEGIN;
         save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -154,7 +162,6 @@
         SANDBOX_BEGIN;
         ret = save(tab, size, "file.txt");
         SANDBOX_END;
-        system("chmod 644 file.txt");
 
         free(tab);
         tab = NULL;
@@ -210,14 +217,14 @@
 
     int main(int argc,char** argv){
         BAN_FUNCS(system, fopen, fread, fwrite, fclose);
-        RUN(test, test_close, test_open, test_write_fail);
+        RUN(test_no_file, test_with_file, test_close, test_open, test_write_fail);
     }
 accessible: true
 author: Olivier Martin
 context: |-
     *Estimated time: 25 minutes*
 
-    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file. The file may already exist or not. After the execution of the function, the file should only contain the array.
+    Given an array of ``struct point`` defined below, write a C code to write the array of struct into a file. The file may already exist or not. After the execution of the function, the file should only contain the array. If the file has to be created, the user who created it must has
 
     .. code-block:: c
 
@@ -228,6 +235,8 @@ context: |-
         } point_t;
 
     Use only ``open(2)``, ``write(2)`` and ``close(2)``. You can only call ``write(2)`` once.
+
+    Hint : read carefully the man page of ``open(2)`` to manage all the  cases mentionned here above.
 environment: cpp
 evaluate: best
 groups: false
