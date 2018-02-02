@@ -265,13 +265,16 @@ void test_pop_value(){
 
   //print_stack(stack, 6);
 
-  monitored.malloc = true;
+  //monitored.malloc = true;
+  monitored.free = true;
 
   SANDBOX_BEGIN;
   stack =  generate_stack(a, 6);
   tmp_head = stack;
   ret = pop(&stack, &result);
   SANDBOX_END;
+
+  monitored.free = false;
 
   //print_stack(stack, 5);
 
@@ -283,7 +286,6 @@ void test_pop_value(){
   // check the popped value
   char *src = *(a+5);
   //printf("src = %s, result = %s, size = %li ", src, result, strlen(src));
-  //CU_ASSERT_STRING_EQUAL(src, result);
   int cmp = strncmp((const char*) result, (const char*) src, strlen(src));
   CU_ASSERT_TRUE(!cmp);
   if (cmp)
@@ -298,12 +300,16 @@ void test_pop_value(){
     push_info_msg(_("The head is not the waited one "));
 
   // check if the function free the first node (not the string inside !)
-  int ml = malloced(tmp_head);
-  //printf("%i ", ml);
-  CU_ASSERT_TRUE(!ml);
-  if (ml)
-    push_info_msg(_("The previous head is not freed "));
+  int ml = stats.free.called;
+  CU_ASSERT_EQUAL(ml, 1);
+  if (ml != 1)
+    push_info_msg(_("The function never call free"));
 
+  void *last_ptr = (void*) stats.free.last_params.ptr;
+  void *ptr = (void*) tmp_head;
+  CU_ASSERT_EQUAL(ptr, last_ptr);
+  if (ptr != last_ptr)
+    push_info_msg(_("The previous head is not freed "));
 
   // check the structure if the stack after popped
   if (!stack && !stack->next){
@@ -355,32 +361,6 @@ void test_pop_empty(){
     push_info_msg(_("The previous head is not freed "));
 }
 
-/*void test_push_empty(){
-  set_test_metadata("push", _("Check if the insertion of a new node into an empty list"), 1);
-
-  struct node *head = (struct node*) malloc(sizeof(struct node));
-  if (!head)
-    return;
-
-  head->next = NULL;
-  head->value = 0;
-
- int ret;
-
- srandom(646415654);
-
- SANDBOX_BEGIN;
- ret = push(&head, random());
- SANDBOX_END;
-
- CU_ASSERT_EQUAL(ret, 0);
- if (!ret)
-  push_info_msg(_("You detected an error in normal case"));
-
-
-
-  free_stack(head);
-}*/
 
 int main(int argc,char** argv)
 {
