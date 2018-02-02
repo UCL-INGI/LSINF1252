@@ -13,72 +13,66 @@ network_grading: false
 order: 20
 problems:
     q1:
-        name: Swap
-        language: c
         type: code
+        language: c
         header: |-
             Write the body of the function *swap* which swaps the values pointed by *i* and *j*.
 
             .. code-block:: c
 
                 void swap(int *i, int *j) {
+        name: Swap
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '2':
-        visible: true
-        description: Your code exceeds the maximum allowed time.
+    '0':
         id: timeout
-        type: 1
         name: Timeout
-    '3':
+        visible: true
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        id: sigsegv
+        description: ''
         name: Segmentation Fault
         visible: true
-        description: ''
         type: 1
-        id: sigsegv
-    '4':
+    '2':
         id: not_compile
+        type: 1
         name: Not compile
-        description: You code does not compile.
         visible: true
+        description: You code does not compile.
+    '3':
+        id: memory
+        visible: true
+        type: 1
+        name: Memory Exceeded
+        description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
         type: 1
     '5':
+        id: double_free
         visible: true
-        description: ''
-        id: memory
-        name: Memory Exceeded
+        description: Your code produced a double free.
+        name: Double free
         type: 1
     '6':
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-        description: ''
-        visible: true
-    '7':
-        description: Your code produced a double free.
-        visible: true
-        type: 1
-        id: double_free
-        name: Double free
-    '8':
         id: banned_funcs
-        type: 1
         description: You use some banned functions.
+        type: 1
+        visible: true
         name: Banned functions
-        visible: true
-    '0':
-        name: S2
-        type: 2
-        visible: true
-        description: ''
-        id: ''
-    '1':
-        type: 2
-        visible: true
+    '8':
         name: S2
         description: ''
+        visible: true
+        type: 2
         id: ''
 weight: 1.0

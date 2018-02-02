@@ -1,3 +1,42 @@
+/student/tests.c: |
+    // CTester template
+
+    #include <stdlib.h>
+    #include "CTester/CTester.h"
+    #include "student_code.h"
+
+    void test_my_strlen(){
+      set_test_metadata("my_strlen", _("Check the return value of the function"), 2);
+
+      int ret;
+
+      char *s = "26fgb.thjfgjppzaerofa,zprjgfbl";
+
+      SANDBOX_BEGIN;
+      ret = my_strlen(s);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(ret, 30);
+      if (ret != 30)
+        push_info_msg(_("The function return the wrong value"));
+
+      char *s2 = "k26fgb.thjfgjpp";
+
+      SANDBOX_BEGIN;
+      ret = my_strlen(s2);
+      SANDBOX_END;
+
+      CU_ASSERT_EQUAL(ret, 15);
+      if (ret != 15)
+        push_info_msg(_("The function return the wrong value"));
+
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS(strlen);
+        RUN(test_my_strlen);
+    }
 accessible: true
 author: 'Nicolas Rybowski, '
 context: You are asked to implement `strlen <https://linux.die.net/man/3/strlen>`_.
@@ -22,52 +61,52 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
+    '0':
         id: timeout
         name: Timeout
         visible: true
+        type: 1
         description: Your code exceeds the maximum allowed time.
-        type: 1
-    '2':
+    '1':
         id: sigsegv
-        type: 1
         name: Segmentation Fault
         visible: true
         description: ''
-    '3':
+        type: 1
+    '2':
         id: not_compile
-        visible: true
         type: 1
         name: Not compile
+        visible: true
         description: You code does not compile.
-    '4':
+    '3':
+        id: memory
+        visible: true
+        type: 1
         name: Memory Exceeded
         description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
         visible: true
-        id: memory
+        id: sigfpe
         type: 1
     '5':
-        id: sigfpe
+        id: double_free
         visible: true
-        description: ''
-        name: Floating Point Exception
+        description: Your code produced a double free.
+        name: Double free
         type: 1
     '6':
-        description: Your code produced a double free.
-        id: double_free
-        type: 1
-        visible: true
-        name: Double free
-    '7':
-        id: banned_funcs
-        name: Banned functions
-        type: 1
         description: You use some banned functions.
+        id: banned_funcs
+        type: 1
         visible: true
-    '0':
+        name: Banned functions
+    '7':
         name: S2
-        visible: true
         type: 2
         description: ''
+        visible: true
         id: ''
 weight: 1.0

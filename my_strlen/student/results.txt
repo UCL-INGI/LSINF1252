@@ -1,1 +1,0 @@
-my_strlen#SUCCESS#Check the return value of the function#2#
