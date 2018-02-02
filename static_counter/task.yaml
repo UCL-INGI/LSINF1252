@@ -134,6 +134,15 @@
     score = 100*score/(total if not total == 0 else 1)
     feedback.set_grade(score)
     feedback.set_global_result("success" if score >= 50 else "failed")
+/solution/solution.c.sol: |-
+    static int c = 0;
+    if(c == 0)
+        c = 1;
+    else
+        c *= 2;
+    if(c > 4096)
+        c = 1;
+    return c;
 /student/student_code.c.tpl: |+
     #include <stdio.h>
     #include <stdlib.h>
@@ -157,11 +166,10 @@
     #include "CTester/CTester.h"
 
     void test() {
-        set_test_metadata("static_counter", _("Test"), 1);
+        set_test_metadata("static_counter", _("Test counter"), 1);
         int count = 1;
 
-        // We run multiples times the test to avoid student returning randomly 1 or 0.
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i < 40; i++){
             int ret = 0;
 
             SANDBOX_BEGIN;
@@ -178,7 +186,6 @@
                 count = 1;
         }
     }
-
 
     int main(int argc,char** argv){
         BAN_FUNCS(system, set_tag);
@@ -237,11 +244,11 @@ tags:
         visible: true
         description: You code does not compile.
     '3':
+        description: ''
         id: memory
         visible: true
         type: 1
         name: Memory Exceeded
-        description: ''
     '4':
         name: Floating Point Exception
         description: ''
@@ -260,6 +267,12 @@ tags:
         type: 1
         visible: true
         name: Banned functions
+    '8':
+        name: Counter reset to 1
+        id: reset_counter
+        description: Your counter returns a value bigger than 4096.
+        type: 1
+        visible: true
     '7':
         name: S2
         description: ''

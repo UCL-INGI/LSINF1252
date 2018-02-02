@@ -29,7 +29,6 @@ network_grading: false
 order: 30
 problems:
     filter:
-        type: code
         header: |-
             We want to filter this list and only take the elements with a pair index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
@@ -47,8 +46,15 @@ problems:
                  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
                  */
                 struct node *pair_filter(struct node *head) {
+        type: code
         language: c
         name: Filtering
+    includes:
+        language: ''
+        type: code
+        header: Here you can add your includes for this task. We strongly recommend
+            you to read the manpage !
+        name: Includes
 stored_submissions: 0
 submission_limit:
     amount: -1
