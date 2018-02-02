@@ -4,21 +4,19 @@ context: |-
     In C, an array is a set of variables sharing the same data type : ``int array[3] = {42, 1337, 0};``.
 
     An item of an array can be retrived through its index : ``array[1]``.
-environment: pyjavacpp
+environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
 name: '[S2] Through the array'
 network_grading: false
 order: 10
 problems:
     tab_find:
         name: Find the index
-        type: code
-        language: c
         header: |-
             Write the body of the function *tab_find* :
 
@@ -31,6 +29,8 @@ problems:
                 @elem : the elem looked for
                 @return : return the index at which elem is found, else returns -1 if not found. */
                 int tab_find(int tab[], int len, int elem)
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1

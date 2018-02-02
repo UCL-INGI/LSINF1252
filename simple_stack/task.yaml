@@ -1,18 +1,3 @@
-/student/student_code.c.tpl: |+
-    #include<stdio.h>
-    #include<stdlib.h>
-
-    #include "student_code.h"
-
-    int push(struct node **head, const char *value){
-        @@push@@
-    }
-
-    int pop(struct node **head, char **result){
-        @@pop@@
-    }
-
-
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |
@@ -81,12 +66,15 @@ problems:
                 * Remove the "head" element of the stack and return it's content.
                 *
                 * @head : pointer to the head of the stack
-                * @name : pointer to store the popped element
+                * @result : pointer to store the popped element
                 *
                 * @return 0 if no error, 1 else.
+                *
+                * pre : @result is a buffer correctly allocated
+                * post : @result contains the string @name from the head of the stack
                 */
 
-                int pop(struct node **head, char **result){
+                int pop(struct node **head, char *result){
         type: code
         name: Pop
     free_node:
