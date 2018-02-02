@@ -17,11 +17,11 @@ void test()
     SANDBOX_END;
         
     free_trap(tab,10);
-        
-    if(ret != 9){
+    ret++;  
+    //if(ret != 9){
         push_info_msg(_("Your function does not return the correct index."));
         CU_FAIL();
-    }
+    //}
 }
 
 int main(int argc,char** argv) {

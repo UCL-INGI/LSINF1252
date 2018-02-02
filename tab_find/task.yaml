@@ -53,8 +53,8 @@
 
     # Run the code in a parallel container
     p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-    p.communicate()
-
+    o, e = p.communicate()
+    print(o.decode("utf-8"))
     # If run failed, exit with "failed" result
     if p.returncode:
         feedback.set_global_result("failed")
@@ -134,6 +134,42 @@
     score = 100*score/(total if not total == 0 else 1)
     feedback.set_grade(score)
     feedback.set_global_result("success" if score >= 50 else "failed")
+/student/Makefile: |+
+    CC=gcc
+    EXEC=tests
+    LDFLAGS=-lcunit -lm -lpthread -ldl -rdynamic
+    SRC=$(wildcard *.c) CTester/wrap_mutex.c CTester/wrap_malloc.c CTester/wrap_file.c CTester/wrap_sleep.c CTester/CTester.c CTester/trap.c
+    OBJ=$(SRC:.c=.o)
+    CFLAGS=-Wall -Werror -DC99 -std=gnu99 -ICTester
+    WRAP=-Wl,-wrap=pthread_mutex_lock -Wl,-wrap=pthread_mutex_unlock -Wl,-wrap=pthread_mutex_trylock -Wl,-wrap=pthread_mutex_init -Wl,-wrap=pthread_mutex_destroy -Wl,-wrap=malloc -Wl,-wrap=free -Wl,-wrap=realloc -Wl,-wrap=calloc -Wl,-wrap=open -Wl,-wrap=creat -Wl,-wrap=close -Wl,-wrap=read -Wl,-wrap=write -Wl,-wrap=stat -Wl,-wrap=fstat -Wl,-wrap=lseek -Wl,-wrap=exit -Wl,-wrap=sleep
+
+    all: $(EXEC)
+
+    %.o: %.c
+        $(CC) $(CFLAGS) -c -o $@ $<
+
+    $(EXEC): $(OBJ)
+        $(CC) $(WRAP) -o $@ $(OBJ) $(LDFLAGS)
+
+    create-po:
+        mkdir -p po/fr/
+        xgettext --keyword=_ --language=C --add-comments --sort-output --from-code=UTF-8 -o po/tests.pot $(SRC)
+        msginit --input=po/tests.pot --locale=fr_BE.utf8 --output=po/fr/tests.po
+
+    update-po:
+        xgettext --keyword=_ --language=C --add-comments --sort-output --from-code=UTF-8 -o po/tests.pot $(SRC)
+        msgmerge --update po/fr/tests.po po/tests.pot
+
+    compile-mo:
+        msgfmt --no-hash --output-file=po/fr/tests.mo po/fr/tests.po
+        mkdir -p fr/LC_MESSAGES/
+        cp po/fr/tests.mo fr/LC_MESSAGES/tests.mo
+
+    clean:
+        rm -f $(EXEC) $(OBJ)
+
+    .PHONY: tests
+
 /student/student_code.c.tpl: |+
     #include<string.h>
 
@@ -163,11 +199,11 @@
         SANDBOX_END;
 
         free_trap(tab,10);
-
-        if(ret != 9){
+        ret++;
+        //if(ret != 9){
             push_info_msg(_("Your function does not return the correct index."));
             CU_FAIL();
-        }
+        //}
     }
 
     int main(int argc,char** argv) {
@@ -217,9 +253,9 @@ tags:
     '0':
         id: timeout
         name: Timeout
-        visible: true
         type: 1
         description: Your code exceeds the maximum allowed time.
+        visible: true
     '1':
         id: sigsegv
         name: Segmentation Fault

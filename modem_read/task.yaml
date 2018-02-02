@@ -17,7 +17,7 @@
             tab1[i] = i;
         }
 
-        void * p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
+        void *p = trap_buffer(64, TRAP_RIGHT, PROT_READ, (void*) tab1);
 
         monitored.malloc = true;
         monitored.free = true;
@@ -29,9 +29,7 @@
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(ret,1);
-
         CU_ASSERT_EQUAL(stats.malloc.called,1);
-
         CU_ASSERT_EQUAL(stats.free.called,1);
 
         free_trap(p,64);
@@ -60,13 +58,14 @@
         ret = has_42();
         SANDBOX_END;
 
-        printf("%d\n", ret);
-
         CU_ASSERT_EQUAL(ret,1);
-
         CU_ASSERT_EQUAL(stats.malloc.called,1);
-
         CU_ASSERT_EQUAL(stats.free.called,1);
+
+        if (stats.malloc.last_params.size != 256) {
+            CU_FAIL();
+            push_info_msg(_("You didn't malloc() with the right size"));
+        }
 
         free_trap(p,64);
     }
@@ -95,9 +94,7 @@
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(ret,1);
-
         CU_ASSERT_EQUAL(stats.malloc.called,1);
-
         CU_ASSERT_EQUAL(stats.free.called,1);
 
         free_trap(p,64);
@@ -126,12 +123,9 @@
         ret = has_42();
         SANDBOX_END;
 
-        printf("%d\n", ret);
 
         CU_ASSERT_EQUAL(ret,1);
-
         CU_ASSERT_EQUAL(stats.malloc.called,1);
-
         CU_ASSERT_EQUAL(stats.free.called,1);
 
         free_trap(p,64);
@@ -161,7 +155,6 @@
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(ret,0);
-
         CU_ASSERT_EQUAL(stats.malloc.called,1);
         CU_ASSERT_EQUAL(stats.free.called,1);
 
