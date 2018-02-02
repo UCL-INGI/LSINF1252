@@ -1,14 +1,13 @@
-/student/student_code.c.tpl: |
+/student/solutions/student_code.c: |
     #include"student_code.h"
 
     uint64_t set_bit(uint64_t x, int pos, bool value)
     {
-    @    @q1@@
+    if (value)
+        return x | (1 << pos);
+    else
+        return x & ~(1 << pos);
     }
-/student/student_code.h: |
-    #include<stdint.h>
-    #include<stdbool.h>
-    uint64_t set_bit(uint64_t x, int pos, bool value);
 accessible: true
 author: Arthur van Stratum
 context: |-
@@ -58,10 +57,10 @@ tags:
         description: Your code exceeds the maximum allowed time.
     '1':
         id: sigsegv
+        type: 1
         description: ''
         name: Segmentation Fault
         visible: true
-        type: 1
     '2':
         id: not_compile
         type: 1
