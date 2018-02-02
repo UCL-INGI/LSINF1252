@@ -228,7 +228,7 @@ context: |-
 
     .. code-block:: c
 
-        typedef struct point{
+        typedef struct point {
             int x;
             int y;
             int z;
