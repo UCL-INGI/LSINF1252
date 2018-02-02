@@ -36,6 +36,18 @@ problems:
 
             ``valgrind --option-name program``
         name: ''
+    m1:
+        header: |-
+            In your Makefile, you have the following variable definition:
+
+            .. code-block:: console
+
+                CC = gcc
+
+            What do you type to use it in other parts of your Makefile?
+        answer: $(CC)$
+        name: Variables
+        type: match
 stored_submissions: 0
 submission_limit:
     amount: -1
