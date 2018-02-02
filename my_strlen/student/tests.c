@@ -33,6 +33,6 @@ void test_my_strlen(){
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS(strlen);
+    BAN_FUNCS(strlen,strnlen);
     RUN(test_my_strlen);
 }
