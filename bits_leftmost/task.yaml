@@ -21,7 +21,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Leftist bits'
+name: '[S2] Leftist bits - REVIEWED'
 network_grading: false
 order: 14
 problems:
@@ -41,52 +41,52 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
+    '0':
         id: timeout
-        description: Your code exceeds the maximum allowed time.
         name: Timeout
         visible: true
         type: 1
-    '2':
+        description: Your code exceeds the maximum allowed time.
+    '1':
         id: sigsegv
-        type: 1
+        description: ''
         name: Segmentation Fault
         visible: true
-        description: ''
-    '3':
+        type: 1
+    '2':
         id: not_compile
-        visible: true
         type: 1
         name: Not compile
+        visible: true
         description: You code does not compile.
-    '4':
+    '3':
+        id: memory
+        visible: true
+        type: 1
         name: Memory Exceeded
         description: ''
+    '4':
+        name: Floating Point Exception
+        description: ''
         visible: true
-        id: memory
+        id: sigfpe
         type: 1
     '5':
-        id: sigfpe
+        id: double_free
         visible: true
-        description: ''
-        name: Floating Point Exception
+        description: Your code produced a double free.
+        name: Double free
         type: 1
     '6':
-        id: double_free
-        description: Your code produced a double free.
-        type: 1
-        visible: true
-        name: Double free
-    '7':
         id: banned_funcs
-        name: Banned functions
         description: You use some banned functions.
         type: 1
         visible: true
-    '0':
+        name: Banned functions
+    '7':
         name: S2
-        visible: true
-        type: 2
         description: ''
+        type: 2
+        visible: true
         id: ''
 weight: 1.0

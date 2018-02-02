@@ -1,40 +1,52 @@
 accessible: true
 author: Mathieu Xhonneux
 context: In this exercise, you will familiarize yourself with the functions ``printf(3)``
-    and ``sprintf(3)``.
-environment: pyjavacpp
+    (printing in the terminal) and ``sprintf(3)`` (text formatting).
+environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S2] Printing data'
 network_grading: false
 order: 7
 problems:
     simple:
-        header: Print the string "foo".
-        name: Foo
         type: code
+        header: |-
+            The function ``printf`` writes data to the standard output stream (*stdout*).
+
+            Write the body of the function *print_foo* which will print "foo" (without the quotes) to *stdout*.
+
+            .. code-block:: c
+
+                void print_foo() {
+        name: Foo
         language: c
     digit:
-        type: code
-        name: Digit
         language: ''
         header: Print a number (%d) + text
+        type: code
+        name: Digit
+    example:
+        name: ''
+        header: ''
+        type: match
+        answer: ''
     unsigned-string:
         header: |-
             Print an unsigned char (%u) + string.
 
             Add QCM : what happens if we use %d with a char n > 127 ?
+        name: Unsigned + string
         language: c
         type: code
-        name: Unsigned + string
     sprintf:
+        type: code
         name: sprintf
         language: c
-        type: code
         header: |
             Exemple de sprintf :
 
