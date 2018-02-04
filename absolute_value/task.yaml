@@ -9,7 +9,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Absolute value - REVIEWED'
+name: '[S1] Absolute value '
 network_grading: false
 order: 6
 problems:
