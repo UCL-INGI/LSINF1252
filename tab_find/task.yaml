@@ -3,7 +3,7 @@ author: Olivier Martin
 context: |-
     In C, an array is a set of variables sharing the same data type : ``int array[3] = {42, 1337, 0};``.
 
-    An item of an array can be retrived through its index.
+    An item of an array can be retrieved through its index.
     For example ``array[1]`` gives the second element of the array (here ``1337``).
 environment: cpp
 evaluate: best
@@ -12,7 +12,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Through the array - REVIEWED'
+name: '[S1] Through the array '
 network_grading: false
 order: 10
 problems:
