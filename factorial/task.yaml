@@ -9,7 +9,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S2] Factorial - REVIEWED'
+name: '[S2] Factorial'
 network_grading: false
 order: 8
 problems:
@@ -18,7 +18,7 @@ problems:
         language: c
         name: Factorial
         header: |-
-            Write your own function ``factorial`` which takes as parameter an integer and returns and integer value. Your function must be named ``factorial``.
+            Write your own function ``factorial`` which takes as parameter an integer and returns an integer value. Your function must be named ``factorial``.
 
             Provide below the signature and the body of this function.
 stored_submissions: 0
