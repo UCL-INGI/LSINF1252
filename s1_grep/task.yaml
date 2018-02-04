@@ -14,7 +14,7 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S1] grep - REVIEWED'
+name: '[S1] grep '
 network_grading: false
 order: 1
 problems:

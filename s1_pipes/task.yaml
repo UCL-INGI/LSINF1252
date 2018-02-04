@@ -11,7 +11,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S1] Pipes - REVIEWED'
+name: '[S1] Pipes'
 network_grading: false
 order: 2
 problems:
