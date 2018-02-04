@@ -1,8 +1,9 @@
 accessible: true
 author: Tom Rousseaux
 context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf1/archive.tar.gz>`_,
-    ouvez ``FirstMission`` et suivez les insctructions. Un code individuel vous sera
-    fourni à la fin du CTF rentrez-le ci-dessous.
+    ouvrez ``FirstMission`` et suivez les instructions. Un code individuel vous sera
+    fourni à la fin de l'exercice. Entrez-le ci-dessous pour confirmer que vous avez
+    complètement réalisé cet exercice.
 environment: cpp
 evaluate: best
 groups: false
@@ -10,7 +11,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S1] Capture The Flag 1 - REVIEWED'
+name: '[S1] Capture The Flag 1'
 network_grading: false
 order: 0
 problems:
