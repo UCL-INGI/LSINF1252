@@ -9,9 +9,13 @@ admins:
 - pgonzalezalv
 - rousseauxt
 - obonaventure
+- gegoa
+- jadinm
 tutors:
 - aballet
-- odyl
+- ody
+- dimidschstei
+- aclarembeau
 groups_student_choice: true
 use_classrooms: true
 allow_unregister: true
