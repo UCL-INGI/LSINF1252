@@ -14,7 +14,7 @@ limits:
     time: '30'
 name: '[S1] Through the array '
 network_grading: false
-order: 10
+order: 7
 problems:
     tab_find:
         header: |-

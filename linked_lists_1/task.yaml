@@ -24,7 +24,7 @@ limits:
     time: '10'
 name: 'Listes chaînées: concepts de base'
 network_grading: false
-order: 6
+order: 48
 problems:
     length:
         name: Longueur d’une liste chaînée

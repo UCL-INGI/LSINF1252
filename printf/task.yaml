@@ -11,7 +11,7 @@ limits:
     time: '30'
 name: '[S2] Printing data - REVIEWED'
 network_grading: false
-order: 7
+order: 9
 problems:
     simple:
         type: code

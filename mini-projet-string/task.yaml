@@ -21,7 +21,7 @@ limits:
     output: '2'
 name: 'Mini-projet : implémentation de strlen, strcat et strcasecmp'
 network_grading: false
-order: 5
+order: 47
 problems:
     strlen:
         name: strlen

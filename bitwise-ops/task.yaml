@@ -25,7 +25,7 @@ limits:
     output: '2'
 name: '[Beta] Opérations sur les bits'
 network_grading: false
-order: 40
+order: 72
 problems:
     get_bit:
         type: code

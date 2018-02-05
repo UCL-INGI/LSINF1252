@@ -9,7 +9,7 @@ limits:
     output: 5210
     time: 10
 name: malloc, realloc et free
-order: 8
+order: 50
 problems:
     my_malloc:
         header: |-

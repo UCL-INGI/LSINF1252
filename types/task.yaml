@@ -11,7 +11,7 @@ limits:
     time: '10'
 name: Les types
 network_grading: false
-order: 12
+order: 52
 problems:
     q1:
         name: Un entier

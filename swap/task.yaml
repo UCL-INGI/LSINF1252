@@ -1,42 +1,43 @@
 accessible: true
 author: Fabien Duchêne & Christoph Paasch
 context: |+
-    .. raw:: html
+    Soit la définition de la structure représentant des fractions entières suivante:
 
-        <p>
-          Soit la définition de la structure représentant des fractions entières suivante:
-        </p>
-        <pre class="code">
+    .. code-block:: c
+
         struct fract_t {
                 int num;
                 int denum;
         };
-        </pre>
-        <p>
-          On veut pouvoir swapper (échanger) les valeurs de deux fractions en utilisant la fonction void swap(struct fract_t *a, struct fract_t *b). Ecrivez le code de cette fonction.
-        </p>
+
+    On veut pouvoir swapper (échanger) les valeurs de deux fractions en utilisant la fonction void swap(struct fract_t *a, struct fract_t *b). Ecrivez le code de cette fonction.
 
 environment: cpp
+evaluate: best
 groups: false
 limits:
     memory: '128'
-    output: '5210'
     time: '30'
+    output: '5210'
 name: Echange de valeurs de fractions
 network_grading: false
-order: 4
+order: 46
 problems:
     q1:
-        name: ''
         header: |+
-            .. raw:: html
+            Complétez ici le code
 
-                <p class='lead'></p>
-                <p>
-                  Complètez ici le code
-                </p>void swap(struct fract_t *a, struct fract_t *b)
+            .. code-block:: c
 
+                void swap(struct fract_t *a, struct fract_t *b)
+
+        name: ''
         language: c
         type: code
 responseIsHTML: true
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
 weight: 1.0
