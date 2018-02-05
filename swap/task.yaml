@@ -15,14 +15,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '128'
     time: '30'
     output: '5210'
-name: Echange de valeurs de fractions
+    memory: '128'
+name: '[S2] Echange de valeurs de fractions'
 network_grading: false
 order: 46
 problems:
     q1:
+        name: ''
+        language: c
+        type: code
         header: |+
             Complétez ici le code
 
@@ -30,9 +33,6 @@ problems:
 
                 void swap(struct fract_t *a, struct fract_t *b)
 
-        name: ''
-        language: c
-        type: code
 responseIsHTML: true
 stored_submissions: 0
 submission_limit:
