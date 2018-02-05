@@ -6,72 +6,72 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
 name: '[S2] Factorial'
 network_grading: false
 order: 10
 problems:
     facto:
-        type: code
-        language: c
         name: Factorial
+        language: c
         header: |-
             Write your own function ``factorial`` which takes as parameter an integer and returns an integer value. Your function must be named ``factorial``.
 
-            Provide below the signature and the body of this function.
+            Provide below the prototype and the body of this function.
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        visible: true
         id: timeout
         name: Timeout
-        visible: true
-        type: 1
         description: Your code exceeds the maximum allowed time.
+        type: 1
     '1':
+        type: 1
+        visible: true
+        description: ''
         id: sigsegv
-        description: ''
         name: Segmentation Fault
-        visible: true
-        type: 1
     '2':
-        id: not_compile
-        type: 1
-        name: Not compile
-        visible: true
         description: You code does not compile.
+        visible: true
+        name: Not compile
+        type: 1
+        id: not_compile
     '3':
-        id: memory
         visible: true
-        type: 1
         name: Memory Exceeded
-        description: ''
-    '4':
-        name: Floating Point Exception
+        id: memory
         description: ''
         type: 1
+    '4':
+        description: ''
         visible: true
+        name: Floating Point Exception
+        type: 1
         id: sigfpe
     '5':
-        id: double_free
         visible: true
-        description: Your code produced a double free.
         name: Double free
+        id: double_free
         type: 1
+        description: Your code produced a double free.
     '6':
-        id: banned_funcs
         description: You use some banned functions.
+        id: banned_funcs
+        name: Banned functions
         type: 1
         visible: true
-        name: Banned functions
     '7':
         name: S2
-        description: ''
         type: 2
+        description: ''
         visible: true
         id: ''
 weight: 1.0
