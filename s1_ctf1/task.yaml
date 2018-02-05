@@ -1,6 +1,6 @@
 accessible: true
 author: Tom Rousseaux
-context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_ctf1/archive.tar.gz>`_,
+context: Téléchargez `cette archive <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_ctf1/archive.tar.gz>`_,
     ouvrez ``FirstMission`` et suivez les instructions. Un code individuel vous sera
     fourni à la fin de l'exercice. Entrez-le ci-dessous pour confirmer que vous avez
     complètement réalisé cet exercice.
@@ -16,10 +16,10 @@ network_grading: false
 order: 0
 problems:
     q1:
-        answer: ''
-        header: ''
         name: Entrez le code ici
         type: match
+        answer: ''
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -27,14 +27,14 @@ submission_limit:
 tags:
     '0':
         visible: true
-        type: 2
         name: S1
+        type: 2
         description: ''
         id: ''
     '1':
-        name: Command line
-        visible: true
         type: 2
+        visible: true
+        name: Command line
         description: ''
         id: ''
 weight: 1.0
