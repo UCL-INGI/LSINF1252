@@ -1,0 +1,63 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+
+    - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions librairies)
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '60'
+    memory: '100'
+    output: '2'
+name: '[Juin 2016A] Traduction de code assembleur'
+network_grading: false
+order: 22
+problems:
+    asmfct:
+        language: c
+        type: code
+        header: |-
+            .. code-block:: text
+
+               fct:
+                   movl 4(%esp), %eax
+                   cmpl $0,%eax
+                   jg n
+                   movl $-1,%eax
+                   ret
+               n:  movl $0,%ebx
+                   movl %eax, %ecx
+                   movl $0, %eax
+                   movl $0, %edx
+               l:  addl $2, %ebx
+                   addl %ebx, %eax
+                   addl $1, %edx
+                   cmpl %ecx, %edx
+                   jl l
+                   ret
+
+            Votre fonction doit nécessairement s'appeler ``fct``
+        name: Traduisez en langage C la fonction assembleur suivante
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Votre fonction de test (optionnel)
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

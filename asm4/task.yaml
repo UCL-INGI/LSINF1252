@@ -1,0 +1,63 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+        - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+
+    **Attention:** veuillez utiliser la version **HTML** du syllabus
+environment: cpp
+evaluate: student
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Septembre 2016B] Traduction de code assembleur'
+network_grading: false
+order: 33
+problems:
+    asm:
+        name: Fonction f
+        type: code
+        language: c
+        header: |-
+            La fonction suivante a été écrite en assembleur. Traduisez la en une version équivalente en C. Votre fonction doit nécessairement avoir comme nom ``f``.
+
+            .. code:: console
+
+
+                           f:
+                             subl $8, %esp
+                             movl 20(%esp), %edx
+                             movl 16(%esp), %ecx
+                             movl 12(%esp), %ebx
+                             addl %ebx, %ecx
+                             cmpl %edx, %ecx
+                             jle m31
+                             movl %edx, %eax
+                             addl $8, %esp
+                             ret
+                           m31:
+                             movl %ecx, %eax
+                             addl $8, %esp
+                             ret
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+                           void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
