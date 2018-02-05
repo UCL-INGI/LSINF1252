@@ -9,7 +9,9 @@ admins:
 - pgonzalezalv
 - rousseauxt
 - obonaventure
-tutors: []
+tutors:
+- aballet
+- odyl
 groups_student_choice: true
 use_classrooms: true
 allow_unregister: true
