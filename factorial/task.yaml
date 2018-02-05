@@ -9,7 +9,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S2] Factorial'
+name: '[S1] Factorial'
 network_grading: false
 order: 10
 problems:
