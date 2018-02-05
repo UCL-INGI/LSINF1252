@@ -1,0 +1,175 @@
+accessible: true
+author: Olivier Bonaventure
+context: |
+    Vous devez modifier une librairie qui implémente une ArrayList en y ajoutant une fonction. Cette ArrayList s'utilise comme suit
+
+    .. code-block:: c
+
+
+       int main(void) {
+            struct array_list *head = arraylist_init((size_t) 2, (size_t) sizeof(int));
+            int first = 5;
+            int second = 6;
+            int third = 7;
+            int tmp;
+
+            int ret;
+
+            if (!head)
+                    return 0;
+
+            set_element(head, 0, (void *)&first);
+            set_element(head, 1, (void *)&second);
+
+            get_element(head, 1, (void *)&tmp);
+            // tmp contient 6
+            add_tail(head, (void *)&third);
+            get_element(head, 2, (void *)&tmp);
+            // tmp contient 7
+            printf("array-list size: %d element-size %d\n", get_size(head), get_elem_size(head));
+            // affiche array-list size: 3 element-size 4
+            array_list_destroy(head);
+            return 0;
+       }
+
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+    - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions librairies)
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Juin 2016A/B] ArrayList'
+network_grading: false
+order: 25
+problems:
+    ArrayList:
+        type: code
+        header: |-
+            .. code-block:: c
+
+               #include <errno.h>
+               #include <stdio.h>
+               #include <stdlib.h>
+               #include <string.h>
+               #include <semaphore.h>
+
+               struct array_list {
+                    char *content;
+                    size_t size;
+                    size_t elem_size;
+                    sem_t mutex;
+               };
+
+               /* Initialize an array-list
+                *
+                * @return: Pointer to array_list on   success, NULL on error and errno is set.
+                */
+               struct array_list *arraylist_init(size_t n_elem, size_t elem_size)
+               {
+                    struct array_list *alist= (struct array_list *)malloc(sizeof(*alist));
+
+                    if (!alist)
+                            return NULL;
+
+                    alist->content = malloc(n_elem * elem_size);
+                    if (!alist->content) {
+                            free(alist);
+                            return NULL;
+                    }
+
+                    if (sem_init(&alist->mutex, 0, 1)) {
+                            free(alist->content);
+                            free(alist);
+                            return NULL;
+                    }
+
+                    alist->size = n_elem;
+                    alist->elem_size = elem_size;
+
+                    return alist;
+               }
+
+               /* Set the element 'elem' at position 'index' (indexes start at 0) inside the
+                * array-list
+                *
+                * @return: -1 on error, 0 on success.
+                */
+               int set_element(struct array_list *alist, int index, void *elem)
+
+               {
+                    char *ptr;
+
+                    if (index >= alist->size)
+                            return -1;
+
+                    if (sem_wait(&alist->mutex))
+                            return -1;
+
+                    ptr = alist->content + (index * alist->elem_size);
+                    memcpy(ptr, elem, alist->elem_size);
+
+                    if (sem_post(&alist->mutex))
+                            return -1;
+
+                    return 0;
+               }
+
+
+               /* Get the element at position 'index' of the array-list and copy it into 'elem'.
+                * It is exepected that 'elem' has a sufficiently large memory-region to
+                * hold the data.
+                *
+                * @return: -1 on error, 0 on success.
+                */
+               int get_element(struct array_list *alist, int index, void *elem)
+               // code non fourni
+
+               /* Get the current size of the array-list */
+               size_t get_size(struct array_list *alist)
+               {
+                      return alist->size;
+               }
+
+               /* Get the size of the elements of the   array-list */
+               size_t get_elem_size(struct array_list *alist)
+               {
+                      return alist->elem_size;
+               }
+
+               /* Fully destroys the array-list. All elements will be lost */
+               int array_list_destroy(struct array_list *alist)
+               // code non fourni
+
+               /* Expand the array-list by one element and put 'elem' at this place.
+                *
+                * @return: -1 on error, 0 on success
+                *
+                * Vous *devez* utiliser realloc dans cette fonction
+                */
+               int add_tail(struct array_list *alist, void *elem)
+               // question
+        language: c
+        name: ArrayList
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

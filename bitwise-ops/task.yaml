@@ -1,0 +1,82 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On souhaite effectuer des opérations spécifiques sur certains bits d'un entier non-signé de 32 bits. Lorsque l'on parle de position, l'indice 0 correspond au bit le plus faible, et 31 au bit le plus fort. Dans cet exercice, un `unsigned char` représente toujours un seul bit et ne pourra donc que prendre les valeurs numériques 0 ou 1 (et non '0' et '1')
+
+    Écrivez une fonction `unsigned char get_bit(unsigned int x, unsigned int pos)` qui renvoie le bit à la position `pos` de x.
+
+    Écrivez une fonction `unsigned int set_bit(unsigned int x, unsigned int pos, unsigned char value)` qui met le bit à la position `pos` de x à la valeur `value`.
+
+    Écrivez une fonction `unsigned char get_3_leftmost_bits(unsigned int x)` qui renvoie les 3 bits les plus à gauches de x. Par exemple, si on a la séquence 11011001, la fonction doit renvoyer la valeur correspondant à 00000110.
+
+    Écrivez une fonction `unsigned char get_4_rightmost_bits(unsigned int x)` qui renvoie les 4 bits les plus à droite de x.
+
+    Écrivez une fonction `unsigned int unset_last_bit(unsigned int x)` qui met à 0 le premier bit de poids fort à 1 qu'il trouve, et ne fait rien s'il n'y a pas de bit mis à 1.
+
+    Écrivez une fonction `unsigned int cycle_bits(unsigned int x, unsigned int n)` qui déplace tous les bits de n places vers la gauche selon la formule x[(i+n)%32] = x[i] où x[i] représente le ième bit de x.
+
+    Vous pouvez faire appel aux fonctions `get_bit` et `set_bit` dans les autres.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[Beta] Opérations sur les bits'
+network_grading: false
+order: 40
+problems:
+    get_bit:
+        type: code
+        name: get_bit
+        language: c
+        header: |-
+            Écrivez le code de la fonction `get_bit`.
+
+            `unsigned char get_bit(unsigned int x, unsigned int pos) {`
+    set_bit:
+        language: c
+        type: code
+        name: set_bit
+        header: |-
+            Écrivez le code de la fonction `set_bit`.
+
+            `unsigned int set_bit(unsigned int x, unsigned int pos, unsigned char value) {`
+    get_3_leftmost_bits:
+        header: |-
+            Écrivez le code de la fonction `get_3_leftmost_bits`.
+
+            `unsigned char get_3_leftmost_bits(unsigned int x) {`
+        language: c
+        name: get_3_leftmost_bits
+        type: code
+    get_4_rightmost_bits:
+        type: code
+        name: get_4_rightmost_bits
+        header: |-
+            Écrivez le code de la fonction `get_4_rightmost_bits`.
+
+            `unsigned char get_4_rightmost_bits(unsigned int x) {`
+        language: c
+    unset_last_bit:
+        name: unset_last_bit
+        language: c
+        type: code
+        header: |-
+            Écrivez le code de la fonction `unset_last_bit`.
+
+            `unsigned int unset_last_bit(unsigned int x) {`
+    cycle_bits:
+        type: code
+        name: cycle_bits
+        header: |-
+            Écrivez le code de la fonction `cycle_bits`.
+
+            `unsigned int cycle_bits(unsigned int x, unsigned int n) {`
+        language: c
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
