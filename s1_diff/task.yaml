@@ -4,17 +4,17 @@ context: |-
     3 students are suspected of doing illegal things with computer of the university. They know that computers send logs to the server and so hid their activity to the server. But they don't know that logs are also saved on the different computers.
     There are the logs from the server and from the students, use `diff(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/diff.1.html>`_ to compare them and find which student are innocent.
 
-    - `syslog <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/syslog.log>`_
-    - `student 1 <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student1.log>`_
-    - `student 2 <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student2.log>`_
-    - `student 3 <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s1_diff/student3.log>`_
+    - `syslog <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_diff/syslog.log>`_
+    - `student 1 <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_diff/student1.log>`_
+    - `student 2 <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_diff/student2.log>`_
+    - `student 3 <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_diff/student3.log>`_
 environment: mcq
 evaluate: best
 groups: false
 limits:
+    time: '30'
     memory: '100'
     output: '2'
-    time: '30'
 name: '[S1] Diff - REVIEWED'
 network_grading: false
 order: 3
@@ -23,28 +23,28 @@ problems:
         choices:
         -   text: Student 1
         -   text: Student 2
-        -   valid: true
-            text: Student 3
-        limit: 0
-        header: ''
+        -   text: Student 3
+            valid: true
         multiple: true
         name: Which students are innocents?
+        limit: 0
         type: multiple_choice
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        visible: true
         name: S1
         description: ''
-        visible: true
         type: 2
         id: ''
     '1':
         type: 2
+        visible: true
         description: ''
         name: Command line
-        visible: true
         id: ''
 weight: 1.0
