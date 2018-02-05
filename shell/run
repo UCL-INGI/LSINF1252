@@ -1,0 +1,14 @@
+#!/bin/bash
+
+getinput run_command > run_command.h
+getinput run_pipe > run_pipe.h
+getinput run_and > run_and.h
+getinput run_redirected > run_redirected.h
+
+CFLAGS+="-I./adds"
+LDFLAGS+="-L./adds"
+
+export CFLAGS
+export LDFLAGS
+
+./check-c-program -u shell.c -t shell_test.c -m memcheck.c

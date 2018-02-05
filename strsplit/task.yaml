@@ -1,0 +1,57 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+        - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+
+    **Attention:** veuillez utiliser la version **HTML** du syllabus
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Septembre 2016B] Manipulation de chaines de caractères'
+network_grading: false
+order: 34
+problems:
+    split:
+        type: code
+        language: c
+        header: |-
+            .. code:: c
+
+
+                           /*
+                            * @pre 0<n<strlen(str), str!=NULL, str se termine par '\0'
+                            * @post dans un tableau deux pointeurs vers deux chaînes de caractères
+                            *       terminées par '\0'. La première (indice 0) contient
+                            *       les caractères en positions 0 à n-1 dans str.
+                            *       La seconde le reste de la chaîne str.
+                            *       En cas d'erreur, retourne NULL en ayant libéré correctement
+                            *       tout mémoire allouée avant l'erreur.
+                            *
+                            * Contrainte : la seule fonction de manipulation des chaînes de caractères
+                            *              que vous pouvez utiliser est strlen. Les autres (e.g.
+                            *              strcat, strncat, strstr, ...) sont interdites. Vous pouvez
+                            *              bien entendu utiliser malloc et free.
+                            */
+
+                            char** strsplit(const char *str, int n) {
+        name: Fonction strstplit
+    montest:
+        header: ''
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

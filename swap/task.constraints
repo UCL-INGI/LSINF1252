@@ -1,0 +1,19 @@
+<task>
+	<constraints>
+		<language>c</language>
+		<maxtime>30</maxtime>
+		<maxmem>32</maxmem>
+		<submission>
+			<maxsub>-1</maxsub>
+			<freq>-1</freq>
+			<end>-1</end>
+		</submission>
+		<checkempty>1</checkempty>
+	</constraints>
+	<questions>
+		<question id="q1" header="void swap(struct fract_t *a, struct fract_t *b)" />
+	</questions>
+	<skeletons>
+		<file path="input/swap.c" />
+	</skeletons>
+</task>

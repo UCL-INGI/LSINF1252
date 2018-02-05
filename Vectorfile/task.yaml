@@ -1,0 +1,103 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+        - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+
+    **Attention:** veuillez utiliser la version **HTML** du syllabus
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '10'
+    memory: '100'
+    output: '2'
+name: '[Septembre 2016A] Stockage d''un vecteur de réels dans un fichier'
+network_grading: false
+order: 32
+problems:
+    mp:
+        language: c
+        name: Fonction swap
+        header: |-
+            Afin de compléter une librairie permettant de stocker et de manipuler des vecteurs
+            contenant des réels en les plaçant dans des fichiers plutôt qu'en
+            mémoire, vous devez implémenter la fonction *swap* en utilisant **uniquement** les appels systèmes suivants: *open*, *read*, *write* et *close*. Le code de la fonction *create* de la librairie vous est fournie.
+
+
+
+            .. code:: c
+
+
+                  #include <fcntl.h>
+                  #include <sys/types.h>
+                  #include <sys/stat.h>
+                  #include <sys/uio.h>
+                  #include <unistd.h>
+                  #include <stdlib.h>
+                  #include <stdio.h>
+
+                  /*
+                   * Implementation de vecteurs en utilisation des fichiers
+                   * La donnée à l'indice zéro correspond aux sizeof(double)
+                   * premiers bytes du fichier, la deuxième aux suivantes, etc.
+                   * La taille d'un tel fichier est toujours un multiple
+                   * entier de sizeof(double)
+                   */
+
+                  /*
+                   * @pre *filename!=NULL, size>0
+                   * @post construit un fichier contenant size double à la valeur val
+                   *       retourne le nombre de données écrites, -1 en cas d'erreur
+                   */
+                  int create(char *filename, int size, double val) {
+
+                    int err;
+                    int fd=open(filename,O_RDWR|O_CREAT,S_IRUSR|S_IWUSR);
+                    if(fd==-1) {
+                      return -1;
+                    }
+                    for(int i=0; i<size; i++) {
+                      err=write(fd,(void *) &val, sizeof(double));
+                      if(err<0) {
+                         err=close(fd);
+                         return(-1);
+                       }
+                     }
+                     err=close(fd);
+                     if(err==-1)
+                       return err;
+                     else
+                       return size;
+                   }
+
+                  /*
+                   * @pre filename!=NULL, 0 <= i*sizeof(double) < taille fichier,
+                   *       0 <= j*sizeof(double) < taille fichier
+                   * @post échange les données aux indices i et j dans
+                   *       le vectorfile (0 est le premier indice)
+                   *       retourne 0 en cas de succès, -1 si erreur
+                   */
+
+                  int swap(char *filename, int i, int j) {
+        type: code
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

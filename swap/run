@@ -1,0 +1,20 @@
+#!/bin/sh
+
+parsetemplate --output swap.c template.c
+
+gcc -Wall -Werror swap.c test.c -o test
+
+# Verify the output of the code...
+output=$(./test)
+ret_code=$?
+
+if [ $ret_code = 0 ]; then
+        # The student succeeded
+        feedback --result success --feedback "Votre code est correct!"
+else
+        # The student failed
+        feedback --result failed --feedback "Erreur: $output"
+fi
+
+
+

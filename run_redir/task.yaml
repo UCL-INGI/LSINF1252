@@ -1,0 +1,67 @@
+accessible: true
+author: ''
+context: |-
+    Dans un shell, il est parfois nécessaire d'exécuter des programmes en redirigeant leurs flux standards de sortie et d'erreur vers un fichier.
+
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+    - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Juin 2016B] Redirection des flux de sortie et d''erreur standards'
+network_grading: false
+order: 28
+problems:
+    run_redir:
+        type: code
+        language: c
+        name: Exécution d'un programme en redirigeant ses flux de sortie
+        header: |-
+            Implémentez la fonction run_redir dont les spécifications sont fournies ci-dessous. Il est interdit d'utiliser la fonction ``system`` de la librairie standard.
+
+            .. code-block:: c
+
+               #include <unistd.h>
+               #include <sys/types.h>
+               #include <sys/wait.h>
+               #include <sys/stat.h>
+               #include <fcntl.h>
+               #include <stdlib.h>
+               #include <stdio.h>
+
+
+               /*
+                * @pre prog!=NULL, argv!=NULL, file!=NULL
+                * execute le programme prog avec les arguments argv
+                * en redirigeant la sortie standard et l'erreur standard
+                * vers le fichier file. Retourne la valeur de retour
+                * du programme et -1 en cas d'erreur d'exécution du programme
+                * ou d'accès au fichier
+                */
+               int run_redir(char *prog, char* argv[], char *file) {
+               // insérez ici le code sans terminer par }
+    contest:
+        name: Fonction de test optionnelle
+        optional: true
+        language: c
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Si vous utilisez ``printf`` dans cette fonction, cela risque d'interférer avec la sortie standard de votre programme, méfiez-vous.  Vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+               // insérez votre code sans terminer par }
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

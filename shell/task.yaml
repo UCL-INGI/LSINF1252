@@ -1,0 +1,81 @@
+accessible: true
+author: Kilian Verhetsel
+context: |+
+    .. raw:: html
+
+        <p>
+          Le shell est un outil dans les systèmes UNIX qui vous permet facilement exécuter d’autres programmes, et même de les combiner de façon intelligente : vous pouvez, par exemple, utiliser <code>grep foo fichier</code> pour trouver les lignes qui contiennent <code>foo</code> dans un fichier, <code>wc -l fichier</code> pour compter le nombre de lignes dans un fichier ; mais en les combinant, on peut écrire <code>grep foo fichier | wc -l</code> pour compter le nombre de lignes qui contiennent dans un fichier.
+        </p>
+        <p>
+          Dans cet exercice, vous allez implémenter la partie du shell qui exécute une commande ou qui en combine deux. (Remarque : toutes les tableaux d’arguments passés à vos fonctions contiennent comme premier élément le chemin vers l’exécutable et comme dernier élément <code>NULL</code>).
+        </p>
+
+environment: cpp
+groups: false
+limits:
+    memory: '512'
+    output: '5210'
+    time: '10'
+name: Écrire un shell
+network_grading: false
+order: 21
+problems:
+    run_command:
+        header: |-
+            Écrivez le corps de la fonction ``int run_command(const char *path, char *
+            const argv[])`` qui lance l’exécutable qui se trouve dans ``path`` avec les
+            arguments stockés dans ``argv``, et renvoie le code de retour de la commande
+            qui a été exécutée.
+        language: c
+        type: code
+        name: Exécution simple
+    run_pipe:
+        language: c
+        name: Pipe
+        header: |-
+            L’opérateur ``|`` est appelé ``pipe`` (ce qui devrait vous aider à trouver
+            une fonction utile pour répondre à cette question…). Il permet de connecter
+            la sortie d’une commande (par exemple ``grep foo fichier``) à l’entrée d’une
+            autre (par exemple ``wc -l``).
+
+            Écrivez le corps de la fonction ``int run_pipe(const char *path_a, char *
+            const argv_a[], const char *path_b, char * const argv_b[])`` qui crée un
+            processus A en lance l’exécutable ``path_a`` avec les arguments stockés dans
+            ``argv_a`` et un processus B (qui utilise ``path_b`` et ``argv_b``) en
+            connectant la sortie du processus A à l’entrée d’un processus B. La fonction
+            doit renvoyer le code de retour du processus B.
+        type: code
+    run_and:
+        language: c
+        header: |-
+            L’opérateur ``&&`` peut servir de ET logique en shell. Il permet de
+            n’exécuter une commande que si le code de retour d’une autre commande est
+            égal à zéro.
+
+            Écrivez le corps de la fonction ``int run_and(const char *path_a, char *
+            const argv_a[], const char *path_b, char * const argv_b[])`` qui crée un
+            processus A (comme dans la question précédente) puis, si le code de retour
+            est égal à 0, un processus B (à nouveau comme dans la question précédente) et
+            renvoie le code de retour du processus B, ou celui de A s’il n’est pas nul.
+        type: code
+        name: ET logique
+    run_redirected:
+        type: code
+        name: Rediriger la sortie
+        language: c
+        header: |-
+            Parfois, il est utile de rediriger la sortie standard vers un fichier pour
+            sauvegarder le résultat d’une commande. Cela peut se faire en utilisant la
+            syntaxe suivante : ``cat file1 file2 > new_file``. Après l’exécution de cette
+            commande, le fichier ``new_file`` contient le contenu de ``file1`` suivi de
+            celui de ``file2``.
+
+            Écrivez le corps de la fonction ``int run_redirected(const char *path, char *
+            const argv[], const char *output_path)`` qui lance un processus qui exécute
+            le programme ``path`` avec les arguments stockés dans ``argv``, en
+            redirigeant la sortie vers le fichier ``output_path``. La fonction doit
+            renvoyer le code de retour du processus.
+
+            Si le fichier ``output_path`` existe déjà, la fonction doit remplacer son
+            contenu par la sortie de la commande.
+weight: 1.0

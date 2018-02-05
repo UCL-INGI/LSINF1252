@@ -1,0 +1,24 @@
+accessible: false
+author: ''
+context: true false
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[Beta] true false'
+network_grading: false
+problems:
+    truefalse:
+        header: ''
+        language: c
+        name: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+order: 37

@@ -1,0 +1,54 @@
+accessible: false
+author: Cécile Hautecoeur & Aurélie Massart
+context: |-
+    Le but de cet exercice est de trier une liste chaînée. Pour ce faire, on vous laisse le choix de l'algorithme que vous souhaitez implémenter. La seule contrainte est que la liste se décrit comme suit :
+
+    .. code-block:: c
+
+        struct list {
+            struct node* head;
+        }
+        struct node {
+            int elem;
+            struct node* next;
+        }
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    memory: '100'
+    time: '30'
+name: '[StudentJob] Trier une liste chainée'
+network_grading: false
+order: 56
+problems:
+    q1:
+        type: code
+        header: Ecrivez ici les headers nécessaire à votre fonction
+        language: c
+        name: ''
+    q2:
+        name: ''
+        header: Ecrivez ici les sous-fonctions que vous utilisez.
+        type: code
+        language: c
+    q3:
+        type: code
+        language: c
+        header: |-
+            Ecrivez ici la fonction de tri dont la signature est
+
+            .. code-block:: c
+
+                void sortList(struct list* myList){
+                    \\ à compléter
+                }
+
+            Hint : si vous n'avez pas d'idée d'implémentation pour le tri vous pouvez simplement chercher le minimum et le placer au début de liste, puis faire de même avec le minimum de la liste sans compter le premier élément et ainsi de suite. Le but ici n'est pas de créer l'algorithme le plus efficace, mais bien un algorithme fonctionnel!
+        name: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

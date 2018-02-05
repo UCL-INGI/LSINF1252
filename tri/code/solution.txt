@@ -1,0 +1,98 @@
+/*   Copyright (c) 2015, 2016 Hautecoeur Cécile & Massart Aurélie
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU Affero General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Affero General Public License for more details.
+ *
+ *   You should have received a copy of the GNU Affero General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
+
+
+struct node {
+  int elem;
+  struct node* next;
+};
+
+struct list {
+  struct node* head;
+};
+
+void putFrontMin(struct list* myList, int n, int value, int index){
+	if(n!=index){
+		int elem1 = 0;
+		struct node *current = myList->head;
+		int i = 1;
+		while(current!=NULL) {
+			if(i==index){
+				elem1 = current->elem;
+				current->elem = value;
+			}
+			else { if(i==n) {
+						current->elem = elem1;
+					}
+			}
+			current = current->next;
+			i++;
+		}
+	}
+}
+
+int sortMiniList(struct list* myList, int listIndex) {
+	int min = INT_MAX;
+	int index = 1;
+	int currindex = 1;
+	struct node* current = myList->head;
+
+	while(current!=NULL){
+		if(currindex>=listIndex && current->elem < min){
+			min = current->elem;
+			index = currindex;
+			}
+		current=current->next;
+		currindex++;
+	}
+	if(currindex<=listIndex) {return -1;}
+	putFrontMin(myList,index,min,listIndex);
+	return 0;
+}
+
+void sortList(struct list* myList){
+	void sortList(struct list* myList){
+	if (myList == NULL) { return; }
+	int verif = 0;
+	int index = 1;
+	while(verif == 0){
+		verif = sortMiniList(myList, index);
+		index++;
+	}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+accessible: true
+author: ''
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+    - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+    - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Juin 2016B] Search and replace'
+network_grading: false
+order: 27
+problems:
+    sr:
+        language: c
+        type: code
+        header: |-
+            Implémentez la fonction ``sr`` dont les spécifications sont fournies ci-dessous.
+
+            .. code-block:: c
+
+               #include <sys/uio.h>
+               #include <unistd.h>
+               #include <stdlib.h>
+               #include <stdio.h>
+               #include <fcntl.h>
+               #include <sys/stat.h>
+               #include <string.h>
+
+               /*
+                * @pre filename!=NULL, src!=NULL, dst!=NULL, len >0
+                *      src et dst pointent vers des zones de tailles len
+                *      le fichier filename a comme taille un multiple entier de len
+                * @post modifie le contenu du fichier filename en remplaçant
+                *       toutes les occurences des blocs de données src par dst.
+                *       Le fichier est supposé découpé en blocs de taille len
+                *       aux positions 0, len, 2*len, ...
+                *       retourne le nombre de blocs remplacés et -1 en cas d'erreur
+                *       Il est interdit d'utiliser mmap et vous devez utiliser malloc
+                *       pour allouer la mémoire dont vous avez besoin. Pour accéder au fichier, vous pouvez uniquement utiliser open, read, lseek, write et close.
+                */
+               int sr(char *filename, char *src, char *dst, ssize_t len) {
+               // insérez votre code ici sans terminer par }
+        name: Search and replace
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        optional: true
+        type: code
+        language: c
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
