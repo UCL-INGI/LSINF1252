@@ -1,0 +1,116 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+        - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+
+    **Attention:** veuillez utiliser la version **HTML** du syllabus
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '10'
+    memory: '100'
+    output: '2'
+name: '[Septembre 2016A] Liste doublement chaînée'
+network_grading: false
+order: 31
+problems:
+    dl:
+        language: c
+        header: |-
+            Une liste doublement chaînée est implémentée comme suit. Notez
+            que suite à l'implémentation de la fonction ``list_init``, le
+            premier noeud de la liste est toujours vide et ne contient
+            aucune donnée. Vous devez implémenter la fonction ``delete``                 dont les spécifications vous sont fournies.
+
+            .. code:: c
+
+                  #include<stdio.h>
+                  #include<stdlib.h>
+
+                  // Noeud de la liste chaînée
+                  typedef struct Node {
+                          int data;
+                          struct Node *next;
+                          struct Node *prev;
+                  } node;
+
+                  // La liste doublement chaînée. Cette liste comprend un premier
+                  // noeud vide qui ne contient pas de donnée utile. Les données
+                  // utiles sont stockées à partir du second noeud.
+
+                  typedef struct List {
+                    node *start;  // pointe toujours vers le premier élément
+                    node *tail;   // pointe toujours vers le dernier élément
+                  } list;
+
+                  /*
+                   * @pre l!=NULL
+                   * @post a initialisé la liste doublement chaînée l. Une liste vide
+                   *       contient toujours un premier noeud qui est vide
+                   *       et dont les pointeurs next et prev pointent vers NULL
+                   *       retourne 0 en cas de succès, -1 en cas d'erreur
+                   */
+
+                  int list_init(list *l) {
+
+                    l->start=malloc(sizeof(node));
+                    if(l->start==NULL)
+                      return -1;
+                    l->start->next=NULL;
+                    l->start->prev=NULL;
+                    l->start->data=-1;
+                    l->tail=l->start;
+                    return 0;
+                  }
+
+                  /*
+                   * @pre l!=NULL
+                   * @post insert à la fin de la liste un noeud content la donnée data
+                   *       retourne -1 en cas d'erreur, 0 sinon
+                   */
+                  int insert(list *l, int data)
+                  {
+                    node *pointer;
+                    pointer = (node *)malloc(sizeof(node));
+                    if(pointer==NULL)
+                      return -1;
+                    l->tail->next=pointer;
+                    pointer->prev=l->tail;
+                    l->tail=pointer;
+                    pointer->data = data;
+                    pointer->next = NULL;
+                    return 0;
+                  }
+
+                  /*
+                   * @pre l!=NULL
+                   * @post a retiré de la liste l tous les noeuds dont la donnée
+                   *       est key
+                   *       retourne le nombre de noeuds retirés, -1 en cas d'erreur
+                   */
+                  int delete(list *l, int key)
+                  {
+        name: Fonction delete
+        type: code
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

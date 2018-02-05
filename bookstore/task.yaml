@@ -1,0 +1,75 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On souhaite gérer le catalogue d'une librairie dans lequel chaque livre est identifié par son auteur et son titre. La structure de données choisie est la suivante : il y a une liste chaînée d'auteurs dont chaque élément pointe vers une liste chaînée d'ouvrages.
+
+    .. code-block:: c
+
+        typedef struct cellAuteur {
+            char *auteur;
+            struct cellLivre *Livres;
+            struct cellAuteur *next;
+        } cellAuteur;
+
+        typedef struct cellLivre {
+            char *titre;
+            struct cellLivre *suiv;
+        } cellLivre;
+
+    Écrivez une fonction `cellAuteur *existe(cellAuteur *librairie, char *strAuteur)` qui teste si un auteur existe dans la liste librairie et dans ce cas renvoie un pointeur sur sa cellule de la liste (et NULL sinon).
+
+    Écrivez une fonction `int compteOuvrage(cellAuteur *librairie, char *strAuteur)` qui compte le nombre de livres d'un auteur dans la liste librairie.
+
+    Écrivez une fonction `void add(cellAuteur *librairie, char *strAuteur, char *strTitre)` qui ajoute dans le catalogue un livre de l'auteur indiqué. L'auteur existe dans le catalogue. Un même livre ne peut pas être présent 2 fois dans la catalogue.
+
+    Écrivez une fonction `void supprimer(cellAuteur **librairie, char *strAuteur)` qui supprime du catalogue un auteur et tous ses livres. L'auteur existe dans le catalogue.
+
+    Vous avez accès aux fonctions de `string.h`.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[Beta] Gestion d''une librairie'
+network_grading: false
+order: 45
+problems:
+    existe:
+        type: code
+        language: c
+        name: existe
+        header: |-
+            Écrivez le corps de la fonction `existe`.
+
+            `cellAuteur *existe(cellAuteur *librairie, char *strAuteur) {`
+    compteOuvrage:
+        type: code
+        language: c
+        header: |-
+            Écrivez le corps de la fonction `compteOuvrage`.
+
+            `int compteOuvrage(cellAuteur *librairie, char *strAuteur) {`
+        name: compteOuvrage
+    add:
+        header: |-
+            Écrivez le corps de la fonction `add`.
+
+            `void add(cellAuteur *librairie, char *strAuteur, char *strTitre) {`
+        language: c
+        type: code
+        name: add
+    supprimer:
+        header: |
+            Écrivez le corps de la fonction `supprimer`.
+
+            `void supprimer(cellAuteur **librairie, char *strAuteur) {`
+        language: c
+        type: code
+        name: supprimer
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

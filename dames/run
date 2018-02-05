@@ -1,0 +1,91 @@
+#!/bin/bash
+
+getinput codearchive > archive.tar.gz
+
+mkdir tmp && cp archive.tar.gz tmp && cd tmp
+
+tar_out=$(tar zxf archive.tar.gz 2>&1)
+if [ $? -ne 0 ]; then
+	feedback --result failed --feedback "Erreur lors de la décompression::
+
+$(echo "$tar_out" | sed "s/^/   /")
+"
+	exit 1
+fi
+
+if [ ! -e "dames.c" ]; then
+	feedback --result failed --feedback "Fichier dames.c manquant"
+	exit 1
+fi
+
+if [ ! -e "dames.h" ]; then
+	feedback --result failed --feedback "Fichier dames.h manquant"
+	exit 1
+fi
+
+if [ ! -e "programme.c" ]; then
+	feedback --result failed --feedback "Fichier programme.c manquant"
+	exit 1
+fi
+
+if [ ! -e "test.c" ]; then
+	feedback --result failed --feedback "Fichier test.c manquant"
+	exit 1
+fi
+
+if [ ! -e "Makefile" ]; then
+	feedback --result failed --feedback "Makefile manquant"
+	exit 1
+fi
+
+if [[ -e "programme" || -e "test" ]]; then
+	feedback --result failed --feedback "Il ne peut pas y avoir de fichier 'programme' ou 'test' (compilés) déjà présent"
+	exit 1
+fi
+
+ls_out=$(ls *.o 2>&1)
+if [ $? -eq 0 ]; then
+	feedback --result failed --feedback "Il ne peut pas y avoir de fichier objet (.o) déjà présents"
+	exit 1
+fi
+
+make_out=$(make jeu 2>&1)
+if [ $? -ne 0 ]; then
+	feedback --result failed --feedback "Le programme principal ne compile pas::
+
+$(echo "$make_out" | sed "s/^/   /")
+"
+	exit 1
+fi
+
+if [ ! -e "programme" ]; then
+	feedback --result failed --feedback "Le programme est compilé mais l'exécutable 'programme' est introuvable"
+	exit 1
+fi
+
+if [ ! -x "programme" ]; then
+	feedback --result failed --feedback "Le programme est compilé et le fichier 'programme' existe mais n'est pas exécutable"
+	exit 1
+fi
+
+rm -rf * && cp ../archive.tar.gz . && tar zxf archive.tar.gz
+make_out=$(make test 2>&1)
+if [ $? -ne 0 ]; then
+	feedback --result failed --feedback "Le programme de test ne compile pas ::
+
+$(echo "$make_out" | sed "s/^/   /")
+"
+	exit 1
+fi
+
+if [ ! -e "test" ]; then
+	feedback --result failed --feedback "Le programme de test est compilé mais l'exécutable 'test' est introuvable"
+	exit 1
+fi
+
+if [ ! -x "test" ]; then
+	feedback --result failed --feedback "Le programme de test est compilé et le fichier 'test' existe mais n'est pas exécutable"
+	exit 1
+fi
+
+feedback --result success

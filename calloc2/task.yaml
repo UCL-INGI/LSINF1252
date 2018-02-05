@@ -1,0 +1,28 @@
+accessible: false
+author: Mathieu Xhonneux
+context: Coder une fonction calloc2, ayant le même prototype et le même fonctionnement
+    que calloc(3) mais qui utilise malloc(3) pour allouer la mémoire.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[Beta] Coder calloc à l''aide de malloc'
+network_grading: false
+order: 44
+problems:
+    calloc2:
+        header: |-
+            Entrez ici le corps de la fonction calloc2.
+
+            `void *calloc2(size_t nmemb, size_t size) {`
+        type: code
+        language: c
+        name: calloc2
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

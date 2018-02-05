@@ -1,0 +1,51 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On souhaite parcourir un arbre binaire de recherche. Un arbre de recherche binaire est une structure de données où chaque nœud possède une clé et une valeur. En outre, chaque nœud peut avoir 2 nœuds fils : un à gauche dont la clé est toujours inférieure à la sienne, et un à droite dont la clé est toujours supérieure à la sienne. Autrement dit si vous êtes à un nœud dont la clé vaut 10 et que vous cherchez un nœud dont la clé vaut 5, vous savez que vous devez descendre à gauche pour espérer trouver un éventuel nœud dont la clé vaut 5.
+
+    .. code-block:: c
+
+        typedef struct BSTreeNode {
+            int key;
+            int value;
+
+            struct BSTreeNode *left;
+            struct BSTreeNode *right;
+        } Node;
+
+
+    Écrivez une fonction `int has_key(Node root, int key)` qui vérifie si l'arbre binaire dont le sommet est le nœud root possède un nœud dont la clé vaut key et renvoie 1 si oui, renvoie 0 sinon.
+
+    Écrivez une fonction `int compare(Node root_a, Node root_b)` qui vérifie si les 2 arbres binaires passés en argument sont identiques (ils ont la même structure et tous les nœuds possèdent la même paire clé/valeur). Renvoie 1 si les arbres sont identiques, 0 sinon. Indice : pensez récursivement.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[Beta] Parcours d''un arbre binaire de recherche'
+network_grading: false
+order: 42
+problems:
+    has_key:
+        type: code
+        header: |-
+            Écrivez le corps de la fonction has_key.
+
+            `int has_key(Node root, int key) {`
+        language: c
+        name: has_key
+    compare:
+        type: code
+        header: |-
+            Écrivez le corps de la fonction compare.
+
+            `int compare(Node root_a, Node root_b) {`
+        name: compare
+        language: c
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

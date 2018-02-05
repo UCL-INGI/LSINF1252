@@ -1,0 +1,18 @@
+#! /bin/bash
+# This line parses the template and put the result in studentcode.py
+parsetemplate --output test.c template.c
+
+gcc test.c -o test # 2> q1.err
+
+# Verify the output of the code...
+output=$(bash test.sh)
+if [ "$output" = "OK" ]; then
+        # The student succeeded
+        feedback --result success --feedback "Votre code est correct!"
+else
+        # The student failed
+        feedback --result failed --feedback "Erreur: $output"
+fi
+
+
+

@@ -1,0 +1,30 @@
+accessible: false
+author: David Lebrun
+context: |+
+    .. raw:: html
+
+        <p>
+          Cette tâche vous permet de vérifier que votre programme de jeu de dames passe les vérifications de base, telles que présence et fonctionnement du Makefile, nommage correct des exécutables, etc. Si votre programme ne passe pas ces tests, il ne sera <b>pas corrigé</b>.
+        </p>
+
+environment: cpp
+groups: false
+limits:
+    memory: '128'
+    output: '5210'
+    time: '10'
+name: 'Jeu de dames: tests de base'
+network_grading: false
+order: 20
+problems:
+    codearchive:
+        header: |+
+            .. raw:: html
+
+                <p>
+                  Uploadez ici une archive <b>.tar.gz</b> contenant les fichiers composant votre programme (i.e. au moins Makefile, dames.c, dames.h, programme.c, test.c et éventuellement les autres fichiers nécessaires à la compilation et au bon fonctionnement). Les fichiers doivent se trouver à la <b>racine</b> de l'archive .tar.gz (i.e. pas un dossier).
+                </p>
+
+        name: Archive du code
+        type: file
+weight: 1.0
