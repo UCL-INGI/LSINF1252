@@ -1,6 +1,6 @@
 accessible: true
 author: Fabien Duchêne & Christoph Paasch
-context: |+
+context: |-
     Soit la définition de la structure représentant des fractions entières suivante:
 
     .. code-block:: c
@@ -10,8 +10,7 @@ context: |+
                 int denum;
         };
 
-    On veut pouvoir swapper (échanger) les valeurs de deux fractions en utilisant la fonction void swap(struct fract_t *a, struct fract_t *b). Ecrivez le code de cette fonction.
-
+    On veut pouvoir swapper (échanger) les valeurs de deux fractions en utilisant la fonction ``void swap(struct fract_t *a, struct fract_t *b)``. Ecrivez le code de cette fonction.
 environment: cpp
 evaluate: best
 groups: false

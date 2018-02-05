@@ -1,0 +1,95 @@
+accessible: true
+author: ''
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+        - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+
+    **Attention:** veuillez utiliser la version **HTML** du syllabus
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Septembre 2016B] Manipulation de liste'
+network_grading: false
+order: 66
+problems:
+    deleteAllYounger:
+        language: C
+        header: |
+            Une liste chaînée est implémentée comme suit:
+
+            .. code:: c
+
+                    /*
+                     * Un employé d'une entreprise
+                     */
+
+                    typedef struct employe {
+                      char *name;  // nom de l'employé
+                      unsigned int age; // âge de l'employé
+                    } Employe;
+                    /*
+                     * Un noeud de la liste
+                     */
+                    typedef struct node {
+                      void *data; // pointeur vers la donnée stockée
+                      struct node *next; // pointeur vers le noeud suivant
+                    } Node;
+
+                    /*
+                     * @pre list!=NULL
+                     * @post initialise la liste chaînée
+                     */
+                    void initializeList(LinkedList *list) {
+                      list->head=NULL;
+                      list->tail=NULL;
+                    }
+
+                    /*
+                     * @pre list!=NULL, data!=NULL, data pointe vers Employe
+                     * @post Crée un noeud contenant un pointeur vers data
+                     *       et l'ajoute en début de liste
+                     *       retourne un pointeur vers le noeud créé, NULL en cas d'erreur
+                     */
+                    Node * addHead(LinkedList *list, void *data) {
+                      Node *node= (Node *) malloc(sizeof(Node));
+                      if(node==NULL)
+                        return NULL;
+                      node->data=data;
+                      if(list->head==NULL) {
+                        list->tail=node;
+                        node->next=NULL;
+                      } else {
+                        node->next=list->head;
+                      }
+                      list->head=node;
+                      return node;
+                    }
+
+                    /*
+                     * @pre list!=NULL, age>0
+                     * @post retire de la liste tous les employés strictement plus jeunes
+                     *       que age. Retourne le nombre d'employés retirés de la
+                     *       liste, -1 en cas d'erreur.
+                     */
+                    int deleteAllYounger(LinkedList *list, int age) {
+        name: Fonction deleteAllYounger
+        type: code
+    montest:
+        header: ''
+        name: Fonction de test optionnelle
+        optional: true
+        type: code
+        language: C
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
