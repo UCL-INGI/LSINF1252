@@ -27,7 +27,7 @@ context: |-
 
          Hello make
 
-    Now, fire up your terminal, use ``cd path/to/hello/folder/`` to go to the directory which contains ``hello.c`` (`download hello.c <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s2_make/hello.c>`_ to compare with what you did) and type: ``make hello``
+    Now, fire up your terminal, use ``cd path/to/hello/folder/`` to go to the directory which contains ``hello.c`` (`download hello.c <https://inginious.info.ucl.ac.be/course/LSINF1252/s2_make/hello.c>`_ to compare with what you did) and type: ``make hello``
 
     Now the ``make`` comes alive and tells you something like:
 
@@ -69,7 +69,7 @@ context: |-
 
     Once you read these 3 sections, let us practice a bit.
 
-    To try the following questions locally, you can download a zip file of the questions folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s2_make/make_me.zip>`_.
+    To try the following questions locally, you can download a zip file of the questions folder `here <https://inginious.info.ucl.ac.be/course/LSINF1252/s2_make/make_me.zip>`_.
 
     ----
 
@@ -82,14 +82,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S2] make basics - REVIEWED'
 network_grading: false
 order: 21
 problems:
     make_me_easy:
+        name: Make me easy
+        answer: make make_me
         header: |-
             After typing ``ls`` in your terminal, you see the following folder structure:
 
@@ -100,33 +102,31 @@ problems:
             You want to build an executable ``make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
 
             **Hint:** you do not need to write a *Makefile*.
-        answer: make make_me
-        name: Make me easy
         type: match
     make_me_less_easy:
+        type: code
+        language: Makefile
+        name: Make me less easy
         header: |-
             Suppose you cannot use what you did in the above question. Write a Makefile that compiles the above given code and builds an executable ``make_me``. You can reuse the ``Makefile`` given in the above given zip file.
 
             **Hint:** If you have no idea where to start, read `sections 2.1 to 2.3. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_.
-        language: Makefile
-        type: code
-        name: Make me less easy
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: make
         visible: true
-        type: 0
+        id: make
         name: make & Makefile
+        type: 0
         description: Tasks related to the make task runner for targets described in
             Makefile.
     '1':
-        name: S2
-        visible: true
         type: 2
+        visible: true
+        name: S2
         description: ''
         id: ''
 weight: 1.0
