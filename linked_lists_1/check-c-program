@@ -1,0 +1,146 @@
+#!/bin/bash
+
+user_code=""
+has_user=false
+
+test_code=""
+has_test=false
+
+memtest_code=""
+has_memtest=false
+
+user_objects=""
+test_objects=""
+memtest_objects=""
+
+OPTIND=1
+while getopts "u:t:m:" opt; do
+    case "$opt" in
+        u)
+            user_code=$OPTARG
+            has_user=true
+            ;;
+        t)
+            test_code=$OPTARG
+            has_test=true
+            ;;
+        m)
+            memtest_code=$OPTARG
+            has_memtest=true
+            ;;
+        o)
+            test_program=$OPTARG
+            ;;
+    esac
+done
+
+OLDIFS=$IFS
+IFS=","
+if $has_user; then
+    for file in $user_code; do
+        obj=$(echo "$file" | sed s/.c$/.o/)
+        user_objects="$objects $obj"
+        compiler_out=$(clang -std=gnu99 -g -c $file -o $obj $CFLAGS 2>&1)
+        if [ $? -ne 0 ]; then
+            feedback $FEEDBACK_FLAGS --result failed --feedback "Le programme ne compile pas::
+
+$(echo "$compiler_out" | sed "s/^/   /")
+$(echo clang -std=gnu99 -g -c $file -o $obj $CFLAGS | sed "s/^/   /")
+"
+            exit 1
+        fi
+    done
+fi
+
+if $has_test; then
+    for file in $test_code; do
+        obj=$(echo $file | sed s/.c$/.o/)
+        test_objects="$objects $obj"
+        compiler_out=$(clang -std=gnu99 -g -c $file -o $obj $CFLAGS 2>&1)
+        if [ $? -ne 0 ]; then
+            feedback $FEEDBACK_FLAGS --result crash --feedback "Le code de test ne compile pas::
+
+$(echo "$compiler_out" | sed "s/^/   /")
+$(echo clang -std=gnu99 -g -c $file -o $obj $CFLAGS | sed "s/^/   /")
+
+Veuillez contactez l’administrateur du cours.
+"
+            exit 1
+        fi
+    done
+fi
+
+if $has_memtest; then
+    for file in $memtest_code; do
+        obj=$(echo $file | sed s/.c$/.o/)
+        memtest_objects="$objects $obj"
+        compiler_out=$(clang -std=gnu99 -g -c $file -o $obj $CFLAGS 2>&1)
+        if [ $? -ne 0 ]; then
+            feedback $FEEDBACK_FLAGS --result crash --feedback "Le code de test ne compile pas::
+
+$(echo "$compiler_out" | sed "s/^/   /")
+$(echo clang -std=gnu99 -g -c $file -o $obj $CFLAGS | sed "s/^/   /")
+
+Veuillez contactez l’administrateur du cours.
+"
+            exit 1
+        fi
+    done
+fi
+IFS=$OLDIFS
+
+if $has_test; then
+    linker_out=$(clang -lmatchers -lcheck -lcheck_helpers -lstdlib_hooks $user_objects $test_objects -o test_program $LDFLAGS 2>&1)
+    if [ $? -ne 0 ]; then
+        feedback $FEEDBACK_FLAGS --result failed --feedback "Erreur lors de l’édition des liens::
+
+$(echo "$linker_out" | sed "s/^/   /")
+"
+        exit 1
+    fi
+fi
+
+if $has_memtest; then
+    linker_out=$(clang -lstdlib_hooks $user_objects $memtest_objects -o test_memory $LDFLAGS 2>&1)
+    if [ $? -ne 0 ]; then
+        feedback $FEEDBACK_FLAGS --result failed --feedback "Erreur lors de l’édition des liens::
+
+$(echo "$linker_out" | sed "s/^/   /")
+"
+        exit 1
+    fi
+    memtest_hash_old=$(md5sum test_memory)
+fi
+
+if $has_test; then
+    test_out=$(LD_PRELOAD=./adds/libstdlib_hooks-preload.so LD_LIBRARY_PATH=./adds/ ./test_program 2>&1)
+    if [ $? -ne 0 ]; then
+        feedback $FEEDBACK_FLAGS --result failed --feedback "Votre programme ne fonctionne pas correctement::
+
+$(echo "$test_out" | sed "s/^/    /")
+"
+        exit 1
+    fi
+fi
+
+if $has_memtest; then
+    memtest_hash_new=$(md5sum test_memory)
+    if [ "$memtest_hash_old" != "$memtest_hash_new" ]; then
+        feedback $FEEDBACK_FLAGS --result failed --feedback "Le programme de test a été modifié !"
+        exit 1
+    fi
+
+    valgrind_out=$(LD_PRELOAD=./adds/libstdlib_hooks-preload.so LD_LIBRARY_PATH=./adds/ valgrind \
+        --suppressions=./adds/stdlib_hooks.supp \
+        --error-exitcode=66 --leak-check=full ./test_memory 2>&1)
+
+    if [ $? -ne 0 ]; then
+        feedback $FEEDBACK_FLAGS --result failed --feedback "Votre programme ne gère pas la mémoire correctement::
+
+$(echo "$valgrind_out" | sed "s/^/    /")
+"
+        exit 1
+    fi
+fi
+
+feedback $FEEDBACK_FLAGS --result success

@@ -1,0 +1,79 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    La fonction ``reverse``, dont les spécifications sont reprises ci-dessous, permet de manipuler les données dans un fichier.
+
+    .. code-block :: c
+
+       /*
+        * @pre filename!=NULL
+        * @post Modifie le contenu du fichier filename en échangeant :
+        *  - le premier byte du fichier avec le dernier
+        *  - le deuxième byte avec l'avant dernier
+        *  - ...
+        * Apres modification, le fichier est fermé.
+        * retourne 0 en cas de succès, -1 en cas d'erreur.
+        * L'implémentation ne peut pas utiliser read, write, fread, fwrite, fgetc, fgets, ... Ce qui implique que mmap est obligatoire.
+        */
+
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+
+    * http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+    * http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+    * http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions librairies)
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Juin 2016A] Modification de fichier'
+network_grading: false
+order: 24
+problems:
+    reverse:
+        name: Insérez ci-dessous le corps de votre fonction reverse.
+        type: code
+        header: |-
+            .. code-block:: c
+
+               #include <sys/types.h>
+               #include <sys/stat.h>
+               #include <sys/mman.h>
+               #include <fcntl.h>
+               #include <stdlib.h>
+               #include <stdio.h>
+               #include <unistd.h>
+               #include <string.h>
+
+               /*
+                * @pre filename!=NULL
+                * @post Modifie le contenu du fichier filename en echangeant :
+                *  - le premier byte du fichier avec le dernier
+                *  - le deuxieme byte avec l'avant dernier
+                *  - ...
+                * Apres modification, le fichier est ferme.
+                * retourne 0 en cas de succes, -1 en cas d'erreur.
+                * L'implementation ne peut pas utiliser, fopen, read, write, fread, fwrite, fgetc, fgets, ... open et mmap sont obligatoires.
+                */
+
+               int reverse(char *filename) {
+        language: c
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur dans le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        optional: true
+        type: code
+        language: c
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

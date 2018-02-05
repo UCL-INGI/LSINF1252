@@ -1,0 +1,54 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On souhaite gérer des polynômes réels de degré inférieur ou égal à 10 en utilisant la structure suivante :
+
+    `typedef struct { double coeff[10]; } poly;`
+
+    qui servira à représenter le polynôme où coeff[0] est le coefficient du terme indépendant, coeff[1] le coefficient du terme en x, etc.
+
+    Écrivez une fonction `double eval(poly *P, double x)` qui calcule la valeur du polynôme P au point x. On pourra se servir de la formule de Horner : P(x) = ((...(a_9*x + a_8)*x + a_7)*x + ...)x + a_1)*x + a_0 où a_i est coeff[i].
+
+    Écrivez une fonction `void derivee(poly *P, poly *Pderiv)` qui inscrit dans `Pderiv` la dérivée du polynôme P.
+
+    Écrivez une fonction double `racine(poly *P, double x0)` qui calcule via la méthode de Newton la racine du polynôme P. La méthode est la suivante : on part d'un point initial, et on construit une suite de points qui se rapprochent de la racine en calculant à chaque étape un nouveau point à partir de la valeur du polynôme et de sa dérivée : x_n+1 = x_n - P(x_n)/P'(x_n). La fonction s'arrête lorsque abs(P(x_n)) < 0.0001. On suppose que le calcul converge toujours vers une racine.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: '[Beta] Polynômes'
+network_grading: false
+order: 43
+problems:
+    eval:
+        type: code
+        language: c
+        header: |-
+            Écrivez le corps de la fonction `eval`.
+
+            `double eval(poly *P, double x) {`
+        name: eval
+    derivee:
+        header: |-
+            Écrivez le corps de la fonction `derivee`.
+
+            `void derivee(poly *P, poly *Pderiv)`
+        name: derivee
+        type: code
+        language: c
+    racine:
+        header: |-
+            Écrivez le corps de la fonction `racine`.
+
+            `double racine(poly *P, double x0)`
+        name: racine
+        language: c
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,35 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On désire implémenter un algorithme de tri par insertion sur un tableau de N entiers, le tableau et sa taille étant passés en argument.
+
+    L'algorithme de tri est le suivant : Pour chaque élément d'indice i (i variant de 1 à N-1)
+
+    - cet élément devient la clé
+    - on la compare avec l'élément d'indice i-1
+    - si la clé est plus petite, on les échange et on recommence la comparaison avec l'élément précédent (d'indice i-2) et ainsi de suite, tant que la clé est plus petite que l'élément qui lui précède (ou qu'on est revenu au début du tableau)
+    - quand la clé est à sa place (c'est-à-dire qu'elle est plus grande que ou égale à l'élément qui lui précède), la boucle intérieure est finie et on passe à l'élément d'indice i+1.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: '[Beta] Tri par insertion'
+network_grading: false
+order: 38
+problems:
+    tri:
+        header: |-
+            Écrivez le corps de la fonction `void tri(int T[], int taille)`.
+
+            void tri(int T[], int taille) {
+        name: tri
+        type: code
+        language: c
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

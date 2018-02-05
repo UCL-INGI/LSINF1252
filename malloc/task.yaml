@@ -1,0 +1,21 @@
+accessible: false
+author: Kilian Verhetsel
+context: |-
+    La type de la plupart des variables en C est facile à déterminer. Néanmoins, le
+    C contient aussi des types qui ne diffèrent que de façons subtiles, comme les
+environment: cpp
+limits:
+    memory: 128
+    output: 5210
+    time: 10
+name: malloc, realloc et free
+order: 8
+problems:
+    my_malloc:
+        header: |-
+            Écrivez le contenu du fichier ``malloc.c`` qui contiendra les trois fonctions
+            demandées ainsi que toutes les structure de données et fonctions auxiliaires
+            dont vous aurez besoin.
+        language: c
+        name: Implémentation
+        type: code

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# FIXME: Why does this not work? getinput my_malloc > my_malloc.c
+parsetemplate my_malloc.c
+
+check-c-program -u my_malloc.c -t malloc_test.c

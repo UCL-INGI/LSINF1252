@@ -1,0 +1,67 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Dans un programme similaire à un shell, on vous demander d'écrire une fonction qui permet de lancer un exécutable et d'indiquer si :
+
+    * le programme ne s'est pas exécuté ou a retourné une valeur de retour positive
+    * le programme s'est exécuté correctement et a retourné une valeur de retour =0
+    * le programme a été interrompu par un signal
+
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+     - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+     - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+     - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '60'
+    memory: '100'
+    output: '2'
+name: '[Juin 2016A] Déterminer la valeur de retour d''un programme exécutable'
+network_grading: false
+order: 23
+problems:
+    fork:
+        header: |-
+            .. code-block:: c
+
+               #include <unistd.h>
+               #include <sys/wait.h>
+               #include <stdlib.h>
+               #include <stdio.h>
+               #include <string.h>
+               #include <errno.h>
+
+               /*
+                * @pre : prog!=null, arg!=null
+                * @post: exécute le programme prog en lui passant
+                *       arg comme arguments et sans environnement.
+                *       Retourne
+                *       -1 si le programme n'est pas exécutable
+                *       ou a retourné une valeur de retour >0
+                *       0 si il s'exécute correctement et retourne une valeur de retour = 0
+                *       -2 si il s'exécute et est interrompu par la réception d'un signal
+                */
+               int run(char *prog, char *arg[]) {
+        type: code
+        language: c
+        name: Insérez ici le code de la fonction run
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur dans le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

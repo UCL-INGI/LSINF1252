@@ -1,0 +1,71 @@
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+extern int errno;
+
+void montest(void) {
+}
+
+/*
+ * @pre prog!=NULL, arg!=NULL
+ * @post execute le programme prog avec les arguments arg et retourne: 
+ * -1 si le programme n'est pas executable
+ * 0 si il s'execute correctement
+ * -2 si il s'execute et est termine par la reception d'un signal
+ */
+int run(char *prog, char *arg[]) {
+
+  pid_t pid;
+  pid=fork(); 
+  if (pid==-1) { 
+    // erreur à l'exécution de fork perror("fork"); 
+    return(-1);
+  } 
+  if (pid==0) {
+    // fils
+    int ret;
+    ret=execve(prog,arg,NULL);
+    if(ret==-1) {
+      //printf("execeve : %s\n",strerror(errno));
+      return(-1);
+    }
+  }  else  {
+    // pere
+    int status=7;
+    //int fils=2;
+    int fils=waitpid(pid,&status,0);
+    if(fils==-1) { 
+      //printf("fils -1\n");
+      return(-1);
+    } 
+    if(WIFEXITED(status)) {
+      //printf("fils ok %d\n",WEXITSTATUS(status));
+      return(0); // WEXITSTATUS(status);
+    }
+    if(WIFSIGNALED(status)) {
+      //printf("signal\n");
+      return(-2);
+    }
+
+  }
+  return(-10);
+}
+
+
+void old_main(int argc, char *argv[]) {
+  char *argv0[]={"code","a",(char *)0};
+  char *argv2[]={"code","a","bc",(char *)0};
+  char *argv3[]={"code",(char *)0};
+  char *argv4[]={"code.c",(char *)0};
+
+  printf("run(code,a)=%d\n",run("code",argv0));  // 0 
+  printf("run(code,a,bc)=%d\n",run("code",argv2)); // -2
+  printf("run(code)=%d\n",run("code",argv3)); // 0
+  printf("run(code.c)=%d\n",run("code.c",argv4)); // -1 
+
+
+
+}

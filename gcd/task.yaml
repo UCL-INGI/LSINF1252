@@ -1,0 +1,48 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On cherche à calculer le plus grand commun diviseur de deux très grands nombres. Pour ce faire, on calcule tous les diviseurs de chacun des 2 nombres, et on regarde quel est leur PGCD. Pour ce faire, on déclare la liste chaînée suivante, permettant d'enregistrer en mémoire les diviseurs d'un nombre :
+
+    .. code-block:: c
+
+        struct Node {
+            unsigned int divisor;
+            struct Node *next;
+        };
+
+
+    Écrivez une fonction `void *factorize(void *n)` qui retourne un pointeur vers une liste chaînée contenant tous les diviseurs dans l'ordre décroissant du nombre de type `unsigned int` vers lequel n pointe.
+
+    Écrivez une fonction `unsigned int gcd(unsigned int a, unsigned int b)` qui va lancer l'exécution de `factorize` pour a et b dans 2 threads différents et va extraire des deux listes renvoyées le PGCD. Le nombre 1 est considéré comme un diviseur. Cette fonction renvoie 0 si une erreur s'est produite.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: '[Beta] Threads : plus grand commun diviseur'
+network_grading: false
+order: 48
+problems:
+    factorize:
+        type: code
+        header: |-
+            Écrivez le code de la fonction `factorize`.
+
+            `void *factorize(void *n) {`
+        language: c
+        name: factorize
+    gcd:
+        name: gcd
+        language: c
+        header: |-
+            Écrivez le code de la fonction `factorize`.
+
+            `unsigned int gcd(unsigned int a, unsigned int b) {`
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

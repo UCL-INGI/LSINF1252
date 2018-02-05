@@ -1,0 +1,13 @@
+#!/bin/bash
+
+getinput reverse > reverse.h
+getinput append  > append.h
+getinput split   > split.h
+
+CFLAGS+="-I./adds"
+LDFLAGS+="-L./adds"
+
+export CFLAGS
+export LDFLAGS
+
+./check-c-program -u list.c -t list_test.c -m memcheck.c

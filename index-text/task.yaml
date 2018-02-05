@@ -1,0 +1,52 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    On souhaite indexer un texte afin de savoir quels mots reviennent le plus fréquemment dans un corpus. Le processus d'indexation se fait en 2 phases : on compte d'abord le nombre d'occurrences de chaque mot, et on supprime ensuite de la table d'indexation tous les mots qui n'ont pas été indexés au moins N fois. Le corpus est une chaîne de caractères composées uniquement de minuscules et où le seul délimiteur est un espace (pas de ponctuation). Votre programme n'est jamais censé produire d'erreurs de segmentation.
+
+    On définit la structure suivante représentant une entrée de l'index :
+
+    .. code-block:: c
+
+        typedef struct indexEntry {
+            char word[26];
+            int count; //nombre de fois qu'un mot est apparu dans le corpus
+            struct indexEntry *next;
+        } Entry;
+
+    Écrivez une fonction `Entry *build_index(char *corpus)` qui renvoie l'index associé au corpus passé en paramètre. Vous pouvez modifier la chaine passée en argument.
+
+    Écrivez une fonction `void filter_index(Entry **index_head, int treshold)` qui supprime de l'index tous les mots qui n'ont pas été recensés au moins treshold fois.
+
+    Vous avez accès aux fonctions de `string.h` et de `stdlib.h`.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Beta] Indexation d''un texte'
+network_grading: false
+order: 46
+problems:
+    build_index:
+        type: code
+        name: build_index
+        language: c
+        header: |-
+            Écrivez le corps de la fonction `build_index`.
+
+            `Entry *build_index(char *corpus) {`
+    filter_index:
+        name: filter_index
+        language: c
+        header: |-
+            Écrivez le corps de la fonction `filter_index`.
+
+            `void filter_index(Entry **index_head, int treshold) {`
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

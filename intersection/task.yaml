@@ -1,0 +1,91 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Le syllabus est accessible depuis l'URL http://sites.uclouvain.be/SystInfo
+
+    Les pages de manuel sont accessibles depuis les URLs suivants :
+        - http://sites.uclouvain.be/SystInfo/manpages/man1 (commandes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man2 (appels systèmes)
+        - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
+
+    **Attention:** veuillez utiliser la version **HTML** du syllabus
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Septembre 2016B] Intersection de fichiers'
+network_grading: false
+order: 35
+problems:
+    intersection:
+        header: |
+            .. code:: c
+
+                    /*
+                     * @pre *filename!=NULL, size>0
+                     * @post construit un fichier contenant size nombre complexes contenant les
+                     *       valeurs 1+i, 1+2i, 1+3i, ... 1+size*i
+                     *       retourne size en cas de succès et -1 en cas d'erreur
+                     */
+                    int create(char *filename, int size) {
+
+                      int err;
+                      int fd=open(filename,O_RDWR|O_CREAT,S_IRUSR|S_IWUSR);
+                      if(fd==-1) {
+                        return -1;
+                      }
+                      for(int i=1; i<=size; i++) {
+                        complex val;
+                        val.r=1;
+                        val.i=i;
+                        err=write(fd,(void *) &val, sizeof(complex));
+                        if(err<0) {
+                           err=close(fd);
+                           return(-1);
+                         }
+                       }
+                       err=close(fd);
+                       if(err==-1)
+                         return err;
+                       else
+                         return size;
+                     }
+
+                    /*
+                     * @pre filename1!=NULL, filename2!=NULL
+                     *      Les deux fichiers contiennent un nombre entier de complexes,
+                     *      Tous les nombres complexes se trouvant dans un fichier sont
+                     *      différents.
+                     *
+                     * @post retourne le nombre de complexes qui se trouvent à
+                     *       la fois dans le fichier filename1 et le fichier filename2
+                     *       -1 si erreur
+                     *
+                     * Contrainte: Vous pouvez uniquement utiliser les fonctions open,
+                     *             read, write, close, mmap et munmap pour accéder aux
+                     *             fichiers
+                     */
+
+                    int count_same(char *filename1, char *filename2) {
+        type: code
+        language: c
+        name: Fonction count_same
+    montest:
+        header: |-
+            Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
+
+            .. code-block:: c
+
+               void montest(void) {
+        language: c
+        optional: true
+        type: code
+        name: Fonction de test optionnelle
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

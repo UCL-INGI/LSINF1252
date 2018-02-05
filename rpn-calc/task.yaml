@@ -1,0 +1,52 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |-
+    La notation polonaise inversée permet d'écrire de façon non-ambigüe sans parenthèses des formules arithmétiques. Par exemple, le calcul ((1 + 2) × 4) + 3 peut être noté 1 2 + 4 * 3 + en notation polonaise inverse, ou encore 3 4 1 2 + * +. L'avantage de cette notation est qu'elle est très facilement compréhensible par un ordinateur : on imagine une pile où on peut soit ajouter un élément sur la pile, soit retirer le dernier élément ajouté. En parcourant la formule arithmétique, si on rencontre un nombre, on l'ajoute à la pile, si on rencontre une opérande (par ex. le symbole '+'), on retire les 2 derniers éléments de la pile, on en fait la somme et on ajoute le résultat à la pile.
+
+    Pour ce problème, vous ne pourrez utiliser que la variable globale `double stack[STACK_SIZE]`, représentant la pile, et `int stack_height`, représentant la hauteur actuelle de la pile, qui seront déjà initialisées à 0 et accessibles par vos fonctions. Vous pouvez supposer que les exemples utilisés par les tests feront en sorte que le nombre d'éléments actuels dans la pile ne dépassera jamais `STACK_SIZE`.
+
+    Écrivez une fonction  void push(double value)` qui permet d'ajouter l'élément value à la pile.
+
+    Écrivez une fonction `double pop(void)` qui enlève et retourne l'élément au sommet de la pile.
+
+    Écrivez une fonction `double rpn(char *expr)` qui calcule l'expression en notation polonaise inverse contenue dans expr et retourne le résultat. Vous pouvez supposer que `expr` contiendra toujours une expression correcte où il ne restera jamais qu'un seul élément sur la pile à la fin de l'exécution. Indice : utilisez la fonction strtok(3) pour séparer les différents éléments de la chaîne et la fonction atof(3) pour convertir l'éventuel nombre rencontré en double. Exemple : "4 2 5 * + 1 3 2 * + /" est censé renvoyer 2. Les opérandes possibles sont + (addition), - (soustraction), * (multiplication) et / (division).
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Beta] Calculatrice en notation polonaise inversée'
+network_grading: false
+order: 47
+problems:
+    push:
+        header: |-
+            Écrivez le corps de la fonction push.
+
+            `void push(double value) {`
+        type: code
+        name: push
+        language: c
+    pop:
+        name: pop
+        type: code
+        language: c
+        header: |-
+            Écrivez le corps de la fonction pop.
+
+            `double pop(void) {`
+    rpn:
+        language: c
+        type: code
+        header: |-
+            Écrivez le corps de la fonction rpn.
+
+            `double rpn(char *expr) {`
+        name: rpn
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,41 @@
+accessible: true
+author: Olivier Bonaventure
+context: |-
+    Parcourez un fichier sans jamais utiliser l'appel système read.
+    Le syllabus est accessible depuis http://sites.uclouvain.be/SystInfo
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '120'
+    memory: '100'
+    output: '2'
+name: Parcours de fichiers
+network_grading: false
+order: 7
+problems:
+    count:
+        type: code
+        name: count
+        header: |-
+            Ecrivez une fonction qui permet de compter le nombre de fois qu'un caractère est présent dans un fichier sans jamais utiliser l'appel système read.
+
+            #include <sys/mman.h>
+
+            #include <sys/types.h>
+
+            #include <sys/stat.h>
+
+            #include <fcntl.h>
+
+            #include <sys/uio.h>
+
+            #include <unistd.h>
+
+            ``int count(char *filename, char c) {``
+        language: c
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,56 @@
+accessible: true
+author: Mathieu Xhonneux
+context: |
+    On souhaite écrire notre propre type de sémaphore à l'aide de mutex. On déclare pour ce faire les 2 structures suivantes :
+
+    .. code-block:: c
+
+        typedef struct semProcess {
+            pthread_mutex_t mutex;
+            struct semProcess *next;
+        } sem_process_t;
+
+        typedef struct mySem {
+            int value;
+            int capacity;
+            sem_process_t *blocked_procs;
+            pthread_mutex_t mutex;
+        } mysem_t;
+
+    Chaque sémaphore contient une valeur et une liste de processus bloqués. Le mutex de mySem devra être utilisé pour éviter que des appels concurrents des fonctions sousmentionnées sur la même sémaphore ne soient pas exécutés simultanément.
+
+    Écrivez une fonction `int mysem_wait(mysem_t *sem)` qui bloque le fil d'exécution si `value` de `sem` vaut 0 et ajoute le processus à la fin de la liste des processus bloqués. Pour bloquer un processus, vous devrez ajouter un `sem_process_t` à `blocked_procs` du sémaphore et verrouiller le mutex de `sem_process_t`. Si `value` est plus grand que 0, il est décrémenté.
+
+    Écrivez une fonction `int mysem_post(mysem_t *sem)` qui incrémente `value` de `sem` si aucun autre processus n'est bloqué, et sinon débloque le premier processus de la liste des processus bloqués. `value` ne peut jamais excéder `capacity`. **ATTENTION** : Ne libérez pas la structure sem_process_t d'un processus libéré, contentez-vous de supprimer son mutex. Considérez que la fonction `mysem_close` que vous n'avez pas à implémenter s'occupe de la libération des ressources.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    time: '5'
+    memory: '100'
+    output: '2'
+name: '[Beta] Mes propres sémaphores'
+network_grading: false
+order: 49
+problems:
+    mysem_wait:
+        type: code
+        header: |-
+            Écrivez le corps de la fonction `mysem_wait`.
+
+            `int mysem_wait(mysem_t *sem) {`
+        name: mysem_wait
+        language: c
+    mysem_post:
+        name: mysem_post
+        header: |-
+            Écrivez le corps de la fonction `mysem_wait`.
+
+            `int mysem_post(mysem_t *sem) {`
+        language: c
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

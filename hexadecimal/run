@@ -1,0 +1,91 @@
+#!/usr/bin/python2
+#coding: utf-8
+
+"""Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+Copyright (C) 2016 Mathieu Xhonneux
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
+import xml.etree.ElementTree as ET
+import subprocess, shlex, json, re, sys
+from collections import namedtuple
+
+COMPILE_ERROR_TPL = """
+Erreur de compilation :
+
+.. code-block:: c
+
+	{}
+"""
+
+ProcessOutput = namedtuple('ProcessOutput', ['returncode', 'stdout', 'stderr'])
+
+#Wrapper pour exécuter des commandes systèmes et d'obtenir facilement les flux stdout, stderr et le code de retour
+def run(cmd):
+    proc = subprocess.Popen(shlex.split(cmd), stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+    proc.wait() #waiting the child process to finish
+    
+    stdout = proc.stdout.read()#.decode('utf-8')
+    stderr = proc.stderr.read()#.decode('utf-8')
+
+    return ProcessOutput(proc.returncode, stdout, stderr)
+
+run('parsetemplate -o code/student_code.c code/template.c.tpl')
+process = run('make -f code/Makefile')
+
+if process.stderr != '': #On renvoie d'éventuelles erreurs de compilation
+    stderrRST = COMPILE_ERROR_TPL.format(process.stderr.replace('\n','\n\t'))
+    run('feedback -r failed -f "{}"'.format(stderrRST))
+    sys.exit(0)
+
+process = run('make -f code/Makefile run')
+if process.returncode != 0: #L'exécution des tests CUnit ne s'est pas déroulée correctement
+    if process.returncode == -8:
+        run('feedback -r failed -f "Votre code a produit une erreur lors de l\'exécution des tests. Le signal SIGFPE a été envoyé : exception de virgule flottante (floating point exception)."')
+    elif process.returncode == -11:
+        run('feedback -r failed -f "Votre code a produit une erreur lors de l\'exécution des tests.Le signal SIGSEGV a été envoyé : segmentation fault."')
+    else:
+        run('feedback -r failed -f "Votre code a produit une erreur lors de l\'exécution des tests."')
+    sys.exit(0)
+
+#Après exécution des tests, on récupère les résultats enregistrés dans le fichier XML suivant
+tree = ET.parse('CUnitAutomated-Results.xml') 
+
+tests_failed = set()
+
+root = tree.getroot()
+for test_failure in root.iter('CUNIT_RUN_TEST_FAILURE'): #Récupération des noms des tests qui ont échoué
+    name = test_failure.findall('TEST_NAME')[0].text.strip()
+    tests_failed.add(name)
+
+if len(tests_failed) == 0:
+    run('feedback -r success -f "Votre code a passé tous les tests."')
+else:
+    #Récupération dans le code des des tests des annotations reprenant le feedback à envoyer à l'utilisateur pour chaque test échoué.
+    tests_code = open('code/tests.c').read()
+    annotations = re.findall("@(.*):(.*) => \[(.*)]", tests_code)
+
+    problems_states = {a[0]: [0, ""] for a in annotations}
+    tests_descr = {a[1]:{'problem-id':a[0], 'descr':a[2]} for a in annotations}
+
+    for fail in tests_failed:
+        pid = tests_descr[fail]['problem-id']
+        problems_states[pid][0] += 1
+        problems_states[pid][1] += tests_descr[fail]['descr']+"\n\n"
+
+
+    for pid, (nb_failures, descriptions) in problems_states.iteritems():
+        if nb_failures > 0:
+            run('feedback -r failed -i {} -f "{}"'.format(pid, descriptions))

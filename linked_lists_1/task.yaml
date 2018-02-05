@@ -1,0 +1,82 @@
+accessible: true
+author: Kilian Verhetsel
+context: |+
+    .. raw:: html
+
+        <p>
+          Une liste chaînée est une structure de données permettant de représenter une séquence d’éléments. Dans cet exercice, une liste chaînée sera représentée par un pointeur sur la structure suivante:
+        </p>
+        <pre class="code">
+        typedef struct node {
+          int value;
+          struct node *next;
+        } node;
+        </pre>
+        <p>
+          La liste vide est représentée par un pointeur nul. Le but des questions suivantes est de vous familiariser avec les listes chaînées en C. (Remarque : vous ne devez jamais traiter le cas des listes contenant un cycle.)
+        </p>
+
+environment: cpp
+groups: false
+limits:
+    output: '5210'
+    memory: '512'
+    time: '10'
+name: 'Listes chaînées: concepts de base'
+network_grading: false
+order: 6
+problems:
+    length:
+        name: Longueur d’une liste chaînée
+        language: c
+        header: |-
+            Écrivez le corps de la fonction ``size_t length(node *list)``, qui doit
+            renvoyer le nombre d’éléments se trouvant dans la liste.
+        type: code
+    count:
+        type: code
+        name: Compter les éléments d’une liste chaînée
+        header: |-
+            Écrivez le corps de la fonction ``size_t count(node *list, int value)``, qui
+            doit renvoyer le nombre d’éléments dont la valeur est ``value`` se trouvant
+            dans la liste.
+        language: c
+    push:
+        type: code
+        language: c
+        name: Rajouter un élément
+        header: |+
+            .. raw:: html
+
+                <p>
+                  Écrivez le corps de la fonction <code>int push(node **list, int value)</code>, permettant de rajouter un élément au début d’une liste.
+                </p>
+                <p>
+                  Le premier argument est un pointeur sur une liste. La fonction doit remplacer la liste pointée par une nouvelle liste où a été rajouté un élément.
+                </p>
+                <p>
+                  La fonction doit renvoyer ``0`` si elle réussit et une valeur négative si elle n’arrive pas à allouer de la mémoire.
+                </p><img src="http://target0.be/sinf1252/push.png" width="50%" height="50%" alt="">
+
+    pop:
+        name: Supprimer un élément
+        language: c
+        type: code
+        header: |+
+            .. raw:: html
+
+                <p>
+                  Écrivez le corps de la fonction <code>int pop(node **list)</code>, permettant de supprimer le premier élément d’une liste et d’en renvoyer la valeur.
+                </p>
+                <p>
+                  Le premier argument est un pointeur sur une liste. Vous pouvez supposer que cette liste ne sera jamais vide. La fonction doit remplacer la liste pointée par une liste où le premier élément a été supprimé.
+                </p><img src="http://target0.be/sinf1252/pop.png" width="50%" height="50%" alt="">
+
+    free_list:
+        name: Libérer une liste chaînée
+        header: |-
+            Écrivez le corps de la fonction ``void free_list(node *list)``, permettant de
+            libérer tous les nœuds d’une liste.
+        language: c
+        type: code
+weight: 1.0

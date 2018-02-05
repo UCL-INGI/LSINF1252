@@ -1,0 +1,63 @@
+#!/bin/python3
+
+# Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+# Auteurs : Mathieu Xhonneux, Anthony Gégo
+# Licence : GPLv3
+
+import subprocess, shlex, re, os
+from xml.etree import ElementTree
+from inginious import feedback, rst, input
+
+# Switch working directory to student/
+os.chdir("student")
+
+# Fetch and save the student code into a file for compilation
+input.parse_template("template.c.tpl", "student_code.c")
+
+# Parse tests annotations
+annotations = re.findall("@(.*):(.*) => \[(.*)]", open('tests.c').read())
+
+# Compilation
+p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+make_output = p.communicate()[0].decode('utf-8')
+# If compilation failed, exit with "failed" result
+if p.returncode:
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
+    feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
+    exit(0)
+
+# Remove source files
+subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
+
+# Run the code in a parallel container
+p = subprocess.Popen(shlex.split("run_student make run"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+run_output = p.communicate()[0].decode('utf-8')
+# If run failed, exit with "failed" result
+if p.returncode:
+    feedback.set_global_result("failed")
+    if p.returncode == 256-8:
+        feedback.set_global_feedback("Votre code a produit une erreur lors de l\'exécution des tests. Le signal SIGFPE a été envoyé : exception de virgule flottante (floating point exception).")
+    elif p.returncode == 256-11:
+        feedback.set_global_feedback("Votre code a produit une erreur lors de l\'exécution des tests. Le signal SIGSEGV a été envoyé : segmentation fault.")
+    else:
+        feedback.set_global_feedback("Votre code a produit une erreur lors de l\'exécution des tests.")
+    exit(0)
+
+# Fetch CUnit test results
+tree = ElementTree.parse('CUnitAutomated-Results.xml') 
+tests_failed = set([item.find('TEST_NAME').text.strip() for item in tree.getroot().iter('CUNIT_RUN_TEST_FAILURE')])
+
+# Produce feedback
+if len(tests_failed) == 0:
+    feedback.set_global_result("success")
+    feedback.set_global_feedback("Votre code a passé tous les tests.")
+else:
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("Il y a des erreurs dans votre solution.")
+    
+    tests_descr = {a[1]:{'pid':a[0], 'desc':a[2]} for a in annotations}
+    for fail in tests_failed:
+        pid = tests_descr[fail]['pid']
+        feedback.set_problem_result("failed", pid)
+        feedback.set_problem_feedback("* " + tests_descr[fail]['desc']+"\n\n", pid, True)

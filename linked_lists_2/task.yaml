@@ -1,0 +1,74 @@
+accessible: true
+author: Kilian Verhetsel
+context: |+
+    .. raw:: html
+
+        <p>
+          Cet exercice contient des exercices plus avancés sur les listes chaînées. Il est conseillé de commencer par le premier exercice sur les listes chaînées avant celui-ci. À nouveau, une liste chaînée sera représentée par un pointeur sur la structure suivante
+        </p>
+        <pre class="code">
+             typedef struct node {
+               int value; /* valeur du nœud */
+               struct node *next; /* pointeur vers l’élément suivant */
+             } node;
+        </pre>
+        <p>
+          La liste vide est représentée par un pointeur nul. Le but de l’exercice est de comprendre comment manipuler les pointeurs pour modifier des structures chaînées.
+        </p>
+        <p>
+          Dans toutes les sous-questions, vous devez réutiliser les nœuds des listes passées en argument et modifier leur structure. Il n’est jamais nécessaire d’allouer un nouveau nœud. (Remarque : vous ne devez jamais traiter le cas des listes contenant un cycle.)
+        </p>
+
+environment: cpp
+groups: false
+limits:
+    memory: '512'
+    output: '5210'
+    time: '10'
+name: 'Listes chaînées: exercices avancés'
+network_grading: false
+order: 9
+problems:
+    reverse:
+        header: |+
+            .. raw:: html
+
+                <p>
+                  Écrivez le corps de la fonction <code>void reverse(reverse **list)</code>, qui doit inverser la liste pointée par <code>list</code> et faire en sorte que <code>list</code> pointe sur le début de la liste inversée.
+                </p><img src="http://target0.be/sinf1252/reverse.png" width="50%" height="50%" alt="">
+
+        type: code
+        language: c
+        name: Inverser une liste
+    append:
+        type: code
+        language: c
+        name: Concaténation de listes
+        header: |+
+            .. raw:: html
+
+                <p>
+                  Écrivez le corps de la fonction <code>node *append(node *a, node *b)</code>, qui doit renvoyer une liste contenant tous les éléments de la première liste suivis de tous ceux de la seconde.
+                </p>
+                <p>
+                  Puisque cette fonction va modifier les nœuds des listes <code>a</code> et <code>b</code>, ces deux-ci ne peuvent plus être utilisées après l’appel de la fonction. Seule la liste renvoyée permet d’accéder aux données.
+                </p><img src="http://target0.be/sinf1252/append.png" width="50%" height="50%" alt="">
+
+    split:
+        language: c
+        type: code
+        header: |+
+            .. raw:: html
+
+                <p>
+                  Écrivez le corps de la fonction <code>void split(node *list, node **first_half, node **second_half)</code>, qui va couper une liste en son milieu.
+                </p>
+                <p>
+                  Après l’appel, <code>first_half</code> pointe vers le début d’une liste contenant la première moitié de la liste et de même pour <code>second_half</code> avec la seconde. Si la liste est de taille impaire, l’une de ces deux listes (peu importe laquelle) aura un élément de plus que l’autre.
+                </p>
+                <p>
+                  Les nœuds de la liste originale ayant été redistribués entre les deux nouvelles listes, cette première ne pourra plus être utilisée après l’appel. (Une application concrète de cette fonction est l’implémentation d’un algorithme de tri appelé <code>merge sort</code> ou tri fusion.)
+                </p><img src="http://target0.be/sinf1252/split.png" width="50%" height="50%" alt="">
+
+        name: Séparation d’une liste chaînée
+weight: 1.0
