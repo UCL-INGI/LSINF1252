@@ -1,4 +1,7 @@
 #include "student_code.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 struct node *pair_filter(struct node *head){
   if (!head)
@@ -7,12 +10,12 @@ struct node *pair_filter(struct node *head){
   struct node *run = head, *ret, *tmp, *act;
   int i = 0;
 
-  while(!run){
+  while(run){
     if (!i%2){
-      tmp = (struct node*) malloc(sizeof(struct node))
+      tmp = (struct node*) malloc(sizeof(struct node));
       memcpy(tmp, run, sizeof(struct node));
 
-      if (run == head)
+      if (i == 0)
         ret = tmp;
       else
         act->next = tmp;

@@ -10,25 +10,41 @@ struct node *generate_list(){
   int i, j;
 
   struct node *head, *tmp, *act;
+  char* tmp2;
 
   for (j = 0; j < 10; j++){
     tmp = (struct node*) malloc(len);
-    for(i = 0; i < len; i++){
-        if (!i%2)
-          *(tmp+i) = (void*) 0;
+    //printf("tmp add = %p\n", tmp);
+    tmp->next = NULL;
+    tmp2 = (char*) tmp;
+
+    for(i = sizeof(struct node*); i < len; i++){
+        if (i%2)
+          *(tmp2+i) = 0;
         else
-          *(tmp+i) = j+1;
+          *(tmp2+i) = (j+1)%10;
+        //printf("struct %i : byte %i = %i\n", j, i, *(tmp2+i));
+        //printf("%i", *(tmp2+i));
     }
 
-    if (j == 0)
+    if (j == 0){
       head = tmp;
-    else
-      act->next = tmp;
+    }
+    else{
+      (act)->next = tmp;
+    }
 
     act = tmp;
   }
 
   act->next = NULL;
+
+  /*struct node * run = head;
+  while(run)
+  {
+    printf("run : %p\n", run);
+    run = run->next;
+  }*/
 
   return head;
 }
@@ -37,15 +53,18 @@ void test_pair_filter(){
   set_test_metadata("filter", _("Test"), 1);
   int len = sizeof(struct node);
 
-  struct node* head = generate_list(), ret;
+  struct node* head = generate_list(), *ret;
+  //printf("%p\n", (head));
 
   SANDBOX_BEGIN;
   ret = pair_filter(head);
   SANDBOX_END;
 
+  //printf("ret %p\n", ret);
+
   struct node *run1 = ret, *run2 = head;
   int cmp;
-  while(!run){
+  while(!run1){
     cmp = memcmp((const void*) run1, (const void*) run2, len);
     if (cmp != 0){
       CU_FAIL("The function produced a wrong list");
@@ -59,6 +78,8 @@ void test_pair_filter(){
       break;
     run2 = run2->next;
   }
+
+
   CU_PASS("The produced list match");
 }
 
@@ -66,5 +87,5 @@ void test_pair_filter(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_myfunc_ret);
+    RUN(test_pair_filter);
 }

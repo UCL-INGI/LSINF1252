@@ -11,5 +11,4 @@ struct node {
     void *fifo;
 };
 
-
 struct node *pair_filter(struct node *head);
