@@ -20,7 +20,7 @@ groups_student_choice: true
 use_classrooms: true
 allow_unregister: true
 allow_preview: true
-registration: false
+registration: true
 registration_password: null
 registration_ac: null
 registration_ac_list:
