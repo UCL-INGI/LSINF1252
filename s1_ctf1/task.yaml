@@ -29,7 +29,7 @@ tags:
         visible: true
         name: S1
         type: 2
-        description: ''
+        description: Première semaine
         id: ''
     '1':
         type: 2
