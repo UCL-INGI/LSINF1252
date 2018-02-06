@@ -69,7 +69,7 @@ tags:
         type: 1
         visible: true
     '7':
-        name: S2
+        name: S1
         type: 2
         description: ''
         visible: true
