@@ -23,8 +23,7 @@ then
     then
         feedback-result -i make_calc_simple failed
         feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
-        feedback-msg -a -i make_calc_simple -m echo error.txt
-        echo error.txt
+        feedback-msg -a -i make_calc_simple -m cat error.txt
         feedback-result failed
         feedback-msg -m "Try again"
         ((score-=50))
@@ -35,9 +34,9 @@ then
 else
     feedback-result -i make_calc_simple failed
     feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
+    feedback-msg -a -i make_calc_simple -m "error.txt"
     feedback-result failed
     feedback-msg -m "Try again"
-    echo error.txt
     ((score-=50))
 fi
 
