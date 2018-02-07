@@ -3,10 +3,10 @@ OBJ = calc.o operations.o
 @@make_calc_simple@@
 
 calc.o: calc.c calc.h operations.h
-	$(CC) -c $^
+	cc -c $^
 
 operations.o: operations.c operations.h
-	$(CC) -c $^
+	cc -c $^
 
 .PHONY: clean mrproper
 
