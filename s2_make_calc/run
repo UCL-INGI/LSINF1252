@@ -79,8 +79,6 @@ else
     ((score-=50))
 fi
 
-echo $score
-
 feedback-grade $score
 if [ $score -eq 100 ]
 then 
