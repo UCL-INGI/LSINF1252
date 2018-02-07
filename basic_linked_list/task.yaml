@@ -95,10 +95,10 @@ tags:
         type: 1
         visible: false
     '11':
-        id: not_expected_list
-        description: The linked list does not correspond to the waited one.
         name: Incorrect list
+        description: The linked list does not correspond to the waited one.
         type: 1
+        id: not_expected_list
         visible: false
     '12':
         description: The list was modified while the malloc() fails.
@@ -109,9 +109,9 @@ tags:
     '14':
         description: You code does not compile.
         visible: true
-        type: 1
         id: not_compile
         name: Not compile
+        type: 1
     '15':
         name: Memory Exceeded
         description: ''
@@ -122,8 +122,8 @@ tags:
         visible: true
         type: 1
         id: sigfpe
-        description: ''
         name: Floating Point Exception
+        description: ''
     '17':
         description: Your code produced a double free.
         id: double_free
@@ -131,45 +131,51 @@ tags:
         visible: true
         type: 1
     '18':
-        id: banned_funcs
-        name: Banned functions
         description: You use some banned functions.
-        type: 1
+        id: banned_funcs
         visible: true
+        name: Banned functions
+        type: 1
     '2':
         name: Not malloc() once
         description: The malloc() functions was not called exactly once.
         type: 1
         id: not_malloc_once
         visible: false
-    '3':
+    '22':
+        name: SCRIPT ERROR
         type: 1
+        description: SCRIPT_ERROR
+        id: SCRIPT_ERROR
+        visible: false
+    '3':
         description: The allocated memory has not the correct size.
+        type: 1
         id: malloc_fail_memory_size
         name: Wrong malloc memory size
         visible: false
     '4':
         name: Bad node value
-        description: The value of the node is not the expected one.
         type: 1
+        description: The value of the node is not the expected one.
         id: bad_node_value
         visible: false
     '5':
+        type: 1
         name: Bad next pointer
         id: bad_next_pointer
         description: The 'next' pointer is not correctly initialised
-        type: 1
         visible: false
     '6':
-        type: 1
         id: malloc_fail_handling
-        name: Malloc fail handling
+        type: 1
         description: Wrong return value when malloc call fails.
+        name: Malloc fail handling
         visible: false
     '7':
         id: not_allocated
-        name: Not allocated
         type: 1
+        name: Not allocated
         description: A new node is not allocated with malloc().
         visible: false
     '8':

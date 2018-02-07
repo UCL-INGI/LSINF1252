@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Student score
+score=100
+
 # Get student code for `make_calc_simple` and parse it in the template
 parsetemplate -o student/Makefile student/Makefile.tpl
 
@@ -20,16 +23,17 @@ then
         feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
         feedback-result failed
         feedback-msg -i "Try again"
+        ((score-=50))
     else
         feedback-result -i make_calc_simple success
         feedback-msg -i make_calc_simple -m "You made it!"
-        feedback-result success
     fi
 else
     feedback-result -i make_calc_simple failed
     feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
     feedback-result failed
     feedback-msg -i "Try again"
+    ((score-=50))
 fi
 
 # Try to make student code for `make_calc` exercise
@@ -48,10 +52,10 @@ then
         feedback-msg -i make_calc -m "Your Makefile is not correct."
         feedback-result failed
         feedback-msg -i "Try again"
+        ((score-=25))
     else
         feedback-result -i make_calc success
         feedback-msg -i make_calc -m "You made it!"
-        feedback-result success
     fi
 elif test -e student/operations.o
 then
@@ -62,15 +66,23 @@ then
         feedback-msg -i make_calc -m "Your Makefile is not correct."
         feedback-result failed
         feedback-msg -i "Try again"
+        ((score-=25))
     else
         feedback-result -i make_calc success
         feedback-msg -i make_calc -m "You made it!"
-        feedback-result success
 	fi
 else
     feedback-result -i make_calc failed
     feedback-msg -i make_calc -m "At least on of the object files was not detected."
     feedback-result failed
     feedback-msg -i "Try again"
+    ((score-=50))
 fi
 
+feedback-grade $score
+if $score -e 100
+then 
+	feedback-result success
+else
+	feedback-result failed
+fi

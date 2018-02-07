@@ -305,8 +305,10 @@ void test_add_node_non_empty(){
     push_info_msg(_("The new linked list does not correspond to the waited one"));
     set_tag("not_expected_list");
   }
-  else if (cl == 2)
+  else if (cl == 2){
     push_info_msg(_("SCRIPT ERROR"));
+    set_tag("SCRIPT_ERROR");
+  }
 
   // check the return code in normal case (expected 0)
   CU_ASSERT_EQUAL(ret, 0);
@@ -354,8 +356,6 @@ void test_add_node_nomem(){
   failures.malloc = FAIL_ALWAYS;
   failures.malloc_ret = NULL;
 
-
-
   SANDBOX_BEGIN;
   ret = add_node(list, *val);
   SANDBOX_END;
@@ -379,14 +379,16 @@ void test_add_node_nomem(){
     push_info_msg(_("The new linked list does not correspond to the waited one"));
     set_tag("modif_list_malloc_fail");
   }
-  else if (cl == 2)
+  else if (cl == 2){
     push_info_msg(_("SCRIPT ERROR"));
+    set_tag("SCRIPT_ERROR");
+  }
 
   // check the return code in normal case (expected 0)
   CU_ASSERT_EQUAL(ret, 1);
   if (ret != 1){
     push_info_msg(_("Your function returns an error in normal case!"));
-    set_tag("malloc_fail_handlingreturn_value_malloc_fail");
+    set_tag("malloc_fail_handling");  
   }
 
   // check the update of the list size
