@@ -11,8 +11,6 @@
 # CFLAGS += -O2 -D_FORTIFY_SOURCE=2 # Add canary code, i.e. detect buffer overflows
 # CFLAGS += -fstack-protector-all # Add canary code to detect stack smashing
 
-.SUFFIXES:
-
 OBJ = calc.o operations.o
 
 all: $(OBJ)
@@ -26,3 +24,6 @@ clean:
 
 mrproper: clean
 	rm -f calc
+    
+# No implicit rules
+.SUFFIXES:

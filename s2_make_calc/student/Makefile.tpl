@@ -26,3 +26,6 @@ clean:
 
 mrproper: clean
 	rm -f calc
+    
+# No implicit rules
+.SUFFIXES:
