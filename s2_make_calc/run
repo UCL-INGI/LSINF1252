@@ -37,11 +37,8 @@ else
 fi
 
 # Try to make student code for `make_calc` exercise
-make mrproper2
-ls student/
-
 make make2
-ls student/
+
 # Do object files exist? If yes, check for diffs with working code
 if test -e student/calc.o
 then

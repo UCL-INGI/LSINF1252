@@ -13,7 +13,8 @@
 
 OBJ = calc.o operations.o
 
-all: $(OBJ)
+calc: $(OBJ)
+	$(CC) -o $(OBJ)
 
 @@make_calc@@	
 

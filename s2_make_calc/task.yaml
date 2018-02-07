@@ -31,22 +31,22 @@ order: 23
 problems:
     make_calc_simple:
         language: Makefile
-        type: code
-        name: Linking object files
         header: |-
             Unfortunately, for some obscure reasons the source folder (including the precious ``Makefile``) was lost but you still have access to the object files.
 
             Write a *Makefile* rule to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``. That is, you want to *link* the object files into the executable.
 
             **Hints:** You do not need to write the rules for ``operations.o`` and ``calc.o``. Do not forget the prerequisites of your rule. You cannot use *implicit* rules, you must use *explicit* rules.
-    make_calc:
         type: code
+        name: Linking object files
+    make_calc:
         header: |-
             Now, you just remembered you had created a ``git`` *repository* for this calculator on a *remote server*. You ``clone`` it on your computer, and verify each file with the command line editor ``nano``. You notice the ``Makefile`` is incomplete. There are no recipes to build the object files!
 
             Write *Makefile* rules to build the object files ``calc.o`` and ``operations.o`` from the source files.
 
             **Hints:** Do not forget the prerequisites of your rule. You cannot use *implicit* rules, you must use *explicit* rules.
+        type: code
         name: Object files and prerequisites
         language: Makefile
 stored_submissions: 0
@@ -55,16 +55,16 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 0
-        visible: true
         name: make & Makefile
-        id: make
         description: Tasks related to the make task runner for targets described in
             Makefile.
+        type: 0
+        visible: true
+        id: make
     '1':
+        visible: true
         type: 2
         name: S2
-        visible: true
         description: ''
         id: ''
 weight: 1.0
