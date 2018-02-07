@@ -15,7 +15,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S1] Diff - REVIEWED'
+name: '[S1] Diff'
 network_grading: false
 order: 3
 problems:
@@ -25,26 +25,26 @@ problems:
         -   text: Student 2
         -   text: Student 3
             valid: true
-        multiple: true
         name: Which students are innocents?
         limit: 0
-        type: multiple_choice
+        multiple: true
         header: ''
+        type: multiple_choice
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        visible: true
         name: S1
         description: ''
         type: 2
+        visible: true
         id: ''
     '1':
-        type: 2
         visible: true
-        description: ''
+        type: 2
         name: Command line
+        description: ''
         id: ''
 weight: 1.0
