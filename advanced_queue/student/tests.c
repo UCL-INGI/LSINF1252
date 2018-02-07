@@ -11,11 +11,21 @@ void test_enqueue_empty() {
     queue_t q;
     q.head = &n;
 
-    int ret = 0;
+    int ret = -1;
+    
+    monitored.malloc = true;
+    
+    size_t start= stats.memory.used;
 
     SANDBOX_BEGIN;
-    ret = myfunc(21);
+    ret = enqueue(&q,0);
     SANDBOX_END;
+    
+    size_t delta = stats.memory.used -start;
+    
+    CU_ASSERT_EQUAL(delta,sizeof(node_t));
+    
+    CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(ret,0);
 }
@@ -23,6 +33,6 @@ void test_enqueue_empty() {
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_myfunc_ret);
+    RUN(test_enqueue_empty);
 }
 
