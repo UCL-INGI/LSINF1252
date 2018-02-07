@@ -3,6 +3,9 @@
 # Student score
 score=100
 
+# file to capture stderr
+touch error.txt
+
 # Get student code for `make_calc_simple` and parse it in the template
 parsetemplate -o student/Makefile student/Makefile.tpl
 
@@ -11,8 +14,7 @@ parsetemplate -o student/Makefile2 student/Makefile2.tpl
 
 
 # Try to make student code for `make_calc_simple` exercise
-make
-
+make 2> error.txt
 # Does file exist? If yes, check for diffs with working code
 if test -e student/calc
 then
@@ -21,6 +23,7 @@ then
     then
         feedback-result -i make_calc_simple failed
         feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
+        feedback-msg -a -i make_calc_simple -m error.txt
         feedback-result failed
         feedback-msg -m "Try again"
         ((score-=50))
