@@ -106,12 +106,16 @@ void test_init_node_value(){
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(ret->value, 10);
-  if (ret->value != 10)
+  if (ret->value != 10){
+    set_tag("bad_node_value");
     push_info_msg(_("The value of the node is not the expected one"));
+  }
 
   CU_ASSERT_PTR_NULL(ret->next);
-  if (ret->next)
+  if (ret->next){
+    set_tag("bad_next_pointer");
     push_info_msg(_("The 'next' pointer is not correctly initialised"));
+  }
 
   free_node_corr(ret);
 
@@ -122,12 +126,16 @@ void test_init_node_value(){
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(ret->value, val);
-  if (ret->value != val)
+  if (ret->value != val){
+    set_tag("bad_node_value");
     push_info_msg(_("The value of the node is not the expected one"));
+  }
 
   CU_ASSERT_PTR_NULL(ret->next);
-  if (ret->next)
+  if (ret->next){
+    set_tag("bad_next_pointer");
     push_info_msg(_("The 'next' pointer is not correctly initialised"));
+  }
 
   free_node_corr(ret);
 }
@@ -148,8 +156,10 @@ void test_init_node_nomem(){
   SANDBOX_END;
 
   CU_ASSERT_PTR_NULL(ret);
-  if (ret)
+  if (ret){
+    set_tag("malloc_fail_handling");  
     push_info_msg(_("Wrong return value when malloc call fails"));
+  }
 }
 
 void test_add_node_empty(){
@@ -174,8 +184,10 @@ void test_add_node_empty(){
   // check if only one call to malloc
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
-  if (ms != 1)
+  if (ms != 1){
     push_info_msg(_("You used more than one call to malloc"));
+    set_tag("not_malloc_once");
+  }
 
   // check if new element is malloced
   int mal = malloced((void*) list->first);
@@ -184,21 +196,29 @@ void test_add_node_empty(){
   if (mal){
     int val = list->first->value;
     CU_ASSERT_EQUAL(val, value);
-    if (val != value)
+    if (val != value){
+      set_tag("bad_inserted_value");
       push_info_msg(_("The inserted value does not correspond to the waited one"));
+    }
   }
-  else
+  else{
     push_info_msg(_("The new node is not allocated"));
+    set_tag("not_allocated");
+  }
 
   // check the return code in normal case (expected 0)
   CU_ASSERT_EQUAL(ret, 0);
-  if (ret != 0)
+  if (ret != 0){
     push_info_msg(_("Your function returns an error in normal case!"));
+    set_tag("error_normal_case");
+  }
 
   // check the update of the list size
   CU_ASSERT_EQUAL(list->size, 1);
-  if (list->size != 1)
+  if (list->size != 1){
     push_info_msg(_("Wrong update of the list size."));
+    set_tag("wrong_list_size");
+  }
 
   //-----------------------------------------------------------------
 
@@ -216,8 +236,10 @@ void test_add_node_wrong_args(){
     SANDBOX_END;
 
     CU_ASSERT_TRUE(ret);
-    if (!ret)
-         push_info_msg(_("Wrong return value when wrong args"));
+    if (!ret){
+        set_tag("wrong_args_handling");
+        push_info_msg(_("Wrong return value when wrong args"));
+    }
 }
 
 void test_add_node_non_empty(){
@@ -254,8 +276,9 @@ void test_add_node_non_empty(){
   // check if only one call to malloc
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
-  if (ms != 1)
+  if (ms != 1){
     push_info_msg(_("You used more than one call to malloc"));
+  }
 
   // check if new element is malloced
   int mal = malloced((void*) list->first);
@@ -332,8 +355,10 @@ void test_add_node_nomem(){
   // check if only one call to malloc
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
-  if (ms != 1)
+  if (ms != 1){
     push_info_msg(_("You used more than one call to malloc"));
+    set_tag("not_malloc_once");
+  }
 
   // check if the structure if the list changed
   int *new_vals = (val+1);
