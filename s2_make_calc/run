@@ -14,7 +14,7 @@ parsetemplate -o student/Makefile2 student/Makefile2.tpl
 
 
 # Try to make student code for `make_calc_simple` exercise
-make 2> error.txt
+make &> error.txt
 # Does file exist? If yes, check for diffs with working code
 if test -e student/calc
 then
