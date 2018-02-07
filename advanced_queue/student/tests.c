@@ -4,8 +4,12 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-void test_myfunc_ret() {
-    set_test_metadata("myfunc", _("Brief description of the test"), 1);
+void test_enqueue_empty() {
+    set_test_metadata("enqueue", _("Enqueue of an empty list"), 1);
+    
+    node_t* n = NULL;
+    queue_t q;
+    q.head = &n;
 
     int ret = 0;
 
