@@ -386,7 +386,7 @@ void test_add_node_nomem(){
   CU_ASSERT_EQUAL(ret, 1);
   if (ret != 1){
     push_info_msg(_("Your function returns an error in normal case!"));
-    set_tag("return_value_malloc_fail");
+    set_tag("malloc_fail_handlingreturn_value_malloc_fail");
   }
 
   // check the update of the list size

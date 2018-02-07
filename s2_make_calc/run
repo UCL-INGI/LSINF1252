@@ -18,13 +18,18 @@ then
     then
         feedback-result -i make_calc_simple failed
         feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -i "Try again"
     else
         feedback-result -i make_calc_simple success
         feedback-msg -i make_calc_simple -m "You made it!"
+        feedback-result success
     fi
 else
     feedback-result -i make_calc_simple failed
     feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
+    feedback-result failed
+    feedback-msg -i "Try again"
 fi
 
 # Try to make student code for `make_calc` exercise
@@ -41,9 +46,12 @@ then
     then
         feedback-result -i make_calc failed
         feedback-msg -i make_calc -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -i "Try again"
     else
         feedback-result -i make_calc success
         feedback-msg -i make_calc -m "You made it!"
+        feedback-result success
     fi
 elif test -e student/operations.o
 then
@@ -52,12 +60,17 @@ then
     then
         feedback-result -i make_calc failed
         feedback-msg -i make_calc -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -i "Try again"
     else
         feedback-result -i make_calc success
         feedback-msg -i make_calc -m "You made it!"
+        feedback-result success
 	fi
 else
     feedback-result -i make_calc failed
     feedback-msg -i make_calc -m "At least on of the object files was not detected."
+    feedback-result failed
+    feedback-msg -i "Try again"
 fi
 

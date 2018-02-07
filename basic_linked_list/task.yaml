@@ -83,11 +83,11 @@ tags:
         visible: true
         description: Your code exceeds the maximum allowed time.
     '1':
-        id: sigsegv
-        visible: true
         name: Segmentation Fault
-        type: 1
+        id: sigsegv
         description: ''
+        visible: true
+        type: 1
     '10':
         id: wrong_args_handling
         description: Wrong return value when wrong args.
@@ -106,45 +106,39 @@ tags:
         name: Modif list malloc fail
         type: 1
         visible: false
-    '13':
-        description: Incorrect return value when malloc fails.
-        type: 1
-        name: Return value malloc fail
-        id: return_value_malloc_fail
-        visible: false
     '14':
         description: You code does not compile.
-        id: not_compile
-        type: 1
         visible: true
+        type: 1
+        id: not_compile
         name: Not compile
     '15':
-        visible: true
         name: Memory Exceeded
         description: ''
         id: memory
         type: 1
-    '16':
-        type: 1
-        name: Floating Point Exception
         visible: true
+    '16':
+        visible: true
+        type: 1
         id: sigfpe
         description: ''
+        name: Floating Point Exception
     '17':
-        name: Double free
-        id: double_free
-        visible: true
         description: Your code produced a double free.
+        id: double_free
+        name: Double free
+        visible: true
         type: 1
     '18':
-        description: You use some banned functions.
         id: banned_funcs
-        visible: true
         name: Banned functions
+        description: You use some banned functions.
         type: 1
+        visible: true
     '2':
-        description: The malloc() functions was not called exactly once.
         name: Not malloc() once
+        description: The malloc() functions was not called exactly once.
         type: 1
         id: not_malloc_once
         visible: false
@@ -161,14 +155,14 @@ tags:
         id: bad_node_value
         visible: false
     '5':
-        id: bad_next_pointer
         name: Bad next pointer
+        id: bad_next_pointer
         description: The 'next' pointer is not correctly initialised
         type: 1
         visible: false
     '6':
-        id: malloc_fail_handling
         type: 1
+        id: malloc_fail_handling
         name: Malloc fail handling
         description: Wrong return value when malloc call fails.
         visible: false
@@ -181,8 +175,8 @@ tags:
     '8':
         description: Your function returns an error in normal case.
         type: 1
-        name: Error normal case
         id: error_normal_case
+        name: Error normal case
         visible: false
     '9':
         type: 1
@@ -198,14 +192,14 @@ tags:
         id: ''
     '20':
         description: Task dealing with data structures and linked list
+        name: Data structures
         type: 2
         visible: true
-        name: Data structures
         id: ''
     '21':
         type: 2
+        visible: true
         name: Malloc
         description: Usage of malloc()
-        visible: true
         id: ''
 weight: 1.0
