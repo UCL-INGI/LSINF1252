@@ -30,10 +30,10 @@ fi
 # Try to make student code for `make_calc` exercise
 make make2
 
-# Does file exist? If yes, check for diffs with working code
-if test -e student/calc
+# Do object files exist? If yes, check for diffs with working code
+if test -e student/{calc,operations}.o
 then
-    diff reference/calc student/calc
+    diff reference/{calc,operations}.o student/{calc,operations}.o
     if [ $? -ne 0 ]
     then
         feedback-result failed
@@ -44,5 +44,6 @@ then
     fi
 else
     feedback-result failed
-    feedback-msg -m "The executable file calc was not detected."
+    feedback-msg -m "At least on of the object files was not detected."
 fi
+

@@ -13,8 +13,6 @@
 
 OBJ = calc.o operations.o
 
-calc: $(OBJ)
-
 @@make_calc@@
 
 .PHONY: clean mrproper
