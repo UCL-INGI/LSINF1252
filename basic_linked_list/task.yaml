@@ -34,17 +34,14 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
+    time: '30'
     output: '2'
 name: '[S3] Basic linked list - REVIEWED'
 network_grading: false
 order: 28
 problems:
     init_node:
-        language: c
-        type: code
-        name: Node initialisation
         header: |
             .. code-block:: c
 
@@ -55,10 +52,13 @@ problems:
                 * @return: return the pointer to the new node, or NULL if a failure occured.
                 */
                 node_t *init_node(int value) {
+        language: c
+        type: code
+        name: Node initialisation
     add_node:
+        language: c
         name: Adding a node
         type: code
-        language: c
         header: |
             .. code-block:: c
 
@@ -78,68 +78,134 @@ submission_limit:
 tags:
     '0':
         name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-        type: 1
         id: timeout
-    '1':
-        visible: true
         type: 1
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+    '1':
         id: sigsegv
+        visible: true
         name: Segmentation Fault
+        type: 1
         description: ''
     '10':
-        name: Not malloc once
-        id: not_malloc_once
+        id: wrong_args_handling
+        description: Wrong return value when wrong args.
+        name: Bad Args handling
         type: 1
-        description: The malloc() function was not used exactly once.
         visible: false
-    '2':
+    '11':
+        id: not_expected_list
+        description: The linked list does not correspond to the waited one.
+        name: Incorrect list
+        type: 1
+        visible: false
+    '12':
+        description: The list was modified while the malloc() fails.
+        id: modif_list_malloc_fail
+        name: Modif list malloc fail
+        type: 1
+        visible: false
+    '13':
+        description: Incorrect return value when malloc fails.
+        type: 1
+        name: Return value malloc fail
+        id: return_value_malloc_fail
+        visible: false
+    '14':
         description: You code does not compile.
-        visible: true
         id: not_compile
         type: 1
-        name: Not compile
-    '3':
-        description: ''
-        name: Memory Exceeded
-        id: memory
         visible: true
-        type: 1
-    '4':
-        name: Floating Point Exception
+        name: Not compile
+    '15':
+        visible: true
+        name: Memory Exceeded
         description: ''
+        id: memory
         type: 1
+    '16':
+        type: 1
+        name: Floating Point Exception
         visible: true
         id: sigfpe
-    '5':
-        type: 1
+        description: ''
+    '17':
         name: Double free
-        description: Your code produced a double free.
-        visible: true
         id: double_free
-    '6':
-        type: 1
-        name: Banned functions
         visible: true
-        id: banned_funcs
-        description: You use some banned functions.
-    '7':
-        name: Malloc bad size
+        description: Your code produced a double free.
         type: 1
+    '18':
+        description: You use some banned functions.
+        id: banned_funcs
+        visible: true
+        name: Banned functions
+        type: 1
+    '2':
+        description: The malloc() functions was not called exactly once.
+        name: Not malloc() once
+        type: 1
+        id: not_malloc_once
+        visible: false
+    '3':
+        type: 1
+        description: The allocated memory has not the correct size.
         id: malloc_fail_memory_size
-        description: The size of the allocated memory is not correct.
+        name: Wrong malloc memory size
+        visible: false
+    '4':
+        name: Bad node value
+        description: The value of the node is not the expected one.
+        type: 1
+        id: bad_node_value
+        visible: false
+    '5':
+        id: bad_next_pointer
+        name: Bad next pointer
+        description: The 'next' pointer is not correctly initialised
+        type: 1
+        visible: false
+    '6':
+        id: malloc_fail_handling
+        type: 1
+        name: Malloc fail handling
+        description: Wrong return value when malloc call fails.
+        visible: false
+    '7':
+        id: not_allocated
+        name: Not allocated
+        type: 1
+        description: A new node is not allocated with malloc().
         visible: false
     '8':
-        type: 2
-        name: Data structures
-        visible: true
-        description: Task dealing with data structures and linked list
-        id: ''
+        description: Your function returns an error in normal case.
+        type: 1
+        name: Error normal case
+        id: error_normal_case
+        visible: false
     '9':
+        type: 1
+        name: Wrong list size
+        description: The list has not the expected size.
+        id: wrong_list_size
+        visible: false
+    '19':
+        visible: true
         name: S3
         type: 2
         description: ''
+        id: ''
+    '20':
+        description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
+        name: Data structures
+        id: ''
+    '21':
+        type: 2
+        name: Malloc
+        description: Usage of malloc()
         visible: true
         id: ''
 weight: 1.0

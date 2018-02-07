@@ -16,46 +16,48 @@ then
     diff reference/calc student/calc
     if [ $? -ne 0 ]
     then
-        feedback-result failed
-        feedback-msg -m "Your Makefile is not correct."
+        feedback-result -i make_calc_simple failed
+        feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
     else
-        feedback-result success
-        feedback-msg -m "You made it!"
+        feedback-result -i make_calc_simple success
+        feedback-msg -i make_calc_simple -m "You made it!"
     fi
 else
-    feedback-result failed
-    feedback-msg -m "The executable file calc was not detected."
+    feedback-result -i make_calc_simple failed
+    feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
 fi
 
 # Try to make student code for `make_calc` exercise
-make make2
+make mrproper2
+ls student/
 
-ls student/ -la
+make make2
+ls student/
 # Do object files exist? If yes, check for diffs with working code
 if test -e student/calc.o
 then
     diff reference/calc.o student/calc.o
     if [ $? -ne 0 ]
     then
-        feedback-result failed
-        feedback-msg -m "Your Makefile is not correct."
+        feedback-result -i make_calc failed
+        feedback-msg -i make_calc -m "Your Makefile is not correct."
     else
-        feedback-result success
-        feedback-msg -m "You made it!"
+        feedback-result -i make_calc success
+        feedback-msg -i make_calc -m "You made it!"
     fi
 elif test -e student/operations.o
 then
 	diff reference/operations.o student/operations.o
     if [ $? -ne 0 ]
     then
-        feedback-result failed
-        feedback-msg -m "Your Makefile is not correct."
+        feedback-result -i make_calc failed
+        feedback-msg -i make_calc -m "Your Makefile is not correct."
     else
-        feedback-result success
-        feedback-msg -m "You made it!"
+        feedback-result -i make_calc success
+        feedback-msg -i make_calc -m "You made it!"
 	fi
 else
-    feedback-result failed
-    feedback-msg -m "At least on of the object files was not detected."
+    feedback-result -i make_calc failed
+    feedback-msg -i make_calc -m "At least on of the object files was not detected."
 fi
 
