@@ -21,8 +21,8 @@ then
     then
         feedback-result -i make_calc_simple failed
         feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
-        feedback-result failed
-        feedback-msg -i "Try again"
+        #feedback-result failed
+        #feedback-msg -i "Try again"
         ((score-=50))
     else
         feedback-result -i make_calc_simple success
@@ -50,8 +50,8 @@ then
     then
         feedback-result -i make_calc failed
         feedback-msg -i make_calc -m "Your Makefile is not correct."
-        feedback-result failed
-        feedback-msg -i "Try again"
+        #feedback-result failed
+        #feedback-msg -i "Try again"
         ((score-=25))
     else
         feedback-result -i make_calc success
@@ -64,8 +64,8 @@ then
     then
         feedback-result -i make_calc failed
         feedback-msg -i make_calc -m "Your Makefile is not correct."
-        feedback-result failed
-        feedback-msg -i "Try again"
+        #feedback-result failed
+        #feedback-msg -i "Try again"
         ((score-=25))
     else
         feedback-result -i make_calc success
