@@ -29,8 +29,8 @@ then
         feedback-msg -i make_calc_simple -m "You made it!"
     fi
 else
-    #feedback-result -i make_calc_simple failed
-    #feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
+    feedback-result -i make_calc_simple failed
+    feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
     feedback-result failed
     feedback-msg -m "Try again"
     ((score-=50))
