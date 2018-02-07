@@ -1,7 +1,7 @@
 OBJ = calc.o operations.o
 
 calc: $(OBJ)
-	cc -o $(OBJ)
+	cc -o calc $(OBJ)
 
 @@make_calc@@
 
