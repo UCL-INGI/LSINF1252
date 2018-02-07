@@ -32,7 +32,7 @@ make make2
 
 ls student/ -la
 # Do object files exist? If yes, check for diffs with working code
-if test -e student/{calc,operations}.o
+if [ test -e student/calc.o ] && [ test -e student/operations.o ]
 then
     diff reference/{calc,operations}.o student/{calc,operations}.o
     if [ $? -ne 0 ]
