@@ -19,21 +19,20 @@ then
     diff reference/calc student/calc
     if [ $? -ne 0 ]
     then
-        #feedback-result -i make_calc_simple failed
-        #feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
-        #feedback-result failed
-        #feedback-msg -i "Try again"
+        feedback-result -i make_calc_simple failed
+        feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -m "Try again"
         ((score-=50))
     else
-        #feedback-result -i make_calc_simple success
-        #feedback-msg -i make_calc_simple -m "You made it!"
-        echo 0
+        feedback-result -i make_calc_simple success
+        feedback-msg -i make_calc_simple -m "You made it!"
     fi
 else
     #feedback-result -i make_calc_simple failed
     #feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
     feedback-result failed
-    feedback-msg -i "Try again"
+    feedback-msg -m "Try again"
     ((score-=50))
 fi
 
@@ -49,38 +48,37 @@ then
     diff reference/calc.o student/calc.o
     if [ $? -ne 0 ]
     then
-        #feedback-result -i make_calc failed
-        #feedback-msg -i make_calc -m "Your Makefile is not correct."
-        #feedback-result failed
-        #feedback-msg -i "Try again"
+        feedback-result -i make_calc failed
+        feedback-msg -i make_calc -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -m "Try again"
         ((score-=25))
     else
-        #feedback-result -i make_calc success
-        #feedback-msg -i make_calc -m "You made it!"
-        echo 0
+        feedback-result -i make_calc success
+        feedback-msg -i make_calc -m "You made it!"
     fi
 elif test -e student/operations.o
 then
 	diff reference/operations.o student/operations.o
     if [ $? -ne 0 ]
     then
-        #feedback-result -i make_calc failed
-        #feedback-msg -i make_calc -m "Your Makefile is not correct."
-        #feedback-result failed
-        #feedback-msg -i "Try again"
+        feedback-result -i make_calc failed
+        feedback-msg -i make_calc -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -m "Try again"
         ((score-=25))
     else
-        #feedback-result -i make_calc success
-        #feedback-msg -i make_calc -m "You made it!"
-        @echo 1
+        feedback-result -i make_calc success
+        feedback-msg -i make_calc -m "You made it!"
 	fi
 else
-    #feedback-result -i make_calc failed
-    #feedback-msg -i make_calc -m "At least on of the object files was not detected."
+    feedback-result -i make_calc failed
+    feedback-msg -i make_calc -m "At least on of the object files was not detected."
     feedback-result failed
-    feedback-msg -i "Try again"
+    feedback-msg -m "Try again"
     ((score-=50))
 fi
+
 
 feedback-grade $score
 if $score -e 100
