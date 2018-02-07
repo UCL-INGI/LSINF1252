@@ -288,8 +288,10 @@ void test_add_node_non_empty(){
   if (mal){
     int valf = list->first->value;
     CU_ASSERT_EQUAL(valf, *val);
-    if (valf != *val)
+    if (valf != *val){
       push_info_msg(_("The inserted value does not correspond to the waited one"));
+      set_tag("bad_inserted_value");
+    }
   }
   else{
     push_info_msg(_("The new node is not allocated"));
@@ -390,7 +392,7 @@ void test_add_node_nomem(){
   // check the update of the list size
   CU_ASSERT_EQUAL(list->size, 3);
   if (list->size != 3){
-    set_tag("return_value_malloc_fail");
+    set_tag("wrong_list_size_malloc_fail");
     push_info_msg(_("Wrong update of the list size."));
   }
 
