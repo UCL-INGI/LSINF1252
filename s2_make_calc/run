@@ -34,7 +34,7 @@ ls student/ -la
 # Do object files exist? If yes, check for diffs with working code
 if test -e student/calc.o
 then
-    diff reference/calc.o student/operations.o
+    diff reference/calc.o student/calc.o
     if [ $? -ne 0 ]
     then
         feedback-result failed
@@ -44,6 +44,7 @@ then
         feedback-msg -m "You made it!"
     fi
 elif test -e student/operations.o
+then
 	diff reference/operations.o student/operations.o
     if [ $? -ne 0 ]
     then
@@ -52,6 +53,7 @@ elif test -e student/operations.o
     else
         feedback-result success
         feedback-msg -m "You made it!"
+	fi
 else
     feedback-result failed
     feedback-msg -m "At least on of the object files was not detected."
