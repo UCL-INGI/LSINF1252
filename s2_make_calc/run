@@ -30,6 +30,7 @@ fi
 # Try to make student code for `make_calc` exercise
 make make2
 
+ls student/ -la
 # Do object files exist? If yes, check for diffs with working code
 if test -e student/{calc,operations}.o
 then
