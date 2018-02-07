@@ -32,9 +32,9 @@ make make2
 
 ls student/ -la
 # Do object files exist? If yes, check for diffs with working code
-if [ test -e student/calc.o ] && [ test -e student/operations.o ]
+if test -e student/calc.o
 then
-    diff reference/{calc,operations}.o student/{calc,operations}.o
+    diff reference/calc.o student/operations.o
     if [ $? -ne 0 ]
     then
         feedback-result failed
@@ -43,6 +43,15 @@ then
         feedback-result success
         feedback-msg -m "You made it!"
     fi
+elif test -e student/operations.o
+	diff reference/operations.o student/operations.o
+    if [ $? -ne 0 ]
+    then
+        feedback-result failed
+        feedback-msg -m "Your Makefile is not correct."
+    else
+        feedback-result success
+        feedback-msg -m "You made it!"
 else
     feedback-result failed
     feedback-msg -m "At least on of the object files was not detected."
