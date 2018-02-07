@@ -278,6 +278,7 @@ void test_add_node_non_empty(){
   CU_ASSERT_EQUAL(ms, 1);
   if (ms != 1){
     push_info_msg(_("You used more than one call to malloc"));
+    set_tag("not_malloc_once");
   }
 
   // check if new element is malloced
@@ -290,26 +291,34 @@ void test_add_node_non_empty(){
     if (valf != *val)
       push_info_msg(_("The inserted value does not correspond to the waited one"));
   }
-  else
+  else{
     push_info_msg(_("The new node is not allocated"));
+    set_tag("not_allocated");
+  }
 
   // check if the structure if the list changed
   int cl = check_list(list, val, 4);
   CU_ASSERT_EQUAL(cl, 0);
-  if (cl == 1)
+  if (cl == 1){
     push_info_msg(_("The new linked list does not correspond to the waited one"));
+    set_tag("not_expected_list");
+  }
   else if (cl == 2)
     push_info_msg(_("SCRIPT ERROR"));
 
   // check the return code in normal case (expected 0)
   CU_ASSERT_EQUAL(ret, 0);
-  if (ret != 0)
+  if (ret != 0){
+    set_tag("error_normal_case");
     push_info_msg(_("Your function returns an error in normal case!"));
+  }
 
   // check the update of the list size
   CU_ASSERT_EQUAL(list->size, 4);
-  if (list->size != 4)
+  if (list->size != 4){
     push_info_msg(_("Wrong update of the list size."));
+    set_tag("wrong_list_size");
+  }
 
   //-----------------------------------------------------------------
 
@@ -364,20 +373,26 @@ void test_add_node_nomem(){
   int *new_vals = (val+1);
   int cl = check_list(list, new_vals, 3);
   CU_ASSERT_EQUAL(cl, 0);
-  if (cl == 1)
+  if (cl == 1){
     push_info_msg(_("The new linked list does not correspond to the waited one"));
+    set_tag("modif_list_malloc_fail");
+  }
   else if (cl == 2)
     push_info_msg(_("SCRIPT ERROR"));
 
   // check the return code in normal case (expected 0)
   CU_ASSERT_EQUAL(ret, 1);
-  if (ret != 1)
+  if (ret != 1){
     push_info_msg(_("Your function returns an error in normal case!"));
+    set_tag("return_value_malloc_fail");
+  }
 
   // check the update of the list size
   CU_ASSERT_EQUAL(list->size, 3);
-  if (list->size != 3)
+  if (list->size != 3){
+    set_tag("return_value_malloc_fail");
     push_info_msg(_("Wrong update of the list size."));
+  }
 
   //-----------------------------------------------------------------
 
