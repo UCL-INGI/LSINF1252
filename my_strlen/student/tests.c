@@ -29,6 +29,16 @@ void test_my_strlen(){
   if (ret != 15)
     push_info_msg(_("The function return the wrong value"));
 
+  char *s3 = "";
+  SANDBOX_BEGIN;
+  ret = my_strlen(s3);
+  SANDBOX_END;
+
+  CU_ASSERT_EQUAL(ret, 0);
+  if (ret != 0)
+    push_info_msg(_("The function return the wrong value"));
+
+
 }
 
 int main(int argc,char** argv)
