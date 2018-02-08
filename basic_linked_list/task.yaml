@@ -3,7 +3,7 @@ author: Maxime Mawait & Nicolas Rybowski
 context: |+
     We ask you to write two primitives needed to implement a simple linked list.
 
-    **In your functions, you cannot use the function \``calloc\``**
+    **In your functions, you cannot use the function** ``calloc``
 
     .. code-block:: c
 
@@ -42,6 +42,8 @@ network_grading: false
 order: 28
 problems:
     init_node:
+        language: c
+        type: code
         header: |
             .. code-block:: c
 
@@ -52,13 +54,8 @@ problems:
                 * @return: return the pointer to the new node, or NULL if a failure occured.
                 */
                 node_t *init_node(int value) {
-        language: c
-        type: code
         name: Node initialisation
     add_node:
-        language: c
-        name: Adding a node
-        type: code
         header: |
             .. code-block:: c
 
@@ -71,142 +68,145 @@ problems:
                 * @return: 0 if success, 1 else
                 */
                 int add_node(list_t *list, int value);
+        language: c
+        type: code
+        name: Adding a node
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        type: 1
+        description: Your code exceeds the maximum allowed time.
+        visible: true
         name: Timeout
         id: timeout
-        type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
     '1':
+        description: ''
         id: sigsegv
-        visible: true
         name: Segmentation Fault
         type: 1
-        description: ''
+        visible: true
     '10':
-        id: not_malloc_once
+        type: 1
+        description: The list has not the expected size.
+        name: Wrong list size
+        id: wrong_list_size
+        visible: false
+    '11':
+        description: Wrong return value when wrong args.
+        id: wrong_args_handling
+        type: 1
+        name: Bad Args handling
+        visible: false
+    '12':
+        type: 1
+        name: Incorrect list
+        description: The linked list does not correspond to the waited one.
+        id: not_expected_list
+        visible: false
+    '13':
+        description: The list was modified while the malloc() fails.
+        id: modif_list_malloc_fail
+        name: Modif list malloc fail
+        type: 1
+        visible: false
+    '14':
+        visible: true
+        type: 1
+        name: Not compile
+        description: You code does not compile.
+        id: not_compile
+    '15':
+        description: ''
+        id: memory
+        name: Memory Exceeded
+        visible: true
+        type: 1
+    '16':
+        type: 1
+        id: sigfpe
+        name: Floating Point Exception
+        visible: true
+        description: ''
+    '17':
+        id: double_free
+        type: 1
+        description: Your code produced a double free.
+        visible: true
+        name: Double free
+    '18':
+        name: Banned functions
+        visible: true
+        id: banned_funcs
+        type: 1
+        description: You use some banned functions.
+    '2':
         description: The malloc() functions was not called exactly once.
         name: Not malloc once
         type: 1
+        id: not_malloc_once
         visible: false
-    '11':
+    '3':
+        type: 1
+        name: SCRIPT ERROR
         id: SCRIPT_ERROR
         description: SCRIPT_ERROR - This tag should not appear. If it appears this
             is probably an error in the test suite of this task.
-        name: SCRIPT ERROR
-        type: 1
         visible: false
-    '12':
+    '4':
         description: The allocated memory has not the correct size.
         id: malloc_fail_memory_size
         name: Wrong malloc memory size
         type: 1
         visible: false
-    '13':
+    '5':
         description: The value of the node is not the expected one.
+        id: bad_node_value
         type: 1
         name: Bad node value
-        id: bad_node_value
         visible: false
-    '14':
-        description: The 'next' pointer is not correctly initialised
-        name: Bad next pointer
+    '6':
         id: bad_next_pointer
+        description: The 'next' pointer is not correctly initialised
         type: 1
+        name: Bad next pointer
         visible: false
-    '15':
-        name: Malloc fail handling
+    '7':
         description: Wrong return value when malloc call fails.
-        id: malloc_fail_handling
         type: 1
+        name: Malloc fail handling
+        id: malloc_fail_handling
         visible: false
-    '16':
+    '8':
+        description: A new node is not allocated with malloc().
         type: 1
         id: not_allocated
-        description: A new node is not allocated with malloc().
         name: Not allocated
         visible: false
-    '17':
-        description: Your function returns an error in normal case.
-        id: error_normal_case
-        name: Error normal case
-        type: 1
-        visible: false
-    '18':
-        description: The list has not the expected size.
-        id: wrong_list_size
-        name: Wrong list size
-        type: 1
-        visible: false
-    '2':
-        description: Wrong return value when wrong args.
-        name: Bad Args handling
-        type: 1
-        id: wrong_args_handling
-        visible: false
-    '3':
-        type: 1
-        description: The linked list does not correspond to the waited one.
-        id: not_expected_list
-        name: Incorrect list
-        visible: false
-    '4':
-        name: Modif list malloc fail
-        description: The list was modified while the malloc() fails.
-        type: 1
-        id: modif_list_malloc_fail
-        visible: false
-    '5':
-        id: not_compile
-        name: Not compile
-        description: You code does not compile.
-        visible: true
-        type: 1
-    '6':
-        id: memory
-        type: 1
-        name: Memory Exceeded
-        visible: true
-        description: ''
-    '7':
-        id: sigfpe
-        visible: true
-        name: Floating Point Exception
-        type: 1
-        description: ''
-    '8':
-        description: Your code produced a double free.
-        type: 1
-        name: Double free
-        visible: true
-        id: double_free
     '9':
         type: 1
-        visible: true
-        name: Banned functions
-        description: You use some banned functions.
-        id: banned_funcs
+        id: error_normal_case
+        name: Error normal case
+        description: Your function returns an error in normal case.
+        visible: false
     '19':
-        visible: true
         name: S3
-        type: 2
+        visible: true
         description: ''
+        type: 2
         id: ''
     '20':
         description: Task dealing with data structures and linked list
         type: 2
-        visible: true
         name: Data structures
+        visible: true
         id: ''
     '21':
         type: 2
-        name: Malloc
         description: Usage of malloc()
+        name: Malloc
         visible: true
         id: ''
 weight: 1.0
