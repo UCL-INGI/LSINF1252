@@ -1,12 +1,9 @@
 OBJ = calc.o operations.o
 
-@@make_calc_simple@@
+calc: $(OBJ)
+	cc -o calc $(OBJ)
 
-calc.o: calc.c calc.h operations.h
-	cc -c $^
-
-operations.o: operations.c operations.h
-	cc -c $^
+@@make_calc@@
 
 .PHONY: clean mrproper
 

@@ -7,13 +7,13 @@ context: |
 
     .. code-block:: console
 
-        calc.c    calc.h    operations.c    operations.h
+        calc.c    calc.h    operations.c    operations.h    Makefile
 
     ``calc.c`` contains the calculator which handles the 4 basic operations: addition, substraction, multiplication, and division. These 4 operations are implemented in ``operations.c``.
 
     As you might have noticed, there are also two other files: ``calc.h`` and ``operations.h``. These are the corresponding **header** files of ``calc.c`` and ``operations.c``. These headers contain the function prototypes and specifications, but not their definitions. They can also contain ``extern`` declarations of variables. For more on that, see `this page <https://www.tutorialspoint.com/cprogramming/c_header_files.htm>`_ or chapter 4 in [kernighan2006c]_.
 
-    When compiling this calculator, you need to specify in the Makefile rules the header files needed by ``calc.c``, that is both ``calc.h`` and ``operations.h``.
+    When compiling this calculator, you need to specify in the ``Makefile`` rules the header files needed by ``calc.c``, that is both ``calc.h`` and ``operations.h``.
 
     ----
 
@@ -30,31 +30,41 @@ network_grading: false
 order: 23
 problems:
     make_calc_simple:
+        language: Makefile
         type: code
+        name: Linking object files
         header: |-
-            Unfortunately, the source folder was lost but you still have access to the object files.
+            Unfortunately, for some obscure reasons the source folder (including the precious ``Makefile``) was lost but you still have access to the object files.
 
             Write a *Makefile* rule to build the executable ``calc`` from both object files ``calc.o`` and ``operations.o``. That is, you want to *link* the object files into the executable.
 
-            **Hints:** You do not need to write the rules for ``operations.o`` and ``calc.o``. Do not forget the prerequisites of your rule.
+            **Hints:** You do not need to write the rules for ``operations.o`` and ``calc.o``. Do not forget the prerequisites of your rule. You cannot use *implicit* rules, you must use *explicit* rules.
+    make_calc:
+        type: code
+        header: |-
+            Now, you just remembered you had created a ``git`` *repository* for this calculator on a *remote server*. You ``clone`` it on your computer, and verify each file with the command line editor ``nano``. You notice the ``Makefile`` is incomplete. There are no recipes to build the object files!
+
+            Write *Makefile* rules to build the object files ``calc.o`` and ``operations.o`` from the source files.
+
+            **Hints:** Do not forget the prerequisites of your rule. You cannot use *implicit* rules, you must use *explicit* rules.
+        name: Object files and prerequisites
         language: Makefile
-        name: 'Linking '
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: make
         type: 0
-        name: make & Makefile
         visible: true
+        name: make & Makefile
+        id: make
         description: Tasks related to the make task runner for targets described in
             Makefile.
     '1':
+        type: 2
         name: S2
         visible: true
-        type: 2
         description: ''
         id: ''
 weight: 1.0

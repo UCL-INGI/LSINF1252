@@ -1,3 +1,42 @@
+/student/tests.c: |+
+    // CTester template
+
+    #include <stdlib.h>
+    #include "student_code.h"
+    #include "CTester/CTester.h"
+
+    void test_enqueue_empty() {
+        set_test_metadata("enqueue", _("Enqueue of an empty list"), 1);
+
+        node_t* n = NULL;
+        queue_t q;
+        q.head = &n;
+
+        int ret = -1;
+
+        monitored.malloc = true;
+
+        size_t start= stats.memory.used;
+
+        SANDBOX_BEGIN;
+        ret = enqueue(&q,0);
+        SANDBOX_END;
+
+        size_t delta = stats.memory.used -start;
+
+        CU_ASSERT_EQUAL(delta,sizeof(node_t));
+
+        CU_ASSERT_EQUAL(stats.malloc.called,1);
+
+        CU_ASSERT_EQUAL(ret,0);
+    }
+
+    int main(int argc,char** argv)
+    {
+        BAN_FUNCS();
+        RUN(test_enqueue_empty);
+    }
+
 accessible: false
 author: Maxime Mawait & Nicolas Rybowski
 context: |-
@@ -17,80 +56,80 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S4] Queue avancée'
 network_grading: false
 order: 36
 problems:
     enqueue:
-        language: c
+        header: ''
         name: Enqueue
-        type: code
-        header: ''
-    dequeue:
-        name: Dequeue
-        header: ''
-        type: code
         language: c
+        type: code
+    dequeue:
+        type: code
+        name: Dequeue
+        language: c
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '2':
+    '0':
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
         id: timeout
         type: 1
-        name: Timeout
         visible: true
-        description: Your code exceeds the maximum allowed time.
-    '3':
-        id: sigsegv
-        visible: true
+    '1':
         type: 1
-        name: Segmentation Fault
         description: ''
-    '4':
+        id: sigsegv
+        name: Segmentation Fault
+        visible: true
+    '2':
         name: Not compile
         description: You code does not compile.
         visible: true
         id: not_compile
         type: 1
-    '5':
-        id: memory
+    '3':
         visible: true
-        description: ''
         name: Memory Exceeded
+        id: memory
         type: 1
-    '6':
-        id: sigfpe
         description: ''
-        type: 1
+    '4':
+        description: ''
         visible: true
         name: Floating Point Exception
-    '7':
-        id: double_free
-        name: Double free
-        visible: true
-        description: Your code produced a double free.
         type: 1
-    '8':
+        id: sigfpe
+    '5':
+        id: double_free
+        visible: true
+        name: Double free
+        type: 1
+        description: Your code produced a double free.
+    '6':
+        description: You use some banned functions.
+        id: banned_funcs
         type: 1
         name: Banned functions
-        id: banned_funcs
-        description: You use some banned functions.
         visible: true
-    '0':
+    '7':
         name: Data structures
-        visible: true
-        type: 2
         description: Task dealing with data structures and linked list
+        type: 2
+        visible: true
         id: ''
-    '1':
+    '8':
+        type: 2
         description: ''
         name: S4
         visible: true
-        type: 2
         id: ''
 weight: 1.0

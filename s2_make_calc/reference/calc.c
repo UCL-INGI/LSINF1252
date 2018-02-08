@@ -42,6 +42,11 @@ int main(int argc, char *argv[])
     if (argv[optind] != NULL) {
         precision = atoi(argv[optind]);
     }
+    /* Testing linking with operations.h */
+    double a = 1.0;
+    double b = 2.0;
+    a = calc_add(a, b);
+
     fprintf(stdout, "%.*f\n", precision, cur_value);
     exit(EXIT_SUCCESS);
 }

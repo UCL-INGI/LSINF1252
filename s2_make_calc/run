@@ -1,26 +1,89 @@
 #!/bin/bash
 
-# Get student code and parse it in the template
+# Student score
+score=100
+
+# file to capture stderr
+touch error.txt
+
+# Get student code for `make_calc_simple` and parse it in the template
 parsetemplate -o student/Makefile student/Makefile.tpl
 
-# Try to compile student code
-make
+# Get student code for `make_calc` and parse it in the template
+parsetemplate -o student/Makefile2 student/Makefile2.tpl
 
+
+# Try to make student code for `make_calc_simple` exercise
+make &> error.txt
 # Does file exist? If yes, check for diffs with working code
 if test -e student/calc
 then
     diff reference/calc student/calc
     if [ $? -ne 0 ]
     then
+        feedback-result -i make_calc_simple failed
+        feedback-msg -i make_calc_simple -m "Your Makefile is not correct."
+        # feedback-msg -a -i make_calc_simple -m cat error.txt
         feedback-result failed
-        feedback-msg -m "Your Makefile is not correct."
+        feedback-msg -m "Try again"
+        ((score-=50))
     else
-        feedback-result success
-        feedback-msg -m "You made it!"
+        feedback-result -i make_calc_simple success
+        feedback-msg -i make_calc_simple -m "You made it!"
     fi
 else
+    feedback-result -i make_calc_simple failed
+    feedback-msg -i make_calc_simple -m "The executable file calc was not detected."
+    # feedback-msg -a -i make_calc_simple -m cat error.txt
     feedback-result failed
-    feedback-msg -m "The executable file calc was not detected."
+    feedback-msg -m "Try again"
+    ((score-=50))
 fi
 
-make mrproper
+# Try to make student code for `make_calc` exercise
+make make2
+
+# Do object files exist? If yes, check for diffs with working code
+if test -e student/calc.o
+then
+    diff reference/calc.o student/calc.o
+    if [ $? -ne 0 ]
+    then
+        feedback-result -i make_calc failed
+        feedback-msg -i make_calc -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -m "Try again"
+        ((score-=25))
+    else
+        feedback-result -i make_calc success
+        feedback-msg -i make_calc -m "You made it!"
+    fi
+elif test -e student/operations.o
+then
+	diff reference/operations.o student/operations.o
+    if [ $? -ne 0 ]
+    then
+        feedback-result -i make_calc failed
+        feedback-msg -i make_calc -m "Your Makefile is not correct."
+        feedback-result failed
+        feedback-msg -m "Try again"
+        ((score-=25))
+    else
+        feedback-result -i make_calc success
+        feedback-msg -i make_calc -m "You made it!"
+	fi
+else
+    feedback-result -i make_calc failed
+    feedback-msg -i make_calc -m "At least on of the object files was not detected."
+    feedback-result failed
+    feedback-msg -m "Try again"
+    ((score-=50))
+fi
+
+feedback-grade $score
+if [ $score -eq 100 ]
+then 
+	feedback-result success
+else
+	feedback-result failed
+fi
