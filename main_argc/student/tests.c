@@ -11,73 +11,76 @@ void test_myfunc_ret()
 	int ret1 = 1;
 	int ret2 = 1;
 	int ret3 = 1;
+	int ret4 = 1;
+	int ret5 = 1;
 
-	char **argv1 = {"tests", "a", "b", "ihuqfiudshfsi", "kujsvglqiu"};
-	char **argv2 = {"tests", "a", "b", "ihuqfiudshfsi"};
-	char **argv3 = {"tests"};
+	char *str1 ="tests";
+	char *str2 ="a";
+	char *str3 ="b";
+	char *str4 ="ihuqfiudshfsi";
+	char *str5 ="kujsvglqiu";
+	char *argv1[5] = {str1, str2, str3, str4, str5};
+	char *argv2[4] = {str1, str2, str3, str5};
+	char *argv3[1] = {str1};
+	char *argv4[3] = {str1, str2, str3};
+	char *argv5[2] = {str1, str5};
 	char buf[16];
 
 	SANDBOX_BEGIN;
 	ret1 = main2(5, argv1);
 	SANDBOX_END;
-	ssize_t size = read(stdout_cpy, buf, 16);
-	CU_ASSERT_EQUAL(size, 16);
-	if (size<16)
-		push_info_msg(_("Your function doesn't output enough characters"));
-	else if (read(stdout_cpy, buf, 16)){
+	read(stdout_cpy, buf, 16);
+	if (strncmp("a ihuqfiudshfsi\n", buf, 16)){
 		CU_FAIL("");
-		push_info_msg(_("Your function too much characters"));
-		while (read(stdout_cpy, buf, 16)) //empties stdout
-			;
-	}
-	else if (strncmp("a ihuqfiudshfsi\n", buf, 16)){
-		CU_FAIL("");
-		push_info_msg(_("Your function output the wrong string"));
+		push_info_msg(_("Your function output the wrong string when 4 arguments are provided"));
 	}
 	else
 		CU_PASS("");
 
 
 	SANDBOX_BEGIN;
-	ret2 = main2(4, argv1);
+	ret2 = main2(4, argv2);
 	SANDBOX_END;
-	size = read(stdout_cpy, buf, 16);
-	CU_ASSERT_EQUAL(size, 16);
-	if (size<16){
+
+	read(stdout_cpy, buf, 13);
+	if (strncmp("a kujsvglqiu\n", buf, 13)){
 		CU_FAIL("");
-		push_info_msg(_("Your function doesn't output enough characters"));
-	}
-	else if (read(stdout_cpy, buf, 16)){
-		CU_FAIL("");
-		push_info_msg(_("Your function too much characters"));
-		while (read(stdout_cpy, buf, 16)) //empties stdout
-			;
-	}
-	else if (strncmp("a ihuqfiudshfsi\n", buf, 16)){
-		CU_FAIL("");
-		push_info_msg(_("Your function output the wrong string"));
+		push_info_msg(_("Your function output the wrong string when 3 arguments are provided"));
 	}
 	else
 		CU_PASS("");
 
 	SANDBOX_BEGIN;
-	ret3 = main2(1, argv1);
+	ret3 = main2(1, argv3);
 	SANDBOX_END;
-	size = read(stdout_cpy, buf, 1);
-	CU_ASSERT_EQUAL(size, 1);
-	if (size<1){
-		push_info_msg(_("Your function doesn't output anything when no arguments are provided"));
-		CU_FAIL("");
-	}
-	else if (read(stdout_cpy, buf, 16)){
-		CU_FAIL("");
-		push_info_msg(_("Your function too much characters"));
-		while (read(stdout_cpy, buf, 16)) //empties stdout
-			;
-	}
-	else if (strncmp("\n", buf, 1)){
+	read(stdout_cpy, buf, 1);
+	if (strncmp("\n", buf, 1)){
 		CU_FAIL("");
 		push_info_msg(_("Your function output the wrong string when no arguments are provided"));
+	}
+	else
+		CU_PASS("");
+
+	SANDBOX_BEGIN;
+	ret4 = main2(3, argv4);
+	SANDBOX_END;
+
+	read(stdout_cpy, buf, 2);
+	if (strncmp("a\n", buf, 2)){
+		CU_FAIL("");
+		push_info_msg(_("Your function output the wrong string when 2 arguments are provided"));
+	}
+	else
+		CU_PASS("");
+
+	SANDBOX_BEGIN;
+	ret5 = main2(2, argv5);
+	SANDBOX_END;
+
+	read(stdout_cpy, buf, 11);
+	if (strncmp("kujsvglqiu\n", buf, 11)){
+		CU_FAIL("");
+		push_info_msg(_("Your function output the wrong string 1 arguments is provided"));
 	}
 	else
 		CU_PASS("");
@@ -85,7 +88,9 @@ void test_myfunc_ret()
 	CU_ASSERT_EQUAL(ret1,0);
 	CU_ASSERT_EQUAL(ret2,0);
 	CU_ASSERT_EQUAL(ret3,0);
-	if (ret1||ret2||ret3)
+	CU_ASSERT_EQUAL(ret4,0);
+	CU_ASSERT_EQUAL(ret5,0);
+	if (ret1||ret2||ret3||ret4||ret5)
 		push_info_msg(_("Your function didn't return 0"));
 }
 
