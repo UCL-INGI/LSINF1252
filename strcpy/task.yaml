@@ -9,15 +9,14 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
 name: '[S3] Improved strcpy - REVIEWED'
 network_grading: false
 order: 26
 problems:
     strcpy_impl:
         type: code
-        name: buf_strcpy
         language: c
         header: |
             Write the body of the function *buf_strcpy*.
@@ -33,69 +32,70 @@ problems:
                 * Take care of '\0' and the working of strlen() (if you use it).
                 */
                 char *buf_strcpy(const char *src) {
+        name: buf_strcpy
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
-        name: Timeout
-        visible: true
-        type: 1
         description: Your code exceeds the maximum allowed time.
+        visible: true
+        name: Timeout
+        type: 1
+        id: timeout
     '1':
-        id: sigsegv
         description: ''
+        type: 1
+        id: sigsegv
+        visible: true
         name: Segmentation Fault
-        visible: true
-        type: 1
     '2':
-        id: not_compile
-        type: 1
         name: Not compile
-        visible: true
         description: You code does not compile.
+        type: 1
+        visible: true
+        id: not_compile
     '3':
+        id: memory
+        type: 1
+        visible: true
         description: ''
         name: Memory Exceeded
-        id: memory
-        visible: true
-        type: 1
     '4':
-        name: Floating Point Exception
         description: ''
-        visible: true
         id: sigfpe
         type: 1
+        visible: true
+        name: Floating Point Exception
     '5':
+        name: Double free
+        description: Your code produced a double free.
         id: double_free
         visible: true
-        description: Your code produced a double free.
-        name: Double free
         type: 1
     '6':
         id: banned_funcs
-        description: You use some banned functions.
-        type: 1
-        visible: true
         name: Banned functions
-    '7':
-        id: malloc_fail
-        name: Malloc fail
-        description: You do not manage the case where malloc() fails.
         type: 1
+        description: You use some banned functions.
         visible: true
+    '7':
+        description: You do not manage the case where malloc() fails.
+        name: Malloc fail
+        visible: true
+        id: malloc_fail
+        type: 1
     '8':
-        name: S3
         description: ''
         visible: true
+        name: S3
         type: 2
         id: ''
     '9':
-        visible: true
-        type: 2
         description: Usage of malloc()
+        type: 2
         name: Malloc
+        visible: true
         id: ''
 weight: 1.0

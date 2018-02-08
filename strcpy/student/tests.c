@@ -78,6 +78,6 @@ void test_strcpy_nomem() {
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS();
+    BAN_FUNCS(memcpy, memccpy);
     RUN(test_strcpy_return, test_strcpy_nomem);
 }
