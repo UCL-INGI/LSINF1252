@@ -3,6 +3,8 @@ author: Nicolas Rybowski
 context: |-
     The classic function ``char *strcpy(char *destination, const char *source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then proceeds to the copy.
 
+    The use of copy functions as ``memcpy`` is not allowed.
+
     *Hint* : use `malloc <https://linux.die.net/man/3/malloc>`_
 environment: cpp
 evaluate: best
