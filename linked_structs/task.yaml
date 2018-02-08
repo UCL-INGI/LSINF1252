@@ -21,20 +21,23 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
-name: '[S3] Filtering a linked list - WIP'
+    memory: '100'
+    time: '30'
+name: '[S3] Filtering a linked list - REQUEST REVIEW'
 network_grading: false
 order: 30
 problems:
     includes:
         language: ''
-        type: code
         header: Here you can add your includes for this task. We strongly recommend
             you to read the manpage given in question 2 !
         name: Includes
+        type: code
     filter:
+        name: Filtering
+        language: c
+        type: code
         header: |-
             We want to filter this list and only take the elements with a pair index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
@@ -52,60 +55,57 @@ problems:
                  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
                  */
                 struct node *pair_filter(struct node *head) {
-        type: code
-        name: Filtering
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        visible: true
-        id: timeout
-        name: Timeout
         description: Your code exceeds the maximum allowed time.
-        type: 1
-    '1':
+        name: Timeout
         visible: true
-        description: ''
-        id: sigsegv
         type: 1
+        id: timeout
+    '1':
+        description: ''
+        type: 1
+        id: sigsegv
+        visible: true
         name: Segmentation Fault
     '2':
-        description: You code does not compile.
-        visible: true
         name: Not compile
-        id: not_compile
+        description: You code does not compile.
         type: 1
-    '3':
         visible: true
-        name: Memory Exceeded
-        id: memory
+        id: not_compile
+    '3':
         type: 1
+        id: memory
+        visible: true
         description: ''
+        name: Memory Exceeded
     '4':
         description: ''
-        visible: true
         name: Floating Point Exception
-        type: 1
         id: sigfpe
+        type: 1
+        visible: true
     '5':
+        description: Your code produced a double free.
+        name: Double free
         visible: true
         id: double_free
         type: 1
-        name: Double free
-        description: Your code produced a double free.
     '6':
-        description: You use some banned functions.
+        type: 1
         id: banned_funcs
         name: Banned functions
-        type: 1
+        description: You use some banned functions.
         visible: true
     '7':
-        name: S3
-        type: 2
         description: ''
         visible: true
+        type: 2
+        name: S3
         id: ''
 weight: 1.0
