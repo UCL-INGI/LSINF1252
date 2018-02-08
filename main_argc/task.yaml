@@ -1,22 +1,19 @@
 accessible: false
 author: Arthur van Stratum
 context: When you execute a C program, its function *main()* is called with, as parameters,
-    the arguments after the executable's name.
+    the name of the program and the arguments after the executable's name.
 environment: cpp
 evaluate: best
 groups: false
 limits:
     time: '30'
-    output: '2'
     memory: '100'
-name: '[S2] Reading arguments WIP'
+    output: '2'
+name: '[S2] Reading arguments TO REVIEW'
 network_grading: false
 order: 8
 problems:
     q1:
-        name: ''
-        language: c
-        type: code
         header: |
             Write a complete C program containing a *main*. Your program should print one argument out of two (starting with the first), and return 0. Each argument shall be separated by a space, and th output terminated by a newmline.
 
@@ -26,6 +23,9 @@ problems:
 
                 ./myProg a b c d e f g
                 a c e g
+        language: c
+        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
