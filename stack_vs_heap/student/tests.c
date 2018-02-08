@@ -19,6 +19,17 @@ void test_sum2(){
     sprintf(msg, _("Expected value: 10. Received value: %i"), result);
     push_info_msg(msg);
   }
+
+  SANDBOX_BEGIN;
+  version1(136, 3);
+  SANDBOX_END;
+
+  CU_ASSERT_EQUAL(result, 139);
+  if (result != 139){
+    char msg[80];
+    sprintf(msg, _("Expected value: 139. Received value: %i"), result);
+    push_info_msg(msg);
+  }
 }
 
 
