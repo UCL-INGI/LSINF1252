@@ -49,8 +49,22 @@ struct node *generate_list(){
   return head;
 }
 
+void test_empty_list(){
+  set_test_metadata("filter", _("Test the return value of the function when null pointer is given as arg"), 1);
+
+  struct node* ret = (struct node*) 0x42;
+
+  SANDBOX_BEGIN;
+  ret = pair_filter(NULL);
+  SANDBOX_END;
+
+  CU_ASSERT_PTR_NULL(ret);
+  if (ret)
+    push_info_msg(_("Wrong returned value when passing NULL arg"));
+}
+
 void test_pair_filter(){
-  set_test_metadata("filter", _("Test"), 1);
+  set_test_metadata("filter", _("Test if the function returns a valid linked list in normal case"), 1);
   int len = sizeof(struct node);
 
   struct node* head = generate_list(), *ret;
@@ -59,6 +73,11 @@ void test_pair_filter(){
   SANDBOX_BEGIN;
   ret = pair_filter(head);
   SANDBOX_END;
+
+  if (!ret){
+    CU_FAIL("NULL returned value");
+    push_info_msg(_("NULL returned value"));
+  }
 
   //printf("ret %p\n", ret);
 
@@ -79,7 +98,6 @@ void test_pair_filter(){
     run2 = run2->next;
   }
 
-
   CU_PASS("The produced list match");
 }
 
@@ -87,5 +105,5 @@ void test_pair_filter(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_pair_filter);
+    RUN(test_pair_filter, test_empty_list);
 }

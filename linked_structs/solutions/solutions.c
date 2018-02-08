@@ -26,7 +26,7 @@ struct node *pair_filter(struct node *head){
     i++;
   }
 
-  //act->next = NULL;
+  act->next = NULL;
 
   return ret;
 }
