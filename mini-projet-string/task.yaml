@@ -10,14 +10,14 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: 'Mini-projet : implémentation de strlen, strcat et strcasecmp'
+name: '[S2] strlen, strcat et strcasecmp'
 network_grading: false
 order: 47
 problems:
     strlen:
         type: code
-        language: c
         name: strlen
+        language: c
         header: |-
             Ecrivez ici le corps de la fonction `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
 
@@ -25,6 +25,8 @@ problems:
 
                 size_t strlen(const char *str) {
     strcat:
+        language: c
+        type: code
         name: Coder strcat
         header: |-
             Entrez ici le corps de la fonction `strcat <https://sites.uclouvain.be/SystInfo/manpages/man3/strcat.3.html>`_
@@ -32,9 +34,9 @@ problems:
             .. code-block:: c
 
                 char *strcat(char *destination, const char *source) {
-        language: c
-        type: code
     strcasecmp:
+        type: code
+        language: c
         header: |-
             Ecrivez ici le corps de la fonction `strcasecmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
 
@@ -44,11 +46,21 @@ problems:
 
                 int strcasecmp(const char *s1, const char *s2) {
         name: Coder strcasecmp
-        language: c
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: 3
     period: 24
-tags: {}
+tags:
+    '1':
+        description: ''
+        type: 2
+        visible: true
+        name: S2
+        id: ''
+    '2':
+        name: Pointer
+        description: Task about pointers and their use
+        type: 2
+        visible: true
+        id: ''
 weight: 1.0
