@@ -9,7 +9,11 @@ context: |-
 
     For this, C introduces a new class of variable types :
 
-    * *int8_t* (signed integer of 8 bits), *uint8_t* (unsigned integer of 8 bits), *uint16_t* (unsigned integer of 16 bits) ... (you can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). (these are defined in <stdint.h>).
+    - *int8_t* (signed integer of 8 bits)
+    - *uint8_t* (unsigned integer of 8 bits)
+    - *uint16_t* (unsigned integer of 16 bits)
+
+    You can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). These types are defined in <stdint.h>
 environment: cpp
 evaluate: best
 groups: false
@@ -17,7 +21,7 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S2] Bitwise operation: weakest bits - REVIEWED'
+name: '[S2] Bitwise operation: high order bits '
 network_grading: false
 order: 14
 problems:
