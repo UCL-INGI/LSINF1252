@@ -10,7 +10,7 @@ done
 
 rep=$(getinput q1)
 
-if [ "$rep" == "$last" ]
+if [[ ( "$rep"=="$last" ) || ( "$rep -"=="$last" ) ]]
 then
 	feedback-result success
 else

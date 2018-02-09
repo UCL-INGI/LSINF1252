@@ -25,15 +25,15 @@ submission_limit:
     period: -1
 tags:
     '0':
+        description: ''
         visible: true
         name: Command line
         type: 2
-        description: ''
         id: ''
     '1':
-        type: 2
-        visible: true
-        name: S1
         description: ''
+        type: 2
+        name: S1
+        visible: true
         id: ''
 weight: 1.0
