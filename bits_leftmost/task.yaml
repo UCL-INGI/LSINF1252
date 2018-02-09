@@ -23,7 +23,11 @@ order: 14
 problems:
     q1:
         header: |-
-            Write the body of a function *get_3_leftmost_bits* that returns the 3 strongest bits of *x*. For instance, with *x=0b11011001...*, the function should return a *uint8_t* containing 0b00000110.
+            Write the body of a function *get_3_leftmost_bits* that returns the 3 high order bits of *x*.
+
+            For instance, if *x=0b11011001...*, the function should return a *uint8_t* containing ``0b00000110``.
+
+            If *x=0b01100001...*, the function should return a *uint8_t* containing ``0b00000011``.
 
             .. code-block:: c
 
