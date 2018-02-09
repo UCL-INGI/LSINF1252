@@ -31,11 +31,28 @@ problems:
 
             Remember that in C (this is defined in stdbool.h), ``true`` corresponds to integer ``1`` while ``false`` corresponds to integer ``0``.
 
+            Remember than in C, you can create a mask as a binary value and use it with the bitwise ``and`` (``&``) and ``or`` (``|``) operations. For example:
+
+            .. code-block:: c
+
+               uint8_t a=0b00000000;
+               uint8_t b=0b00001000;
+               uint8_t c=0b11111101;
+               uint8_t d=0b11011011;
+               // ~(a) returns 0b11111111
+               // (c&a) returns 0b00000000
+               // (c&b) returns 0b00001000
+               // (a|b) returns 0b00001000
+               // (d&c) returns 0b11011001
+
 
             .. code-block:: c
 
                 #include <stdint.h>
                 #include <stdbool.h>
+                /*
+                 * @pre 0<= pos < 64
+                 */
                 uint64_t set_bit(uint64_t x, int pos, bool value) {
         name: ''
         type: code
