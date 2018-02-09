@@ -27,7 +27,10 @@ order: 16
 problems:
     q1:
         header: |-
-            Write the body of a function that returns the variable *x*, but with the *pos*-est bit set to *value*.
+            Write the body of a function that returns the value of variable *x*, but modified with the bit at position *pos* set to *value*.
+
+            Remember that in C (this is defined in stdbool.h), ``true`` corresponds to integer ``1`` while ``false`` corresponds to integer ``0``.
+
 
             .. code-block:: c
 
