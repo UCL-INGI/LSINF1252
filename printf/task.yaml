@@ -1,22 +1,23 @@
 accessible: true
 author: Mathieu Xhonneux
-context: In this exercise, you will familiarize yourself with the functions ``printf(3)``
-    (printing in the terminal) and ``sprintf(3)`` (text formatting).
+context: In this exercise, you will familiarize yourself with the functions `printf(3)
+    <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ (printing
+    on the standard output) and `sprintf(3) <`printf <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
+    (text formatting).
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '30'
 name: '[S2] Printing data'
 network_grading: false
 order: 9
 problems:
     simple:
-        language: c
         header: |-
-            The function ``printf`` writes data to the standard output stream (*stdout*).
+            The function `printf <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ writes data to the standard output stream (*stdout*).
 
             Write the body of the function *print_foo* which will print "foo\\n" (without the quotes, the symbol '\\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
 
@@ -25,9 +26,8 @@ problems:
                 void print_foo() {
         name: Foo
         type: code
+        language: c
     digit:
-        name: Digital
-        type: code
         header: |-
             ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
 
@@ -39,6 +39,8 @@ problems:
                  * result: print to stdout "The magic number is NUMBER.\n"
                  */
                 void print_digit(int number) {
+        type: code
+        name: Digital
         language: c
     example:
         header: |
@@ -50,12 +52,10 @@ problems:
 
                 float PI = 3.1415926;
                 printf("pi = %.4f", PI);
-        answer: pi = 3.1416
         name: Floating away
+        answer: pi = 3.1416
         type: match
     sprintf:
-        name: sprintf
-        type: code
         language: c
         header: |
             ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
@@ -70,57 +70,59 @@ problems:
                  * The given buffer is guaranteed to be big enough
                  */
                 void format_str(char *buffer, unsigned int d, char *name, char initial) {
+        type: code
+        name: sprintf
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Timeout
         description: Your code exceeds the maximum allowed time.
-        type: 1
+        name: Timeout
         visible: true
+        type: 1
         id: timeout
     '1':
-        visible: true
+        description: ''
         type: 1
         id: sigsegv
-        description: ''
+        visible: true
         name: Segmentation Fault
     '2':
-        description: You code does not compile.
-        visible: true
-        type: 1
-        id: not_compile
         name: Not compile
+        description: You code does not compile.
+        type: 1
+        visible: true
+        id: not_compile
     '3':
-        name: Memory Exceeded
+        type: 1
         id: memory
         visible: true
-        type: 1
         description: ''
+        name: Memory Exceeded
     '4':
-        name: Floating Point Exception
         description: ''
-        type: 1
         id: sigfpe
-        visible: true
-    '5':
-        visible: true
-        name: Double free
         type: 1
+        visible: true
+        name: Floating Point Exception
+    '5':
         description: Your code produced a double free.
         id: double_free
+        name: Double free
+        visible: true
+        type: 1
     '6':
         type: 1
-        name: Banned functions
-        visible: true
         id: banned_funcs
+        name: Banned functions
         description: You use some banned functions.
-    '7':
-        name: S2
-        type: 2
-        description: ''
         visible: true
+    '7':
+        visible: true
+        description: ''
+        type: 2
+        name: S2
         id: ''
 weight: 1.0
