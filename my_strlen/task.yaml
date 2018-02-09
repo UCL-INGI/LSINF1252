@@ -1,73 +1,76 @@
 accessible: true
 author: 'Nicolas Rybowski, '
-context: You are asked to implement `strlen <https://linux.die.net/man/3/strlen>`_.
+context: Your objective is to implement `strlen <https://linux.die.net/man/3/strlen>`_
+    one of the basic functions of the C library that deals with strings.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S2] My strlen - REVIEWED'
 network_grading: false
 order: 11
 problems:
     my_stlren:
+        type: code
         name: my_stlren
         language: c
-        header: Write here your code for ``my_strlen``
-        type: code
+        header: Include here the code and the signature for your ``my_strlen``. Your
+            function must have the same signature as the `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
+            function of the standard C library.
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
-        name: Timeout
-        visible: true
-        type: 1
         description: Your code exceeds the maximum allowed time.
-    '1':
-        id: sigsegv
-        name: Segmentation Fault
         visible: true
+        name: Timeout
+        type: 1
+        id: timeout
+    '1':
         description: ''
         type: 1
-    '2':
-        id: not_compile
-        type: 1
-        name: Not compile
+        id: sigsegv
         visible: true
+        name: Segmentation Fault
+    '2':
+        name: Not compile
         description: You code does not compile.
+        type: 1
+        visible: true
+        id: not_compile
     '3':
+        type: 1
         id: memory
         visible: true
-        type: 1
+        description: ''
         name: Memory Exceeded
-        description: ''
     '4':
-        name: Floating Point Exception
         description: ''
-        visible: true
+        name: Floating Point Exception
         id: sigfpe
         type: 1
-    '5':
-        id: double_free
         visible: true
+    '5':
         description: Your code produced a double free.
         name: Double free
+        visible: true
+        id: double_free
         type: 1
     '6':
-        description: You use some banned functions.
         id: banned_funcs
         type: 1
-        visible: true
         name: Banned functions
+        description: You use some banned functions.
+        visible: true
     '7':
-        name: S2
-        type: 2
         description: ''
         visible: true
+        type: 2
+        name: S2
         id: ''
 weight: 1.0
