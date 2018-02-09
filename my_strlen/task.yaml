@@ -1,6 +1,6 @@
 accessible: true
 author: 'Nicolas Rybowski, '
-context: Your objective is to implement `strlen <https://linux.die.net/man/3/strlen>`_
+context: Your objective is to implement `strlen <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
     one of the basic functions of the C library that deals with strings.
 environment: cpp
 evaluate: best
