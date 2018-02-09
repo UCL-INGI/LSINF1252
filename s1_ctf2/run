@@ -10,6 +10,9 @@ done
 
 rep=$(getinput q1)
 
+rep=$(echo $rep | sed 's/ .*//g')  #Ppour éviter le non match si on ne colle pas le tiret qui suit le hash
+last=$(echo $last | sed 's/ .*//g')
+
 if [ "$rep" == "$last" ]
 then
 	feedback-result success
