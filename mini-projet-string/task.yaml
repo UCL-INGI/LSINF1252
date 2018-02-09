@@ -1,32 +1,23 @@
 accessible: true
 author: Mathieu Xhonneux
-context: |-
-    La libraire string(3) implémente un grand nombre de fonctions de manipulation des strings qui vous serons utile lors de différents projets de programmation. Pour ce mini-projet vous devriez implémenter les fonctions suivantes:
+context: |+
+    La libraire `string(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/string.3.html>`_ implémente un grand nombre de fonctions de manipulation des strings qui vous seront utiles lors de différents projets de programmation.
 
-    strlen(3)
-
-    strcat(3)
-
-    strcasecmp(3)
-
-    Indice : pour strcasecmp, travaillez à partir des données de ce `tableau <https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ASCII-Table-wide.svg/2000px-ASCII-Table-wide.svg.png>`_ (vous n'avez pas accès à la fonction `tolower` de `ctype.h`).
-
-    Cette question a pour objectif de vérifier que votre implémentation, que vous avez normalement testée sur votre ordinateur, fonctionne correctement. Le nombre de soumissions autorisées est limité.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '30'
 name: 'Mini-projet : implémentation de strlen, strcat et strcasecmp'
 network_grading: false
 order: 47
 problems:
     strlen:
-        name: strlen
-        language: c
         type: code
+        language: c
+        name: strlen
         header: |-
             Entrez ici le corps de la fonction strlen.
 
@@ -34,6 +25,7 @@ problems:
 
                 size_t strlen(const char *str) {
     strcat:
+        name: Coder strcat
         header: |-
             Entrez ici le corps de la fonction strcat.
 
@@ -42,10 +34,7 @@ problems:
                 char *strcat(char *destination, const char *source) {
         language: c
         type: code
-        name: Coder strcat
     strcasecmp:
-        language: c
-        type: code
         header: |-
             Entrez ici le corps de la fonction strcasecmp.
 
@@ -53,8 +42,11 @@ problems:
 
                 int strcasecmp(const char *s1, const char *s2) {
         name: Coder strcasecmp
+        language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: 3
     period: 24
+tags: {}
 weight: 1.0
