@@ -19,7 +19,7 @@ problems:
         language: c
         name: strlen
         header: |-
-            Entrez ici le corps de la fonction strlen.
+            Ecrivez ici le corps de la fonction `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
 
             .. code-block:: c
 
@@ -27,7 +27,7 @@ problems:
     strcat:
         name: Coder strcat
         header: |-
-            Entrez ici le corps de la fonction strcat.
+            Entrez ici le corps de la fonction `strcat <https://sites.uclouvain.be/SystInfo/manpages/man3/strcat.3.html>`_
 
             .. code-block:: c
 
@@ -36,7 +36,9 @@ problems:
         type: code
     strcasecmp:
         header: |-
-            Entrez ici le corps de la fonction strcasecmp.
+            Ecrivez ici le corps de la fonction `strcasecmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
+
+            Pour cette fonction, travaillez à partir des données de ce `tableau <https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ASCII-Table-wide.svg/2000px-ASCII-Table-wide.svg.png>`_ (vous n'avez pas accès à la fonction `tolower(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/tolower.3.html>`_ de `ctype.h`).
 
             .. code-block:: c
 
