@@ -5,80 +5,80 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S2] Swap my integers - REVIEWED'
 network_grading: false
 order: 20
 problems:
     q1:
-        type: code
-        language: c
         header: |-
-            Write the body of the function *swap* which swaps the values pointed by *i* and *j*.
+            Write the body of the function *swap* which exchanges the values pointed by *i* and *j*.
 
             .. code-block:: c
 
                 void swap(int *i, int *j) {
         name: Swap
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
+        description: Your code exceeds the maximum allowed time.
         name: Timeout
         visible: true
         type: 1
-        description: Your code exceeds the maximum allowed time.
+        id: timeout
     '1':
-        id: sigsegv
         description: ''
+        type: 1
+        visible: true
+        id: sigsegv
         name: Segmentation Fault
-        visible: true
-        type: 1
     '2':
-        id: not_compile
-        type: 1
         name: Not compile
-        visible: true
         description: You code does not compile.
+        type: 1
+        visible: true
+        id: not_compile
     '3':
+        type: 1
         id: memory
         visible: true
-        type: 1
+        description: ''
         name: Memory Exceeded
-        description: ''
     '4':
-        name: Floating Point Exception
         description: ''
-        visible: true
         id: sigfpe
         type: 1
-    '5':
-        id: double_free
+        name: Floating Point Exception
         visible: true
+    '5':
         description: Your code produced a double free.
         name: Double free
+        visible: true
+        id: double_free
         type: 1
     '6':
-        id: banned_funcs
-        description: You use some banned functions.
         type: 1
-        visible: true
+        id: banned_funcs
         name: Banned functions
+        description: You use some banned functions.
+        visible: true
     '7':
-        name: S2
+        visible: true
         description: ''
         type: 2
-        visible: true
+        name: S2
         id: ''
     '8':
-        name: Pointer
         description: Task about pointers and their use
-        visible: true
         type: 2
+        visible: true
+        name: Pointer
         id: ''
 weight: 1.0
