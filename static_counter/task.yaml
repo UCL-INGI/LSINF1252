@@ -1,39 +1,4 @@
-/student/tests.c: |-
-    // CTester template
-
-    #include <stdlib.h>
-    #include "student_code.h"
-    #include "CTester/CTester.h"
-
-    void test() {
-        set_test_metadata("static_counter", _("Test counter"), 1);
-        int count = 1;
-
-        for(int i = 0; i < 40; i++){
-            int ret = 0;
-
-            SANDBOX_BEGIN;
-            ret = stexp();
-            SANDBOX_END;
-            if(ret > 4096){
-                set_tag("reset_counter");
-            }
-            if(ret != count){
-                CU_FAIL();
-                push_info_msg(_("Your counter is not correct."));
-                break;
-            }
-            count *= 2;
-            if(count > 4096)
-                count = 1;
-        }
-    }
-
-    int main(int argc,char** argv){
-        BAN_FUNCS(system, set_tag);
-        RUN(test);
-    }
-accessible: true
+accessible: false
 author: Mathieu Xhonneux
 context: |-
     A variable declared inside a function with the keyword *static* implies that the value of this variable will be kept across the different calls to this function.
@@ -43,17 +8,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S2] Exponentially static counter - REVIEWED'
 network_grading: false
 order: 13
 problems:
     static_counter:
+        type: code
         name: Static counter
         language: c
-        type: code
         header: |-
             Write the body of the function *stexp* which returns at its ``*n*th`` call the value ``2^(n-1)``. Once it has returned the value 4096, the next return should go back to 1.
 
@@ -68,57 +33,57 @@ submission_limit:
     period: -1
 tags:
     '0':
-        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        visible: true
         name: Timeout
         type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
+        id: timeout
     '1':
-        id: sigsegv
         description: ''
+        type: 1
+        id: sigsegv
+        visible: true
         name: Segmentation Fault
-        visible: true
-        type: 1
     '2':
-        id: not_compile
-        type: 1
         name: Not compile
-        visible: true
         description: You code does not compile.
+        type: 1
+        visible: true
+        id: not_compile
     '3':
+        type: 1
         id: memory
         visible: true
-        type: 1
+        description: ''
         name: Memory Exceeded
-        description: ''
     '4':
-        name: Floating Point Exception
         description: ''
-        visible: true
+        name: Floating Point Exception
         id: sigfpe
         type: 1
-    '5':
-        id: double_free
         visible: true
+    '5':
         description: Your code produced a double free.
         name: Double free
+        visible: true
+        id: double_free
         type: 1
     '6':
         id: banned_funcs
-        description: You use some banned functions.
-        type: 1
-        visible: true
         name: Banned functions
-    '7':
-        id: reset_counter
-        name: Counter reset to 1
-        description: Your counter returns a value bigger than 4096.
-        type: 1
+        description: You use some banned functions.
         visible: true
+        type: 1
+    '7':
+        description: Your counter returns a value bigger than 4096.
+        visible: true
+        id: reset_counter
+        type: 1
+        name: Counter reset to 1
     '8':
-        name: S2
         description: ''
         type: 2
         visible: true
+        name: S2
         id: ''
 weight: 1.0
