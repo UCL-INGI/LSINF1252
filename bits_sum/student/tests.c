@@ -18,8 +18,18 @@ void test_myfunc_ret() {
 	CU_ASSERT_EQUAL(1, ret2);
 	CU_ASSERT_EQUAL(1, ret3);
 	CU_ASSERT_EQUAL(0, ret4);
-	if ( 6!= ret1||1!= ret2 ||1!= ret3 ||0!= ret4)
-		push_info_msg(_("nbits returns the wrong numbers of bits"));
+	if ( 6!= ret1) {
+		push_info_msg(_("nbits does not return the correct answer when its input is 0b1110110100"));
+    }
+    if ( 1!= ret2 ) {
+		push_info_msg(_("nbits does not return the correct answer when its input is 0b0000010000"));
+    }
+    if ( 1!= ret3 ) {
+		push_info_msg(_("nbits does not return the correct answer when its input is 0b1000000000000000"));
+    }
+    if ( 0!= ret4) {
+		push_info_msg(_("nbits does not return the correct answer when its input is 0b0000000000000000"));
+    }
 }
 
 int main(int argc,char** argv)
