@@ -27,10 +27,12 @@ order: 19
 problems:
     q1:
         header: |-
-            Write the body of a function *reset_highestorder_bit*, which sets to ``0`` the highest bit set to ``1`` it founds, and does nothing if there's no bit set to ``0``.
+            Write the body of a function ``reset_highestorder_bit``, which sets to ``0`` the highest bit set to ``1`` it founds, and does nothing if there's no bit set to ``0``.
 
             For example, with bytes, ``reset_highestorder_bit(0b000111010101010)`` would return ``0b000011010101010`` and
             ``reset_highestorder_bit(0b100111010101010)`` would return ``0b000111010101010``
+
+            To write this function, you first need to determine the position of the highest order bit that is set to ``1`` and the reset its value.
 
             .. code-block:: c
 
