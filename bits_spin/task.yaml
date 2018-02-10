@@ -27,7 +27,9 @@ order: 17
 problems:
     q1:
         header: |-
-            Write the body of a function *cycle_bits*, which moves all bits from *n* places to the left, according to the formula *x[(i+n)%32] = x[i]*, where *x[i]* is the i-iest bit of *x*.
+            Write the body of a function *cycle_bits*, which cycles all bits from *n* places to the left, according to the formula *x[(i+n)%32] = x[i]*, where *x[i]* is the i-iest bit of *x*.
+
+            Here is a simple example with bytes. Consider byte ``0b01101011``. If ``n`` is set to ``1``, then ``cycle_bits`` would return ``0b11010110``. If ``n`` is set to ``3``, then ``cycle_bits`` would return ``0b10110110``.
 
             .. code-block:: c
 
