@@ -1,28 +1,33 @@
-accessible: false
+accessible: true
 author: Mathieu Xhonneux
-context: Coder une fonction calloc2, ayant le même prototype et le même fonctionnement
-    que calloc(3) mais qui utilise malloc(3) pour allouer la mémoire.
+context: Ecrire la fonction ``calloc2``, ayant le même prototype et le même fonctionnement
+    que `calloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/calloc.3.html>`_
+    mais qui utilise `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_
+    pour allouer la mémoire.
 environment: cpp
 evaluate: best
 groups: false
 limits:
+    output: '2'
     memory: '100'
     time: '30'
-    output: '2'
-name: '[Beta] Coder calloc à l''aide de malloc'
+name: '[S2] Coder calloc en utilisant malloc'
 network_grading: false
 order: 77
 problems:
     calloc2:
-        header: |-
-            Entrez ici le corps de la fonction calloc2.
-
-            `void *calloc2(size_t nmemb, size_t size) {`
+        name: calloc2
         type: code
         language: c
-        name: calloc2
+        header: |-
+            Entrez ici le corps de votre fonction ``calloc2``. Pensez à bien respecter tout ce que fait la fonction `calloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_
+
+            .. code-block:: c
+
+               void *calloc2(size_t nmemb, size_t size) {
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
+tags: {}
 weight: 1.0
