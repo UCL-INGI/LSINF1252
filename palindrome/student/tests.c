@@ -46,7 +46,7 @@ void test_myfunc_ret()
 	CU_ASSERT_EQUAL(ret6,-1);
 	CU_ASSERT_EQUAL(ret7,1);
 	if (ret1!=0 || ret4!=0)
-		push_info_msg(_("Your function doesn't work for strings that are not palindromes"));
+		push_info_msg(_("Your function does not work correctly for strings that are not palindromes"));
 	if (ret2!=1 || ret3!=1 || ret5!=1 || ret7!=1)
 		push_info_msg(_("Your function doesn't work for strings that are palindromes"));
 	if (ret6!=-1)

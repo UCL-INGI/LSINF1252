@@ -1,82 +1,82 @@
 accessible: true
 author: Arthur van Stratum
-context: 'Palindrome are strings of text which reads the same backward as forward,
-    i.e. : "racecar", or "a man a plan a canal panama".'
+context: 'Palindrome are strings of text which read the same backward as forward,
+    i.e. : "racecar", "a man a plan a canal panama" or "kayak".'
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S2] Palindrome - REVIEWED'
 network_grading: false
 order: 12
 problems:
     q1:
-        name: ''
-        language: c
-        type: code
         header: |-
-            Write the body of the function *pal* which tells if the given string is a palindrome or not. Ignore spaces. An empty string is considered a palindrome. You have access to the functions of *string.h*
+            Write the body of the function *pal* which tells if the given string is a palindrome or not. Ignore spaces. An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
 
             .. code-block:: c
 
                 #include <string.h>
                 /*
-                * @return: return 1 if a str is a palindrome, -1 if str is NULL, else 0.
+                * @return: returns true (1) if str is a palindrome, -1 if str is NULL, otherwise false (0).
                 */
                 int pal(char *str) {
+        name: ''
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        description: Your code exceeds the maximum allowed time.
         name: Timeout
+        visible: true
         type: 1
         id: timeout
-        visible: true
-        description: Your code exceeds the maximum allowed time.
     '1':
+        description: ''
         type: 1
         visible: true
-        name: Segmentation Fault
         id: sigsegv
-        description: ''
+        name: Segmentation Fault
     '2':
-        visible: true
-        description: You code does not compile.
-        id: not_compile
-        type: 1
         name: Not compile
-    '3':
-        name: Memory Exceeded
+        description: You code does not compile.
+        type: 1
         visible: true
-        description: ''
+        id: not_compile
+    '3':
         type: 1
         id: memory
-    '4':
-        id: sigfpe
-        name: Floating Point Exception
+        visible: true
         description: ''
-        visible: true
+        name: Memory Exceeded
+    '4':
+        description: ''
+        id: sigfpe
         type: 1
-    '5':
+        name: Floating Point Exception
         visible: true
+    '5':
         description: Your code produced a double free.
-        id: double_free
         name: Double free
+        visible: true
+        id: double_free
         type: 1
     '6':
+        type: 1
         id: banned_funcs
         name: Banned functions
-        type: 1
         description: You use some banned functions.
         visible: true
     '7':
-        description: ''
         visible: true
+        description: ''
         type: 2
         name: S2
         id: ''
