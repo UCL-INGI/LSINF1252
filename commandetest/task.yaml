@@ -3,16 +3,16 @@ author: Gregory Detal & Fabien Duchêne
 context: |+
     La commande ``test`` permet d'évaluer une expression passée en paramètre. Elle retourne:
 
-    - ``0`` si l'expression passée en argument est vraie
-    - ``1`` si l'expression passée en argument est fausse
+     - ``0`` si l'expression passée en argument est vraie
+     - ``1`` si l'expression passée en argument est fausse
 
     On vous demande d'écrire un sous-ensemble de la commande ``test`` en C. Les expressions à implémenter sont ``-eq``, ``-ge``, ``-gt``, ``-le``, ``-lt`` et ``-ne``.
 
     Pour rappel, la commande ``test`` est décrite dans la page de manuel qui lui est consacrée.
 
-    Pour répondre à cette question, vous devez structurer votre programme avec des appels de sous-fonction et donc de ne pas faire toute l'exécution dans la fonction main().
+    Pour répondre à cette question, vous devez structurer votre programme avec des appels de sous-fonction et donc de ne pas faire toute l'exécution dans la fonction ``main()``.
 
-    Il existe plusieurs façon pour tester votre code, une de ces façon est de regarder dans le shell le contenu de la variable ``$?`` après chaque exécution de votre programme. Une autre façon est de profiter de l'instruction conditionnelle ``if-then-else`` du shell.
+    Il existe plusieurs façons pour tester votre code, une de ces façons est de regarder dans le shell le contenu de la variable ``$?`` après chaque exécution de votre programme. Une autre façon est de profiter de l'instruction conditionnelle ``if-then-else`` du shell.
 
 
 
@@ -20,17 +20,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    output: '5210'
     memory: '32'
     time: '30'
-    output: '5210'
 name: La commande test
 network_grading: false
 order: 45
 problems:
     q1:
-        language: c
         name: ''
         type: code
+        language: c
         header: |+
             Complétez ici le code du fichier ``test.c`` qui contient la réponse à l'énoncé.
 
@@ -39,4 +39,5 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
+tags: {}
 weight: 1.0

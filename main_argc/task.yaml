@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Arthur van Stratum
 context: When you execute a C program, its function ``main()`` is called with, as
     parameters, the name of the program and the arguments after the executable's name.
