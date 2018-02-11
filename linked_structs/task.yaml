@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Mathieu Xhonneux, Nicolas Rybowski
 context: |-
     We have a linked list, built with ``struct node``.
