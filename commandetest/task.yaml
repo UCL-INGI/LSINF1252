@@ -1,14 +1,14 @@
 accessible: true
 author: Gregory Detal & Fabien Duchêne
 context: |+
-    La commande ``test`` permet d'évaluer une expression passée en paramètre. Elle retourne:
+    La commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ permet d'évaluer une expression passée en paramètre. Elle retourne:
 
      - ``0`` si l'expression passée en argument est vraie
      - ``1`` si l'expression passée en argument est fausse
 
-    On vous demande d'écrire un sous-ensemble de la commande ``test`` en C. Les expressions à implémenter sont ``-eq``, ``-ge``, ``-gt``, ``-le``, ``-lt`` et ``-ne``.
+    On vous demande d'écrire un sous-ensemble de la commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ en C. Les expressions à implémenter sont ``-eq``, ``-ge``, ``-gt``, ``-le``, ``-lt`` et ``-ne``.
 
-    Pour rappel, la commande ``test`` est décrite dans la page de manuel qui lui est consacrée.
+    Pour rappel, la commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ est décrite dans la `page de manuel  <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ qui lui est consacrée.
 
     Pour répondre à cette question, vous devez structurer votre programme avec des appels de sous-fonction et donc de ne pas faire toute l'exécution dans la fonction ``main()``.
 
@@ -23,7 +23,7 @@ limits:
     output: '5210'
     memory: '32'
     time: '30'
-name: La commande test
+name: '[S3] Le programme test'
 network_grading: false
 order: 45
 problems:
