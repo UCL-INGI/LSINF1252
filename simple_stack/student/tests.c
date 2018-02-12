@@ -242,7 +242,7 @@ void test_pop_args(){
     char *result = NULL;
 
     SANDBOX_BEGIN;
-    ret = pop(NULL, &result);
+    ret = pop(NULL, result);
     SANDBOX_END;
 
     CU_ASSERT_TRUE(ret);
@@ -272,7 +272,7 @@ void test_pop_value(){
   stack =  generate_stack(a, 6);
   tmp_head = stack;
   name_head = tmp_head->name;
-  ret = pop(&stack, &result);
+  ret = pop(&stack, result);
   SANDBOX_END;
 
   monitored.free = false;
@@ -357,7 +357,7 @@ void test_pop_empty(){
   monitored.malloc = true;
 
   SANDBOX_BEGIN;
-  ret = pop(&head, &dst);
+  ret = pop(&head, dst);
   SANDBOX_END;
 
   CU_ASSERT_TRUE(!ret);

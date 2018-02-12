@@ -6,13 +6,14 @@ int pop(struct node **head, char **result){
   if (!head)
     return 1;
 
-  struct node* tmp = *head;
-  *head = tmp->next;
+    struct node* tmp = *head;
+    *head = tmp->next;
 
-  *result = tmp->name;
-  free(tmp);
+    strcpy(*result,tmp->name);
+    free(tmp->name);
+    free(tmp);
 
-  return 0;
+    return 0;
 }
 
 int push(struct node **head, const char *value){
