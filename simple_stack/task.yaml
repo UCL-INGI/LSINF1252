@@ -31,15 +31,14 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S3] Simple stack - REVIEWED'
 network_grading: false
 order: 29
 problems:
     push:
-        type: code
         header: |-
             .. code-block:: c
 
@@ -55,8 +54,9 @@ problems:
                 int push(struct node **head, const char *value){
         name: Push
         language: c
+        type: code
     pop:
-        language: c
+        type: code
         header: |-
             .. code-block:: c
 
@@ -72,66 +72,66 @@ problems:
                 * post : @result contains the string @name from the head of the stack
                 */
 
-                int pop(struct node **head, char *result){
-        type: code
+                int pop(struct node **head, char **result){
         name: Pop
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
-        name: Timeout
-        visible: true
-        type: 1
         description: Your code exceeds the maximum allowed time.
+        visible: true
+        name: Timeout
+        type: 1
+        id: timeout
     '1':
-        id: sigsegv
         description: ''
+        type: 1
+        id: sigsegv
+        visible: true
         name: Segmentation Fault
-        visible: true
-        type: 1
     '2':
-        id: not_compile
-        type: 1
         name: Not compile
-        visible: true
         description: You code does not compile.
+        type: 1
+        visible: true
+        id: not_compile
     '3':
+        type: 1
         id: memory
         visible: true
-        type: 1
+        description: ''
         name: Memory Exceeded
-        description: ''
     '4':
-        name: Floating Point Exception
         description: ''
-        visible: true
+        name: Floating Point Exception
         id: sigfpe
         type: 1
-    '5':
-        id: double_free
         visible: true
+    '5':
         description: Your code produced a double free.
         name: Double free
+        visible: true
+        id: double_free
         type: 1
     '6':
+        id: banned_funcs
+        name: Banned functions
         type: 1
         description: You use some banned functions.
-        id: banned_funcs
         visible: true
-        name: Banned functions
     '7':
-        name: Data structures
         description: Task dealing with data structures and linked list
-        type: 2
         visible: true
+        type: 2
+        name: Data structures
         id: ''
     '8':
-        name: S3
         description: ''
         type: 2
         visible: true
+        name: S3
         id: ''
 weight: 1.0

@@ -5,6 +5,6 @@ struct node{
     char *name;
 };
 
-int pop(struct node **head, char *result);
+int pop(struct node **head, char **result);
 
 int push(struct node **head, const char *value);
