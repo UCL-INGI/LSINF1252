@@ -72,7 +72,7 @@ problems:
                 * post : @result contains the string @name from the head of the stack
                 */
 
-                int pop(struct node **head, char **result){
+                int pop(struct node **head, char *result){
         name: Pop
         language: c
 stored_submissions: 0

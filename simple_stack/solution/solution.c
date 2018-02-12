@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include<stdio.h>
 
-int pop(struct node **head, char **result){
+int pop(struct node **head, char *result){
   if (!head)
     return 1;
 
     struct node* tmp = *head;
     *head = tmp->next;
 
-    strcpy(*result,tmp->name);
+    strcpy(result,tmp->name);
     free(tmp->name);
     free(tmp);
 
