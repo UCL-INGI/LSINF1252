@@ -10,7 +10,7 @@ limits:
     time: '30'
 name: '[S3] make more basics - multiple choice questions'
 network_grading: false
-order: 32
+order: 34
 problems:
     m1:
         answer: $(CC)

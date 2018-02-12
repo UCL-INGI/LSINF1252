@@ -87,7 +87,7 @@ limits:
     memory: '100'
 name: '[S2] make basics - REVIEWED'
 network_grading: false
-order: 21
+order: 23
 problems:
     make_me_easy:
         name: Make me easy

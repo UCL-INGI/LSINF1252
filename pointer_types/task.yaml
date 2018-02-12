@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S4] Pointer arithmetic - REVIEWED'
 network_grading: false
-order: 37
+order: 39
 problems:
     first:
         name: First argument

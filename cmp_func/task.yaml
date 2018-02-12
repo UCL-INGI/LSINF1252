@@ -15,7 +15,7 @@ limits:
     time: '30'
 name: '[S4] Comparing functions - REVIEWED'
 network_grading: false
-order: 39
+order: 41
 problems:
     cmp_func:
         name: Compare functions

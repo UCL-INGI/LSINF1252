@@ -36,7 +36,7 @@ limits:
     time: '30'
 name: '[S3] Simple stack - REVIEWED'
 network_grading: false
-order: 29
+order: 31
 problems:
     push:
         header: |-

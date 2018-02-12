@@ -56,7 +56,7 @@ limits:
     output: '2'
 name: '[S3] make more basics'
 network_grading: false
-order: 31
+order: 33
 problems:
     m1:
         answer: OBJ = calc.o operations.o

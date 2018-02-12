@@ -34,7 +34,7 @@ limits:
     time: '30'
 name: '[S3] Global''n''stack - REVIEWED'
 network_grading: false
-order: 24
+order: 26
 problems:
     return1:
         type: match

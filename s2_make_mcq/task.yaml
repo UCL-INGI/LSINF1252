@@ -10,7 +10,7 @@ limits:
     output: '2'
 name: '[S2] make basics - multiple choice questions - REVIEWED'
 network_grading: false
-order: 22
+order: 24
 problems:
     mcq1:
         header: Select all *correct* answers related to the *target* of a Makefile

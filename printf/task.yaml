@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S2] Printing data'
 network_grading: false
-order: 9
+order: 10
 problems:
     simple:
         header: |-
