@@ -32,7 +32,7 @@ void free_list(node_t** h){
 * @begin_char: first char expected in the list
 * @order_relation: 1 if natural order, -1 if reverse order
 * @size_list: number of elements expected in the list
-* @offset_inserted: position expected of the inserted element
+* @offset_inserted: position expected of the inserted element, negative in reinsertion case
 *
 * @return:  0 if correct Insertion
 *           -1 if node are in bad order
@@ -40,11 +40,13 @@ void free_list(node_t** h){
 *           -3 if inserted element is not malloced
 */
 int test_list(node_t** header, char begin_char, int order_relation, int size_list, int offset_inserted){
+    int malloced_flag = 1;
+    if(offset_inserted < 0) malloced_flag = 0;
     int count = 1;
     char cmp = begin_char;
     node_t* runner = *header;
     while(runner){
-        if(count == offset_inserted) if(!malloced(runner)) return -3;
+        if(malloced_flag && count == offset_inserted) if(!malloced(runner)) return -3;
         if(runner->val != cmp) return -1;
         count++;
         cmp = cmp + order_relation;
@@ -953,9 +955,188 @@ void test2_insert_last_decresc(){
     free_list(h);
 }
 
+void test_reinsert_first(){
+    set_test_metadata("insert", _("Reinsertion in first place"), 1);
+
+    int ret = 1;
+    node_t* l = (node_t*) malloc(sizeof(node_t));
+    if(!l) { CU_FAIL(_("no mem")); return;}
+    l->val = 'a';
+    l->next = NULL;
+    node_t** h = &l;
+
+    monitored.malloc = 1;
+
+    size_t start = stats.memory.used;
+    SANDBOX_BEGIN;
+    ret = insert(h,'a',&cmp1);
+    SANDBOX_END;
+    size_t delta = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(delta, 0);
+    if(delta) CU_FAIL(_("You shouldn't allocate memory for a reinsertion"));
+
+    CU_ASSERT_EQUAL(ret,0);
+    if(ret) CU_FAIL(_("You don't return the good value"));
+
+    CU_ASSERT_PTR_NOT_NULL(*h);
+
+    ret = test_list(h,'a',1,1,-1);
+
+    switch (ret) {
+        case -1:
+            CU_FAIL(_("The elements are not in the correct order"));
+            break;
+        case -2:
+            CU_FAIL(_("There is not the correct number of elements in the list"));
+            break;
+        case -3:
+            CU_FAIL(_("The inserted element is not malloced"));
+            break;
+        case 0:
+            break;
+        default:
+            break;
+    }
+
+    free_list(h);
+}
+
+void test_reinsert_middle(){
+    set_test_metadata("insert", _("Reinsertion in middle place"), 1);
+
+    int ret = 1;
+    node_t* l1 = (node_t*) malloc(sizeof(node_t));
+    if(!l1) { CU_FAIL(_("no mem")); return;}
+    node_t* l2 = (node_t*) malloc(sizeof(node_t));
+    if(!l2) { CU_FAIL(_("no mem")); free(l1); return;}
+    node_t* l3 = (node_t*) malloc(sizeof(node_t));
+    if(!l3) { CU_FAIL(_("no mem")); free(l1); free(l2); return;}
+    node_t* l4 = (node_t*) malloc(sizeof(node_t));
+    if(!l4) { CU_FAIL(_("no mem")); free(l1); free(l2); free(l3); return;}
+    node_t* l5 = (node_t*) malloc(sizeof(node_t));
+    if(!l5) { CU_FAIL(_("no mem")); free(l1); free(l2); free(l3); free(l4); return;}
+    l5->val = 'e';
+    l5->next = NULL;
+    l4->val = 'd';
+    l4->next = l5;
+    l3->val = 'c';
+    l3->next = l4;
+    l2->val = 'b';
+    l2->next = l3;
+    l1->val = 'a';
+    l1->next = l2;
+    node_t** h = &l1;
+
+    monitored.malloc = 1;
+
+    size_t start = stats.memory.used;
+    SANDBOX_BEGIN;
+    ret = insert(h,'d',&cmp1);
+    SANDBOX_END;
+    size_t delta = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(delta, 0);
+    if(delta) CU_FAIL(_("You shouldn't allocate memory for a reinsertion"));
+
+    CU_ASSERT_EQUAL(ret,0);
+    if(ret) CU_FAIL(_("You don't return the good value"));
+
+    CU_ASSERT_PTR_NOT_NULL(*h);
+
+    CU_ASSERT_EQUAL(stats.malloc.called,0);
+    if(stats.malloc.called) CU_FAIL(_("You don't have to call malloc"));
+
+    ret = test_list(h,'a',1,5,-1);
+
+    switch (ret) {
+        case -1:
+            CU_FAIL(_("The elements are not in the correct order"));
+            break;
+        case -2:
+            CU_FAIL(_("There is not the correct number of elements in the list"));
+            break;
+        case -3:
+            CU_FAIL(_("The inserted element is not malloced"));
+            break;
+        case 0:
+            break;
+        default:
+            break;
+    }
+
+    free_list(h);
+}
+
+void test_reinsert_last(){
+    set_test_metadata("insert", _("Reinsertion in last place"), 1);
+
+    int ret = 1;
+    node_t* l1 = (node_t*) malloc(sizeof(node_t));
+    if(!l1) { CU_FAIL(_("no mem")); return;}
+    node_t* l2 = (node_t*) malloc(sizeof(node_t));
+    if(!l2) { CU_FAIL(_("no mem")); free(l1); return;}
+    node_t* l3 = (node_t*) malloc(sizeof(node_t));
+    if(!l3) { CU_FAIL(_("no mem")); free(l1); free(l2); return;}
+    node_t* l4 = (node_t*) malloc(sizeof(node_t));
+    if(!l4) { CU_FAIL(_("no mem")); free(l1); free(l2); free(l3); return;}
+    node_t* l5 = (node_t*) malloc(sizeof(node_t));
+    if(!l5) { CU_FAIL(_("no mem")); free(l1); free(l2); free(l3); free(l4); return;}
+    l5->val = 'v';
+    l5->next = NULL;
+    l4->val = 'w';
+    l4->next = l5;
+    l3->val = 'x';
+    l3->next = l4;
+    l2->val = 'y';
+    l2->next = l3;
+    l1->val = 'z';
+    l1->next = l2;
+    node_t** h = &l1;
+
+    monitored.malloc = 1;
+
+    size_t start = stats.memory.used;
+    SANDBOX_BEGIN;
+    ret = insert(h,'v',&cmp2);
+    SANDBOX_END;
+    size_t delta = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(delta, 0);
+    if(delta) CU_FAIL(_("You don't allocate the good amount of memory"));
+
+    CU_ASSERT_EQUAL(ret,0);
+    if(ret) CU_FAIL(_("You don't return the good value"));
+
+    CU_ASSERT_PTR_NOT_NULL(*h);
+
+    CU_ASSERT_EQUAL(stats.malloc.called,0);
+    if(stats.malloc.called != 0) CU_FAIL(_("You don't have to call malloc"));
+
+    ret = test_list(h,'z',-1,5,-1);
+
+    switch (ret) {
+        case -1:
+            CU_FAIL(_("The elements are not in the correct order"));
+            break;
+        case -2:
+            CU_FAIL(_("There is not the correct number of elements in the list"));
+            break;
+        case -3:
+            CU_FAIL(_("The inserted element is not malloced"));
+            break;
+        case 0:
+            break;
+        default:
+            break;
+    }
+
+    free_list(h);
+}
+
 
 int main(int argc,char** argv)
 {
     BAN_FUNCS(free);
-    RUN(test_compare_equals, test_compare_greater, test_compare_smaller,test_empty_list, test_empty_list_fail, test_insert_first_cresc, test_insert_first_fails, test1_insert_middle_cresc, test2_insert_middle_cresc, test1_insert_middle_fails, test1_insert_last_cresc,test2_insert_last_cresc, test1_insert_last_fails, test_insert_first_decresc, test1_insert_middle_decresc, test2_insert_middle_decresc, test1_insert_last_decresc, test2_insert_last_decresc);
+    RUN(test_compare_equals, test_compare_greater, test_compare_smaller,test_empty_list, test_empty_list_fail, test_insert_first_cresc, test_insert_first_fails, test1_insert_middle_cresc, test2_insert_middle_cresc, test1_insert_middle_fails, test1_insert_last_cresc,test2_insert_last_cresc, test1_insert_last_fails, test_insert_first_decresc, test1_insert_middle_decresc, test2_insert_middle_decresc, test1_insert_last_decresc, test2_insert_last_decresc,test_reinsert_first,test_reinsert_middle,test_reinsert_last);
 }
