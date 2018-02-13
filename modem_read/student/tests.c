@@ -30,6 +30,8 @@ void test_42_right1() {
     CU_ASSERT_EQUAL(ret,1);
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     CU_ASSERT_EQUAL(stats.free.called,1);
+    if(stats.malloc.called > 1 || stats.free.called > 1)
+        push_info_msg(_("Why do you use malloc or free more then once"));
 
     free_trap(p,64);
 }
@@ -58,18 +60,18 @@ void test_42_left1() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
-    
+
     if (stats.malloc.called != 1) {
         CU_FAIL();
-        push_info_msg(_("You didn't call malloc()."));
+        push_info_msg(_("You didn't call malloc() once."));
     }
-    
+
     if (stats.free.called != 1) {
         CU_FAIL();
-        push_info_msg(_("You didn't call free()."));
+        push_info_msg(_("You didn't call free() once."));
     }
-    
-    if (stats.malloc.last_params.size != 256) { 
+
+    if (stats.malloc.last_params.size != 256) {
         CU_FAIL();
         push_info_msg(_("You didn't malloc() with the right size"));
     }
@@ -101,8 +103,22 @@ void test_42_right2() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-    CU_ASSERT_EQUAL(stats.free.called,1);
+
+    if (stats.malloc.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call malloc() once."));
+    }
+
+    if (stats.free.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call free() once."));
+    }
+
+    if (stats.malloc.last_params.size != 256) {
+        CU_FAIL();
+        push_info_msg(_("You didn't malloc() with the right size"));
+    }
+
 
     free_trap(p,64);
 }
@@ -132,8 +148,22 @@ void test_42_left2() {
 
 
     CU_ASSERT_EQUAL(ret,1);
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-    CU_ASSERT_EQUAL(stats.free.called,1);
+
+    if (stats.malloc.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call malloc() once."));
+    }
+
+    if (stats.free.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call free() once."));
+    }
+
+    if (stats.malloc.last_params.size != 256) {
+        CU_FAIL();
+        push_info_msg(_("You didn't malloc() with the right size"));
+    }
+
 
     free_trap(p,64);
 }
@@ -164,15 +194,15 @@ void test_no42_right() {
     CU_ASSERT_EQUAL(ret,0);
     if (stats.malloc.called != 1) {
         CU_FAIL();
-        push_info_msg(_("You didn't call malloc()."));
+        push_info_msg(_("You didn't call malloc() once."));
     }
-    
+
     if (stats.free.called != 1) {
         CU_FAIL();
-        push_info_msg(_("You didn't call free()."));
+        push_info_msg(_("You didn't call free() once."));
     }
-    
-    if (stats.malloc.last_params.size != 256) { 
+
+    if (stats.malloc.last_params.size != 256) {
         CU_FAIL();
         push_info_msg(_("You didn't malloc() with the right size"));
     }
@@ -205,9 +235,21 @@ void test_no42_left() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
+    if (stats.malloc.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call malloc() once."));
+    }
 
-    CU_ASSERT_EQUAL(stats.free.called,1);
+    if (stats.free.called != 1) {
+        CU_FAIL();
+        push_info_msg(_("You didn't call free() once."));
+    }
+
+    if (stats.malloc.last_params.size != 256) {
+        CU_FAIL();
+        push_info_msg(_("You didn't malloc() with the right size"));
+    }
+
 
     free_trap(p,64);
 }
@@ -231,6 +273,7 @@ void test_fail() {
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
     CU_ASSERT_EQUAL(stats.free.called,0);
+    if(stats.free.called) push_info_msg(_("Why do you use free when malloc fails?"));
 }
 
 int main(int argc,char** argv)

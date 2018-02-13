@@ -1,5 +1,3 @@
-// CTester template
-
 #include <stdlib.h>
 #include "student_code.h"
 #include "CTester/CTester.h"
@@ -95,15 +93,10 @@ void test_contains_retnok() {
 
     monitored.malloc = true;
     monitored.free = true;
-    printf("%d NB MALLOC\n", stats.malloc.called);
     SANDBOX_BEGIN;
-    printf("%d NB MALLOC avant contains\n", stats.malloc.called);
     ret = contains(tree,-2);
-    printf("%d NB MALLOC apres contains\n", stats.malloc.called);
     SANDBOX_END;
-    printf("%d NB MALLOC\n", stats.malloc.called);
 
-    printf("%d NB MALLOC\n", stats.malloc.called);
     CU_ASSERT_EQUAL(ret,0);
 
     ret = 0;
@@ -112,9 +105,7 @@ void test_contains_retnok() {
     ret = contains(tree,10);
     SANDBOX_END;
 
-    printf("%d NB MALLOC\n", stats.malloc.called);
     CU_ASSERT_EQUAL(ret,0);
-    printf("%d NB MALLOC\n", stats.malloc.called);
 
     CU_ASSERT_EQUAL(stats.malloc.called, 0);
     if (stats.malloc.called) {
