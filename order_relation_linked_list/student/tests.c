@@ -1009,7 +1009,7 @@ void test_reinsert_first(){
     ret = test_list(h,'a',1,1,-1);
 
     CU_ASSERT_EQUAL(ret,0);
-    if(!ret) push_info_msg(_("You must not reinsert elements"));
+    if(ret) push_info_msg(_("You must not reinsert elements"));
 
     switch (ret) {
         case -1:
@@ -1078,7 +1078,7 @@ void test_reinsert_middle(){
     ret = test_list(h,'a',1,5,-1);
 
     CU_ASSERT_EQUAL(ret,0);
-    if(!ret) push_info_msg(_("You must not reinsert elements"));
+    if(ret) push_info_msg(_("You must not reinsert elements"));
 
     switch (ret) {
         case -1:
@@ -1147,7 +1147,7 @@ void test_reinsert_last(){
     ret = test_list(h,'z',-1,5,-1);
 
     CU_ASSERT_EQUAL(ret,0);
-    if(!ret) push_info_msg(_("You must not reinsert elements"));
+    if(ret) push_info_msg(_("You must not reinsert elements"));
 
     switch (ret) {
         case -1:
