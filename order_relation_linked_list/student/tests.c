@@ -183,18 +183,18 @@ void test_empty_list(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_TRUE(malloced(*h));
-    if(!malloced(*h)) CU_FAIL("You must allocate dynamic memory on the heap rather then static variables on the stack");
+    if(!malloced(*h)) push_info_msg("You must allocate dynamic memory on the heap rather then static variables on the stack");
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     if(*h){
         CU_ASSERT_EQUAL((*h)->val,'c');
@@ -202,6 +202,7 @@ void test_empty_list(){
     }
     else{
         CU_FAIL(_("You must change the head to your created node"));
+        push_info_msg(_("You must change the head to your created node"));
     }
     free_list(h);
 }
@@ -223,16 +224,16 @@ void test_empty_list_fail(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You shouldn't allocate memory if malloc fails"));
+    if(delta) push_info_msg(_("You shouldn't allocate memory if malloc fails"));
 
     CU_ASSERT_EQUAL(ret,-1);
-    if(!ret) CU_FAIL(_("You don't return the good value"));
+    if(!ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
 
-    if(*h) CU_FAIL(_("The head sould be NULL"));
+    if(*h) push_info_msg(_("The head sould be NULL"));
 }
 
 void test_insert_first_cresc(){
@@ -254,27 +255,29 @@ void test_insert_first_cresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_TRUE(malloced(*h));
-    if(!malloced(*h)) CU_FAIL("You must allocate dynamic memory on the heap rather then static variables on the stack");
+    if(!malloced(*h)) push_info_msg("You must allocate dynamic memory on the heap rather then static variables on the stack");
 
     ret = test_list(h,'a',1,2,1);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -305,24 +308,28 @@ void test_insert_first_fails(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You shouldn't allocate memory if malloc fails"));
+    if(delta) push_info_msg(_("You shouldn't allocate memory if malloc fails"));
 
     CU_ASSERT_EQUAL(ret,-1);
-    if(!ret) CU_FAIL(_("You don't return the good value"));
+    if(!ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     if(*h){
         CU_ASSERT_EQUAL((*h)->val,'c');
         CU_ASSERT_PTR_NULL((*h)->next);
         if((*h)->next){
             CU_FAIL(_("You change the list if malloc fails"));
+            push_info_msg(_("You change the list if malloc fails"));
         }
     }
-    else CU_FAIL(_("You souldn't change the head"));
+    else{
+        CU_FAIL(_("You souldn't change the head"));
+        push_info_msg(_("You souldn't change the head"));
+    }
 
     free_list(h);
 }
@@ -350,27 +357,29 @@ void test1_insert_middle_cresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'a',1,3,2);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -416,27 +425,29 @@ void test2_insert_middle_cresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'a',1,6,5);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -471,15 +482,15 @@ void test1_insert_middle_fails(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You shouldn't allocate memory when malloc fails"));
+    if(delta) push_info_msg(_("You shouldn't allocate memory when malloc fails"));
 
     CU_ASSERT_EQUAL(ret,-1);
-    if(!ret) CU_FAIL(_("You don't return the good value"));
+    if(!ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     if(*h){
         CU_ASSERT_EQUAL((*h)->val,'a');
@@ -488,9 +499,9 @@ void test1_insert_middle_fails(){
             CU_ASSERT_EQUAL((*h)->next->val,'c');
             CU_ASSERT_PTR_NULL((*h)->next->next);
         }
-        else CU_FAIL(_("You must not change the list"));
+        else push_info_msg(_("You must not change the list"));
     }
-    else CU_FAIL(_("You must not change the list"));
+    else push_info_msg(_("You must not change the list"));
 
     free_list(h);
 }
@@ -518,27 +529,29 @@ void test1_insert_last_cresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'a',1,3,3);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -584,27 +597,29 @@ void test2_insert_last_cresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'a',1,6,6);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -638,15 +653,15 @@ void test1_insert_last_fails(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You shouldn't allocate memory when malloc fails"));
+    if(delta) push_info_msg(_("You shouldn't allocate memory when malloc fails"));
 
     CU_ASSERT_EQUAL(ret,-1);
-    if(!ret) CU_FAIL(_("You don't return the good value"));
+    if(!ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     if(*h){
         CU_ASSERT_EQUAL((*h)->val,'a');
@@ -655,9 +670,9 @@ void test1_insert_last_fails(){
             CU_ASSERT_EQUAL((*h)->next->val,'b');
             CU_ASSERT_PTR_NULL((*h)->next->next);
         }
-        else CU_FAIL(_("You must not change the list"));
+        else push_info_msg(_("You must not change the list"));
     }
-    else CU_FAIL(_("You must not change the list"));
+    else push_info_msg(_("You must not change the list"));
 
     free_list(h);
 }
@@ -681,30 +696,32 @@ void test_insert_first_decresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_TRUE(malloced(*h));
-    if(!malloced(*h)) CU_FAIL("You must allocate dynamic memory on the heap rather then static variables on the stack");
+    if(!malloced(*h)) push_info_msg("You must allocate dynamic memory on the heap rather then static variables on the stack");
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'z',-1,2,1);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -738,27 +755,29 @@ void test1_insert_middle_decresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'z',-1,3,2);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -804,27 +823,29 @@ void test2_insert_middle_decresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'z',-1,6,5);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -858,27 +879,29 @@ void test1_insert_last_decresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'z',-1,3,3);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -924,27 +947,29 @@ void test2_insert_last_decresc(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, sizeof(node_t));
-    if(delta != sizeof(node_t)) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called != 1) CU_FAIL(_("You only have to call malloc once to insert a node"));
+    if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
     ret = test_list(h,'z',-1,6,6);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -974,24 +999,26 @@ void test_reinsert_first(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You shouldn't allocate memory for a reinsertion"));
+    if(delta) push_info_msg(_("You shouldn't allocate memory for a reinsertion"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     ret = test_list(h,'a',1,1,-1);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -1037,27 +1064,29 @@ void test_reinsert_middle(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You shouldn't allocate memory for a reinsertion"));
+    if(delta) push_info_msg(_("You shouldn't allocate memory for a reinsertion"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,0);
-    if(stats.malloc.called) CU_FAIL(_("You don't have to call malloc"));
+    if(stats.malloc.called) push_info_msg(_("You don't have to call malloc"));
 
     ret = test_list(h,'a',1,5,-1);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
@@ -1103,27 +1132,29 @@ void test_reinsert_last(){
     size_t delta = stats.memory.used - start;
 
     CU_ASSERT_EQUAL(delta, 0);
-    if(delta) CU_FAIL(_("You don't allocate the good amount of memory"));
+    if(delta) push_info_msg(_("You don't allocate the good amount of memory"));
 
     CU_ASSERT_EQUAL(ret,0);
-    if(ret) CU_FAIL(_("You don't return the good value"));
+    if(ret) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
     CU_ASSERT_EQUAL(stats.malloc.called,0);
-    if(stats.malloc.called != 0) CU_FAIL(_("You don't have to call malloc"));
+    if(stats.malloc.called != 0) push_info_msg(_("You don't have to call malloc"));
 
     ret = test_list(h,'z',-1,5,-1);
 
+    CU_ASSERT_EQUAL(ret,0);
+
     switch (ret) {
         case -1:
-            CU_FAIL(_("The elements are not in the correct order"));
+            push_info_msg(_("The elements are not in the correct order"));
             break;
         case -2:
-            CU_FAIL(_("There is not the correct number of elements in the list"));
+            push_info_msg(_("There is not the correct number of elements in the list"));
             break;
         case -3:
-            CU_FAIL(_("The inserted element is not malloced"));
+            push_info_msg(_("The inserted element is not malloced"));
             break;
         case 0:
             break;
