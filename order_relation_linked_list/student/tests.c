@@ -29,8 +29,7 @@ void free_list(node_t** h){
 
 /*
 * @header: beginning of the list
-* @begin_char: first char expected in the list
-* @order_relation: 1 if natural order, -1 if reverse order
+* @begin_char: char values expected in the list
 * @size_list: number of elements expected in the list
 * @offset_inserted: position expected of the inserted element, negative in reinsertion case
 *
@@ -39,20 +38,18 @@ void free_list(node_t** h){
 *           -2 if the number of elements
 *           -3 if inserted element is not malloced
 */
-int test_list(node_t** header, char begin_char, int order_relation, int size_list, int offset_inserted){
+int test_list(node_t** header, char* values, int size_list, int offset_inserted){
     int malloced_flag = 1;
     if(offset_inserted < 0) malloced_flag = 0;
-    int count = 1;
-    char cmp = begin_char;
+    int count = 0;
     node_t* runner = *header;
     while(runner){
         if(malloced_flag && count == offset_inserted) if(!malloced(runner)) return -3;
-        if(runner->val != cmp) return -1;
+        if(runner->val != values[count]) return -1;
         count++;
-        cmp = cmp + order_relation;
         runner = runner->next;
     }
-    if(count != size_list + 1) return -2;
+    if(count != size_list) return -2;
     return 0;
 }
 
@@ -265,7 +262,9 @@ void test_insert_first_cresc(){
     CU_ASSERT_TRUE(malloced(*h));
     if(!malloced(*h)) push_info_msg("You must allocate dynamic memory on the heap rather then static variables on the stack");
 
-    ret = test_list(h,'a',1,2,1);
+    char values[] = {'a','b'};
+
+    ret = test_list(h,values,2,0);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -367,7 +366,9 @@ void test1_insert_middle_cresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'a',1,3,2);
+    char values[] = {'a','b','c'};
+
+    ret = test_list(h,values,3,1);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -435,7 +436,9 @@ void test2_insert_middle_cresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'a',1,6,5);
+    char values[] = {'a','b','c','d','e','f'};
+
+    ret = test_list(h,values,6,4);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -539,7 +542,9 @@ void test1_insert_last_cresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'a',1,3,3);
+    char values[] = {'a','b','c'};
+
+    ret = test_list(h,values,3,2);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -607,7 +612,9 @@ void test2_insert_last_cresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'a',1,6,6);
+    char values[] = {'a','b','c','d','e','f'};
+
+    ret = test_list(h,values,6,5);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -709,7 +716,9 @@ void test_insert_first_decresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'z',-1,2,1);
+    char values[] = {'z','y'};
+
+    ret = test_list(h,values,2,0);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -765,7 +774,9 @@ void test1_insert_middle_decresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'z',-1,3,2);
+    char values[] = {'z','y','x'};
+
+    ret = test_list(h,values,3,1);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -833,7 +844,9 @@ void test2_insert_middle_decresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'z',-1,6,5);
+    char values[] = {'z','y','x','w','v','u'};
+
+    ret = test_list(h,values,6,4);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -889,7 +902,9 @@ void test1_insert_last_decresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'z',-1,3,3);
+    char values[] = {'z','y','x'};
+
+    ret = test_list(h,values,3,2);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -957,7 +972,9 @@ void test2_insert_last_decresc(){
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     if(stats.malloc.called != 1) push_info_msg(_("You only have to call malloc once to insert a node"));
 
-    ret = test_list(h,'z',-1,6,6);
+    char values[] = {'z','y','x','w','v','u'};
+
+    ret = test_list(h,values,6,5);
 
     CU_ASSERT_EQUAL(ret,0);
 
@@ -1006,7 +1023,9 @@ void test_reinsert_first(){
 
     CU_ASSERT_PTR_NOT_NULL(*h);
 
-    ret = test_list(h,'a',1,1,-1);
+    char values[] = {'a'};
+
+    ret = test_list(h,values,1,-1);
 
     CU_ASSERT_EQUAL(ret,0);
     if(ret) push_info_msg(_("You must not reinsert elements"));
@@ -1075,7 +1094,9 @@ void test_reinsert_middle(){
     CU_ASSERT_EQUAL(stats.malloc.called,0);
     if(stats.malloc.called) push_info_msg(_("You don't have to call malloc"));
 
-    ret = test_list(h,'a',1,5,-1);
+    char values[] = {'a','b','c','d','e'};
+
+    ret = test_list(h,values,5,-1);
 
     CU_ASSERT_EQUAL(ret,0);
     if(ret) push_info_msg(_("You must not reinsert elements"));
@@ -1144,7 +1165,9 @@ void test_reinsert_last(){
     CU_ASSERT_EQUAL(stats.malloc.called,0);
     if(stats.malloc.called != 0) push_info_msg(_("You don't have to call malloc"));
 
-    ret = test_list(h,'z',-1,5,-1);
+    char values[] = {'z','y','x','w','v'};
+
+    ret = test_list(h,values,5,-1);
 
     CU_ASSERT_EQUAL(ret,0);
     if(ret) push_info_msg(_("You must not reinsert elements"));
