@@ -51,48 +51,48 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '30'
 name: '[S3] make more basics'
 network_grading: false
 order: 33
 problems:
     m1:
         answer: OBJ = calc.o operations.o
+        name: Calculator variable
+        type: match
         header: |-
-            Remember the  `calculator <https://inginious.info.ucl.ac.be/course/LSINF1252-2018/s02_make_calc>`_ you had to make last week?
+            Remember the  `calculator <https://inginious.info.ucl.ac.be/course/LSINF1252/s2_make_calc>`_ you had to make last week?
 
             When you typed ``ls`` you had the following folder structure:
 
             .. code-block:: console
 
-                calc.c    calc.h    operations.c    operations.h
+                calc.c    calc.h    Makefile    operations.c    operations.h
 
             Write a variable called ``OBJ`` to simplify the compilation process in the Makefile.
-        type: match
-        name: Calculator variable
     c1:
-        header: Remember the calculator
-        name: 'Make '
-        language: Makefile
         type: code
+        name: 'Make '
+        header: Remember the calculator
+        language: Makefile
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: make
         type: 0
         name: make & Makefile
-        visible: true
+        id: make
         description: Tasks related to the make task runner for targets described in
             Makefile.
+        visible: true
     '1':
         name: S3
         visible: true
-        type: 2
         description: ''
+        type: 2
         id: ''
 weight: 1.0
