@@ -83,7 +83,7 @@ problems:
     c1:
         type: code
         name: 'Make '
-        header: 'Now '
+        header: ''
         language: Makefile
 stored_submissions: 0
 submission_limit:
