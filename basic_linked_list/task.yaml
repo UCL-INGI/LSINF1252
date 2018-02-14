@@ -38,7 +38,7 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S3] Basic linked list - REVIEWED'
+name: '[S3] Simple linked list '
 network_grading: false
 order: 30
 problems:
@@ -50,10 +50,10 @@ problems:
             .. code-block:: c
 
                 /*
-                * Create a new node in memory with the value @value.
+                * Create a new node containing the value @value.
                 *
-                * @value: value of the node
-                * @return: return the pointer to the new node, or NULL if a failure occured.
+                * @value: value stored in the node
+                * @return: returns the pointer to the newly created node, or NULL if an error occured.
                 */
                 node_t *init_node(int value) {
     add_node:
@@ -62,12 +62,12 @@ problems:
             .. code-block:: c
 
                 /*
-                * Add an element to the head of the list @list and update its member `size`
+                * Add a node at the head of the list @list and increment the number of nodes in the list (member `size`)
                 *
-                * @l: list of integers
+                * @l: linked list
                 * @value: value to add to the list
                 *
-                * @return: 0 if success, 1 else
+                * @return: 0 if success, 1 otherwise
                 */
                 int add_node(list_t *list, int value);
         language: c
