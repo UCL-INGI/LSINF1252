@@ -30,18 +30,18 @@ os.chdir("student")
 input.parse_template("Makefile.tpl", "Makefile")
 
 # Compilation
-p = subprocess.Popen(shlex.split("make make_me"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 make_output = p.communicate()[0].decode('utf-8')
 # If compilation failed, exit with "failed" result
 if p.returncode:
-    feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make make_me`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
+    feedback.set_problem_feedback("The compilation of your code failed. The output message of the ``make`` command is:" + rst.get_codeblock('', make_output), "make_me_less_easy")
 elif os.path.exists("make_me"): # Check make builds the correct exec
     score += 75
     feedback.set_problem_result("success", "make_me_less_easy")
     feedback.set_problem_feedback("Your code compiles.\n", "make_me_less_easy")
 else:
     feedback.set_problem_result("failed", "make_me_less_easy")
-    feedback.set_problem_feedback("You didn't make it!", "make_me_less_easy")
+    feedback.set_problem_feedback("You didn't make it! Note that ``make`` without argument is run. Therefore, the first processed rule is the first one in the Makefile.", "make_me_less_easy")
 
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
