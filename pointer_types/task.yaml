@@ -8,15 +8,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
-name: '[S4] Pointer arithmetic - REVIEWED'
+name: '[S3] Pointer arithmetic '
 network_grading: false
 order: 39
 problems:
     first:
         name: First argument
+        type: code
         language: c
         header: |-
             You found a hint from the hacker, telling the first parameter is  located at the 12th byte after *ptr*. An int is guaranteed to be 4 bytes long.
@@ -26,8 +27,8 @@ problems:
             .. code-block:: c
 
                 int first(void *ptr) {
-        type: code
     second:
+        language: c
         header: |-
             The second parameter is a char located 6 bytes after *ptr*.
 
@@ -36,12 +37,10 @@ problems:
             .. code-block:: c
 
                 char second(void *ptr) {
-        language: c
         type: code
         name: Second argument
     third:
-        type: code
-        language: c
+        name: Third argument
         header: |-
             The third parameter is an int located 45 bytes after *ptr*.
 
@@ -50,64 +49,65 @@ problems:
             .. code-block:: c
 
                 int third(void *ptr) {
-        name: Third argument
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
+        type: 1
         name: Timeout
-        visible: true
-        type: 1
+        id: timeout
         description: Your code exceeds the maximum allowed time.
-    '1':
-        id: sigsegv
-        name: Segmentation Fault
-        description: ''
         visible: true
+    '1':
+        visible: true
+        description: ''
+        name: Segmentation Fault
         type: 1
+        id: sigsegv
     '2':
-        id: not_compile
         type: 1
+        description: You code does not compile.
         name: Not compile
         visible: true
-        description: You code does not compile.
+        id: not_compile
     '3':
-        description: ''
-        id: memory
-        visible: true
         type: 1
+        visible: true
         name: Memory Exceeded
+        id: memory
+        description: ''
     '4':
+        visible: true
         description: ''
         name: Floating Point Exception
-        visible: true
-        id: sigfpe
         type: 1
+        id: sigfpe
     '5':
         description: Your code produced a double free.
-        id: double_free
-        visible: true
-        name: Double free
         type: 1
+        visible: true
+        id: double_free
+        name: Double free
     '6':
-        id: banned_funcs
         description: You use some banned functions.
         type: 1
-        visible: true
         name: Banned functions
+        visible: true
+        id: banned_funcs
     '7':
         name: Pointer
-        visible: true
-        description: Task about pointers and their use
         type: 2
+        description: Task about pointers and their use
+        visible: true
         id: ''
     '8':
-        name: S4
         description: ''
         type: 2
+        name: S3
         visible: true
         id: ''
 weight: 1.0
