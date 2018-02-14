@@ -8,59 +8,59 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S2] strlen, strcat et strcasecmp'
 network_grading: false
 order: 22
 problems:
     strlen:
-        type: code
-        name: strlen
-        language: c
         header: |-
-            Ecrivez ici le corps de la fonction `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
+            Ecrivez ici le corps de la fonction `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
 
             .. code-block:: c
 
                 size_t strlen(const char *str) {
-    strcat:
-        language: c
         type: code
-        name: Coder strcat
+        language: c
+        name: strlen
+    strcat:
         header: |-
             Entrez ici le corps de la fonction `strcat <https://sites.uclouvain.be/SystInfo/manpages/man3/strcat.3.html>`_
 
             .. code-block:: c
 
                 char *strcat(char *destination, const char *source) {
-    strcasecmp:
         type: code
         language: c
+        name: Coder strcat
+    strcasecmp:
+        language: c
         header: |-
-            Ecrivez ici le corps de la fonction `strcasecmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
+            Ecrivez ici le corps de la fonction `strcasecmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcasecmp.3.html>`_
 
             Pour cette fonction, travaillez à partir des données de ce `tableau <https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ASCII-Table-wide.svg/2000px-ASCII-Table-wide.svg.png>`_ (vous n'avez pas accès à la fonction `tolower(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/tolower.3.html>`_ de `ctype.h`).
 
             .. code-block:: c
 
                 int strcasecmp(const char *s1, const char *s2) {
+        type: code
         name: Coder strcasecmp
 stored_submissions: 0
 submission_limit:
     amount: 3
     period: 24
 tags:
-    '1':
-        description: ''
+    '0':
         type: 2
-        visible: true
         name: S2
-        id: ''
-    '2':
-        name: Pointer
-        description: Task about pointers and their use
-        type: 2
+        description: ''
         visible: true
+        id: ''
+    '1':
+        visible: true
+        type: 2
+        description: Task about pointers and their use
+        name: Pointer
         id: ''
 weight: 1.0
