@@ -16,12 +16,19 @@ void test_myfunc_ret()
 	int ret6 = -2;
 	int ret7 = -2;
 
-	char *str1 = trap_buffer(44, TRAP_RIGHT, PROT_WRITE, "Tityre tu patulae recubans sub tegmine fagi");
-	char *str2 = trap_buffer(40, TRAP_RIGHT, PROT_WRITE, "tu l as trop ecrase cesar ce port salut");
-	char *str3 = trap_buffer(1, TRAP_RIGHT, PROT_WRITE, "");
-	char *str4 = trap_buffer(25, TRAP_RIGHT, PROT_WRITE, "azertyuioppptpoiuytreza");
-	char *str5 = trap_buffer(22, TRAP_RIGHT, PROT_WRITE, "qsdfghjklmmlkjhgfdsq");
-	char *str6 = trap_buffer(2, TRAP_RIGHT, PROT_WRITE, "e");
+    char *s1="Tityre tu patulae recubans sub tegmine fagi";
+    char *s2="tu l as trop ecrase cesar ce port salut";
+    char *s3="";
+    char *s4="azertyuioppptpoiuytreza";
+    char *s5="qsdfghjklmmlkjhgfdsq";
+    char *s6="e";
+    
+	char *str1 = trap_buffer(strlen(s1)+1, TRAP_RIGHT, PROT_WRITE, s1);
+	char *str2 = trap_buffer(strlen(s2)+1, TRAP_RIGHT, PROT_WRITE, s2);
+	char *str3 = trap_buffer(strlen(s3)+1, TRAP_RIGHT, PROT_WRITE, s3);
+	char *str4 = trap_buffer(strlen(s4)+1, TRAP_RIGHT, PROT_WRITE, s4);
+	char *str5 = trap_buffer(strlen(s5)+1, TRAP_RIGHT, PROT_WRITE, s5);
+	char *str6 = trap_buffer(strlen(s6)+1, TRAP_RIGHT, PROT_WRITE, s6);
 
 	SANDBOX_BEGIN;
 	ret1 = pal(str1);
