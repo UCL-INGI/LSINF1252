@@ -14,8 +14,11 @@ network_grading: false
 order: 12
 problems:
     q1:
+        language: c
+        name: ''
+        type: code
         header: |-
-            Write the body of the function *pal* which tells if the given string is a palindrome or not. Ignore spaces. An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
+            Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces.** An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
 
             .. code-block:: c
 
@@ -24,60 +27,57 @@ problems:
                 * @return: returns true (1) if str is a palindrome, -1 if str is NULL, otherwise false (0).
                 */
                 int pal(char *str) {
-        name: ''
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        description: Your code exceeds the maximum allowed time.
+        type: 1
         name: Timeout
-        visible: true
-        type: 1
         id: timeout
+        description: Your code exceeds the maximum allowed time.
+        visible: true
     '1':
+        visible: true
         description: ''
-        type: 1
-        visible: true
-        id: sigsegv
         name: Segmentation Fault
+        type: 1
+        id: sigsegv
     '2':
-        name: Not compile
-        description: You code does not compile.
         type: 1
         visible: true
+        description: You code does not compile.
+        name: Not compile
         id: not_compile
     '3':
         type: 1
         id: memory
         visible: true
-        description: ''
         name: Memory Exceeded
-    '4':
         description: ''
-        id: sigfpe
-        type: 1
-        name: Floating Point Exception
+    '4':
         visible: true
+        description: ''
+        type: 1
+        id: sigfpe
+        name: Floating Point Exception
     '5':
         description: Your code produced a double free.
-        name: Double free
+        type: 1
         visible: true
         id: double_free
-        type: 1
+        name: Double free
     '6':
-        type: 1
-        id: banned_funcs
-        name: Banned functions
         description: You use some banned functions.
+        type: 1
+        name: Banned functions
         visible: true
+        id: banned_funcs
     '7':
-        visible: true
-        description: ''
-        type: 2
         name: S2
+        type: 2
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
