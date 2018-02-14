@@ -46,7 +46,7 @@ void test_fail_first() {
     if(stats.malloc.called > 2) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
     CU_ASSERT_EQUAL(stats.sleep.called,1)
-    if(stats.sleep.called > 1) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    if(stats.sleep.called > 1) push_info_msg(_("Why did you call sleep more then once per loop?"));
 
     free(ret);
 }
@@ -72,7 +72,7 @@ void test_fail_twice() {
     if(stats.malloc.called > 3) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
     CU_ASSERT_EQUAL(stats.sleep.called,2)
-    if(stats.sleep.called > 2) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    if(stats.sleep.called > 2) push_info_msg(_("Why did you call sleep more then once per loop?"));
 
     free(ret);
 }
@@ -98,7 +98,7 @@ void test_fail_five() {
     if(stats.malloc.called > 6) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
     CU_ASSERT_EQUAL(stats.sleep.called,5)
-    if(stats.sleep.called > 5) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    if(stats.sleep.called > 5) push_info_msg(_("Why did you call sleep more then once per loop?"));
 
     free(ret);
 }
@@ -124,7 +124,7 @@ void test_fail_eight() {
     if(stats.malloc.called > 9) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
     CU_ASSERT_EQUAL(stats.sleep.called,8)
-    if(stats.sleep.called > 8) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    if(stats.sleep.called > 8) push_info_msg(_("Why did you call sleep more then once per loop?"));
 
     free(ret);
 }
@@ -148,7 +148,7 @@ void test_fail_ten() {
     if(stats.malloc.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
     CU_ASSERT_EQUAL(stats.sleep.called,10)
-    if(stats.sleep.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    if(stats.sleep.called > 10) push_info_msg(_("Why did you call sleep more then once per loop?"));
 }
 
 void test_fail_always() {
@@ -170,7 +170,7 @@ void test_fail_always() {
     if(stats.malloc.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
     CU_ASSERT_EQUAL(stats.sleep.called,10)
-    if(stats.sleep.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    if(stats.sleep.called > 10) push_info_msg(_("Why did you call sleep more then once per loop?"));
 }
 
 int main(int argc,char** argv)
