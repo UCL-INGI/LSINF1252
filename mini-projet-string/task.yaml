@@ -48,8 +48,8 @@ problems:
         name: Coder strcasecmp
 stored_submissions: 0
 submission_limit:
-    amount: 3
-    period: 24
+    amount: -1
+    period: -1
 tags:
     '0':
         type: 2
