@@ -7,6 +7,7 @@
 void test_myfunc_ret()
 {
 	set_test_metadata("q1", _("Test the function palindrome"), 1);
+    char msg[1000]; // should be large enough
 
 	int ret1 = -2;
 	int ret2 = -2;
@@ -52,8 +53,9 @@ void test_myfunc_ret()
 	CU_ASSERT_EQUAL(ret5,1);
 	CU_ASSERT_EQUAL(ret6,-1);
 	CU_ASSERT_EQUAL(ret7,1);
-	if (ret1!=0 )
-		push_info_msg(_("Your function does not work correctly for strings that are not palindromes and contain spaces (remember to first remove spaces from your string)"));
+	if (ret1!=0 ) {
+		push_info_msg(_("Your function does not work correctly for strings that are not palindromes and contain spaces (remember to first remove spaces from your string) "));
+    }
     if (ret2!=1 )
 		push_info_msg(_("Your function does not work correctly for strings that are palindromes and contain spaces (remember to first remove spaces from your string)"));
     if (ret4!=0 )
