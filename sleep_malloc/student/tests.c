@@ -166,11 +166,11 @@ void test_fail_always() {
 
     CU_ASSERT_PTR_NULL(ret);
 
-    CU_ASSERT_EQUAL(stats.malloc.called,10)
-    if(stats.malloc.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
+    //CU_ASSERT_EQUAL(stats.malloc.called,10)
+   // if(stats.malloc.called > 10) push_info_msg(_("Why did you call malloc more then once per loop?"));
 
-    CU_ASSERT_EQUAL(stats.sleep.called,10)
-    if(stats.sleep.called > 10) push_info_msg(_("Why did you call sleep more then once per loop?"));
+    //CU_ASSERT_EQUAL(stats.sleep.called,10)
+   // if(stats.sleep.called > 10) push_info_msg(_("Why did you call sleep more then once per loop?"));
 }
 
 int main(int argc,char** argv)
