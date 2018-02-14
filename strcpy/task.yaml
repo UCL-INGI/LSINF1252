@@ -13,7 +13,7 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S3] Improved strcpy - REVIEWED'
+name: '[S3] Improved strcpy '
 network_grading: false
 order: 28
 problems:
