@@ -1,103 +1,103 @@
 accessible: true
 author: Nicolas Rybowski
 context: |-
-    The classic function ``char *strcpy(char *destination, const char *source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then proceeds to the copy.
+    The classic function ``char *strcpy(char *destination, const char *source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then performs the copy.
 
     The use of copy functions as ``memcpy`` is not allowed.
 
-    *Hint* : use `malloc <https://linux.die.net/man/3/malloc>`_
+    *Hint* : use `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_
 environment: cpp
 evaluate: best
 groups: false
 limits:
+    output: '2'
     memory: '100'
     time: '30'
-    output: '2'
 name: '[S3] Improved strcpy - REVIEWED'
 network_grading: false
 order: 28
 problems:
     strcpy_impl:
+        name: buf_strcpy
         type: code
-        language: c
         header: |
             Write the body of the function *buf_strcpy*.
 
             .. code-block:: c
 
                 /*
-                * Create a buffer the same size as src, and copy the content of src to this buffer.
+                * Creates a buffer that has the same size as src, and copies the content of src to this buffer.
                 *
                 * @src: string to be copied
                 * @return: return pointer. if src == NULL or in case of error, return NULL
                 *
-                * Take care of '\0' and the working of strlen() (if you use it).
+                * Remember that strings are terminated with '\0' and that strlen("abc") returns 3 even if 4 bytes are required to store this string.
                 */
                 char *buf_strcpy(const char *src) {
-        name: buf_strcpy
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        type: 1
+        name: Timeout
+        id: timeout
         description: Your code exceeds the maximum allowed time.
         visible: true
-        name: Timeout
-        type: 1
-        id: timeout
     '1':
+        visible: true
         description: ''
-        type: 1
         id: sigsegv
-        visible: true
         name: Segmentation Fault
+        type: 1
     '2':
-        name: Not compile
-        description: You code does not compile.
         type: 1
         visible: true
+        description: You code does not compile.
+        name: Not compile
         id: not_compile
     '3':
-        id: memory
         type: 1
-        visible: true
-        description: ''
         name: Memory Exceeded
-    '4':
+        id: memory
         description: ''
+        visible: true
+    '4':
+        visible: true
+        type: 1
         id: sigfpe
-        type: 1
-        visible: true
         name: Floating Point Exception
+        description: ''
     '5':
-        name: Double free
         description: Your code produced a double free.
-        id: double_free
-        visible: true
         type: 1
+        visible: true
+        id: double_free
+        name: Double free
     '6':
-        id: banned_funcs
         name: Banned functions
         type: 1
         description: You use some banned functions.
         visible: true
+        id: banned_funcs
     '7':
-        description: You do not manage the case where malloc() fails.
         name: Malloc fail
-        visible: true
-        id: malloc_fail
         type: 1
-    '8':
-        description: ''
+        description: You do not manage the case where malloc() fails.
+        id: malloc_fail
         visible: true
-        name: S3
+    '8':
         type: 2
+        name: S3
+        visible: true
+        description: ''
         id: ''
     '9':
-        description: Usage of malloc()
+        visible: true
         type: 2
         name: Malloc
-        visible: true
+        description: Usage of malloc()
         id: ''
 weight: 1.0
