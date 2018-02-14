@@ -7,8 +7,8 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
 name: '[S4] Order relation on a linked list - REVIEWED'
 network_grading: false
@@ -17,6 +17,7 @@ problems:
     order_relation:
         language: c
         name: Order relation
+        type: code
         header: |-
             For this subproblem, you are asked to implement the comparison function which rules the order relation of the list.
 
@@ -29,7 +30,6 @@ problems:
                 * and positive number otherwise
                 */
                 int compare(char a, char b) {
-        type: code
     insert:
         name: Insert
         type: code
@@ -61,47 +61,47 @@ submission_limit:
     period: -1
 tags:
     '0':
-        id: timeout
-        name: Timeout
-        visible: true
-        description: Your code exceeds the maximum allowed time.
         type: 1
-    '1':
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
+        name: Timeout
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
         visible: true
+    '1':
+        visible: true
+        description: ''
+        id: sigsegv
+        name: Segmentation Fault
         type: 1
     '2':
-        id: not_compile
         type: 1
-        name: Not compile
         visible: true
         description: You code does not compile.
+        name: Not compile
+        id: not_compile
     '3':
+        type: 1
+        visible: true
+        name: Memory Exceeded
         id: memory
         description: ''
-        name: Memory Exceeded
-        visible: true
-        type: 1
     '4':
-        name: Floating Point Exception
+        visible: true
+        type: 1
         description: ''
-        visible: true
         id: sigfpe
-        type: 1
+        name: Floating Point Exception
     '5':
-        id: double_free
-        visible: true
         description: Your code produced a double free.
-        name: Double free
-        type: 1
-    '6':
-        id: banned_funcs
-        description: You use some banned functions.
-        name: Banned functions
         type: 1
         visible: true
+        id: double_free
+        name: Double free
+    '6':
+        description: You use some banned functions.
+        type: 1
+        name: Banned functions
+        visible: true
+        id: banned_funcs
     '7':
         name: Data structures
         type: 2
@@ -109,15 +109,15 @@ tags:
         visible: true
         id: ''
     '8':
-        name: Pointer
-        description: Task about pointers and their use
         type: 2
+        name: Pointer
         visible: true
+        description: Task about pointers and their use
         id: ''
     '9':
-        visible: true
-        type: 2
         description: ''
+        visible: true
         name: S4
+        type: 2
         id: ''
 weight: 1.0

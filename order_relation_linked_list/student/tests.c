@@ -392,7 +392,7 @@ void test1_insert_middle_cresc(){
 }
 
 void test2_insert_middle_cresc(){
-    set_test_metadata("insert", _("Insertion in middle place, complex case, natural order"), 1);
+    set_test_metadata("insert", _("Insertion in middle place, complex case, natural order"), 2);
 
     int ret = 1;
     node_t* l1 = (node_t*) malloc(sizeof(node_t));
@@ -568,7 +568,7 @@ void test1_insert_last_cresc(){
 }
 
 void test2_insert_last_cresc(){
-    set_test_metadata("insert", _("Insertion in last place, complex case, natural order"), 1);
+    set_test_metadata("insert", _("Insertion in last place, complex case, natural order"), 2);
 
     int ret = 1;
     node_t* l1 = (node_t*) malloc(sizeof(node_t));
@@ -800,7 +800,7 @@ void test1_insert_middle_decresc(){
 }
 
 void test2_insert_middle_decresc(){
-    set_test_metadata("insert", _("Insertion in middle place, complex case, reverse order"), 1);
+    set_test_metadata("insert", _("Insertion in middle place, complex case, reverse order"), 2);
 
     int ret = 1;
     node_t* l1 = (node_t*) malloc(sizeof(node_t));
@@ -928,7 +928,7 @@ void test1_insert_last_decresc(){
 }
 
 void test2_insert_last_decresc(){
-    set_test_metadata("insert", _("Insertion in last place, complex case, reverse order"), 1);
+    set_test_metadata("insert", _("Insertion in last place, complex case, reverse order"), 2);
 
     int ret = 1;
     node_t* l1 = (node_t*) malloc(sizeof(node_t));
