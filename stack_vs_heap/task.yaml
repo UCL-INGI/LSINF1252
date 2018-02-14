@@ -39,33 +39,33 @@ problems:
     return1:
         name: On the stack
         header: |-
-            Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
+            The variables which are declared inside functions are stored on the program's stack. These variables are only accessible by the function in which they were declared.
 
-            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
+            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value. Once a variable is passed by value, a copy of its value is placed on the stack.
 
-            Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
+            Consider the ``main`` function here above. What number would the first call to ``printf`` print ?
         answer: '5'
         type: match
     version1:
         type: code
         language: c
         header: |
-            From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
+            Write the body of the function ``sum2`` which stores in the global variable ``result`` the sum of its parameters. Why does it work with a global variable ?
 
             .. code-block:: c
 
                 void sum2(int a, int b) {
-        name: Globalizing
+        name: Global variables
     version2:
         language: c
         header: |
-            You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html).
-            You can use the @r arg for this.
-            What is the link between passing by reference and pointers ?
+            You are now asked to return the result of the sum, neither by using the ``return`` keyword, nor by using a global variables.
 
             .. code-block:: c
 
-                /* sum3: updates the value pointed by r, to the sum of the values pointed by a and b */
+                /*
+                 * @post stores the sum of the values pointed by a and b in the memory pointed by r
+                 */
                 void sum3 (int *a, int *b, int *r) {
         name: Passing by reference
         type: code

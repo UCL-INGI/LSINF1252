@@ -54,7 +54,7 @@ context: |-
 
     In this file we used 3 variables: ``CC`` to define the C Compiler; ``CFLAGS`` to define the C Compiler flags; ``OBJ`` to define the object files. This is a common use of variables to both simplify the Makefile and easily change the settings of the compiler.
 
-    Notice the use of two ``.PHONY`` targets: ``clean`` which will remove auto-generated files, e.g. object files; ``mrproper`` which will remove both auto-generated & built files, e.g. executable files; ``help`` which will search for lines starting with ``##`` and print them without the ``##``. Try it out by tipping ``make help``.
+    Notice the use of two ``.PHONY`` targets: ``clean`` which will remove auto-generated files, e.g. object files; ``mrproper`` which will remove both auto-generated & built files, e.g. executable files; ``help`` which will search for lines starting with ``##`` and print them on ``stdout`` without the ``##``. Try it out by tipping ``make help``.
 environment: cpp
 evaluate: best
 groups: false
