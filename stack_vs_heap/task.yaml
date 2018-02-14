@@ -1,13 +1,13 @@
 accessible: true
 author: Nicolas Rybowski, Mathieu Xhonneux
 context: |-
-    In a C program, variables are stored across different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will show you how global variables, and variables on the stack, are managed.
+    In a C program, variables are stored in different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will show you how global variables and variables on the stack are managed.
 
     .. code-block:: c
 
         int result;
 
-        void sum1(a1, b1) {
+        void sum1(int a1, int b1) {
             a1 = a1 + b1;
         }
 
@@ -29,34 +29,35 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    memory: '100'
     output: '2'
+    memory: '100'
     time: '30'
-name: '[S3] Global''n''stack - REVIEWED'
+name: '[S3] Global and local variables'
 network_grading: false
 order: 26
 problems:
     return1:
-        type: match
+        name: On the stack
         header: |-
             Variables which are declared inside functions are put on the program's stack. These variables are only accessible by the function in which they are declared.
 
             Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value (see http://courses.washington.edu/css342/zander/css332/passby.html for more details). Once a variable is passed by value, a copy of it is made on the stack.
 
             Consider the ``main`` function here above. Knowing this, what number would the first call to ``printf`` print ?
-        name: On the stack
         answer: '5'
+        type: match
     version1:
-        name: Globalizing
+        type: code
+        language: c
         header: |
             From what you have learned in the first question, write the body of the function *sum2* which uses the global variable *result*. Why does it work with a global variable ?
 
             .. code-block:: c
 
                 void sum2(int a, int b) {
-        type: code
-        language: c
+        name: Globalizing
     version2:
+        language: c
         header: |
             You are now asked to return the result of the sum, not by using the *return* keyword, nor by using a global variable, but using the mechanism of passing by reference (see again http://courses.washington.edu/css342/zander/css332/passby.html).
             You can use the @r arg for this.
@@ -66,65 +67,64 @@ problems:
 
                 /* sum3: updates the value pointed by r, to the sum of the values pointed by a and b */
                 void sum3 (int *a, int *b, int *r) {
-        type: code
         name: Passing by reference
-        language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: memory
         name: Memory Exceeded
         type: 1
+        id: memory
         description: ''
         visible: true
     '1':
-        id: timeout
+        visible: true
         description: Your code exceeds the maximum allowed time.
         name: Timeout
-        visible: true
         type: 1
+        id: timeout
     '2':
-        id: sigsegv
         type: 1
+        description: ''
         name: Segmentation Fault
         visible: true
-        description: ''
+        id: sigsegv
     '3':
-        description: You code does not compile.
-        id: not_compile
         type: 1
         name: Not compile
+        id: not_compile
+        description: You code does not compile.
         visible: true
     '4':
-        name: Floating Point Exception
+        visible: true
+        type: 1
         description: ''
-        visible: true
         id: sigfpe
-        type: 1
+        name: Floating Point Exception
     '5':
-        id: double_free
-        visible: true
         description: Your code produced a double free.
-        name: Double free
         type: 1
+        visible: true
+        name: Double free
+        id: double_free
     '6':
-        id: banned_funcs
-        name: Banned functions
         description: You use some banned functions.
         type: 1
+        name: Banned functions
         visible: true
+        id: banned_funcs
     '7':
         name: S3
+        type: 2
         visible: true
         description: ''
-        type: 2
         id: ''
     '8':
-        name: Pointer
         description: Task about pointers and their use
+        name: Pointer
         type: 2
         visible: true
         id: ''
