@@ -12,7 +12,7 @@ limits:
     time: '30'
 name: '[S4] Order relation on a linked list - REVIEWED'
 network_grading: false
-order: 40
+order: 42
 problems:
     order_relation:
         language: c

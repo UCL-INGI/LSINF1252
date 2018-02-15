@@ -91,7 +91,7 @@ limits:
     output: '2'
 name: '[S3] make tests'
 network_grading: false
-order: 35
+order: 39
 problems:
     make_test:
         name: Make test

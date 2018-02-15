@@ -25,7 +25,7 @@ limits:
     time: '30'
 name: '[S3] Le programme test'
 network_grading: false
-order: 47
+order: 34
 problems:
     q1:
         language: c

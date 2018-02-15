@@ -26,7 +26,7 @@ limits:
     memory: '100'
 name: '[Beta] Parcours d''un arbre binaire de recherche'
 network_grading: false
-order: 75
+order: 76
 problems:
     has_key:
         type: code

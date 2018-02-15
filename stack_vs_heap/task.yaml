@@ -34,7 +34,7 @@ limits:
     time: '30'
 name: '[S3] Global and local variables'
 network_grading: false
-order: 26
+order: 27
 problems:
     return1:
         name: On the stack

@@ -27,7 +27,7 @@ limits:
     memory: '100'
 name: '[S2] make basics - calculator'
 network_grading: false
-order: 23
+order: 24
 problems:
     make_calc_simple:
         header: |-
