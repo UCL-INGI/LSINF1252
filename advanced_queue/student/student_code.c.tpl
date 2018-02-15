@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include "student_code.h"
 
 int enqueue(queue_t* q, int val){
 	@@enqueue@@
@@ -8,5 +9,3 @@ int enqueue(queue_t* q, int val){
 int dequeue(queue_t* q){
 	@@dequeue@@
 }
-
-
