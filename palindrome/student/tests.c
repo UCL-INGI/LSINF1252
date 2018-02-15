@@ -7,7 +7,7 @@
 void test_myfunc_ret()
 {
 	set_test_metadata("q1", _("Test the function palindrome"), 1);
-    //char msg[1000]; // should be large enough
+
 
 	int ret1 = -2;
 	int ret2 = -2;
