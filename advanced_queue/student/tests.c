@@ -397,7 +397,7 @@ void test_dequeue_one() {
     if(stats.free.called > 1) push_info_msg(_("Why do you use free more then once?"));
 
     CU_ASSERT_EQUAL(ret,1);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    if(ret != 1) push_info_msg(_("You don't return the good value"));
 
     CU_ASSERT_PTR_NULL(q.tail);
     if(q.tail) push_info_msg(_("You have to change the value of the tail to NULL for a queue of size 1"));
@@ -443,7 +443,7 @@ void test_dequeue_five() {
     if(stats.free.called > 1) push_info_msg(_("Why do you use free more then once?"));
 
     CU_ASSERT_EQUAL(ret,8);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    if(ret != 8) push_info_msg(_("You don't return the good value"));
 
     int values[] = {6,3,5,2};
 
@@ -513,7 +513,7 @@ void test_dequeue_ten() {
     if(stats.free.called > 1) push_info_msg(_("Why do you use free more then once?"));
 
     CU_ASSERT_EQUAL(ret,1);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    if(ret != 1) push_info_msg(_("You don't return the good value"));
 
     int values[] = {-10,3,5,2,6,7,4,-3,9};
 
