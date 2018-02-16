@@ -1,50 +1,44 @@
 accessible: false
 author: Kilian Verhetsel
 context: |-
-    La type de la plupart des variables en C est facile à déterminer. Néanmoins, le
-    C contient aussi des types qui ne diffèrent que de façons subtiles, comme les
+    Le type de la plupart des variables en C est facile à déterminer. Néanmoins, le
+    C contient aussi des types qui diffèrent de façons parfois subtiles.
 environment: cpp
+evaluate: best
 groups: false
 limits:
     output: '5210'
-    memory: '128'
     time: '10'
-name: Les types
+    memory: '128'
+name: '[S3] Les types'
 network_grading: false
 order: 53
 problems:
     q1:
-        name: Un entier
         header: Déclarez la variable ``x`` de type ``int``.
-        language: c
         type: code_single_line
+        name: Un entier
     q2:
-        language: c
+        header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
         name: Un tableau d’entiers
         type: code_single_line
-        header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
     q3:
+        type: code_single_line
         name: Taille d’un tableau
         header: |-
             En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
             vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
-        language: c
-        type: code_single_line
     q4:
         type: code_single_line
-        language: c
         name: Un pointeur
         header: Déclarez la variable ``x`` comme un pointeur sur un ``int``.
     q5:
-        type: code_single_line
-        language: c
-        name: Taille d’un pointeur
         header: |-
             En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
             vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
+        type: code_single_line
+        name: Taille d’un pointeur
     q6:
-        name: Taile d’un tableau en tant qu’argument
-        language: c
         type: code_single_line
         header: |-
             Voici le prototype d’une fonction standard::
@@ -54,16 +48,14 @@ problems:
             En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
             vaut 8, que vaut ``sizeof(filedes)`` à l’intérieur du corps d’une fonction
             avec un tel prototype?
+        name: Taile d’un tableau en tant qu’argument
     q7:
-        language: c
-        type: code_single_line
         header: |-
             Déclarez la variable ``x`` comme un tableau 2D composé de ``int`` avec 5
             colonnes et 8 lignes.
         name: Un tableau d’entiers à 2 dimensions
-    q8:
         type: code_single_line
-        language: c
+    q8:
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
             sorte que l’instruction suivant soit illégale::
@@ -74,8 +66,11 @@ problems:
 
               int i = 0;
               x = &i;
+        type: code_single_line
         name: Éléments constants
     q9:
+        type: code_single_line
+        name: Pointeur constant
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
             sorte que la séquence d’instructions suivante soit illégale::
@@ -86,12 +81,9 @@ problems:
             Tout en autorisant cette instruction-ci::
 
                *x = 0;
-        type: code_single_line
-        name: Pointeur constant
-        language: c
     q10:
+        type: code_single_line
         name: Pointeur et éléments constants
-        language: c
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` de manière à ce
             que cette séquence d’instructions soit illégale::
@@ -102,8 +94,8 @@ problems:
             De même que cette instruction::
 
               *x = 0;
-        type: code_single_line
     q11:
+        type: code_single_line
         header: |-
             Supposez que la ligne suivante se trouve dans un autre fichier, dans l’espace
             global::
@@ -113,14 +105,16 @@ problems:
             Écrivez la déclaration qui vous permet d’utiliser cette même variable ``x``
             depuis le fichier courant (typiquement, cette ligne se trouvera dans un
             *header*).
-        language: c
-        type: code_single_line
         name: Partage entre plusieurs fichiers
     q12:
         name: Variable locale à un fichier
-        language: c
         header: |-
             Déclarez la variable ``x`` comme un ``int`` accessible uniquement depuis le
             fichier actuel (ou plutôt, l’unité de compilation actuelle).
         type: code_single_line
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
 weight: 1.0
