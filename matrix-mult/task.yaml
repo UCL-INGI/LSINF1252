@@ -1,38 +1,39 @@
 accessible: true
 author: Mathieu Xhonneux
 context: |-
-    Écrivez une fonction `int access(int *A, int taille, int ordonnee, int abscisse)` qui renvoie l'élément d'abscisse et d'ordonnée indiquées dans une matrice carrée taille x taille d'entiers (il s'agit donc de l'élément `A[ordonnee][abscisse]`). Les indices `ordonnee` et `abscisse` vont de 1 à `taille`.
+    Écrivez une fonction ``int access(int *A, int taille, int ordonnee, int abscisse)`` qui renvoie l'élément d'abscisse et d'ordonnée indiquées dans une matrice carrée taille x taille d'entiers (il s'agit donc de l'élément `A[ordonnee][abscisse]`). Les indices `ordonnee` et `abscisse` vont de 1 à `taille`.
 
     Écrivez une fonction qui effectue la multiplication de deux matrices carrées taille x taille d'entiers. Le prototype de la fonction est la suivante : `void mult(int *A, int *B, int *C, int taille)` et elle calcule C = A x B. Les trois matrices sont stockées sous forme de tableau ligne par ligne et la place de la matrice C est déjà allouée.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[Beta] Multiplication de matrices'
 network_grading: false
 order: 73
 problems:
     access:
         name: access
-        type: code
-        language: c
         header: |-
             Écrivez ici le corps de la fonction access :
 
             `int access(int *A, int taille, int ordonnee, int abscisse) {`
+        type: code
+        language: c
     mult:
+        name: mult
         type: code
         language: c
         header: |-
             Écrivez ici le corps de la fonction access :
 
             `void mult(int *A, int *B, int *C, int taille) {`
-        name: mult
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
+tags: {}
 weight: 1.0
