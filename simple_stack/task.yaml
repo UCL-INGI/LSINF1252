@@ -34,11 +34,13 @@ limits:
     output: '2'
     memory: '100'
     time: '30'
-name: '[S3] Simple stack - REVIEWED'
+name: '[S4] Simple stack - REVIEWED'
 network_grading: false
 order: 35
 problems:
     push:
+        name: Push
+        type: code
         header: |-
             .. code-block:: c
 
@@ -52,11 +54,8 @@ problems:
                 */
 
                 int push(struct node **head, const char *value){
-        name: Push
         language: c
-        type: code
     pop:
-        type: code
         header: |-
             .. code-block:: c
 
@@ -74,6 +73,7 @@ problems:
 
                 int pop(struct node **head, char *result){
         name: Pop
+        type: code
         language: c
 stored_submissions: 0
 submission_limit:
@@ -81,57 +81,57 @@ submission_limit:
     period: -1
 tags:
     '0':
+        type: 1
+        name: Timeout
+        id: timeout
         description: Your code exceeds the maximum allowed time.
         visible: true
-        name: Timeout
-        type: 1
-        id: timeout
     '1':
+        visible: true
         description: ''
+        name: Segmentation Fault
         type: 1
         id: sigsegv
-        visible: true
-        name: Segmentation Fault
     '2':
-        name: Not compile
-        description: You code does not compile.
         type: 1
         visible: true
+        description: You code does not compile.
+        name: Not compile
         id: not_compile
     '3':
         type: 1
         id: memory
         visible: true
-        description: ''
         name: Memory Exceeded
-    '4':
         description: ''
+    '4':
+        type: 1
+        description: ''
+        visible: true
         name: Floating Point Exception
         id: sigfpe
-        type: 1
-        visible: true
     '5':
         description: Your code produced a double free.
-        name: Double free
+        type: 1
         visible: true
         id: double_free
-        type: 1
+        name: Double free
     '6':
-        id: banned_funcs
-        name: Banned functions
-        type: 1
         description: You use some banned functions.
+        type: 1
+        name: Banned functions
         visible: true
+        id: banned_funcs
     '7':
+        name: Data structures
+        type: 2
         description: Task dealing with data structures and linked list
         visible: true
-        type: 2
-        name: Data structures
         id: ''
     '8':
-        description: ''
         type: 2
-        visible: true
         name: S3
+        visible: true
+        description: ''
         id: ''
 weight: 1.0
