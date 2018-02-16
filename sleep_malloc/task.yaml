@@ -1,16 +1,16 @@
 accessible: true
 author: Mathieu Xhonneux & Maxime Mawait
 context: |-
-    The system call malloc may fail, for instance if the OS has no free memory remaining. In this case, it may be possible that some other processes free some memory after some time.
+    The `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ function may fail, for instance if the OS has no free memory remaining. In this case, it may be possible that some other processes to free some memory after some time.
 
-    In our program, instead of reporting an error immediately if no free memory is available, we will wait some time to see if the OS can free memory for us.
+    In our program, instead of reporting an error immediately if no free memory is available, we will wait some time to see if the OS has freed memory for us.
 environment: cpp
 evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S3] Sleepy malloc'
 network_grading: false
 order: 29
@@ -20,14 +20,13 @@ problems:
         language: c
         type: code
         header: |-
-            Write the body of the function *sleepy_malloc*.
+            Write the body of the function ``sleepy_malloc``.
 
-            Hint : think about static variables.
 
-            .. code-block:: c
+            .. code-block:: c`
 
                 /* Wrapper to the malloc system call.
-                 * If malloc fails, sleep for 5 seconds, and re-try.
+                 * If malloc fails, sleep for 5 seconds, and then try again.
                  * If malloc failed 10 times in a row, return NULL.
                  */
                 void *sleepy_malloc(size_t s) {
@@ -80,8 +79,8 @@ tags:
         id: banned_funcs
     '7':
         name: S3
-        type: 2
         description: ''
         visible: true
+        type: 2
         id: ''
 weight: 1.0
