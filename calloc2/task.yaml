@@ -22,6 +22,8 @@ problems:
 
             .. code-block:: c
 
+               #include <stdlib.h>
+
                void *calloc2(size_t nmemb, size_t size) {
         type: code
         language: c
