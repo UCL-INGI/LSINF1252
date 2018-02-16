@@ -15,7 +15,7 @@ network_grading: false
 order: 53
 problems:
     q1:
-        header: Déclarez la variable ``x`` de type ``int``.
+        header: Déclarez une variable ``x`` de type ``int``.
         type: code_single_line
         name: Un entier
     q2:
@@ -30,12 +30,12 @@ problems:
             vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
     q4:
         type: code_single_line
-        name: Un pointeur
-        header: Déclarez la variable ``x`` comme un pointeur sur un ``int``.
+        name: Un pointeur vers un entier
+        header: Déclarez la variable ``x`` comme un pointeur vers un ``int``.
     q5:
         header: |-
             En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
-            vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
+            vaut 8, que vaut ``sizeof(x)`` sachant que ``x`` a été déclaré comme dans la question précédente ?
         type: code_single_line
         name: Taille d’un pointeur
     q6:
@@ -43,15 +43,15 @@ problems:
         header: |-
             Voici le prototype d’une fonction standard::
 
+            .. code-block:: c
+
               int pipe(int filedes[2]);
 
-            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
-            vaut 8, que vaut ``sizeof(filedes)`` à l’intérieur du corps d’une fonction
-            avec un tel prototype?
-        name: Taile d’un tableau en tant qu’argument
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur vaut 8, que vaut ``sizeof(filedes)`` à l’intérieur du corps de la fonction ``pipe`` ?
+        name: Taile d’un tableau passé comme argument
     q7:
         header: |-
-            Déclarez la variable ``x`` comme un tableau 2D composé de ``int`` avec 5
+            Déclarez la variable ``x`` comme un tableau à deux dimensions contenant de ``int`` avec 5
             colonnes et 8 lignes.
         name: Un tableau d’entiers à 2 dimensions
         type: code_single_line
@@ -97,8 +97,9 @@ problems:
     q11:
         type: code_single_line
         header: |-
-            Supposez que la ligne suivante se trouve dans un autre fichier, dans l’espace
-            global::
+            Supposez que la ligne suivante se trouve dans un autre fichier, dans l’espace global.
+
+            .. code-block:: c
 
               int x;
 
