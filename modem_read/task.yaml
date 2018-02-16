@@ -15,7 +15,7 @@ limits:
     time: '30'
 name: '[S3] Reading from the wire '
 network_grading: false
-order: 32
+order: 33
 problems:
     modem:
         language: c

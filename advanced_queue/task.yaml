@@ -22,7 +22,7 @@ limits:
     time: '30'
 name: '[S4] Queue avancée'
 network_grading: false
-order: 41
+order: 42
 problems:
     enqueue:
         type: code

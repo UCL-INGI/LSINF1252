@@ -12,7 +12,7 @@ limits:
     memory: '100'
 name: '[S2] strlen, strcat et strcasecmp'
 network_grading: false
-order: 23
+order: 22
 problems:
     strlen:
         header: |-

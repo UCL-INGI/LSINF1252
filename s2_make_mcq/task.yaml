@@ -10,7 +10,7 @@ limits:
     time: '30'
 name: '[S4] make basics - multiple choice questions - REVIEWED'
 network_grading: false
-order: 26
+order: 25
 problems:
     mcq1:
         choices:

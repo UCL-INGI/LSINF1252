@@ -87,7 +87,7 @@ limits:
     time: '30'
 name: '[S4] make basics - REVIEWED'
 network_grading: false
-order: 25
+order: 24
 problems:
     make_me_easy:
         answer: make make_me

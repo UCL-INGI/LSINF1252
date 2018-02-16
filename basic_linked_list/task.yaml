@@ -40,7 +40,7 @@ limits:
     time: '30'
 name: '[S3] Simple linked list '
 network_grading: false
-order: 30
+order: 31
 problems:
     init_node:
         name: Node initialisation

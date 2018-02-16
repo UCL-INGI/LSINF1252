@@ -39,7 +39,7 @@ limits:
     time: '30'
 name: '[S3] Simple binary Search Tree'
 network_grading: false
-order: 31
+order: 32
 problems:
     contains:
         type: code
