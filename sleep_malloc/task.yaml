@@ -13,7 +13,7 @@ limits:
     memory: '100'
 name: '[S3] Sleepy malloc'
 network_grading: false
-order: 29
+order: 28
 problems:
     sleep_malloc:
         name: Sleepy malloc

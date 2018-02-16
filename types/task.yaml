@@ -12,7 +12,7 @@ limits:
     memory: '128'
 name: '[S3] Les types'
 network_grading: false
-order: 27
+order: 29
 problems:
     q1:
         header: Déclarez une variable ``x`` de type ``int``.

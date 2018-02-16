@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S3] Pointer arithmetic '
 network_grading: false
-order: 30
+order: 31
 problems:
     first:
         name: First argument
