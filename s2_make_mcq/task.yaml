@@ -5,65 +5,65 @@ environment: mcq
 evaluate: best
 groups: false
 limits:
+    output: '2'
     memory: '100'
     time: '30'
-    output: '2'
-name: '[S2] make basics - multiple choice questions - REVIEWED'
+name: '[S4] make basics - multiple choice questions - REVIEWED'
 network_grading: false
 order: 26
 problems:
     mcq1:
-        header: Select all *correct* answers related to the *target* of a Makefile
-            rule.
-        limit: 2
         choices:
         -   text: The target is the bullseye of a shooting target.
-        -   text: The target is the name of a file.
-            valid: true
-        multiple: true
+        -   valid: true
+            text: The target is the name of a file.
+        limit: 2
+        name: Find the target
+        header: Select all *correct* answers related to the *target* of a Makefile
+            rule.
         success_message: 'Bullseye, good job! '
         type: multiple_choice
-        name: Find the target
-    mcq2:
         multiple: true
+    mcq2:
         name: What are the prerequisite?
+        limit: 2
         choices:
         -   valid: true
             text: The prerequisite is a file that is used as input to create the target.
         -   text: The prerequisite is to have good marksmanship skills to hit the
                 target.
-        header: Select all *correct* answers related to the *prerequisite* of a Makefile
-            rule.
-        type: multiple_choice
         error_message: Try again!
         success_message: Good job!
-        limit: 2
+        header: Select all *correct* answers related to the *prerequisite* of a Makefile
+            rule.
+        multiple: true
+        type: multiple_choice
     mcq3:
         choices:
         -   text: A recipe is an action that make carries out.
             valid: true
-        -   text: '42'
-            feedback: That is the Answer to the Ultimate Question of Life, the Universe,
+        -   feedback: That is the Answer to the Ultimate Question of Life, the Universe,
                 and Everything.
+            text: '42'
         -   text: The recipe is a file that is used as input to create the target.
         -   text: The recipe is the name of a file.
-        type: multiple_choice
-        success_message: Good job!
-        error_message: Try again!
-        name: The recipe
         multiple: true
+        type: multiple_choice
         header: Please select all *correct* answers related to the *recipe* of a Makefile
             rule.
         limit: 2
+        error_message: Try again!
+        name: The recipe
+        success_message: Good job!
     mcq4:
         choices:
-        -   text: |4-
+        -   valid: true
+            text: |4-
 
                 .. code-block:: console
 
                         clean:
                         @rm -f src/*.o
-            valid: true
         -   text: |4-
 
                 .. code-block:: console
@@ -77,13 +77,13 @@ problems:
 
                     clean
                     [spaces]@rm -f src/*.o
-        -   text: |4-
+        -   valid: true
+            text: |4-
 
                 .. code-block:: console
 
                     clean
                     [tab]@rm -f src/*.o
-            valid: true
         -   text: |4-
 
                 .. code-block:: console
@@ -98,9 +98,6 @@ problems:
                         clean
                         @rm -f src/*.o
             valid: true
-        success_message: Good job!
-        limit: 0
-        name: Rules syntax
         header: |-
             Choice all *wrong* Makefile *rules*.
 
@@ -108,44 +105,47 @@ problems:
 
             * ``[tab]`` indicates a tabulation;
             * ``[spaces]`` indicates 8 white spaces.
-        error_message: Try again!
-        type: multiple_choice
+        name: Rules syntax
         multiple: true
+        type: multiple_choice
+        error_message: Try again!
+        limit: 0
+        success_message: Good job!
     match1:
+        type: match
+        name: Break
         header: In a Makefile, what is the character you can use to split a long line?
         answer: \
-        name: Break
-        type: match
     mcq5:
+        limit: 2
+        success_message: Good job!
+        multiple: true
         choices:
         -   valid: true
             text: At the beginning of every recipe line, you put a tab indentation
         -   text: At the beginning of every recipe line, you put a 8 white spaces
                 indentation.
         -   text: At the beginning of every recipe line, you put no indentation.
-        limit: 2
-        header: Choice all the *correct* answers.
-        success_message: Good job!
-        multiple: true
-        error_message: Try again!
-        name: Recipes indentation
         type: multiple_choice
+        header: Choice all the *correct* answers.
+        name: Recipes indentation
+        error_message: Try again!
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: make & Makefile
-        id: make
-        visible: true
         description: Tasks related to the make task runner for targets described in
             Makefile.
+        visible: true
         type: 0
+        id: make
+        name: make & Makefile
     '1':
+        visible: true
         description: ''
         name: S2
-        visible: true
         type: 2
         id: ''
 weight: 1.0
