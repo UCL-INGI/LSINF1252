@@ -10,51 +10,10 @@ limits:
     output: '5210'
     time: '10'
     memory: '128'
-name: '[S3] Les types'
+name: '[S3] Les types (2/2)'
 network_grading: false
 order: 29
 problems:
-    q1:
-        type: code_single_line
-        name: Un entier
-        header: Déclarez une variable ``x`` de type ``int``.
-    q2:
-        header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
-        name: Un tableau d’entiers
-        type: code_single_line
-    q3:
-        type: code_single_line
-        name: Taille d’un tableau
-        header: |-
-            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
-            vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
-    q4:
-        type: code_single_line
-        name: Un pointeur vers un entier
-        header: Déclarez la variable ``x`` comme un pointeur vers un ``int``.
-    q5:
-        header: |-
-            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
-            vaut 8, que vaut ``sizeof(x)`` sachant que ``x`` a été déclaré comme dans la question précédente ?
-        type: code_single_line
-        name: Taille d’un pointeur
-    q6:
-        type: code_single_line
-        header: |-
-            Voici le prototype d’une fonction standard.
-
-            .. code-block:: c
-
-              int pipe(int filedes[2]);
-
-            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur vaut 8, que vaut ``sizeof(filedes)`` à l’intérieur du corps de la fonction ``pipe`` ?
-        name: Taile d’un tableau passé comme argument
-    q7:
-        header: |-
-            Déclarez la variable ``x`` comme un tableau à deux dimensions contenant de ``int`` avec 5
-            colonnes et 8 lignes.
-        name: Un tableau d’entiers à 2 dimensions
-        type: code_single_line
     q8:
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
