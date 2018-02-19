@@ -3,8 +3,8 @@ author: Gregory Detal & Fabien Duchêne
 context: |+
     La commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ permet d'évaluer une expression passée en paramètre. Elle retourne:
 
-     - ``0`` si l'expression passée en argument est vraie
-     - ``1`` si l'expression passée en argument est fausse
+    - ``0`` si l'expression passée en argument est vraie
+    - ``1`` si l'expression passée en argument est fausse
 
     On vous demande d'écrire un sous-ensemble de la commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ en C. Les expressions à implémenter sont ``-eq``, ``-ge``, ``-gt``, ``-le``, ``-lt`` et ``-ne``.
 
@@ -21,19 +21,19 @@ evaluate: best
 groups: false
 limits:
     output: '5210'
-    memory: '32'
     time: '30'
+    memory: '32'
 name: '[S3] Le programme test'
 network_grading: false
 order: 35
 problems:
     q1:
-        language: c
-        name: ''
         header: |+
             Complétez ici le code du fichier ``test.c`` qui contient la réponse à l'énoncé.
 
         type: code
+        name: ''
+        language: c
 responseIsHTML: true
 stored_submissions: 0
 submission_limit:
