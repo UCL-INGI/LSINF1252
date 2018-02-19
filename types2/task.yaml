@@ -1,0 +1,133 @@
+accessible: false
+author: Kilian Verhetsel
+context: |-
+    Le type de la plupart des variables en C est facile à déterminer. Néanmoins, le
+    C contient aussi des types qui diffèrent de façons parfois subtiles.
+environment: cpp
+evaluate: best
+groups: false
+limits:
+    output: '5210'
+    time: '10'
+    memory: '128'
+name: '[S3] Les types'
+network_grading: false
+order: 29
+problems:
+    q1:
+        header: Déclarez une variable ``x`` de type ``int``.
+        type: code_single_line
+        name: Un entier
+    q2:
+        header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
+        name: Un tableau d’entiers
+        type: code_single_line
+    q3:
+        type: code_single_line
+        name: Taille d’un tableau
+        header: |-
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
+            vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
+    q4:
+        type: code_single_line
+        name: Un pointeur vers un entier
+        header: Déclarez la variable ``x`` comme un pointeur vers un ``int``.
+    q5:
+        header: |-
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
+            vaut 8, que vaut ``sizeof(x)`` sachant que ``x`` a été déclaré comme dans la question précédente ?
+        type: code_single_line
+        name: Taille d’un pointeur
+    q6:
+        type: code_single_line
+        header: |-
+            Voici le prototype d’une fonction standard.
+
+            .. code-block:: c
+
+              int pipe(int filedes[2]);
+
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur vaut 8, que vaut ``sizeof(filedes)`` à l’intérieur du corps de la fonction ``pipe`` ?
+        name: Taile d’un tableau passé comme argument
+    q7:
+        header: |-
+            Déclarez la variable ``x`` comme un tableau à deux dimensions contenant de ``int`` avec 5
+            colonnes et 8 lignes.
+        name: Un tableau d’entiers à 2 dimensions
+        type: code_single_line
+    q8:
+        header: |-
+            Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
+            sorte que l’instruction suivant soit illégale.
+
+            .. code-block:: c
+
+               *x = 4;
+
+            Tout en autorisant cette séquence d’instructions
+
+            .. code-block:: c
+
+               int i = 0;
+               x = &i;
+        type: code_single_line
+        name: Éléments constants
+    q9:
+        type: code_single_line
+        name: Pointeur constant
+        header: |-
+            Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
+            sorte que la séquence d’instructions suivante soit illégale.
+
+            .. code-block:: c
+
+              int i = 0;
+              x = &i;
+
+            Tout en autorisant cette instruction-ci.
+
+            .. code-block:: c
+
+               *x = 0;
+    q10:
+        type: code_single_line
+        name: Pointeur et éléments constants
+        header: |-
+            Déclarez la variable ``x`` comme un pointeur sur un ``int`` de manière à ce
+            que cette séquence d’instructions soit illégale
+
+            .. code-block:: c
+
+               int i = 0;
+               x = &i;
+
+            De même que cette instruction
+
+            .. code-block:: c
+
+               *x = 0;
+    q11:
+        type: code_single_line
+        header: |-
+            Supposez que la ligne suivante se trouve dans un autre fichier, dans l’espace global.
+
+            .. code-block:: c
+
+               int x;
+
+            Écrivez la déclaration qui vous permet d’utiliser cette même variable ``x``
+            depuis le fichier courant (typiquement, cette ligne se trouvera dans un
+            *header*).
+        name: Partage entre plusieurs fichiers
+    q12:
+        name: Variable locale à un fichier
+        header: |-
+            Déclarez la variable ``x`` comme un ``int`` accessible uniquement depuis le
+            fichier actuel (ou plutôt, l’unité de compilation actuelle).
+        type: code_single_line
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

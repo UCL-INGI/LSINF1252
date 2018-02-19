@@ -1,0 +1,7 @@
+{
+   dlsym leaks some memory
+   Memcheck:Leak
+   fun:calloc
+   fun:_dlerror_run
+   fun:dlsym
+}
