@@ -86,11 +86,6 @@ int main(int argc, char **argv) {
   if ((status = try_question("q2.c", m, check_q2)) != 0) goto on_failure;
   if ((status = try_question("q4.c", m, check_q4)) != 0) goto on_failure;
   if ((status = try_question("q7.c", m, check_q7)) != 0) goto on_failure;
-  if ((status = try_question("q8.c", m, check_q8)) != 0) goto on_failure;
-  if ((status = try_question("q9.c", m, check_q9)) != 0) goto on_failure;
-  if ((status = try_question("q10.c", m, check_q10)) != 0) goto on_failure;
-  if ((status = try_question("q11.c", m, check_q11)) != 0) goto on_failure;
-  if ((status = try_question("q12.c", m, check_q12)) != 0) goto on_failure;
 
 on_failure: matcher_release(m);
 
