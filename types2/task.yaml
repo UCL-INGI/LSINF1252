@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Kilian Verhetsel
 context: |-
     Le type de la plupart des variables en C est facile à déterminer. Néanmoins, le
@@ -8,13 +8,15 @@ evaluate: best
 groups: false
 limits:
     output: '5210'
-    time: '10'
     memory: '128'
+    time: '10'
 name: '[S3] Les types (2/2)'
 network_grading: false
 order: 29
 problems:
     q8:
+        type: code_single_line
+        name: Éléments constants
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
             sorte que l’instruction suivant soit illégale.
@@ -29,10 +31,7 @@ problems:
 
                int i = 0;
                x = &i;
-        type: code_single_line
-        name: Éléments constants
     q9:
-        type: code_single_line
         name: Pointeur constant
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
@@ -48,6 +47,7 @@ problems:
             .. code-block:: c
 
                *x = 0;
+        type: code_single_line
     q10:
         type: code_single_line
         name: Pointeur et éléments constants
@@ -79,11 +79,11 @@ problems:
             *header*).
         name: Partage entre plusieurs fichiers
     q12:
+        type: code_single_line
         name: Variable locale à un fichier
         header: |-
             Déclarez la variable ``x`` comme un ``int`` accessible uniquement depuis le
             fichier actuel (ou plutôt, l’unité de compilation actuelle).
-        type: code_single_line
 stored_submissions: 0
 submission_limit:
     amount: -1
