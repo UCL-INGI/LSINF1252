@@ -1,4 +1,4 @@
-#include "matchers.h"
+#include <matchers.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -48,6 +48,11 @@ int check_q1(CXCursor cursor);
 int check_q2(CXCursor cursor);
 int check_q4(CXCursor cursor);
 int check_q7(CXCursor cursor);
+int check_q8(CXCursor cursor);
+int check_q9(CXCursor cursor);
+int check_q10(CXCursor cursor);
+int check_q11(CXCursor cursor);
+int check_q12(CXCursor cursor);
 
 int try_question(const char *filename, matcher m, int (*check)(CXCursor)) {
   const char *args[] = {MatcherClangIncludePath};
@@ -81,6 +86,11 @@ int main(int argc, char **argv) {
   if ((status = try_question("q2.c", m, check_q2)) != 0) goto on_failure;
   if ((status = try_question("q4.c", m, check_q4)) != 0) goto on_failure;
   if ((status = try_question("q7.c", m, check_q7)) != 0) goto on_failure;
+  if ((status = try_question("q8.c", m, check_q8)) != 0) goto on_failure;
+  if ((status = try_question("q9.c", m, check_q9)) != 0) goto on_failure;
+  if ((status = try_question("q10.c", m, check_q10)) != 0) goto on_failure;
+  if ((status = try_question("q11.c", m, check_q11)) != 0) goto on_failure;
+  if ((status = try_question("q12.c", m, check_q12)) != 0) goto on_failure;
 
 on_failure: matcher_release(m);
 
@@ -101,4 +111,26 @@ int check_q4(CXCursor cursor) {
 
 int check_q7(CXCursor cursor) {
   return check_type(cursor, "int [8][5]", 7);
+}
+
+int check_q8(CXCursor cursor) {
+  return check_type(cursor, "const int *", 8);
+}
+
+int check_q9(CXCursor cursor) {
+  return check_type(cursor, "int *const", 9);
+}
+
+int check_q10(CXCursor cursor) {
+  return check_type(cursor, "const int *const", 10);
+}
+
+int check_q11(CXCursor cursor) {
+  return check_type(cursor, "int", 11) &&
+    check_keyword(cursor, "extern", 11);
+}
+
+int check_q12(CXCursor cursor) {
+  return check_type(cursor, "int", 12) &&
+    check_keyword(cursor, "static", 12);
 }
