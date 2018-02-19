@@ -16,71 +16,71 @@ network_grading: false
 order: 28
 problems:
     sleep_malloc:
-        name: Sleepy malloc
         language: c
-        type: code
         header: |-
             Write the body of the function ``sleepy_malloc``.
 
 
-            .. code-block:: c`
+            .. code-block:: c
 
                 /* Wrapper to the malloc system call.
                  * If malloc fails, sleep for 5 seconds, and then try again.
                  * If malloc failed 10 times in a row, return NULL.
                  */
                 void *sleepy_malloc(size_t s) {
+        name: Sleepy malloc
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        visible: true
+        description: Your code exceeds the maximum allowed time.
         type: 1
         name: Timeout
         id: timeout
-        description: Your code exceeds the maximum allowed time.
-        visible: true
     '1':
-        visible: true
+        type: 1
         description: ''
-        name: Segmentation Fault
-        type: 1
         id: sigsegv
-    '2':
-        type: 1
         visible: true
+        name: Segmentation Fault
+    '2':
         description: You code does not compile.
-        name: Not compile
         id: not_compile
+        visible: true
+        type: 1
+        name: Not compile
     '3':
+        name: Memory Exceeded
         type: 1
         id: memory
         description: ''
         visible: true
-        name: Memory Exceeded
     '4':
         visible: true
-        type: 1
         description: ''
-        name: Floating Point Exception
         id: sigfpe
-    '5':
-        description: Your code produced a double free.
+        name: Floating Point Exception
         type: 1
-        visible: true
+    '5':
+        type: 1
         id: double_free
         name: Double free
+        visible: true
+        description: Your code produced a double free.
     '6':
         description: You use some banned functions.
-        type: 1
         name: Banned functions
         visible: true
         id: banned_funcs
+        type: 1
     '7':
-        name: S3
-        description: ''
         visible: true
         type: 2
+        name: S3
+        description: ''
         id: ''
 weight: 1.0
