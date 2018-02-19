@@ -8,14 +8,13 @@ evaluate: best
 groups: false
 limits:
     output: '5210'
-    memory: '128'
     time: '10'
+    memory: '128'
 name: '[S3] Les types (2/2)'
 network_grading: false
 order: 29
 problems:
     q8:
-        type: code_single_line
         name: Éléments constants
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
@@ -31,8 +30,8 @@ problems:
 
                int i = 0;
                x = &i;
+        type: code_single_line
     q9:
-        name: Pointeur constant
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
             sorte que la séquence d’instructions suivante soit illégale.
@@ -47,10 +46,10 @@ problems:
             .. code-block:: c
 
                *x = 0;
+        name: Pointeur constant
         type: code_single_line
     q10:
         type: code_single_line
-        name: Pointeur et éléments constants
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` de manière à ce
             que cette séquence d’instructions soit illégale
@@ -65,8 +64,9 @@ problems:
             .. code-block:: c
 
                *x = 0;
+        name: Pointeur et éléments constants
     q11:
-        type: code_single_line
+        name: Partage entre plusieurs fichiers
         header: |-
             Supposez que la ligne suivante se trouve dans un autre fichier, dans l’espace global.
 
@@ -77,10 +77,10 @@ problems:
             Écrivez la déclaration qui vous permet d’utiliser cette même variable ``x``
             depuis le fichier courant (typiquement, cette ligne se trouvera dans un
             *header*).
-        name: Partage entre plusieurs fichiers
-    q12:
         type: code_single_line
+    q12:
         name: Variable locale à un fichier
+        type: code_single_line
         header: |-
             Déclarez la variable ``x`` comme un ``int`` accessible uniquement depuis le
             fichier actuel (ou plutôt, l’unité de compilation actuelle).
@@ -88,5 +88,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        visible: true
+        description: ''
+        name: S3
+        type: 2
+        id: ''
 weight: 1.0

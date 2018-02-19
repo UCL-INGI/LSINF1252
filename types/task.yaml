@@ -15,9 +15,9 @@ network_grading: false
 order: 29
 problems:
     q1:
+        type: code_single_line
         name: Un entier
         header: Déclarez une variable ``x`` de type ``int``.
-        type: code_single_line
     q2:
         header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
         name: Un tableau d’entiers
@@ -26,18 +26,18 @@ problems:
         header: |-
             En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
             vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
-        type: code_single_line
         name: Taille d’un tableau
+        type: code_single_line
     q4:
+        header: Déclarez la variable ``x`` comme un pointeur vers un ``int``.
         type: code_single_line
         name: Un pointeur vers un entier
-        header: Déclarez la variable ``x`` comme un pointeur vers un ``int``.
     q5:
+        name: Taille d’un pointeur
+        type: code_single_line
         header: |-
             En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
             vaut 8, que vaut ``sizeof(x)`` sachant que ``x`` a été déclaré comme dans la question précédente ?
-        type: code_single_line
-        name: Taille d’un pointeur
     q6:
         type: code_single_line
         header: |-
@@ -59,5 +59,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        visible: true
+        description: ''
+        name: S3
+        type: 2
+        id: ''
 weight: 1.0
