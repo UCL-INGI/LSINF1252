@@ -9,13 +9,13 @@ int enqueue(queue_t* q, int val){
     if(!q->tail){
         n->next = n;
         q->tail = n;
-        q->size++;
-        return 0;
     }
-    node_t* head = q->tail->next;
-    n->next = head;
-    q->tail->next = n;
-    q->size++;
+    else{
+      node_t* head = q->tail->next;
+      n->next = head;
+      q->tail->next = n;
+    }
+  q->size++;
 	return 0;
 }
 

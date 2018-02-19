@@ -28,34 +28,57 @@ int check_queue(queue_t* q, int expected_size, int* values, int method){
     return 0;
 }
 
+void error_msg(int ret, int fun){
+  switch (ret) {
+      case -4:
+          push_info_msg(_("You have to update the size of the queue"));
+          break;
+      case -3:
+          if (fun)
+            push_info_msg(_("You have to malloc the enqueued element"));
+          else
+            push_info_msg(_("You have to free the dequeued element"));
+          break;
+      case -2:
+          push_info_msg(_("You don't have the good number of elements in the queue"));
+          break;
+      case -1:
+          push_info_msg(_("The elements of the queue are not in the good order"));
+          break;
+      default:
+          break;
+  }
+}
+
+void enqueue_mem_check(int delta, int stats, int ret){
+  CU_ASSERT_EQUAL(delta,sizeof(node_t));
+  if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
+
+  CU_ASSERT_EQUAL(stats,1);
+  if(stats > 1) push_info_msg(_("Why do you use malloc more then once"));
+
+  CU_ASSERT_EQUAL(ret,0);
+  if(ret) push_info_msg(_("You don't return the good value"));
+}
+
 void test_enqueue_empty() {
     set_test_metadata("enqueue", _("Enqueue of an empty queue"), 1);
 
-    node_t* n = NULL;
     queue_t q;
-    q.tail = n;
+    q.tail = NULL;
     q.size = 0;
 
     int ret = -1;
 
     monitored.malloc = true;
 
-    size_t start= stats.memory.used;
+    size_t start = stats.memory.used;
 
     SANDBOX_BEGIN;
     ret = enqueue(&q,0);
     SANDBOX_END;
 
-    size_t delta = stats.memory.used -start;
-
-    CU_ASSERT_EQUAL(delta,sizeof(node_t));
-    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
-
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called > 1) push_info_msg(_("Why do you use malloc more then once"));
-
-    CU_ASSERT_EQUAL(ret,0);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    enqueue_mem_check(stats.memory.used - start, stats.malloc.called, ret);
 
     int values[] = {0};
 
@@ -63,27 +86,14 @@ void test_enqueue_empty() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret,1);
+
     if(q.tail){
         CU_ASSERT_EQUAL(q.tail->next,q.tail);
         if(q.tail->next != q.tail)
             push_info_msg(_("You must link the tail with itself! That's a circular linked list"));
     }
+    
     free(stats.malloc.last_return);
 }
 
@@ -136,16 +146,7 @@ void test_enqueue_one() {
     ret = enqueue(&q,0);
     SANDBOX_END;
 
-    size_t delta = stats.memory.used -start;
-
-    CU_ASSERT_EQUAL(delta,sizeof(node_t));
-    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
-
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called > 1) push_info_msg(_("Why do you use malloc more then once"));
-
-    CU_ASSERT_EQUAL(ret,0);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    enqueue_mem_check(stats.memory.used - start, stats.malloc.called, ret);
 
     int values[] = {1,0};
 
@@ -153,22 +154,7 @@ void test_enqueue_one() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret,1);
 
     free(stats.malloc.last_return);
 }
@@ -196,16 +182,7 @@ void test_enqueue_five() {
     ret = enqueue(&q,0);
     SANDBOX_END;
 
-    size_t delta = stats.memory.used -start;
-
-    CU_ASSERT_EQUAL(delta,sizeof(node_t));
-    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
-
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called > 1) push_info_msg(_("Why do you use malloc more then once"));
-
-    CU_ASSERT_EQUAL(ret,0);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    enqueue_mem_check(stats.memory.used - start, stats.malloc.called, ret);
 
     int values[] = {1,0,3,5,2,6};
 
@@ -213,22 +190,7 @@ void test_enqueue_five() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret,1);
 
     free(stats.malloc.last_return);
 }
@@ -261,16 +223,7 @@ void test_enqueue_ten() {
     ret = enqueue(&q,0);
     SANDBOX_END;
 
-    size_t delta = stats.memory.used -start;
-
-    CU_ASSERT_EQUAL(delta,sizeof(node_t));
-    if(delta != sizeof(node_t)) push_info_msg(_("You don't allocate the good amount of memory"));
-
-    CU_ASSERT_EQUAL(stats.malloc.called,1);
-    if(stats.malloc.called > 1) push_info_msg(_("Why do you use malloc more then once"));
-
-    CU_ASSERT_EQUAL(ret,0);
-    if(ret) push_info_msg(_("You don't return the good value"));
+    enqueue_mem_check(stats.memory.used - start, stats.malloc.called, ret);
 
     int values[] = {1,0,3,5,2,6,7,4,-3,9,-10};
 
@@ -278,22 +231,7 @@ void test_enqueue_ten() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret,1);
 
     free(stats.malloc.last_return);
 }
@@ -344,22 +282,7 @@ void test_enqueue_ten_fails() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret,1);
 
     free(stats.malloc.last_return);
 }
@@ -451,22 +374,7 @@ void test_dequeue_five() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret,0);
 
     free(stats.malloc.last_return);
 }
@@ -521,22 +429,7 @@ void test_dequeue_ten() {
 
     CU_ASSERT_EQUAL(ret,0);
 
-    switch (ret) {
-        case -4:
-            push_info_msg(_("You have to update the size of the queue"));
-            break;
-        case -3:
-            push_info_msg(_("You hace to malloc the enqueued element"));
-            break;
-        case -2:
-            push_info_msg(_("You don't have the good number of elements in the queue"));
-            break;
-        case -1:
-            push_info_msg(_("The elements of the queue are not in the good order"));
-            break;
-        default:
-            break;
-    }
+    error_msg(ret, 0);
 
     free(stats.malloc.last_return);
 }
