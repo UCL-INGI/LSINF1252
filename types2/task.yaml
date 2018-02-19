@@ -15,9 +15,9 @@ network_grading: false
 order: 29
 problems:
     q1:
-        header: Déclarez une variable ``x`` de type ``int``.
         type: code_single_line
         name: Un entier
+        header: Déclarez une variable ``x`` de type ``int``.
     q2:
         header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
         name: Un tableau d’entiers

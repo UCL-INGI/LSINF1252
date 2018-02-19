@@ -33,7 +33,7 @@ else
     feedback --result failed --feedback "Erreur à la question 6"
 fi
 
-compiler_out=$(clang -std=gnu99 -L/usr/lib64/llvm $LDFLAGS $CFLAGS -lclang check.c adds/matchers/*.c -o check 2>&1)
+compiler_out=$(clang -std=gnu99 -L/usr/lib64/llvm $LDFLAGS $CFLAGS -lclang check.c adds/*.c -o check 2>&1)
 if [ $? -ne 0 ]; then
     feedback --result crashed --feedback "Le programme de test n’a pas pu être compilé::
 

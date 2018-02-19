@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Kilian Verhetsel
 context: |-
     Le type de la plupart des variables en C est facile à déterminer. Néanmoins, le
@@ -10,7 +10,7 @@ limits:
     output: '5210'
     time: '10'
     memory: '128'
-name: '[S3] Les types'
+name: '[S3] Les types (1/2)'
 network_grading: false
 order: 29
 problems:
