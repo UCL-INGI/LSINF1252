@@ -48,11 +48,6 @@ int check_q1(CXCursor cursor);
 int check_q2(CXCursor cursor);
 int check_q4(CXCursor cursor);
 int check_q7(CXCursor cursor);
-int check_q8(CXCursor cursor);
-int check_q9(CXCursor cursor);
-int check_q10(CXCursor cursor);
-int check_q11(CXCursor cursor);
-int check_q12(CXCursor cursor);
 
 int try_question(const char *filename, matcher m, int (*check)(CXCursor)) {
   const char *args[] = {MatcherClangIncludePath};
@@ -106,26 +101,4 @@ int check_q4(CXCursor cursor) {
 
 int check_q7(CXCursor cursor) {
   return check_type(cursor, "int [8][5]", 7);
-}
-
-int check_q8(CXCursor cursor) {
-  return check_type(cursor, "const int *", 8);
-}
-
-int check_q9(CXCursor cursor) {
-  return check_type(cursor, "int *const", 9);
-}
-
-int check_q10(CXCursor cursor) {
-  return check_type(cursor, "const int *const", 10);
-}
-
-int check_q11(CXCursor cursor) {
-  return check_type(cursor, "int", 11) &&
-    check_keyword(cursor, "extern", 11);
-}
-
-int check_q12(CXCursor cursor) {
-  return check_type(cursor, "int", 12) &&
-    check_keyword(cursor, "static", 12);
 }
