@@ -11,8 +11,8 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S3] Reading from the wire '
 network_grading: false
 order: 34
@@ -22,7 +22,7 @@ problems:
         name: '42'
         type: code
         header: |-
-            You want to know if the information that you received from the modem you received contains a byte whoe numerical value is ``42``.
+            You want to know if the information that you received from the modem you received contains a byte whose numerical value is ``42``.
             Write the body of the function ``has_42``, this function has to use ``malloc`` to create the buffer before calling ``modem_read``:
 
             .. code-block:: c
@@ -38,57 +38,57 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 1
-        name: Timeout
-        id: timeout
+        visible: true
         description: Your code exceeds the maximum allowed time.
-        visible: true
+        name: Timeout
+        type: 1
+        id: timeout
     '1':
-        visible: true
+        type: 1
         description: ''
-        name: Segmentation Fault
-        type: 1
         id: sigsegv
-    '2':
-        type: 1
         visible: true
-        description: You code does not compile.
-        name: Not compile
+        name: Segmentation Fault
+    '2':
+        visible: true
         id: not_compile
+        description: You code does not compile.
+        type: 1
+        name: Not compile
     '3':
+        name: Memory Exceeded
         type: 1
         id: memory
-        visible: true
-        name: Memory Exceeded
         description: ''
+        visible: true
     '4':
-        type: 1
-        description: ''
         visible: true
+        description: ''
         id: sigfpe
         name: Floating Point Exception
-    '5':
-        description: Your code produced a double free.
         type: 1
-        visible: true
+    '5':
+        type: 1
         id: double_free
         name: Double free
+        visible: true
+        description: Your code produced a double free.
     '6':
         description: You use some banned functions.
-        type: 1
         name: Banned functions
         visible: true
         id: banned_funcs
+        type: 1
     '7':
-        type: 2
-        description: ''
         visible: true
+        type: 2
         name: S3
+        description: ''
         id: ''
     '8':
+        description: Task about pointers and their use
+        visible: true
         type: 2
         name: Pointer
-        visible: true
-        description: Task about pointers and their use
         id: ''
 weight: 1.0
