@@ -34,8 +34,8 @@ problems:
                 int has_42() {
 stored_submissions: 0
 submission_limit:
-    amount: -1
-    period: -1
+    amount: 12
+    period: 1
 tags:
     '0':
         visible: true
