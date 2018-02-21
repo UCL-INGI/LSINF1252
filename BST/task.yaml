@@ -35,8 +35,8 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S3] Simple Binary Search Tree'
 network_grading: false
 order: 33
@@ -44,6 +44,7 @@ problems:
     contains:
         type: code
         language: c
+        name: Function contains
         header: |-
             Write the body of the ``contains`` function. If you use subfunctions, write them in the box below with their signature and body.
 
@@ -53,70 +54,69 @@ problems:
                 * Return 1 if there is a node containing @value in @tree and 0 otherwise.
                 */
                 int contains(bt_t* tree, int value){
-        name: Function contains
     other:
-        header: Write here the submethods used by the contains method.
-        optional: 'on'
-        name: Helpfull submethods
         type: code
+        header: Write here the submethods used by the contains method.
         language: ''
+        name: Helpful submethods
+        optional: 'on'
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
-        type: 1
         name: Timeout
+        type: 1
         description: Your code exceeds the maximum allowed time.
+        id: timeout
         visible: true
     '1':
-        visible: true
         description: ''
+        visible: true
+        id: sigsegv
         type: 1
         name: Segmentation Fault
-        id: sigsegv
     '2':
-        type: 1
         visible: true
-        description: You code does not compile.
-        name: Not compile
+        type: 1
         id: not_compile
+        name: Not compile
+        description: You code does not compile.
     '3':
+        id: memory
         type: 1
         visible: true
-        name: Memory Exceeded
-        id: memory
         description: ''
+        name: Memory Exceeded
     '4':
+        description: ''
         type: 1
-        name: Floating Point Exception
         visible: true
         id: sigfpe
-        description: ''
+        name: Floating Point Exception
     '5':
-        description: Your code produced a double free.
-        id: double_free
-        type: 1
         visible: true
-        name: Double free
-    '6':
-        description: You use some banned functions.
         type: 1
-        name: Banned functions
+        description: Your code produced a double free.
+        name: Double free
+        id: double_free
+    '6':
         visible: true
         id: banned_funcs
+        name: Banned functions
+        type: 1
+        description: You use some banned functions.
     '7':
-        name: Data structures
         type: 2
-        description: Task dealing with data structures and linked list.
         visible: true
+        description: Task dealing with data structures and linked list.
+        name: Data structures
         id: ''
     '8':
         type: 2
         name: S4
-        visible: true
         description: ''
+        visible: true
         id: ''
 weight: 1.0
