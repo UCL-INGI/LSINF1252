@@ -93,16 +93,15 @@ void test_enqueue_empty() {
         if(q.tail->next != q.tail)
             push_info_msg(_("You must link the tail with itself! That's a circular linked list"));
     }
-    
+
     free(stats.malloc.last_return);
 }
 
 void test_enqueue_empty_fails() {
     set_test_metadata("enqueue", _("Enqueue of an empty queue when malloc fails"), 1);
 
-    node_t* n = NULL;
     queue_t q;
-    q.tail = n;
+    q.tail = NULL;
 
     int ret = 1;
 
