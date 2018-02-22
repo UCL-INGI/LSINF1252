@@ -11,7 +11,7 @@ context: |-
 
     .. image:: https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg
 
-    Assume that the head of the queue is the leftmost node and that the tail of the queue is the rightmost node. In the previous example, the head and the tail are respecively `12` and `37`. So in this case, the only pointer you can use will point on the `37` node.
+    Assume that the head of the queue is the leftmost node and that the tail of the queue is the rightmost node. In the previous example, the head and the tail are respectively `12` and `37`. So in this case, the only pointer you can use will point on the `37` node.
 
     .. code-block:: c
 
