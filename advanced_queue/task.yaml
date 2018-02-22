@@ -3,6 +3,14 @@ author: Maxime Mawait & Nicolas Rybowski
 context: |-
     You are asked to implement `enqueue` and `dequeue` functions of a `Queue` with doubly circular linked list.
 
+    Here there is a little explanation from
+    `Wikipedia <https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ :
+
+    "With a circular list, a pointer to the last node gives easy access also to the first node, by following one link. Thus, in applications that require access to both ends of the list (e.g., in the implementation of a queue), a circular structure allows one to handle the structure by a single pointer, instead of two."
+
+
+    .. image:: https://en.wikipedia.org/wiki/Linked_list#/media/File:Circularly-linked-list.svg
+
     .. code-block:: c
 
         typedef struct node{
@@ -18,79 +26,79 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S4] Queue avancée'
 network_grading: false
 order: 42
 problems:
     enqueue:
-        type: code
-        language: c
-        header: ''
         name: Enqueue
-    dequeue:
-        name: Dequeue
+        type: code
         language: c
         header: ''
+    dequeue:
+        language: c
+        name: Dequeue
         type: code
+        header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 1
         name: Timeout
+        type: 1
         id: timeout
+        visible: true
         description: Your code exceeds the maximum allowed time.
-        visible: true
     '1':
-        visible: true
         description: ''
+        visible: true
         id: sigsegv
+        type: 1
         name: Segmentation Fault
-        type: 1
     '2':
-        type: 1
         visible: true
-        description: You code does not compile.
-        name: Not compile
+        type: 1
         id: not_compile
+        name: Not compile
+        description: You code does not compile.
     '3':
-        type: 1
-        visible: true
-        name: Memory Exceeded
         id: memory
-        description: ''
-    '4':
         visible: true
-        type: 1
         description: ''
+        type: 1
+        name: Memory Exceeded
+    '4':
+        description: ''
+        visible: true
         id: sigfpe
         name: Floating Point Exception
+        type: 1
     '5':
-        description: Your code produced a double free.
-        type: 1
         visible: true
-        id: double_free
-        name: Double free
-    '6':
-        description: You use some banned functions.
         type: 1
-        name: Banned functions
+        description: Your code produced a double free.
+        name: Double free
+        id: double_free
+    '6':
         visible: true
         id: banned_funcs
+        name: Banned functions
+        type: 1
+        description: You use some banned functions.
     '7':
-        name: Data structures
         type: 2
-        description: Task dealing with data structures and linked list
         visible: true
+        description: Task dealing with data structures and linked list
+        name: Data structures
         id: ''
     '8':
-        type: 2
-        name: S4
-        visible: true
         description: ''
+        name: S4
+        type: 2
+        visible: true
         id: ''
 weight: 1.0
