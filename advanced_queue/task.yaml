@@ -39,16 +39,27 @@ problems:
         name: Enqueue
         type: code
         language: c
-        header: ''
+        header: int enqueue(queue_t* q, int val){
     dequeue:
         language: c
         name: Dequeue
         type: code
-        header: ''
+        header: |-
+            *HINT* : Do not forget to free all the unused memory.
+
+            .. code:: c
+
+                /*
+                *    Remove the node at the tail of the @q queue and returns the value
+                *    @q : the queue to dequeue
+                *
+                *    @return : the value at the tail
+                */
+                int dequeue(queue_t* q){
 stored_submissions: 0
 submission_limit:
-    amount: -1
-    period: -1
+    amount: 5
+    period: 1
 tags:
     '0':
         name: Timeout
