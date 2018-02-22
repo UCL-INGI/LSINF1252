@@ -1,4 +1,4 @@
-accessible: true
+accessible: false
 author: Kilian Verhetsel
 context: |-
     Le type de la plupart des variables en C est facile à déterminer. Néanmoins, le
@@ -15,7 +15,7 @@ network_grading: false
 order: 29
 problems:
     q8:
-        name: Éléments constants
+        type: code_single_line
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
             sorte que l’instruction suivant soit illégale.
@@ -30,7 +30,7 @@ problems:
 
                int i = 0;
                x = &i;
-        type: code_single_line
+        name: Éléments constants
     q9:
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` en faisant en
@@ -50,6 +50,7 @@ problems:
         type: code_single_line
     q10:
         type: code_single_line
+        name: Pointeur et éléments constants
         header: |-
             Déclarez la variable ``x`` comme un pointeur sur un ``int`` de manière à ce
             que cette séquence d’instructions soit illégale
@@ -64,9 +65,7 @@ problems:
             .. code-block:: c
 
                *x = 0;
-        name: Pointeur et éléments constants
     q11:
-        name: Partage entre plusieurs fichiers
         header: |-
             Supposez que la ligne suivante se trouve dans un autre fichier, dans l’espace global.
 
@@ -78,21 +77,22 @@ problems:
             depuis le fichier courant (typiquement, cette ligne se trouvera dans un
             *header*).
         type: code_single_line
+        name: Partage entre plusieurs fichiers
     q12:
-        name: Variable locale à un fichier
-        type: code_single_line
         header: |-
             Déclarez la variable ``x`` comme un ``int`` accessible uniquement depuis le
             fichier actuel (ou plutôt, l’unité de compilation actuelle).
+        type: code_single_line
+        name: Variable locale à un fichier
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        visible: true
-        description: ''
         name: S3
         type: 2
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
