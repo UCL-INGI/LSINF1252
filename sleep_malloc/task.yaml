@@ -16,7 +16,6 @@ network_grading: false
 order: 28
 problems:
     sleep_malloc:
-        language: c
         header: |-
             Write the body of the function ``sleepy_malloc``.
 
@@ -29,6 +28,7 @@ problems:
                  */
                 void *sleepy_malloc(size_t s) {
         name: Sleepy malloc
+        language: c
         type: code
 stored_submissions: 0
 submission_limit:
@@ -36,51 +36,51 @@ submission_limit:
     period: -1
 tags:
     '0':
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        type: 1
         name: Timeout
-        id: timeout
-    '1':
         type: 1
-        description: ''
-        id: sigsegv
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
         visible: true
+    '1':
+        description: ''
+        visible: true
+        id: sigsegv
+        type: 1
         name: Segmentation Fault
     '2':
-        description: You code does not compile.
+        visible: true
+        type: 1
         id: not_compile
-        visible: true
-        type: 1
         name: Not compile
+        description: You code does not compile.
     '3':
-        name: Memory Exceeded
-        type: 1
         id: memory
-        description: ''
+        type: 1
         visible: true
+        description: ''
+        name: Memory Exceeded
     '4':
-        visible: true
         description: ''
+        type: 1
+        visible: true
         id: sigfpe
         name: Floating Point Exception
-        type: 1
     '5':
-        type: 1
-        id: double_free
-        name: Double free
         visible: true
+        type: 1
         description: Your code produced a double free.
+        name: Double free
+        id: double_free
     '6':
-        description: You use some banned functions.
-        name: Banned functions
         visible: true
         id: banned_funcs
+        name: Banned functions
         type: 1
+        description: You use some banned functions.
     '7':
-        visible: true
         type: 2
-        name: S3
+        visible: true
         description: ''
+        name: S3
         id: ''
 weight: 1.0
