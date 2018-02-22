@@ -48,7 +48,7 @@ problems:
                 *    Add @val value at the head of the @q queue
                 *
                 *    @val : the value to enqueue
-                *   @q    : the queue to enqueue
+                *    @q    : the queue to enqueue. The given queue will always be valid, you don't have to handle the NULL case.
                 *
                 *    @return 0 if no error, -1 else
                 */
@@ -64,7 +64,7 @@ problems:
 
                 /*
                 *    Remove the node at the tail of the @q queue and returns the value
-                *    @q : the queue to dequeue
+                *    @q : the queue to dequeue. The given queue will always be valid, you don't have to handle the NULL case.
                 *
                 *    @return : the value at the tail
                 */
