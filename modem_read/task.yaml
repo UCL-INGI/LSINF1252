@@ -5,24 +5,22 @@ context: |-
 
     ``void modem_read(void *buffer, int *buf_len);``
 
-    This function fills the supplied buffer with the data received from the modem, and writes the number of bytes written to the value pointed by ``buf_len``. It can write up to maximum 256 bytes in a single call. This function is guaranteed to return.
+    This function fills the supplied buffer with the data received from the modem (an array of ``char``), and writes the number of bytes written to the value pointed by ``buf_len``. It can write up to maximum 256 bytes in a single call. This function is guaranteed to return.
 environment: cpp
 evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S3] Reading from the wire '
 network_grading: false
 order: 34
 problems:
     modem:
-        language: c
         name: '42'
-        type: code
         header: |-
-            You want to know if the information that you received from the modem you received contains a byte whoe numerical value is ``42``.
+            You want to know if the information that you received from the modem you received contains a byte whose numerical value is ``42``.
             Write the body of the function ``has_42``, this function has to use ``malloc`` to create the buffer before calling ``modem_read``:
 
             .. code-block:: c
@@ -32,63 +30,65 @@ problems:
                  *         else 0, -1 if an error has happened.
                  */
                 int has_42() {
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
-    amount: -1
-    period: -1
+    amount: 12
+    period: 1
 tags:
     '0':
-        type: 1
         name: Timeout
+        type: 1
         id: timeout
         description: Your code exceeds the maximum allowed time.
         visible: true
     '1':
-        visible: true
         description: ''
-        name: Segmentation Fault
-        type: 1
+        visible: true
         id: sigsegv
+        type: 1
+        name: Segmentation Fault
     '2':
-        type: 1
         visible: true
-        description: You code does not compile.
-        name: Not compile
+        type: 1
         id: not_compile
+        name: Not compile
+        description: You code does not compile.
     '3':
-        type: 1
         id: memory
-        visible: true
-        name: Memory Exceeded
-        description: ''
-    '4':
         type: 1
+        visible: true
+        description: ''
+        name: Memory Exceeded
+    '4':
         description: ''
         visible: true
         id: sigfpe
         name: Floating Point Exception
+        type: 1
     '5':
-        description: Your code produced a double free.
-        type: 1
         visible: true
-        id: double_free
-        name: Double free
-    '6':
-        description: You use some banned functions.
         type: 1
-        name: Banned functions
+        description: Your code produced a double free.
+        name: Double free
+        id: double_free
+    '6':
         visible: true
         id: banned_funcs
+        name: Banned functions
+        type: 1
+        description: You use some banned functions.
     '7':
         type: 2
-        description: ''
         visible: true
+        description: ''
         name: S3
         id: ''
     '8':
+        description: Task about pointers and their use
         type: 2
         name: Pointer
         visible: true
-        description: Task about pointers and their use
         id: ''
 weight: 1.0
