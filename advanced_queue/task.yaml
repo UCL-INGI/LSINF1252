@@ -39,7 +39,18 @@ problems:
         name: Enqueue
         type: code
         language: c
-        header: int enqueue(queue_t* q, int val){
+        header: |-
+            .. code:: c
+
+                /*
+                *    Add @val value at the head of the @q queue
+                *
+                *    @val : the value to enqueue
+                *   @q    : the queue to enqueue
+                *
+                *    @return 0 if no error, -1 else
+                */
+                int enqueue(queue_t* q, int val){
     dequeue:
         language: c
         name: Dequeue
