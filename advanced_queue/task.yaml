@@ -22,6 +22,7 @@ context: |-
 
         typedef struct queue{
           struct node* tail;
+          int size;
         } queue_t  ;
 environment: cpp
 evaluate: best
