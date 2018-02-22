@@ -9,7 +9,7 @@ WRAP=-Wl,-wrap=pthread_mutex_lock -Wl,-wrap=pthread_mutex_unlock -Wl,-wrap=pthre
 all: $(EXEC)
 
 student_code.o: student_code.c
-	$(CC) -Wall -Werror -DC99 -c -o student_code.o student_code.c
+	$(CC) $(CFLAGS) -pedantic -c -o student_code.o student_code.c
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< 
