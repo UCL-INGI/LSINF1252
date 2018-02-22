@@ -9,7 +9,9 @@ context: |-
     "With a circular list, a pointer to the last node gives easy access also to the first node, by following one link. Thus, in applications that require access to both ends of the list (e.g., in the implementation of a queue), a circular structure allows one to handle the structure by a single pointer, instead of two."
 
 
-    .. image:: https://en.wikipedia.org/wiki/Linked_list#/media/File:Circularly-linked-list.svg
+    .. image:: https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg
+
+
 
     .. code-block:: c
 
