@@ -1,7 +1,7 @@
 accessible: false
 author: Maxime Mawait & Nicolas Rybowski
 context: |-
-    You are asked to implement `enqueue` and `dequeue` functions of a `Queue` with simply circular linked list.
+    You are asked to implement ``enqueue`` and ``dequeue`` functions of a `Queue` with simply circular linked list.
 
     Here there is a little explanation from
     `Wikipedia <https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ :
@@ -12,6 +12,8 @@ context: |-
     .. image:: https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg
 
     Assume that the head of the queue is the leftmost node and that the tail of the queue is the rightmost node. In the previous example, the head and the tail are respectively `12` and `37`. So in this case, the only pointer you can use will point on the `37` node.
+
+    Here are defined the structure you have to use to complete the task.
 
     .. code-block:: c
 
