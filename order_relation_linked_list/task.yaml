@@ -8,16 +8,13 @@ evaluate: best
 groups: false
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[S4] Order relation on a linked list - REVIEWED'
 network_grading: false
 order: 43
 problems:
     order_relation:
-        language: c
-        name: Order relation
-        type: code
         header: |-
             For this subproblem, you are asked to implement the comparison function which rules the order relation of the list.
 
@@ -30,7 +27,13 @@ problems:
                 * and positive number otherwise
                 */
                 int compare(char a, char b) {
+        language: c
+        type: code
+        name: Order relation
     insert:
+        language: c
+        type: code
+        name: Insert
         header: |
             Given the following linked list structure :
 
@@ -52,38 +55,35 @@ problems:
                 * @return: 0 if success, -1 otherwise
                 */
                 int insert(node_t **head, char val, int (*cmp)(char,char)) {
-        name: Insert
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
-    amount: 10
+    amount: 8
     period: 1
 tags:
     '0':
-        visible: true
         type: 1
-        description: Your code exceeds the maximum allowed time.
         name: Timeout
-        id: timeout
-    '1':
-        type: 1
-        description: ''
-        id: sigsegv
-        name: Segmentation Fault
         visible: true
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+    '1':
+        description: ''
+        visible: true
+        id: sigsegv
+        type: 1
+        name: Segmentation Fault
     '2':
         visible: true
+        type: 1
         id: not_compile
-        description: You code does not compile.
-        type: 1
         name: Not compile
+        description: You code does not compile.
     '3':
-        name: Memory Exceeded
-        type: 1
         id: memory
-        description: ''
+        type: 1
         visible: true
+        description: ''
+        name: Memory Exceeded
     '4':
         description: ''
         visible: true
@@ -91,22 +91,22 @@ tags:
         name: Floating Point Exception
         type: 1
     '5':
-        name: Double free
-        id: double_free
+        visible: true
         type: 1
         description: Your code produced a double free.
-        visible: true
+        name: Double free
+        id: double_free
     '6':
-        description: You use some banned functions.
-        name: Banned functions
         visible: true
         id: banned_funcs
+        name: Banned functions
         type: 1
+        description: You use some banned functions.
     '7':
-        visible: true
         type: 2
-        name: Data structures
         description: Task dealing with data structures and linked list
+        visible: true
+        name: Data structures
         id: ''
     '8':
         description: Task about pointers and their use
@@ -116,8 +116,8 @@ tags:
         id: ''
     '9':
         description: ''
-        name: S4
         type: 2
         visible: true
+        name: S4
         id: ''
 weight: 1.0

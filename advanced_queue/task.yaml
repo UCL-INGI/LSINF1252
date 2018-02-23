@@ -75,7 +75,7 @@ problems:
                 int dequeue(queue_t* q){
 stored_submissions: 0
 submission_limit:
-    amount: 5
+    amount: 8
     period: 1
 tags:
     '0':
