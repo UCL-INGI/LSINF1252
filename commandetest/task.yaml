@@ -31,9 +31,9 @@ problems:
         header: |+
             Complétez ici le code du fichier ``test.c`` qui contient la réponse à l'énoncé.
 
+        language: c
         type: code
         name: ''
-        language: c
 responseIsHTML: true
 stored_submissions: 0
 submission_limit:

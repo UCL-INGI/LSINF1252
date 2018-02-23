@@ -2,7 +2,7 @@
 # This line parses the template and put the result in studentcode.py
 parsetemplate --output test.c template.c
 
-gcc test.c -o test # 2> q1.err
+gcc -O0 test.c -o test # 2> q1.err
 
 # Verify the output of the code...
 output=$(bash test.sh)
