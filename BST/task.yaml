@@ -34,17 +34,17 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
+    output: '2'
 name: '[S3] Simple Binary Search Tree'
 network_grading: false
 order: 33
 problems:
     contains:
-        type: code
-        language: c
         name: Function contains
+        language: c
+        type: code
         header: |-
             Write the body of the ``contains`` function. If you use subfunctions, write them in the box below with their signature and body.
 
@@ -55,68 +55,68 @@ problems:
                 */
                 int contains(bt_t* tree, int value){
     other:
-        type: code
-        header: Write here the submethods used by the contains method.
-        language: ''
         name: Helpful submethods
+        type: code
+        language: c
         optional: 'on'
+        header: Write here the submethods used by the contains method.
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Timeout
         type: 1
-        description: Your code exceeds the maximum allowed time.
+        name: Timeout
         id: timeout
         visible: true
+        description: Your code exceeds the maximum allowed time.
     '1':
-        description: ''
-        visible: true
-        id: sigsegv
         type: 1
+        visible: true
+        description: ''
+        id: sigsegv
         name: Segmentation Fault
     '2':
-        visible: true
         type: 1
-        id: not_compile
         name: Not compile
+        id: not_compile
+        visible: true
         description: You code does not compile.
     '3':
-        id: memory
-        type: 1
         visible: true
         description: ''
         name: Memory Exceeded
-    '4':
-        description: ''
         type: 1
+        id: memory
+    '4':
         visible: true
         id: sigfpe
+        description: ''
+        type: 1
         name: Floating Point Exception
     '5':
-        visible: true
         type: 1
-        description: Your code produced a double free.
+        visible: true
         name: Double free
         id: double_free
+        description: Your code produced a double free.
     '6':
         visible: true
-        id: banned_funcs
         name: Banned functions
         type: 1
+        id: banned_funcs
         description: You use some banned functions.
     '7':
-        type: 2
-        visible: true
-        description: Task dealing with data structures and linked list.
         name: Data structures
+        type: 2
+        description: Task dealing with data structures and linked list.
+        visible: true
         id: ''
     '8':
-        type: 2
         name: S4
         description: ''
+        type: 2
         visible: true
         id: ''
 weight: 1.0
