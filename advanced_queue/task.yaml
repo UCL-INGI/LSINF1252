@@ -30,35 +30,33 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
+    output: '2'
 name: '[S4] Advanced queue'
 network_grading: false
 order: 42
 problems:
     enqueue:
         name: Enqueue
-        type: code
-        language: c
         header: |-
             .. code:: c
 
                 /*
                 * Add @val value at the head of the @q queue
                 *
-                * @val : the value to enqueue
-                * @q    : the queue to enqueue.
+                * @val     : the value to enqueue
+                * @q     : the queue to enqueue.
                 *
                 * @return 0 if no error, -1 else
                 *
                 * pre : The given queue will always be valid, you don't have to handle the NULL case.
                 */
                 int enqueue(queue_t* q, int val){
-    dequeue:
-        language: c
-        name: Dequeue
         type: code
+        language: c
+    dequeue:
+        name: Dequeue
         header: |-
             *HINT* : Do not forget to free all the unused memory.
 
@@ -66,69 +64,71 @@ problems:
 
                 /*
                 * Remove the node at the tail of the @q queue and returns the value
-                * @q : the queue to dequeue.
+                * @q         : the queue to dequeue.
                 *
-                * @return : the value at the tail
+                * @return     : the value at the tail
                 *
-                * pre : The given queue will always be valid, you don't have to handle the NULL case.
+                * pre         : The given queue will always be valid, you don't have to handle the NULL case.
                 */
                 int dequeue(queue_t* q){
+        type: code
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: 8
     period: 1
 tags:
     '0':
-        name: Timeout
         type: 1
+        name: Timeout
         id: timeout
         visible: true
         description: Your code exceeds the maximum allowed time.
     '1':
-        description: ''
-        visible: true
-        id: sigsegv
         type: 1
+        visible: true
+        description: ''
+        id: sigsegv
         name: Segmentation Fault
     '2':
-        visible: true
         type: 1
-        id: not_compile
         name: Not compile
+        id: not_compile
+        visible: true
         description: You code does not compile.
     '3':
-        id: memory
         visible: true
         description: ''
-        type: 1
         name: Memory Exceeded
+        type: 1
+        id: memory
     '4':
-        description: ''
-        visible: true
         id: sigfpe
-        name: Floating Point Exception
-        type: 1
-    '5':
         visible: true
+        description: ''
         type: 1
-        description: Your code produced a double free.
+        name: Floating Point Exception
+    '5':
+        type: 1
+        visible: true
         name: Double free
         id: double_free
+        description: Your code produced a double free.
     '6':
         visible: true
+        type: 1
         id: banned_funcs
         name: Banned functions
-        type: 1
         description: You use some banned functions.
     '7':
-        type: 2
-        visible: true
-        description: Task dealing with data structures and linked list
         name: Data structures
+        type: 2
+        description: Task dealing with data structures and linked list
+        visible: true
         id: ''
     '8':
-        description: ''
         name: S4
+        description: ''
         type: 2
         visible: true
         id: ''
