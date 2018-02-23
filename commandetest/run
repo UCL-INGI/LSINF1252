@@ -2,11 +2,11 @@
 # This line parses the template and put the result in studentcode.py
 parsetemplate --output test.c template.c
 
-gcc -O0 test.c -o test # 2> q1.err
+gcc test.c -o test # 2> q1.err
 
 if [ $? -ne 0 ]; then
   feedback-result "failed"
-  feedback-msg -em "\nVotre programme ne compile pas"
+  feedback-msg -m "Votre programme ne compile pas"
   exit
 fi
 

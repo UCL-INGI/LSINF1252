@@ -34,7 +34,6 @@ problems:
         language: c
         type: code
         name: ''
-responseIsHTML: true
 stored_submissions: 0
 submission_limit:
     amount: -1
