@@ -20,27 +20,24 @@ context: |
 
     *Hints* :
 
-    - ``char *name`` is also a pointer, memory must be allocated for it.
+    - ``char *name`` is also a pointer, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the string on the stack.
 
-    - `strncpy <https://linux.die.net/man/3/strncpy>`_
+    - `strncpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strncpy.3.html`_
+    and `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_ are useful commands
 
-    - `strlen <https://linux.die.net/man/3/strlen>`_ (strlen does not count the '\\0' character)
-
-    - Don't forget to free **all** the allocated space when popping one element.
+    - Do not forget to free **all** the allocated space when popping one element.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
     memory: '100'
     time: '30'
-name: '[S4] Simple stack - REVIEWED'
+    output: '2'
+name: '[S4] Simple stack '
 network_grading: false
 order: 36
 problems:
     push:
-        name: Push
-        type: code
         header: |-
             .. code-block:: c
 
@@ -54,8 +51,12 @@ problems:
                 */
 
                 int push(struct node **head, const char *value){
+        type: code
+        name: Push
         language: c
     pop:
+        type: code
+        language: c
         header: |-
             .. code-block:: c
 
@@ -73,8 +74,6 @@ problems:
 
                 int pop(struct node **head, char *result){
         name: Pop
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -84,43 +83,43 @@ tags:
         type: 1
         name: Timeout
         id: timeout
-        description: Your code exceeds the maximum allowed time.
         visible: true
+        description: Your code exceeds the maximum allowed time.
     '1':
+        type: 1
         visible: true
         description: ''
-        name: Segmentation Fault
-        type: 1
         id: sigsegv
+        name: Segmentation Fault
     '2':
         type: 1
-        visible: true
-        description: You code does not compile.
         name: Not compile
         id: not_compile
+        visible: true
+        description: You code does not compile.
     '3':
+        visible: true
+        description: ''
+        name: Memory Exceeded
         type: 1
         id: memory
-        visible: true
-        name: Memory Exceeded
-        description: ''
     '4':
-        type: 1
-        description: ''
         visible: true
-        name: Floating Point Exception
         id: sigfpe
+        description: ''
+        type: 1
+        name: Floating Point Exception
     '5':
-        description: Your code produced a double free.
         type: 1
         visible: true
-        id: double_free
         name: Double free
+        id: double_free
+        description: Your code produced a double free.
     '6':
-        description: You use some banned functions.
+        visible: true
         type: 1
         name: Banned functions
-        visible: true
+        description: You use some banned functions.
         id: banned_funcs
     '7':
         name: Data structures
@@ -129,9 +128,9 @@ tags:
         visible: true
         id: ''
     '8':
-        type: 2
         name: S4
-        visible: true
         description: ''
+        type: 2
+        visible: true
         id: ''
 weight: 1.0
