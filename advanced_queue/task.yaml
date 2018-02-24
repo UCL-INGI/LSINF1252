@@ -1,19 +1,17 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |-
-    You are asked to implement ``enqueue`` and ``dequeue`` functions of a `Queue` with simply circular linked list.
-
-    Here there is a little explanation from
-    `Wikipedia <https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ :
+    You must implement the ``enqueue`` and ``dequeue`` functions of a `Queue` that is implemented as a simple circular list. This
+    `Wikipedia page<https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ describes such a list as follows:
 
     "With a circular list, a pointer to the last node gives easy access also to the first node, by following one link. Thus, in applications that require access to both ends of the list (e.g., in the implementation of a queue), a circular structure allows one to handle the structure by a single pointer, instead of two."
 
 
     .. image:: https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg
 
-    Assume that the head of the queue is the leftmost node and that the tail of the queue is the rightmost node. In the previous example, the head and the tail are respectively `12` and `37`. So in this case, the only pointer you can use will point on the `37` node.
+    Assume that the head of the queue is the leftmost node and that the tail of the queue is the rightmost node. In the previous example, the head and the tail are respectively ``12`` and ``37``. So in this case, the only pointer you can use will point to the ``37`` node.
 
-    Here are defined the structure you have to use to complete the task.
+    You can use the following datastructures for this exercise:
 
     .. code-block:: c
 
@@ -46,11 +44,11 @@ problems:
                 * Add @val value at the head of the @q queue
                 *
                 * @val     : the value to enqueue
-                * @q     : the queue to enqueue.
+                * @q     : the queue
                 *
-                * @return 0 if no error, -1 else
+                * @return 0 if no error, -1 otherwise
                 *
-                * pre : The given queue will always be valid, you don't have to handle the NULL case.
+                * pre : The queue q will always be valid, you don't need to handle the NULL case.
                 */
                 int enqueue(queue_t* q, int val){
         type: code
@@ -63,20 +61,19 @@ problems:
             .. code:: c
 
                 /*
-                * Remove the node at the tail of the @q queue and returns the value
-                * @q         : the queue to dequeue.
-                *
+                * Remove the node at the tail of the @q queue and return the value of this node
+                * @q         : the queue
                 * @return     : the value at the tail
                 *
-                * pre         : The given queue will always be valid, you don't have to handle the NULL case.
+                * pre         : The given queue will always be valid, you do not need to handle the NULL case.
                 */
                 int dequeue(queue_t* q){
         type: code
         language: c
 stored_submissions: 0
 submission_limit:
-    amount: 8
-    period: 1
+    amount: -1
+    period: -1
 tags:
     '0':
         type: 1
