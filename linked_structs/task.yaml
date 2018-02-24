@@ -104,7 +104,7 @@ tags:
         description: You use some banned functions.
         id: banned_funcs
     '7':
-        name: S3
+        name: S4
         type: 2
         description: ''
         visible: true
