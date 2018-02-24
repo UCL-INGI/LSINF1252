@@ -24,14 +24,15 @@ limits:
     memory: '100'
     time: '30'
     output: '2'
-name: '[S3] Filtering a linked list '
+name: '[S4] Filtering a linked list '
 network_grading: false
 order: 37
 problems:
     includes:
         language: ''
-        header: Here you can add your includes for this task. We strongly recommend
-            you to read the manpage given in question 2 !
+        header: 'Please insert here the ``#include`` that are required to use the
+            functions that you use to answer this question. These includes are specified
+            in the man pages of the functions that you use. '
         name: Includes
         type: code
     filter:
@@ -39,17 +40,17 @@ problems:
         language: c
         name: Filtering
         header: |-
-            We want to filter this list and only take the elements with a pair index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
+            We want to filter this list and ewtract the elements with an odd index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
-            Write the body of the function *pair_filter*.
+            Write the body of the function ``pair_filter``.
 
-            Hint : You have to use `memcpy <https://linux.die.net/man/3/memcpy>`_ to do this
+            Hint : You should use `memcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/memcpy.3.html>`_ for this question
 
             .. code-block:: c
 
                 /* pair_filter
                  * Make a copy of the linked list starting at head,
-                 * only taking one element out of two
+                 * only taking the elements with an odd index
                  *
                  * @head : head of a linked list, possibly NULL
                  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
