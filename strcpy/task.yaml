@@ -15,7 +15,7 @@ limits:
     time: '30'
 name: '[S3] Improved strcpy '
 network_grading: false
-order: 30
+order: 28
 problems:
     strcpy_impl:
         name: buf_strcpy

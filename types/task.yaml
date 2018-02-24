@@ -12,7 +12,7 @@ limits:
     memory: '128'
 name: '[S3] Les types (1/2)'
 network_grading: false
-order: 29
+order: 26
 problems:
     q1:
         type: code_single_line

@@ -15,7 +15,7 @@ limits:
     memory: '100'
 name: '[S3] Reading from the wire '
 network_grading: false
-order: 34
+order: 32
 problems:
     modem:
         name: '42'

@@ -25,7 +25,7 @@ limits:
     memory: '32'
 name: '[S3] Le programme test'
 network_grading: false
-order: 35
+order: 33
 problems:
     q1:
         header: |+

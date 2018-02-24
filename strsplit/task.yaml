@@ -18,7 +18,7 @@ limits:
     output: '2'
 name: '[Septembre 2016B] Manipulation de chaines de caractères'
 network_grading: false
-order: 69
+order: 70
 problems:
     split:
         type: code

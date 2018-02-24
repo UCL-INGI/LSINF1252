@@ -39,7 +39,7 @@ limits:
     output: '2'
 name: '[S3] Simple Binary Search Tree'
 network_grading: false
-order: 33
+order: 31
 problems:
     contains:
         name: Function contains

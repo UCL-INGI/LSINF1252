@@ -87,7 +87,7 @@ limits:
     memory: '100'
 name: '[S4] make basics '
 network_grading: false
-order: 24
+order: 34
 problems:
     make_me_easy:
         type: match

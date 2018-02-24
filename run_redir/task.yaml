@@ -18,7 +18,7 @@ limits:
     output: '2'
 name: '[Juin 2016B] Redirection des flux de sortie et d''erreur standards'
 network_grading: false
-order: 62
+order: 63
 problems:
     run_redir:
         type: code

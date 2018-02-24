@@ -13,7 +13,7 @@ limits:
     memory: '100'
 name: '[S3] Pointer arithmetic '
 network_grading: false
-order: 31
+order: 29
 problems:
     first:
         type: code
