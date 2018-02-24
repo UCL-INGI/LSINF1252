@@ -82,17 +82,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
-name: '[S4] make basics - REVIEWED'
+name: '[S4] make basics '
 network_grading: false
 order: 24
 problems:
     make_me_easy:
-        answer: make make_me
-        name: Make me easy
         type: match
+        answer: make make_me
         header: |-
             After typing ``ls`` in your terminal, you see the following folder structure:
 
@@ -103,14 +102,15 @@ problems:
             You want to build an executable ``make_me`` from the above source thanks to ``make``. What do you type in the terminal to do that?
 
             **Hint:** you do not need to write a *Makefile*.
+        name: Make me easy
     make_me_less_easy:
-        name: Make me less easy
         language: Makefile
         header: |-
             Suppose you cannot use what you did in the above question. Write a Makefile that compiles the above given code and builds an executable ``make_me``. You can reuse the ``Makefile`` given in the above given zip file.
 
             **Hint:** If you have no idea where to start, read `sections 2.1 to 2.3. in the GNU make manual <https://www.gnu.org/software/make/manual/make.html#Introduction>`_.
         type: code
+        name: Make me less easy
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -124,9 +124,9 @@ tags:
             Makefile.
         visible: true
     '1':
-        name: S2
-        description: ''
         type: 2
         visible: true
+        name: S2
+        description: ''
         id: ''
 weight: 1.0
