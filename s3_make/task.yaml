@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Pablo Gonzalez Alvarez
 context: |-
     *Estimated time: 20 minutes*
@@ -59,17 +59,14 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
+    time: '30'
     output: '2'
     memory: '100'
-    time: '30'
-name: '[S3] make more basics'
+name: '[S4] make more basics'
 network_grading: false
 order: 38
 problems:
     m1:
-        answer: OBJ = calc.o operations.o
-        name: Calculator variable
-        type: match
         header: |-
             Remember the  `calculator <https://inginious.info.ucl.ac.be/course/LSINF1252/s2_make_calc>`_ you had to make last week?
 
@@ -80,11 +77,14 @@ problems:
                 calc.c    calc.h    Makefile    operations.c    operations.h
 
             Write a variable called ``OBJ`` to simplify the compilation process in the Makefile.
+        name: Calculator variable
+        type: match
+        answer: OBJ = calc.o operations.o
     c1:
+        language: Makefile
+        header: ''
         type: code
         name: 'Make '
-        header: ''
-        language: Makefile
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -98,9 +98,9 @@ tags:
             Makefile.
         visible: true
     '1':
-        name: S3
-        visible: true
-        description: ''
         type: 2
+        visible: true
+        name: S3
+        description: ''
         id: ''
 weight: 1.0
