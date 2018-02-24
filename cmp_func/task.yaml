@@ -3,7 +3,7 @@ author: Mathieu Xhonneux & Maxime Mawait
 context: |-
     Pointers to functions can be used to handle functions in a dynamic fashion, and will be of great importance later in this course. It is hence important to grasp how they work.
 
-    In this exercise, you will code a function which receives pointers to two functions, to determine if these functions are equivalent. Two functions are equivalent if they produce the same output for the same input.
+    In this exercise, you will code a function which receives pointers to two functions, to determine if these functions are equivalent. Two functions are considered to be equivalent if they always produce the same output for the same input.
 
     The functions passed by pointers will be of the form ``uint8_t func(uint8_t n)``.
 environment: cpp
@@ -13,69 +13,68 @@ limits:
     memory: '100'
     output: '2'
     time: '30'
-name: '[S4] Comparing functions - REVIEWED'
+name: '[S4] Comparing functions '
 network_grading: false
 order: 44
 problems:
     cmp_func:
-        name: Compare functions
-        header: |
-            Write the function *cmp_func* (prototype and body), which receives two pointers to functions (described as above), and returns an int, containing 1 if the functions are equivalent, else 0. Test the comparison for all the values
+        header: |+
+            Write the function ``cmp_func`` (prototype and body), which receives two pointers to functions (described above), and returns an ``int``, set to ``1`` if the functions are equivalent and ``0``otherwise. Compare the two functions by testing their values for all possible ``uint8_t`` (i.e. from ``0`` to ``255``)
 
-            Reminder: value of an *uint8_t* is between 0 and 255.
         type: code
         language: c
+        name: Compare functions
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
+    '0':
+        type: 1
         name: Timeout
+        id: timeout
         visible: true
+        description: Your code exceeds the maximum allowed time.
+    '1':
         type: 1
-    '2':
-        id: sigsegv
-        type: 1
-        name: Segmentation Fault
         visible: true
         description: ''
-    '3':
-        id: not_compile
-        visible: true
+        id: sigsegv
+        name: Segmentation Fault
+    '2':
         type: 1
         name: Not compile
+        id: not_compile
+        visible: true
         description: You code does not compile.
-    '4':
+    '3':
+        visible: true
         description: ''
         name: Memory Exceeded
-        visible: true
+        type: 1
         id: memory
-        type: 1
-    '5':
-        description: ''
-        id: sigfpe
+    '4':
         visible: true
-        name: Floating Point Exception
+        id: sigfpe
+        description: ''
         type: 1
-    '6':
-        id: double_free
-        description: Your code produced a double free.
+        name: Floating Point Exception
+    '5':
         type: 1
         visible: true
         name: Double free
-    '7':
-        id: banned_funcs
+        id: double_free
+        description: Your code produced a double free.
+    '6':
+        visible: true
         name: Banned functions
-        description: You use some banned functions.
         type: 1
-        visible: true
-    '0':
+        id: banned_funcs
+        description: You use some banned functions.
+    '7':
         name: S4
-        visible: true
         type: 2
         description: ''
+        visible: true
         id: ''
 weight: 1.0
