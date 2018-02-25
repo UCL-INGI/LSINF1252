@@ -2,7 +2,7 @@ accessible: true
 author: Maxime Mawait & Nicolas Rybowski
 context: |-
     You must implement the ``enqueue`` and ``dequeue`` functions of a `Queue` that is implemented as a simple circular list. This
-    `Wikipedia page<https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ describes such a list as follows:
+    ` Wikipedia page <https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ describes such a list as follows:
 
     "With a circular list, a pointer to the last node gives easy access also to the first node, by following one link. Thus, in applications that require access to both ends of the list (e.g., in the implementation of a queue), a circular structure allows one to handle the structure by a single pointer, instead of two."
 
