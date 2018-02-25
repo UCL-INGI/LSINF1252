@@ -22,7 +22,7 @@ context: |
 
     - ``char *name`` is also a pointer, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the string on the stack.
 
-    - `strncpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strncpy.3.html`_
+    -`strncpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strncpy.3.html`_
     and `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_ are useful commands
 
     - Do not forget to free **all** the allocated space when popping one element.
