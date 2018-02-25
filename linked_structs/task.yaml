@@ -40,7 +40,7 @@ problems:
         language: c
         name: Filtering
         header: |-
-            We want to filter this list and ewtract the elements with an odd index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
+            We want to filter this list and extract the elements with an odd index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
             Write the body of the function ``pair_filter``.
 
