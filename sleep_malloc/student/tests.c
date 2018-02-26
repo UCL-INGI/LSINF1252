@@ -11,9 +11,18 @@ void test_success() {
 
     monitored.malloc = true;
     failures.malloc = FAIL_NEVER;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
+
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
 
     CU_ASSERT_PTR_NOT_NULL(ret);
 
@@ -34,10 +43,19 @@ void test_fail_first() {
     failures.malloc = FAIL_FIRST;
     monitored.sleep = true;
     failures.sleep = FAIL_ALWAYS;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
-    
+
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
+
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
 
     CU_ASSERT_PTR_NOT_NULL(ret);
@@ -62,14 +80,23 @@ void test_fail_twice() {
     failures.malloc = FAIL_TWICE;
     monitored.sleep = true;
     failures.sleep = FAIL_ALWAYS;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
 
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
+
     CU_ASSERT_PTR_NOT_NULL(ret);
 
     CU_ASSERT_TRUE(malloced(ret));
-    
+
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
 
     CU_ASSERT_EQUAL(stats.malloc.called,3)
@@ -90,14 +117,23 @@ void test_fail_five() {
     failures.malloc = 0x1f;
     monitored.sleep = true;
     failures.sleep = FAIL_ALWAYS;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
 
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
+
     CU_ASSERT_PTR_NOT_NULL(ret);
 
     CU_ASSERT_TRUE(malloced(ret));
-    
+
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
 
     CU_ASSERT_EQUAL(stats.malloc.called,6)
@@ -118,14 +154,23 @@ void test_fail_eight() {
     failures.malloc = 0xff;
     monitored.sleep = true;
     failures.sleep = FAIL_ALWAYS;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
 
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
+
     CU_ASSERT_PTR_NOT_NULL(ret);
 
     CU_ASSERT_TRUE(malloced(ret));
-    
+
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
 
     CU_ASSERT_EQUAL(stats.malloc.called,9)
@@ -146,12 +191,21 @@ void test_fail_ten() {
     failures.malloc = 0x3ff;
     monitored.sleep = true;
     failures.sleep = FAIL_ALWAYS;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
 
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
+
     CU_ASSERT_PTR_NULL(ret);
-    
+
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
 
     CU_ASSERT_EQUAL(stats.malloc.called,10)
@@ -170,12 +224,21 @@ void test_fail_always() {
     failures.malloc = FAIL_ALWAYS;
     monitored.sleep = true;
     failures.sleep = FAIL_ALWAYS;
+
+    size_t  start = stats.memory.used;
+
     SANDBOX_BEGIN;
     ret = sleep_malloc(16);
     SANDBOX_END;
 
+    size_t used_size = stats.memory.used - start;
+
+    CU_ASSERT_EQUAL(used_size, 16);
+    if (used_size != 16)
+      push_info_msg(_("You allocated more memory than required."));
+
     CU_ASSERT_PTR_NULL(ret);
-    
+
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
 
     CU_ASSERT_EQUAL(stats.malloc.called,10)
