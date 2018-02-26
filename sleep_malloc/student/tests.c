@@ -200,8 +200,8 @@ void test_fail_ten() {
 
     size_t used_size = stats.memory.used - start;
 
-    CU_ASSERT_EQUAL(used_size, 16);
-    if (used_size != 16)
+    CU_ASSERT_EQUAL(used_size, 0);
+    if (used_size != 0)
       push_info_msg(_("You allocated more memory than required."));
 
     CU_ASSERT_PTR_NULL(ret);
@@ -233,8 +233,8 @@ void test_fail_always() {
 
     size_t used_size = stats.memory.used - start;
 
-    CU_ASSERT_EQUAL(used_size, 16);
-    if (used_size != 16)
+    CU_ASSERT_EQUAL(used_size, 0);
+    if (used_size != 0)
       push_info_msg(_("You allocated more memory than required."));
 
     CU_ASSERT_PTR_NULL(ret);
