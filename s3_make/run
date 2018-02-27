@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import subprocess, shlex, os
 from inginious import feedback, rst, input
 
@@ -7,10 +9,16 @@ score = 0
 # MATCH
 
 match = input.get_input("m1")
-if match != 'OBJ = calc.o operations.o  ':
+if match != 'OBJ = calc.o operations.o':
     feedback.set_problem_result("failed", "m1")
     feedback.set_problem_feedback("You didn't make it!", "m1")
 else:
     score += 100
     feedback.set_problem_result("success", "m1")
     feedback.set_problem_feedback("You made it!", "m1")
+
+
+# Set score
+feedback.set_grade(score)
+feedback.set_global_result("success" if score >= 80 else "failed")
+feedback.set_global_feedback("Good job" if score >= 80 else "Try again")
