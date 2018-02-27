@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import xml.etree.ElementTree as ET
 import subprocess, shlex, json, re, sys
 from collections import namedtuple
-from inginious import feedback
 
 COMPILE_ERROR_TPL = """
 Erreur de compilation :
@@ -74,7 +73,7 @@ for test_failure in root.iter('CUNIT_RUN_TEST_FAILURE'): #Récupération des nom
 if len(tests_failed) == 0:
     run('feedback -r success -f "Votre code a passé tous les tests."')
 else:
-    feedback.set_global_result("failed")
+    run('feedback-result failed')
     #Récupération dans le code des des tests des annotations reprenant le feedback à envoyer à l'utilisateur pour chaque test échoué.
     tests_code = open('code/tests.c').read()
     annotations = re.findall("@(.*):(.*) => \[(.*)]", tests_code)
