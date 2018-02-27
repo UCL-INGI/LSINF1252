@@ -59,14 +59,16 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     output: '2'
     memory: '100'
+    time: '30'
 name: '[S4] make more basics'
 network_grading: false
 order: 37
 problems:
     m1:
+        name: Calculator variable
+        answer: OBJ = calc.o operations.o
         header: |-
             Remember the  `calculator <https://inginious.info.ucl.ac.be/course/LSINF1252/s2_make_calc>`_ you had to make last week?
 
@@ -77,30 +79,23 @@ problems:
                 calc.c    calc.h    Makefile    operations.c    operations.h
 
             Write a variable called ``OBJ`` to simplify the compilation process in the Makefile.
-        name: Calculator variable
         type: match
-        answer: OBJ = calc.o operations.o
-    c1:
-        language: Makefile
-        header: ''
-        type: code
-        name: 'Make '
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 0
+        visible: true
         name: make & Makefile
-        id: make
         description: Tasks related to the make task runner for targets described in
             Makefile.
-        visible: true
+        id: make
+        type: 0
     '1':
+        description: ''
+        name: S3
         type: 2
         visible: true
-        name: S3
-        description: ''
         id: ''
 weight: 1.0
