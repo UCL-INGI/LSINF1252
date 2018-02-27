@@ -7,23 +7,23 @@ environment: cpp
 evaluate: best
 groups: false
 limits:
-    output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
+    output: '2'
 name: '[S2] strlen, strcat et strcasecmp'
 network_grading: false
 order: 22
 problems:
     strlen:
+        language: c
         header: |-
             Ecrivez ici le corps de la fonction `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
 
             .. code-block:: c
 
                 size_t strlen(const char *str) {
-        type: code
-        language: c
         name: strlen
+        type: code
     strcat:
         header: |-
             Entrez ici le corps de la fonction `strcat <https://sites.uclouvain.be/SystInfo/manpages/man3/strcat.3.html>`_
@@ -31,11 +31,11 @@ problems:
             .. code-block:: c
 
                 char *strcat(char *destination, const char *source) {
-        type: code
         language: c
+        type: code
         name: Coder strcat
     strcasecmp:
-        language: c
+        type: code
         header: |-
             Ecrivez ici le corps de la fonction `strcasecmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcasecmp.3.html>`_
 
@@ -44,7 +44,7 @@ problems:
             .. code-block:: c
 
                 int strcasecmp(const char *s1, const char *s2) {
-        type: code
+        language: c
         name: Coder strcasecmp
 stored_submissions: 0
 submission_limit:
@@ -52,15 +52,15 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 2
+        visible: true
         name: S2
         description: ''
-        visible: true
+        type: 2
         id: ''
     '1':
-        visible: true
         type: 2
-        description: Task about pointers and their use
+        visible: true
         name: Pointer
+        description: Task about pointers and their use
         id: ''
 weight: 1.0
