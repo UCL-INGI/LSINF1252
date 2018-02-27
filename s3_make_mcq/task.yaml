@@ -13,6 +13,9 @@ network_grading: false
 order: 38
 problems:
     m1:
+        name: Using a variable in a Makefile
+        answer: $(CC)
+        type: match
         header: |-
             In your Makefile, you have the following variable definition:
 
@@ -21,32 +24,29 @@ problems:
                 CC = gcc
 
             What do you type to use it in other parts of your Makefile?
-        name: Using a variable in a Makefile
-        type: match
-        answer: $(CC)
     q1:
+        name: Linking
         choices:
         -   text: gcc -o test test.o -lcunit
             valid: true
-        -   valid: true
-            text: gcc -c test.o -lcunit
-        -   text: gcc -o test.o
-            feedback: 'The name of the executable is missing and the '
+        -   text: gcc -c test.o -lcunit
+            valid: true
+        -   feedback: 'The name of the executable is missing and the '
+            text: gcc -o test.o
         limit: 0
-        header: Select all *correct* answers related to the linking of the `CUnit`
-            library in a Makefile recipe.
         multiple: true
         type: multiple_choice
-        name: Linking
+        header: Select all *correct* answers related to the linking of the `CUnit`
+            library in a Makefile recipe.
     q2:
+        answer: '  valgrind --leak-check=full --show-leak-kinds=all program'
+        name: Valgrind
         header: |-
             You want to check for leaks in your code ``program`` with valgrind. What option(s) do you use to report all possible memory leaks of ``program`` in full detail?
 
             Write the whole command you want to output, for instance     :
 
             ``valgrind --option-name program``
-        name: ''
-        answer: '  valgrind --leak-check=full --show-leak-kinds=all program'
         type: match
 stored_submissions: 0
 submission_limit:
@@ -54,16 +54,16 @@ submission_limit:
     period: -1
 tags:
     '0':
-        type: 0
-        name: make & Makefile
-        id: make
         visible: true
+        id: make
+        name: make & Makefile
         description: Tasks related to the make task runner for targets described in
             Makefile.
+        type: 0
     '1':
-        visible: true
         type: 2
-        description: ''
+        visible: true
         name: S3
+        description: ''
         id: ''
 weight: 1.0
