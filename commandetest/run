@@ -1,6 +1,7 @@
 #! /bin/bash
 # This line parses the template and put the result in studentcode.py
 parsetemplate --output test.c template.c
+archive -a test.c
 
 gcc test.c -o test # 2> q1.err
 

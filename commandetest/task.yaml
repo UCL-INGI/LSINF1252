@@ -21,19 +21,19 @@ evaluate: best
 groups: false
 limits:
     output: '5210'
-    time: '30'
     memory: '32'
+    time: '30'
 name: '[S3] Le programme test'
 network_grading: false
 order: 33
 problems:
     q1:
+        name: ''
+        language: c
         header: |+
             Complétez ici le code du fichier ``test.c`` qui contient la réponse à l'énoncé.
 
-        language: c
         type: code
-        name: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
