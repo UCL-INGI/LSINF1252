@@ -21,9 +21,9 @@ environment: pyjavacpp
 evaluate: best
 groups: false
 limits:
+    output: '2'
     memory: '100'
     time: '30'
-    output: '2'
 name: '[S4] Filtering a linked list '
 network_grading: false
 order: 43
@@ -36,11 +36,10 @@ problems:
         name: Includes
         type: code
     filter:
-        type: code
-        language: c
         name: Filtering
+        language: c
         header: |-
-            We want to filter this list and extract the elements with an odd index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
+            We want to filter this list and extract the elements with an even index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
 
             Write the body of the function ``pair_filter``.
 
@@ -50,63 +49,64 @@ problems:
 
                 /* pair_filter
                  * Make a copy of the linked list starting at head,
-                 * only taking the elements with an odd index
+                 * only taking the elements with an even index
                  *
                  * @head : head of a linked list, possibly NULL
                  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
                  */
                 struct node *pair_filter(struct node *head) {
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 1
+        visible: true
         name: Timeout
         id: timeout
-        visible: true
         description: Your code exceeds the maximum allowed time.
+        type: 1
     '1':
         type: 1
         visible: true
-        description: ''
         id: sigsegv
         name: Segmentation Fault
+        description: ''
     '2':
         type: 1
-        id: not_compile
         name: Not compile
         description: You code does not compile.
+        id: not_compile
         visible: true
     '3':
         visible: true
         description: ''
-        name: Memory Exceeded
         type: 1
         id: memory
+        name: Memory Exceeded
     '4':
         visible: true
-        id: sigfpe
-        description: ''
         type: 1
         name: Floating Point Exception
+        id: sigfpe
+        description: ''
     '5':
         type: 1
-        visible: true
         name: Double free
-        id: double_free
-        description: Your code produced a double free.
-    '6':
         visible: true
-        type: 1
+        description: Your code produced a double free.
+        id: double_free
+    '6':
         name: Banned functions
-        description: You use some banned functions.
         id: banned_funcs
+        type: 1
+        visible: true
+        description: You use some banned functions.
     '7':
         name: S4
+        visible: true
         type: 2
         description: ''
-        visible: true
         id: ''
 weight: 1.0
