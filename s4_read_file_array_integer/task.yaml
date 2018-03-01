@@ -3,111 +3,111 @@ author: Olivier Martin
 context: |-
     *Estimated time: 25 minutes*
 
-    Given a file containing some (possibly none) positive integers (``int``), write a code that computes the sum of all integers present in the file. The sum have to be returned.
+    Given a file containing some (possibly none) positive integers (``int``), write a code that computes the sum of all integers that were stored in the file. The function returns the sum when there are no errors. In case of errors, it returns.
 
     - If ``open()`` fails, return ``-1``.
     - If ``read()`` fails, return ``-2``.
     - If ``close()`` fails, return ``-3``.
 
-    Use only ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
+    You can only use ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
 environment: cpp
 evaluate: best
 groups: false
 limits:
-    time: '30'
     memory: '100'
     output: '2'
+    time: '30'
 name: '[S5] File integers reading - REVIEWED'
 network_grading: false
 order: 47
 problems:
     q1:
         language: c
-        name: Write your code here
         type: code
         header: |-
-            .. code-block:: java
+            .. code-block:: c
 
                 /*
                  * @pre filename != NULL, name of the file
-                 * @post return the sum of all integers present in the file.
+                 * @post returns the sum of all integers stored in the binary file.
                  *       return -1 if the file can not be open.
                  *       return -2 if an error occurs during reading
                  *       return -3 if close() fails.
                  */
                 int sum_file(char *filename) {
+        name: Write your code here
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        name: Close
-        type: 0
         id: close
+        name: Close
         visible: true
         description: This tag validate that your close are correctly performed.
+        type: 0
     '1':
         id: open
         description: This tag validate you are able to open a file and handle errors
             with open().
-        name: Open
-        visible: true
         type: 0
+        visible: true
+        name: Open
     '2':
         type: 0
-        description: The student has correctly computed and returned the sum.
         id: sum
+        description: The student has correctly computed and returned the sum.
         name: Sum
         visible: false
     '10':
-        id: timeout
-        type: 1
         visible: true
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-    '3':
-        description: You do not manage failures properly during read operations.
-        name: Failure handling
-        id: failure_handling
-        visible: true
-        type: 1
-    '4':
-        description: You use some banned functions.
-        visible: true
-        type: 1
-        id: banned_funcs
-        name: Banned functions
-    '5':
-        visible: true
-        description: Your code produced a double free.
-        id: double_free
-        name: Double free
-        type: 1
-    '6':
-        id: sigfpe
+        name: Segmentation Fault
         description: ''
         type: 1
+        id: sigsegv
+    '3':
         visible: true
-        name: Floating Point Exception
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        name: Timeout
+        type: 1
+    '4':
+        type: 1
+        visible: true
+        id: failure_handling
+        description: You do not manage failures properly during read operations.
+        name: Failure handling
+    '5':
+        type: 1
+        visible: true
+        id: banned_funcs
+        description: You use some banned functions.
+        name: Banned functions
+    '6':
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+        visible: true
+        id: double_free
     '7':
+        name: Floating Point Exception
+        type: 1
+        id: sigfpe
+        visible: true
+        description: ''
+    '8':
         id: memory
         name: Memory Exceeded
         visible: true
-        type: 1
         description: ''
-    '8':
-        id: not_compile
         type: 1
-        name: Not compile
-        description: You code does not compile.
-        visible: true
     '9':
-        id: sigsegv
-        description: ''
         type: 1
+        id: not_compile
         visible: true
-        name: Segmentation Fault
+        description: You code does not compile.
+        name: Not compile
     '11':
         type: 2
         visible: true
@@ -115,9 +115,9 @@ tags:
         description: ''
         id: ''
     '12':
-        description: ''
-        name: File
-        visible: true
         type: 2
+        description: ''
+        visible: true
+        name: File
         id: ''
 weight: 1.0
