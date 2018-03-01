@@ -10,15 +10,16 @@ evaluate: best
 groups: false
 limits:
     memory: '100'
-    output: '2'
     time: '30'
-name: '[S5] File exists - REVIEWED'
+    output: '2'
+name: '[S5] File exists '
 network_grading: false
 order: 46
 problems:
     q1:
-        type: code
+        name: File exist
         language: c
+        type: code
         header: |-
             .. code-block:: c
 
@@ -27,64 +28,63 @@ problems:
                  * @post return 0 if the file {filename} exist. -1 Otherwise.
                  */
                  int file_exists(char *filename)
-        name: File exist
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: banned_funcs
+        visible: true
         name: Banned functions
-        visible: true
-        type: 1
+        id: banned_funcs
         description: You use some banned functions.
+        type: 1
     '1':
-        id: double_free
-        description: Your code produced a double free.
-        name: Double free
+        type: 1
         visible: true
-        type: 1
+        id: double_free
+        name: Double free
+        description: Your code produced a double free.
     '2':
-        id: sigfpe
         type: 1
+        id: sigfpe
+        description: ''
         name: Floating Point Exception
         visible: true
-        description: ''
     '3':
+        visible: true
+        description: ''
+        type: 1
         id: memory
-        visible: true
-        type: 1
         name: Memory Exceeded
-        description: ''
     '4':
+        visible: true
+        type: 1
         name: Not compile
-        description: You code does not compile.
-        visible: true
         id: not_compile
-        type: 1
+        description: You code does not compile.
     '5':
-        id: sigsegv
-        visible: true
+        type: 1
         description: ''
+        visible: true
         name: Segmentation Fault
-        type: 1
+        id: sigsegv
     '6':
-        id: timeout
+        name: Timeout
         description: Your code exceeds the maximum allowed time.
+        id: timeout
         type: 1
         visible: true
-        name: Timeout
     '7':
         name: S5
-        description: ''
-        type: 2
         visible: true
+        type: 2
+        description: ''
         id: ''
     '8':
-        name: File
-        description: ''
         visible: true
+        description: ''
         type: 2
+        name: File
         id: ''
 weight: 1.0
