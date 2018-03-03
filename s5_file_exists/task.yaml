@@ -48,8 +48,8 @@ tags:
     '2':
         type: 1
         id: sigfpe
-        description: ''
         name: Floating Point Exception
+        description: ''
         visible: true
     '3':
         visible: true
@@ -65,8 +65,8 @@ tags:
         description: You code does not compile.
     '5':
         type: 1
-        description: ''
         visible: true
+        description: ''
         name: Segmentation Fault
         id: sigsegv
     '6':

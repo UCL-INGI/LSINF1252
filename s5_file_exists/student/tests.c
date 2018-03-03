@@ -33,6 +33,8 @@ void test_exist() {
         int ret = 0;
 
         system("touch file.txt");
+        monitored.close = true;
+        monitored.open = true;
         SANDBOX_BEGIN;
         ret = file_exists("file.txt");
         SANDBOX_END;
@@ -42,6 +44,11 @@ void test_exist() {
             push_info_msg(_("When the file exist, you do not return 0"));
         }else{
             set_tag("test_file_exist");
+        }
+        
+        if (stats.open.called > 0 && stats.close.called == 0){
+            push_info_msg(_("You did not close() the file when the file exists."));
+            CU_FAIL();
         }
     }
 }
