@@ -19,6 +19,7 @@ void test_exist_not() {
         if(ret != -1){
             CU_FAIL();
             push_info_msg(_("When the file does not exist, you do not return -1"));
+            return;
         }else{
              set_tag("test_file_exist_not");
         }
