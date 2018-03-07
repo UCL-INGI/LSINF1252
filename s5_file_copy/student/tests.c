@@ -132,7 +132,7 @@ void test_file_write_fail() {
     int ret = 0;
     
     monitored.write = true;
-    failures.write = FAIL_THIRD;
+    failures.write = FAIL_FIRST;
     failures.write_ret = -1;
     
     SANDBOX_BEGIN;
