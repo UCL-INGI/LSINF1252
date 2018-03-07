@@ -229,7 +229,7 @@ void test_lseek_q1_fail(){
     set_test_metadata("q1", _("Test lseek fails"), 1);
     monitored.lseek = true;
     failures.lseek=FAIL_FIRST;
-    failures.lseek_ret = 0;   
+    failures.lseek_ret = -1;   
     int ret = 0;
     gen_file(10);
     SANDBOX_BEGIN;
