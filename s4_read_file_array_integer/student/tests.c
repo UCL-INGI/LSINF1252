@@ -114,7 +114,7 @@ void test_some_integers_fail_read() {
     int ret = 0;
     
     monitored.read = true;
-    failures.read = FAIL_THIRD;
+    failures.read = FAIL_FIRST;
     failures.read_ret = -1;
     
     SANDBOX_BEGIN;
