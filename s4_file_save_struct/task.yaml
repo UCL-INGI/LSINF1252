@@ -64,57 +64,57 @@ tags:
         name: Close
     '10':
         visible: true
-        id: timeout
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
+        id: banned_funcs
+        name: Banned functions
+        description: You use some banned functions.
         type: 1
     '2':
         type: 1
         visible: true
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
     '3':
         visible: true
-        description: You call the read or write function more than necessary.
-        id: too_many_op
-        name: Too many read/write
+        description: ''
+        id: sigsegv
+        name: Segmentation Fault
         type: 1
     '4':
+        type: 1
+        visible: true
+        id: too_many_op
+        description: You call the read or write function more than necessary.
+        name: Too many read/write
+    '5':
         type: 1
         visible: true
         id: failure_handling
         description: You do not manage failures properly during write operations.
         name: Failure handling
-    '5':
+    '6':
+        description: You code do not compile.
+        name: Not compile
         type: 1
         visible: true
         id: not_compile
-        description: You code do not compile.
-        name: Not compile
-    '6':
-        description: ''
+    '7':
         name: Memory Exceeded
         type: 1
-        visible: true
         id: memory
-    '7':
-        name: Floating Point Exception
-        type: 1
-        id: sigfpe
         visible: true
         description: ''
     '8':
-        id: double_free
-        name: Double free
+        id: sigfpe
+        name: Floating Point Exception
         visible: true
-        description: Your code produced a double free.
+        description: ''
         type: 1
     '9':
-        id: banned_funcs
+        id: double_free
         visible: true
-        description: You use some banned functions.
-        name: Banned functions
+        description: Your code produced a double free.
+        name: Double free
         type: 1
     '11':
         type: 2
