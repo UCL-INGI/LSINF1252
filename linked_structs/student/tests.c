@@ -68,18 +68,21 @@ void test_one_elem(){
 
   struct node* ret = (struct node*) 0x42;
 
-  struct node* list = malloc(sizeof(struct node)); 
+  struct node* list = malloc(sizeof(struct node));
   list->next = NULL;
-  list->fifo = NULL;
-  list->parent = '\0';
+  /*list->fifo = NULL;
+  list->parent = '\0';*/
 
   SANDBOX_BEGIN;
   ret = pair_filter(list);
   SANDBOX_END;
 
   CU_ASSERT_PTR_NOT_NULL(ret);
-  if (!ret)
+  if (!ret){
     push_info_msg(_("NULL was returned for a one element list"));
+    return;
+  }
+
   CU_ASSERT_PTR_NULL(ret->next);
   if (memcmp(list, ret, sizeof(struct node))){
       CU_FAIL("The function produced a wrong list");
@@ -92,11 +95,11 @@ void test_two_elem(){
 
   struct node* ret = (struct node*) 0x42;
 
-  struct node* list = malloc(sizeof(struct node)); 
+  struct node* list = malloc(sizeof(struct node));
   list->fifo = NULL;
   list->parent = '\0';
 
-  list->next = malloc(sizeof(struct node)); 
+  list->next = malloc(sizeof(struct node));
   list->next->next = NULL;
   list->next->fifo = NULL;
   list->next->parent = '\0';
@@ -106,8 +109,11 @@ void test_two_elem(){
   SANDBOX_END;
 
   CU_ASSERT_PTR_NOT_NULL(ret);
-  if (!ret)
+  if (!ret){
     push_info_msg(_("NULL was returned for a two element list"));
+    return;
+  }
+
   CU_ASSERT_PTR_NULL(ret->next);
   list->next = NULL;
   if (memcmp(list, ret, sizeof(struct node))){
@@ -130,6 +136,7 @@ void test_pair_filter(){
   if (!ret){
     CU_FAIL("NULL returned value");
     push_info_msg(_("NULL returned value"));
+    return;
   }
 
   //printf("ret %p\n", ret);
