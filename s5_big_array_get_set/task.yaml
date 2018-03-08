@@ -69,87 +69,87 @@ tags:
         name: Open
     '10':
         visible: true
-        id: not_compile
-        name: Not compile
-        description: You code do not compile.
+        id: sigsegv
+        name: Segmentation Fault
+        description: ''
         type: 1
     '11':
-        id: original_modif
+        id: banned_funcs
         type: 1
         visible: true
-        name: Original file modified
-        description: You have modified the original file.
+        name: Banned functions
+        description: You use some banned functions.
     '12':
         type: 1
         visible: true
-        id: wrong_set_value
-        description: The value written in the file has not the correct value.
-        name: Wrong Set Value
+        id: double_free
+        description: Your code produced a double free.
+        name: Double free
     '13':
-        name: Wrong Index Set
-        id: wrong_index_set
+        name: Failure handling
+        id: failure_handling
         type: 1
-        description: A value at an unwanted index was modified.
+        description: You do not manage failures properly.
         visible: true
     '14':
         type: 1
-        description: The get() function did not return the expected value.
+        description: ''
         visible: true
-        id: wrong_get_value_returned
-        name: Wrong Get Value Returned
+        id: sigfpe
+        name: Floating Point Exception
     '15':
-        name: Timeout
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
+        name: Memory Exceeded
+        id: memory
+        description: ''
         visible: true
         type: 1
     '2':
         type: 1
         visible: true
-        id: oob
-        description: You try to read outside of the array.
-        name: Out of bounds
+        id: not_compile
+        description: You code do not compile.
+        name: Not compile
     '3':
         visible: true
-        description: You call the read or write function more than necessary.
-        id: too_many_op
-        name: Too many read/write
+        description: You have modified the original file.
+        id: original_modif
+        name: Original file modified
         type: 1
     '4':
         type: 1
         visible: true
-        name: Segmentation Fault
-        id: sigsegv
-        description: ''
+        name: Wrong Set Value
+        id: wrong_set_value
+        description: The value written in the file has not the correct value.
     '5':
         type: 1
+        description: A value at an unwanted index was modified.
         visible: true
-        id: banned_funcs
-        description: You use some banned functions.
-        name: Banned functions
+        id: wrong_index_set
+        name: Wrong Index Set
     '6':
-        description: Your code produced a double free.
-        name: Double free
+        description: The get() function did not return the expected value.
+        name: Wrong Get Value Returned
         type: 1
         visible: true
-        id: double_free
+        id: wrong_get_value_returned
     '7':
-        name: Failure handling
+        name: Timeout
         type: 1
-        id: failure_handling
+        id: timeout
         visible: true
-        description: You do not manage failures properly.
+        description: Your code exceeds the maximum allowed time.
     '8':
-        id: sigfpe
-        name: Floating Point Exception
+        id: oob
+        name: Out of bounds
         visible: true
-        description: ''
+        description: You try to read outside of the array.
         type: 1
     '9':
-        id: memory
+        id: too_many_op
         visible: true
-        description: ''
-        name: Memory Exceeded
+        description: You call the read or write function more than necessary.
+        name: Too many read/write
         type: 1
     '16':
         visible: true
