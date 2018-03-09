@@ -64,57 +64,57 @@ tags:
         name: Close
     '10':
         visible: true
-        id: banned_funcs
-        name: Banned functions
-        description: You use some banned functions.
+        id: double_free
+        name: Double free
+        description: Your code produced a double free.
         type: 1
     '2':
         type: 1
         visible: true
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
+        id: banned_funcs
+        description: You use some banned functions.
+        name: Banned functions
     '3':
         visible: true
-        description: ''
-        id: sigsegv
-        name: Segmentation Fault
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        name: Timeout
         type: 1
     '4':
+        type: 1
+        visible: true
+        id: sigsegv
+        description: ''
+        name: Segmentation Fault
+    '5':
         type: 1
         visible: true
         id: too_many_op
         description: You call the read or write function more than necessary.
         name: Too many read/write
-    '5':
+    '6':
+        description: You do not manage failures properly during write operations.
+        name: Failure handling
         type: 1
         visible: true
         id: failure_handling
-        description: You do not manage failures properly during write operations.
-        name: Failure handling
-    '6':
-        description: You code do not compile.
+    '7':
         name: Not compile
         type: 1
-        visible: true
         id: not_compile
-    '7':
-        name: Memory Exceeded
-        type: 1
-        id: memory
         visible: true
-        description: ''
+        description: You code do not compile.
     '8':
-        id: sigfpe
-        name: Floating Point Exception
+        id: memory
+        name: Memory Exceeded
         visible: true
         description: ''
         type: 1
     '9':
-        id: double_free
+        id: sigfpe
         visible: true
-        description: Your code produced a double free.
-        name: Double free
+        description: ''
+        name: Floating Point Exception
         type: 1
     '11':
         type: 2

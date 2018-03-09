@@ -144,7 +144,7 @@ void test_close() {
 }
 
 void test_open() {
-    set_test_metadata("q1", _("Test close()."), 1);
+    set_test_metadata("q1", _("Test open()."), 1);
     int size = 6;
     point_t* tab = gen_struct(size);
     int ret = 0;
