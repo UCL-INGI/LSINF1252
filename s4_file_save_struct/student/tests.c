@@ -169,6 +169,7 @@ void test_open() {
     }
     
     //Test if open() return a correct file descriptor.
+    system("rm file.txt");
     tab = gen_struct(size);
     monitored.open = true;
     SANDBOX_BEGIN;
