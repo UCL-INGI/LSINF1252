@@ -121,7 +121,9 @@ void test_close() {
         CU_FAIL();
     }
     
+    
     //We fail the close()
+    system("rm file.txt");
     tab = gen_struct(size);
     int ret = 0;
     monitored.close = true;
