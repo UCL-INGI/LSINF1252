@@ -43,6 +43,7 @@ def run(cmd):
     return ProcessOutput(proc.returncode, stdout, stderr)
 
 run('parsetemplate -o code/student_code.c code/template.c.tpl')
+run('archive -a student_code.c')
 process = run('make -f code/Makefile')
 
 if process.stderr != '': #On renvoie d'éventuelles erreurs de compilation
