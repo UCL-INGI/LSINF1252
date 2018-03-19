@@ -5,6 +5,7 @@ context: 'Palindrome are strings of text which read the same backward as forward
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
     output: '2'
     memory: '100'
@@ -14,8 +15,6 @@ network_grading: false
 order: 12
 problems:
     q1:
-        language: c
-        name: ''
         type: code
         header: |-
             Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces.** An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
@@ -27,57 +26,59 @@ problems:
                 * @return: returns true (1) if str is a palindrome, -1 if str is NULL, otherwise false (0).
                 */
                 int pal(char *str) {
+        name: ''
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 1
-        name: Timeout
         id: timeout
         description: Your code exceeds the maximum allowed time.
+        type: 1
         visible: true
+        name: Timeout
     '1':
         visible: true
         description: ''
-        name: Segmentation Fault
-        type: 1
         id: sigsegv
-    '2':
         type: 1
-        visible: true
+        name: Segmentation Fault
+    '2':
         description: You code does not compile.
         name: Not compile
         id: not_compile
-    '3':
         type: 1
-        id: memory
+        visible: true
+    '3':
         visible: true
         name: Memory Exceeded
+        id: memory
+        type: 1
         description: ''
     '4':
-        visible: true
-        description: ''
-        type: 1
         id: sigfpe
+        description: ''
+        visible: true
+        type: 1
         name: Floating Point Exception
     '5':
-        description: Your code produced a double free.
         type: 1
-        visible: true
         id: double_free
+        description: Your code produced a double free.
         name: Double free
+        visible: true
     '6':
         description: You use some banned functions.
+        id: banned_funcs
+        visible: true
         type: 1
         name: Banned functions
-        visible: true
-        id: banned_funcs
     '7':
-        name: S2
-        type: 2
         description: ''
+        name: S2
         visible: true
+        type: 2
         id: ''
 weight: 1.0
