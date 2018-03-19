@@ -20,6 +20,7 @@ context: |-
 environment: pyjavacpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
     output: '2'
     memory: '100'
@@ -29,14 +30,13 @@ network_grading: false
 order: 43
 problems:
     includes:
+        name: Includes
         language: ''
+        type: code
         header: 'Please insert here the ``#include`` that are required to use the
             functions that you use to answer this question. These includes are specified
             in the man pages of the functions that you use. '
-        name: Includes
-        type: code
     filter:
-        name: Filtering
         language: c
         header: |-
             We want to filter this list and extract the elements with an even index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
@@ -55,6 +55,7 @@ problems:
                  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
                  */
                 struct node *pair_filter(struct node *head) {
+        name: Filtering
         type: code
 stored_submissions: 0
 submission_limit:
@@ -62,51 +63,51 @@ submission_limit:
     period: -1
 tags:
     '0':
-        visible: true
-        name: Timeout
         id: timeout
         description: Your code exceeds the maximum allowed time.
         type: 1
-    '1':
-        type: 1
+        name: Timeout
         visible: true
-        id: sigsegv
-        name: Segmentation Fault
+    '1':
+        visible: true
         description: ''
-    '2':
+        id: sigsegv
         type: 1
-        name: Not compile
+        name: Segmentation Fault
+    '2':
         description: You code does not compile.
+        name: Not compile
+        type: 1
         id: not_compile
         visible: true
     '3':
         visible: true
-        description: ''
+        name: Memory Exceeded
         type: 1
         id: memory
-        name: Memory Exceeded
+        description: ''
     '4':
+        id: sigfpe
+        description: ''
         visible: true
         type: 1
         name: Floating Point Exception
-        id: sigfpe
-        description: ''
     '5':
         type: 1
+        id: double_free
+        description: Your code produced a double free.
         name: Double free
         visible: true
-        description: Your code produced a double free.
-        id: double_free
     '6':
-        name: Banned functions
-        id: banned_funcs
-        type: 1
-        visible: true
         description: You use some banned functions.
+        id: banned_funcs
+        visible: true
+        type: 1
+        name: Banned functions
     '7':
+        description: ''
         name: S4
         visible: true
         type: 2
-        description: ''
         id: ''
 weight: 1.0
