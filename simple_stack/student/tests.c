@@ -295,10 +295,16 @@ void test_pop_value(){
   // check head of the stack
   char *src2 = *(a+4);
   //printf("src = %s, result = %s, size = %li ", src2, stack->name, strlen(stack->name));
+
+  if (stack != tmp_head->next){
+    push_info_msg(_("The head ptr is not the expected one"));
+    return;
+  }
+
   int cmp2 = strncmp((const char*) stack->name, (const char*) src2, strlen(src2));
   CU_ASSERT_TRUE(!cmp2);
   if (cmp2)
-    push_info_msg(_("The head is not the wanted one "));
+    push_info_msg(_("The value of the head node is not the wanted one "));
 
   // check if the function free the first node
   int ml = stats.free.called;
@@ -318,7 +324,7 @@ void test_pop_value(){
     // push info TODO
   }
 
-  printf("ml3 = %i, %s",ml3, name_head);
+  //printf("ml3 = %i, %s",ml3, name_head);
 
   // check the structure if the stack after popped
   if (!stack && !stack->next){
