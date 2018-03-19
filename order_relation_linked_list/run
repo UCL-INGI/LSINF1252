@@ -12,6 +12,7 @@ os.chdir("student")
 
 # Fetch and save the student code into a file for compilation
 input.parse_template("student_code.c.tpl", "student_code.c")
+subprocess.call(['archive', '-a', 'student_code.c'], universal_newlines=True)
 
 # Compilation
 p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)

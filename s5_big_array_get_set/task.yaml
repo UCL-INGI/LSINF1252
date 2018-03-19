@@ -23,6 +23,7 @@ network_grading: false
 order: 48
 problems:
     q1:
+        type: code
         header: |-
             .. code-block:: c
 
@@ -34,7 +35,6 @@ problems:
                  *       return -2 if index >= length of array.
                  */
                 int get(char *filename, int index) {
-        type: code
         name: Retrieve the element at a given index
         language: c
     q2:
@@ -58,100 +58,100 @@ submission_limit:
 tags:
     '0':
         id: close
-        type: 0
+        description: This tag validate that your close are correctly performed.
         visible: true
         name: Close
-        description: This tag validate that your close are correctly performed.
+        type: 0
     '1':
-        name: Open
         id: open
         visible: true
         type: 0
+        name: Open
         description: This tag validate you are able to open a file.
     '10':
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
         type: 1
-        name: Double free
-    '11':
-        name: Failure handling
-        type: 1
-        description: You do not manage failures properly.
-        id: failure_handling
-        visible: true
-    '12':
-        description: ''
-        type: 1
-        visible: true
-        name: Floating Point Exception
-        id: sigfpe
-    '13':
-        type: 1
-        description: ''
-        visible: true
-        id: memory
-        name: Memory Exceeded
-    '14':
-        type: 1
-        visible: true
-        name: Not compile
-        description: You code do not compile.
-        id: not_compile
-    '15':
-        name: Original file modified
-        id: original_modif
-        description: You have modified the original file.
-        visible: true
-        type: 1
-    '2':
-        type: 1
-        visible: true
-        description: The value written in the file has not the correct value.
-        name: Wrong Set Value
-        id: wrong_set_value
-    '3':
-        description: A value at an unwanted index was modified.
-        visible: true
-        type: 1
-        id: wrong_index_set
-        name: Wrong Index Set
-    '4':
-        name: Wrong Get Value Returned
-        type: 1
-        visible: true
-        id: wrong_get_value_returned
         description: The get() function did not return the expected value.
-    '5':
+        id: wrong_get_value_returned
+        name: Wrong Get Value Returned
+        visible: true
+    '11':
         description: Your code exceeds the maximum allowed time.
         type: 1
-        id: timeout
+        visible: true
         name: Timeout
-        visible: true
-    '6':
-        visible: true
+        id: timeout
+    '12':
         id: oob
-        description: You try to read outside of the array.
-        name: Out of bounds
+        visible: true
         type: 1
-    '7':
+        name: Out of bounds
+        description: You try to read outside of the array.
+    '13':
+        visible: true
+        description: You call the read or write function more than necessary.
         type: 1
         id: too_many_op
         name: Too many read/write
-        description: You call the read or write function more than necessary.
-        visible: true
-    '8':
+    '14':
+        description: ''
         visible: true
         type: 1
         name: Segmentation Fault
         id: sigsegv
-        description: ''
-    '9':
-        name: Banned functions
-        visible: true
+    '15':
         type: 1
         id: banned_funcs
+        name: Banned functions
+        visible: true
         description: You use some banned functions.
+    '2':
+        description: Your code produced a double free.
+        name: Double free
+        type: 1
+        visible: true
+        id: double_free
+    '3':
+        description: You do not manage failures properly.
+        name: Failure handling
+        type: 1
+        id: failure_handling
+        visible: true
+    '4':
+        id: sigfpe
+        visible: true
+        description: ''
+        name: Floating Point Exception
+        type: 1
+    '5':
+        type: 1
+        id: memory
+        description: ''
+        name: Memory Exceeded
+        visible: true
+    '6':
+        description: You code do not compile.
+        id: not_compile
+        type: 1
+        name: Not compile
+        visible: true
+    '7':
+        description: You have modified the original file.
+        type: 1
+        name: Original file modified
+        id: original_modif
+        visible: true
+    '8':
+        visible: true
+        id: wrong_set_value
+        description: The value written in the file has not the correct value.
+        type: 1
+        name: Wrong Set Value
+    '9':
+        id: wrong_index_set
+        name: Wrong Index Set
+        description: A value at an unwanted index was modified.
+        type: 1
+        visible: true
     '16':
         visible: true
         type: 2
@@ -159,9 +159,9 @@ tags:
         name: File
         id: ''
     '17':
+        visible: true
         name: S5
         description: ''
         type: 2
-        visible: true
         id: ''
 weight: 1.0

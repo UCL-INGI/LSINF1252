@@ -6,17 +6,17 @@ context: Given the provided implementation of a linked list, you need to impleme
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
+    output: '2'
     memory: '100'
     time: '30'
-    output: '2'
 name: '[S4] Ordered  linked list'
 network_grading: false
 order: 45
 problems:
     order_relation:
         language: c
-        type: code
         name: Order relation
         header: |-
             For this subproblem, you need to implement the comparison function which defines the order relationship of the list.
@@ -30,9 +30,8 @@ problems:
                 * and positive number otherwise
                 */
                 int compare(char a, char b) {
-    insert:
         type: code
-        name: Insert
+    insert:
         header: |
             Assuming following linked list structure :
 
@@ -54,59 +53,61 @@ problems:
                 * @return: 0 if success, -1 otherwise
                 */
                 int insert(node_t **head, char val, int (*cmp)(char,char)) {
+        name: Insert
         language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        visible: true
-        name: Timeout
         id: timeout
+        name: Timeout
         description: Your code exceeds the maximum allowed time.
         type: 1
+        visible: true
     '1':
-        type: 1
         visible: true
-        id: sigsegv
-        name: Segmentation Fault
         description: ''
-    '2':
+        id: sigsegv
         type: 1
-        visible: true
-        id: not_compile
+        name: Segmentation Fault
+    '2':
         description: You code does not compile.
         name: Not compile
+        type: 1
+        id: not_compile
+        visible: true
     '3':
         visible: true
-        description: ''
+        name: Memory Exceeded
         type: 1
         id: memory
-        name: Memory Exceeded
+        description: ''
     '4':
+        id: sigfpe
         visible: true
+        description: ''
         type: 1
         name: Floating Point Exception
-        id: sigfpe
-        description: ''
     '5':
         type: 1
+        id: double_free
+        description: Your code produced a double free.
         name: Double free
         visible: true
-        description: Your code produced a double free.
-        id: double_free
     '6':
-        id: banned_funcs
-        name: Banned functions
         description: You use some banned functions.
-        type: 1
+        id: banned_funcs
         visible: true
+        type: 1
+        name: Banned functions
     '7':
+        description: Task dealing with data structures and linked list
         name: Data structures
         visible: true
         type: 2
-        description: Task dealing with data structures and linked list
         id: ''
     '8':
         visible: true
@@ -115,9 +116,9 @@ tags:
         name: Pointer
         id: ''
     '9':
-        visible: true
+        type: 2
         name: S4
         description: ''
-        type: 2
+        visible: true
         id: ''
 weight: 1.0
