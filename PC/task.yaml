@@ -9,20 +9,22 @@ context: |-
         - http://sites.uclouvain.be/SystInfo/manpages/man3 (fonctions des librairies)
 
     **Attention:** veuillez utiliser la version **HTML** du syllabus
+
+
+    .. image:: PC/buffer.png
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
-    time: '10'
-    memory: '100'
     output: '2'
+    memory: '100'
+    time: '10'
 name: '[Septembre 2016A] Producteurs/Consommateurs'
 network_grading: false
 order: 66
 problems:
     mp:
-        language: c
-        name: Fonction insert
         header: |-
             Une librairie supportant un buffer partagé utilisé pour résoudre
             le problème des "Producteurs/Consommateurs" est implémentée comme
@@ -71,6 +73,8 @@ problems:
                 {
                   // à compléter
         type: code
+        name: Fonction insert
+        language: c
     mp_remove:
         header: |-
             Implémentez ici la fonction suivante
@@ -82,22 +86,23 @@ problems:
                  */
                 int sbuf_remove(sbuf_t *sp)
                 {
+        language: c
         name: Fonction remove
         type: code
-        language: c
     montest:
+        type: code
+        language: c
+        name: Fonction de test optionnelle
+        optional: 'on'
         header: |-
             Insérez votre code de test optionnel ci-dessous. Vous pouvez utiliser ``printf`` dans cette fonction pour débugger votre programme, mais vous *devez* effacer ce code de debug pour finaliser votre soumission car toute erreur le code de cette fonction peut empêcher la bonne évaluation de votre travail.
 
             .. code:: c
 
                void montest(void) {
-        optional: true
-        type: code
-        language: c
-        name: Fonction de test optionnelle
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
+tags: {}
 weight: 1.0
