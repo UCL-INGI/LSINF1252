@@ -22,6 +22,7 @@ import time
 import xml.etree.ElementTree as ET
 import subprocess, shlex, json, re, sys
 from collections import namedtuple
+from inginious import rst, feedback
 
 deadline = "01/09/2016"
 
@@ -43,6 +44,7 @@ process = run('make -f code/Makefile')
 
 if process.stderr != '': #On renvoie d'éventuelles erreurs de compilation
     run('feedback -r failed -f "Erreur de compilation :\n\n{}"'.format(process.stderr))
+    feedback.set_global_feedback(rst.get_codeblock("", process.stderr, True))
     sys.exit(0)
 else:
     compile = True

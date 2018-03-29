@@ -72,8 +72,8 @@ problems:
                 void sbuf_insert(sbuf_t *sp, int item)
                 {
                   // à compléter
-        type: code
         name: Fonction insert
+        type: code
         language: c
     mp_remove:
         header: |-
