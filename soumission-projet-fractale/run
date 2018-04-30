@@ -1,0 +1,136 @@
+#!/bin/bash
+
+LOG="log.log"
+FILE="archive.zip"
+
+fail() {
+	feedback -r failed -ef "$1" -g "$2"
+    readlog
+    exit 1
+}
+
+readlog() {
+    if [[ ! -z "$(cat $LOG)" ]]; then
+        rst-code < "$LOG" | feedback-msg -ea
+    fi
+}
+
+echo "reading input"
+getinput soumission > ${FILE}
+
+if ! file -b $FILE 2>&1 | grep "Zip archive data" ; then
+	fail "Le fichier soumis n'est pas une archive ZIP" 0
+fi
+echo "format zip"
+# Cannot (yet? never?) test filename
+
+if ! unzip $FILE -d student &> $LOG ; then
+	readlog
+	fail "Impossible de décompresser l'archive" 5
+fi
+echo "decompress"
+shopt -s extglob
+TESTDIR=$(ls -d student/!(_*)/)
+if (( $? != 0 )); then
+	 fail "Pas de dossiers créés lors de la décompression" 10
+fi
+echo "dossiers"
+echo $TESTDIR
+
+if (( $(ls -d student/!(_*)/ | wc -l) > 1 )); then
+	TESTDIR="student"
+fi
+
+echo "Contenu de l'archive:" > $LOG
+ls $TESTDIR &>> $LOG
+if [[ ! -f "$TESTDIR/Makefile" ]] ; then
+	fail "Pas de Makefile" 15
+fi
+echo "Makefile"
+if [[ ! -f "$TESTDIR/main.c" ]] ; then
+	fail "Pas de fichier main.c" 20
+fi
+echo "libfractal"
+if [[ ! -d "$TESTDIR/libfractal" ]] ; then
+	fail "Pas de dossier libfractal" 25
+fi
+echo "src"
+if [[ ! -d "$TESTDIR/tests" ]] ; then
+	fail "Pas de répertoire tests" 30
+fi
+echo "tests"
+if [[ ! -f "$TESTDIR/rapport.pdf" ]] ; then
+	fail "Pas de fichier rapport.pdf" 35
+fi
+echo "rapport.pdf"
+if ! file -b "$TESTDIR/rapport.pdf" 2>&1 | grep "PDF" ; then
+	fail "rapport.pdf n'est pas au format PDF" 40
+fi
+echo "rapport is pdf"
+if [[ ! -f "$TESTDIR/gitlog.stat" ]] ; then
+	fail "Pas de fichier gitlog.stat" 45
+fi
+echo "gitlog.stat"
+
+
+#add from ltaffin for jplag
+mavar=$(getinput @username)
+
+echo "$mavar"
+archive -a "$TESTDIR/Makefile" -o $mavar
+for entry in "$TESTDIR/src"/*
+do
+  archive -a "$entry" -o $mavar
+done
+for entry in "$TESTDIR/tests"/*
+do
+  archive -a "$entry" -o $mavar
+done
+
+
+
+cd $TESTDIR
+if [[  -x main ]]; then
+	fail "L'archive contient la version compilée de la main." 50
+fi
+echo "no compiled main"
+if [[ -f libfractal/libfractal.a ]]; then
+	fail "L'archive contient la librairie statique compilée." 55
+fi
+echo "no libfractal.a"
+find . -name '*.o' -print &> $LOG
+if [ ! -z "$(cat $LOG)" ]; then
+	fail "L'archive contient des fichiers objets (.o)" 60
+fi
+echo "no *.o"
+if ! make &> $LOG ; then
+    fail "La cible par défaut de make à échouée" 65
+fi
+echo "make pass"
+if [[ ! ( -x main ) ]]; then
+	fail "La cible par défault ne produit pas l'exécutable main" 70
+fi
+echo "make pass and have main"
+if ! make lib &> $LOG ; then
+    fail "La cible lib de make à échouée" 75
+fi
+echo "make lib pass"
+if ! make tests &> $LOG ; then
+    fail "La cible tests de make à échouée" 80
+fi
+echo "make tests pass"
+if ! make clean &> $LOG ; then
+    fail "La cible clean de make à échouée" 85
+fi
+echo "make clean pass"
+if [[  -x main ]]; then
+	fail "make clean n'a pas supprimé le fichier compilé main." 90
+fi
+echo "make clean removes main"
+find . -name '*.o' -print &> $LOG
+if [ ! -z "$(cat $LOG)" ]; then
+	fail "make clean laisse des fichiers objets (.o)" 95
+fi
+echo "make clean removes *.o"
+
+feedback -r success -f "Le fichier respecte le format attendu; votre soumission sera prise en compte" -g 100

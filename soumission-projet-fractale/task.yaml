@@ -1,0 +1,32 @@
+accessible: 2018-04-30 11:30:28/2018-05-11 18:00:00
+author: Quentin De Coninck
+context: |-
+    Cette tâche vous permet de soumettre votre projet. Elle va également valider le format de votre archive, la présence des fichiers requis, la présence des cibles requises dans votre Makefile et la bonne compilation de votre projet. Le format requis est décrit dans l'énoncé disponible sur Moodle.
+
+    Votre archive doit respecter le format de nommage `fractal_NUMGroupe_NOM1_NOM2.zip`. **Un seul des deux membres du groupe doit soumettre.**
+
+    La dernière soumission **valide** sera considérée pour l'évaluation. En l'absence de telle soumission (donc si votre soumission comporte une erreur), votre projet **ne sera pas considéré pour l'évaluation**.
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '15'
+name: Soumission du projet fractale
+network_grading: false
+problems:
+    soumission:
+        name: Soumettez ici l'archive du projet
+        type: file
+        allowed_exts:
+        - .zip
+        max_size: 10485760
+        header: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
