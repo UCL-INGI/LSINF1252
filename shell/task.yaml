@@ -33,8 +33,8 @@ problems:
         language: c
     run_pipe:
         type: code
-        name: Pipe
         language: c
+        name: Pipe
         header: |-
             L’opérateur ``|`` est appelé ``pipe`` (ce qui devrait vous aider à trouver
             une fonction utile pour répondre à cette question…). Il permet de connecter
