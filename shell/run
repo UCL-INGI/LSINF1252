@@ -5,8 +5,8 @@ getinput run_pipe > run_pipe.h
 getinput run_and > run_and.h
 getinput run_redirected > run_redirected.h
 
-CFLAGS+="-Werror -I./adds/"
-LDFLAGS+="-L./adds/"
+CFLAGS+="-Iadds/"
+LDFLAGS+="-Ladds/"
 
 export CFLAGS
 export LDFLAGS
