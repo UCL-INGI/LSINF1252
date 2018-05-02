@@ -11,27 +11,30 @@ context: |+
         </p>
 
 environment: cpp
+evaluate: best
 groups: false
+input_random: '0'
 limits:
-    memory: '512'
-    output: '5210'
     time: '10'
+    output: '5210'
+    memory: '512'
 name: Écrire un shell
 network_grading: false
 order: 56
 problems:
     run_command:
+        type: code
+        name: Exécution simple
         header: |-
             Écrivez le corps de la fonction ``int run_command(const char *path, char *
             const argv[])`` qui lance l’exécutable qui se trouve dans ``path`` avec les
             arguments stockés dans ``argv``, et renvoie le code de retour de la commande
             qui a été exécutée.
         language: c
-        type: code
-        name: Exécution simple
     run_pipe:
-        language: c
+        type: code
         name: Pipe
+        language: c
         header: |-
             L’opérateur ``|`` est appelé ``pipe`` (ce qui devrait vous aider à trouver
             une fonction utile pour répondre à cette question…). Il permet de connecter
@@ -44,9 +47,10 @@ problems:
             ``argv_a`` et un processus B (qui utilise ``path_b`` et ``argv_b``) en
             connectant la sortie du processus A à l’entrée d’un processus B. La fonction
             doit renvoyer le code de retour du processus B.
-        type: code
     run_and:
+        name: ET logique
         language: c
+        type: code
         header: |-
             L’opérateur ``&&`` peut servir de ET logique en shell. Il permet de
             n’exécuter une commande que si le code de retour d’une autre commande est
@@ -57,12 +61,9 @@ problems:
             processus A (comme dans la question précédente) puis, si le code de retour
             est égal à 0, un processus B (à nouveau comme dans la question précédente) et
             renvoie le code de retour du processus B, ou celui de A s’il n’est pas nul.
-        type: code
-        name: ET logique
     run_redirected:
-        type: code
         name: Rediriger la sortie
-        language: c
+        type: code
         header: |-
             Parfois, il est utile de rediriger la sortie standard vers un fichier pour
             sauvegarder le résultat d’une commande. Cela peut se faire en utilisant la
@@ -78,4 +79,10 @@ problems:
 
             Si le fichier ``output_path`` existe déjà, la fonction doit remplacer son
             contenu par la sortie de la commande.
+        language: c
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
 weight: 1.0
