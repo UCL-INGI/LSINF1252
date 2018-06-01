@@ -1,6 +1,6 @@
 CC=gcc
 EXEC=tests
-LDFLAGS=-lcunit -Wl,-wrap=fork -Wl,-wrap=waitpid -Wl,-wrap=open -Wl,-wrap=dup2 -Wl,-wrap=system
+LDFLAGS=-lcunit -Wl,-wrap=fork -Wl,-wrap=waitpid -Wl,-wrap=open -Wl,-wrap=fopen -Wl,-wrap=dup2 -Wl,-wrap=system
 #SRC=$(wildcard code/*.c)
 SRC = $(filter-out code/code.c, $(wildcard code/*.c))
 OBJ=$(SRC:.c=.o)

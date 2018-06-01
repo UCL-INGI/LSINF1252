@@ -46,6 +46,7 @@ pid_t __real_waitpid(pid_t pid, int *status, int options);
 
 int __real_open(const char *path, int oflag, mode_t mode);
 int __real_dup2(int fildes, int fildes2);
+FILE* __real_fopen(const char *restrict pathname, const char *restrict mode);
 
 /* wrapping write function */
 
@@ -62,6 +63,15 @@ int __wrap_open(const char *path, int oflag, mode_t mode) {
   }
   global_open++;
   return __real_open(path,oflag, mode);
+}
+
+FILE* __wrap_fopen(const char *restrict pathname, const char *restrict mode) {
+
+  if(fail_open) {
+    return NULL;
+  }
+  global_open++;
+  return __real_fopen(pathname, mode);
 }
 
 // pour compter dup2, on doit passer par un fichier car dup2 est exécuté
