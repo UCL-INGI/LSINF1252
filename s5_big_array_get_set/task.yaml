@@ -15,15 +15,16 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    output: '2'
-    time: '30'
     memory: '50'
+    time: '30'
+    output: '2'
 name: '[S5] Get and set on array stored in binary file '
 network_grading: false
 order: 48
 problems:
     q1:
         type: code
+        name: Retrieve the element at a given index
         header: |-
             .. code-block:: c
 
@@ -35,10 +36,11 @@ problems:
                  *       return -2 if index >= length of array.
                  */
                 int get(char *filename, int index) {
-        name: Retrieve the element at a given index
+        default: ''
         language: c
     q2:
         type: code
+        language: c
         header: |-
             .. code-block:: c
 
@@ -49,7 +51,7 @@ problems:
                  *       do nothing in case of errors
                  */
                 void set(char *filename, int index, int value) {
-        language: c
+        default: ''
         name: Change the value at a given index
 stored_submissions: 0
 submission_limit:
@@ -57,111 +59,111 @@ submission_limit:
     period: -1
 tags:
     '0':
-        id: close
-        description: This tag validate that your close are correctly performed.
         visible: true
-        name: Close
         type: 0
+        description: This tag validate that your close are correctly performed.
+        name: Close
+        id: close
     '1':
-        id: open
-        visible: true
         type: 0
         name: Open
+        visible: true
+        id: open
         description: This tag validate you are able to open a file.
     '10':
-        type: 1
-        description: The get() function did not return the expected value.
-        id: wrong_get_value_returned
-        name: Wrong Get Value Returned
         visible: true
-    '11':
-        description: Your code exceeds the maximum allowed time.
-        type: 1
-        visible: true
-        name: Timeout
-        id: timeout
-    '12':
-        id: oob
-        visible: true
-        type: 1
-        name: Out of bounds
-        description: You try to read outside of the array.
-    '13':
-        visible: true
-        description: You call the read or write function more than necessary.
-        type: 1
-        id: too_many_op
-        name: Too many read/write
-    '14':
-        description: ''
-        visible: true
-        type: 1
-        name: Segmentation Fault
-        id: sigsegv
-    '15':
-        type: 1
-        id: banned_funcs
-        name: Banned functions
-        visible: true
-        description: You use some banned functions.
-    '2':
-        description: Your code produced a double free.
-        name: Double free
-        type: 1
-        visible: true
-        id: double_free
-    '3':
-        description: You do not manage failures properly.
-        name: Failure handling
-        type: 1
-        id: failure_handling
-        visible: true
-    '4':
         id: sigfpe
-        visible: true
-        description: ''
         name: Floating Point Exception
+        description: ''
         type: 1
-    '5':
-        type: 1
-        id: memory
+    '11':
+        visible: true
         description: ''
         name: Memory Exceeded
-        visible: true
-    '6':
+        id: memory
+        type: 1
+    '12':
         description: You code do not compile.
+        visible: true
         id: not_compile
         type: 1
         name: Not compile
-        visible: true
-    '7':
-        description: You have modified the original file.
+    '13':
+        id: original_modif
         type: 1
         name: Original file modified
-        id: original_modif
+        description: You have modified the original file.
         visible: true
-    '8':
-        visible: true
+    '14':
         id: wrong_set_value
         description: The value written in the file has not the correct value.
-        type: 1
         name: Wrong Set Value
-    '9':
-        id: wrong_index_set
-        name: Wrong Index Set
+        type: 1
+        visible: true
+    '15':
+        visible: true
         description: A value at an unwanted index was modified.
         type: 1
+        id: wrong_index_set
+        name: Wrong Index Set
+    '2':
+        id: wrong_get_value_returned
+        visible: true
+        type: 1
+        name: Wrong Get Value Returned
+        description: The get() function did not return the expected value.
+    '3':
+        type: 1
+        visible: true
+        description: Your code exceeds the maximum allowed time.
+        name: Timeout
+        id: timeout
+    '4':
+        description: You try to read outside of the array.
+        name: Out of bounds
+        id: oob
+        visible: true
+        type: 1
+    '5':
+        id: too_many_op
+        name: Too many read/write
+        description: You call the read or write function more than necessary.
+        visible: true
+        type: 1
+    '6':
+        name: Segmentation Fault
+        id: sigsegv
+        description: ''
+        type: 1
+        visible: true
+    '7':
+        id: banned_funcs
+        type: 1
+        name: Banned functions
+        visible: true
+        description: You use some banned functions.
+    '8':
+        name: Double free
+        type: 1
+        id: double_free
+        description: Your code produced a double free.
+        visible: true
+    '9':
+        id: failure_handling
+        type: 1
+        description: You do not manage failures properly.
+        name: Failure handling
         visible: true
     '16':
-        visible: true
-        type: 2
         description: ''
+        visible: true
         name: File
+        type: 2
         id: ''
     '17':
-        visible: true
-        name: S5
         description: ''
+        name: S5
+        visible: true
         type: 2
         id: ''
 weight: 1.0
