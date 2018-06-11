@@ -1194,6 +1194,5 @@ void test_reinsert_last(){
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS(free);
     RUN(test_compare_equals, test_compare_greater, test_compare_smaller,test_empty_list, test_empty_list_fail, test_insert_first_cresc, test_insert_first_fails, test1_insert_middle_cresc, test2_insert_middle_cresc, test1_insert_middle_fails, test1_insert_last_cresc,test2_insert_last_cresc, test1_insert_last_fails, test_insert_first_decresc, test1_insert_middle_decresc, test2_insert_middle_decresc, test1_insert_last_decresc, test2_insert_last_decresc,test_reinsert_first,test_reinsert_middle,test_reinsert_last);
 }
