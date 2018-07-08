@@ -3,7 +3,7 @@
 cd "$(dirname "$0")"
 DIRS=`ls -d */`
 
-git clone https://github.com/Zashas/CTester.git
+git clone https://github.com/UCL-INGI/CTester.git
 
 for dir in $DIRS; do
     ls $dir".no_ctester" &> /dev/null
