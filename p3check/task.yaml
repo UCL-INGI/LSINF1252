@@ -1,0 +1,30 @@
+accessible: 2018-07-16 15:15:27/2018-08-13 01:00:00
+author: ''
+context: Cette tâche permet de vérifier la validité de l'archive à soumettre pour
+    le projet de seconde session sur les matrices creuses. Une archive ne passant
+    pas le test ne sera pas corrigée.
+environment: cpp
+evaluate: last
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: Soumission du projet de seconde session
+network_grading: false
+problems:
+    p1archive:
+        allowed_exts:
+        - .tar.gz
+        header: Uploadez l'archive de votre projet. Elle doit être nommée NOMA.tar.gz,
+            contenir un répertoire NOMA, lui-même contenant les fichiers matrix.h,
+            matrix.c, test.c, report.pdf et Makefile.
+        type: file
+        name: Archive
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
