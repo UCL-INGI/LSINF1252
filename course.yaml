@@ -17,6 +17,10 @@ tutors:
 - ody
 - dimidschstei
 - aclarembeau
+- rousseauxt
+- tascongutier
+- jvlaeminck
+- silardinois
 groups_student_choice: true
 use_classrooms: true
 allow_unregister: true
@@ -29,3 +33,4 @@ registration_ac_list:
 is_lti: false
 lti_keys: {}
 lti_send_back_grade: false
+description: ''
