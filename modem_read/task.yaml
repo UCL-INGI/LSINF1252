@@ -9,16 +9,16 @@ context: |-
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
-    output: '2'
     time: '30'
     memory: '100'
+    output: '2'
 name: '[S3] Reading from the wire '
 network_grading: false
 order: 32
 problems:
     modem:
-        name: '42'
         header: |-
             You want to know if the information that you received from the modem you received contains a byte whose numerical value is ``42``.
             Write the body of the function ``has_42``, this function has to use ``malloc`` to create the buffer before calling ``modem_read``:
@@ -30,65 +30,67 @@ problems:
                  *         else 0, -1 if an error has happened.
                  */
                 int has_42() {
-        type: code
         language: c
+        type: code
+        name: '42'
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: 12
     period: 1
 tags:
     '0':
-        name: Timeout
-        type: 1
         id: timeout
+        type: 1
+        name: Timeout
         description: Your code exceeds the maximum allowed time.
         visible: true
     '1':
+        name: Segmentation Fault
         description: ''
         visible: true
         id: sigsegv
         type: 1
-        name: Segmentation Fault
     '2':
-        visible: true
-        type: 1
         id: not_compile
-        name: Not compile
         description: You code does not compile.
+        type: 1
+        visible: true
+        name: Not compile
     '3':
         id: memory
-        type: 1
-        visible: true
         description: ''
+        visible: true
         name: Memory Exceeded
+        type: 1
     '4':
         description: ''
-        visible: true
         id: sigfpe
+        type: 1
         name: Floating Point Exception
-        type: 1
-    '5':
         visible: true
-        type: 1
+    '5':
         description: Your code produced a double free.
-        name: Double free
+        type: 1
         id: double_free
+        name: Double free
+        visible: true
     '6':
         visible: true
-        id: banned_funcs
         name: Banned functions
-        type: 1
         description: You use some banned functions.
+        type: 1
+        id: banned_funcs
     '7':
         type: 2
         visible: true
-        description: ''
         name: S3
+        description: ''
         id: ''
     '8':
         description: Task about pointers and their use
-        type: 2
         name: Pointer
         visible: true
+        type: 2
         id: ''
 weight: 1.0

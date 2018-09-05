@@ -30,6 +30,8 @@ void test_42_right1() {
     CU_ASSERT_EQUAL(ret,1);
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     CU_ASSERT_EQUAL(stats.free.called,1);
+    if(ret == 0)
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
     if(stats.malloc.called > 1 || stats.free.called > 1)
         push_info_msg(_("Why do you use malloc or free more then once"));
 
@@ -60,6 +62,10 @@ void test_42_left1() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
+    
+    if(ret == 0){
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
+    }
 
     if (stats.malloc.called != 1) {
         CU_FAIL();
@@ -103,6 +109,10 @@ void test_42_right2() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
+    
+    if(ret == 0){
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
+    }
 
     if (stats.malloc.called != 1) {
         CU_FAIL();
@@ -148,6 +158,10 @@ void test_42_left2() {
 
 
     CU_ASSERT_EQUAL(ret,1);
+    
+    if(ret == 0){
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
+    }
 
     if (stats.malloc.called != 1) {
         CU_FAIL();
