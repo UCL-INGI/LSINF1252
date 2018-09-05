@@ -30,10 +30,10 @@ void test_42_right1() {
     CU_ASSERT_EQUAL(ret,1);
     CU_ASSERT_EQUAL(stats.malloc.called,1);
     CU_ASSERT_EQUAL(stats.free.called,1);
-    if(ret == 0)
-        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
     if(stats.malloc.called > 1 || stats.free.called > 1)
         push_info_msg(_("Why do you use malloc or free more then once"));
+    else if(ret == 0)
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
 
     free_trap(p,64);
 }
@@ -62,10 +62,6 @@ void test_42_left1() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
-    
-    if(ret == 0){
-        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
-    }
 
     if (stats.malloc.called != 1) {
         CU_FAIL();
@@ -75,6 +71,10 @@ void test_42_left1() {
     if (stats.free.called != 1) {
         CU_FAIL();
         push_info_msg(_("You didn't call free() once."));
+    }
+    
+    else if(ret == 0){
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
     }
 
     if (stats.malloc.last_params.size != 256) {
@@ -109,10 +109,6 @@ void test_42_right2() {
     SANDBOX_END;
 
     CU_ASSERT_EQUAL(ret,1);
-    
-    if(ret == 0){
-        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
-    }
 
     if (stats.malloc.called != 1) {
         CU_FAIL();
@@ -122,6 +118,10 @@ void test_42_right2() {
     if (stats.free.called != 1) {
         CU_FAIL();
         push_info_msg(_("You didn't call free() once."));
+    }
+    
+    else if(ret == 0){
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
     }
 
     if (stats.malloc.last_params.size != 256) {
@@ -158,10 +158,6 @@ void test_42_left2() {
 
 
     CU_ASSERT_EQUAL(ret,1);
-    
-    if(ret == 0){
-        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
-    }
 
     if (stats.malloc.called != 1) {
         CU_FAIL();
@@ -171,6 +167,10 @@ void test_42_left2() {
     if (stats.free.called != 1) {
         CU_FAIL();
         push_info_msg(_("You didn't call free() once."));
+    }
+    
+    else if(ret == 0){
+        push_info_msg("Make sure to go through the buffer to find 42 and to return 1");
     }
 
     if (stats.malloc.last_params.size != 256) {
