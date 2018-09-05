@@ -6,6 +6,7 @@ context: |-
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
     time: '120'
     memory: '100'
@@ -15,8 +16,8 @@ network_grading: false
 order: 52
 problems:
     count:
+        default: ''
         type: code
-        name: count
         header: |-
             Ecrivez une fonction qui permet de compter le nombre de fois qu'un caractère est présent dans un fichier sans jamais utiliser l'appel système read.
 
@@ -33,9 +34,11 @@ problems:
             #include <unistd.h>
 
             ``int count(char *filename, char c) {``
+        name: count
         language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
+tags: {}
 weight: 1.0
