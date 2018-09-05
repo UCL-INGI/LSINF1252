@@ -7,8 +7,8 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S2] Palindrome'
 network_grading: false
@@ -16,8 +16,10 @@ order: 12
 problems:
     q1:
         type: code
+        name: ''
+        language: c
         header: |-
-            Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces.** An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
+            Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces.** For example, "k ay ak" should be considered a palindrome. An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
 
             .. code-block:: c
 
@@ -26,59 +28,58 @@ problems:
                 * @return: returns true (1) if str is a palindrome, -1 if str is NULL, otherwise false (0).
                 */
                 int pal(char *str) {
-        name: ''
-        language: c
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
         type: 1
-        visible: true
+        id: timeout
         name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        visible: true
     '1':
         visible: true
-        description: ''
-        id: sigsegv
-        type: 1
         name: Segmentation Fault
+        id: sigsegv
+        description: ''
+        type: 1
     '2':
-        description: You code does not compile.
         name: Not compile
         id: not_compile
-        type: 1
         visible: true
+        type: 1
+        description: You code does not compile.
     '3':
-        visible: true
-        name: Memory Exceeded
         id: memory
+        name: Memory Exceeded
         type: 1
         description: ''
+        visible: true
     '4':
-        id: sigfpe
+        visible: true
         description: ''
-        visible: true
-        type: 1
         name: Floating Point Exception
-    '5':
         type: 1
-        id: double_free
-        description: Your code produced a double free.
-        name: Double free
+        id: sigfpe
+    '5':
         visible: true
+        id: double_free
+        name: Double free
+        type: 1
+        description: Your code produced a double free.
     '6':
-        description: You use some banned functions.
+        name: Banned functions
+        type: 1
         id: banned_funcs
         visible: true
-        type: 1
-        name: Banned functions
+        description: You use some banned functions.
     '7':
-        description: ''
-        name: S2
-        visible: true
         type: 2
+        name: S2
+        description: ''
+        visible: true
         id: ''
 weight: 1.0
