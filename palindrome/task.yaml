@@ -19,7 +19,7 @@ problems:
         name: ''
         language: c
         header: |-
-            Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces.** For example, "k ay ak" should be considered a palindrome. An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
+            Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces:** for example, "kay a k" should be considered a palindrome. An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*
 
             .. code-block:: c
 

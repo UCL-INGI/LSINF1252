@@ -30,7 +30,7 @@ void test_myfunc_ret()
 	ret1 = main2(5, argv1);
 	SANDBOX_END;
 	read(stdout_cpy, buf, 16);
-	if (strncmp("a ihuqfiudshfsi ", buf, 16)) {
+	if (!strncmp("a ihuqfiudshfsi ", buf, 16)) {
 		CU_FAIL("");
 		push_info_msg(_("Your function output the wrong string when 4 arguments are provided. Be sure not to have a space after the last argument"));
 	}
@@ -47,7 +47,7 @@ void test_myfunc_ret()
 	SANDBOX_END;
 
 	read(stdout_cpy, buf, 13);
-	if (strncmp("a kujsvglqiu ", buf, 13)) {
+	if (!strncmp("a kujsvglqiu ", buf, 13)) {
 		CU_FAIL("");
 		push_info_msg(_("Your function output the wrong string when 3 arguments are provided. Be sure not to have a space after the last argument"));
 	}
@@ -74,7 +74,7 @@ void test_myfunc_ret()
 	SANDBOX_END;
 
 	read(stdout_cpy, buf, 2);
-	if (strncmp("a ", buf, 2)) {
+	if (!strncmp("a ", buf, 2)) {
 		CU_FAIL("");
 		push_info_msg(_("Your function output the wrong string when 2 arguments are provided. Be sure not to have a space after the last argument"));
 	}
@@ -90,7 +90,7 @@ void test_myfunc_ret()
 	SANDBOX_END;
 
 	read(stdout_cpy, buf, 11);
-	if (strncmp("kujsvglqiu ", buf, 11)) {
+	if (!strncmp("kujsvglqiu ", buf, 11)) {
 		CU_FAIL("");
 		push_info_msg(_("Your function output the wrong string when 1 arguments are provided. Be sure not to have a space after the last argument"));
 	}
