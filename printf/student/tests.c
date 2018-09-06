@@ -24,7 +24,7 @@ void test_digit() {
     print_digit(21);
     SANDBOX_END;
     
-    char* the_magic_NUMBER = "The magic number is NUMBER\n";
+    char* the_magic_NUMBER = "The magic number is NUMBER.\n";
 
     char buf[24];
     int n = read(stdout_cpy, buf, 24);
