@@ -1,8 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include <unistd.h>
 #include "student_code.h"
 
-void* sleep_malloc(size_t s){
-    @@sleep_malloc@@
+int free_all(university_t* u){
+    @@free_all@@
 }

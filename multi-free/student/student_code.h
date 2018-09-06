@@ -1,1 +1,1 @@
-void* sleep_malloc(size_t s);
+int free_all(university_t* u);
