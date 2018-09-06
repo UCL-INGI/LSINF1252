@@ -6,21 +6,24 @@ context: |-
     Given a file containing arbitrary bytes, you must write a function that copies the file. Obviously, your function cannot modify the content of the original file. Beware that the copied file should have the same permissions as the original file.
 
     Use only ``open(2)``, ``read(2)``, ``write(2)``, ``stat(2)`` and ``close(2)``.
+
+    *Hint: you need to go through the file to copy all of it.*
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
 limits:
-    output: '2'
     time: '30'
     memory: '100'
+    output: '2'
 name: '[S5] File copy '
 network_grading: false
 order: 50
 problems:
     q1:
+        language: c
+        default: ''
         name: ''
-        type: code
         header: |-
             Write here the body of the function
 
@@ -34,100 +37,100 @@ problems:
                  *       return 0 if the function terminates with success, -1 in case of errors.
                  */
                 int copy(char *file_name, char *new_file_name) {
-        language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 0
-        id: close
         description: This tag validate that your close are correctly performed.
-        visible: true
         name: Close
+        id: close
+        type: 0
+        visible: true
     '1':
         type: 0
-        visible: true
-        id: permission
         description: This tag validate that you are able to copy permission of a file.
+        id: permission
         name: Permission
+        visible: true
     '2':
+        id: copy
         description: This tag validate you are able to copy a file.
         name: Copy
-        type: 0
         visible: true
-        id: copy
+        type: 0
     '3':
-        name: Open
-        type: 0
-        id: open
-        visible: true
         description: This tag validate you are able to open a file.
+        visible: true
+        id: open
+        type: 0
+        name: Open
     '10':
-        type: 1
-        description: ''
-        visible: true
-        name: Floating Point Exception
-        id: sigfpe
-    '11':
-        description: ''
-        visible: true
-        name: Segmentation Fault
-        type: 1
-        id: sigsegv
-    '12':
-        id: banned_funcs
-        visible: true
-        type: 1
-        name: Banned functions
-        description: You use some banned functions.
-    '4':
-        id: memory
-        visible: true
-        description: ''
-        type: 1
-        name: Memory Exceeded
-    '5':
-        type: 1
-        id: not_compile
-        description: You code does not compile.
-        name: Not compile
-        visible: true
-    '6':
-        id: double_free
-        type: 1
-        name: Double free
-        description: Your code produced a double free.
-        visible: true
-    '7':
         id: timeout
-        description: Your code exceeds the maximum allowed time.
         name: Timeout
         type: 1
+        description: Your code exceeds the maximum allowed time.
         visible: true
-    '8':
+    '11':
+        id: original_modif
+        type: 1
         visible: true
         name: Original file modified
-        id: original_modif
         description: You have modified the original file.
-        type: 1
-    '9':
-        id: failure_handling
-        name: Failure handling
+    '12':
         description: You do not manage failures during the copy properly.
+        id: failure_handling
+        visible: true
+        name: Failure handling
+        type: 1
+    '4':
+        description: ''
+        name: Floating Point Exception
+        type: 1
+        id: sigfpe
+        visible: true
+    '5':
+        type: 1
+        name: Segmentation Fault
+        description: ''
+        id: sigsegv
+        visible: true
+    '6':
+        description: You use some banned functions.
         type: 1
         visible: true
+        id: banned_funcs
+        name: Banned functions
+    '7':
+        type: 1
+        name: Memory Exceeded
+        description: ''
+        id: memory
+        visible: true
+    '8':
+        description: You code does not compile.
+        id: not_compile
+        visible: true
+        type: 1
+        name: Not compile
+    '9':
+        name: Double free
+        id: double_free
+        type: 1
+        visible: true
+        description: Your code produced a double free.
     '13':
         visible: true
         description: ''
-        type: 2
         name: File
+        type: 2
         id: ''
     '14':
         description: ''
+        name: S5
         visible: true
         type: 2
-        name: S5
         id: ''
 weight: 1.0
