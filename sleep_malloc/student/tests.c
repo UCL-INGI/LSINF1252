@@ -72,6 +72,7 @@ void test_fail_first() {
     if(stats.sleep.last_arg != 5){
         char string_sleep[70];
         sprintf(string_sleep, "You did you call sleep for %d seconds ? It should be 5 !", stats.sleep.last_arg);
+        push_info_msg(string_sleep);
     }
 
     free(ret);
@@ -110,6 +111,12 @@ void test_fail_twice() {
 
     CU_ASSERT_EQUAL(stats.sleep.called,2)
     if(stats.sleep.called > 2) push_info_msg(_("Why did you call sleep more then once per loop?"));
+    
+    if(stats.sleep.last_arg != 5){
+        char string_sleep[70];
+        sprintf(string_sleep, "You did you call sleep for %d seconds ? It should be 5 !", stats.sleep.last_arg);
+        push_info_msg(string_sleep);
+    }
 
     free(ret);
 }
@@ -147,6 +154,12 @@ void test_fail_five() {
 
     CU_ASSERT_EQUAL(stats.sleep.called,5)
     if(stats.sleep.called > 5) push_info_msg(_("Why did you call sleep more then once per loop?"));
+    
+    if(stats.sleep.last_arg != 5){
+        char string_sleep[70];
+        sprintf(string_sleep, "You did you call sleep for %d seconds ? It should be 5 !", stats.sleep.last_arg);
+        push_info_msg(string_sleep);
+    }
 
     free(ret);
 }
@@ -184,6 +197,12 @@ void test_fail_eight() {
 
     CU_ASSERT_EQUAL(stats.sleep.called,8)
     if(stats.sleep.called > 8) push_info_msg(_("Why did you call sleep more then once per loop?"));
+    
+    if(stats.sleep.last_arg != 5){
+        char string_sleep[70];
+        sprintf(string_sleep, "You did you call sleep for %d seconds ? It should be 5 !", stats.sleep.last_arg);
+        push_info_msg(string_sleep);
+    }
 
     free(ret);
 }
