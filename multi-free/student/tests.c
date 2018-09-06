@@ -45,6 +45,14 @@ university_t* init_u(person_t* rector, const char* city, int creation){
     return u;
 }
 
+int free_a(university_t* u){
+    free(u->rector->name);
+    free(u->rector);
+    free(u->city);
+    free(u);
+    return 0;
+}
+
 void test_success(){
     
     set_test_metadata("free_all", _("All the data correctly initialised"), 1);
@@ -80,8 +88,9 @@ void test_success(){
     }
     else{
         push_info_msg(_("Pas free totalemenjt"));
-        free_all(u);
     }
+    
+    free_a(u);
     
 }
 
