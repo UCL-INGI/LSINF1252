@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "student_code.h"
-#include "/CTester/CTester.h"
+#include "../CTester/CTester.h"
 
 person_t* init_p(char* name, int age, int salary){
     person_t *p = (person_t*)malloc(sizeof(person_t));
@@ -24,7 +24,7 @@ person_t* init_p(char* name, int age, int salary){
     return p;
 }
 
-university_t* init_u(person_t rector, const char* city, int creation){
+university_t* init_u(person_t* rector, const char* city, int creation){
     university_t *u = (university_t*)malloc(sizeof(university_t));
     if(u == NULL)
         return NULL;
@@ -34,9 +34,9 @@ university_t* init_u(person_t rector, const char* city, int creation){
 
     char* city = (char*)malloc(sizeof(char)*strlen(city));
     if(city == NULL){
+        free(u->p->name);
+        free(u->p);
         free(u);
-        free(p->name);
-        free(p);
         return NULL;
     }
     strncpy(new_city, city, strlen(city));
@@ -75,7 +75,8 @@ void test_success(){
     
     size_t freed_size = start - stats.memory.used;
     
-    CU_ASSER_EQUAL(freed_size, total_size);
+    CU_ASSERT_EQUAL(freed_size, total_size);
+    CU_ASSERT_EQUAL(ret,0);
     
     if(u == NULL){
         push_info_msg(_("Free totalement meme ici"));
