@@ -27,8 +27,8 @@ problems:
 
                 void print_foo() {
         default: ''
-        language: c
         name: Foo
+        language: c
     digit:
         language: c
         name: Digital
