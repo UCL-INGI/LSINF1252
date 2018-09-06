@@ -19,7 +19,7 @@ context: |-
             char* name;
             int salary;
             int age;
-        }
+        } person_t;
 
     The *name* and the *city* have been allocated with *malloc*.
 environment: cpp
