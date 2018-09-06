@@ -40,9 +40,9 @@ tags:
     '0':
         id: timeout
         type: 1
+        name: Timeout
         description: Your code exceeds the maximum allowed time.
         visible: true
-        name: Timeout
     '1':
         type: 1
         name: Segmentation Fault
@@ -81,8 +81,8 @@ tags:
         id: banned_funcs
     '7':
         type: 2
-        name: S3
         visible: true
+        name: S3
         description: ''
         id: ''
 weight: 1.0
