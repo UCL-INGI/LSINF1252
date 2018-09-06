@@ -128,7 +128,7 @@ with open("../task.yaml", 'r') as stream:
                 feedback.set_problem_result("failed", name)
                 feedback.set_problem_feedback("Votre réponse est incorrecte. (0/1 pts)", name, True)
                 if answer == 'pi = 3.1415':
-                    feedback.set_problem_feedback("Rappelez-vous que la fonction printf va arrondir le nombre.", name, True)
+                    feedback.set_problem_feedback("\nRappelez-vous que la fonction printf va arrondir le nombre.", name, True)
 
             total += 1
 
