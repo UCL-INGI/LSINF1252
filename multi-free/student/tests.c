@@ -97,7 +97,7 @@ void test_success(){
         push_info_msg(_("Pas free totalemenjt"));
     }
     
-    free_a(u);
+    //free_a(u);
     
 }
 
