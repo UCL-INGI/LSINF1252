@@ -82,6 +82,9 @@ void test_success(){
     
     CU_ASSERT_EQUAL(freed_size, total_size);
     CU_ASSERT_EQUAL(ret,0);
+    char message[10];
+    sprintf(message, "%lu : %lu", freed_size, total_size);
+    push_info_msg(message);
     
     if(u == NULL){
         push_info_msg(_("Free totalement meme ici"));
