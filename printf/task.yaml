@@ -7,15 +7,17 @@ context: In this exercise, you will familiarize yourself with the functions `pri
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S2] Printing data'
 network_grading: false
 order: 10
 problems:
     simple:
+        type: code
         header: |-
             The function `printf <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ writes data to the standard output stream (*stdout*).
 
@@ -24,10 +26,13 @@ problems:
             .. code-block:: c
 
                 void print_foo() {
-        name: Foo
-        type: code
+        default: ''
         language: c
+        name: Foo
     digit:
+        language: c
+        name: Digital
+        default: ''
         header: |-
             ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
 
@@ -40,9 +45,8 @@ problems:
                  */
                 void print_digit(int number) {
         type: code
-        name: Digital
-        language: c
     example:
+        answer: pi = 3.1416
         header: |
             ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
 
@@ -53,10 +57,9 @@ problems:
                 float PI = 3.1415926;
                 printf("pi = %.4f", PI);
         name: Floating away
-        answer: pi = 3.1416
         type: match
     sprintf:
-        language: c
+        default: ''
         header: |
             ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
 
@@ -71,6 +74,7 @@ problems:
                  */
                 void format_str(char *buffer, unsigned int d, char *name, char initial) {
         type: code
+        language: c
         name: sprintf
 stored_submissions: 0
 submission_limit:
@@ -78,51 +82,51 @@ submission_limit:
     period: -1
 tags:
     '0':
-        description: Your code exceeds the maximum allowed time.
+        visible: true
         name: Timeout
-        visible: true
-        type: 1
+        description: Your code exceeds the maximum allowed time.
         id: timeout
+        type: 1
     '1':
-        description: ''
         type: 1
-        id: sigsegv
-        visible: true
         name: Segmentation Fault
-    '2':
-        name: Not compile
-        description: You code does not compile.
-        type: 1
-        visible: true
-        id: not_compile
-    '3':
-        type: 1
-        id: memory
-        visible: true
         description: ''
+        visible: true
+        id: sigsegv
+    '2':
+        id: not_compile
+        description: You code does not compile.
+        visible: true
+        name: Not compile
+        type: 1
+    '3':
+        id: memory
+        description: ''
+        visible: true
         name: Memory Exceeded
+        type: 1
     '4':
         description: ''
-        id: sigfpe
-        type: 1
-        visible: true
         name: Floating Point Exception
+        type: 1
+        id: sigfpe
+        visible: true
     '5':
+        type: 1
+        name: Double free
         description: Your code produced a double free.
         id: double_free
-        name: Double free
         visible: true
-        type: 1
     '6':
+        description: You use some banned functions.
         type: 1
+        visible: true
         id: banned_funcs
         name: Banned functions
-        description: You use some banned functions.
-        visible: true
     '7':
+        type: 2
         visible: true
         description: ''
-        type: 2
         name: S2
         id: ''
 weight: 1.0
