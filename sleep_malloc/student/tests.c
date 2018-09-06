@@ -20,9 +20,7 @@ void test_success() {
 
     size_t used_size = stats.memory.used - start;
     
-    if(stats.sleep.last_arg == 7){
-        push_info_msg(_("Why did you call sleep for 5000 seconds ?"));
-    }
+    push_info_msg("Real time: %d", stats.sleep.last_arg);
 
     CU_ASSERT_EQUAL(used_size, 16);
     if (used_size != 16)
