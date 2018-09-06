@@ -52,11 +52,6 @@ void test_fail_first() {
     SANDBOX_END;
 
     size_t used_size = stats.memory.used - start;
-    
-    char sss[20];
-    sprintf(sss,"Real time: %d", stats.sleep.last_arg);
-    
-    push_info_msg(sss);
 
     CU_ASSERT_EQUAL(used_size, 16);
     if (used_size != 16)
@@ -73,6 +68,11 @@ void test_fail_first() {
 
     CU_ASSERT_EQUAL(stats.sleep.called,1)
     if(stats.sleep.called > 1) push_info_msg(_("Why did you call sleep more then once per loop?"));
+    
+    if(stats.sleep.last_arg != 5){
+        char string_sleep[70];
+        sprintf(string_sleep, "You did you call sleep for %d seconds ? It should be 5 !", stats.sleep.last_arg);
+    }
 
     free(ret);
 }
