@@ -57,6 +57,8 @@ void test_success(){
     
     set_test_metadata("free_all", _("All the data correctly initialised"), 1);
     
+    size_t start = stats.memory.used;
+    
     char* rector_name = "Vincent Blondel";
     char* city_name = "Louvain-la-Neuve";
     
@@ -72,14 +74,11 @@ void test_success(){
     
     int ret = -2;
     
-    size_t start = stats.memory.used;
-    
     monitored.free = true;
     
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
-    //free_a(u);
     
     monitored.free = false;
     
@@ -98,7 +97,6 @@ void test_success(){
         push_info_msg(_("Pas free totalemenjt"));
     }
     
-    free_a(u);
     
 }
 
