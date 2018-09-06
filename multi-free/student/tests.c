@@ -55,7 +55,7 @@ int free_a(university_t* u){
 
 void test_success(){
     
-    set_test_metadata("free_all", _("All the data correctly initialised"), 1);
+    set_test_metadata("free_all", _("Testing in a normal case"), 1);
     
     char* rector_name = "Vincent Blondel";
     char* city_name = "Louvain-la-Neuve";
@@ -69,37 +69,24 @@ void test_success(){
     if(u == NULL)
         return;
     
-    int total_size = sizeof(u) + sizeof(p) + sizeof(rector_name) + sizeof(city_name);
-    
     int ret = -2;
     
     monitored.free = true;
-    
-    int start = stats.memory.used;
-    
     
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
     
-    
-    int freed_size = -(start - stats.memory.used);
-    
     monitored.free = false;
     
-    //CU_ASSERT_EQUAL(freed_size, total_size);
     CU_ASSERT_EQUAL(ret,0);
-    char message[10];
-    sprintf(message, "%d : %d", freed_size, total_size);
-    push_info_msg(message);
-    
-    if(u == NULL){
-        push_info_msg(_("Free totalement meme ici"));
+    if(ret != 0){
+        push_info_msg("You should return 0 in a normal case");
     }
-    else{
-        push_info_msg(_("Pas free totalemenjt"));
+    int free_called = stats.free.called;
+    if(free_called != 4){
+        push_info_msg("Hahahah");
     }
-    
     
 }
 
