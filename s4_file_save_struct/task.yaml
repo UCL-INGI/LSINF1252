@@ -15,21 +15,23 @@ context: |-
 
     Use only ``open(2)``, ``write(2)`` and ``close(2)``. You can only call ``write(2)`` once.
 
-    Hint : read carefully the man page of ``open(2)`` to manage all the  cases mentionned above.
+    Hint : read carefully the man page of ``open(2)`` to manage all the  cases mentionned above. Be sure to open the file with the appropriate rights.
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S5] Save struct into file'
 network_grading: false
 order: 49
 problems:
     q1:
         language: c
-        type: code
+        default: ''
+        name: ''
         header: |-
             .. code-block:: c
 
@@ -44,78 +46,78 @@ problems:
                  *       -3 if close() failed.
                  */
                 int save(point_t *pt, int size, char *filename) {
-        name: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: open
-        name: Open
-        visible: true
         description: This tag validate you are able to open a file.
+        name: Open
+        id: open
         type: 0
+        visible: true
     '1':
-        id: close
-        description: This tag validate that your close are correctly performed.
         type: 0
-        visible: true
+        description: This tag validate that your close are correctly performed.
         name: Close
+        visible: true
+        id: close
     '10':
+        id: memory
+        name: Memory Exceeded
+        type: 1
         visible: true
-        id: sigfpe
-        name: Floating Point Exception
         description: ''
-        type: 1
     '2':
+        id: sigfpe
+        description: ''
+        name: Floating Point Exception
+        visible: true
         type: 1
-        visible: true
-        id: double_free
-        description: Your code produced a double free.
-        name: Double free
     '3':
+        description: Your code produced a double free.
         visible: true
-        description: You use some banned functions.
-        id: banned_funcs
-        name: Banned functions
+        name: Double free
+        id: double_free
         type: 1
     '4':
+        description: You use some banned functions.
+        name: Banned functions
         type: 1
+        id: banned_funcs
         visible: true
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
     '5':
+        type: 1
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+        visible: true
+    '6':
+        description: ''
         type: 1
         visible: true
         id: sigsegv
-        description: ''
         name: Segmentation Fault
-    '6':
-        description: You call the read or write function more than necessary.
-        name: Too many read/write
-        type: 1
-        visible: true
-        id: too_many_op
     '7':
-        name: Failure handling
         type: 1
-        id: failure_handling
+        name: Too many read/write
+        description: You call the read or write function more than necessary.
+        id: too_many_op
+        visible: true
+    '8':
         visible: true
         description: You do not manage failures properly during write operations.
-    '8':
-        id: not_compile
+        type: 1
+        name: Failure handling
+        id: failure_handling
+    '9':
         name: Not compile
+        id: not_compile
+        type: 1
         visible: true
         description: You code do not compile.
-        type: 1
-    '9':
-        id: memory
-        visible: true
-        description: ''
-        name: Memory Exceeded
-        type: 1
     '11':
         type: 2
         visible: true
@@ -123,9 +125,9 @@ tags:
         description: ''
         id: ''
     '12':
-        type: 2
         description: ''
-        visible: true
         name: File
+        visible: true
+        type: 2
         id: ''
 weight: 1.0
