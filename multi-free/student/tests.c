@@ -49,22 +49,46 @@ void test_success(){
     
     set_test_metadata("free_all", _("All the data correctly initialised"), 1);
     
-    person_t* p = init_p("Vincent Blondel", 53, 6000);
+    char* rector_name = "Vincent Blondel";
+    char* city_name = "Louvain-la-Neuve";
+    
+    person_t* p = init_p(rector_name, 53, 6000);
     if(p == NULL)
         return;
     
-    university_t* u = init_u(p, "Louvain-la-Neuve", 1425);
+    university_t* u = init_u(p, city_name, 1425);
     if(u == NULL)
         return;
     
+    size_t total_size = sizeof(u) + sizeof(p) + sizeof(rector_name) + sizeof(city_name);
+    
     int ret = -2;
     
+    monitored.free = true;
+    failures.free = FAIL_NEVER;
     
+    size_t start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    ret = free_all(u);
+    SANDBOX_END;
+    
+    size_t freed_size = start - stats.memory.used;
+    
+    CU_ASSER_EQUAL(freed_size, total_size);
+    
+    if(u == NULL){
+        push_info_msg(_("Free totalement meme ici"));
+    }
+    else{
+        push_info_msg(_("Pas free totalemenjt"));
+        free_all(u);
+    }
     
 }
 
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success,test_fail_first,test_fail_twice,test_fail_five,test_fail_eight,test_fail_ten,test_fail_always);
+    RUN(test_success);
 }
