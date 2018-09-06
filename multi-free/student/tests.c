@@ -60,7 +60,6 @@ void test_success(){
     char* rector_name = "Vincent Blondel";
     char* city_name = "Louvain-la-Neuve";
     
-    int start = stats.memory.used;
     
     person_t* p = init_p(rector_name, 53, 6000);
     if(p == NULL)
@@ -76,14 +75,17 @@ void test_success(){
     
     monitored.free = true;
     
+    int start = stats.memory.used;
+    
     
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
     
-    monitored.free = false;
     
     int freed_size = -(start - stats.memory.used);
+    
+    monitored.free = false;
     
     //CU_ASSERT_EQUAL(freed_size, total_size);
     CU_ASSERT_EQUAL(ret,0);
