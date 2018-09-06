@@ -7,7 +7,7 @@ context: |-
 
     Use only ``open(2)``, ``read(2)``, ``write(2)``, ``stat(2)`` and ``close(2)``.
 
-    *Hint: you need to go through the file to copy all of it.*
+    *Hint: you may need to go through the file to copy all of it.*
 environment: cpp
 evaluate: best
 groups: false
