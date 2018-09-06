@@ -20,6 +20,8 @@ context: |-
             int salary;
             int age;
         }
+
+    The *name* and the *city* have been allocated with *malloc*.
 environment: cpp
 evaluate: best
 groups: false
@@ -34,7 +36,15 @@ problems:
     free_all:
         language: c
         type: code
-        header: ''
+        header: |-
+            Write the body of the function ``free_all``.
+
+            .. code-block:: c
+
+                /*
+                 * Frees all the memory associated with u
+                 * @return: -1 in case of failure, 0 otherwise
+                 */
         default: ''
         name: Free all
 stored_submissions: 0
