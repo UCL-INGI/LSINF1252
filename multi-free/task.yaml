@@ -5,21 +5,16 @@ context: |-
 
     .. code-block:: c
 
-        typedef struct bt{
-            struct node* root;
-        } bt_t;
-
-
-    .. code-block:: c
         typedef struct university {
             char* city;
             int  creation;
-            person_t rector;
+            person_t* rector;
         } university_t;
 
-    The structure *person_t* is the following
+    The structure *person_t* is the following:
 
     .. code-block:: c
+
         typedef struct person {
             char* name;
             int salary;
