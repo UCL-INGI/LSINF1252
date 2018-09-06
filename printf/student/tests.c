@@ -30,7 +30,7 @@ void test_digit() {
     int n = read(stdout_cpy, buf, 24);
     CU_ASSERT_EQUAL(n, 24);
     CU_ASSERT_TRUE(!strncmp(buf, "The magic number is 21.\n", 24));
-    if(!strncmp(buf, the_magic_NUMBER, 28)){
+    if(!strncmp(buf, the_magic_NUMBER, 24)){
         push_info_msg("You should replace NUMBER by the variable number");
     }
 
