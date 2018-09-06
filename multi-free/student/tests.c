@@ -57,10 +57,10 @@ void test_success(){
     
     set_test_metadata("free_all", _("All the data correctly initialised"), 1);
     
-    size_t start = stats.memory.used;
-    
     char* rector_name = "Vincent Blondel";
     char* city_name = "Louvain-la-Neuve";
+    
+    size_t start = stats.memory.used;
     
     person_t* p = init_p(rector_name, 53, 6000);
     if(p == NULL)
@@ -76,6 +76,7 @@ void test_success(){
     
     monitored.free = true;
     
+    
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
@@ -87,7 +88,7 @@ void test_success(){
     //CU_ASSERT_EQUAL(freed_size, total_size);
     CU_ASSERT_EQUAL(ret,0);
     char message[10];
-    sprintf(message, "%lu : %lu", freed_size, total_size);
+    sprintf(message, "%d : %d", freed_size, total_size);
     push_info_msg(message);
     
     if(u == NULL){
