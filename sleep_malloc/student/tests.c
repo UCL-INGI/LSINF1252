@@ -20,7 +20,10 @@ void test_success() {
 
     size_t used_size = stats.memory.used - start;
     
-    push_info_msg("Real time: %d", stats.sleep.last_arg);
+    char sss[20];
+    sprintf(sss,"Real time: %d", stats.sleep.last_return);
+    
+    push_info_msg(sss);
 
     CU_ASSERT_EQUAL(used_size, 16);
     if (used_size != 16)
