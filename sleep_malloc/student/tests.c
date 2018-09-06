@@ -19,6 +19,10 @@ void test_success() {
     SANDBOX_END;
 
     size_t used_size = stats.memory.used - start;
+    
+    if(stats.sleep.last_arg == 7){
+        push_info_msg(_("Why did you call sleep for 5000 seconds ?"));
+    }
 
     CU_ASSERT_EQUAL(used_size, 16);
     if (used_size != 16)
@@ -31,9 +35,6 @@ void test_success() {
     CU_ASSERT_EQUAL(stats.malloc.called,1)
     if(stats.malloc.called > 1) push_info_msg(_("Why did you call malloc more then once?"));
     
-    if(stats.sleep.last_arg == 5){
-        push_info_msg(_("Why did you call sleep for 5000 seconds ?"));
-    }
 
     free(ret);
 }
