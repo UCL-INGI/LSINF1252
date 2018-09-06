@@ -1,0 +1,43 @@
+accessible: false
+author: Louis Navarre
+context: |-
+    You are asked to implement the function ``free_all`` function, which will free all the memory associated with the following structure *university_t*:
+
+    .. code-block:: c
+        typedef struct university {
+            char* city;
+            int  creation;
+            person_t rector;
+        } university_t;
+
+    The structure *person_t* is the following
+
+    .. code-block:: c
+        typedef struct person {
+            char* name;
+            int salary;
+            int age;
+        }
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Beta] Multi-free'
+network_grading: false
+problems:
+    free_all:
+        language: c
+        type: code
+        header: ''
+        default: ''
+        name: Free all
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
