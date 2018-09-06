@@ -31,7 +31,7 @@ void test_digit() {
     CU_ASSERT_EQUAL(n, 24);
     CU_ASSERT_TRUE(!strncmp(buf, "The magic number is 21.\n", 24));
     if(!strncmp(buf, the_magic_NUMBER)){
-        push_info_msg("You should replace NUMBER by the variable number")
+        push_info_msg("You should replace NUMBER by the variable number");
     }
 
     SANDBOX_BEGIN;
