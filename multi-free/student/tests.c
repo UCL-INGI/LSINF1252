@@ -32,10 +32,10 @@ university_t* init_u(person_t* rector, const char* city, int creation){
     u->rector = rector;
     u->creation = creation;
 
-    char* city = (char*)malloc(sizeof(char)*strlen(city));
-    if(city == NULL){
-        free(u->p->name);
-        free(u->p);
+    char* new_city = (char*)malloc(sizeof(char)*strlen(city));
+    if(new_city == NULL){
+        free(u->rector->name);
+        free(u->rector);
         free(u);
         return NULL;
     }
@@ -63,9 +63,6 @@ void test_success(){
     size_t total_size = sizeof(u) + sizeof(p) + sizeof(rector_name) + sizeof(city_name);
     
     int ret = -2;
-    
-    monitored.free = true;
-    failures.free = FAIL_NEVER;
     
     size_t start = stats.memory.used;
     
