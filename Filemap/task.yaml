@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Olivier Bonaventure
 context: |-
     Parcourez un fichier sans jamais utiliser l'appel système read.
