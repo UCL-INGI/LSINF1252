@@ -59,7 +59,7 @@ void test_fail_first() {
 
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
     if(stats.sleep.last_arg != 5){
-        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more informations"));
+        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more information"));
     }
 
     CU_ASSERT_PTR_NOT_NULL(ret);
@@ -103,7 +103,7 @@ void test_fail_twice() {
 
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
     if(stats.sleep.last_arg != 5){
-        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more informations"));
+        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more information"));
     }
 
     CU_ASSERT_EQUAL(stats.malloc.called,3)
@@ -143,7 +143,7 @@ void test_fail_five() {
 
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
     if(stats.sleep.last_arg != 5){
-        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more informations"));
+        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more information"));
     }
 
     CU_ASSERT_EQUAL(stats.malloc.called,6)
@@ -183,7 +183,7 @@ void test_fail_eight() {
 
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
     if(stats.sleep.last_arg != 5){
-        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more informations"));
+        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more information"));
     }
 
     CU_ASSERT_EQUAL(stats.malloc.called,9)
@@ -221,7 +221,7 @@ void test_fail_ten() {
 
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
     if(stats.sleep.last_arg != 5){
-        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more informations"));
+        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more information"));
     }
 
     CU_ASSERT_EQUAL(stats.malloc.called,10)
@@ -257,7 +257,7 @@ void test_fail_always() {
 
     CU_ASSERT_EQUAL(stats.sleep.last_arg,5);
     if(stats.sleep.last_arg != 5){
-        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more informations"));
+        push_info_msg(_("You did not call sleep with the right time. See `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_ for more information"));
     }
 
     CU_ASSERT_EQUAL(stats.malloc.called,10)
