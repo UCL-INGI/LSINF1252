@@ -1,0 +1,39 @@
+accessible: false
+author: Louis Navarre
+context: |-
+    Le caractère '\\0' permet d'identifier la fin d'un *string* en C. Mais ce n'est pas pour autant que celui-ci ne peut pas aussi jouer le rôle d'un véritable caractère.
+
+    Dans cet exercice, complétez le corps de la fonction ``counting_zero``.
+
+    Vous ne pouvez utiliser aucune fonction de la librairie *string*.
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[Beta] Compter le nombre de ''\0'''
+network_grading: false
+problems:
+    counting_zero:
+        default: ''
+        type: code
+        language: c
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * @str: la chaine de caractere a traiter
+                 * @length: la longueur de la chaine de caractere
+                 * @return: le nombre d'occurences du caractere '\0'
+                 */
+                 int counting_zero(char* str, int length){
+        name: Compter le nombre de \0
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0
