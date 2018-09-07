@@ -24,7 +24,7 @@ limits:
     time: '30'
 name: '[S2] Bitwise operation: resetting the highest order bit '
 network_grading: false
-order: 22
+order: 21
 problems:
     q1:
         type: code

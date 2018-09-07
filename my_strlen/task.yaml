@@ -11,7 +11,7 @@ limits:
     time: '30'
 name: '[S2] My strlen - REVIEWED'
 network_grading: false
-order: 14
+order: 13
 problems:
     my_stlren:
         type: code

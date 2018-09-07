@@ -14,7 +14,7 @@ limits:
     output: '2'
 name: '[S2] Printing data'
 network_grading: false
-order: 13
+order: 12
 problems:
     simple:
         type: code

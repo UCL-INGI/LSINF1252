@@ -12,7 +12,7 @@ limits:
     time: '30'
 name: '[S2] Palindrome'
 network_grading: false
-order: 15
+order: 14
 problems:
     q1:
         type: code

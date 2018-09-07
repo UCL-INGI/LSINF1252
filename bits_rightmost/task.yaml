@@ -23,7 +23,7 @@ limits:
     time: '30'
 name: '[S2] Bitwise operation: extract low order bits'
 network_grading: false
-order: 18
+order: 17
 problems:
     q1:
         header: |

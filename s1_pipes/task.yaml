@@ -13,7 +13,7 @@ limits:
     memory: '100'
 name: '[S1] Pipes'
 network_grading: false
-order: 4
+order: 3
 problems:
     file:
         name: ''

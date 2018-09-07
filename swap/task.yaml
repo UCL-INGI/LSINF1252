@@ -20,7 +20,7 @@ limits:
     memory: '128'
 name: '[S2] Echange de valeurs de fractions'
 network_grading: false
-order: 24
+order: 23
 problems:
     q1:
         name: ''
