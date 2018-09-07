@@ -46,7 +46,7 @@ problems:
 
                 /*
                  * Frees all the memory associated with u
-                 * @return: -1 in case of failure, 0 otherwise
+                 * @return: 0 in case of success, -1 otherwise
                  */
                  int free_all(university_t* u){
         default: ''

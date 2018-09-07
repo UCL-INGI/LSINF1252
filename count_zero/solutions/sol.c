@@ -3,21 +3,12 @@
 #include <unistd.h>
 #include "student_code.h"
 
-int free_all(university_t* u){
-    if(u == NULL){
-        return -1;
+int counting_zero(char* str, int length){
+    int count = 0;
+    int i;
+    for(i = 0; i < length; i++){
+        if(str[i] = '\0')
+            count++;
     }
-
-    if(u->rector != NULL){
-        if(u->rector->name != NULL){
-            free(u->rector->name);
-        }
-        free(u->rector);
-    }
-    if(u->city != NULL){
-        free(u->city);
-    }
-    free(u);
-
-    return 0;
+    return count;
 }
