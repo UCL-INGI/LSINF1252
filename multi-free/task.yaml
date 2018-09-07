@@ -34,6 +34,7 @@ limits:
     output: '2'
 name: '[S3] Multi-free'
 network_grading: false
+order: 28
 problems:
     free_all:
         language: c
@@ -62,4 +63,3 @@ tags:
         description: ''
         id: ''
 weight: 1.0
-order: 28
