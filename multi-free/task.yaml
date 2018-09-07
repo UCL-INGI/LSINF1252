@@ -7,7 +7,7 @@ context: |-
 
         typedef struct university {
             char* city;
-            int  creation;
+            int creation;
             person_t* rector;
         } university_t;
 
