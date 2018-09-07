@@ -45,6 +45,21 @@ university_t* init_u(person_t* rector, const char* city, int creation){
     return u;
 }
 
+university_t* init_new(){
+    char* rector_name = "Vincent Blondel";
+    char* city_name = "Louvain-la-Neuve";
+    
+    
+    person_t* p = init_p(rector_name, 53, 6000);
+    if(p == NULL)
+        return NULL;
+    
+    university_t* u = init_u(p, city_name, 1425);
+    if(u == NULL)
+        return NULL;
+    return u;
+}
+
 int free_a(university_t* u){
     free(u->rector->name);
     free(u->rector);
@@ -57,15 +72,7 @@ void test_success(){
     
     set_test_metadata("free_all", _("Testing in a normal case"), 1);
     
-    char* rector_name = "Vincent Blondel";
-    char* city_name = "Louvain-la-Neuve";
-    
-    
-    person_t* p = init_p(rector_name, 53, 6000);
-    if(p == NULL)
-        return;
-    
-    university_t* u = init_u(p, city_name, 1425);
+    university_t* u = init_new();
     if(u == NULL)
         return;
     
@@ -91,7 +98,7 @@ void test_success(){
 }
 
 void test_null(){
-    set_test_metadata("free_all", _("u is NULL"), 1);
+    set_test_metadata("free_all", _("Testing when u is NULL"), 1);
     
     university_t* u = NULL;
     
@@ -100,14 +107,39 @@ void test_null(){
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
+    
     CU_ASSERT_EQUAL(ret,-1);
     if(ret != -1){
         push_info_msg(_("Your function does not work for NULL pointers"));
     }
 }
 
+void test_free_fail(){
+    set_test_metadata("free_all", _("Testing when free fails"), 1);
+    
+    university_t* u = init_new();
+    if(u == NULL)
+        return;
+    
+    int ret = -2;
+    
+    monitored.free = true;
+    failures.free = FAIL_ALWAYS;
+    
+    SANDBOX_BEGIN;
+    ret = free_all(u);
+    SANDBOX_END;
+    
+    CU_ASSERT_EQUAL(ret,-1);
+    if(ret != -1){
+        push_info_msg("Your function does not handle free failures");
+    }
+    
+    free_a(u);
+}
+
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success, test_null);
+    RUN(test_success, test_null, test_free_fail);
 }
