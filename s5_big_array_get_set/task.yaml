@@ -20,7 +20,7 @@ limits:
     output: '2'
 name: '[S5] Get and set on array stored in binary file '
 network_grading: false
-order: 51
+order: 52
 problems:
     q1:
         type: code

@@ -27,7 +27,7 @@ limits:
     memory: '100'
 name: '[S4] make basics - calculator'
 network_grading: false
-order: 38
+order: 39
 problems:
     make_calc_simple:
         header: |-

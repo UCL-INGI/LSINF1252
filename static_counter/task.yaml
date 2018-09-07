@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S2] Exponentially static counter - REVIEWED'
 network_grading: false
-order: 15
+order: 16
 problems:
     static_counter:
         type: code

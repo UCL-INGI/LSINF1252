@@ -23,7 +23,7 @@ limits:
     time: '30'
 name: '[S2] Bitwise operation: setting a bit'
 network_grading: false
-order: 18
+order: 19
 problems:
     q1:
         header: |-

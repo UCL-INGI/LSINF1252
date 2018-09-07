@@ -47,7 +47,7 @@ limits:
     output: '2'
 name: '[Juin 2016A/B] ArrayList'
 network_grading: false
-order: 63
+order: 64
 problems:
     ArrayList:
         type: code

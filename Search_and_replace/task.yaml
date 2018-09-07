@@ -16,7 +16,7 @@ limits:
     output: '2'
 name: '[Juin 2016B] Search and replace'
 network_grading: false
-order: 65
+order: 66
 problems:
     sr:
         language: c
