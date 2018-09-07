@@ -116,9 +116,13 @@ void test_u_null(){
     
     int ret = -2;
     
+    monitored.free = true;
+    
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
+    
+    monitored.free = false;
     
     CU_ASSERT_EQUAL(ret,-1);
     if(ret != -1){
@@ -135,9 +139,13 @@ void test_rector_null(){
     
     int ret = -2;
     
+    monitored.free = true;
+    
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
+    
+    monitored.free = false;
     
     CU_ASSERT_EQUAL(ret, 0);
     if(ret != 0){
@@ -162,9 +170,13 @@ void test_strings_null(){
     
     int ret = -2;
     
+    monitored.free = true;
+    
     SANDBOX_BEGIN;
     ret = free_all(u);
     SANDBOX_END;
+    
+    monitored.free = false;
     
     CU_ASSERT_EQUAL(ret,0);
     if(ret != 0){
