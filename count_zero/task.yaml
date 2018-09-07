@@ -24,7 +24,7 @@ problems:
 
                 /*
                  * @str: la chaine de caractere a traiter
-                 * @length: la longueur de la chaine de caractere
+                 * @length: la longueur de la chaine de caractere, length > 0
                  * @return: le nombre d'occurences du caractere '\0'
                  */
                  int counting_zero(char* str, int length){
@@ -38,8 +38,8 @@ submission_limit:
 tags:
     '0':
         type: 2
+        visible: true
         name: S2
         description: ''
-        visible: true
         id: ''
 weight: 1.0
