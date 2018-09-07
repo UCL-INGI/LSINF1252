@@ -22,6 +22,8 @@ context: |-
         } person_t;
 
     The *name* and the *city* have been allocated with *malloc*.
+
+    *Hint:* all the data may not have been initialised correctly.
 environment: cpp
 evaluate: best
 groups: false
