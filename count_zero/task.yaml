@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Louis Navarre
 context: |-
     The character '\\0' identifies the end of a string in C. But it can also play the role of a real character.
