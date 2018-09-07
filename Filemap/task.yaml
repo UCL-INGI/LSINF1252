@@ -33,7 +33,9 @@ problems:
 
             #include <unistd.h>
 
-            ``int count(char *filename, char c) {``
+            .. code-block:: c
+
+                int count(char *filename, char c) {
         name: count
         language: c
 stored_submissions: 0
