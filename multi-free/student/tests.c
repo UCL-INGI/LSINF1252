@@ -91,7 +91,7 @@ void test_success(){
 }
 
 void test_null(){
-    set_test_metadata("free_all", _("u is NULL"));
+    set_test_metadata("free_all", _("u is NULL"), 1);
     
     university_t* u = NULL;
     
@@ -102,7 +102,7 @@ void test_null(){
     SANDBOX_END;
     CU_ASSERT_EQUAL(ret,-1);
     if(ret != -1){
-        push_info_msg(_("Your function does not work for NULL pointers"), 1);
+        push_info_msg(_("Your function does not work for NULL pointers"));
     }
 }
 
