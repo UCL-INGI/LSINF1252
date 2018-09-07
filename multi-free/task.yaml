@@ -23,7 +23,7 @@ context: |-
 
     The *name* and the *city* have been allocated with *malloc*.
 
-    *Hint:* all the data may not have been initialised correctly.
+    *Hint:* all the data may not have been initialised correctly. Therefore, you have to handle all the cases.
 environment: cpp
 evaluate: best
 groups: false
@@ -36,6 +36,7 @@ name: '[Beta] Multi-free'
 network_grading: false
 problems:
     free_all:
+        language: c
         type: code
         header: |-
             Write the body of the function ``free_all``.
@@ -49,7 +50,6 @@ problems:
                  int free_all(university_t* u){
         default: ''
         name: Free all
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
