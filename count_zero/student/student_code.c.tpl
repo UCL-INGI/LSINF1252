@@ -2,6 +2,6 @@
 #include<stdlib.h>
 #include "student_code.h"
 
-int free_all(university_t* u){
+int counting_zero(char* str, int length){
     @@counting_zero@@
 }
