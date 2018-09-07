@@ -97,7 +97,7 @@ void test_success(){
     
 }
 
-void test_null(){
+void test_u_null(){
     set_test_metadata("free_all", _("Testing when u is NULL"), 1);
     
     university_t* u = NULL;
@@ -114,8 +114,27 @@ void test_null(){
     }
 }
 
+void test_rector_null(){
+    set_test_metadata("free_all", _("Testing when there is no rector"), 1);
+    
+    university_t* u = init_u(NULL, "Ottawa", 1848);
+    if(u == NULL)
+        return;
+    
+    int ret = -2;
+    
+    SANDBOX_BEGIN;
+    ret = free_all(u);
+    SANDBOX_END;
+    
+    CU_ASSERT_EQUAL(ret, -1);
+    if(ret != -1){
+        push_info_msg(_("Your function does not work when there is no rector"));
+    }
+}
+
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success, test_null);
+    RUN(test_success, test_u_null, test_rector_null);
 }
