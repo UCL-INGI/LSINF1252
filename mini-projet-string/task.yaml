@@ -13,7 +13,7 @@ limits:
     time: '30'
 name: '[S2] strlen, strcat et strcasecmp'
 network_grading: false
-order: 22
+order: 25
 problems:
     strlen:
         type: code

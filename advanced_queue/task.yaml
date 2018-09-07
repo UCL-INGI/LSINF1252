@@ -34,7 +34,7 @@ limits:
     time: '30'
 name: '[S4] Advanced queue'
 network_grading: false
-order: 44
+order: 47
 problems:
     enqueue:
         header: |-

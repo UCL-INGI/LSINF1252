@@ -26,7 +26,7 @@ limits:
     output: '2'
 name: '[S5] Save struct into file'
 network_grading: false
-order: 49
+order: 52
 problems:
     q1:
         language: c

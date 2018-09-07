@@ -12,7 +12,7 @@ limits:
     time: '30'
 name: '[S2] Reading arguments '
 network_grading: false
-order: 9
+order: 12
 problems:
     q1:
         type: code

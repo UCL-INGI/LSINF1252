@@ -19,7 +19,7 @@ limits:
     time: '30'
 name: '[S5] Reading integers in a binary file'
 network_grading: false
-order: 47
+order: 50
 problems:
     q1:
         language: c

@@ -12,7 +12,7 @@ limits:
     output: '2'
 name: '[S1] Capture The Flag 2'
 network_grading: false
-order: 5
+order: 8
 problems:
     q1:
         name: ''

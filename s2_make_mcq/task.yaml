@@ -10,7 +10,7 @@ limits:
     time: '30'
 name: '[S4] make basics - multiple choice questions '
 network_grading: false
-order: 36
+order: 39
 problems:
     mcq1:
         header: Select all *correct* answers related to the *target* of a Makefile

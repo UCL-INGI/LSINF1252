@@ -18,7 +18,7 @@ limits:
     memory: '100'
 name: '[Beta] Tri par insertion'
 network_grading: false
-order: 73
+order: 76
 problems:
     tri:
         header: |-

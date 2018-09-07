@@ -17,7 +17,7 @@ limits:
     output: '2'
 name: '[S1] Diff'
 network_grading: false
-order: 3
+order: 6
 problems:
     q1:
         choices:

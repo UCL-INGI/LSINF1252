@@ -31,7 +31,7 @@ limits:
     output: '2'
 name: '[Beta] Mes propres sémaphores'
 network_grading: false
-order: 83
+order: 86
 problems:
     mysem_wait:
         type: code

@@ -15,7 +15,7 @@ limits:
     time: '10'
 name: 'Jeu de dames: tests de base'
 network_grading: false
-order: 55
+order: 58
 problems:
     codearchive:
         header: |+
