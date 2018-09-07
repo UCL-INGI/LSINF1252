@@ -114,32 +114,8 @@ void test_null(){
     }
 }
 
-void test_free_fail(){
-    set_test_metadata("free_all", _("Testing when free fails"), 1);
-    
-    university_t* u = init_new();
-    if(u == NULL)
-        return;
-    
-    int ret = -2;
-    
-    monitored.free = true;
-    failures.free = FAIL_ALWAYS;
-    
-    SANDBOX_BEGIN;
-    ret = free_all(u);
-    SANDBOX_END;
-    
-    CU_ASSERT_EQUAL(ret,-1);
-    if(ret != -1){
-        push_info_msg("Your function does not handle free failures");
-    }
-    
-    free_a(u);
-}
-
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success, test_null, test_free_fail);
+    RUN(test_success, test_null);
 }
