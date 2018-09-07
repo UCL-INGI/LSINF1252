@@ -115,7 +115,7 @@ void test_fail_twice() {
     if(stats.sleep.last_arg != 5){
         char string_sleep[70];
         sprintf(string_sleep, "You did you call sleep for %d seconds ? It should be 5 !", stats.sleep.last_arg);
-        push_info_msg(string_sleep);
+        push_info_msg(_("`malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ "));
     }
 
     free(ret);
