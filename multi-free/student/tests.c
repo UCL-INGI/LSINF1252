@@ -190,9 +190,75 @@ void test_strings_null(){
     }
     if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
-    }
-    
+    }    
 }
+
+/*
+ * Fonction permettant de creer le fichier dot pour afficher
+ * les zones memoires
+ * En commentaire en attendant l'installation de graphviz
+ * Louis Navarre
+int compute_graphic(university_t* u){
+    Agraph_t *g;
+    Agnode_t *n;
+    GVC_t *gvc;
+
+    // set up a graphviz context
+    gvc = gvContext();
+
+    // Create a simple digraph 
+
+    g = agopen("g", Agdirected, 0);
+
+    //struct node *ptr=stack;
+    n = agnode(g, "variable u", 1);
+    agsafeset(n, "color", "white", "");
+
+
+    char ptr_addr[20];
+
+    snprintf(ptr_addr, 20, "%p", u);
+    Agnode_t *u_ptr = agnode(g, ptr_addr, 1);
+    Agnode_t *u_v = agnode(g, "u", 1);
+    agsafeset(u_v, "shape", "rectangle", "");
+
+
+    snprintf(ptr_addr, 20, "%p", u->city);
+    Agnode_t *city = agnode(g, u->city, 1);
+    agsafeset(city, "shape", "rectangle", "");
+    Agnode_t *city_ptr = agnode(g, ptr_addr, 1);
+
+    snprintf(ptr_addr, 20, "%p", u->rector);
+    Agnode_t *rector = agnode(g, "rector", 1);
+    agsafeset(rector, "shape", "rectangle", "");
+    Agnode_t *rector_ptr = agnode(g, ptr_addr, 1);
+
+    snprintf(ptr_addr, 20, "%p", u->rector->name);
+    Agnode_t *name = agnode(g, u->rector->name, 1);
+    agsafeset(name, "shape", "rectangle", "");
+    Agnode_t *name_ptr = agnode(g, ptr_addr, 1);
+
+    Agedge_t *e1 = agedge(g, n, u_ptr, 0, 1);
+    e1 = agedge(g, u_ptr, u_v, 0, 1);
+    e1 = agedge(g, u_v, city_ptr, 0, 1);
+    e1 = agedge(g, city_ptr, city, 0 ,1);
+    e1 = agedge(g, u_v, rector_ptr, 0, 1);
+    e1 = agedge(g, rector_ptr, rector, 0, 1);
+    e1 = agedge(g, rector, name_ptr, 0 ,1);
+    e1 = agedge(g, name_ptr, name, 0, 1);
+    e1 = NULL;
+
+    // compute graph
+    gvLayout(gvc, g, "dot");
+    // save graph in png file for feedback
+    gvRenderFilename(gvc, g, "png", "t.png");
+
+
+    gvFreeLayout(gvc, g);
+    agclose(g);
+    return (gvFreeContext(gvc));
+}
+*/
 
 int main(int argc,char* argv[])
 {
