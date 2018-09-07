@@ -87,20 +87,13 @@ void test_success(){
     if(u == NULL)
         return;
     
-    int ret = -2;
-    
     monitored.free = true;
     
     SANDBOX_BEGIN;
-    ret = free_all(u);
+    free_all(u);
     SANDBOX_END;
     
     monitored.free = false;
-    
-    CU_ASSERT_EQUAL(ret,0);
-    if(ret != 0){
-        push_info_msg("You should return 0 in a normal case");
-    }
     
     CU_ASSERT_EQUAL(stats.free.called, 4);
     if(stats.free.called != 4){
@@ -111,27 +104,6 @@ void test_success(){
     
 }
 
-void test_u_null(){
-    set_test_metadata("free_all", _("Testing when u is NULL"), 1);
-    
-    university_t* u = NULL;
-    
-    int ret = -2;
-    
-    monitored.free = true;
-    
-    SANDBOX_BEGIN;
-    ret = free_all(u);
-    SANDBOX_END;
-    
-    monitored.free = false;
-    
-    CU_ASSERT_EQUAL(ret,-1);
-    if(ret != -1){
-        push_info_msg(_("Your function does not work for NULL pointers"));
-    }
-}
-
 void test_rector_null(){
     set_test_metadata("free_all", _("Testing when there is no rector"), 1);
     
@@ -139,20 +111,13 @@ void test_rector_null(){
     if(u == NULL)
         return;
     
-    int ret = -2;
-    
     monitored.free = true;
     
     SANDBOX_BEGIN;
-    ret = free_all(u);
+    free_all(u);
     SANDBOX_END;
     
     monitored.free = false;
-    
-    CU_ASSERT_EQUAL(ret, 0);
-    if(ret != 0){
-        push_info_msg(_("Your function does not return the right value when there is no rector"));
-    }
     
     CU_ASSERT_EQUAL(stats.free.called, 2);
     if(stats.free.called != 2){
@@ -170,20 +135,14 @@ void test_strings_null(){
     if(u == NULL)
         return;
     
-    int ret = -2;
-    
     monitored.free = true;
     
     SANDBOX_BEGIN;
-    ret = free_all(u);
+    free_all(u);
     SANDBOX_END;
     
     monitored.free = false;
     
-    CU_ASSERT_EQUAL(ret,0);
-    if(ret != 0){
-        push_info_msg(_("Your function does not return the right value when the strings are NULL"));
-    }
     CU_ASSERT_EQUAL(stats.free.called,2);
     if(stats.free.called > 2){
         push_info_msg(_("Your code does not work correctly when the strings are NULL"));
@@ -263,5 +222,5 @@ int compute_graphic(university_t* u){
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success, test_u_null, test_rector_null, test_strings_null);
+    RUN(test_success, test_rector_null, test_strings_null);
 }

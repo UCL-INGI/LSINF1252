@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Louis Navarre
 context: |-
     Le caractère '\\0' permet d'identifier la fin d'un *string* en C. Mais ce n'est pas pour autant que celui-ci ne peut pas aussi jouer le rôle d'un véritable caractère.

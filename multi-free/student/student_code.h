@@ -10,4 +10,4 @@ typedef struct university {
     person_t* rector;
 } university_t;
 
-int free_all(university_t* u);
+void free_all(university_t* u);

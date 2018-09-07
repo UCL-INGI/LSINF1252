@@ -46,9 +46,9 @@ problems:
 
                 /*
                  * Frees all the memory associated with u
-                 * @return: 0 in case of success, -1 otherwise
+                 * @pre: u != NULL
                  */
-                 int free_all(university_t* u){
+                 void free_all(university_t* u){
         default: ''
         name: Free all
 stored_submissions: 0
