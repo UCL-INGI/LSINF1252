@@ -34,6 +34,7 @@ name: '[Beta] Multi-free'
 network_grading: false
 problems:
     free_all:
+        language: c
         type: code
         header: |-
             Write the body of the function ``free_all``.
@@ -44,9 +45,9 @@ problems:
                  * Frees all the memory associated with u
                  * @return: -1 in case of failure, 0 otherwise
                  */
+                 int free_all(university_t* u){
         default: ''
         name: Free all
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
