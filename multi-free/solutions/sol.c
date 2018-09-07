@@ -5,7 +5,7 @@
 
 void free_all(university_t* u){
     if(u->rector != NULL){
-        if(u->rector->name != NULL){
+        if(u->rector->name != NULL){ 
             free(u->rector->name);
         }
         free(u->rector);
@@ -13,5 +13,6 @@ void free_all(university_t* u){
     if(u->city != NULL){
         free(u->city);
     }
+    
     free(u);
 }
