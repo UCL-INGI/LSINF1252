@@ -48,7 +48,7 @@ void test_count_2(){
 	SANDBOX_END;
 
 	CU_ASSERT_EQUAL(ret, 0);
-	if(ret != 3){
+	if(ret != 0){
 		push_info_msg(_("Votre fonction fonctionne pas correctement avec un fichier vide"));
 	}
 }
