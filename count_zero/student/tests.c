@@ -18,7 +18,7 @@ void test_1(){
     
     CU_ASSERT_EQUAL(ret,4);
     if(ret != 4){
-        push_info_msg(_("Vous n'avez pas le bon compte"));
+        push_info_msg(_("You don't have the right count"));
     }
 }
 
@@ -34,12 +34,12 @@ void test_2(){
     
     CU_ASSERT_EQUAL(ret, 2);
     if(ret != 2){
-        push_info_msg(_("Votre code ne fonctionne pas pour des strings commencant/terminant par \\0"));
+        push_info_msg(_("Your function does not work for strings beginnig/ending by \\0"));
     }
 }
 
 void test_complexe(){
-    set_test_metadata("counting_zero", _("Test plus complexe"), 1);
+    set_test_metadata("counting_zero", _("Test more complex"), 1);
     
     char* str3 = "\0\0\0\0a\\0b\0\\0";
     int ret = -2;
@@ -50,12 +50,12 @@ void test_complexe(){
     
     CU_ASSERT_EQUAL(ret,5);
     if(ret != 5){
-        push_info_msg(_("Votre code ne fonctionne pas pour des strings plus complexes"));
+        push_info_msg(_("Your function does not work for more complex strings"));
     }
 }
 
 void test_null(){
-    set_test_metadata("counting_zero", _("Test avec de mauvais arguments"), 1);
+    set_test_metadata("counting_zero", _("Test with wrong args"), 1);
     
     char* str4 = NULL;
     int ret = -2;
@@ -66,7 +66,7 @@ void test_null(){
     
     CU_ASSERT_EQUAL(ret, -1);
     if(ret != -1){
-        push_info_msg(_("Votre code ne prend pas en compte les strings NULL"));
+        push_info_msg(_("Your function does not handle NULL strings"));
     }
 }
 

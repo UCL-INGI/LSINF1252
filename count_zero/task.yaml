@@ -40,8 +40,8 @@ submission_limit:
 tags:
     '0':
         type: 2
+        visible: true
         name: S2
         description: ''
-        visible: true
         id: ''
 weight: 1.0
