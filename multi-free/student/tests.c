@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "student_code.h"
-#include "../CTester/CTester.h"
+#include "CTester/CTester.h"
 
 person_t* init_p(char* name, int age, int salary){
     person_t *p = (person_t*)malloc(sizeof(person_t));
