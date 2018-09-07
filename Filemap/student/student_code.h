@@ -1,13 +1,1 @@
-typedef struct person {
-    char* name;
-    int salary;
-    int age;
-} person_t;
-
-typedef struct university {
-    char* city;
-    int  creation;
-    person_t* rector;
-} university_t;
-
-int free_all(university_t* u);
+int count(char* filename, char c);
