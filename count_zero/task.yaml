@@ -14,7 +14,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[S2] Compter le nombre de ''\0'''
+name: '[S2] Count the ''\0'''
 network_grading: false
 order: 14
 problems:
