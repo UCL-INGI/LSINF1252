@@ -75,28 +75,7 @@ void test_count_3(){
     }
 }
 
-/*
- * Test avec NULL a la place d'un fichier
- */
-void test_count_4(){
-	set_test_metadata("count", _("Test 4"), 1);
-
-	int ret = -2;
-
-	char* filename = NULL;
-	char the_char = 'a';
-
-	SANDBOX_BEGIN;
-	ret = count(filename, the_char);
-	SANDBOX_END;
-
-	CU_ASSERT_EQUAL(ret, -1);
-	if(ret != -1){
-		push_info_msg("Votre fonction ne fonctionne pas pour une valeur NULL de filename");
-	}
-}
-
 int main(int argc, char* argv[]){
 	BAN_FUNCS(pread, read, readv);
-	RUN(test_count_1, test_count_2, test_count_3, test_count_4);
+	RUN(test_count_1, test_count_2, test_count_3);
 }
