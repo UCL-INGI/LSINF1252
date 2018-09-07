@@ -34,7 +34,6 @@ name: '[Beta] Multi-free'
 network_grading: false
 problems:
     free_all:
-        language: c
         type: code
         header: |-
             Write the body of the function ``free_all``.
@@ -48,6 +47,7 @@ problems:
                  int free_all(university_t* u){
         default: ''
         name: Free all
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1

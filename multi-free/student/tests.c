@@ -90,8 +90,24 @@ void test_success(){
     
 }
 
+void test_null(){
+    set_test_metadata("free_all", _("u is NULL"));
+    
+    university_t* u = NULL;
+    
+    int ret = -2;
+    
+    SANDBOX_BEGIN;
+    ret = free_all(u);
+    SANDBOX_END;
+    CU_ASSERT_EQUAL(ret,-1);
+    if(ret != -1){
+        push_info_msg(_("Your function does not work for NULL pointers"), 1);
+    }
+}
+
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success);
+    RUN(test_success, test_null);
 }
