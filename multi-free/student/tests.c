@@ -13,13 +13,19 @@ person_t* init_p(char* name, int age, int salary){
     p->age = age;
     p->salary = salary;
     
-    char* new_name = (char*)malloc(sizeof(char)*strlen(name));
-    if(new_name == NULL){
-        free(p);
-        return NULL;
+    if(name != NULL){
+        char* new_name = (char*)malloc(sizeof(char)*strlen(name));
+        if(new_name == NULL){
+            free(p);
+            return NULL;
+        }
+        strncpy(new_name, name, strlen(name));
+        
+        p->name = new_name;
     }
-    strncpy(new_name, name, strlen(name));
-    p->name = new_name;
+    else{
+        p->name = NULL;
+    }
     
     return p;
 }
@@ -31,16 +37,21 @@ university_t* init_u(person_t* rector, const char* city, int creation){
     
     u->rector = rector;
     u->creation = creation;
-
-    char* new_city = (char*)malloc(sizeof(char)*strlen(city));
-    if(new_city == NULL){
-        free(u->rector->name);
-        free(u->rector);
-        free(u);
-        return NULL;
+    
+    if(city == NULL){
+        char* new_city = (char*)malloc(sizeof(char)*strlen(city));
+        if(new_city == NULL){
+            free(u->rector->name);
+            free(u->rector);
+            free(u);
+            return NULL;
+        }
+        strncpy(new_city, city, strlen(city));
+        u->city = new_city;
     }
-    strncpy(new_city, city, strlen(city));
-    u->city = new_city;
+    else{
+        u->city = NULL;
+    }
 
     return u;
 }
@@ -90,9 +101,10 @@ void test_success(){
     if(ret != 0){
         push_info_msg("You should return 0 in a normal case");
     }
-    int free_called = stats.free.called;
-    if(free_called != 4){
-        push_info_msg("Hahahah");
+    
+    CU_ASSERT_EQUAL(stats.free.called, 4);
+    if(stats.free.called != 4){
+        push_info_msg(_("You did not free all the memory"));
     }
     
 }
@@ -127,14 +139,49 @@ void test_rector_null(){
     ret = free_all(u);
     SANDBOX_END;
     
-    CU_ASSERT_EQUAL(ret, -1);
-    if(ret != -1){
-        push_info_msg(_("Your function does not work when there is no rector"));
+    CU_ASSERT_EQUAL(ret, 0);
+    if(ret != 0){
+        push_info_msg(_("Your function does not return the right value when there is no rector"));
     }
+    
+    CU_ASSERT_EQUAL(stats.free.called, 2);
+    if(stats.free.called != 2){
+        push_info_msg(_("You did not free all the memory"));
+    }
+}
+
+void test_strings_null(){
+    set_test_metadata("free_all", _("Testing when the strings are NULL"), 1);
+    
+    person_t* p = init_p(NULL, 50, 10000);
+    if(p == NULL)
+        return;
+    university_t* u = init_u(p,NULL,1800);
+    if(u == NULL)
+        return;
+    
+    int ret = -2;
+    
+    SANDBOX_BEGIN;
+    ret = free_all(u);
+    SANDBOX_END;
+    
+    CU_ASSERT_EQUAL(ret,0);
+    if(ret != 0){
+        push_info_msg(_("Your function does not return the right value when the strings are NULL"));
+    }
+    CU_ASSERT_EQUAL(stats.free.called,2);
+    if(stats.free.called > 2){
+        push_info_msg(_("Why do you call free more than twice ?"));
+    }
+    if(stats.free.called < 2){
+        push_info_msg(_("You did not free all the memory"));
+    }
+    
 }
 
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_success, test_u_null, test_rector_null);
+    RUN(test_success, test_u_null, test_rector_null, test_strings_null);
 }
