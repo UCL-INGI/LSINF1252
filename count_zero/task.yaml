@@ -1,4 +1,4 @@
-accessible: true
+accessible: false
 author: Louis Navarre
 context: |-
     Le caractère '\\0' permet d'identifier la fin d'un *string* en C. Mais ce n'est pas pour autant que celui-ci ne peut pas aussi jouer le rôle d'un véritable caractère.
@@ -27,6 +27,7 @@ problems:
                  * @str: la chaine de caractere a traiter
                  * @length: la longueur de la chaine de caractere, length > 0
                  * @return: le nombre d'occurences du caractere '\0'
+                 *         ou -1 en cas d'erreur
                  */
                  int counting_zero(char* str, int length){
         type: code

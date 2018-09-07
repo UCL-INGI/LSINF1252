@@ -1,4 +1,4 @@
-accessible: true
+accessible: false
 author: Louis Navarre
 context: |-
     You are asked to implement the function ``free_all``, which will free all the memory associated with the following structure *university_t*:
