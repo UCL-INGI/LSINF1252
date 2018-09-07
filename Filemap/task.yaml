@@ -17,7 +17,6 @@ order: 56
 problems:
     count:
         default: ''
-        language: c
         type: code
         header: |-
             Ecrivez une fonction qui permet de compter le nombre de fois qu'un caractère est présent dans un fichier sans jamais utiliser l'appel système read.
@@ -38,6 +37,7 @@ problems:
 
                 int count(char *filename, char c) {
         name: count
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
