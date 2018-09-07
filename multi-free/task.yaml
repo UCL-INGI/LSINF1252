@@ -23,7 +23,7 @@ context: |-
 
     The *name* and the *city* have been allocated with *malloc*.
 
-    *Hint:* all the data may not have been initialised correctly. Therefore, you have to handle all the cases.
+    *Hint:* all the data may not have been initialised correctly. Therefore, you have to handle all the cases (e.g. some pointers can be already NULL, and don't need to be freed).
 environment: cpp
 evaluate: best
 groups: false
@@ -32,7 +32,7 @@ limits:
     time: '30'
     memory: '100'
     output: '2'
-name: '[Beta] Multi-free'
+name: '[S3] Multi-free'
 network_grading: false
 problems:
     free_all:
@@ -54,5 +54,11 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags: {}
+tags:
+    '0':
+        type: 2
+        visible: true
+        name: S3
+        description: ''
+        id: ''
 weight: 1.0
