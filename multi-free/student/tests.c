@@ -186,7 +186,7 @@ void test_strings_null(){
     }
     CU_ASSERT_EQUAL(stats.free.called,2);
     if(stats.free.called > 2){
-        push_info_msg(_("Why do you call free more than twice ?"));
+        push_info_msg(_("Your code does not work correctly when the strings are NULL"));
     }
     if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
