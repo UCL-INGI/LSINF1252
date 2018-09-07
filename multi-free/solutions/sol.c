@@ -7,12 +7,17 @@ int free_all(university_t* u){
     if(u == NULL){
         return -1;
     }
-    
-    free(u->rector->name);
-    free(u->rector);
-    
-    free(u->city);
+
+    if(u->rector != NULL){
+        if(u->rector->name != NULL){
+            free(u->rector->name);
+        }
+        free(u->rector);
+    }
+    if(u->city != NULL){
+        free(u->city);
+    }
     free(u);
-    
+
     return 0;
 }

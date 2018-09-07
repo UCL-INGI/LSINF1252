@@ -38,7 +38,7 @@ university_t* init_u(person_t* rector, const char* city, int creation){
     u->rector = rector;
     u->creation = creation;
     
-    if(city == NULL){
+    if(city != NULL){
         char* new_city = (char*)malloc(sizeof(char)*strlen(city));
         if(new_city == NULL){
             free(u->rector->name);
