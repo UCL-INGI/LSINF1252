@@ -112,6 +112,7 @@ bt_t* tree1(){
 
 
 void test_insert_normal() {
+    printf("PRINTF");
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
     char* newword = "dodo";
