@@ -127,7 +127,7 @@ void test_insert_normal(){
     monitored.malloc = true;
 
     SANDBOX_BEGIN;
-    insert(tree, newEnWord, newFrWord);
+    int inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 3 malloc (enWord, frWord, node);
@@ -143,6 +143,10 @@ void test_insert_normal(){
     CU_ASSERT_EQUAL(sameTrees,true);
     if(!sameTrees)
         push_info_msg(_("Your tree isn't what was expected"));
+    
+    CU_ASSERT_EQUAL(inserted, 1);
+    if(inserted == 1)
+        push_info_msg(_("The returned value should be 1"));
 }
 
 void test_insert_empty_tree(){
@@ -171,7 +175,7 @@ void test_insert_empty_tree(){
     monitored.malloc = true;
 
     SANDBOX_BEGIN;
-    insert(tree, newEnWord, newFrWord);
+    int inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 3 malloc (enWord, frWord, node);
@@ -184,6 +188,10 @@ void test_insert_empty_tree(){
     CU_ASSERT_EQUAL(sameTrees,true);
     if(!sameTrees)
         push_info_msg(_("Your tree isn't what was expected"));
+    
+    CU_ASSERT_EQUAL(inserted, 1);
+    if(inserted == 1)
+        push_info_msg(_("The returned value should be 1"));
 }
 
 void test_insert_null_tree(){
@@ -212,7 +220,7 @@ void test_insert_null_tree(){
     monitored.malloc = true;
 
     SANDBOX_BEGIN;
-    insert(tree, newEnWord, newFrWord);
+    int inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 4 malloc (enWord, frWord, node);
@@ -225,6 +233,10 @@ void test_insert_null_tree(){
     CU_ASSERT_EQUAL(sameTrees,true);
     if(!sameTrees)
         push_info_msg(_("Your tree isn't what was expected"));
+    
+    CU_ASSERT_EQUAL(inserted, 1);
+    if(inserted == 1)
+        push_info_msg(_("The returned value should be 1"));
 }
 
 int main(int argc,char** argv)
