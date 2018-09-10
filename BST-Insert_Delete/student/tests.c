@@ -15,7 +15,7 @@ int sameNodes(node_t* node1, node_t* node2){
         return true;
     if(node1 == NULL || node2 == NULL)
         return false;
-    if(strcmp(node1->word, node2->word) || strcmp(node1->definition, node2->definition))
+    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord))
         return false;
     return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
@@ -31,33 +31,33 @@ int sameTrees(bt_t* compTree, bt_t* tree){
 void freeNode(node_t* node){
     if(!node)
         return;
-    if(node->word)
-        free(node->word);
-    if(node->definition)
-        free(node->definition);
+    if(node->enWord)
+        free(node->enWord);
+    if(node->frWord)
+        free(node->frWord);
     if(node->left)
         freeNode(node->left);
     if(node->right)
         freeNode(node->right);
 }
 
-node_t* init_node(char* word, char* definition){
+node_t* init_node(char* enWord, char* frWord){
     node_t* newnode = malloc(sizeof(node_t));
     if(!newnode)
         return NULL;
-    newnode->word = (char*) malloc(strlen(word));
-    if(!(newnode->word)){
+    newnode->enWord = (char*) malloc(strlen(enWord));
+    if(!(newnode->enWord)){
         free(newnode);
         return NULL;
     }
-    strcpy(newnode->word,word);
-    newnode->definition = (char*) malloc(strlen(definition));
-    if(!(newnode->definition)){
-        free(newnode->word);
+    strcpy(newnode->enWord,enWord);
+    newnode->frWord = (char*) malloc(strlen(frWord));
+    if(!(newnode->frWord)){
+        free(newnode->enWord);
         free(newnode);
         return NULL;
     }
-    strcpy(newnode->definition,definition);
+    strcpy(newnode->frWord,frWord);
     newnode->left = newnode->right = NULL;
     return newnode;
 }
@@ -69,8 +69,8 @@ void freeBt(bt_t* bt){
         freeNode(bt->root);
 }
 
-bt_t* init_bt(char* word, char* definition){
-    node_t* root = init_node(word,definition);
+bt_t* init_bt(char* enWord, char* frWord){
+    node_t* root = init_node(enWord,frWord);
     if(!root)
         return NULL;
     bt_t* bt = (bt_t*) malloc(sizeof(bt_t));
@@ -119,18 +119,18 @@ bt_t* tree1(){
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
-    char* newword = "dodo";
-    char* newdef = "dodo def";
+    char* newEnWord = "dodo";
+    char* newFrWord = "dodo def";
 
     bt_t* compTree = tree1();
 
     monitored.malloc = true;
 
     SANDBOX_BEGIN;
-    insert(tree, newword, newdef);
+    insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
-    // check if only 3 malloc (word, definition, node);
+
+    // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);
     if(nbMalloc != 3)
@@ -150,12 +150,12 @@ void test_insert_empty_tree(){
     //student arguments
     bt_t* tree = malloc(sizeof(bt_t));
     tree->root = NULL;
-    char* newword = "dodo";
-    char* newdef = "dodo def";
-    
+    char* newEnWord = "dodo";
+    char* newFrWord = "dodo def";
+
     //solution
     bt_t* solT = malloc(sizeof(bt_t));
-    node_t* node = init_node(newword,newdef);
+    node_t* node = init_node(newEnWord,newFrWord);
     solT->root = node;
     if(!tree || !solT || !node){
         if(node)
@@ -167,19 +167,19 @@ void test_insert_empty_tree(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     monitored.malloc = true;
-    
+
     SANDBOX_BEGIN;
-    insert(tree, newword, newdef);
+    insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
-    // check if only 3 malloc (word, definition, node);
+
+    // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);
     if(nbMalloc != 3)
         push_info_msg(_("You can only use 3 calls to malloc for this case"));
-    
+
     int sameTrees = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameTrees,true);
     if(!sameTrees)
@@ -190,14 +190,14 @@ void test_insert_null_tree(){
     set_test_metadata("insert", _("Test with a null tree"),1);
     //student arguments
     bt_t* tree = NULL;
-    char* newword = "dodo";
-    char* newdef = "dodo def";
-    
+    char* newEnWord = "dodo";
+    char* newFrWord = "dodo def";
+
     //solution
     bt_t* solT = malloc(sizeof(bt_t));
-    node_t* node = init_node(newword,newdef);
+    node_t* node = init_node(newEnWord,newFrWord);
     solT->root = node;
-    
+
     if(!tree || !solT || !node){
         if(node)
             free(node);
@@ -208,19 +208,19 @@ void test_insert_null_tree(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     monitored.malloc = true;
-    
+
     SANDBOX_BEGIN;
-    insert(tree, newword, newdef);
+    insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
-    // check if only 4 malloc (word, definition, node);
+
+    // check if only 4 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 4);
     if(nbMalloc != 4)
         push_info_msg(_("You can only use 4 calls to malloc for this case"));
-    
+
     int sameTrees = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameTrees,true);
     if(!sameTrees)
