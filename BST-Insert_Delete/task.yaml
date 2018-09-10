@@ -67,7 +67,12 @@ problems:
         language: c
     rightsubtreesleftmostchild:
         type: code
-        header: Write the body of the ``rightSubtreesLeftMostChild`` function.
+        header: |-
+            Write the body of the ``rightSubtreesLeftMostChild`` function.
+
+            .. code-block:: c
+
+                node_t* rightSubtreesLeftMostChild(node_t* node);
         default: ''
         language: c
         name: Right subtree's left-most child
