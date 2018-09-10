@@ -1,6 +1,7 @@
 // CTester template
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "student_code.h"
 #include "CTester/CTester.h"
 
