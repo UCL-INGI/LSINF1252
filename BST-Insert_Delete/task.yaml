@@ -49,8 +49,15 @@ problems:
         default: ''
         language: c
         name: Insert function
-        header: Write the body of the ``insert`` function. If you use subfonctions,
-            write them in the box below with their signature and body.
+        header: |-
+            Write the body of the ``insert`` function. If you use subfonctions, write them in the box below with their signature and body.
+
+            .. code-block:: c
+
+                /*
+                 * Return 1 if the new node was inserted, 0 otherwise.
+                 */
+                int insert(bt_t* bt, char* enWord, char* frWord);
     other:
         name: Subfunctions
         header: You can write your needed subfunctions for the insert function.
@@ -65,8 +72,12 @@ problems:
         language: c
         name: Right subtree's left-most child
     delete:
-        header: Write the body of the ``delete`` function. Using another fonction
-            already written above would be helpful.
+        header: |-
+            Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique.
+
+            .. code-block:: c
+
+                void delete(bt_t* bt, char* enWord);
         language: c
         default: ''
         type: code
