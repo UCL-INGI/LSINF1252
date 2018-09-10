@@ -45,10 +45,10 @@ name: 'BST : Insert and Delete'
 network_grading: false
 problems:
     insert:
-        name: Insert function
         type: code
         default: ''
         language: c
+        name: Insert function
         header: Write the body of the ``insert`` function. If you use subfonctions,
             write them in the box below with their signature and body.
     other:
@@ -58,12 +58,19 @@ problems:
         default: ''
         type: code
         language: c
-    delete:
+    rightsubtreesleftmostchild:
+        type: code
+        header: Write the body of the ``rightSubtreesLeftMostChild`` function.
+        default: ''
         language: c
-        header: ''
+        name: Right subtree's left-most child
+    delete:
+        header: Write the body of the ``delete`` function. Using another fonction
+            already written above would be helpful.
+        language: c
         default: ''
         type: code
-        name: Delete a node in a binary search tree
+        name: Delete function
 stored_submissions: 0
 submission_limit:
     amount: -1
