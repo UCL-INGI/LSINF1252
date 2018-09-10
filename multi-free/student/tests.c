@@ -143,8 +143,6 @@ void test_rector_null(){
     
     university_t* u_c = u;
     char* city_c = u->city;
-    person_t* p_c = u->rector;
-    char* name_c = u->rector->name;
     
     monitored.free = true;
     
@@ -158,6 +156,9 @@ void test_rector_null(){
     if(stats.free.called != 2){
         push_info_msg(_("You did not free all the memory"));
     }
+    
+    int verif_u = malloced(u_c);
+    int verif_city = malloced(city_c);
     
     CU_ASSERT_EQUAL(verif_u, false);
     CU_ASSERT_EQUAL(verif_city, false);
@@ -181,9 +182,7 @@ void test_strings_null(){
         return;
     
     university_t* u_c = u;
-    char* city_c = u->city;
     person_t* p_c = u->rector;
-    char* name_c = u->rector->name;
     
     monitored.free = true;
     
@@ -200,6 +199,9 @@ void test_strings_null(){
     if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
     }
+    
+    int verif_u = malloced(u_c);
+    int verif_rector = malloced(p_c);
     
     CU_ASSERT_EQUAL(verif_u, false);
     CU_ASSERT_EQUAL(verif_rector, false);
@@ -281,6 +283,6 @@ int compute_graphic(university_t* u){
 
 int main(int argc,char* argv[])
 {
-    BAN_FUNCS(malloc);
+    BAN_FUNCS(malloc, calloc);
     RUN(test_success, test_rector_null, test_strings_null);
 }
