@@ -1,4 +1,8 @@
-// CTester template
+/*
+ * 3/5 tests on insert (need the fail malloc + the insert not done because key is already present)
+ * 0/5 tests on delete
+ * 0/? test on right subtree's leftmost node
+ */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -226,5 +230,5 @@ void test_insert_null_tree(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal);
+    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree);
 }
