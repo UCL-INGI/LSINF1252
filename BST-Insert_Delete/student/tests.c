@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "student_code.h"
 #include "CTester/CTester.h"
 
