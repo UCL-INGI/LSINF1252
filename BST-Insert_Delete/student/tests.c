@@ -83,10 +83,10 @@ bt_t* tree1(){
     if(!tree)
         CU_FAIL(_("Internal error while allocating memory"));
     node_t* node1 = init_node("animal","animal def");
-    node_t* node2 = init_node("dog","dog def");
+    node_t* node2 = init_node("deer","deer def");
     node_t* node3 = init_node("creature","creature def");
     node_t* node4 = init_node("elephant","elephant def");
-    node_t* node5 = init_node("deer","deer def");
+    node_t* node5 = init_node("dog","dog def");
     node_t* node6 = init_node("eagle","eagle def");
     node_t* node7 = init_node("sponge","sponge def");
 
