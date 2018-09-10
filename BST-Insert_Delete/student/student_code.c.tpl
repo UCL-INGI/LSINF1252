@@ -7,6 +7,10 @@ int insert(bt_t* bt, char* word, char* definition){
     @@insert@@
 }
 
+node_t* rightSubtreesLeftMostChild(node_t* node){
+    @@rightsubtreesleftmostchild@@
+}
+
 void delete(bt_t* bt, char* word){
     @@delete@@
 }
