@@ -3,7 +3,7 @@
 #include <string.h>
 #include "student_code.h" // necessary ?
 
-int insert(bt_t* bt, char* word, char* definition){
+int insert(bt_t* bt, char* enWord, char* definition){
     @@insert@@
 }
 
@@ -11,6 +11,6 @@ node_t* rightSubtreesLeftMostChild(node_t* node){
     @@rightsubtreesleftmostchild@@
 }
 
-void delete(bt_t* bt, char* word){
+void delete(bt_t* bt, char* enWord){
     @@delete@@
 }
