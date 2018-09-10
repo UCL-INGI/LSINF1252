@@ -73,7 +73,7 @@ problems:
         name: Right subtree's left-most child
     delete:
         header: |-
-            Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique.
+            Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique. Delete the node using the technique explained in the problem statement.
 
             .. code-block:: c
 
