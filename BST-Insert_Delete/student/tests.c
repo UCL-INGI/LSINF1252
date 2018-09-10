@@ -131,12 +131,12 @@ void test_insert_normal() {
     CU_ASSERT_EQUAL(nbMalloc, 3);
     if(nbMalloc != 3)
         push_info_msg(_("You can only use 3 calls to malloc for this case"));
-    /*
+    
     //TODO Hard coded feature ? better to compare with a real tree ?
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
-    ((((compTree->root)->right)->right)->left)->left = init_node("dodo","dodo def");
-    */
+    (compTree->root) = init_node("dodo","dodo def");
+    
     CU_ASSERT_EQUAL(sameTrees(compTree,tree),0);
     if(!sameTrees(compTree,tree))
         push_info_msg(_("Your tree isn't what was expected"));
