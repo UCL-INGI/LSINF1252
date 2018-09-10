@@ -60,7 +60,8 @@ problems:
                 int insert(bt_t* bt, char* enWord, char* frWord);
     other:
         name: Subfunctions
-        header: You can write your needed subfunctions for the insert function.
+        header: You can write your needed subfunctions for the insert function. Don't
+            forget to write their signature and body.
         optional: 'on'
         default: ''
         type: code
