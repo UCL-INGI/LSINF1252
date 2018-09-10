@@ -112,8 +112,7 @@ bt_t* tree1(){
 }
 
 
-void test_insert_normal() {
-    push_info_msg(_("test"));
+void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
     char* newword = "dodo";
@@ -136,8 +135,91 @@ void test_insert_normal() {
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
     ((((compTree->root)->right)->right)->left)->left = init_node("dodo","dodo def");
-    CU_ASSERT_EQUAL(sameTrees(compTree,tree),true);
-    if(!sameTrees(compTree,tree))
+    int sameTrees = sameTrees(compTree,tree);
+    CU_ASSERT_EQUAL(sameTrees,true);
+    if(!sameTrees)
+        push_info_msg(_("Your tree isn't what was expected"));
+}
+
+void test_insert_empty_tree(){
+    set_test_metadata("insert", _("Test with an empty tree"),1);
+    //student arguments
+    bt_t* tree = malloc(sizeof(bt_t));
+    tree->root = NULL;
+    char* newword = "dodo";
+    char* newdef = "dodo def";
+    
+    //solution
+    bt_t* solT = malloc(sizeof(bt_t));
+    node_t* node = init_node(newword,newdef);
+    solT->root = node;
+    if(!tree || !solT || !node){
+        if(node)
+            free(node);
+        if(tree)
+            free(tree);
+        if(solT)
+            free(solT);
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    monitored.malloc = true;
+    
+    SANDBOX_BEGIN;
+    insert(tree, newword, newdef);
+    SANDBOX_END;
+    
+    // check if only 3 malloc (word, definition, node);
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 3);
+    if(nbMalloc != 3)
+        push_info_msg(_("You can only use 3 calls to malloc for this case"));
+    
+    int sameTrees = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameTrees,true);
+    if(!sameTrees)
+        push_info_msg(_("Your tree isn't what was expected"));
+}
+
+void test_insert_null_tree(){
+    set_test_metadata("insert", _("Test with a null tree"),1);
+    //student arguments
+    bt_t* tree = NULL;
+    char* newword = "dodo";
+    char* newdef = "dodo def";
+    
+    //solution
+    bt_t* solT = malloc(sizeof(bt_t));
+    node_t* node = init_node(newword,newdef);
+    solT->root = node;
+    
+    if(!tree || !solT || !node){
+        if(node)
+            free(node);
+        if(tree)
+            free(tree);
+        if(solT)
+            free(solT);
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    monitored.malloc = true;
+    
+    SANDBOX_BEGIN;
+    insert(tree, newword, newdef);
+    SANDBOX_END;
+    
+    // check if only 4 malloc (word, definition, node);
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 4);
+    if(nbMalloc != 4)
+        push_info_msg(_("You can only use 4 calls to malloc for this case"));
+    
+    int sameTrees = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameTrees,true);
+    if(!sameTrees)
         push_info_msg(_("Your tree isn't what was expected"));
 }
 
