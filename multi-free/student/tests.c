@@ -87,6 +87,11 @@ void test_success(){
     if(u == NULL)
         return;
     
+    university_t* u_c = u;
+    char* city_c = u->city;
+    person_t* p_c = u->rector;
+    char* name_c = u->rector->name;
+    
     monitored.free = true;
     
     SANDBOX_BEGIN;
@@ -99,6 +104,31 @@ void test_success(){
     if(stats.free.called != 4){
         push_info_msg(_("You did not free all the memory"));
     }
+    
+    int verif_u = malloced(u_c);
+    int verif_city = malloced(city_c);
+    int verif_rector = malloced(p_c);
+    int verif_name = malloced(name_c);
+    
+    CU_ASSERT_EQUAL(verif_u, false);
+    CU_ASSERT_EQUAL(verif_city, false);
+    CU_ASSERT_EQUAL(verif_rector, false);
+    CU_ASSERT_EQUAL(verif_name, false);
+    
+    if(verif_u != false){
+        push_info_msg(_("You did not free the memory associated with the university"));
+    }
+    if(verif_city != false){
+        push_info_msg(_("You did not free the memory associated with the city"));
+    }
+    if(verif_rector != false){
+        push_info_msg(_("You did not free the memory associated with the rector"));
+    }
+    if(verif_name != false){
+        push_info_msg(_("You did not free the memory associated with the rector's name"));
+    }
+    
+    
     
     
     
@@ -122,6 +152,16 @@ void test_rector_null(){
     CU_ASSERT_EQUAL(stats.free.called, 2);
     if(stats.free.called != 2){
         push_info_msg(_("You did not free all the memory"));
+    }
+    
+    CU_ASSERT_EQUAL(verif_u, false);
+    CU_ASSERT_EQUAL(verif_city, false);
+    
+    if(verif_u != false){
+        push_info_msg(_("You did not free the memory associated with the university"));
+    }
+    if(verif_city != false){
+        push_info_msg(_("You did not free the memory associated with the city"));
     }
 }
 
@@ -149,7 +189,17 @@ void test_strings_null(){
     }
     if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
-    }    
+    }
+    
+    CU_ASSERT_EQUAL(verif_u, false);
+    CU_ASSERT_EQUAL(verif_rector, false);
+    
+    if(verif_u != false){
+        push_info_msg(_("You did not free the memory associated with the university"));
+    }
+    if(verif_rector != false){
+        push_info_msg(_("You did not free the memory associated with the rector"));
+    }
 }
 
 /*
@@ -221,6 +271,6 @@ int compute_graphic(university_t* u){
 
 int main(int argc,char* argv[])
 {
-    BAN_FUNCS();
+    BAN_FUNCS(malloc);
     RUN(test_success, test_rector_null, test_strings_null);
 }
