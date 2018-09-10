@@ -1,7 +1,7 @@
 accessible: false
 author: Alexandre Gobeaux
 context: ''
-environment: default
+environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
@@ -19,9 +19,9 @@ problems:
         default: ''
         header: ''
     delete:
-        language: ''
         default: ''
         header: ''
+        language: ''
         name: Delete a node in a binary search tree
         type: code
 stored_submissions: 0
