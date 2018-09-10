@@ -23,10 +23,12 @@ context: |-
     Your mission will be to implement the **insert**, the **leftmost node of right part** the **delete** functions.
 
     - **Insert** function :
+
     For each node we know this : every key (*enWord*) in the node.left subpart is lower than the key of the node. Similarly, every key (*enWord*) in the node.right subpart is lower than the key of the node. We use the alphabetical order to check if one word is lower or higher than another one.
 
     - **Leftmost node of right part** and **Delete** function :
-    Deleting a node in a tree like that might not be easy ! That's why I'll explain you how to proceed (you'll have to use this procedure to get the points).
+
+    Deleting a node in a tree like that might not be easy ! That's why I'll explain you how to proceed (you'll have to use this procedure in order to get the points).
     If the node we want to delete has 0 or only 1 child, it's quite easy, we only have to replace this node by his child (if there is one).
     When it comes to a node which has two children, it's harder. We first have to implement a function that will find the leftmost node of the right subpart. In the example, if we want to suppress *XXX*, the leftmost node of the right subpart is *YYY*. Then, we can move *YYY* to XXX and replace *XXX* by his child (if it has one).
 
