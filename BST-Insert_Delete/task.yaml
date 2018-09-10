@@ -45,17 +45,25 @@ name: 'BST : Insert and Delete'
 network_grading: false
 problems:
     insert:
-        name: Insert a new node into a binary search tree.
+        name: Insert function
         type: code
-        language: C
         default: ''
-        header: ''
+        language: c
+        header: Write the body of the ``insert`` function. If you use subfonctions,
+            write them in the box below with their signature and body.
+    other:
+        name: Subfunctions
+        header: You can write your needed subfunctions for the insert function.
+        optional: 'on'
+        default: ''
+        type: code
+        language: c
     delete:
-        default: ''
+        language: c
         header: ''
-        language: C
-        name: Delete a node in a binary search tree
+        default: ''
         type: code
+        name: Delete a node in a binary search tree
 stored_submissions: 0
 submission_limit:
     amount: -1
