@@ -1,6 +1,36 @@
 accessible: false
 author: Alexandre Gobeaux
-context: ''
+context: |-
+    To help you studying your english course, you've got the wonderful idea of creating a Binary Search Tree (BST). This will also help you to study for the LSINF1252 course! The key of each node will be the english word and the value will be the french word corresponding. Those are represented using an array of char.
+    So let's define our 2 structures :
+
+    .. code-block:: c
+
+        typedef struct bt {
+            struct node* root;
+        } bt_t;
+
+        typedef struct node {
+            char* enWord;
+            char* frWord;
+            struct node* left;
+            struct node* right;
+        } node_t;
+
+    TODO : SCHEME NEEDED + EXPLAIN WHICH NODE IS THE ROOT.
+    + CHANGE THE CODE : word -> enWord, definition -> frWord.
+
+    Your mission will be to implement the insert and the delete functions.
+
+    **Insert** function :
+    For each node we know this : every key (*enWord*) in the node.left subpart is lower than the key of the node. Similarly, every key (*enWord*) in the node.right subpart is lower than the key of the node. We use the alphabetical order to check if one word is lower or higher than another one.
+
+    **Leftmost node of right part** and **Delete** function :
+    Deleting a node in a tree like that might not be easy ! That's why I'll explain you how to proceed (you'll have to use this procedure to get the points).
+    If the node we want to delete has 0 or only 1 child, it's quite easy, we only have to replace this node by his child (if there is one).
+    When it comes to a node which has two children, it's harder. We first have to implement a function that will find the leftmost node of the right subpart. In the example, if we want to suppress *XXX*, the leftmost node of the right subpart is *YYY*. Then, we can move *YYY* to XXX and replace *XXX* by his child (if it has one).
+
+    SCHEME NEEDED for XXX and YYY.
 environment: cpp
 evaluate: best
 groups: false
@@ -19,9 +49,9 @@ problems:
         default: ''
         header: ''
     delete:
-        language: C
         default: ''
         header: ''
+        language: C
         name: Delete a node in a binary search tree
         type: code
 stored_submissions: 0
