@@ -33,18 +33,19 @@ context: |
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
 name: '[S3] Simple Binary Search Tree'
 network_grading: false
 order: 35
 problems:
     contains:
-        name: Function contains
-        language: c
+        default: ''
         type: code
+        name: Function contains
         header: |-
             Write the body of the ``contains`` function. If you use subfunctions, write them in the box below with their signature and body.
 
@@ -54,69 +55,71 @@ problems:
                 * Return 1 if there is a node containing @value in @tree and 0 otherwise.
                 */
                 int contains(bt_t* tree, int value){
+        language: c
     other:
+        optional: 'on'
         name: Helpful submethods
+        default: ''
+        header: Write here the submethods used by the contains method.
         type: code
         language: c
-        optional: 'on'
-        header: Write here the submethods used by the contains method.
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 1
-        name: Timeout
         id: timeout
         visible: true
+        name: Timeout
         description: Your code exceeds the maximum allowed time.
+        type: 1
     '1':
-        type: 1
-        visible: true
-        description: ''
-        id: sigsegv
         name: Segmentation Fault
+        description: ''
+        visible: true
+        id: sigsegv
+        type: 1
     '2':
-        type: 1
-        name: Not compile
         id: not_compile
-        visible: true
-        description: You code does not compile.
-    '3':
-        visible: true
-        description: ''
-        name: Memory Exceeded
         type: 1
-        id: memory
-    '4':
+        description: You code does not compile.
         visible: true
-        id: sigfpe
+        name: Not compile
+    '3':
+        id: memory
         description: ''
+        type: 1
+        visible: true
+        name: Memory Exceeded
+    '4':
+        description: ''
+        visible: true
         type: 1
         name: Floating Point Exception
+        id: sigfpe
     '5':
-        type: 1
-        visible: true
-        name: Double free
         id: double_free
         description: Your code produced a double free.
-    '6':
+        type: 1
+        name: Double free
         visible: true
+    '6':
         name: Banned functions
+        description: You use some banned functions.
+        visible: true
         type: 1
         id: banned_funcs
-        description: You use some banned functions.
     '7':
-        name: Data structures
         type: 2
-        description: Task dealing with data structures and linked list.
         visible: true
+        name: Data structures
+        description: Task dealing with data structures and linked list.
         id: ''
     '8':
-        name: S4
         description: ''
-        type: 2
+        name: S4
         visible: true
+        type: 2
         id: ''
 weight: 1.0

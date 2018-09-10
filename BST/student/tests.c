@@ -15,7 +15,7 @@ void free_bst(node_t* node){
 void test_contains_retok1() {
     set_test_metadata("contains", _("Test contained value"), 1);
 
-    if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+    if(!tree) CU_FAIL(_("Internal error while allocating memory"));
 
     int ret = 12320;
 
@@ -55,7 +55,7 @@ void test_contains_retok1() {
 void test_contains_retok2() {
     set_test_metadata("contains", _("Test complex contained value"), 1);
 
-    if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+    if(!tree) CU_FAIL(_("Internal error while allocating memory"));
 
     int ret = 1213120;
 
@@ -87,7 +87,7 @@ void test_contains_retok2() {
 void test_contains_retnok() {
     set_test_metadata("contains", _("Test not contained value"), 1);
 
-    if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+    if(!tree) CU_FAIL(_("Internal error while allocating memory"));
 
     int ret = 122320;
 
@@ -120,7 +120,7 @@ void test_contains_retnok() {
 void test_contains_retnull() {
     set_test_metadata("contains", _("Test for empty or null tree"), 1);
 
-    if(!tree) CU_FAIL(_("Internal error while alocating memory"));
+    if(!tree) CU_FAIL(_("Internal error while allocating memory"));
 
     bt_t* tree = (bt_t*) malloc(sizeof(bt_t));
     tree->root = 0;
