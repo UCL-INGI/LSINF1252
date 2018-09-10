@@ -18,7 +18,7 @@ void test_1(){
     
     CU_ASSERT_EQUAL(ret,4);
     if(ret != 4){
-        push_info_msg(_("You don't have the right count"));
+        push_info_msg(_("Your function does not return the correct answer for string: \"a\0b\0c\0d\0e\""));
     }
 }
 
@@ -34,7 +34,7 @@ void test_2(){
     
     CU_ASSERT_EQUAL(ret, 2);
     if(ret != 2){
-        push_info_msg(_("Your function does not work for strings beginnig/ending by \\0"));
+        push_info_msg(_("Your function does not work for strings beginning/ending by \\0"));
     }
 }
 
@@ -50,12 +50,12 @@ void test_complexe(){
     
     CU_ASSERT_EQUAL(ret,5);
     if(ret != 5){
-        push_info_msg(_("Your function does not work for more complex strings"));
+        push_info_msg(_("Your function does not work correctly with the following string : \"\0\0\0\0a\\0b\0\\0\""));
     }
 }
 
 void test_null(){
-    set_test_metadata("counting_zero", _("Test with wrong args"), 1);
+    set_test_metadata("counting_zero", _("Test with NULL args"), 1);
     
     char* str4 = NULL;
     int ret = -2;
@@ -66,7 +66,7 @@ void test_null(){
     
     CU_ASSERT_EQUAL(ret, -1);
     if(ret != -1){
-        push_info_msg(_("Your function does not handle NULL strings"));
+        push_info_msg(_("Your function does return -1 if its first argument is NULL"));
     }
 }
 
