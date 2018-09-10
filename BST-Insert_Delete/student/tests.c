@@ -136,7 +136,7 @@ void test_insert_normal() {
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
     ((((compTree->root)->right)->right)->left)->left = init_node("dodo","dodo def");
-    CU_ASSERT_EQUAL(sameTrees(compTree,tree),0);
+    CU_ASSERT_EQUAL(sameTrees(compTree,tree),true);
     if(!sameTrees(compTree,tree))
         push_info_msg(_("Your tree isn't what was expected"));
 }
