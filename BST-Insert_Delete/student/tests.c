@@ -125,9 +125,11 @@ void test_insert_normal(){
     bt_t* compTree = tree1();
 
     monitored.malloc = true;
+    
+    int inserted;
 
     SANDBOX_BEGIN;
-    int inserted = insert(tree, newEnWord, newFrWord);
+    inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 3 malloc (enWord, frWord, node);
@@ -139,7 +141,8 @@ void test_insert_normal(){
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
     ((((compTree->root)->right)->right)->left)->left = init_node("dodo","dodo def");
-    int sameTrees = sameTrees(compTree,tree);
+    int sameTrees;
+    sameTrees = sameTrees(compTree,tree);
     CU_ASSERT_EQUAL(sameTrees,true);
     if(!sameTrees)
         push_info_msg(_("Your tree isn't what was expected"));
@@ -171,11 +174,13 @@ void test_insert_empty_tree(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
+    
+    int inserted;
 
     monitored.malloc = true;
 
     SANDBOX_BEGIN;
-    int inserted = insert(tree, newEnWord, newFrWord);
+    inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 3 malloc (enWord, frWord, node);
