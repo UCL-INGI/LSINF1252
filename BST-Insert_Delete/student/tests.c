@@ -112,9 +112,7 @@ bt_t* tree1(){
 
 
 void test_insert_normal() {
-    CU_ASSERT_EQUAL(1,2);
-    push_info_msg("test");
-    /*
+    push_info_msg(_("test"));
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
     char* newword = "dodo";
@@ -127,7 +125,7 @@ void test_insert_normal() {
     SANDBOX_BEGIN;
     insert(tree, newword, newdef);
     SANDBOX_END;
-
+    
     // check if only 3 malloc (word, definition, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);
@@ -141,7 +139,6 @@ void test_insert_normal() {
     CU_ASSERT_EQUAL(sameTrees(compTree,tree),0);
     if(!sameTrees(compTree,tree))
         push_info_msg(_("Your tree isn't what was expected"));
-    */
 }
 
 int main(int argc,char** argv)
