@@ -15,15 +15,15 @@ problems:
     insert:
         name: Insert a new node into a binary search tree.
         type: code
-        language: C
         default: ''
+        language: C
         header: ''
     delete:
+        type: code
+        language: ''
         default: ''
         header: ''
-        language: ''
         name: Delete a node in a binary search tree
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
