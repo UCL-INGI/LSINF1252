@@ -1,0 +1,32 @@
+accessible: true
+author: Alexandre Gobeaux
+context: ''
+environment: default
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: 'BST : Insert and Delete'
+network_grading: false
+problems:
+    insert:
+        name: Insert a new node into a binary search tree.
+        type: code
+        language: C
+        default: ''
+        header: ''
+    delete:
+        default: ''
+        header: ''
+        language: ''
+        name: Delete a node in a binary search tree
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

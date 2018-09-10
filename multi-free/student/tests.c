@@ -141,6 +141,11 @@ void test_rector_null(){
     if(u == NULL)
         return;
     
+    university_t* u_c = u;
+    char* city_c = u->city;
+    person_t* p_c = u->rector;
+    char* name_c = u->rector->name;
+    
     monitored.free = true;
     
     SANDBOX_BEGIN;
@@ -174,6 +179,11 @@ void test_strings_null(){
     university_t* u = init_u(p,NULL,1800);
     if(u == NULL)
         return;
+    
+    university_t* u_c = u;
+    char* city_c = u->city;
+    person_t* p_c = u->rector;
+    char* name_c = u->rector->name;
     
     monitored.free = true;
     
