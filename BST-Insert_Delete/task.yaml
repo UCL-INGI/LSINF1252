@@ -21,7 +21,7 @@ problems:
     delete:
         default: ''
         header: ''
-        language: ''
+        language: C
         name: Delete a node in a binary search tree
         type: code
 stored_submissions: 0
