@@ -56,8 +56,8 @@ problems:
 
                 /*
                  * @bt: the binary tree, bt != NULL
-                 * @enWord: the key of the new node
-                 * @frWord: the value of the new node
+                 * @enWord: the key of the new node, enWord != NULL
+                 * @frWord: the value of the new node, frWord != NULL
                  * @return: 1 if the new node was inserted, 0 otherwise
                  */
                 int insert(bt_t* bt, char* enWord, char* frWord);
@@ -76,6 +76,10 @@ problems:
 
             .. code-block:: c
 
+                /*
+                 * Find the left-most child of the right subtree of @node.
+                 * @node: node != NULL
+                 */
                 node_t* rightSubtreesLeftMostChild(node_t* node);
         default: ''
         language: c
