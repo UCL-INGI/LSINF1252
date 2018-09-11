@@ -176,6 +176,34 @@ bt_t* tree3(){
     return tree;
 }
 
+bt_t* tree4(){
+    bt_t* tree = init_bt("cat","chat");
+    if(!tree)
+        CU_FAIL(_("Internal error while allocating memory"));
+    node_t* node1 = init_node("animal","animal");
+    node_t* node2 = init_node("deer","biche");
+    node_t* node3 = init_node("creature","créature");
+    node_t* node4 = init_node("elephant","éléphant");
+    node_t* node7 = init_node("sponge","éponge");
+
+    if(!node1 || !node2 || !node3 || !node4 || !node7){
+        freeNode(tree->root);
+        if(node1) freeNode(node1);
+        if(node2) freeNode(node2);
+        if(node3) freeNode(node3);
+        if(node4) freeNode(node4);
+        if(node7) freeNode(node7);
+        free(tree);
+        CU_FAIL(_("Internal error while allocating memory"));
+    }
+    else{
+        (tree->root)->left = node1; (tree->root)->right = node2;
+        node2->left = node3; node2->right = node4;
+        node4->right = node7;
+    }
+    return tree;
+}
+
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
@@ -782,10 +810,10 @@ void test_rightSubtreesLeftMostChild(){
         }
     }
 }
-/*
+
 // TEST TODO, hard to solve...
-void test_delete_two_children(){
-    set_test_metadata("delete", _("Test deleting a simple node with 2 children using the algorithm explained above"),1);
+void test_delete_two_children_tree1(){
+    set_test_metadata("delete", _("Test deleting a simple node (which has 2 children) using the algorithm explained above"),1);
     //student arguments
     bt_t* tree = tree1();
     bt_t* solT = tree1();
@@ -807,23 +835,158 @@ void test_delete_two_children(){
     
     //sol
     node_t* deerdog = (solT->root)->right;
-    deerdog->enWord = "dog";
-    deerdog->frWord = "chien";
+    free(deerdog->enWord); free(deerdog->frWord);
+    deerdog->enWord = dog->enWord;
+    deerdog->frWord = dog->frWord;
     node_t* elephant = deerdog->right;
     node_t* dog = (deerdog->right)->left;
     elephant->left = dog->right; //eagle
+    free(dog);
     
-    dog->right = NULL; // to be able to freeNode dog and not eagle
-    freeNode(dog);
+    monitored.malloc = true;
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree, "deer");
+    SANDBOX_END;
+    
+    int nbMalloc = stats.malloc.called;
+    int nbFree = stats.free.called;
     
     
+    //TODO : you sould use free 3 times or wrong number of free's ?
+    CU_ASSERT_EQUAL(nbFree,3);
+    if(nbFree != 3){
+        push_info_msg(_("You should use free 3 times"));
+    }
     
+    CU_ASSERT_EQUAL(nbMalloc,0);
+    if(nbMalloc != 0){
+        push_info_msg(_("Why are you using malloc ?"));
+    }
     
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
 }
-*/
+
+void test_delete_two_children_tree1_root(){
+    set_test_metadata("delete", _("Test deleting the root node (which has 2 children) using the algorithm explained above"),1);
+    //student arguments
+    bt_t* tree = tree1();
+    bt_t* solT = tree1();
+    
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    char* cat = tree->root;
+    
+    //sol
+    node_t* creature = (cat->right)->left;
+    solT->root = creature;
+    creature->left = cat->left;
+    creature->right = cat->right;
+    free(cat->enWord); free(cat->frWord); free(cat);
+    
+    
+    monitored.malloc = true;
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree, "cat");
+    SANDBOX_END;
+    
+    int nbMalloc = stats.malloc.called;
+    int nbFree = stats.free.called;
+    
+    
+    //TODO : you sould use free 3 times or wrong number of free's ?
+    CU_ASSERT_EQUAL(nbFree,3);
+    if(nbFree != 3){
+        push_info_msg(_("You should use free 3 times"));
+    }
+    
+    CU_ASSERT_EQUAL(nbMalloc,0);
+    if(nbMalloc != 0){
+        push_info_msg(_("Why are you using malloc ?"));
+    }
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+}
+
+void test_delete_two_children_tree4(){
+    set_test_metadata("delete", _("Test deleting a simple node (which has 2 children) using the algorithm explained above. The node's right subtree's leftmost child is node->right"),1);
+    //student arguments
+    bt_t* tree = tree4();
+    bt_t* solT = tree4();
+    
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    char* cat = tree->root;
+    
+    //sol
+    node_t* deer = cat->right;
+    node_t* elephant = deer->right;
+    cat->right = elephant;
+    elephant->left = deer->left;
+    free(deer->enWord); free(deer->frWord); free(deer);
+    //sol built
+    
+    
+    
+    monitored.malloc = true;
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree, "deer");
+    SANDBOX_END;
+    
+    int nbMalloc = stats.malloc.called;
+    int nbFree = stats.free.called;
+    
+    
+    //TODO : you sould use free 3 times or wrong number of free's ?
+    CU_ASSERT_EQUAL(nbFree,3);
+    if(nbFree != 3){
+        push_info_msg(_("You should use free 3 times"));
+    }
+    
+    CU_ASSERT_EQUAL(nbMalloc,0);
+    if(nbMalloc != 0){
+        push_info_msg(_("Why are you using malloc ?"));
+    }
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+}
+
 
 int main(int argc,char** argv)
 {
     BAN_FUNCS(strdut,calloc);
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_rightSubtreesLeftMostChild);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_rightSubtreesLeftMostChild, test_delete_two_children_tree1, test_delete_two_children_tree1_root, test_delete_two_children_tree4);
 }
