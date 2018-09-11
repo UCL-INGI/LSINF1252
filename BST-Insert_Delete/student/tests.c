@@ -232,8 +232,56 @@ void test_insert_null_tree(){
         push_info_msg(_("The returned value should be 1"));
 }
 
+void test_insert_already_inserted(){
+    set_test_metadata("insert", _("Test with an already inserted node"),1);
+    //student arguments
+    bt_t* tree = tree1();
+    char* newEnWord = "cat";
+    char* newFrWord = "chat";
+    
+    //solution
+    bt_t* solT = tree1();
+    
+    if(!tree || !solT){
+        if(tree)
+            free(tree);
+        if(solT)
+            free(solT);
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    monitored.malloc = true;
+    monitored.free = true;
+    int inserted;
+    SANDBOX_BEGIN;
+    inserted = insert(tree, newEnWord, newFrWord);
+    SANDBOX_END;
+    
+    //TODO : on pourrait check la mémoire aussi mais s'il malloc puis free, il aura bon donc que faire?
+    // Check : 0 malloc, 0 free
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 0);
+    if(nbMalloc != 0)
+        push_info_msg(_("You can't use malloc in this case"));
+    
+    int nbFree = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbFree, 0);
+    if(nbFree != 0)
+        push_info_msg(_("Why did you use free ?"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+    
+    CU_ASSERT_EQUAL(inserted, 0);
+    if(inserted != 0)
+        push_info_msg(_("The returned value should be 0"));
+}
+
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree);
+    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted);
 }
