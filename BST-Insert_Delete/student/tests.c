@@ -83,16 +83,16 @@ bt_t* init_bt(char* enWord, char* frWord){
 }
 
 bt_t* tree1(){
-    bt_t* tree = init_bt("cat","a small domesticated carnivorous mammal");
+    bt_t* tree = init_bt("cat","chat");
     if(!tree)
         CU_FAIL(_("Internal error while allocating memory"));
-    node_t* node1 = init_node("animal","animal def");
-    node_t* node2 = init_node("deer","deer def");
-    node_t* node3 = init_node("creature","creature def");
-    node_t* node4 = init_node("elephant","elephant def");
-    node_t* node5 = init_node("dog","dog def");
-    node_t* node6 = init_node("eagle","eagle def");
-    node_t* node7 = init_node("sponge","sponge def");
+    node_t* node1 = init_node("animal","animal");
+    node_t* node2 = init_node("deer","biche");
+    node_t* node3 = init_node("creature","créature");
+    node_t* node4 = init_node("elephant","éléphant");
+    node_t* node5 = init_node("dog","chien");
+    node_t* node6 = init_node("eagle","aigle");
+    node_t* node7 = init_node("sponge","éponge");
 
     if(!node1 || !node2 || !node3 || !node4 || !node5 || !node6 || !node7){
         freeNode(tree->root);
@@ -120,7 +120,7 @@ void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
     char* newEnWord = "dodo";
-    char* newFrWord = "dodo def";
+    char* newFrWord = "dodo";
 
     bt_t* compTree = tree1();
 
@@ -145,7 +145,7 @@ void test_insert_normal(){
         push_info_msg(_("Your tree isn't what was expected"));
     
     CU_ASSERT_EQUAL(inserted, 1);
-    if(inserted == 1)
+    if(inserted != 1)
         push_info_msg(_("The returned value should be 1"));
 }
 
@@ -190,7 +190,7 @@ void test_insert_empty_tree(){
         push_info_msg(_("Your tree isn't what was expected"));
     
     CU_ASSERT_EQUAL(inserted, 1);
-    if(inserted == 1)
+    if(inserted != 1)
         push_info_msg(_("The returned value should be 1"));
 }
 
@@ -235,7 +235,7 @@ void test_insert_null_tree(){
         push_info_msg(_("Your tree isn't what was expected"));
     
     CU_ASSERT_EQUAL(inserted, 1);
-    if(inserted == 1)
+    if(inserted != 1)
         push_info_msg(_("The returned value should be 1"));
 }
 
