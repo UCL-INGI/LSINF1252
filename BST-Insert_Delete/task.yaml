@@ -1,4 +1,4 @@
-accessible: false
+accessible: true
 author: Alexandre Gobeaux
 context: |-
     To help you study your english course, you've got the wonderful idea of creating a Binary Search Tree (BST). This will also help you to study for the LSINF1252 course! The key of each node will be the english word and the value will be the french word corresponding. Those are represented using an array of char.
