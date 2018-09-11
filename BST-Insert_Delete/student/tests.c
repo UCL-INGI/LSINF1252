@@ -157,6 +157,25 @@ bt_t* tree2(){
     return tree;
 }
 
+bt_t* tree3(){
+    bt_t* tree = init_bt("cat","chat");
+    if(!tree)
+        CU_FAIL(_("Internal error while allocating memory"));
+    node_t* node1 = init_node("animal","animal");
+
+    if(!node1){
+        freeNode(tree->root);
+        if(node1) freeNode(node1);
+        free(tree);
+        CU_FAIL(_("Internal error while allocating memory"));
+    }
+    else{
+        // = NULL done in init_node
+        (tree->root)->left = node1;
+    }
+    return tree;
+}
+
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
@@ -619,7 +638,7 @@ void test_delete_node_not_found(){
         push_info_msg(_("Your tree isn't what was expected"));
 }
 
-void test_delete_root(){
+void test_delete_root_replace_null(){
     set_test_metadata("delete", _("Test deleting the root of the tree, with no child"),1);
     //student arguments
     char* enWord = "dodo";
@@ -657,6 +676,42 @@ void test_delete_root(){
         push_info_msg(_("Your tree isn't what was expected"));
 
     //TODO special feedback in case he forgot to do bt->root = NULL ?
+}
+
+void test_delete_root_replace_node(){
+    set_test_metadata("delete", _("Test deleting the root of the tree, with a child"),1);
+    //student arguments
+    bt_t* tree = tree(3);
+    char* enWord = "cat";
+    
+    //solution
+    bt_t* solT = init_bt("animal","animal");
+
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT)
+            free(solT);
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree,enWord);
+    SANDBOX_END;
+
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 3);
+    if(nbFree != 3)
+        push_info_msg(_("Wrong number of free's"));
+
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
 }
 
 void test_delete_empty_tree(){
@@ -787,5 +842,5 @@ void test_rightSubtreesLeftMostChild(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostChild);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostChild);
 }
