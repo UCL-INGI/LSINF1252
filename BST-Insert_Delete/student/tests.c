@@ -1,7 +1,7 @@
 /*
  * 7/7 tests on insert (need the fail malloc + fail malloc with null tree ? il faudrait free le tree du coup ? too hard ?). Question on NULL tree test.
  * 1/1 test on right subtree's leftmost node
- * 6/8-9 tests on delete (need the biggest one, using right subtree's leftmost node)
+ * 7/8-9 tests on delete (need the biggest one, using right subtree's leftmost node)
  */
 
 #include <stdlib.h>
@@ -681,7 +681,7 @@ void test_delete_root_replace_null(){
 void test_delete_root_replace_node(){
     set_test_metadata("delete", _("Test deleting the root of the tree, with a child"),1);
     //student arguments
-    bt_t* tree = tree(3);
+    bt_t* tree = tree3();
     char* enWord = "cat";
     
     //solution
