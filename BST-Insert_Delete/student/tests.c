@@ -741,11 +741,11 @@ void test_rightsubtreesleftmostnode(){
     node_t* eagle = dog->right;
     node_t* sponge = horse->right;
     
-    node_t* catdog, deerdodo, horsesponge, dogeagle;
+    node_t* catcreature, deerdodo, horsesponge, dogeagle;
     monitored.free = true;
     monitored.malloc = true;
     SANDBOX_BEGIN;
-    catdog = rightsubtreesleftmostnode(cat);
+    catcreature = rightsubtreesleftmostnode(cat);
     deerdodo = rightsubtreesleftmostnode(deer);
     horsesponge = rightsubtreesleftmostnode(horse);
     dogeagle = rightsubtreesleftmostnode(dog);
@@ -767,15 +767,15 @@ void test_rightsubtreesleftmostnode(){
         push_info_msg(_("You are not allowed to change the tree."));
     
     if(sameT && !nbMalloc && !nbFree){
-        int dogEquals = catdog == dog;
+        int creatureEquals = cat == creature;
         int dodoEquals = deerdodo == dodo;
         int spongeEquals = horsesponge == sponge;
         int eagleEquals = dogeagle == eagle;
-        CU_ASSERT_EQUAL(dogEquals);
-        CU_ASSERT_EQUAL(dodoEquals);
-        CU_ASSERT_EQUAL(spongeEquals);
-        CU_ASSERT_EQUAL(eagleEquals);
-        if(!dogEquals || !dodoEquals || spongeEquals || eagleEquals ||){
+        CU_ASSERT_EQUAL(creatureEquals,true);
+        CU_ASSERT_EQUAL(dodoEquals,true);
+        CU_ASSERT_EQUAL(spongeEquals,true);
+        CU_ASSERT_EQUAL(eagleEquals,true);
+        if(!creatureEquals || !dodoEquals || spongeEquals || eagleEquals){
             push_info_msg(_("At least one of your 4 outputs was wrong."));
         }
     }
