@@ -831,15 +831,13 @@ void test_delete_two_children_tree1(){
         //TODO return ??? Or CU_FAIL is enough ?
     }
     
-    char* deer = (tree->root)->right;
-    
     //sol
     node_t* deerdog = (solT->root)->right;
     free(deerdog->enWord); free(deerdog->frWord);
+    node_t* dog = (deerdog->right)->left;
     deerdog->enWord = dog->enWord;
     deerdog->frWord = dog->frWord;
     node_t* elephant = deerdog->right;
-    node_t* dog = (deerdog->right)->left;
     elephant->left = dog->right; //eagle
     free(dog);
     
@@ -889,7 +887,7 @@ void test_delete_two_children_tree1_root(){
         //TODO return ??? Or CU_FAIL is enough ?
     }
     
-    char* cat = tree->root;
+    node_t* cat = tree->root;
     
     //sol
     node_t* creature = (cat->right)->left;
@@ -945,7 +943,7 @@ void test_delete_two_children_tree4(){
         //TODO return ??? Or CU_FAIL is enough ?
     }
     
-    char* cat = tree->root;
+    node_t* cat = tree->root;
     
     //sol
     node_t* deer = cat->right;
