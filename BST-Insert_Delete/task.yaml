@@ -39,16 +39,12 @@ groups: false
 input_random: '0'
 limits:
     time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
 name: 'BST : Insert and Delete'
 network_grading: false
 problems:
     insert:
-        type: code
-        default: ''
-        language: c
-        name: Insert function
         header: |-
             Write the body of the ``insert`` function. If you use subfonctions, write them in the box below with their signature and body.
 
@@ -61,16 +57,19 @@ problems:
                  * @return: 1 if the new node was inserted, 0 otherwise
                  */
                 int insert(bt_t* bt, char* enWord, char* frWord);
-    other:
-        name: Subfunctions
-        header: You can write your needed subfunctions here. Don't forget to write
-            their signature and body.
-        optional: 'on'
         default: ''
+        name: Insert function
         type: code
         language: c
-    rightsubtreesleftmostchild:
+    other:
+        name: Subfunctions
         type: code
+        language: c
+        default: ''
+        optional: 'on'
+        header: You can write your needed subfunctions here. Don't forget to write
+            their signature and body.
+    rightsubtreesleftmostchild:
         header: |-
             Write the body of the ``rightSubtreesLeftMostChild`` function.
 
@@ -81,9 +80,10 @@ problems:
                  * @return: the left-most child of the right subtree of node.
                  */
                 node_t* rightSubtreesLeftMostChild(node_t* node);
-        default: ''
         language: c
+        type: code
         name: Right subtree's left-most child
+        default: ''
     delete:
         header: |-
             Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique. Delete the node using the technique explained in the problem statement.
@@ -95,10 +95,10 @@ problems:
                  * @enWord: the key of the node you want to delete, enWord != NULL
                  */
                 void delete(bt_t* bt, char* enWord);
-        language: c
-        default: ''
         type: code
+        default: ''
         name: Delete function
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1

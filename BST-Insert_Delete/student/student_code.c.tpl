@@ -3,11 +3,11 @@
 #include <string.h>
 #include "student_code.h" // necessary ?
 
+@@other@@
+
 int insert(bt_t* bt, char* enWord, char* frWord){
     @@insert@@
 }
-
-@@other@@
 
 node_t* rightSubtreesLeftMostChild(node_t* node){
     @@rightsubtreesleftmostchild@@
