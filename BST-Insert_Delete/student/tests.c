@@ -158,12 +158,9 @@ void test_insert_empty_tree(){
     char* newFrWord = "dodo";
 
     //solution
-    bt_t* solT = malloc(sizeof(bt_t));
-    node_t* node = init_node(newEnWord,newFrWord);
-    solT->root = node;
-    if(!tree || !solT || !node){
-        if(node)
-            free(node);
+    bt_t* solT = init_bt(newEnWord,newFrWord);
+    
+    if(!tree || !solT){
         if(tree)
             free(tree);
         if(solT)
@@ -202,13 +199,9 @@ void test_insert_null_tree(){
     char* newFrWord = "dodo";
 
     //solution
-    bt_t* solT = malloc(sizeof(bt_t));
-    node_t* node = init_node(newEnWord,newFrWord);
-    solT->root = node;
-
-    if(!tree || !solT || !node){
-        if(node)
-            free(node);
+    bt_t* solT = init_bt(newEnWord,newFrWord);
+    
+    if(!tree || !solT){
         if(tree)
             free(tree);
         if(solT)
