@@ -116,6 +116,46 @@ bt_t* tree1(){
     return tree;
 }
 
+bt_t* tree2(){
+    bt_t* tree = init_bt("cat","chat");
+    if(!tree)
+        CU_FAIL(_("Internal error while allocating memory"));
+    node_t* node1 = init_node("animal","animal");
+    node_t* node2 = init_node("deer","biche");
+    node_t* node3 = init_node("creature","créature");
+    node_t* node4 = init_node("horse","cheval");
+    node_t* node5 = init_node("dog","chien");
+    node_t* node6 = init_node("eagle","aigle");
+    node_t* node7 = init_node("sponge","éponge");
+    node_t* node8 = init_node("dodo","dodo");
+    node_t* node9 = init_node("fish","poisson");
+    node_t* node10 = init_node("falcon","faucon");
+
+    if(!node1 || !node2 || !node3 || !node4 || !node5 || !node6 || !node7 || !node8 ||!node9){
+        freeNode(tree->root);
+        if(node1) freeNode(node1);
+        if(node2) freeNode(node2);
+        if(node3) freeNode(node3);
+        if(node4) freeNode(node4);
+        if(node5) freeNode(node5);
+        if(node6) freeNode(node6);
+        if(node7) freeNode(node7);
+        if(node8) freeNode(node8);
+        if(node9) freeNode(node9);
+        free(tree);
+        CU_FAIL(_("Internal error while allocating memory"));
+    }
+    else{
+        // = NULL done in init_node
+        (tree->root)->left = node1; (tree->root)->right = node2;
+        node2->left = node3; node2->right = node4;
+        node4->left = node5; node4->right = node7;
+        node5->left = node8; node5->right = node6;
+        node6->right = node9;
+        node9->left = node10;
+    }
+    return tree;
+}
 
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
@@ -681,6 +721,67 @@ void test_delete_null_tree(){
     if(!sameT)
         push_info_msg(_("Your tree isn't what was expected"));
 
+}
+
+void test_rightsubtreesleftmostnode(){
+    set_test_metadata("delete", _("Multiple normal test cases."),3);
+    //student arguments
+    bt_t* tree = tree2();
+    
+    //solution (check if the student hasn't changed anything to the tree)
+    //useful ? useless ?
+    bt_t* solT = tree2();
+    
+    node_t* cat = tree->root; // test -> creature
+    node_t* deer = cat->right; // test -> dodo
+    node_t* creature = deer->left;
+    node_t* horse = deer->right; // test -> sponge
+    node_t* dog = horse->left; // test -> eagle
+    node_t* dodo = dog->left;
+    node_t* eagle = dog->right;
+    node_t* sponge = horse->right;
+    
+    node_t* catdog, deerdodo, horsesponge, dogeagle;
+    monitored.free = true;
+    monitored.malloc = true;
+    SANDBOX_BEGIN;
+    catdog = rightsubtreesleftmostnode(cat);
+    deerdodo = rightsubtreesleftmostnode(deer);
+    horsesponge = rightsubtreesleftmostnode(horse);
+    dogeagle = rightsubtreesleftmostnode(dog);
+    SANDBOX_END;
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 0);
+    if(nbFree != 0)
+        push_info_msg(_("Why do you use free ?"));
+    
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 0);
+    if(nbMalloc != 0)
+        push_info_msg(_("Why do you use malloc ?"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("You are not allowed to change the tree."));
+    
+    if(sameT && !nbMalloc && !nbFree){
+        int dogEquals = catdog == dog;
+        int dodoEquals = deerdodo == dodo;
+        int spongeEquals = horsesponge == sponge;
+        int eagleEquals = dogeagle == eagle;
+        CU_ASSERT_EQUAL(dogEquals);
+        CU_ASSERT_EQUAL(dodoEquals);
+        CU_ASSERT_EQUAL(spongeEquals);
+        CU_ASSERT_EQUAL(eagleEquals);
+        if(!dogEquals || !dodoEquals || spongeEquals || eagleEquals ||){
+            push_info_msg(_("At least one of your 4 outputs was wrong."));
+        }
+    }
+    
+    
+    
 }
 
 int main(int argc,char** argv)
