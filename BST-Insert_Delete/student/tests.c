@@ -740,77 +740,6 @@ void test_delete_empty_tree(){
 
 }
 
-void test_rightSubtreesLeftMostChild(){
-    set_test_metadata("rightsubtreesleftmostchild", _("Multiple normal test cases."),4);
-    //student arguments
-    bt_t* tree = tree2();
-    
-    //solution (check if the student hasn't changed anything to the tree)
-    //useful ? useless ?
-    bt_t* solT = tree2();
-    
-    if(!tree || !solT){
-        if(tree){
-            freeNode(tree->root);
-            free(tree);
-        }
-        if(solT){
-            freeNode(solT->root);
-            free(solT);
-        }
-        CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
-    }
-    
-    node_t* cat = tree->root; // test -> creature
-    node_t* deer = cat->right; // test -> dodo
-    node_t* creature = deer->left;
-    node_t* horse = deer->right; // test -> sponge
-    node_t* dog = horse->left; // test -> eagle
-    node_t* dodo = dog->left;
-    node_t* eagle = dog->right;
-    node_t* sponge = horse->right;
-    
-    node_t *catcreature, *deerdodo, *horsesponge, *dogeagle;
-    monitored.free = true;
-    monitored.malloc = true;
-    SANDBOX_BEGIN;
-    catcreature = rightSubtreesLeftMostChild(cat);
-    deerdodo = rightSubtreesLeftMostChild(deer);
-    horsesponge = rightSubtreesLeftMostChild(horse);
-    dogeagle = rightSubtreesLeftMostChild(dog);
-    SANDBOX_END;
-    
-    int nbFree = stats.free.called;
-    CU_ASSERT_EQUAL(nbFree, 0);
-    if(nbFree != 0)
-        push_info_msg(_("Why do you use free ?"));
-    
-    int nbMalloc = stats.malloc.called;
-    CU_ASSERT_EQUAL(nbMalloc, 0);
-    if(nbMalloc != 0)
-        push_info_msg(_("Why do you use malloc ?"));
-    
-    int sameT = sameTrees(solT,tree);
-    CU_ASSERT_EQUAL(sameT,true);
-    if(!sameT)
-        push_info_msg(_("You are not allowed to change the tree."));
-    
-    if(sameT && !nbMalloc && !nbFree){
-        int creatureEquals = catcreature == creature;
-        int dodoEquals = deerdodo == dodo;
-        int spongeEquals = horsesponge == sponge;
-        int eagleEquals = dogeagle == eagle;
-        CU_ASSERT_EQUAL(creatureEquals,true);
-        CU_ASSERT_EQUAL(dodoEquals,true);
-        CU_ASSERT_EQUAL(spongeEquals,true);
-        CU_ASSERT_EQUAL(eagleEquals,true);
-        if(!creatureEquals || !dodoEquals || !spongeEquals || !eagleEquals){
-            push_info_msg(_("At least one of your 4 outputs was wrong."));
-        }
-    }
-}
-
 // TEST TODO, hard to solve...
 void test_delete_two_children_tree1(){
     set_test_metadata("delete", _("Test deleting a simple node (which has 2 children) using the algorithm explained above"),1);
@@ -990,5 +919,5 @@ void test_delete_two_children_tree4(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS(strdut,calloc);
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_rightSubtreesLeftMostChild, test_delete_two_children_tree1, test_delete_two_children_tree1_root, test_delete_two_children_tree4);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_delete_two_children_tree1, test_delete_two_children_tree1_root, test_delete_two_children_tree4);
 }
