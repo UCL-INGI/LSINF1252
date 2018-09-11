@@ -280,8 +280,97 @@ void test_insert_already_inserted(){
         push_info_msg(_("The returned value should be 0"));
 }
 
+void test_delete_no_child(){
+    set_test_metadata("delete", _("Test with a node having no child"),1);
+    //student arguments
+    bt_t* tree = tree1();
+    char* enWord = "eagle";
+    
+    bt_t* solT = tree1();
+    freeNode(((((solT->root)->right)->right)->left)->right);
+    ((((solT->root)->right)->right)->left)->right = NULL;
+    //TODO special feedback in case he free's but doesn't put NULL instead ?
+    
+    //TODO monitored malloc to see he isn't doing anything wrong ?
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree,enWord);
+    SANDBOX_END;
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 3);
+    if(nbFree != 3)
+        push_info_msg(_("Wrong number of free's"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+    
+}
+
+void test_delete_one_child(){
+    set_test_metadata("delete", _("Test with a node having only one child"),1);
+    //student arguments
+    bt_t* tree = tree1();
+    char* enWord = "dog";
+    
+    //solution
+    bt_t* solT = tree1();
+    node_t* elephant = ((solT->root)->right)->right;
+    node_t* dog = elephant->left;
+    elephant->left = dog->right;
+    free(dog->enWord);
+    free(dog->frWord);
+    free(dog);
+    
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree,enWord);
+    SANDBOX_END;
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 3);
+    if(nbFree != 3)
+        push_info_msg(_("Wrong number of free's"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+}
+
+void test_delete_two_children(){
+    // TODO
+}
+
+void test_delete_node_not_found(){
+    set_test_metadata("delete", _("Test with a key that isn't in the tree"),1);
+    //student arguments
+    bt_t* tree = tree1();
+    char* enWord = "dodo";
+    
+    //solution
+    bt_t* solT = tree1();
+    
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree,enWord);
+    SANDBOX_END;
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 0);
+    if(nbFree != 0)
+        push_info_msg(_("Wrong number of free's"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+}
+
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted);
+    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found);
 }
