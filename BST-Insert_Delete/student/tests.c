@@ -45,13 +45,13 @@ node_t* init_node(char* enWord, char* frWord){
     node_t* newnode = malloc(sizeof(node_t));
     if(!newnode)
         return NULL;
-    newnode->enWord = (char*) malloc(strlen(enWord));
+    newnode->enWord = (char*) malloc(sizeof(char)*(strlen(enWord)+1));
     if(!(newnode->enWord)){
         free(newnode);
         return NULL;
     }
     strcpy(newnode->enWord,enWord);
-    newnode->frWord = (char*) malloc(strlen(frWord));
+    newnode->frWord = (char*) malloc(sizeof(char)*(strlen(frWord)+1));
     if(!(newnode->frWord)){
         free(newnode->enWord);
         free(newnode);
