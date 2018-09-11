@@ -775,9 +775,13 @@ void test_rightsubtreesleftmostnode(){
         CU_ASSERT_EQUAL(dodoEquals,true);
         CU_ASSERT_EQUAL(spongeEquals,true);
         CU_ASSERT_EQUAL(eagleEquals,true);
-        if(!creatureEquals || !dodoEquals || spongeEquals || eagleEquals){
+        if(!creatureEquals || !dodoEquals || !spongeEquals || !eagleEquals){
             push_info_msg(_("At least one of your 4 outputs was wrong."));
         }
+        push_info_msg(_("Test :"));
+        char char_arr[100];
+        sprintf(char_arr, "%d", creatureEquals);
+        push_info_msg(char_arr);
     }
     
     
@@ -787,5 +791,5 @@ void test_rightsubtreesleftmostnode(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree, test_rightsubtreesleftmostnode);
 }
