@@ -98,6 +98,3 @@ void malloc_log(void *ptr, size_t size);
 int malloced(void *addr);
 // total amount of memory allocated by malloc
 int  malloc_allocated();
-
-// plot using graphviz
-void plot_memory(char *);
