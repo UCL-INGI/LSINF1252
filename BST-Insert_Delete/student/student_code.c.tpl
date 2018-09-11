@@ -7,6 +7,8 @@ int insert(bt_t* bt, char* enWord, char* frWord){
     @@insert@@
 }
 
+@@other@@
+
 node_t* rightSubtreesLeftMostChild(node_t* node){
     @@rightsubtreesleftmostchild@@
 }
