@@ -163,6 +163,156 @@ void test_insert_normal(){
         push_info_msg(_("The returned value should be 1"));
 }
 
+void test_insert_normal_first_malloc_fails(){
+    set_test_metadata("insert", _("Test when malloc fails"), 1);
+    bt_t* tree = tree1();
+    char* newEnWord = "dodo";
+    char* newFrWord = "dodo";
+
+    bt_t* solT = tree1();
+
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    failures.malloc = FAIL_FIRST;
+    monitored.malloc = true;
+    monitored.free = true;
+    int inserted;
+    SANDBOX_BEGIN;
+    inserted = insert(tree, newEnWord, newFrWord);
+    SANDBOX_END;
+
+    // check if only 1 malloc (enWord, frWord, node) since it fails.
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 1);
+    if(nbMalloc != 1)
+        push_info_msg(_("You should have used malloc only once in this case"));
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 0);
+    if(nbFree != 0)
+        push_info_msg(_("You shouldn't have called free"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+
+    CU_ASSERT_EQUAL(inserted, 0);
+    if(inserted != 0)
+        push_info_msg(_("The returned value should be 0"));
+}
+
+void test_insert_normal_second_malloc_fails(){
+    set_test_metadata("insert", _("Test when second malloc fails"), 1);
+    bt_t* tree = tree1();
+    char* newEnWord = "dodo";
+    char* newFrWord = "dodo";
+
+    bt_t* solT = tree1();
+
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    failures.malloc = FAIL_SECOND;
+    monitored.malloc = true;
+    monitored.free = true;
+    int inserted;
+    SANDBOX_BEGIN;
+    inserted = insert(tree, newEnWord, newFrWord);
+    SANDBOX_END;
+
+    // check if only 2 malloc (enWord, frWord, node) since the second one fails.
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 2);
+    if(nbMalloc != 2)
+        push_info_msg(_("You should have used malloc only twice in this case"));
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 1);
+    if(nbFree != 1)
+        push_info_msg(_("You should have called free once"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+
+    CU_ASSERT_EQUAL(inserted, 0);
+    if(inserted != 0)
+        push_info_msg(_("The returned value should be 0"));
+}
+
+void test_insert_normal_third_malloc_fails(){
+    set_test_metadata("insert", _("Test when third malloc fails"), 1);
+    bt_t* tree = tree1();
+    char* newEnWord = "dodo";
+    char* newFrWord = "dodo";
+
+    bt_t* solT = tree1();
+
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    failures.malloc = FAIL_THIRD;
+    monitored.malloc = true;
+    monitored.free = true;
+    int inserted;
+    SANDBOX_BEGIN;
+    inserted = insert(tree, newEnWord, newFrWord);
+    SANDBOX_END;
+
+    // check if only 3 malloc (enWord, frWord, node)
+    int nbMalloc = stats.malloc.called;
+    CU_ASSERT_EQUAL(nbMalloc, 3);
+    if(nbMalloc != 3)
+        push_info_msg(_("You should have used malloc only three times in this case"));
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 2);
+    if(nbFree != 2)
+        push_info_msg(_("You should have called free twice"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+
+    CU_ASSERT_EQUAL(inserted, 0);
+    if(inserted != 0)
+        push_info_msg(_("The returned value should be 0"));
+}
+
 void test_insert_empty_tree(){
     set_test_metadata("insert", _("Test with an empty tree"),1);
     //student arguments
@@ -536,5 +686,5 @@ void test_delete_null_tree(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree);
 }
