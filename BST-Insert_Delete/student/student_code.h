@@ -11,6 +11,4 @@ typedef struct bt {
 
 int insert(bt_t* bt, char* enWord, char* frWord);
 
-node_t* rightSubtreesLeftMostChild(node_t* node);
-
 void delete(bt_t* bt, char* enWord);

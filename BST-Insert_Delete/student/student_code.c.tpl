@@ -9,10 +9,6 @@ int insert(bt_t* bt, char* enWord, char* frWord){
     @@insert@@
 }
 
-node_t* rightSubtreesLeftMostChild(node_t* node){
-    @@rightsubtreesleftmostchild@@
-}
-
 void delete(bt_t* bt, char* enWord){
     @@delete@@
 }
