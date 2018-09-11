@@ -55,7 +55,10 @@ problems:
             .. code-block:: c
 
                 /*
-                 * Return 1 if the new node was inserted, 0 otherwise.
+                 * @bt: the binary tree, bt != NULL
+                 * @enWord: the key of the new node
+                 * @frWord: the value of the new node
+                 * @return: 1 if the new node was inserted, 0 otherwise
                  */
                 int insert(bt_t* bt, char* enWord, char* frWord);
     other:
