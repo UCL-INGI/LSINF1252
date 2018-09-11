@@ -369,8 +369,39 @@ void test_delete_node_not_found(){
         push_info_msg(_("Your tree isn't what was expected"));
 }
 
+void test_delete_root(){
+    set_test_metadata("delete", _("Test deleting the root of the tree, with no child"),1);
+    //student arguments
+    char* enWord = "dodo";
+    char* frWord = "dodo";
+    bt_t* tree = init_bt(enWord, frWord);
+    
+    //solution
+    bt_t* solT = malloc(sizeof(bt_t));
+    solT->root = NULL;
+    
+    monitored.free = true;
+    SANDBOX_BEGIN;
+    delete(tree,enWord);
+    SANDBOX_END;
+    
+    int nbFree = stats.free.called;
+    CU_ASSERT_EQUAL(nbFree, 3);
+    if(nbFree != 3)
+        push_info_msg(_("Wrong number of free's"));
+    
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
+    
+    //TODO special feedback in case he forgot to do bt->root = NULL ?
+}
+
+
+
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found);
+    RUN(test_insert_normal, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root);
 }
