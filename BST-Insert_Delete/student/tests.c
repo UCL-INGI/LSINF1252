@@ -723,8 +723,8 @@ void test_delete_null_tree(){
 
 }
 
-void test_rightSubtreesLeftMostNode(){
-    set_test_metadata("rightSubtreesLeftMostNode", _("Multiple normal test cases."),4);
+void test_rightSubtreesLeftMostChild(){
+    set_test_metadata("rightsubtreesleftmostchild", _("Multiple normal test cases."),4);
     //student arguments
     bt_t* tree = tree2();
     
@@ -791,5 +791,5 @@ void test_rightSubtreesLeftMostNode(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS();
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostNode);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostChild);
 }
