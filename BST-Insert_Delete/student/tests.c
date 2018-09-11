@@ -43,8 +43,10 @@ int sameTrees(bt_t* compTree, bt_t* tree){
             msg = strcat("compTree NULL, tree : ", tree->root->enWord);
         }
         else{
-            msg = (char*)malloc(sizeof(char)*100);
+            /*
+            msg = (char*)calloc(1,sizeof(char)*100);
             msg = "tree NULL, ";
+            */
             strcat(msg, compTree->root->enWord);
         }
         return false;
