@@ -40,12 +40,12 @@ int sameTrees(bt_t* compTree, bt_t* tree){
     if(compTree == NULL || tree == NULL){
         if(!compTree){
             msg = (char*)malloc(sizeof(char)*100);
-            msg = strcat("compTree NULL, tree : ", tree.root);
-        }
+            msg = strcat("compTree NULL, tree : ", tree->root->enWord);
+        }/*
         else{
             msg = (char*)malloc(sizeof(char)*100);
-            msg = strcat("tree NULL, compTree : ", compTree.root);
-        }
+            msg = strcat("tree NULL, compTree : ", compTree->root->enWord);
+        }*/
         return false;
     }
     return sameNodes(compTree->root, tree->root);
