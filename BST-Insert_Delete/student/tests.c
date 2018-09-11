@@ -741,14 +741,14 @@ void test_rightsubtreesleftmostnode(){
     node_t* eagle = dog->right;
     node_t* sponge = horse->right;
     
-    node_t* catcreature, deerdodo, horsesponge, dogeagle;
+    node_t *catcreature, *deerdodo, *horsesponge, *dogeagle;
     monitored.free = true;
     monitored.malloc = true;
     SANDBOX_BEGIN;
-    catcreature = rightsubtreesleftmostnode(cat);
-    deerdodo = rightsubtreesleftmostnode(deer);
-    horsesponge = rightsubtreesleftmostnode(horse);
-    dogeagle = rightsubtreesleftmostnode(dog);
+    catcreature = rightSubtreesLeftMostChild(cat);
+    deerdodo = rightSubtreesLeftMostChild(deer);
+    horsesponge = rightSubtreesLeftMostChild(horse);
+    dogeagle = rightSubtreesLeftMostChild(dog);
     SANDBOX_END;
     
     int nbFree = stats.free.called;
@@ -767,7 +767,7 @@ void test_rightsubtreesleftmostnode(){
         push_info_msg(_("You are not allowed to change the tree."));
     
     if(sameT && !nbMalloc && !nbFree){
-        int creatureEquals = cat == creature;
+        int creatureEquals = catcreature == creature;
         int dodoEquals = deerdodo == dodo;
         int spongeEquals = horsesponge == sponge;
         int eagleEquals = dogeagle == eagle;
