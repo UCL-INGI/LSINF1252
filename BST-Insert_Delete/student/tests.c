@@ -1,5 +1,5 @@
 /*
- * 4/5 tests on insert (need the fail malloc + the insert not done because key is already present). Question on NULL tree test.
+ * 4/5 tests on insert (need the fail malloc + fail malloc with null tree ? il faudrait free le tree du coup ? too hard ?). Question on NULL tree test.
  * 0/5 tests on delete
  * 0/? test on right subtree's leftmost node
  */
