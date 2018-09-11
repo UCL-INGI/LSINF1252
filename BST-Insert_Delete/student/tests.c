@@ -1,7 +1,7 @@
 /*
- * 4/5 tests on insert (need the fail malloc + fail malloc with null tree ? il faudrait free le tree du coup ? too hard ?). Question on NULL tree test.
- * 0/5 tests on delete
- * 0/? test on right subtree's leftmost node
+ * 7/7 tests on insert (need the fail malloc + fail malloc with null tree ? il faudrait free le tree du coup ? too hard ?). Question on NULL tree test.
+ * 1/1 test on right subtree's leftmost node
+ * 6/8-9 tests on delete (need the biggest one, using right subtree's leftmost node)
  */
 
 #include <stdlib.h>
@@ -778,10 +778,6 @@ void test_rightSubtreesLeftMostChild(){
         if(!creatureEquals || !dodoEquals || !spongeEquals || !eagleEquals){
             push_info_msg(_("At least one of your 4 outputs was wrong."));
         }
-        push_info_msg(_("Test :"));
-        char char_arr[100];
-        sprintf(char_arr, "%d", creatureEquals);
-        push_info_msg(char_arr);
     }
     
     
