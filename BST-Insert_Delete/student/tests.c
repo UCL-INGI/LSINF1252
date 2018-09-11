@@ -1,5 +1,5 @@
 /*
- * 3/5 tests on insert (need the fail malloc + the insert not done because key is already present)
+ * 3/5 tests on insert (need the fail malloc + the insert not done because key is already present). Question on NULL tree test.
  * 0/5 tests on delete
  * 0/? test on right subtree's leftmost node
  */
@@ -10,46 +10,21 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
-char* msg;
-
 int sameNodes(node_t* node1, node_t* node2){
     if(node1 == NULL && node2 == NULL)
         return true;
-    if(node1 == NULL || node2 == NULL){
-        if(!node1){
-            msg = (char*)malloc(sizeof(char)*100);
-            msg = strcat("node1 NULL, node2 : ", node2->enWord);
-        }
-        else{
-            msg = (char*)malloc(sizeof(char)*100);
-            msg = strcat("node2 NULL, node1 : ", node1->enWord); 
-        }
+    if(node1 == NULL || node2 == NULL)
         return false;
-    }
-    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord)){
-        msg = (char*)malloc(sizeof(char)*100);
-        msg = strcat(node1->enWord, node2->enWord);
+    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord))
         return false;
-    }
     return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
 
 int sameTrees(bt_t* compTree, bt_t* tree){
     if(compTree == NULL && tree == NULL)
         return true;
-    if(compTree == NULL || tree == NULL){
-        if(!compTree){
-            msg = (char*)malloc(sizeof(char)*100);
-            msg = strcat("compTree NULL, tree : ", tree->root->enWord);
-        }
-        else{
-            msg = (char*)calloc(1,sizeof(char)*100);
-            msg = "tree NULL, ";
-            
-            //strcat(msg, compTree->root->enWord);
-        }
+    if(compTree == NULL || tree == NULL)
         return false;
-    }
     return sameNodes(compTree->root, tree->root);
 }
 
@@ -250,7 +225,7 @@ void test_insert_null_tree(){
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
-        push_info_msg(msg);
+        push_info_msg(_("Your tree isn't what was expected"));
     
     CU_ASSERT_EQUAL(inserted, 1);
     if(inserted != 1)
