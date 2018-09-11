@@ -3,7 +3,7 @@
 #include <string.h>
 #include "student_code.h" // necessary ?
 
-int insert(bt_t* bt, char* enWord, char* definition){
+int insert(bt_t* bt, char* enWord, char* frWord){
     @@insert@@
 }
 

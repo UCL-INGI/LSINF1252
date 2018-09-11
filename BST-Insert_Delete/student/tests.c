@@ -125,9 +125,9 @@ void test_insert_normal(){
     bt_t* compTree = tree1();
 
     monitored.malloc = true;
-
+    int inserted;
     SANDBOX_BEGIN;
-    int inserted = insert(tree, newEnWord, newFrWord);
+    inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 3 malloc (enWord, frWord, node);
@@ -173,9 +173,9 @@ void test_insert_empty_tree(){
     }
 
     monitored.malloc = true;
-
+    int inserted;
     SANDBOX_BEGIN;
-    int inserted = insert(tree, newEnWord, newFrWord);
+    inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 3 malloc (enWord, frWord, node);
@@ -218,9 +218,9 @@ void test_insert_null_tree(){
     }
 
     monitored.malloc = true;
-
+    int inserted;
     SANDBOX_BEGIN;
-    int inserted = insert(tree, newEnWord, newFrWord);
+    inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
     // check if only 4 malloc (enWord, frWord, node);
