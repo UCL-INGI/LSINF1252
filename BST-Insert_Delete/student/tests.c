@@ -859,7 +859,9 @@ void test_delete_two_children_tree1_root(){
 }
 
 void test_delete_two_children_tree4(){
-    set_test_metadata("delete", _("Test deleting a simple node (which has 2 children) using the algorithm explained above. The node's right subtree's leftmost child is node->right"),1);
+    set_test_metadata("delete", _("Test deleting a simple node (which has 2 children) using the algorithm explained above. The node's right subtree's leftmost child is node->right"),1000);
+    CU_ASSERT_EQUAL(true,false);
+    push_info_msg(_("Tu pues Louis"));
     //student arguments
     bt_t* tree = tree4();
     bt_t* solT = tree4();
