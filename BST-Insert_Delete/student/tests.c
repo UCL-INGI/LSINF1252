@@ -41,11 +41,12 @@ int sameTrees(bt_t* compTree, bt_t* tree){
         if(!compTree){
             msg = (char*)malloc(sizeof(char)*100);
             msg = strcat("compTree NULL, tree : ", tree->root->enWord);
-        }/*
+        }
         else{
             msg = (char*)malloc(sizeof(char)*100);
-            msg = strcat("tree NULL, compTree : ", compTree->root->enWord);
-        }*/
+            msg = "tree NULL, ";
+            strcat(msg, compTree->root->enWord);
+        }
         return false;
     }
     return sameNodes(compTree->root, tree->root);
@@ -248,7 +249,7 @@ void test_insert_null_tree(){
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
-        push_info_msg(_("Your tree isn't what was expected"));
+        push_info_msg(msg);
     
     CU_ASSERT_EQUAL(inserted, 1);
     if(inserted != 1)
