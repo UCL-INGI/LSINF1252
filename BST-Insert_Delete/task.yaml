@@ -76,7 +76,7 @@ problems:
             .. code-block:: c
 
                 /*
-                 * @node: node != NULL
+                 * @node: node has 2 children, node != NULL
                  * @return: the left-most child of the right subtree of node.
                  */
                 node_t* rightSubtreesLeftMostChild(node_t* node);
