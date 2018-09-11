@@ -889,14 +889,16 @@ void test_delete_two_children_tree1_root(){
         //TODO return ??? Or CU_FAIL is enough ?
     }
     
-    node_t* cat = tree->root;
-    
     //sol
-    node_t* creature = (cat->right)->left;
+    node_t* cat = solT->root;
+    node_t* deer = cat->right;
+    node_t* creature = deer->left;
     solT->root = creature;
     creature->left = cat->left;
     creature->right = cat->right;
     free(cat->enWord); free(cat->frWord); free(cat);
+    deer->left = NULL;
+    
     
     char* catStr = "cat";
     
