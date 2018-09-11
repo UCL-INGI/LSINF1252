@@ -10,21 +10,39 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+char* msg = malloc(sizeof(char)*100);
+
 int sameNodes(node_t* node1, node_t* node2){
     if(node1 == NULL && node2 == NULL)
         return true;
-    if(node1 == NULL || node2 == NULL)
+    if(node1 == NULL || node2 == NULL){
+        if(!node1){
+            msg = strcat("node1 NULL, node2 : ", node2->enWord);
+        }
+        else{
+            msg = strcat("node2 NULL, node1 : ", node1->enWord); 
+        }
         return false;
-    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord))
+    }
+    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord)){
+        msg = strcat(node1->enWord, node2->enWord);
         return false;
+    }
     return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
 
 int sameTrees(bt_t* compTree, bt_t* tree){
     if(compTree == NULL && tree == NULL)
         return true;
-    if(compTree == NULL || tree == NULL)
+    if(compTree == NULL || tree == NULL){
+        if(!compTree){
+            msg = strcat("compTree NULL, tree : ", tree.root);
+        }
+        else{
+            msg = strcat("tree NULL, compTree : ", compTree.root);
+        }
         return false;
+    }
     return sameNodes(compTree->root, tree->root);
 }
 
