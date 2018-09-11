@@ -898,11 +898,12 @@ void test_delete_two_children_tree1_root(){
     creature->right = cat->right;
     free(cat->enWord); free(cat->frWord); free(cat);
     
+    char* catStr = "cat";
     
     monitored.malloc = true;
     monitored.free = true;
     SANDBOX_BEGIN;
-    delete(tree, "cat");
+    delete(tree, catStr);
     SANDBOX_END;
     
     int nbMalloc = stats.malloc.called;
@@ -955,12 +956,12 @@ void test_delete_two_children_tree4(){
     free(deer->enWord); free(deer->frWord); free(deer);
     //sol built
     
-    
+    char* deerStr = "deer";
     
     monitored.malloc = true;
     monitored.free = true;
     SANDBOX_BEGIN;
-    delete(tree, "deer");
+    delete(tree, deerStr);
     SANDBOX_END;
     
     int nbMalloc = stats.malloc.called;
@@ -988,5 +989,5 @@ void test_delete_two_children_tree4(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS(strdut,calloc);
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_rightSubtreesLeftMostChild, test_delete_two_children_tree1);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_rightSubtreesLeftMostChild, test_delete_two_children_tree1, test_delete_two_children_tree1_root);
 }
