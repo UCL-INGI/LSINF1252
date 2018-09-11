@@ -138,7 +138,7 @@ void test_insert_normal(){
     //TODO Hard coded feature ? better to compare with a real tree ?
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
-    ((((compTree->root)->right)->right)->left)->left = init_node("dodo","dodo def");
+    ((((compTree->root)->right)->right)->left)->left = init_node("dodo","dodo");
     int sameT = sameTrees(compTree,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
