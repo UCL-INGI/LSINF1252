@@ -417,45 +417,6 @@ void test_insert_empty_tree(){
         push_info_msg(_("The returned value should be 1"));
 }
 
-void test_insert_null_tree(){
-    set_test_metadata("insert", _("Test with a null tree"),1);
-    //student arguments
-    bt_t* tree = NULL;
-    char* newEnWord = "dodo";
-    char* newFrWord = "dodo";
-
-    //solution
-    bt_t* solT = init_bt(newEnWord,newFrWord);
-
-    if(!solT){
-        //free(newEnword);
-        //free(newFrWord);
-        CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
-    }
-
-    monitored.malloc = true;
-    int inserted;
-    SANDBOX_BEGIN;
-    inserted = insert(tree, newEnWord, newFrWord);
-    SANDBOX_END;
-
-    // check if only 4 malloc (enWord, frWord, node);
-    int nbMalloc = stats.malloc.called;
-    CU_ASSERT_EQUAL(nbMalloc, 4);
-    if(nbMalloc != 4)
-        push_info_msg(_("You can only use 4 calls to malloc for this case"));
-
-    int sameT = sameTrees(solT,tree);
-    CU_ASSERT_EQUAL(sameT,true);
-    if(!sameT)
-        push_info_msg(_("Your tree isn't what was expected"));
-
-    CU_ASSERT_EQUAL(inserted, 1);
-    if(inserted != 1)
-        push_info_msg(_("The returned value should be 1"));
-}
-
 void test_insert_already_inserted(){
     set_test_metadata("insert", _("Test with an already inserted node"),1);
     //student arguments
@@ -891,5 +852,5 @@ void test_delete_two_children(){
 int main(int argc,char** argv)
 {
     BAN_FUNCS(strdut,calloc);
-    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostChild);
+    RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostChild);
 }
