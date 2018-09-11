@@ -787,6 +787,19 @@ void test_rightSubtreesLeftMostChild(){
     //useful ? useless ?
     bt_t* solT = tree2();
     
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
     node_t* cat = tree->root; // test -> creature
     node_t* deer = cat->right; // test -> dodo
     node_t* creature = deer->left;
@@ -834,13 +847,49 @@ void test_rightSubtreesLeftMostChild(){
             push_info_msg(_("At least one of your 4 outputs was wrong."));
         }
     }
+}
+/*
+// TEST TODO, hard to solve...
+void test_delete_two_children(){
+    set_test_metadata("delete", _("Test deleting a simple node with 2 children using the algorithm explained above"),1);
+    //student arguments
+    bt_t* tree = tree1();
+    bt_t* solT = tree1();
+    
+    if(!tree || !solT){
+        if(tree){
+            freeNode(tree->root);
+            free(tree);
+        }
+        if(solT){
+            freeNode(solT->root);
+            free(solT);
+        }
+        CU_FAIL(_("Internal error while allocating memory"));
+        //TODO return ??? Or CU_FAIL is enough ?
+    }
+    
+    char* deer = (tree->root)->right;
+    
+    //sol
+    node_t* deerdog = (solT->root)->right;
+    deerdog->enWord = "dog";
+    deerdog->frWord = "chien";
+    node_t* elephant = deerdog->right;
+    node_t* dog = (deerdog->right)->left;
+    elephant->left = dog->right; //eagle
+    
+    dog->right = NULL; // to be able to freeNode dog and not eagle
+    freeNode(dog);
+    
     
     
     
 }
+*/
 
 int main(int argc,char** argv)
 {
-    BAN_FUNCS();
+    BAN_FUNCS(strdut,calloc);
     RUN(test_insert_normal, test_insert_normal_first_malloc_fails, test_insert_normal_second_malloc_fails, test_insert_normal_third_malloc_fails, test_insert_empty_tree, test_insert_null_tree, test_insert_already_inserted, test_delete_no_child, test_delete_one_child, test_delete_node_not_found, test_delete_root_replace_null, test_delete_root_replace_node, test_delete_empty_tree, test_delete_null_tree, test_rightSubtreesLeftMostChild);
 }
