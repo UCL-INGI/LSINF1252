@@ -29,8 +29,8 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    time: '30'
     memory: '100'
+    time: '30'
     output: '2'
 name: '[S3] Multi-free'
 network_grading: false
@@ -38,6 +38,8 @@ order: 29
 problems:
     free_all:
         language: c
+        default: ''
+        name: Free all
         type: code
         header: |-
             Write the body of the function ``free_all``.
@@ -49,17 +51,15 @@ problems:
                  * @pre: u != NULL
                  */
                  void free_all(university_t* u){
-        default: ''
-        name: Free all
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        type: 2
-        visible: true
-        name: S3
         description: ''
+        visible: true
+        type: 2
+        name: S3
         id: ''
 weight: 1.0

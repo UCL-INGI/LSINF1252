@@ -739,8 +739,6 @@ void test_delete_one_child(){
     free(dog->frWord);
     free(dog);
 
-    //to be sure he free's the node after the key and value
-    void *ptr = (void*) (((((tree->root)->right)->right)->left)->right);
 
     monitored.free = true;
     SANDBOX_BEGIN;
@@ -751,11 +749,10 @@ void test_delete_one_child(){
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
         push_info_msg(_("You should use free 3 times"));
-}
-int sameT = sameTrees(solT,tree);
-CU_ASSERT_EQUAL(sameT,true);
-if(!sameT)
-    push_info_msg(_("Your tree isn't what was expected"));
+    int sameT = sameTrees(solT,tree);
+    CU_ASSERT_EQUAL(sameT,true);
+    if(!sameT)
+        push_info_msg(_("Your tree isn't what was expected"));
 }
 
 void test_delete_node_not_found(){

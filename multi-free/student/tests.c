@@ -128,10 +128,11 @@ void test_success(){
         push_info_msg(_("You did not free the memory associated with the rector's name"));
     }
     
-    
-    
-    
-    
+    void *last_ptr = (void*) stats.free.last_params.ptr;
+    void *ptr = (void*) tmp_head;
+    CU_ASSERT_EQUAL(ptr, last_ptr);
+    if (ptr != last_ptr)
+    push_info_msg(_("The last free you should do is on the struct"));
 }
 
 void test_rector_null(){
@@ -169,6 +170,12 @@ void test_rector_null(){
     if(verif_city != false){
         push_info_msg(_("You did not free the memory associated with the city"));
     }
+    
+    void *last_ptr = (void*) stats.free.last_params.ptr;
+    void *ptr = (void*) tmp_head;
+    CU_ASSERT_EQUAL(ptr, last_ptr);
+    if (ptr != last_ptr)
+    push_info_msg(_("The last free you should do is on the struct"));
 }
 
 void test_strings_null(){
@@ -212,6 +219,12 @@ void test_strings_null(){
     if(verif_rector != false){
         push_info_msg(_("You did not free the memory associated with the rector"));
     }
+    
+    void *last_ptr = (void*) stats.free.last_params.ptr;
+    void *ptr = (void*) tmp_head;
+    CU_ASSERT_EQUAL(ptr, last_ptr);
+    if (ptr != last_ptr)
+    push_info_msg(_("The last free you should do is on the struct"));
 }
 
 /*
