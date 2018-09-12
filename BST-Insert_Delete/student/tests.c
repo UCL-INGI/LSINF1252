@@ -231,6 +231,8 @@ void test_insert_normal(){
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
+    enWord = "wordChanged";
+    
     // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);

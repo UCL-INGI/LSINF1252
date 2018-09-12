@@ -38,14 +38,14 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
+    memory: '100'
     time: '30'
     output: '2'
-    memory: '100'
 name: 'BST : Insert and Delete'
 network_grading: false
 problems:
     insert:
-        name: Insert function
+        type: code
         header: |-
             Write the body of the ``insert`` function. If you use subfonctions, write them in the box below with their signature and body.
 
@@ -58,17 +58,17 @@ problems:
                  * @return: 1 if the new node was inserted, 0 otherwise
                  */
                 int insert(bt_t* bt, char* enWord, char* frWord);
-        default: ''
-        type: code
         language: c
+        default: ''
+        name: Insert function
     other:
-        name: Subfunctions
-        type: code
-        language: c
-        default: ''
-        optional: 'on'
         header: You can write your needed subfunctions here. Don't forget to write
             their signature and body.
+        default: ''
+        language: c
+        type: code
+        name: Subfunctions
+        optional: 'on'
     delete:
         header: |-
             Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique. Delete the node using the technique explained in the problem statement.
@@ -80,9 +80,9 @@ problems:
                  * @enWord: the key of the node you want to delete, enWord != NULL
                  */
                 void delete(bt_t* bt, char* enWord);
-        type: code
         default: ''
         name: Delete function
+        type: code
         language: c
 stored_submissions: 0
 submission_limit:
