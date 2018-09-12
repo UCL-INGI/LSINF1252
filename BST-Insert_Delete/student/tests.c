@@ -209,6 +209,10 @@ void test_insert_normal(){
     bt_t* tree = tree1();
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
+    
+    char str[10];
+    sprintf(str, "%zd", logs.malloc.log[0].size);
+    push_info_msg(str);
 
     bt_t* solT = tree1();
 
