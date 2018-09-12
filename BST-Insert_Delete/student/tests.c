@@ -1,9 +1,3 @@
-/*
- * 7/7 tests on insert (need the fail malloc + fail malloc with null tree ? il faudrait free le tree du coup ? too hard ?). Question on NULL tree test.
- * 1/1 test on right subtree's leftmost node
- * 7/8-9 tests on delete (need the biggest one, using right subtree's leftmost node)
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

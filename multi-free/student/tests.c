@@ -129,7 +129,7 @@ void test_success(){
     }
     
     void *last_ptr = (void*) stats.free.last_params.ptr;
-    void *ptr = (void*) tmp_head;
+    void *ptr = (void*) verif_u;
     CU_ASSERT_EQUAL(ptr, last_ptr);
     if (ptr != last_ptr)
     push_info_msg(_("The last free you should do is on the struct"));
@@ -172,7 +172,7 @@ void test_rector_null(){
     }
     
     void *last_ptr = (void*) stats.free.last_params.ptr;
-    void *ptr = (void*) tmp_head;
+    void *ptr = (void*) verif_u;
     CU_ASSERT_EQUAL(ptr, last_ptr);
     if (ptr != last_ptr)
     push_info_msg(_("The last free you should do is on the struct"));
@@ -221,7 +221,7 @@ void test_strings_null(){
     }
     
     void *last_ptr = (void*) stats.free.last_params.ptr;
-    void *ptr = (void*) tmp_head;
+    void *ptr = (void*) verif_u;
     CU_ASSERT_EQUAL(ptr, last_ptr);
     if (ptr != last_ptr)
     push_info_msg(_("The last free you should do is on the struct"));
