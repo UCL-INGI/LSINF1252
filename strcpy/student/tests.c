@@ -50,11 +50,11 @@ void test_strcpy_return() {
         }
         free(ret);
     }
-    else if(!mal){
+    if(!mal){
         push_info_msg(_("The returned pointer is not malloced"));
         set_tag("malloc_fail");
     }
-    else{ // ms = false
+    if(cs){
         push_info_msg(_("You should use malloc for this task. Calloc could also work but it's not efficient to use it here since we initialise the memory just after we allocate it"));
     }
 }

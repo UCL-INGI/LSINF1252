@@ -1,5 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<sys/stat.h>
+#include<sys/mman.h>
+#include<fcntl.h>
+#include<unistd.h>
 #include "student_code.h"
 
 studen_t* load_linked_list(char* filename){
