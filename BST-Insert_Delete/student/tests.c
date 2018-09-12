@@ -278,9 +278,11 @@ void test_insert_normal(){
         size[1]= logs.malloc.log[count+1].size;
         size[2] = logs.malloc.log[count+2].size;
         if(!containsArray(size,3,32)){
+            CU_ASSERT_EQUAL(true,false); //TODO other way
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
         }
         if(containsArray(size,3,5) != 2){
+            CU_ASSERT_EQUAL(true,false); //TODO other way
             //TODO Question : why \\\\ for only one backslash ?
             push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\\\\0' character !"));
         }
