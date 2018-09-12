@@ -1,17 +1,19 @@
 accessible: false
 author: Louis Navarre
-context: |+
+context: |-
     Given a file containing a linked list of the structure *student_t* following, you have to write a function to load the entire linked list from the file and to return a pointer to the head of this linked list. Assume that, in the file, if **a** is followed by **b**, you will have ``a->next = b``.
 
     .. code-block:: c
 
         typedef struct student{
             struct student* next;
+            char* name;
             int noma;
         } student_t;
 
     In this exercice, you **cannot** use *fopen*, *read*, *write*, *fread*, *fwrite*, *fgetc*, *fgets*, which means that you must use `mmap(2). <https://sites.uclouvain.be/SystInfo/manpages/man2/mmap.2.html>`_
 
+    In case of error (using malloc), you have to free **all** the memory you have allocated.
 environment: cpp
 evaluate: best
 groups: false

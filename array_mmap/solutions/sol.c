@@ -40,5 +40,13 @@ student_t *load_linked_list(char* filename){
     
     memcpy((void*) root, (void*)&map[0], sizeof(student_t));
     
-    student_t* previous = NULL;
+    student_t* previous = root;
+    
+    int i;
+    for(i = 0; i < length_by_struct; i++){
+        student_t* new = (student_t*)malloc(sizeof(student_t));
+        if(new == NULL){
+            //must free all allocated memory
+        }
+    }
 }
