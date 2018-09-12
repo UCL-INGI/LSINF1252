@@ -7,7 +7,7 @@ context: |-
     .. code-block:: c
 
         typedef struct bt {
-            struct node* root;
+            struct node *root;
         } bt_t;
 
         typedef struct node {
@@ -17,8 +17,14 @@ context: |-
             struct node *right;
         } node_t;
 
+    **What is a Binary Search Tree (BST) ?**
+
+    A Binary Search Tree is a tree for which every node has a special property : the subtree defined by node.left only contains keys(enWord) lower than the node's key. Similarly, the subtree defined by node.right only contains keys higher than the node's key. This is helpful when searching for a specific key in the data structure.
+
     TODO : SCHEME NEEDED + EXPLAIN WHICH NODE IS THE ROOT.
     + CHANGE THE CODE : word -> enWord, definition -> frWord.
+
+    **Your mission**
 
     Your mission will be to implement the **insert** and the **delete** functions.
 
