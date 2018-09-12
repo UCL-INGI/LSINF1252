@@ -86,6 +86,7 @@ problems:
     delete:
         header: |-
             Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique. Delete the node using the technique explained in the problem statement.
+            **Note :** You can write subfonctions (if needed) at the same place as for the *insert* function.
 
             .. code-block:: c
 
