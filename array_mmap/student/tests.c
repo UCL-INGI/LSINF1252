@@ -75,15 +75,13 @@ void test_normal_case(){
     student_t* a;
     
     SANDBOX_BEGIN;
-    a = load_linked_list("test1.dat");
+    a = load_linked_list("normal_case.txt");
     SANDBOX_END;
     CU_ASSERT_EQUAL(a,NULL);
 }
 
 int main(int argc,char* argv[])
 {
-    student_t* root1 = create_linked_list(12351600, 5);
-    create_file("test1.txt", root1);
     BAN_FUNCS();
     RUN(test_normal_case);
 }
