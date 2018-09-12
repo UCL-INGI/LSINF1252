@@ -384,10 +384,10 @@ void test_add_node_nomem(){
     set_tag("SCRIPT_ERROR");
   }
 
-  // check the return code in normal case (expected 0)
+  // check the return code in malloc fail case (expected 1)
   CU_ASSERT_EQUAL(ret, 1);
   if (ret != 1){
-    push_info_msg(_("Your function returns an error in normal case!"));
+    push_info_msg(_("The return value expected was 1"));
     set_tag("malloc_fail_handling");  
   }
 
