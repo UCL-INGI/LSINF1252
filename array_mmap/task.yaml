@@ -1,0 +1,34 @@
+accessible: false
+author: Louis Navarre
+context: |
+    Given a file containing a linked list of the structure *student_t* following, you have to write a function to load the entire linked list from the file and to return a pointer to the head of this linked list. Assume that, in the file, if **a** is followed by **b**, you will have ``a->next = b``.
+
+    .. code-block:: c
+
+        typedef struct student{
+            struct student* next;
+            int noma;
+        } student_t;
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Get an array from a binary file using mmap
+network_grading: false
+problems:
+    load_list:
+        default: ''
+        header: ''
+        name: ''
+        type: code
+        language: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

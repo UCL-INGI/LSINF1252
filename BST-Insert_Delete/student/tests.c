@@ -51,6 +51,7 @@ int sameNodes(node_t* node1, node_t* node2){
 int sameTrees(bt_t* solT, bt_t* tree){
     if(solT == NULL && tree == NULL)
         return true;
+    //never happens, we don't have NULL trees
     if(solT == NULL || tree == NULL)
         return false;
     return sameNodes(solT->root, tree->root);
@@ -349,7 +350,7 @@ void test_insert_normal_first_malloc_fails(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     strcpy(newEnWord, "dodo");
@@ -416,7 +417,7 @@ void test_insert_normal_second_malloc_fails(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     strcpy(newEnWord, "dodo");
@@ -484,7 +485,7 @@ void test_insert_normal_third_malloc_fails(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     strcpy(newEnWord, "dodo");
@@ -552,7 +553,7 @@ void test_insert_empty_tree(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     strcpy(newEnWord, "dodo");
@@ -611,7 +612,7 @@ void test_insert_already_inserted(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     strcpy(newEnWord, "cat");
@@ -663,12 +664,11 @@ void test_delete_no_child(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     freeNode(((((solT->root)->right)->right)->left)->right);
     ((((solT->root)->right)->right)->left)->right = NULL;
-    //TODO special feedback in case he free's but doesn't put NULL instead ?
 
     /*
     //TODO should do ? harder when there is a child... we could delete 1 or another node...
@@ -723,7 +723,7 @@ void test_delete_one_child(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     node_t* elephant = ((solT->root)->right)->right;
@@ -768,7 +768,7 @@ void test_delete_node_not_found(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     monitored.free = true;
@@ -806,7 +806,7 @@ void test_delete_root_replace_null(){
         if(solT)
             free(solT);
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     monitored.free = true;
@@ -824,7 +824,12 @@ void test_delete_root_replace_null(){
     if(!sameT)
         push_info_msg(_("Your tree isn't what was expected"));
 
-    //TODO special feedback in case he forgot to do bt->root = NULL ?
+    if(tree){
+        if(tree->root){
+            CU_FAIL();
+            push_info_msg(_("Tree->root should be NULL"));
+        }
+    }
 }
 
 void test_delete_root_replace_node(){
@@ -844,7 +849,7 @@ void test_delete_root_replace_node(){
         if(solT)
             free(solT);
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     monitored.free = true;
@@ -862,7 +867,12 @@ void test_delete_root_replace_node(){
     if(!sameT)
         push_info_msg(_("Your tree isn't what was expected"));
 
-    //TODO special feedback when tree->root isn't updated ?
+    if(tree){
+        if(tree->root != solT->root){
+            CU_FAIL();
+            push_info_msg(_("The root of your tree is wrong. Did you update it ?"));
+        }
+    }
 }
 
 void test_delete_empty_tree(){
@@ -882,7 +892,7 @@ void test_delete_empty_tree(){
         if(solT)
             free(solT);
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     monitored.free = true;
@@ -918,7 +928,7 @@ void test_delete_two_children_tree1(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     //sol
@@ -975,7 +985,7 @@ void test_delete_two_children_tree1_root(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     //sol
@@ -1033,7 +1043,7 @@ void test_delete_two_children_tree4(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
 
     //sol
