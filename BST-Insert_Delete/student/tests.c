@@ -211,10 +211,12 @@ void test_insert_normal(){
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
     
+    
+    //TEST
     char str[10];
     char str2[10];
-    sprintf(str, "%zd", logs.malloc.log[count+2].size);
-    sprintf(str, "%zd", logs.malloc.log[count+1].size);
+    sprintf(str, "%zd", logs.malloc.log[count].size);
+    sprintf(str2, "%zd", logs.malloc.log[count+1].size);
     push_info_msg(str);
     push_info_msg(str2);
 
@@ -239,13 +241,22 @@ void test_insert_normal(){
     
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
-
+    
+    //TEST
+    count = logs.malloc.n;
+    
     monitored.malloc = true;
     int inserted;
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-
+    
+    //TEST
+    sprintf(str, "%zd", logs.malloc.log[count].size);
+    sprintf(str2, "%zd", logs.malloc.log[count+1].size);
+    push_info_msg(str);
+    push_info_msg(str2);
+    
     //to be sure he copies the string
     newEnWord = realloc(newEnWord, sizeof(char)*8);
     strcpy(newEnWord, "changed");
