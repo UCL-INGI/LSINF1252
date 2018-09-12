@@ -85,22 +85,102 @@ int same_linked_list(student_t* st1, student_t* st2){
 }
 
 void test_normal_case(){
-    set_test_metadata("load_linked_list",_("Test in a normal case"),1);
+    set_test_metadata("load_linked_list", _("Test with a file containing many elements"), 1);
+    
     student_t* sol = create_linked_list(12351600, 5);
     if(sol == NULL){
         return;
     }
     student_t* root_ret;
     
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
     SANDBOX_BEGIN;
     root_ret = load_linked_list("normal_case.txt");
     SANDBOX_END;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
     
     int cmp = same_linked_list(sol, root_ret);
     
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your linked list is not what was expected"));
+    }
+}
+
+void test_open_fails(){
+    set_test_metadata("load_linked_list", _("Test with fail of open"), 1);
+    
+    student_t* root_ret;
+    
+    failures.open = FAIL_ALWAYS;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("normal_case.txt");
+    SANDBOX_END;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work when open fails"));
+    }
+}
+
+void test_empty_file(){
+    set_test_metadata("load_linked_list", _("Test with an empty file"), 1);
+    
+    student_t* root_ret;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("empty_file.txt");
+    SANDBOX_END;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work with an empty file"));
+    }
+}
+
+void test_one_element(){
+    set_test_metadata("load_linked_list", _("Test with a file containing one element"), 1);
+    
+    student_t* sol = create_linked_list(46691600, 1);
+    
+    student_t* root_ret;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("one_element.txt");
+    SANDBOX_END;
+    
+    int cmp = same_linked_list(root_ret, sol);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work with a file containing one element"));
     }
 }
 
