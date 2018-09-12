@@ -205,7 +205,7 @@ bt_t* tree4(){
 }
 
 void test_insert_normal(){
-    push_info_msg(_("\\\\ test\\\\testtest\ntesttest"));
+    push_info_msg(_("testtest"));
     push_info_msg(_("newmsg"));
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
