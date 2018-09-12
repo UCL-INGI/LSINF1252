@@ -41,6 +41,10 @@ int sameNodes(node_t* node1, node_t* node2){
         if(!strcmp(node2->enWord,"changed")){
             push_info_msg(_("You certainly did node->enWord = enWord. This doesn't copy the string. So if enWord gets changed in the test function, the word in your tree will also change ! Hint : use strcpy"));
         }
+        elseif(!strcmp(node2->frWord,"changed")){
+            push_info_msg(_("You certainly did node->frWord = frWord. This doesn't copy the string. So if enWord gets changed in the test function, the word in your tree will also change ! Hint : use strcpy"));
+        }
+        }
         else{
             char error_msg[100];
             sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
@@ -295,7 +299,9 @@ void test_insert_normal(){
     
     //to be sure he copies the string
     newEnWord = realloc(newEnWord, sizeof(char)*8);
+    newFrWord = realloc(newFrWord, sizeof(char)*8);
     strcpy(newEnWord, "changed");
+    strcpy(newFrWord, "changed");
     //TODOFreeIfNewEnWordNULL
     
     // check if only 3 malloc (enWord, frWord, node);
@@ -567,7 +573,9 @@ void test_insert_empty_tree(){
     
     //to be sure he copies the string
     newEnWord = realloc(newEnWord, sizeof(char)*8);
+    newFrWord = realloc(newFrWord, sizeof(char)*8);
     strcpy(newEnWord, "changed");
+    strcpy(newFrWord, "changed");
     //TODOFreeIfNewEnWordNULL
     
     // check if only 3 malloc (enWord, frWord, node);
