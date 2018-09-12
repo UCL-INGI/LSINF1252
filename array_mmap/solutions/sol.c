@@ -45,7 +45,7 @@ student_t *load_linked_list(char* filename){
     student_t* previous = root;
     
     int i;
-    for(i = 0; i < length_by_struct; i++){
+    for(i = 1; i < length_by_struct; i++){
         student_t* new = (student_t*)malloc(sizeof(student_t));
         if(new == NULL){
             student_t* failure_runner = root;
