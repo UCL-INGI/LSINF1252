@@ -4,6 +4,7 @@
 #include<sys/mman.h>
 #include<fcntl.h>
 #include<unistd.h>
+#include<string.h>
 #include "student_code.h"
 
 student_t *load_linked_list(char* filename){
@@ -37,5 +38,5 @@ student_t *load_linked_list(char* filename){
         return -1;
     }
     
-    root->
+    
 }
