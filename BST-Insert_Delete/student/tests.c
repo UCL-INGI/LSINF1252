@@ -277,11 +277,12 @@ void test_insert_normal(){
         size[1] = logs.malloc.log[count].size;
         size[2]= logs.malloc.log[count+1].size;
         size[3] = logs.malloc.log[count+2].size;
-        if(!containsArray(size,3,25)){
+        if(!containsArray(size,3,32)){
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
         }
         if(containsArray(size,3,5) != 2){
-            push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\\\0' character !"));
+            //TODO Question : why \\\\ for only one backslash ?
+            push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\\\\0' character !"));
         }
     }
     int sameT = sameTrees(solT,tree);
