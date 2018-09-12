@@ -187,5 +187,5 @@ void test_one_element(){
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_normal_case);
+    RUN(test_open_fails, test_empty_file, test_one_element, test_normal_case);
 }
