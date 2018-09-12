@@ -77,8 +77,10 @@ void test_normal_case(){
     SANDBOX_BEGIN;
     a = load_linked_list("test1.dat");
     SANDBOX_END;
-    CU_ASSERT_EQUAL(a,NULL);
-    push_info_msg("test");
+    if(a != NULL){
+        CU_FAIL();
+        push_info_msg(_("error msg"));
+    }
 }
 
 int main(int argc,char* argv[])
