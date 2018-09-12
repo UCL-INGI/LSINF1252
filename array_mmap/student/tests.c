@@ -73,10 +73,7 @@ void test_success(){
 
 int main(int argc,char* argv[])
 {
-    student_t* root1 = create_linked_list(12351600, 5);
-    if(root1 == NULL)
-        return 0;
-    create_file("test1.dat", root1);
+    
     BAN_FUNCS();
     RUN(test_success);
 }
