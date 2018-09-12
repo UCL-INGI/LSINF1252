@@ -5,6 +5,7 @@
 #include<fcntl.h>
 #include<unistd.h>
 #include<string.h>
+#include "CTester/CTester.h"
 #include "student_code.h"
 
 void free_all(student_t* root){
