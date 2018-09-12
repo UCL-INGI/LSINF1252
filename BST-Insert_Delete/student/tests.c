@@ -207,12 +207,16 @@ bt_t* tree4(){
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
-    char* newEnWord = "dodo";
-    char* newFrWord = "dodo";
+    char* newEnWord = malloc(sizeof(char)*5);
+    char* newFrWord = malloc(sizeof(char)*5);
 
     bt_t* solT = tree1();
 
-    if(!tree || !solT){
+    if(!newEnWord || !newFrWord || !tree || !solT){
+        if(newEnWord)
+            free(newEnWord);
+        if(newFrWord)
+            free(newFrWord);
         if(tree){
             freeNode(tree->root);
             free(tree);
@@ -224,6 +228,9 @@ void test_insert_normal(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
+    
+    strcpy(newEnWord, "dodo");
+    strcpy(newFrWord, "dodo");
 
     monitored.malloc = true;
     int inserted;
@@ -231,7 +238,8 @@ void test_insert_normal(){
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
-    newEnWord = "wordChanged";
+    newEnWord = realloc(newEnWord, sizeof(char)*8);
+    strcpy(newEnWord, "changed");
     
     // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
@@ -255,12 +263,16 @@ void test_insert_normal(){
 void test_insert_normal_first_malloc_fails(){
     set_test_metadata("insert", _("Test when malloc fails"), 1);
     bt_t* tree = tree1();
-    char* newEnWord = "dodo";
-    char* newFrWord = "dodo";
+    char* newEnWord = malloc(sizeof(char)*5);
+    char* newFrWord = malloc(sizeof(char)*5);
 
     bt_t* solT = tree1();
 
-    if(!tree || !solT){
+    if(!newEnWord || !newFrWord || !tree || !solT){
+        if(newEnWord)
+            free(newEnWord);
+        if(newFrWord)
+            free(newFrWord);
         if(tree){
             freeNode(tree->root);
             free(tree);
@@ -272,6 +284,9 @@ void test_insert_normal_first_malloc_fails(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
+    
+    strcpy(newEnWord, "dodo");
+    strcpy(newFrWord, "dodo");
     
     failures.malloc = FAIL_FIRST;
     monitored.malloc = true;
@@ -305,12 +320,16 @@ void test_insert_normal_first_malloc_fails(){
 void test_insert_normal_second_malloc_fails(){
     set_test_metadata("insert", _("Test when second malloc fails"), 1);
     bt_t* tree = tree1();
-    char* newEnWord = "dodo";
-    char* newFrWord = "dodo";
+    char* newEnWord = malloc(sizeof(char)*5);
+    char* newFrWord = malloc(sizeof(char)*5);
 
     bt_t* solT = tree1();
 
-    if(!tree || !solT){
+    if(!newEnWord || !newFrWord || !tree || !solT){
+        if(newEnWord)
+            free(newEnWord);
+        if(newFrWord)
+            free(newFrWord);
         if(tree){
             freeNode(tree->root);
             free(tree);
@@ -322,6 +341,9 @@ void test_insert_normal_second_malloc_fails(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
+    
+    strcpy(newEnWord, "dodo");
+    strcpy(newFrWord, "dodo");
     
     failures.malloc = FAIL_SECOND;
     monitored.malloc = true;
@@ -355,12 +377,16 @@ void test_insert_normal_second_malloc_fails(){
 void test_insert_normal_third_malloc_fails(){
     set_test_metadata("insert", _("Test when third malloc fails"), 1);
     bt_t* tree = tree1();
-    char* newEnWord = "dodo";
-    char* newFrWord = "dodo";
+    char* newEnWord = malloc(sizeof(char)*5);
+    char* newFrWord = malloc(sizeof(char)*5);
 
     bt_t* solT = tree1();
 
-    if(!tree || !solT){
+    if(!newEnWord || !newFrWord || !tree || !solT){
+        if(newEnWord)
+            free(newEnWord);
+        if(newFrWord)
+            free(newFrWord);
         if(tree){
             freeNode(tree->root);
             free(tree);
@@ -372,6 +398,9 @@ void test_insert_normal_third_malloc_fails(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
+    
+    strcpy(newEnWord, "dodo");
+    strcpy(newFrWord, "dodo");
     
     failures.malloc = FAIL_THIRD;
     monitored.malloc = true;
@@ -407,16 +436,17 @@ void test_insert_empty_tree(){
     //student arguments
     bt_t* tree = malloc(sizeof(bt_t));
     tree->root = NULL;
-    char* newEnWord = "dodo";
-    char* newFrWord = "dodo";
+    char* newEnWord = malloc(sizeof(char)*5);
+    char* newFrWord = malloc(sizeof(char)*5);
 
     //solution
-    bt_t* solT = init_bt(newEnWord,newFrWord);
-
-    if(!tree || !solT){
-        if(tree){
+    if(!newEnWord || !newFrWord || !tree || !solT){
+        if(newEnWord)
+            free(newEnWord);
+        if(newFrWord)
+            free(newFrWord);
+        if(tree)
             free(tree);
-        }
         if(solT){
             freeNode(solT->root);
             free(solT);
@@ -424,7 +454,10 @@ void test_insert_empty_tree(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-
+    
+    strcpy(newEnWord, "dodo");
+    strcpy(newFrWord, "dodo");
+    
     monitored.malloc = true;
     int inserted;
     SANDBOX_BEGIN;
@@ -451,13 +484,17 @@ void test_insert_already_inserted(){
     set_test_metadata("insert", _("Test with an already inserted node"),1);
     //student arguments
     bt_t* tree = tree1();
-    char* newEnWord = "cat";
-    char* newFrWord = "chat";
+    char* newEnWord = malloc(sizeof(char)*4);
+    char* newFrWord = malloc(sizeof(char)*5);
 
     //solution
     bt_t* solT = tree1();
 
-    if(!tree || !solT){
+    if(!newEnWord || !newFrWord || !tree || !solT){
+        if(newEnWord)
+            free(newEnWord);
+        if(newFrWord)
+            free(newFrWord);
         if(tree){
             freeNode(tree->root);
             free(tree);
@@ -469,7 +506,10 @@ void test_insert_already_inserted(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-
+    
+    strcpy(newEnWord, "cat");
+    strcpy(newFrWord, "chat");
+    
     monitored.malloc = true;
     monitored.free = true;
     int inserted;
@@ -503,7 +543,7 @@ void test_delete_no_child(){
     set_test_metadata("delete", _("Test with a node having no child"),1);
     //student arguments
     bt_t* tree = tree1();
-    char* enWord = "eagle";
+    char *enWord = "eagle";
 
     bt_t* solT = tree1();
 
@@ -563,7 +603,7 @@ void test_delete_one_child(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-
+    
     node_t* elephant = ((solT->root)->right)->right;
     node_t* dog = elephant->left;
     elephant->left = dog->right;
@@ -585,10 +625,6 @@ void test_delete_one_child(){
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
         push_info_msg(_("Your tree isn't what was expected"));
-}
-
-void test_delete_two_children(){
-    // TODO
 }
 
 void test_delete_node_not_found(){
