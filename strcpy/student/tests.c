@@ -5,74 +5,75 @@
 #include "CTester/CTester.h"
 
 void test_strcpy_return() {
-  set_test_metadata("strcpy_impl", _("Check if the string is correctly put in memory"), 1);
+    set_test_metadata("strcpy_impl", _("Check if the string is correctly put in memory"), 1);
 
-  char *ret = NULL;
+    char *ret = NULL;
 
-  const char *stack_src = "Chaine de char de test un peu courte mais pas trop quand meme";
-  char *src = (char *)malloc(strlen(stack_src)+1);
-  if (src == NULL)
-      CU_FAIL("no mem");
-  strcpy(src, stack_src);
+    const char *stack_src = "Chaine de char de test un peu courte mais pas trop quand meme";
+    char *src = (char *)malloc(strlen(stack_src)+1);
+    if (src == NULL)
+        CU_FAIL("no mem");
+    strcpy(src, stack_src);
 
-  monitored.malloc = true;
+    monitored.malloc = true;
 
-  SANDBOX_BEGIN;
-  ret = buf_strcpy(src);
-  SANDBOX_END;
 
-  // Tests
-  //-----------------------------------------------------------------
+    SANDBOX_BEGIN;
+    ret = buf_strcpy(src);
+    SANDBOX_END;
 
-  // check if only one call to malloc
-  int ms = stats.malloc.called;
-  CU_ASSERT_EQUAL(ms, 1);
-  if (ms > 1)
-    push_info_msg(_("You used more than one call to malloc"));
+    // Tests
+    //-----------------------------------------------------------------
 
-  // check if new element is malloced
-  int mal = malloced((void*) ret);
-  CU_ASSERT_TRUE(mal);
-  // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-  if (mal) {
-      if(stats.malloc.last_params.size != strlen(src)+1) {
-          CU_FAIL("wrong malloc size");
-          push_info_msg(_("The allocated memory has not the correct size."));
-          set_tag("malloc_fail");
-          return;
-      }
-      if (strncmp(ret, src, strlen(src) + 1) != 0){
-          CU_FAIL("wrong string");
-      }
-      free(ret);
-  }
-  else {
-    push_info_msg(_("The returned pointer is not malloced"));
-    set_tag("malloc_fail");
-  }
+    // check if only one call to malloc
+    int ms = stats.malloc.called;
+    CU_ASSERT_EQUAL(ms, 1);
+    if (ms > 1)
+        push_info_msg(_("You used more than one call to malloc"));
+
+    // check if new element is malloced
+    int mal = malloced((void*) ret);
+    CU_ASSERT_TRUE(mal);
+    // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
+    if (mal) {
+        if(stats.malloc.last_params.size != strlen(src)+1) {
+            CU_FAIL("wrong malloc size");
+            push_info_msg(_("The allocated memory has not the correct size."));
+            set_tag("malloc_fail");
+            return;
+        }
+        if (strncmp(ret, src, strlen(src) + 1) != 0){
+            CU_FAIL("wrong string");
+        }
+        free(ret);
+    }
+    else {
+        push_info_msg(_("The returned pointer is not malloced"));
+        set_tag("malloc_fail");
+    }
 }
 
 void test_strcpy_nomem() {
-  set_test_metadata("strcpy_impl", _("Check the behavior of the function when the call to malloc fails"), 1);
+    set_test_metadata("strcpy_impl", _("Check the behavior of the function when the call to malloc fails"), 1);
 
-  char *ret = NULL;
-  char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
+    char *ret = NULL;
+    char *src = "Chaine de char de test un peu courte mais pas trop quand meme";
 
-  monitored.malloc = true;
-  failures.malloc = FAIL_ALWAYS;
-  failures.malloc_ret = NULL;
+    monitored.malloc = true;
+    failures.malloc = FAIL_ALWAYS;
+    failures.malloc_ret = NULL;
 
-  SANDBOX_BEGIN;
-  ret = buf_strcpy(src);
-  SANDBOX_END;
+    SANDBOX_BEGIN;
+    ret = buf_strcpy(src);
+    SANDBOX_END;
 
-  CU_ASSERT_PTR_NULL(ret);
-  if (ret){
-    push_info_msg(_("The return value of your implementation is wrong"));
-    set_tag("malloc_fail");
-  }
+    CU_ASSERT_PTR_NULL(ret);
+    if (ret){
+        push_info_msg(_("The return value of your implementation is wrong"));
+        set_tag("malloc_fail");
+    }
 
-  free(ret);
+    free(ret);
 
 }
 
