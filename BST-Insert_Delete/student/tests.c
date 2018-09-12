@@ -299,9 +299,12 @@ void test_insert_normal_first_malloc_fails(){
     SANDBOX_END;
     
     //to be sure he copies the string
-    newEnWord = realloc(newEnWord, sizeof(char)*8);
-    strcpy(newEnWord, "changed");
-    //TODOFreeIfNewEnWordNULL
+    int enStillMalloced = malloced(newEnWord);
+    int frStillMalloced = malloced(newFrWord);
+    if(!enStillMalloced || !frStillMalloced){
+        CU_ASSERT_EQUAL(true,false); // error TODO : check if there is another way
+        push_info_msg(_("You cannot free the arguments of the function !"));
+    }
     
     // check if only 1 malloc (enWord, frWord, node) since it fails.
     int nbMalloc = stats.malloc.called;
@@ -361,9 +364,12 @@ void test_insert_normal_second_malloc_fails(){
     SANDBOX_END;
     
     //to be sure he copies the string
-    newEnWord = realloc(newEnWord, sizeof(char)*8);
-    strcpy(newEnWord, "changed");
-    //TODOFreeIfNewEnWordNULL
+    int enStillMalloced = malloced(newEnWord);
+    int frStillMalloced = malloced(newFrWord);
+    if(!enStillMalloced || !frStillMalloced){
+        CU_ASSERT_EQUAL(true,false); // error TODO : check if there is another way
+        push_info_msg(_("You cannot free the arguments of the function !"));
+    }
     
     // check if only 2 malloc (enWord, frWord, node) since the second one fails.
     int nbMalloc = stats.malloc.called;
@@ -423,9 +429,12 @@ void test_insert_normal_third_malloc_fails(){
     SANDBOX_END;
     
     //to be sure he copies the string
-    newEnWord = realloc(newEnWord, sizeof(char)*8);
-    strcpy(newEnWord, "changed");
-    //TODOFreeIfNewEnWordNULL
+    int enStillMalloced = malloced(newEnWord);
+    int frStillMalloced = malloced(newFrWord);
+    if(!enStillMalloced || !frStillMalloced){
+        CU_ASSERT_EQUAL(true,false); // error TODO : check if there is another way
+        push_info_msg(_("You cannot free the arguments of the function !"));
+    }
     
     // check if only 3 malloc (enWord, frWord, node)
     int nbMalloc = stats.malloc.called;
@@ -539,11 +548,6 @@ void test_insert_already_inserted(){
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
-    //to be sure he copies the string
-    newEnWord = realloc(newEnWord, sizeof(char)*8);
-    strcpy(newEnWord, "changed");
-    //TODOFreeIfNewEnWordNULL
     
     // Check : 0 malloc, 0 free
     int nbMalloc = stats.malloc.called;
