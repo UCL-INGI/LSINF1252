@@ -70,14 +70,38 @@ int create_file(char* filename, student_t* root){
     return 0;
 }
 
+int same_linked_list(student_t* st1, student_t* st2){
+    while(st1 != NULL && st2 != NULL){
+        if(st1->noma != st2->noma){
+            return 0;
+        }
+        st1 = st1->next;
+        st2 = st2->next;
+    }
+    if(st1 == NULL && st2 == NULL){
+        return 1;
+    }
+    return 0;
+}
+
 void test_normal_case(){
     set_test_metadata("load_linked_list",_("Test in a normal case"),1);
-    student_t* a;
+    student_t* sol = creat_linked_list(12351600, 5);
+    if(sol == NULL){
+        return;
+    }
+    student_t* root_ret;
     
     SANDBOX_BEGIN;
-    a = load_linked_list("normal_case.txt");
+    root_ret = load_linked_list("normal_case.txt");
     SANDBOX_END;
-    CU_ASSERT_EQUAL(a,NULL);
+    
+    int cmp = same_linked_list(sol, root_ret);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your linked list is not what was expected"));
+    }
 }
 
 int main(int argc,char* argv[])
