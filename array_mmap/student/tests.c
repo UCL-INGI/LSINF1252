@@ -82,8 +82,8 @@ void test_normal_case(){
 
 int main(int argc,char* argv[])
 {
-    //student_t* root1 = create_linked_list(12351600, 5);
-    //create_file("test1.dat", root1);
+    student_t* root1 = create_linked_list(12351600, 5);
+    create_file("test1.txt", root1);
     BAN_FUNCS();
     RUN(test_normal_case);
 }
