@@ -27,8 +27,11 @@ int sameNodes(node_t* node1, node_t* node2){
         return true;
     if(node1 == NULL || node2 == NULL)
         return false;
-    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord))
-        return false;
+    if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord)){
+        char error_msg[100];
+        sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
+        push_info_msg(_(error_msg));
+    }
     return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
 
@@ -97,8 +100,10 @@ bt_t* init_bt(char* enWord, char* frWord){
 
 bt_t* tree1(){
     bt_t* tree = init_bt("cat","chat");
-    if(!tree)
+    if(!tree){
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
+    }
     node_t* node1 = init_node("animal","animal");
     node_t* node2 = init_node("deer","biche");
     node_t* node3 = init_node("creature","créature");
@@ -118,6 +123,7 @@ bt_t* tree1(){
         if(node7) freeNode(node7);
         free(tree);
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
     }
     else{
         (tree->root)->left = node1; (tree->root)->right = node2;
@@ -130,8 +136,10 @@ bt_t* tree1(){
 
 bt_t* tree2(){
     bt_t* tree = init_bt("cat","chat");
-    if(!tree)
+    if(!tree){
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
+    }
     node_t* node1 = init_node("animal","animal");
     node_t* node2 = init_node("deer","biche");
     node_t* node3 = init_node("creature","créature");
@@ -156,6 +164,7 @@ bt_t* tree2(){
         if(node9) freeNode(node9);
         free(tree);
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
     }
     else{
         // = NULL done in init_node
@@ -171,8 +180,10 @@ bt_t* tree2(){
 
 bt_t* tree3(){
     bt_t* tree = init_bt("cat","chat");
-    if(!tree)
+    if(!tree){
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
+    }
     node_t* node1 = init_node("animal","animal");
 
     if(!node1){
@@ -180,6 +191,7 @@ bt_t* tree3(){
         if(node1) freeNode(node1);
         free(tree);
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
     }
     else{
         // = NULL done in init_node
@@ -190,8 +202,10 @@ bt_t* tree3(){
 
 bt_t* tree4(){
     bt_t* tree = init_bt("cat","chat");
-    if(!tree)
+    if(!tree){
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
+    }
     node_t* node1 = init_node("animal","animal");
     node_t* node2 = init_node("deer","biche");
     node_t* node3 = init_node("creature","créature");
@@ -207,6 +221,7 @@ bt_t* tree4(){
         if(node7) freeNode(node7);
         free(tree);
         CU_FAIL(_("Internal error while allocating memory"));
+        return NULL;
     }
     else{
         (tree->root)->left = node1; (tree->root)->right = node2;
@@ -217,7 +232,6 @@ bt_t* tree4(){
 }
 
 void test_insert_normal(){
-    CU_FAIL(_("Try it"));
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
     int count = logs.malloc.n;
@@ -244,7 +258,7 @@ void test_insert_normal(){
             free(solT);
         }
         CU_FAIL(_("Internal error while allocating memory"));
-        //TODO return ??? Or CU_FAIL is enough ?
+        return;
     }
     //TODO Hard coded feature ? better to compare with a real tree ?
     //It takes more time but we can be sure of the answer with that...
@@ -254,7 +268,7 @@ void test_insert_normal(){
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
     
-    //TEST
+    //to be able to know how many bytes the student malloced
     count = logs.malloc.n;
     
     monitored.malloc = true;
