@@ -65,8 +65,16 @@ int create_file(char* filename, student_t* root){
     return 0;
 }
 
+void test_success(){
+    CU_ASSERT_EQUAL(1,1);
+}
+
 int main(int argc,char* argv[])
 {
+    student_t* root1 = create_linked_list(12351600, 5);
+    if(root1 == NULL)
+        return;
+    create_file("test1.dat", root1);
     BAN_FUNCS();
-    RUN(test_success, test_u_null, test_rector_null, test_strings_null);
+    RUN(test_success);
 }
