@@ -27,6 +27,10 @@ void test_strcpy_return() {
 
     // check if only one call to malloc
     int ms = stats.malloc.called;
+    int cs = stats.calloc.called;
+    char str[100];
+    sprintf(str,"Number of calls to malloc : %d, number of calls to calloc : %d",ms,cs);
+    push_info_msg(_(str));
     CU_ASSERT_EQUAL(ms, 1);
     if (ms > 1)
         push_info_msg(_("You used more than one call to malloc"));
