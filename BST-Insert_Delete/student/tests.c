@@ -274,12 +274,9 @@ void test_insert_normal(){
         push_info_msg(_("You can only use 3 calls to malloc for this case"));
     else{ // did he allocate enough memory ? or not too much ?
         int size[3];
-        size[1] = logs.malloc.log[count].size;
-        size[2]= logs.malloc.log[count+1].size;
-        size[3] = logs.malloc.log[count+2].size;
-        char str2[10];
-        sprintf(str2,"%d",size[2]);
-        push_info_msg(str2);
+        size[0] = logs.malloc.log[count].size;
+        size[1]= logs.malloc.log[count+1].size;
+        size[2] = logs.malloc.log[count+2].size;
         if(!containsArray(size,3,32)){
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
         }
