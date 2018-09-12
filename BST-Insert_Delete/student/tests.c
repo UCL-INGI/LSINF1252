@@ -278,11 +278,11 @@ void test_insert_normal(){
         size[1]= logs.malloc.log[count+1].size;
         size[2] = logs.malloc.log[count+2].size;
         if(!containsArray(size,3,32)){
-            CU_ASSERT_EQUAL(true,false); //TODO other way
+            CU_FAIL();
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
         }
         if(containsArray(size,3,5) != 2){
-            CU_ASSERT_EQUAL(true,false); //TODO other way
+            CU_FAIL();
             //TODO Question : why \\\\ for only one backslash ?
             push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\\\\0' character !"));
         }
@@ -338,7 +338,7 @@ void test_insert_normal_first_malloc_fails(){
     int enStillMalloced = malloced(newEnWord);
     int frStillMalloced = malloced(newFrWord);
     if(!enStillMalloced || !frStillMalloced){
-        CU_ASSERT_EQUAL(true,false); // error TODO : check if there is another way
+        CU_FAIL();
         push_info_msg(_("You cannot free the arguments of the function !"));
     }
     */
@@ -406,7 +406,7 @@ void test_insert_normal_second_malloc_fails(){
     int enStillMalloced = malloced(newEnWord);
     int frStillMalloced = malloced(newFrWord);
     if(!enStillMalloced || !frStillMalloced){
-        CU_ASSERT_EQUAL(true,false); // error TODO : check if there is another way
+        CU_FAIL();
         push_info_msg(_("You cannot free the arguments of the function !"));
     }
     */
@@ -474,7 +474,7 @@ void test_insert_normal_third_malloc_fails(){
     int enStillMalloced = malloced(newEnWord);
     int frStillMalloced = malloced(newFrWord);
     if(!enStillMalloced || !frStillMalloced){
-        CU_ASSERT_EQUAL(true,false); // error TODO : check if there is another way
+        CU_FAIL();
         push_info_msg(_("You cannot free the arguments of the function !"));
     }
     */
@@ -647,7 +647,7 @@ void test_delete_no_child(){
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
-        push_info_msg(_("Wrong number of free's"));
+        push_info_msg(_("You should use free 3 times"));
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
@@ -693,7 +693,7 @@ void test_delete_one_child(){
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
-        push_info_msg(_("Wrong number of free's"));
+        push_info_msg(_("You should use free 3 times"));
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
@@ -731,7 +731,7 @@ void test_delete_node_not_found(){
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 0);
     if(nbFree != 0)
-        push_info_msg(_("Wrong number of free's"));
+        push_info_msg(_("You shouldn't use free in this case"));
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
@@ -769,7 +769,7 @@ void test_delete_root_replace_null(){
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
-        push_info_msg(_("Wrong number of free's"));
+        push_info_msg(_("You should use free 3 times"));
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
@@ -807,12 +807,14 @@ void test_delete_root_replace_node(){
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
-        push_info_msg(_("Wrong number of free's"));
+        push_info_msg(_("You should use free 3 times"));
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
         push_info_msg(_("Your tree isn't what was expected"));
+    
+    //TODO special feedback when tree->root isn't updated ?
 }
 
 void test_delete_empty_tree(){
@@ -843,7 +845,7 @@ void test_delete_empty_tree(){
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 0);
     if(nbFree != 0)
-        push_info_msg(_("Wrong number of free's"));
+        push_info_msg(_("You shouldn't use free in this case"));
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
@@ -852,7 +854,6 @@ void test_delete_empty_tree(){
 
 }
 
-// TEST TODO, hard to solve...
 void test_delete_two_children_tree1(){
     set_test_metadata("delete", _("Test deleting a simple node (which has 2 children) using the algorithm explained above"),1);
     //student arguments
@@ -894,7 +895,6 @@ void test_delete_two_children_tree1(){
     int nbFree = stats.free.called;
     
     
-    //TODO : you sould use free 3 times or wrong number of free's ?
     CU_ASSERT_EQUAL(nbFree,3);
     if(nbFree != 3){
         push_info_msg(_("You should use free 3 times"));
@@ -953,7 +953,6 @@ void test_delete_two_children_tree1_root(){
     int nbFree = stats.free.called;
     
     
-    //TODO : you sould use free 3 times or wrong number of free's ?
     CU_ASSERT_EQUAL(nbFree,3);
     if(nbFree != 3){
         push_info_msg(_("You should use free 3 times"));
@@ -1010,7 +1009,6 @@ void test_delete_two_children_tree4(){
     int nbFree = stats.free.called;
     
     
-    //TODO : you sould use free 3 times or wrong number of free's ?
     CU_ASSERT_EQUAL(nbFree,3);
     if(nbFree != 3){
         push_info_msg(_("You should use free 3 times"));
