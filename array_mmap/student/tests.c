@@ -86,7 +86,7 @@ int same_linked_list(student_t* st1, student_t* st2){
 
 void test_normal_case(){
     set_test_metadata("load_linked_list",_("Test in a normal case"),1);
-    student_t* sol = creat_linked_list(12351600, 5);
+    student_t* sol = create_linked_list(12351600, 5);
     if(sol == NULL){
         return;
     }
