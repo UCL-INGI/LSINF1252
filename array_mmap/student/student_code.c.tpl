@@ -2,6 +2,6 @@
 #include<stdlib.h>
 #include "student_code.h"
 
-int free_all(university_t* u){
-    @@free_all@@
+int load_linked_list(char* filename){
+    @@load_list@@
 }

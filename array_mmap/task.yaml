@@ -23,7 +23,7 @@ limits:
 name: Get an array from a binary file using mmap
 network_grading: false
 problems:
-    load_list:
+    load_linked_list:
         default: ''
         header: |-
             Write the body of the function ``load_list`` using mmap.
@@ -38,9 +38,9 @@ problems:
                  * which means that you have to use mmap
                  */
                 student_t* load_linked_list(char* filename){
-        name: Load linked list
-        type: code
         language: c
+        type: code
+        name: Load linked list
 stored_submissions: 0
 submission_limit:
     amount: -1
