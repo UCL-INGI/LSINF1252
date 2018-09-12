@@ -1,6 +1,5 @@
 typedef struct student {
     struct student* next;
-    char* name;
     int noma;
 }
 

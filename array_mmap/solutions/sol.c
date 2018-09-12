@@ -33,12 +33,14 @@ student_t *load_linked_list(char* filename){
     
     student_t* root = (student_t*)malloc(sizeof(student_t));
     if(root == NULL){
-        munmap(map);
+        munmap(map, length);
         close(fd);
         return -1;
     }
     
     memcpy((void*) root, (void*)&map[0], sizeof(student_t));
+    
+    root->next = NULL;
     
     student_t* previous = root;
     
@@ -46,7 +48,19 @@ student_t *load_linked_list(char* filename){
     for(i = 0; i < length_by_struct; i++){
         student_t* new = (student_t*)malloc(sizeof(student_t));
         if(new == NULL){
-            //must free all allocated memory
+            student_t* failure_runner = root;
+            student_t* failure_previous = NULL;
+            
+            while(failure_runner != NULL){
+                failure_previous = runner;
+                failure_runner = failure_runner->next;
+                free(failure_previous->name);
+                free(failure_previous);
+            }
+            
+            munmap(map, length);
+            close(fd);
+            return NULL;
         }
     }
 }
