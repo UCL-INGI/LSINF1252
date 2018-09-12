@@ -79,7 +79,7 @@ void test_init_node_alloc(){
 
   CU_ASSERT_EQUAL(stats.malloc.called, 1);
   if (stats.malloc.called != 1){
-      push_info_msg(_("You should malloc once in this case"));
+      push_info_msg(_("You should call malloc once in this case"));
       set_tag("not_malloc_once");
   }
   if(stats.malloc.last_params.size != sizeof(node_t)) {
@@ -185,7 +185,7 @@ void test_add_node_empty(){
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
   if (ms != 1){
-    push_info_msg(_("You used more than one call to malloc"));
+    push_info_msg(_("You should call malloc once in this case"));
     set_tag("not_malloc_once");
   }
 
@@ -198,7 +198,7 @@ void test_add_node_empty(){
     CU_ASSERT_EQUAL(val, value);
     if (val != value){
       set_tag("bad_inserted_value");
-      push_info_msg(_("The inserted value does not correspond to the waited one"));
+      push_info_msg(_("The inserted value does not correspond to the expected one"));
     }
   }
   else{
@@ -277,7 +277,7 @@ void test_add_node_non_empty(){
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
   if (ms != 1){
-    push_info_msg(_("You used more than one call to malloc"));
+    push_info_msg(_("You should call malloc once in this case"));
     set_tag("not_malloc_once");
   }
 
@@ -289,7 +289,7 @@ void test_add_node_non_empty(){
     int valf = list->first->value;
     CU_ASSERT_EQUAL(valf, *val);
     if (valf != *val){
-      push_info_msg(_("The inserted value does not correspond to the waited one"));
+      push_info_msg(_("The inserted value does not correspond to the expected one"));
       set_tag("bad_inserted_value");
     }
   }
@@ -302,7 +302,7 @@ void test_add_node_non_empty(){
   int cl = check_list(list, val, 4);
   CU_ASSERT_EQUAL(cl, 0);
   if (cl == 1){
-    push_info_msg(_("The new linked list does not correspond to the waited one"));
+    push_info_msg(_("The new linked list does not correspond to the expected one"));
     set_tag("not_expected_list");
   }
   else if (cl == 2){
@@ -367,7 +367,7 @@ void test_add_node_nomem(){
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 1);
   if (ms != 1){
-    push_info_msg(_("You used more than one call to malloc"));
+    push_info_msg(_("You should call malloc once in this case"));
     set_tag("not_malloc_once");
   }
 
@@ -376,7 +376,7 @@ void test_add_node_nomem(){
   int cl = check_list(list, new_vals, 3);
   CU_ASSERT_EQUAL(cl, 0);
   if (cl == 1){
-    push_info_msg(_("The new linked list does not correspond to the waited one"));
+    push_info_msg(_("The new linked list does not correspond to the expected one"));
     set_tag("modif_list_malloc_fail");
   }
   else if (cl == 2){
