@@ -16,7 +16,7 @@ void test_strcpy_return() {
     strcpy(src, stack_src);
 
     monitored.malloc = true;
-
+    monitored.calloc = true;
 
     SANDBOX_BEGIN;
     ret = buf_strcpy(src);
@@ -51,6 +51,9 @@ void test_strcpy_return() {
         push_info_msg(_("The returned pointer is not malloced"));
         set_tag("malloc_fail");
     }
+    int cs = stats.calloc.called;
+    if(cs > 0)
+        push_info_msg(_("You shouldn't use calloc for this task. Since we are writing on the memory just after allocating it, calloc is a loss of time."))
 }
 
 void test_strcpy_nomem() {
