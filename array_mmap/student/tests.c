@@ -71,7 +71,13 @@ int create_file(char* filename, student_t* root){
 }
 
 void test_normal_case(){
-    CU_ASSERT_EQUAL(1,1);
+    
+    student_t* a;
+    
+    SANDBOX_BEGIN;
+    a = load_linked_list("test1.dat");
+    SANDBOX_END;
+    CU_ASSERT_EQUAL(a,NULL);
 }
 
 int main(int argc,char* argv[])
