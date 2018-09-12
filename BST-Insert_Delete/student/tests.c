@@ -211,14 +211,6 @@ void test_insert_normal(){
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
     
-    
-    //TEST
-    char str[10];
-    char str2[10];
-    sprintf(str, "%zd", logs.malloc.log[count].size);
-    sprintf(str2, "%zd", logs.malloc.log[count+1].size);
-    push_info_msg(str);
-    push_info_msg(str2);
 
     bt_t* solT = tree1();
 
@@ -252,6 +244,8 @@ void test_insert_normal(){
     SANDBOX_END;
     
     //TEST
+    char str[10];
+    char str2[10];
     sprintf(str, "%zd", logs.malloc.log[count].size);
     sprintf(str2, "%zd", logs.malloc.log[count+1].size);
     push_info_msg(str);
@@ -271,6 +265,18 @@ void test_insert_normal(){
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
     ((((solT->root)->right)->right)->left)->left = init_node("dodo","dodo");
+    else{ // did he allocate enough memory ? or not too much ?
+        int size[3];
+        int size[1] = logs.malloc.log[count].size;
+        int size[2]= logs.malloc.log[count+1].size;
+        int size[3] = logs.malloc.log[count+2].size;
+        if(!contains(size,25)){
+            push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."))
+        }
+        if(contains(size,5) != 2){
+            push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\0' character !"))
+        }
+    }
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
