@@ -320,15 +320,9 @@ void test_dequeue_one() {
 
     CU_ASSERT_EQUAL(ret,1);
     if(ret != 1) push_info_msg(_("You don't return the good value"));
-    
-    /*
+
     CU_ASSERT_PTR_NULL(q.tail);
     if(q.tail) push_info_msg(_("You have to change the value of the tail to NULL for a queue of size 1"));
-    */
-    if(q.tail != NULL){
-        CU_FAIL();
-        push_info_msg(_("You have to change the value of the tail to NULL for a queue of size 1"));
-    }
 
     CU_ASSERT_EQUAL(q.size,0);
     if(q.size) push_info_msg(_("You have to change the size of the queue after the dequeue"));
