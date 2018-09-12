@@ -71,16 +71,13 @@ int create_file(char* filename, student_t* root){
 }
 
 void test_normal_case(){
-    
+    set_test_metadata("load_linked_list",_("Test in a normal case"),1);
     student_t* a;
     
     SANDBOX_BEGIN;
     a = load_linked_list("test1.dat");
     SANDBOX_END;
-    if(a != NULL){
-        CU_FAIL();
-        push_info_msg(_("error msg"));
-    }
+    CU_ASSERT_EQUAL(a,NULL);
 }
 
 int main(int argc,char* argv[])
