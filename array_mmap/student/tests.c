@@ -64,16 +64,19 @@ int create_file(char* filename, student_t* root){
         }
     }
     
+    close(fd);
+    
     return 0;
 }
 
-void test_success(){
-    CU_ASSERT_EQUAL(1,1);
+void test_normal_case(){
+    char* filename = "normal.dat";
 }
 
 int main(int argc,char* argv[])
 {
-    
+    student_t* root1 = create_linked_list(12351600, 5);
+    create_file("test1.dat", root1);
     BAN_FUNCS();
     RUN(test_success);
 }
