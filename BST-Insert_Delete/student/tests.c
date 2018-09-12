@@ -213,8 +213,11 @@ void test_insert_normal(){
     
 
     bt_t* solT = tree1();
+    node_t* dodonode = init_node("dodo","dodo");
 
-    if(!newEnWord || !newFrWord || !tree || !solT){
+    if(!dodonode || !newEnWord || !newFrWord || !tree || !solT){
+        if(dodonode)
+            freeNode(dodonode);
         if(newEnWord)
             free(newEnWord);
         if(newFrWord)
@@ -230,6 +233,10 @@ void test_insert_normal(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
+    //TODO Hard coded feature ? better to compare with a real tree ?
+    //It takes more time but we can be sure of the answer with that...
+    //'dodo' place was hardcoded, should we use our own function to insert it ?
+    ((((solT->root)->right)->right)->left)->left = dodonode;
     
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
@@ -261,15 +268,11 @@ void test_insert_normal(){
     CU_ASSERT_EQUAL(nbMalloc, 3);
     if(nbMalloc != 3)
         push_info_msg(_("You can only use 3 calls to malloc for this case"));
-    //TODO Hard coded feature ? better to compare with a real tree ?
-    //It takes more time but we can be sure of the answer with that...
-    //'dodo' place was hardcoded, should we use our own function to insert it ?
-    ((((solT->root)->right)->right)->left)->left = init_node("dodo","dodo");
     else{ // did he allocate enough memory ? or not too much ?
         int size[3];
-        int size[1] = logs.malloc.log[count].size;
-        int size[2]= logs.malloc.log[count+1].size;
-        int size[3] = logs.malloc.log[count+2].size;
+        size[1] = logs.malloc.log[count].size;
+        size[2]= logs.malloc.log[count+1].size;
+        size[3] = logs.malloc.log[count+2].size;
         if(!contains(size,25)){
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."))
         }
