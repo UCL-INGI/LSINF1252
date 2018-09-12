@@ -217,6 +217,7 @@ bt_t* tree4(){
 }
 
 void test_insert_normal(){
+    CU_FAIL(_("Try it"));
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
     int count = logs.malloc.n;
