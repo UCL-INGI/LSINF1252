@@ -54,7 +54,6 @@ student_t *load_linked_list(char* filename){
             while(failure_runner != NULL){
                 failure_previous = runner;
                 failure_runner = failure_runner->next;
-                free(failure_previous->name);
                 free(failure_previous);
             }
             
@@ -62,5 +61,13 @@ student_t *load_linked_list(char* filename){
             close(fd);
             return NULL;
         }
+        previous->next = new;
+        new->next = NULL;
+        previous = new;
     }
+    
+    munmap(map, length);
+    close(fd);
+    
+    return root;
 }
