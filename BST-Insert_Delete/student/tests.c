@@ -41,18 +41,17 @@ int sameNodes(node_t* node1, node_t* node2){
         if(!strcmp(node2->enWord,"changed")){
             push_info_msg(_("You certainly did node->enWord = enWord. This doesn't copy the string. So if enWord gets changed in the test function, the word in your tree will also change ! Hint : use strcpy"));
         }
-        elseif(!strcmp(node2->frWord,"changed")){
+        else if(!strcmp(node2->frWord,"changed")){
             push_info_msg(_("You certainly did node->frWord = frWord. This doesn't copy the string. So if enWord gets changed in the test function, the word in your tree will also change ! Hint : use strcpy"));
         }
+        else{
+            char error_msg[100];
+            sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
+            push_info_msg(_(error_msg));
+            return false;
+        }
     }
-    else{
-        char error_msg[100];
-        sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
-        push_info_msg(_(error_msg));
-    }
-    return false;
-}
-return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
+    return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
 
 int sameTrees(bt_t* solT, bt_t* tree){
@@ -676,13 +675,13 @@ void test_delete_no_child(){
     freeNode(((((solT->root)->right)->right)->left)->right);
     ((((solT->root)->right)->right)->left)->right = NULL;
     //TODO special feedback in case he free's but doesn't put NULL instead ?
-    
+
     /*
     //TODO should do ? harder when there is a child... we could delete 1 or another node...
     //to be sure he free's the node after the key and value
     void *ptr = (void*) (((((tree->root)->right)->right)->left)->right);
     */
-    
+
     //TODO monitored malloc to see he isn't doing anything wrong ?
     monitored.free = true;
     SANDBOX_BEGIN;
@@ -700,7 +699,7 @@ void test_delete_no_child(){
         CU_ASSERT_EQUAL(ptr, last_ptr);
         if (ptr != last_ptr)
             push_info_msg(_("The last free you should do is on the struct (node)"));
-    
+
     }
     */
 
@@ -752,11 +751,11 @@ void test_delete_one_child(){
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
         push_info_msg(_("You should use free 3 times"));
-    }
-    int sameT = sameTrees(solT,tree);
-    CU_ASSERT_EQUAL(sameT,true);
-    if(!sameT)
-        push_info_msg(_("Your tree isn't what was expected"));
+}
+int sameT = sameTrees(solT,tree);
+CU_ASSERT_EQUAL(sameT,true);
+if(!sameT)
+    push_info_msg(_("Your tree isn't what was expected"));
 }
 
 void test_delete_node_not_found(){
