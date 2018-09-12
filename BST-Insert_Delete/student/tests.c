@@ -868,7 +868,7 @@ void test_delete_root_replace_node(){
         push_info_msg(_("Your tree isn't what was expected"));
 
     if(tree){
-        if(tree->root != solT->root){
+        if(strcmp((tree->root)->enWord, (solT->root)->enWord) || strcmp((tree->root)->frWord, (solT->root)->enWord)){
             CU_FAIL();
             push_info_msg(_("The root of your tree is wrong. Did you update it ?"));
         }

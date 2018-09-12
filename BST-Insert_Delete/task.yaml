@@ -76,9 +76,9 @@ problems:
         name: Insert function
         type: code
     other:
+        name: Subfunctions
         default: ''
         language: c
-        name: Subfunctions
         header: You can write your needed subfunctions here. Don't forget to write
             their signature and body.
         type: code
