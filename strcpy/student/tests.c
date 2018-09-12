@@ -55,6 +55,7 @@ void test_strcpy_return() {
         set_tag("malloc_fail");
     }
     if(cs){
+        set_tag("malloc_fail");
         push_info_msg(_("You should use malloc for this task. Calloc could also work but it's not efficient to use it here since we initialise the memory just after we allocate it"));
     }
 }
