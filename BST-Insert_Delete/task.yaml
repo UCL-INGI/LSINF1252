@@ -11,10 +11,10 @@ context: |-
         } bt_t;
 
         typedef struct node {
-            char* enWord;
-            char* frWord;
-            struct node* left;
-            struct node* right;
+            char *enWord;
+            char *frWord;
+            struct node *left;
+            struct node *right;
         } node_t;
 
     TODO : SCHEME NEEDED + EXPLAIN WHICH NODE IS THE ROOT.
@@ -33,6 +33,14 @@ context: |-
     When it comes to a node which has two children, it's harder. We first have to find the right subtree's leftmost child. In the example, if we want to suppress *XXX*, the leftmost node of the right subpart is *YYY*. Then, we can move *YYY* to *XXX* and replace *YYY* by his child (if it has one).
 
     SCHEME NEEDED for XXX and YYY.
+
+    *Hints :*
+
+    - ``char *enWord`` and ``char *frWord`` are pointers, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the strings in the tree.
+
+    - Other useful commands: `strcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcpy.3.html>`_, `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_ and `strcmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcmp.3.html>`_.
+
+    - Do not forget to free **all** the allocated space deleting an element.
 environment: cpp
 evaluate: best
 groups: false
