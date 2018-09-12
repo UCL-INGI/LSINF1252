@@ -207,12 +207,16 @@ bt_t* tree4(){
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
+    int count = logs.malloc.n;
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
     
     char str[10];
-    sprintf(str, "%zd", logs.malloc.log[0].size);
+    char str2[10];
+    sprintf(str, "%zd", logs.malloc.log[count+2].size);
+    sprintf(str, "%zd", logs.malloc.log[count+1].size);
     push_info_msg(str);
+    push_info_msg(str2);
 
     bt_t* solT = tree1();
 
