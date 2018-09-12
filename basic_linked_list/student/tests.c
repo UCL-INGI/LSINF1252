@@ -78,8 +78,8 @@ void test_init_node_alloc(){
   SANDBOX_END;
 
   CU_ASSERT_EQUAL(stats.malloc.called, 1);
-  if (!stats.malloc.called){
-      push_info_msg(_("You used more than one call to malloc"));
+  if (stats.malloc.called != 1){
+      push_info_msg(_("You should malloc once in this case"));
       set_tag("not_malloc_once");
   }
   if(stats.malloc.last_params.size != sizeof(node_t)) {

@@ -36,14 +36,15 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
+    output: '2'
 name: '[S3] Simple linked list '
 network_grading: false
 order: 34
 problems:
     init_node:
+        type: code
         header: |
             .. code-block:: c
 
@@ -54,10 +55,14 @@ problems:
                 * @return: returns the pointer to the newly created node, or NULL if an error occured.
                 */
                 node_t *init_node(int value) {
-        type: code
+        default: ''
         name: Node initialisation
         language: c
     add_node:
+        type: code
+        default: ''
+        language: c
+        name: Adding a node
         header: |
             .. code-block:: c
 
@@ -70,145 +75,142 @@ problems:
                 * @return: 0 if success, 1 otherwise
                 */
                 int add_node(list_t *list, int value);
-        name: Adding a node
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        description: Your code exceeds the maximum allowed time.
         type: 1
+        name: Timeout
         id: timeout
         visible: true
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
     '1':
-        description: ''
         visible: true
-        id: sigsegv
         type: 1
+        id: sigsegv
+        description: ''
         name: Segmentation Fault
     '10':
-        type: 1
-        description: Your function returns an error in normal case.
-        name: Error normal case
-        id: error_normal_case
-        visible: false
-    '11':
-        name: Wrong list size
-        description: The list has not the expected size.
-        type: 1
-        id: wrong_list_size
-        visible: false
-    '12':
-        id: wrong_args_handling
-        description: Wrong return value when wrong args.
-        type: 1
-        name: Bad Args handling
-        visible: false
-    '13':
-        description: The linked list does not correspond to the waited one.
-        type: 1
-        name: Incorrect list
-        id: not_expected_list
-        visible: false
-    '14':
-        description: The list was modified while the malloc() fails.
-        name: Modif list malloc fail
-        type: 1
-        id: modif_list_malloc_fail
-        visible: false
-    '15':
-        type: 1
-        description: You code does not compile.
-        id: not_compile
-        visible: true
-        name: Not compile
-    '16':
-        type: 1
-        visible: true
-        description: ''
-        id: memory
-        name: Memory Exceeded
-    '17':
-        visible: true
-        name: Floating Point Exception
-        id: sigfpe
-        description: ''
-        type: 1
-    '18':
-        visible: true
-        id: double_free
         name: Double free
-        type: 1
+        id: double_free
+        visible: true
         description: Your code produced a double free.
-    '2':
+        type: 1
+    '11':
+        id: banned_funcs
+        visible: true
+        type: 1
         description: You use some banned functions.
         name: Banned functions
-        type: 1
-        visible: true
-        id: banned_funcs
-    '3':
-        name: Not malloc once
-        type: 1
-        id: not_malloc_once
+    '12':
         description: The malloc() functions was not called exactly once.
+        name: Not malloc once
+        id: not_malloc_once
+        type: 1
         visible: false
-    '4':
-        id: SCRIPT_ERROR
+    '13':
+        type: 1
         description: SCRIPT_ERROR - This tag should not appear. If it appears this
             is probably an error in the test suite of this task.
-        type: 1
+        id: SCRIPT_ERROR
         name: SCRIPT ERROR
         visible: false
-    '5':
-        type: 1
+    '14':
         id: malloc_fail_memory_size
+        type: 1
         description: The allocated memory has not the correct size.
         name: Wrong malloc memory size
         visible: false
-    '6':
-        id: bad_node_value
-        type: 1
+    '15':
         name: Bad node value
+        type: 1
         description: The value of the node is not the expected one.
+        id: bad_node_value
         visible: false
-    '7':
-        description: The 'next' pointer is not correctly initialised
+    '16':
         name: Bad next pointer
         type: 1
         id: bad_next_pointer
+        description: The 'next' pointer is not correctly initialised
         visible: false
-    '8':
-        description: Wrong return value when malloc call fails.
+    '17':
         name: Malloc fail handling
         id: malloc_fail_handling
+        description: Wrong return value when malloc call fails.
         type: 1
         visible: false
-    '9':
-        id: not_allocated
-        name: Not allocated
+    '18':
+        type: 1
         description: A new node is not allocated with malloc().
-        type: 1
+        name: Not allocated
+        id: not_allocated
         visible: false
-    '19':
+    '2':
+        type: 1
+        id: error_normal_case
+        description: Your function returns an error in normal case.
+        name: Error normal case
+        visible: false
+    '3':
+        id: wrong_list_size
+        name: Wrong list size
+        type: 1
+        description: The list has not the expected size.
+        visible: false
+    '4':
+        type: 1
+        description: Wrong return value when wrong args.
+        name: Bad Args handling
+        id: wrong_args_handling
+        visible: false
+    '5':
+        description: The linked list does not correspond to the waited one.
+        type: 1
+        id: not_expected_list
+        name: Incorrect list
+        visible: false
+    '6':
+        description: The list was modified while the malloc() fails.
+        type: 1
+        name: Modif list malloc fail
+        id: modif_list_malloc_fail
+        visible: false
+    '7':
+        type: 1
+        description: You code does not compile.
+        visible: true
+        id: not_compile
+        name: Not compile
+    '8':
         visible: true
         description: ''
+        type: 1
+        name: Memory Exceeded
+        id: memory
+    '9':
+        name: Floating Point Exception
+        description: ''
+        visible: true
+        type: 1
+        id: sigfpe
+    '19':
         name: S3
+        visible: true
+        description: ''
         type: 2
         id: ''
     '20':
-        description: Task dealing with data structures and linked list
-        name: Data structures
-        visible: true
         type: 2
+        description: Task dealing with data structures and linked list
+        visible: true
+        name: Data structures
         id: ''
     '21':
-        visible: true
         type: 2
         description: Usage of malloc()
         name: Malloc
+        visible: true
         id: ''
 weight: 1.0
