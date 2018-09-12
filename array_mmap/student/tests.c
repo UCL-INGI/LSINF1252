@@ -37,6 +37,7 @@ student_t *create_linked_list(int noma_depart, int nb){
             free_all(root);
             return NULL;
         }
+        previous->next = new;
         new->next = NULL;
         new->noma = noma_depart;
         noma_depart += 10000;
@@ -73,7 +74,7 @@ int main(int argc,char* argv[])
 {
     student_t* root1 = create_linked_list(12351600, 5);
     if(root1 == NULL)
-        return;
+        return 0;
     create_file("test1.dat", root1);
     BAN_FUNCS();
     RUN(test_success);
