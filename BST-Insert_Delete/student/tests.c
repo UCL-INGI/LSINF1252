@@ -10,6 +10,18 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+/*
+ * @return: number of times @value is contained in @array
+ */
+int containsArray(int* array, int size, int value){
+    int count = 0;
+    for(int i = 0; i < size; i++){
+        if(array[i] == value)
+            count++;
+    }
+    return count;
+}
+
 int sameNodes(node_t* node1, node_t* node2){
     if(node1 == NULL && node2 == NULL)
         return true;
@@ -250,14 +262,6 @@ void test_insert_normal(){
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
     
-    //TEST
-    char str[10];
-    char str2[10];
-    sprintf(str, "%zd", logs.malloc.log[count].size);
-    sprintf(str2, "%zd", logs.malloc.log[count+1].size);
-    push_info_msg(str);
-    push_info_msg(str2);
-    
     //to be sure he copies the string
     newEnWord = realloc(newEnWord, sizeof(char)*8);
     strcpy(newEnWord, "changed");
@@ -273,11 +277,11 @@ void test_insert_normal(){
         size[1] = logs.malloc.log[count].size;
         size[2]= logs.malloc.log[count+1].size;
         size[3] = logs.malloc.log[count+2].size;
-        if(!contains(size,25)){
-            push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."))
+        if(!containsArray(size,3,25)){
+            push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
         }
-        if(contains(size,5) != 2){
-            push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\0' character !"))
+        if(containsArray(size,3,5) != 2){
+            push_info_msg(_("You didn't malloc the right space for the strings. Don't forget to count the '\\\0' character !"));
         }
     }
     int sameT = sameTrees(solT,tree);
