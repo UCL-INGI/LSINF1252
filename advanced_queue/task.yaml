@@ -29,14 +29,18 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    output: '2'
     memory: '100'
+    output: '2'
     time: '30'
 name: '[S4] Advanced queue'
 network_grading: false
 order: 48
 problems:
     enqueue:
+        default: ''
+        name: Enqueue
+        type: code
+        language: c
         header: |-
             .. code:: c
 
@@ -51,9 +55,6 @@ problems:
                 * pre : The queue q will always be valid, you don't need to handle the NULL case.
                 */
                 int enqueue(queue_t* q, int val){
-        name: Enqueue
-        language: c
-        type: code
     dequeue:
         header: |-
             *HINT* : Do not forget to free all the unused memory.
@@ -68,61 +69,62 @@ problems:
                 * pre         : The given queue will always be valid, you do not need to handle the NULL case.
                 */
                 int dequeue(queue_t* q){
-        type: code
-        name: Dequeue
+        default: ''
         language: c
+        name: Dequeue
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: timeout
-        name: Timeout
         description: Your code exceeds the maximum allowed time.
-        type: 1
+        id: timeout
         visible: true
+        type: 1
+        name: Timeout
     '1':
         visible: true
+        description: ''
         id: sigsegv
         type: 1
-        description: ''
         name: Segmentation Fault
     '2':
+        visible: true
+        id: not_compile
+        type: 1
         description: You code does not compile.
         name: Not compile
-        type: 1
-        id: not_compile
-        visible: true
     '3':
-        visible: true
-        type: 1
-        name: Memory Exceeded
         id: memory
-        description: ''
-    '4':
-        id: sigfpe
         visible: true
         description: ''
+        name: Memory Exceeded
+        type: 1
+    '4':
         type: 1
         name: Floating Point Exception
+        description: ''
+        visible: true
+        id: sigfpe
     '5':
         type: 1
-        id: double_free
-        description: Your code produced a double free.
-        name: Double free
         visible: true
+        id: double_free
+        name: Double free
+        description: Your code produced a double free.
     '6':
         description: You use some banned functions.
-        id: banned_funcs
-        visible: true
         type: 1
         name: Banned functions
-    '7':
+        id: banned_funcs
         visible: true
-        description: Task dealing with data structures and linked list
-        name: Data structures
+    '7':
         type: 2
+        description: Task dealing with data structures and linked list
+        visible: true
+        name: Data structures
         id: ''
     '8':
         visible: true

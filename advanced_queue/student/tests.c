@@ -316,7 +316,7 @@ void test_dequeue_one() {
     if(stats.malloc.called > 0) push_info_msg(_("Why do you use malloc?"));
 
     CU_ASSERT_EQUAL(stats.free.called,1);
-    if(stats.free.called > 1) push_info_msg(_("Why do you use free more then once?"));
+    if(stats.free.called != 1) push_info_msg(_("You should use free once !"));
 
     CU_ASSERT_EQUAL(ret,1);
     if(ret != 1) push_info_msg(_("You don't return the good value"));
@@ -362,7 +362,7 @@ void test_dequeue_five() {
     if(stats.malloc.called > 0) push_info_msg(_("Why do you use malloc?"));
 
     CU_ASSERT_EQUAL(stats.free.called,1);
-    if(stats.free.called > 1) push_info_msg(_("Why do you use free more then once?"));
+    if(stats.free.called != 1) push_info_msg(_("You should use free once !"));
 
     CU_ASSERT_EQUAL(ret,8);
     if(ret != 8) push_info_msg(_("You don't return the good value"));
@@ -417,7 +417,7 @@ void test_dequeue_ten() {
     if(stats.malloc.called > 0) push_info_msg(_("Why do you use malloc?"));
 
     CU_ASSERT_EQUAL(stats.free.called,1);
-    if(stats.free.called > 1) push_info_msg(_("Why do you use free more then once?"));
+    if(stats.free.called != 1) push_info_msg(_("You should use free once !"));
 
     CU_ASSERT_EQUAL(ret,1);
     if(ret != 1) push_info_msg(_("You don't return the good value"));
