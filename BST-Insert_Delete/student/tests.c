@@ -436,6 +436,7 @@ void test_insert_empty_tree(){
     //student arguments
     bt_t* tree = malloc(sizeof(bt_t));
     tree->root = NULL;
+    bt_t *solT = init_bt("dodo","dodo");
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
 
