@@ -25,12 +25,28 @@ int containsArray(int* array, int size, int value){
 int sameNodes(node_t* node1, node_t* node2){
     if(node1 == NULL && node2 == NULL)
         return true;
-    if(node1 == NULL || node2 == NULL)
+    if(node1 == NULL){
+        push_info_msg(_("One node in your solution tree should be NULL"));
         return false;
+    }
+    if(node2 == NULL){
+        push_info_msg(_("One node in your solution is NULL and shouldn't be"));
+        return false;
+    }
+    if(node2->enWord == NULL || node2->frWord == NULL){
+        push_info_msg(_("One of the 'enWord' and 'frWord' attributes is NULL in one of your nodes"));
+        return false;
+    }
     if(strcmp(node1->enWord, node2->enWord) || strcmp(node1->frWord, node2->frWord)){
-        char error_msg[100];
-        sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
-        push_info_msg(_(error_msg));
+        if(!strcmp(node2->enWord,"changed")){
+            push_info_msg(_("You certainly did node->enWord = enWord. This doesn't copy the string. So if enWord gets changed in the test function, the word in your tree will also change ! Hint : use strcpy"));
+        }
+        else{
+            char error_msg[100];
+            sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
+            push_info_msg(_(error_msg));
+        }
+        return false;
     }
     return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
