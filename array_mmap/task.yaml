@@ -25,10 +25,22 @@ network_grading: false
 problems:
     load_list:
         default: ''
-        header: ''
-        name: ''
+        header: |-
+            Write the body of the function ``load_list`` using mmap.
+
+            .. code-block:: c
+
+                /*
+                 * @filename: the file to be manipulated, filename != NULL
+                 * @return: the pointer to the head of the linked list,
+                 *         NULL is case of error
+                 * you cannot use fopen, read, fread, fgetc, fgets
+                 * which means that you have to use mmap
+                 */
+                student_t* load_linked_list(char* filename){
+        name: Load linked list
         type: code
-        language: ''
+        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
