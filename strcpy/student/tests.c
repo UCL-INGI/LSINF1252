@@ -53,7 +53,7 @@ void test_strcpy_return() {
     }
     int cs = stats.calloc.called;
     if(cs > 0)
-        push_info_msg(_("You shouldn't use calloc for this task. Since we are writing on the memory just after allocating it, calloc is a loss of time."))
+        push_info_msg(_("You shouldn't use calloc for this task. Since we are writing on the memory just after allocating it, calloc is a loss of time."));
 }
 
 void test_strcpy_nomem() {
