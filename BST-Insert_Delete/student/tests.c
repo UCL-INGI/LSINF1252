@@ -231,7 +231,7 @@ void test_insert_normal(){
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
 
-    enWord = "wordChanged";
+    newEnWord = "wordChanged";
     
     // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;

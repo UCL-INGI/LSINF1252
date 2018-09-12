@@ -39,13 +39,13 @@ groups: false
 input_random: '0'
 limits:
     memory: '100'
-    time: '30'
     output: '2'
+    time: '30'
 name: 'BST : Insert and Delete'
 network_grading: false
 problems:
     insert:
-        type: code
+        language: c
         header: |-
             Write the body of the ``insert`` function. If you use subfonctions, write them in the box below with their signature and body.
 
@@ -58,16 +58,16 @@ problems:
                  * @return: 1 if the new node was inserted, 0 otherwise
                  */
                 int insert(bt_t* bt, char* enWord, char* frWord);
-        language: c
         default: ''
         name: Insert function
+        type: code
     other:
-        header: You can write your needed subfunctions here. Don't forget to write
-            their signature and body.
+        name: Subfunctions
         default: ''
         language: c
+        header: You can write your needed subfunctions here. Don't forget to write
+            their signature and body.
         type: code
-        name: Subfunctions
         optional: 'on'
     delete:
         header: |-
@@ -80,10 +80,10 @@ problems:
                  * @enWord: the key of the node you want to delete, enWord != NULL
                  */
                 void delete(bt_t* bt, char* enWord);
+        language: c
+        type: code
         default: ''
         name: Delete function
-        type: code
-        language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
