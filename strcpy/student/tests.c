@@ -28,18 +28,17 @@ void test_strcpy_return() {
     // check if only one call to malloc
     int ms = stats.malloc.called;
     int cs = stats.calloc.called;
-    char str[100];
-    sprintf(str,"Number of calls to malloc : %d, number of calls to calloc : %d",ms,cs);
-    push_info_msg(_(str));
     CU_ASSERT_EQUAL(ms, 1);
-    if (ms > 1)
+    if (ms > 1){
         push_info_msg(_("You used more than one call to malloc"));
+        return;
+    }
 
     // check if new element is malloced
     int mal = malloced((void*) ret);
     CU_ASSERT_TRUE(mal);
     // if malloced, check the value, else not because it produces buffer overflow due to CUNIT
-    if (mal) {
+    if (mal && ms) {
         if(stats.malloc.last_params.size != strlen(src)+1) {
             CU_FAIL("wrong malloc size");
             push_info_msg(_("The allocated memory has not the correct size."));
@@ -51,9 +50,12 @@ void test_strcpy_return() {
         }
         free(ret);
     }
-    else {
+    else if(!mal){
         push_info_msg(_("The returned pointer is not malloced"));
         set_tag("malloc_fail");
+    }
+    else{ // ms = false
+        push_info_msg(_("You should use malloc for this task. Calloc could also work but it's not efficient to use it here since we initialise the memory just after we allocate it"));
     }
 }
 
