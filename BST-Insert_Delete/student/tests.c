@@ -44,15 +44,15 @@ int sameNodes(node_t* node1, node_t* node2){
         elseif(!strcmp(node2->frWord,"changed")){
             push_info_msg(_("You certainly did node->frWord = frWord. This doesn't copy the string. So if enWord gets changed in the test function, the word in your tree will also change ! Hint : use strcpy"));
         }
-        }
-        else{
-            char error_msg[100];
-            sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
-            push_info_msg(_(error_msg));
-        }
-        return false;
     }
-    return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
+    else{
+        char error_msg[100];
+        sprintf(error_msg, "One (of your) wrong node(s) : enWord : %s, frWord : %s. Solution : enWord : %s, frWord : %s.", node2->enWord, node2->frWord, node1->enWord, node1->frWord);
+        push_info_msg(_(error_msg));
+    }
+    return false;
+}
+return sameNodes(node1->left, node2->left) && sameNodes(node1->right, node2->right);
 }
 
 int sameTrees(bt_t* solT, bt_t* tree){
@@ -257,7 +257,7 @@ void test_insert_normal(){
     int count = logs.malloc.n;
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
-    
+
 
     bt_t* solT = tree1();
     node_t* dodonode = init_node("dodo","dodo");
@@ -284,26 +284,26 @@ void test_insert_normal(){
     //It takes more time but we can be sure of the answer with that...
     //'dodo' place was hardcoded, should we use our own function to insert it ?
     ((((solT->root)->right)->right)->left)->left = dodonode;
-    
+
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
-    
+
     //to be able to know how many bytes the student malloced
     count = logs.malloc.n;
-    
+
     monitored.malloc = true;
     int inserted;
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
+
     //to be sure he copies the string
     newEnWord = realloc(newEnWord, sizeof(char)*8);
     newFrWord = realloc(newFrWord, sizeof(char)*8);
     strcpy(newEnWord, "changed");
     strcpy(newFrWord, "changed");
     //TODOFreeIfNewEnWordNULL
-    
+
     // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);
@@ -358,10 +358,10 @@ void test_insert_normal_first_malloc_fails(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
-    
+
     failures.malloc = FAIL_FIRST;
     monitored.malloc = true;
     monitored.free = true;
@@ -379,18 +379,18 @@ void test_insert_normal_first_malloc_fails(){
         push_info_msg(_("You cannot free the arguments of the function !"));
     }
     */
-    
+
     // check if only 1 malloc (enWord, frWord, node) since it fails.
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 1);
     if(nbMalloc != 1)
         push_info_msg(_("You should have used malloc only once in this case"));
-    
+
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 0);
     if(nbFree != 0)
         push_info_msg(_("You shouldn't have called free"));
-    
+
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
@@ -425,10 +425,10 @@ void test_insert_normal_second_malloc_fails(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
-    
+
     failures.malloc = FAIL_SECOND;
     monitored.malloc = true;
     monitored.free = true;
@@ -436,7 +436,7 @@ void test_insert_normal_second_malloc_fails(){
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
+
     /*
     // TODO : FIX, doesnt' work
     //to be sure he copies the string
@@ -447,18 +447,18 @@ void test_insert_normal_second_malloc_fails(){
         push_info_msg(_("You cannot free the arguments of the function !"));
     }
     */
-    
+
     // check if only 2 malloc (enWord, frWord, node) since the second one fails.
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 2);
     if(nbMalloc != 2)
         push_info_msg(_("You should have used malloc only twice in this case"));
-    
+
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 1);
     if(nbFree != 1)
         push_info_msg(_("You should have called free once"));
-    
+
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
@@ -493,10 +493,10 @@ void test_insert_normal_third_malloc_fails(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
-    
+
     failures.malloc = FAIL_THIRD;
     monitored.malloc = true;
     monitored.free = true;
@@ -504,7 +504,7 @@ void test_insert_normal_third_malloc_fails(){
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
+
     /*
     // TODO : FIX, doesnt' work
     //to be sure he copies the string
@@ -515,18 +515,18 @@ void test_insert_normal_third_malloc_fails(){
         push_info_msg(_("You cannot free the arguments of the function !"));
     }
     */
-    
+
     // check if only 3 malloc (enWord, frWord, node)
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);
     if(nbMalloc != 3)
         push_info_msg(_("You should have used malloc only three times in this case"));
-    
+
     int nbFree = stats.free.called;
     CU_ASSERT_EQUAL(nbFree, 2);
     if(nbFree != 2)
         push_info_msg(_("You should have called free twice"));
-    
+
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
@@ -561,23 +561,23 @@ void test_insert_empty_tree(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     strcpy(newEnWord, "dodo");
     strcpy(newFrWord, "dodo");
-    
+
     monitored.malloc = true;
     int inserted;
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
+
     //to be sure he copies the string
     newEnWord = realloc(newEnWord, sizeof(char)*8);
     newFrWord = realloc(newFrWord, sizeof(char)*8);
     strcpy(newEnWord, "changed");
     strcpy(newFrWord, "changed");
     //TODOFreeIfNewEnWordNULL
-    
+
     // check if only 3 malloc (enWord, frWord, node);
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 3);
@@ -620,17 +620,17 @@ void test_insert_already_inserted(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     strcpy(newEnWord, "cat");
     strcpy(newFrWord, "chat");
-    
+
     monitored.malloc = true;
     monitored.free = true;
     int inserted;
     SANDBOX_BEGIN;
     inserted = insert(tree, newEnWord, newFrWord);
     SANDBOX_END;
-    
+
     // Check : 0 malloc, 0 free
     int nbMalloc = stats.malloc.called;
     CU_ASSERT_EQUAL(nbMalloc, 0);
@@ -676,7 +676,13 @@ void test_delete_no_child(){
     freeNode(((((solT->root)->right)->right)->left)->right);
     ((((solT->root)->right)->right)->left)->right = NULL;
     //TODO special feedback in case he free's but doesn't put NULL instead ?
-
+    
+    /*
+    //TODO should do ? harder when there is a child... we could delete 1 or another node...
+    //to be sure he free's the node after the key and value
+    void *ptr = (void*) (((((tree->root)->right)->right)->left)->right);
+    */
+    
     //TODO monitored malloc to see he isn't doing anything wrong ?
     monitored.free = true;
     SANDBOX_BEGIN;
@@ -687,6 +693,16 @@ void test_delete_no_child(){
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
         push_info_msg(_("You should use free 3 times"));
+    /*
+    //TODO should do ? harder when there is a child... we could delete 1 or another node...
+    else{
+        void *last_ptr = (void*) stats.free.last_params.ptr;
+        CU_ASSERT_EQUAL(ptr, last_ptr);
+        if (ptr != last_ptr)
+            push_info_msg(_("The last free you should do is on the struct (node)"));
+    
+    }
+    */
 
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
@@ -716,13 +732,16 @@ void test_delete_one_child(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     node_t* elephant = ((solT->root)->right)->right;
     node_t* dog = elephant->left;
     elephant->left = dog->right;
     free(dog->enWord);
     free(dog->frWord);
     free(dog);
+
+    //to be sure he free's the node after the key and value
+    void *ptr = (void*) (((((tree->root)->right)->right)->left)->right);
 
     monitored.free = true;
     SANDBOX_BEGIN;
@@ -733,7 +752,7 @@ void test_delete_one_child(){
     CU_ASSERT_EQUAL(nbFree, 3);
     if(nbFree != 3)
         push_info_msg(_("You should use free 3 times"));
-
+    }
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
@@ -823,7 +842,7 @@ void test_delete_root_replace_node(){
     //student arguments
     bt_t* tree = tree3();
     char* enWord = "cat";
-    
+
     //solution
     bt_t* solT = init_bt("animal","animal");
 
@@ -852,7 +871,7 @@ void test_delete_root_replace_node(){
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
         push_info_msg(_("Your tree isn't what was expected"));
-    
+
     //TODO special feedback when tree->root isn't updated ?
 }
 
@@ -898,7 +917,7 @@ void test_delete_two_children_tree1(){
     //student arguments
     bt_t* tree = tree1();
     bt_t* solT = tree1();
-    
+
     if(!tree || !solT){
         if(tree){
             freeNode(tree->root);
@@ -911,7 +930,7 @@ void test_delete_two_children_tree1(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     //sol
     node_t* deerdog = (solT->root)->right;
     free(deerdog->enWord); free(deerdog->frWord);
@@ -921,29 +940,29 @@ void test_delete_two_children_tree1(){
     node_t* elephant = deerdog->right;
     elephant->left = dog->right; //eagle
     free(dog);
-    
+
     char* deerStr= "deer";
-    
+
     monitored.malloc = true;
     monitored.free = true;
     SANDBOX_BEGIN;
     delete(tree, deerStr);
     SANDBOX_END;
-    
+
     int nbMalloc = stats.malloc.called;
     int nbFree = stats.free.called;
-    
-    
+
+
     CU_ASSERT_EQUAL(nbFree,3);
     if(nbFree != 3){
         push_info_msg(_("You should use free 3 times"));
     }
-    
+
     CU_ASSERT_EQUAL(nbMalloc,0);
     if(nbMalloc != 0){
         push_info_msg(_("Why are you using malloc ?"));
     }
-    
+
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
@@ -955,7 +974,7 @@ void test_delete_two_children_tree1_root(){
     //student arguments
     bt_t* tree = tree1();
     bt_t* solT = tree1();
-    
+
     if(!tree || !solT){
         if(tree){
             freeNode(tree->root);
@@ -968,7 +987,7 @@ void test_delete_two_children_tree1_root(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     //sol
     node_t* cat = solT->root;
     node_t* deer = cat->right;
@@ -978,30 +997,30 @@ void test_delete_two_children_tree1_root(){
     creature->right = cat->right;
     free(cat->enWord); free(cat->frWord); free(cat);
     deer->left = NULL;
-    
-    
+
+
     char* catStr = "cat";
-    
+
     monitored.malloc = true;
     monitored.free = true;
     SANDBOX_BEGIN;
     delete(tree, catStr);
     SANDBOX_END;
-    
+
     int nbMalloc = stats.malloc.called;
     int nbFree = stats.free.called;
-    
-    
+
+
     CU_ASSERT_EQUAL(nbFree,3);
     if(nbFree != 3){
         push_info_msg(_("You should use free 3 times"));
     }
-    
+
     CU_ASSERT_EQUAL(nbMalloc,0);
     if(nbMalloc != 0){
         push_info_msg(_("Why are you using malloc ?"));
     }
-    
+
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
@@ -1013,7 +1032,7 @@ void test_delete_two_children_tree4(){
     //student arguments
     bt_t* tree = tree4();
     bt_t* solT = tree4();
-    
+
     if(!tree || !solT){
         if(tree){
             freeNode(tree->root);
@@ -1026,7 +1045,7 @@ void test_delete_two_children_tree4(){
         CU_FAIL(_("Internal error while allocating memory"));
         //TODO return ??? Or CU_FAIL is enough ?
     }
-    
+
     //sol
     node_t* cat = solT->root;
     node_t* deer = cat->right;
@@ -1035,29 +1054,29 @@ void test_delete_two_children_tree4(){
     elephant->left = deer->left;
     free(deer->enWord); free(deer->frWord); free(deer);
     //sol built
-    
+
     char* deerStr = "deer";
-    
+
     monitored.malloc = true;
     monitored.free = true;
     SANDBOX_BEGIN;
     delete(tree, deerStr);
     SANDBOX_END;
-    
+
     int nbMalloc = stats.malloc.called;
     int nbFree = stats.free.called;
-    
-    
+
+
     CU_ASSERT_EQUAL(nbFree,3);
     if(nbFree != 3){
         push_info_msg(_("You should use free 3 times"));
     }
-    
+
     CU_ASSERT_EQUAL(nbMalloc,0);
     if(nbMalloc != 0){
         push_info_msg(_("Why are you using malloc ?"));
     }
-    
+
     int sameT = sameTrees(solT,tree);
     CU_ASSERT_EQUAL(sameT,true);
     if(!sameT)
