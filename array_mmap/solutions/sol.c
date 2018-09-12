@@ -38,5 +38,7 @@ student_t *load_linked_list(char* filename){
         return -1;
     }
     
+    memcpy((void*) root, (void*)&map[0], sizeof(student_t));
     
+    student_t* previous = NULL;
 }

@@ -32,6 +32,8 @@ problems:
 
                 /*
                  * @filename: the file to be manipulated, filename != NULL
+                 * @pre: the length of the file is an entire multiple of
+                 *      the size of student_t
                  * @return: the pointer to the head of the linked list,
                  *         NULL is case of error
                  * you cannot use fopen, read, fread, fgetc, fgets
