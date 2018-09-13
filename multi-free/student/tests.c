@@ -50,6 +50,28 @@ person_t* init_p(char* name, int age, int salary){
     
     return p;
 }
+char* rectname = "Vincent Blondel";
+int age = 53;
+int salary = 4000; //disclaimer : salary is random
+char* city = "Louvain-la-Neuve";
+int creation = 1968; //complex story
+
+person_t* rect = init_p(rectname, age, salary);
+if(!rect){
+    CU_FAIL("Internal problem: can't allocate");
+    return;
+}
+university_t* ucl = init_u(rect, city, creation); //creation: complex story
+if(!ucl){
+    CU_FAIL("Internal problem: can't allocate");
+}
+
+monitored.free = true;
+monitored.malloc = true;
+
+char* city, int creation, char* rectname, int rectsalary, int rectage
+SANDBOX_BEGIN;
+init_all(city, creation, rectname, age, salary)
 
 /*
  * Creates a university_t, with its rector (person_t), its city and
@@ -129,12 +151,19 @@ void test_success(){
     char* name_c = u->rector->name;
     
     monitored.free = true;
+    monitored.malloc = true;
     
     SANDBOX_BEGIN;
     free_all(u);
     SANDBOX_END;
     
+    monitored.malloc = false;
     monitored.free = false;
+    
+    CU_ASSERT_EQUAL(stats.malloc.called,0);
+    if(stats.malloc.called){
+        push_info_msg(_("Why are you using malloc ?"));
+    }
     
     CU_ASSERT_EQUAL(stats.free.called, 4);
     if(stats.free.called != 4){
@@ -185,12 +214,19 @@ void test_rector_null(){
     char* city_c = u->city;
     
     monitored.free = true;
+    monitored.malloc = true;
     
     SANDBOX_BEGIN;
     free_all(u);
     SANDBOX_END;
     
+    monitored.malloc = false;
     monitored.free = false;
+    
+    CU_ASSERT_EQUAL(stats.malloc.called,0);
+    if(stats.malloc.called){
+        push_info_msg(_("Why are you using malloc ?"));
+    }
     
     CU_ASSERT_EQUAL(stats.free.called, 2);
     if(stats.free.called != 2){
@@ -234,12 +270,19 @@ void test_strings_null(){
     person_t* p_c = u->rector;
     
     monitored.free = true;
+    monitored.malloc = true;
     
     SANDBOX_BEGIN;
     free_all(u);
     SANDBOX_END;
     
+    monitored.malloc = false;
     monitored.free = false;
+    
+    CU_ASSERT_EQUAL(stats.malloc.called,0);
+    if(stats.malloc.called){
+        push_info_msg(_("Why are you using malloc ?"));
+    }
     
     CU_ASSERT_EQUAL(stats.free.called,2);
     if(stats.free.called > 2){
@@ -338,6 +381,6 @@ int compute_graphic(university_t* u){
 
 int main(int argc,char* argv[])
 {
-    BAN_FUNCS(malloc, calloc);
+    BAN_FUNCS(calloc);
     RUN(test_success, test_rector_null, test_strings_null);
 }

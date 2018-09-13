@@ -38,8 +38,8 @@ order: 31
 problems:
     free_all:
         default: ''
-        type: code
         name: Free all
+        type: code
         language: c
         header: |-
             Write the body of the function ``free_all``.
@@ -64,7 +64,7 @@ problems:
                 /*
                  * @return: a pointer to the university structure containing the elements
                  */
-                 university_t* init_all(char* city, int creation, char* rectname, int rectsalary, int rectage){
+                 university_t* init_all(char* city, int creation, char* rectname, int age, int salary){
         language: c
         type: code
 stored_submissions: 0
