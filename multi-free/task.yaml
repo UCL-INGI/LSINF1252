@@ -51,6 +51,22 @@ problems:
                  * @pre: u != NULL
                  */
                  void free_all(university_t* u){
+    init_all:
+        name: Init all
+        default: ''
+        header: |-
+            Write the body of the function ``init_all``. You must copy the strings.
+
+            *Hint :* Use strcpy.
+
+            .. code-block:: c
+
+                /*
+                 * @return: a pointer to the university structure containing the elements
+                 */
+                 university_t* init_all(char* city, int creation, char* rectname, int rectsalary, int rectage){
+        language: c
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
