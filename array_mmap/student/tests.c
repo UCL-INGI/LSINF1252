@@ -87,7 +87,7 @@ int same_linked_list(student_t* st1, student_t* st2){
 void test_normal_case(){
     set_test_metadata("load_linked_list", _("Test with a file containing many elements"), 1);
     
-    int nb_elem = 6;
+    int nb_elem = 5;
     
     student_t* sol = create_linked_list(12351600, nb_elem);
     if(sol == NULL){
@@ -192,7 +192,7 @@ void test_one_element(){
     root_ret = load_linked_list("one_element.txt");
     SANDBOX_END;
     
-    monitored_open = false;
+    monitored.open = false;
     monitored.malloc = false;
     monitored.free = false;
     
