@@ -18,16 +18,15 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
+    output: '2'
     time: '30'
     memory: '100'
-    output: '2'
 name: '[Beta, S5] Get an array from a binary file using mmap'
 network_grading: false
 order: 1
 problems:
     load_linked_list:
         type: code
-        default: ''
         name: Load linked list
         header: |-
             Write the body of the function ``load_linked_list`` using mmap.
@@ -44,16 +43,96 @@ problems:
                  * which means that you have to use mmap
                  */
                 student_t* load_linked_list(char* filename){
+        default: ''
         language: c
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
+    '4':
+        visible: true
+        description: This tag validate that your close are correctly performed.
+        id: close
+        name: Close
+        type: 0
+    '5':
+        id: open
+        description: This tag validate you are able to open a file and handle errors
+            with open().
+        visible: true
+        name: Open
+        type: 0
+    '10':
+        type: 1
+        description: You do not manage the case where malloc() fails.
+        name: Malloc fail
+        visible: true
+        id: malloc_fail
+    '11':
+        id: malloc_fail_handling
+        description: Wrong return value when malloc call fails.
+        type: 1
+        name: Malloc fail handling
+        visible: false
+    '12':
+        type: 1
+        id: not_compile
+        visible: true
+        name: Not compile
+        description: You code does not compile.
+    '13':
+        type: 1
+        name: Wrong malloc memory size
+        description: The allocated memory doesn't have the correct size.
+        id: malloc_fail_memory_size
+        visible: false
+    '6':
+        name: Bad next pointer
+        description: The 'next' pointer is not correctly initialised
+        type: 1
+        id: bad_next_pointer
+        visible: false
+    '7':
+        description: The value of the node is not the expected one.
+        type: 1
+        id: bad_node_value
+        name: Bad node value
+        visible: false
+    '8':
+        id: error_normal_case
+        description: Your function returns an error in normal case.
+        type: 1
+        name: Error normal case
+        visible: false
+    '9':
+        type: 1
+        id: not_expected_list
+        description: The linked list does not correspond to the waited one.
+        name: Incorrect list
+        visible: false
     '0':
         type: 2
-        name: S5
         visible: true
         description: ''
+        name: S5
+        id: ''
+    '1':
+        description: ''
+        name: File
+        type: 2
+        visible: true
+        id: ''
+    '2':
+        visible: true
+        name: Data structures
+        description: Task dealing with data structures and linked list
+        type: 2
+        id: ''
+    '3':
+        name: Pointer
+        visible: true
+        type: 2
+        description: Task about pointers and their use
         id: ''
 weight: 1.0

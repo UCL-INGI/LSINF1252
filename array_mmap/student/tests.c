@@ -133,6 +133,9 @@ void test_open_fails(){
     if(cmp != 1){
         push_info_msg(_("Your function does not work when open fails"));
     }
+    else{
+        set_tag("open");
+    }
     
     int memory_used_sol = 0;
     
