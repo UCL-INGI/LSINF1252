@@ -192,7 +192,7 @@ void test_push_general() {
   int ms = stats.malloc.called;
   CU_ASSERT_EQUAL(ms, 2);
   if (ms != 2)
-    push_info_msg(_("You can use only two call to malloc to complete the task"));
+    push_info_msg(_("You should call malloc twice to complete the task"));
 
   // check if new element is malloced
   int mal = malloced((void*) stack);

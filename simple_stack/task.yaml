@@ -30,15 +30,15 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    memory: '100'
-    output: '2'
     time: '30'
+    output: '2'
+    memory: '100'
 name: '[S4] Simple stack '
 network_grading: false
 order: 45
 problems:
     push:
-        default: ''
+        name: Push
         header: |-
             .. code-block:: c
 
@@ -53,11 +53,11 @@ problems:
 
                 int push(struct node **head, const char *value){
         type: code
-        name: Push
         language: c
+        default: ''
     pop:
         name: Pop
-        default: ''
+        type: code
         language: c
         header: |-
             .. code-block:: c
@@ -75,64 +75,64 @@ problems:
                 */
 
                 int pop(struct node **head, char *result){
-        type: code
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        type: 1
+        visible: true
         description: Your code exceeds the maximum allowed time.
-        visible: true
-        type: 1
-        name: Timeout
         id: timeout
+        name: Timeout
     '1':
-        visible: true
-        description: ''
-        id: sigsegv
         type: 1
+        visible: true
+        id: sigsegv
+        description: ''
         name: Segmentation Fault
     '2':
-        visible: true
+        name: Not compile
         id: not_compile
+        visible: true
         type: 1
         description: You code does not compile.
-        name: Not compile
     '3':
-        id: memory
         visible: true
-        description: ''
         name: Memory Exceeded
         type: 1
-    '4':
-        type: 1
-        name: Floating Point Exception
+        id: memory
         description: ''
+    '4':
         visible: true
+        description: ''
         id: sigfpe
-    '5':
+        name: Floating Point Exception
         type: 1
-        visible: true
+    '5':
         id: double_free
         name: Double free
+        visible: true
         description: Your code produced a double free.
+        type: 1
     '6':
+        name: Banned functions
         description: You use some banned functions.
+        visible: true
         type: 1
         id: banned_funcs
-        visible: true
-        name: Banned functions
     '7':
-        type: 2
-        description: Task dealing with data structures and linked list
         visible: true
+        description: Task dealing with data structures and linked list
+        type: 2
         name: Data structures
         id: ''
     '8':
         visible: true
-        name: S4
         description: ''
         type: 2
+        name: S4
         id: ''
 weight: 1.0

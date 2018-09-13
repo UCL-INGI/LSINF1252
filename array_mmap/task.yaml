@@ -18,14 +18,16 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
 name: Get an array from a binary file using mmap
 network_grading: false
 problems:
     load_linked_list:
+        type: code
         default: ''
+        name: Load linked list
         header: |-
             Write the body of the function ``load_list`` using mmap.
 
@@ -42,8 +44,6 @@ problems:
                  */
                 student_t* load_linked_list(char* filename){
         language: c
-        type: code
-        name: Load linked list
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -93,6 +93,8 @@ void test_normal_case(){
     }
     student_t* root_ret;
     
+    int start = stats.memory.used;
+    
     monitored.open = true;
     monitored.malloc = true;
     monitored.free = true;
@@ -105,11 +107,19 @@ void test_normal_case(){
     monitored.malloc = false;
     monitored.free = false;
     
+    int memory_used = stats.memory.used - start;
+    int memory_used_sol = sizeof(student_t) * 5;
+    
     int cmp = same_linked_list(sol, root_ret);
     
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your linked list is not what was expected"));
+    }
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You did not allocate the right amount of memory"));
     }
 }
 
@@ -183,6 +193,11 @@ void test_one_element(){
         push_info_msg(_("Your function does not work with a file containing one element"));
     }
 }
+/*
+void test_malloc_fails_first time(){
+    set_test_metadata("load_linked_list"), _("Test whith malloc failing first time"));
+}
+*/
 
 int main(int argc,char* argv[])
 {
