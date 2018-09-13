@@ -319,8 +319,9 @@ void test_pop_value(){
     char *src = *(a+5);
     //printf("src = %s, result = %s, size = %li ", src, result, strlen(src));
     
-    push_info_msg(result);
-    /*
+    
+    //push_info_msg(result);
+    
     // -------------------------------
     if(src != NULL && result != NULL){
         char error_msg[200];
@@ -332,7 +333,7 @@ void test_pop_value(){
     }
 
     // --------------------------------
-    */
+    
 
     int cmp = strncmp((const char*) result, (const char*) src, strlen(src));
     CU_ASSERT_TRUE(!cmp);
