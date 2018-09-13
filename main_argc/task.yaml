@@ -7,14 +7,16 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
+    output: '2'
 name: '[S2] Reading arguments '
 network_grading: false
 order: 13
 problems:
     q1:
+        language: c
+        name: ''
         type: code
         header: |
             Write a complete C program containing a *main*. Your program should print one argument out of two (starting with the first), and return 0. Each argument shall be separated by a space, and the output shall be terminated by a new line. Don't forget the required includes for your program.
@@ -25,8 +27,6 @@ problems:
 
                 ./myProg a b c d e f g
                 a c e g
-        name: ''
-        language: c
         default: ''
 stored_submissions: 0
 submission_limit:
