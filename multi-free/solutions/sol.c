@@ -25,5 +25,6 @@ void free_all(university_t* u){
  * @return: a pointer to the university structure containing the elements
  */
 university_t* init_all(char* city, int creation, char* rectname, int age, int salary){
+    //Assuming that the strings != NULL
     
 }

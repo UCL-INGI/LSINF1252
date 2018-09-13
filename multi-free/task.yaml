@@ -1,7 +1,7 @@
 accessible: false
 author: Louis Navarre & Alexandre Gobeaux
 context: |-
-    You are asked to implement the function ``free_all``, which will free all the memory associated with the following structure *university_t*:
+    Given the following structure *univrsity_t*:
 
     .. code-block:: c
 
@@ -11,7 +11,7 @@ context: |-
             person_t* rector;
         } university_t;
 
-    The structure *person_t* is the following:
+    And the structure *person_t*:
 
     .. code-block:: c
 
@@ -20,6 +20,8 @@ context: |-
             int salary;
             int age;
         } person_t;
+
+    You are asked to implement the functions ``free_all`` and ``init_all``, which respectively initializes the structure *universiy_t* and frees all the memory associated with it.
 
     The *name* and the *city* have been allocated with *malloc*.
 
@@ -40,6 +42,7 @@ problems:
         default: ''
         name: Free all
         type: code
+        language: c
         header: |-
             Write the body of the function ``free_all``.
 
@@ -50,7 +53,6 @@ problems:
                  * @pre: u != NULL
                  */
                  void free_all(university_t* u){
-        language: c
     init_all:
         name: Init all
         default: ''
