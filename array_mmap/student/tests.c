@@ -119,7 +119,7 @@ void test_normal_case(){
     
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
-        push_info_msg(_("You did not allocate the right amount of memory"));
+        push_info_msg(_("You did not allocate the right amount of memory: @d"), memory_used);
     }
 }
 
