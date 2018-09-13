@@ -84,6 +84,234 @@ int same_linked_list(student_t* st1, student_t* st2){
     return 0;
 }
 
+void test_open_fails(){
+    set_test_metadata("load_linked_list", _("Test with fail of open"), 1);
+    
+    student_t* root_ret;
+    
+    failures.open = FAIL_FIRST;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("normal_case.txt");
+    SANDBOX_END;
+    
+    int memory_used = stats.memory.used - start;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work when open fails"));
+    }
+    
+    int memory_used_sol = 0;
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You allocated memory and you did not free it when there is an error"));
+    }
+}
+
+void test_empty_file(){
+    set_test_metadata("load_linked_list", _("Test with an empty file"), 1);
+    
+    student_t* root_ret;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("empty_file.txt");
+    SANDBOX_END;
+    
+    int memory_used = stats.memory.used;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work with an empty file"));
+    }
+    
+    int memory_used_sol = 0;
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You allocated memory and you did not free it when there is an error"));
+    }
+}
+
+void test_malloc_fails_first_time(){
+    set_test_metadata("load_linked_list", _("Test whith malloc failing first time"), 1);
+    
+    student_t* root_ret;
+    
+    failures.malloc = FAIL_FIRST;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("malloc_fails.txt");
+    SANDBOX_END;
+    
+    int memory_used = stats.memory.used - start;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Yout function does not work when malloc fails the first time"));
+    }
+    
+    int memory_used_sol = 0;
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You allocated memory and you did not free it when there is an error"));
+    }
+}
+
+void test_malloc_fails_third_time(){
+    set_test_metadata("load_linked_list", _("Test with malloc failing the third time"), 1);
+    
+    student_t* root_ret;
+    
+    failures.malloc = FAIL_THIRD;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("malloc_fails.txt");
+    SANDBOX_END;
+    
+    int memory_used_sol = stats.memory.used - start;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work when malloc fails the third time"));
+    }
+    
+    int memory_used_sol = 0;
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You allocated memory and you did not free it in case of error"));
+    }
+}
+
+void test_malloc_fails_last_time(){
+    set_test_metadata("load_linked_list", _("Test with malloc failing the last time"), 1);
+    
+    student_t* root_ret;
+    
+    failures.malloc = FAIL_FIFTH;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("malloc_fails.txt");
+    SANDBOX_END;
+    
+    int memory_used = stats.memory.used - start;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, NULL);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work when malloc fails for the last malloc"));
+    }
+    
+    int memory_used_sol = 0;
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You allocated memory and you did not free it in case of error"));
+    }
+}
+
+void test_one_element(){
+    set_test_metadata("load_linked_list", _("Test with a file containing one element"), 1);
+    
+    int nb_elem = 1;
+    
+    student_t* sol = create_linked_list(46691600, nb_elem);
+    
+    student_t* root_ret;
+    
+    monitored.open = true;
+    monitored.malloc = true;
+    monitored.free = true;
+    
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    root_ret = load_linked_list("one_element.txt");
+    SANDBOX_END;
+    
+    int memory_used = stats.memory.used - start;
+    
+    monitored.open = false;
+    monitored.malloc = false;
+    monitored.free = false;
+    
+    int cmp = same_linked_list(root_ret, sol);
+    
+    CU_ASSERT_EQUAL(cmp, 1);
+    if(cmp != 1){
+        push_info_msg(_("Your function does not work with a file containing one element"));
+    }
+    
+    int memory_used_sol = sizeof(student_t) * 1;
+    
+    CU_ASSERT_EQUAL(memory_used, memory_used_sol);
+    if(memory_used != memory_used_sol){
+        push_info_msg(_("You did not allocate the right amount of memory"));
+    }
+}
+
 void test_normal_case(){
     set_test_metadata("load_linked_list", _("Test with a file containing many elements"), 1);
     
@@ -112,8 +340,6 @@ void test_normal_case(){
     monitored.malloc = false;
     monitored.free = false;
     
-    int memory_used_sol = sizeof(student_t) * nb_elem;
-    
     int cmp = same_linked_list(sol, root_ret);
     
     CU_ASSERT_EQUAL(cmp, 1);
@@ -121,96 +347,16 @@ void test_normal_case(){
         push_info_msg(_("Your linked list is not what was expected"));
     }
     
+    int memory_used_sol = sizeof(student_t) * nb_elem;
+    
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the wright amount of memory"));
     }
 }
 
-void test_open_fails(){
-    set_test_metadata("load_linked_list", _("Test with fail of open"), 1);
-    
-    student_t* root_ret;
-    
-    failures.open = FAIL_ALWAYS;
-    
-    monitored.open = true;
-    monitored.malloc = true;
-    monitored.free = true;
-    
-    SANDBOX_BEGIN;
-    root_ret = load_linked_list("normal_case.txt");
-    SANDBOX_END;
-    
-    monitored.open = false;
-    monitored.malloc = false;
-    monitored.free = false;
-    
-    int cmp = same_linked_list(root_ret, NULL);
-    
-    CU_ASSERT_EQUAL(cmp, 1);
-    if(cmp != 1){
-        push_info_msg(_("Your function does not work when open fails"));
-    }
-}
-
-void test_empty_file(){
-    set_test_metadata("load_linked_list", _("Test with an empty file"), 1);
-    
-    student_t* root_ret;
-    
-    monitored.open = true;
-    monitored.malloc = true;
-    monitored.free = true;
-    
-    SANDBOX_BEGIN;
-    root_ret = load_linked_list("empty_file.txt");
-    SANDBOX_END;
-    
-    int cmp = same_linked_list(root_ret, NULL);
-    
-    CU_ASSERT_EQUAL(cmp, 1);
-    if(cmp != 1){
-        push_info_msg(_("Your function does not work with an empty file"));
-    }
-}
-
-void test_one_element(){
-    set_test_metadata("load_linked_list", _("Test with a file containing one element"), 1);
-    
-    int nb_elem = 1;
-    
-    student_t* sol = create_linked_list(46691600, nb_elem);
-    
-    student_t* root_ret;
-    
-    monitored.open = true;
-    monitored.malloc = true;
-    monitored.free = true;
-    
-    SANDBOX_BEGIN;
-    root_ret = load_linked_list("one_element.txt");
-    SANDBOX_END;
-    
-    monitored.open = false;
-    monitored.malloc = false;
-    monitored.free = false;
-    
-    int cmp = same_linked_list(root_ret, sol);
-    
-    CU_ASSERT_EQUAL(cmp, 1);
-    if(cmp != 1){
-        push_info_msg(_("Your function does not work with a file containing one element"));
-    }
-}
-/*
-void test_malloc_fails_first time(){
-    set_test_metadata("load_linked_list"), _("Test whith malloc failing first time"));
-}
-*/
-
 int main(int argc,char* argv[])
 {
     BAN_FUNCS();
-    RUN(test_open_fails, test_empty_file, test_one_element, test_normal_case);
+    RUN(test_open_fails, test_empty_file, test_one_element, test_normal_case, test_malloc_fails_first_time, test_malloc_fails_third_time, test_malloc_fails_last_time);
 }
