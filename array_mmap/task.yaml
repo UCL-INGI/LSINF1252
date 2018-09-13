@@ -10,7 +10,7 @@ context: |-
             int noma;
         } student_t;
 
-    In this exercice, you **cannot** use *fopen*, *read*, *write*, *fread*, *fwrite*, *fgetc*, *fgets*, which means that you must use `mmap(2). <https://sites.uclouvain.be/SystInfo/manpages/man2/mmap.2.html>`_
+    In this exercice, you **cannot** use *fopen*, *read*, *fread*, *fgetc*, *fgets*, which means that you must use `mmap(2). <https://sites.uclouvain.be/SystInfo/manpages/man2/mmap.2.html>`_
 
     In case of error (using malloc), you have to free **all** the memory you have allocated.
 environment: cpp
@@ -28,7 +28,7 @@ problems:
         type: code
         default: ''
         header: |-
-            Write the body of the function ``load_list`` using mmap.
+            Write the body of the function ``load_linked_list`` using mmap.
 
             .. code-block:: c
 

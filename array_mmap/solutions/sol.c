@@ -7,6 +7,15 @@
 #include<string.h>
 #include "student_code.h"
 
+/*
+ * @filename: the file to be manipulated, filename != NULL
+ * @pre: the length of the file is an entire multiple of
+ *      the size of student_t
+ * @return: the pointer to the head of the linked list,
+ *         NULL in case of error
+ * you cannot use fopen, read, fread, fgetc, fgets
+ * which means that you have to use mmap
+ */
 student_t *load_linked_list(char* filename){
     int fd = open(filename, O_RDWR, S_IRUSR|S_IWUSR);
     if(fd == -1){

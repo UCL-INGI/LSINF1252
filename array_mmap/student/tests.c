@@ -529,6 +529,6 @@ void test_normal_case(){
 
 int main(int argc,char* argv[])
 {
-    BAN_FUNCS();
+    BAN_FUNCS(fopen, read, fread, fgetc, fgets);
     RUN(test_open_fails, test_empty_file, test_one_element, test_normal_case, test_malloc_fails_first_time, test_malloc_fails_third_time, test_malloc_fails_last_time);
 }
