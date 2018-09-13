@@ -27,7 +27,6 @@ problems:
     load_linked_list:
         type: code
         default: ''
-        name: Load linked list
         header: |-
             Write the body of the function ``load_list`` using mmap.
 
@@ -44,6 +43,7 @@ problems:
                  */
                 student_t* load_linked_list(char* filename){
         language: c
+        name: Load linked list
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -284,7 +284,7 @@ void test_pop_value(){
     set_test_metadata("pop", _("Check the behavior of the function in normal case"), 1);
 
     int ret;
-    char *result = (char*) malloc(sizeof(char)*50);
+    char *result = (char*) malloc(sizeof(char)*20);
 
     char *a[6] = {"fqgrsrfgfg", "moty;oe26rbgs",
                   "i;rvqr6tgbsecr26", "5qvf15rg5g", "42",
