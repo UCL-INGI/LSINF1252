@@ -57,8 +57,8 @@ problems:
         default: ''
     pop:
         name: Pop
-        type: code
         language: c
+        type: code
         header: |-
             .. code-block:: c
 
@@ -83,10 +83,10 @@ submission_limit:
 tags:
     '0':
         type: 1
-        visible: true
+        name: Timeout
         description: Your code exceeds the maximum allowed time.
         id: timeout
-        name: Timeout
+        visible: true
     '1':
         type: 1
         visible: true
@@ -95,8 +95,8 @@ tags:
         name: Segmentation Fault
     '2':
         name: Not compile
-        id: not_compile
         visible: true
+        id: not_compile
         type: 1
         description: You code does not compile.
     '3':
@@ -107,8 +107,8 @@ tags:
         description: ''
     '4':
         visible: true
-        description: ''
         id: sigfpe
+        description: ''
         name: Floating Point Exception
         type: 1
     '5':
@@ -123,6 +123,12 @@ tags:
         visible: true
         type: 1
         id: banned_funcs
+    '9':
+        id: alloc_size
+        type: 1
+        name: Allocation size
+        description: You don't allocate the good amount of memory.
+        visible: true
     '7':
         visible: true
         description: Task dealing with data structures and linked list
