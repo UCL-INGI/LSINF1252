@@ -255,7 +255,7 @@ void test_malloc_fails_first_time(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Yout function does not work when malloc fails the first time"));
-        set_tag("not_expected_list");
+        set_tag("malloc_fail");
     }
     
     int memory_used_sol = 0;
@@ -323,7 +323,7 @@ void test_malloc_fails_third_time(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your function does not work when malloc fails the third time"));
-        set_tag("not_expected_list");
+        set_tag("malloc_fail");
     }
     
     int memory_used_sol = 0;
@@ -393,7 +393,7 @@ void test_malloc_fails_last_time(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your function does not work when malloc fails for the last malloc"));
-        set_tag("not_expected_list");
+        set_tag("malloc_fail");
     }
     
     int memory_used_sol = 0;

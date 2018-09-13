@@ -19,8 +19,8 @@ groups: false
 input_random: '0'
 limits:
     output: '2'
-    time: '30'
     memory: '100'
+    time: '30'
 name: '[Beta, S5] Get an array from a binary file using mmap'
 network_grading: false
 order: 1
@@ -50,42 +50,42 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '4':
-        visible: true
-        description: This tag validate that your close are correctly performed.
+    '0':
         id: close
         name: Close
         type: 0
-    '5':
+        visible: true
+        description: This tag validate that your close are correctly performed.
+    '1':
         id: open
         description: This tag validate you are able to open a file and handle errors
             with open().
-        visible: true
         name: Open
         type: 0
-    '10':
-        type: 1
+        visible: true
+    '2':
         description: You do not manage the case where malloc() fails.
         name: Malloc fail
-        visible: true
         id: malloc_fail
-    '11':
+        type: 1
+        visible: false
+    '3':
+        name: Malloc fail handling
+        type: 1
         id: malloc_fail_handling
         description: Wrong return value when malloc call fails.
-        type: 1
-        name: Malloc fail handling
         visible: false
-    '12':
-        type: 1
-        id: not_compile
+    '4':
         visible: true
-        name: Not compile
         description: You code does not compile.
-    '13':
+        id: not_compile
+        name: Not compile
         type: 1
-        name: Wrong malloc memory size
-        description: The allocated memory doesn't have the correct size.
+    '5':
         id: malloc_fail_memory_size
+        description: The allocated memory doesn't have the correct size.
+        name: Wrong malloc memory size
+        type: 1
         visible: false
     '6':
         name: Bad next pointer
@@ -96,8 +96,8 @@ tags:
     '7':
         description: The value of the node is not the expected one.
         type: 1
-        id: bad_node_value
         name: Bad node value
+        id: bad_node_value
         visible: false
     '8':
         id: error_normal_case
@@ -111,28 +111,28 @@ tags:
         description: The linked list does not correspond to the waited one.
         name: Incorrect list
         visible: false
-    '0':
+    '10':
         type: 2
-        visible: true
         description: ''
         name: S5
-        id: ''
-    '1':
-        description: ''
-        name: File
-        type: 2
         visible: true
         id: ''
-    '2':
+    '11':
+        description: ''
+        name: File
+        visible: true
+        type: 2
+        id: ''
+    '12':
+        type: 2
         visible: true
         name: Data structures
         description: Task dealing with data structures and linked list
-        type: 2
         id: ''
-    '3':
-        name: Pointer
-        visible: true
+    '13':
         type: 2
+        name: Pointer
         description: Task about pointers and their use
+        visible: false
         id: ''
 weight: 1.0
