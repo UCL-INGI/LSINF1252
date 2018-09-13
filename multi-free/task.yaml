@@ -1,5 +1,5 @@
 accessible: false
-author: Louis Navarre
+author: Louis Navarre & Alexandre Gobeaux
 context: |-
     You are asked to implement the function ``free_all``, which will free all the memory associated with the following structure *university_t*:
 
@@ -38,8 +38,8 @@ order: 31
 problems:
     free_all:
         default: ''
-        name: Free all
         type: code
+        name: Free all
         language: c
         header: |-
             Write the body of the function ``free_all``.
