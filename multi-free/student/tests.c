@@ -5,6 +5,10 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+/*
+ * Creates a person_t, with his name, age and salary
+ * @return: a pointer to the new malloced person_t, NULL in case of error
+ */
 person_t* init_p(char* name, int age, int salary){
     person_t *p = (person_t*)malloc(sizeof(person_t));
     if(p == NULL)
@@ -30,6 +34,11 @@ person_t* init_p(char* name, int age, int salary){
     return p;
 }
 
+/*
+ * Creates a university_t, with its rector (person_t), its city and
+ * the date of the creation
+ * @return: a pointer to the new malloced university_t, NULL in case of error
+ */
 university_t* init_u(person_t* rector, const char* city, int creation){
     university_t *u = (university_t*)malloc(sizeof(university_t));
     if(u == NULL)
@@ -56,6 +65,10 @@ university_t* init_u(person_t* rector, const char* city, int creation){
     return u;
 }
 
+/*
+ * Creates a new university_t with basic informations
+ * @return: a pointer to the new malloced university_t, NULL in case of error
+ */
 university_t* init_new(){
     char* rector_name = "Vincent Blondel";
     char* city_name = "Louvain-la-Neuve";
@@ -71,6 +84,9 @@ university_t* init_new(){
     return u;
 }
 
+/*
+ * Frees all the memory associated with u
+ */
 int free_a(university_t* u){
     free(u->rector->name);
     free(u->rector);
@@ -79,6 +95,9 @@ int free_a(university_t* u){
     return 0;
 }
 
+/*
+ * Test with a normal case: all the memory should be freed
+ */
 void test_success(){
     
     set_test_metadata("free_all", _("Testing in a normal case"), 1);
@@ -135,6 +154,9 @@ void test_success(){
     push_info_msg(_("The last free you should do is on the struct"));
 }
 
+/*
+ * Test when the rector is NULL
+ */
 void test_rector_null(){
     set_test_metadata("free_all", _("Testing when there is no rector"), 1);
     
@@ -178,6 +200,9 @@ void test_rector_null(){
     push_info_msg(_("The last free you should do is on the struct"));
 }
 
+/*
+ * Test when the strings (city and rector's name) are NULL
+ */
 void test_strings_null(){
     set_test_metadata("free_all", _("Testing when the strings are NULL"), 1);
     
