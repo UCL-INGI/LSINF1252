@@ -19,8 +19,8 @@ groups: false
 input_random: '0'
 limits:
     output: '2'
-    memory: '100'
     time: '30'
+    memory: '100'
 name: '[Beta, S5] Get an array from a binary file using mmap'
 network_grading: false
 order: 1
@@ -43,16 +43,16 @@ problems:
                  * which means that you have to use mmap
                  */
                 student_t* load_linked_list(char* filename){
-        default: ''
         language: c
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
-        id: close
         name: Close
+        id: close
         type: 0
         visible: true
         description: This tag validate that your close are correctly performed.
@@ -63,9 +63,21 @@ tags:
         name: Open
         type: 0
         visible: true
+    '14':
+        type: 1
+        visible: true
+        name: Timeout
+        description: Your code exceeds the maximum allowed time.
+        id: timeout
+    '15':
+        type: 1
+        description: Your code produced a double free.
+        name: Double free
+        id: double_free
+        visible: true
     '2':
-        description: You do not manage the case where malloc() fails.
         name: Malloc fail
+        description: You do not manage the case where malloc() fails.
         id: malloc_fail
         type: 1
         visible: false
@@ -88,9 +100,9 @@ tags:
         type: 1
         visible: false
     '6':
+        type: 1
         name: Bad next pointer
         description: The 'next' pointer is not correctly initialised
-        type: 1
         id: bad_next_pointer
         visible: false
     '7':
@@ -120,8 +132,8 @@ tags:
     '11':
         description: ''
         name: File
-        visible: true
         type: 2
+        visible: true
         id: ''
     '12':
         type: 2
