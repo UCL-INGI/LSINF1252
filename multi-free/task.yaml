@@ -32,8 +32,8 @@ groups: false
 input_random: '0'
 limits:
     time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
 name: '[S3] Manipulate the memory'
 network_grading: false
 order: 31
@@ -41,6 +41,7 @@ problems:
     init_all:
         name: Init all
         default: ''
+        language: c
         header: |-
             Write the body of the function ``init_all``. You must copy the strings.
 
@@ -52,12 +53,11 @@ problems:
                  * @return: a pointer to the university structure containing the elements
                  */
                  university_t* init_all(char* city, int creation, char* rectname, int age, int salary){
-        language: c
         type: code
     free_all:
-        default: ''
         name: Free all
         type: code
+        default: ''
         language: c
         header: |-
             Write the body of the function ``free_all``.
@@ -74,9 +74,27 @@ submission_limit:
     amount: -1
     period: -1
 tags:
+    '1':
+        type: 1
+        id: sigsegv
+        description: ''
+        name: Segmentation Fault
+        visible: true
+    '2':
+        name: Double free
+        id: double_free
+        visible: true
+        type: 1
+        description: Your code produced a double free.
+    '3':
+        visible: true
+        name: Not compile
+        type: 1
+        id: not_compile
+        description: You code does not compile.
     '0':
-        type: 2
         name: S3
+        type: 2
         visible: true
         description: ''
         id: ''
