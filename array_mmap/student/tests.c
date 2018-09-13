@@ -310,6 +310,9 @@ void test_one_element(){
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the right amount of memory"));
     }
+    
+    free_all(sol);
+    free_all(root_ret);
 }
 
 void test_normal_case(){
@@ -353,6 +356,9 @@ void test_normal_case(){
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the wright amount of memory"));
     }
+    
+    free_all(sol);
+    free_all(root_ret);
 }
 
 int main(int argc,char* argv[])
