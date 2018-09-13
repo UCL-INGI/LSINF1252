@@ -258,7 +258,7 @@ void test_push_general() {
         // check the return value of the function
         CU_ASSERT_TRUE(!ret);
         if (ret)
-            push_info_msg(_("The function return an error code in normal case"));
+            push_info_msg(_("The function returns an error code in normal case"));
         free_stack(stack);
     }
 }
@@ -368,7 +368,7 @@ void test_pop_value(){
         // check the return value of the function
         CU_ASSERT_TRUE(!ret);
         if (ret)
-            push_info_msg(_("The function return an error code in normal case"));
+            push_info_msg(_("The function returns an error code in normal case"));
         //free_stack(stack);
     }
 }
@@ -377,7 +377,7 @@ void test_pop_value(){
 *
 */
 void test_pop_empty(){
-    set_test_metadata("pop", _("Check the behavior of the function when popping last elemennt"), 1);
+    set_test_metadata("pop", _("Check the behavior of the function when popping last element"), 1);
 
     struct node *head = (struct node*) malloc(sizeof(struct node));
     head->name = (char*) malloc(10);
@@ -396,7 +396,7 @@ void test_pop_empty(){
 
     CU_ASSERT_TRUE(!ret);
     if (ret)
-        push_info_msg(_("The function return an error code in normal case"));
+        push_info_msg(_("The function returns an error code in normal case"));
 
     int ml = malloced(head);
     CU_ASSERT_TRUE(!ml);

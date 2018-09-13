@@ -93,21 +93,23 @@ void test_normal_case(){
     }
     student_t* root_ret;
     
-    int start = stats.memory.used;
     
     monitored.open = true;
     monitored.malloc = true;
     monitored.free = true;
     
+    int start = stats.memory.used;
+    
     SANDBOX_BEGIN;
     root_ret = load_linked_list("normal_case.txt");
     SANDBOX_END;
+    
+    int memory_used = stats.memory.used - start;
     
     monitored.open = false;
     monitored.malloc = false;
     monitored.free = false;
     
-    int memory_used = stats.memory.used - start;
     int memory_used_sol = sizeof(student_t) * 5;
     
     int cmp = same_linked_list(sol, root_ret);
