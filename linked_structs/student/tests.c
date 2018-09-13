@@ -147,14 +147,18 @@ void test_pair_filter(){
     //------
     int count = 0;
     //------
+    if(!run2)
+        push_info_msg("run2 null");
     while(!run2){
-        if(!run1){
-            CU_FAIL("The function produced a wrong list");
-            push_info_msg(_("The function produced a wrong list"));
-        }
         //------
         count++;
         //------
+        if(!run1){
+            CU_FAIL("The function produced a wrong list");
+            push_info_msg(_("The function produced a wrong list"));
+            return;
+        }
+        
         cmp = memcmp((const void*) run1, (const void*) run2, len);
         if (cmp != 0){
             CU_FAIL("The function produced a wrong list");
