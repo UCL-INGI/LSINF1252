@@ -43,6 +43,9 @@ void test_myfunc_ret()
         char error_msg[200];
         sprintf(error_msg, _("Arguments : '%s %s %s %s %s', expected : 'a ihuqfiudshfsi\\\\n', your answer : '%s'"), str1, str2, str3, str4, str5, buf);
         push_info_msg(error_msg);
+        if(!strncmp(buf,"tests",5)){
+            push_info_msg(_("Don't forget that the first argument (index 0) is the name of the program ! myProg in this case !"))
+        }
     }
     else
         CU_PASS("");
@@ -62,6 +65,9 @@ void test_myfunc_ret()
         char error_msg[200];
         sprintf(error_msg, _("Arguments : '%s %s %s %s', expected : 'a kujsvglqiu\\\\n', your answer : '%s'"), str1, str2, str3, str5, buf);
         push_info_msg(error_msg);
+        if(!strncmp(buf,"tests",5)){
+            push_info_msg(_("Don't forget that the first argument (index 0) is the name of the program ! myProg in this case !"))
+        }
     }
     else
         CU_PASS("");
@@ -93,6 +99,9 @@ void test_myfunc_ret()
         char error_msg[200];
         sprintf(error_msg, _("Arguments : '%s %s %s', expected : 'a\\\\n', your answer : '%s'"), str1, str2, str3, buf);
         push_info_msg(error_msg);
+        if(!strncmp(buf,"tests",5)){
+            push_info_msg(_("Don't forget that the first argument (index 0) is the name of the program ! myProg in this case !"))
+        }
     }
     else
         CU_PASS("");
@@ -111,6 +120,9 @@ void test_myfunc_ret()
         char error_msg[200];
         sprintf(error_msg, _("Arguments : '%s %s', expected : 'kujsvglqiu\\\\n', your answer : '%s'"), str1, str5, buf);
         push_info_msg(error_msg);
+        if(!strncmp(buf,"tests",5)){
+            push_info_msg(_("Don't forget that the first argument (index 0) is the name of the program ! myProg in this case !"))
+        }
     }
     else
         CU_PASS("");
