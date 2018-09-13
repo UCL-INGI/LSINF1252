@@ -156,6 +156,9 @@ void test_empty_file(){
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
     }
+    
+    int close_called = stats.close.called;
+    CU_ASSERT_EQUAL(close_called, 0);
 }
 
 void test_malloc_fails_first_time(){
