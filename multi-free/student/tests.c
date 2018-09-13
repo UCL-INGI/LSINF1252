@@ -414,6 +414,7 @@ void test_init_first_malloc_fails(){
     
     monitored.free = true;
     monitored.malloc = true;
+    
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
     SANDBOX_END;
