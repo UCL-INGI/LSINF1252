@@ -318,6 +318,9 @@ void test_pop_value(){
     // check the popped value
     char *src = *(a+5);
     //printf("src = %s, result = %s, size = %li ", src, result, strlen(src));
+    
+    
+    
     int cmp = strncmp((const char*) result, (const char*) src, strlen(src));
     CU_ASSERT_TRUE(!cmp);
     if (cmp)
