@@ -89,9 +89,10 @@ void test_open_fails(){
     
     student_t* root_ret;
     
-    failures.open = FAIL_FIRST;
+    failures.open = FAIL_ALWAYS;
     
     monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -104,6 +105,7 @@ void test_open_fails(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -119,6 +121,15 @@ void test_open_fails(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
+    }
+    
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open only one file"));
+    }
+    else if(stats.open.called < 1){
+        CU_FAIL();
+        push_info_msg(_("You have to open the file before using mmap"));
     }
 }
 
@@ -159,7 +170,15 @@ void test_empty_file(){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
     }
     
-    if(stats.open.called > 0 && stats.close.called == 0){
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open only one file"));
+    }
+    else if(stats.open.called < 0){
+        CU_FAIL();
+        push_info_msg(_("You have to open the file before using mmap"))
+    }
+    else if(stats.open.called == 1 && stats.close.called == 0){
         CU_FAIL();
         push_info_msg(_("You did not close the file after opening it"));
     }
@@ -173,6 +192,7 @@ void test_malloc_fails_first_time(){
     failures.malloc = FAIL_FIRST;
     
     monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -185,6 +205,7 @@ void test_malloc_fails_first_time(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -201,6 +222,19 @@ void test_malloc_fails_first_time(){
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
     }
+    
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open only one file"));
+    }
+    else if(stats.open.called < 1){
+        CU_FAIL();
+        push_info_msg(_("You have to open the file before using mmap"));
+    }
+    else if(stats.open.called == 1 && stats.close.called == 0){
+        CU_FAIL();
+        push_info_msg(_("You did not close the file after opening it"));
+    }
 }
 
 void test_malloc_fails_third_time(){
@@ -211,6 +245,7 @@ void test_malloc_fails_third_time(){
     failures.malloc = FAIL_THIRD;
     
     monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -223,6 +258,7 @@ void test_malloc_fails_third_time(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -239,6 +275,19 @@ void test_malloc_fails_third_time(){
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it in case of error"));
     }
+    
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open only one file"));
+    }
+    else if(stats.open.called < 1){
+        CU_FAIL();
+        push_info_msg(_("You have to open the file before using mmap"));
+    }
+    else if(stats.open.called == 1 && stats.close.called == 0){
+        CU_FAIL();
+        push_info_msg(_("You did not close the file after opening it"));
+    }
 }
 
 void test_malloc_fails_last_time(){
@@ -248,6 +297,7 @@ void test_malloc_fails_last_time(){
     
     failures.malloc = 0b00000000000000000000000000010000;
     
+    monitored.open = true;
     monitored.open = true;
     monitored.malloc = true;
     monitored.free = true;
@@ -261,6 +311,7 @@ void test_malloc_fails_last_time(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -277,6 +328,11 @@ void test_malloc_fails_last_time(){
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it in case of error"));
     }
+    
+    if(stats.open.called > 0 && stats.close.called == 0){
+        CU_FAIL();
+        push_info_msg(_("You did not close the file after opening it"));
+    }
 }
 
 void test_one_element(){
@@ -289,6 +345,7 @@ void test_one_element(){
     student_t* root_ret;
     
     monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -301,6 +358,7 @@ void test_one_element(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -316,6 +374,13 @@ void test_one_element(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the right amount of memory"));
+    }
+    
+    
+    
+    if(stats.open.called > 0 && stats.close.called == 0){
+        CU_FAIL();
+        push_info_msg(_("You did not close the file after opening it"));
     }
     
     free_all(sol);
