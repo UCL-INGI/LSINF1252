@@ -121,8 +121,8 @@ void test_normal_case(){
     
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
-        char a[50];
-        sprintf(a, "You allocated %d memory, but should be %d", memory_used, memory_used_sol);
+        char a[70];
+        sprintf(a, "You allocated %d memory, but should be %d, and test %d", memory_used, memory_used_sol, malloc_allocated());
         push_info_msg(a);
     }
 }
