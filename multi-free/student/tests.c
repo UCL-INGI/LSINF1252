@@ -318,6 +318,7 @@ void test_init_normal_case(){
 
     monitored.free = true;
     monitored.malloc = true;
+    
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
     SANDBOX_END;
@@ -359,7 +360,6 @@ void test_init_normal_case(){
         return;
     }
 
-
     int uniCmp = uniEquals(ret,ucl);
     CU_ASSERT_EQUAL(uniCmp,true);
     if(!uniCmp)
@@ -368,21 +368,28 @@ void test_init_normal_case(){
         realloc(city,8);
         realloc(name,8);
         if(!city || !name){
-            if(city) free(city);
-            if(name) free(name);
+            if(city) 
+                free(city);
+            if(name) 
+                free(name);
+            
             free_a(ucl);
+            
             CU_FAIL(_("Internal error while allocating memory"));
         }
+        
         strcpy(city,"changed");
         strcpy(name,"changed");
+        
         int cmpChange = uniEquals(ret,ucl);
+        
         if(cmpChange){
             push_info_msg(_("You didn't copy the strings ! You should use strcpy or copy it yourself."));
             CU_FAIL();
         }
     }
+    
     free_a(ucl);
-
 }
 
 void test_init_first_malloc_fails(){
@@ -441,10 +448,14 @@ void test_init_second_malloc_fails(){
     char* name = malloc(sizeof(char)*16);
 
     if(!ucl || !city || !name){
-        if(ucl) free_a(ucl);
-        if(city) free(city);
-        if(name) free(name);
-        CU_FAIL(_("Internal error while allocating memory"));
+        if(ucl) 
+            free_a(ucl);
+        if(city) 
+            free(city);
+        if(name) 
+            free(name);
+        
+        CU_FAIL(_("Internal error while allocating memory")); 
         return;
     }
 
@@ -452,8 +463,10 @@ void test_init_second_malloc_fails(){
     strcpy(name,"Vincent Blondel");
     
     failures.malloc = FAIL_SECOND;
+    
     monitored.free = true;
     monitored.malloc = true;
+    
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
     SANDBOX_END;
@@ -488,9 +501,13 @@ void test_init_third_malloc_fails(){
     char* name = malloc(sizeof(char)*16);
 
     if(!ucl || !city || !name){
-        if(ucl) free_a(ucl);
-        if(city) free(city);
-        if(name) free(name);
+        if(ucl) 
+            free_a(ucl);
+        if(city) 
+            free(city);
+        if(name) 
+            free(name);
+        
         CU_FAIL(_("Internal error while allocating memory"));
         return;
     }
@@ -499,15 +516,16 @@ void test_init_third_malloc_fails(){
     strcpy(name,"Vincent Blondel");
     
     failures.malloc = FAIL_THIRD;
+    
     monitored.free = true;
     monitored.malloc = true;
+    
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
     SANDBOX_END;
 
     monitored.malloc = false;
     monitored.free = false;
-
 
     CU_ASSERT_EQUAL(stats.free.called, 2);
     if(stats.free.called)
