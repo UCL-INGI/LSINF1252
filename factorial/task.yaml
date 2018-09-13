@@ -11,7 +11,7 @@ limits:
     output: '2'
 name: '[S1] Factorial'
 network_grading: false
-order: 9
+order: 11
 problems:
     facto:
         name: Factorial

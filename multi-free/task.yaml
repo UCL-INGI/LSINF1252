@@ -29,18 +29,18 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
-name: '[S3] Multi-free'
+name: '[S3] Free the memory'
 network_grading: false
-order: 29
+order: 31
 problems:
     free_all:
-        language: c
         default: ''
-        name: Free all
         type: code
+        name: Free all
+        language: c
         header: |-
             Write the body of the function ``free_all``.
 
@@ -57,9 +57,9 @@ submission_limit:
     period: -1
 tags:
     '0':
-        description: ''
-        visible: true
         type: 2
         name: S3
+        visible: true
+        description: ''
         id: ''
 weight: 1.0

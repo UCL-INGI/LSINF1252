@@ -35,7 +35,7 @@ limits:
     memory: '100'
 name: '[S4] Simple stack '
 network_grading: false
-order: 45
+order: 47
 problems:
     push:
         name: Push

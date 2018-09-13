@@ -10,7 +10,7 @@ limits:
     output: '2'
 name: '[S4] make more basics - multiple choice questions'
 network_grading: false
-order: 42
+order: 44
 problems:
     m1:
         name: Using a variable in a Makefile

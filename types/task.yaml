@@ -13,7 +13,7 @@ limits:
     output: '5210'
 name: '[S3] Les types (1/2)'
 network_grading: false
-order: 30
+order: 32
 problems:
     q1:
         default: ''

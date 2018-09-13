@@ -41,7 +41,7 @@ limits:
     memory: '100'
 name: '[S3] Simple linked list '
 network_grading: false
-order: 34
+order: 36
 problems:
     init_node:
         name: Node initialisation

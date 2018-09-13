@@ -27,7 +27,7 @@ limits:
     output: '2'
 name: '[Beta] Indexation d''un texte'
 network_grading: false
-order: 84
+order: 86
 problems:
     build_index:
         type: code

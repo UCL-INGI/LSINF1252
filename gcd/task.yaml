@@ -23,7 +23,7 @@ limits:
     output: '2'
 name: '[Beta] Threads : plus grand commun diviseur'
 network_grading: false
-order: 86
+order: 88
 problems:
     factorize:
         type: code
