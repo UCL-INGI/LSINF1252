@@ -187,6 +187,7 @@ void test_empty_file(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your function does not work with an empty file"));
+        set_tag("not_expected_list");
     }
     
     int memory_used_sol = 0;
@@ -194,6 +195,7 @@ void test_empty_file(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
+        set_tag("malloc_fail_memory_size");
     }
     
     if(stats.open.called > 1){
@@ -211,6 +213,9 @@ void test_empty_file(){
     else if(stats.open.called == 1 && stats.close.called > 1){
         CU_FAIL();
         push_info_msg(_("Why do you call close more than once ?"));
+    }
+    else{
+        set_tag("close");
     }
 }
 
@@ -250,6 +255,7 @@ void test_malloc_fails_first_time(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Yout function does not work when malloc fails the first time"));
+        set_tag("not_expected_list");
     }
     
     int memory_used_sol = 0;
@@ -257,6 +263,7 @@ void test_malloc_fails_first_time(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
+        set_tag("malloc_fail_memory_size");
     }
     
     if(stats.open.called > 1){
@@ -274,6 +281,9 @@ void test_malloc_fails_first_time(){
     else if(stats.open.called == 1 && stats.close.called > 1){
         CU_FAIL();
         push_info_msg(_("Why do you call close more than once ?"));
+    }
+    else{
+        set_tag("close");
     }
 }
 
@@ -313,6 +323,7 @@ void test_malloc_fails_third_time(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your function does not work when malloc fails the third time"));
+        set_tag("not_expected_list");
     }
     
     int memory_used_sol = 0;
@@ -320,6 +331,7 @@ void test_malloc_fails_third_time(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it in case of error"));
+        set_tag("malloc_fail_memory_size");
     }
     
     if(stats.open.called > 1){
@@ -337,6 +349,9 @@ void test_malloc_fails_third_time(){
     else if(stats.open.called == 1 && stats.close.called > 1){
         CU_FAIL();
         push_info_msg(_("Why do you call close more than once ?"));
+    }
+    else{
+        set_tag("close");
     }
 }
 
@@ -378,6 +393,7 @@ void test_malloc_fails_last_time(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your function does not work when malloc fails for the last malloc"));
+        set_tag("not_expected_list");
     }
     
     int memory_used_sol = 0;
@@ -385,6 +401,7 @@ void test_malloc_fails_last_time(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You allocated memory and you did not free it in case of error"));
+        set_tag("malloc_fail_memory_size");
     }
     
     if(stats.open.called > 1){
@@ -402,6 +419,9 @@ void test_malloc_fails_last_time(){
     else if(stats.open.called == 1 && stats.close.called > 1){
         CU_FAIL();
         push_info_msg(_("Why do you call close more than once ?"));
+    }
+    else{
+        set_tag("close");
     }
 }
 
@@ -443,6 +463,7 @@ void test_one_element(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your function does not work with a file containing one element"));
+        set_tag("not_expected_list");
     }
     
     int memory_used_sol = sizeof(student_t) * 1;
@@ -450,6 +471,7 @@ void test_one_element(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the right amount of memory"));
+        set_tag("malloc_fail_memory_size");
     }
     
     if(stats.open.called > 1){
@@ -467,6 +489,9 @@ void test_one_element(){
     else if(stats.open.called == 1 && stats.close.called > 1){
         CU_FAIL();
         push_info_msg(_("Why do you call close more than once ?"));
+    }
+    else{
+        set_tag("close");
     }
     
     free_all(sol);
@@ -514,6 +539,7 @@ void test_normal_case(){
     CU_ASSERT_EQUAL(cmp, 1);
     if(cmp != 1){
         push_info_msg(_("Your linked list is not what was expected"));
+        set_tag("not_expected_list");
     }
     
     int memory_used_sol = sizeof(student_t) * nb_elem;
@@ -521,6 +547,7 @@ void test_normal_case(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the wright amount of memory"));
+        set_tag("malloc_fail_memory_size");
     }
     
     if(stats.open.called > 1){
@@ -538,6 +565,9 @@ void test_normal_case(){
     else if(stats.open.called == 1 && stats.close.called > 1){
         CU_FAIL();
         push_info_msg(_("Why do you call close more than once ?"));
+    }
+    else{
+        set_tag("close");
     }
     
     free_all(sol);
