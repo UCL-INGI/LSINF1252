@@ -143,11 +143,15 @@ void test_pair_filter(){
 
     struct node *run1 = ret, *run2 = head;
     int cmp;
-    
+
     //------
     int count = 0;
     //------
-    while(!run1){
+    while(!run2){
+        if(!run1){
+            CU_FAIL("The function produced a wrong list");
+            push_info_msg(_("The function produced a wrong list"));
+        }
         //------
         count++;
         //------
