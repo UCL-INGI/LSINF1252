@@ -195,10 +195,10 @@ void test_push_general() {
     char *src ="e5f1vq6f8e81E";
 
     monitored.malloc = true;
-    
+
     //to be able to know how many bytes the student malloced
     int begin = logs.malloc.n;
-    
+
     SANDBOX_BEGIN;
     ret = push(&stack, src);
     SANDBOX_END;
@@ -318,11 +318,19 @@ void test_pop_value(){
     // check the popped value
     char *src = *(a+5);
     //printf("src = %s, result = %s, size = %li ", src, result, strlen(src));
-    
-    char error_msg[200];
-    sprintf(error_msg,"src = %s, result = %s", src, result);
-    push_info_msg(error_msg);
-    
+
+    // -------------------------------
+    if(src != NULL && result != NULL){
+        char error_msg[200];
+        sprintf(error_msg, _("src = %s, result = %s"), src, result);
+        push_info_msg(error_msg);
+    }
+    else{
+        push_info_msg(_("One is NULL"));
+    }
+
+    // --------------------------------
+
     int cmp = strncmp((const char*) result, (const char*) src, strlen(src));
     CU_ASSERT_TRUE(!cmp);
     if (cmp)
