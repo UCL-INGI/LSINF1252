@@ -304,6 +304,19 @@ void test_pop_value(){
     name_head = tmp_head->name;
     tmp_new_head = tmp_head->next;
     ret = pop(&stack, result);
+    
+    // -------------------------------
+    if(*(a+5) != NULL && result != NULL){
+        char error_msg[200];
+        sprintf(error_msg, _("src = %s, result = %s"), *(a+5), result);
+        push_info_msg(error_msg);
+    }
+    else{
+        push_info_msg(_("One is NULL"));
+    }
+
+    // --------------------------------
+    
     SANDBOX_END;
 
     monitored.free = false;
@@ -319,17 +332,7 @@ void test_pop_value(){
     char *src = *(a+5);
     //printf("src = %s, result = %s, size = %li ", src, result, strlen(src));
 
-    // -------------------------------
-    if(src != NULL && result != NULL){
-        char error_msg[200];
-        sprintf(error_msg, _("src = %s, result = %s"), src, result);
-        push_info_msg(error_msg);
-    }
-    else{
-        push_info_msg(_("One is NULL"));
-    }
-
-    // --------------------------------
+    
 
     int cmp = strncmp((const char*) result, (const char*) src, strlen(src));
     CU_ASSERT_TRUE(!cmp);
