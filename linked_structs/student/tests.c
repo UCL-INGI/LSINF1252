@@ -81,8 +81,10 @@ void test_empty_list(){
 
 void test_one_elem(){
     set_test_metadata("filter", _("Test the return value of the function when the list is one element long"), 1);
-
-    struct node* ret = (struct node*) 0x42;
+    
+    //TODO changed
+    //struct node* ret = (struct node*) 0x42;
+    struct node *ret;
 
     struct node* list = malloc(sizeof(struct node));
     list->next = NULL;
@@ -109,7 +111,9 @@ void test_one_elem(){
 void test_two_elem(){
     set_test_metadata("filter", _("Test the return value of the function when the list is two element long"), 1);
 
-    struct node* ret = (struct node*) 0x42;
+    //TODO changed
+    //struct node* ret = (struct node*) 0x42;
+    struct node *ret;
 
     struct node* list = malloc(sizeof(struct node));
     list->fifo = NULL;
