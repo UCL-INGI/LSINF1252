@@ -124,10 +124,10 @@ tags:
         type: 1
         id: banned_funcs
     '9':
-        id: alloc_size
+        id: wrong_alloc_size
         type: 1
-        name: Allocation size
-        description: You don't allocate the good amount of memory.
+        name: Wrong allocation size
+        description: You don't allocate the right amount of memory.
         visible: true
     '7':
         visible: true

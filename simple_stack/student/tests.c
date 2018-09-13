@@ -215,10 +215,12 @@ void test_push_general() {
         if(!containsArray(size,2,sizeof(struct node))){
             CU_FAIL();
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 16 bytes since you have 2 pointers (of 8 bytes each) in it."));
+            set_tag("wrong_alloc_size");
         }
         if(!containsArray(size,2,sizeof(char)*(strlen(src)+1))){
             CU_FAIL();
             push_info_msg(_("You didn't malloc the right space for your string. Don't forget to count the '\\\\0' character !"));
+            set_tag("wrong_alloc_size");
         }
     }
 
