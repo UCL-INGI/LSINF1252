@@ -31,6 +31,7 @@ elif [ "$size_array_arg" == "4" ]; then
     exit 1
 else
     feedback --result failed --feedback "Erreur à la question 6"
+    exit 1
 fi
 
 compiler_out=$(clang -std=gnu99 -L/usr/lib64/llvm $LDFLAGS $CFLAGS -lclang check.c adds/*.c -o check 2>&1)
