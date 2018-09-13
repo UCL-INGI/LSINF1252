@@ -128,6 +128,7 @@ void test_empty_file(){
     student_t* root_ret;
     
     monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -140,6 +141,7 @@ void test_empty_file(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -157,8 +159,10 @@ void test_empty_file(){
         push_info_msg(_("You allocated memory and you did not free it when there is an error"));
     }
     
-    int close_called = stats.close.called;
-    CU_ASSERT_EQUAL(close_called, 0);
+    if(stats.open.called > 0 && stats.close.called == 0){
+        CU_FAIL();
+        push_info_msg(_("You did not close the file after opening it"));
+    }
 }
 
 void test_malloc_fails_first_time(){
