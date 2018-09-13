@@ -6,6 +6,23 @@
 #include "CTester/CTester.h"
 
 /*
+
+I tried to use stats.memory.used to check if the memory has been freed, but it did not work. Doing the following thing did not work:
+
+int start = stats.memory.used;
+
+SANDBOX_BEGIN;
+free_all(u);
+SANDBOX_END;
+
+int freed = start - stats.memory.used;
+
+Everytime, freed = 0. Instead, I had to check if all the memory pointed by the pointers has been freed individually.
+
+*/
+
+
+/*
  * Creates a person_t, with his name, age and salary
  * @return: a pointer to the new malloced person_t, NULL in case of error
  */
