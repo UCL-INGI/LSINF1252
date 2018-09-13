@@ -32,7 +32,7 @@ student_t *create_linked_list(int noma_depart, int nb){
     student_t* previous = root;
     
     int i;
-    for(i = 0; i < nb; i++){
+    for(i = 1; i < nb; i++){
         student_t* new = (student_t*)malloc(sizeof(student_t));
         if(new == NULL){
             free_all(root);
@@ -87,7 +87,9 @@ int same_linked_list(student_t* st1, student_t* st2){
 void test_normal_case(){
     set_test_metadata("load_linked_list", _("Test with a file containing many elements"), 1);
     
-    student_t* sol = create_linked_list(12351600, 5);
+    int nb_elem = 6;
+    
+    student_t* sol = create_linked_list(12351600, nb_elem);
     if(sol == NULL){
         return;
     }
@@ -110,7 +112,7 @@ void test_normal_case(){
     monitored.malloc = false;
     monitored.free = false;
     
-    int memory_used_sol = sizeof(student_t) * 5;
+    int memory_used_sol = sizeof(student_t) * nb_elem;
     
     int cmp = same_linked_list(sol, root_ret);
     
@@ -121,9 +123,7 @@ void test_normal_case(){
     
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
-        char a[70];
-        sprintf(a, "You allocated %d memory, but should be %d, and test %d", memory_used, memory_used_sol, malloc_allocated());
-        push_info_msg(a);
+        push_info_msg(_("You did not allocate the wright amount of memory"));
     }
 }
 
@@ -178,7 +178,9 @@ void test_empty_file(){
 void test_one_element(){
     set_test_metadata("load_linked_list", _("Test with a file containing one element"), 1);
     
-    student_t* sol = create_linked_list(46691600, 1);
+    int nb_elem = 1;
+    
+    student_t* sol = create_linked_list(46691600, nb_elem);
     
     student_t* root_ret;
     
@@ -189,6 +191,10 @@ void test_one_element(){
     SANDBOX_BEGIN;
     root_ret = load_linked_list("one_element.txt");
     SANDBOX_END;
+    
+    monitored_open = false;
+    monitored.malloc = false;
+    monitored.free = false;
     
     int cmp = same_linked_list(root_ret, sol);
     
