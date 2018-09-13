@@ -1,3 +1,9 @@
+/**
+* WORKING ON IT, DON'T TOUCH !!!
+*/
+
+
+
 // CTester template
 
 #include <stdlib.h>
@@ -153,7 +159,7 @@ void test_pair_filter(){
         //------
         if(!run1){
             CU_FAIL("The function produced a wrong list");
-            push_info_msg(_("The function produced a wrong list"));
+            push_info_msg(_("The function produced a wrong list. Your list is shorter than expected."));
             return;
         }
         
