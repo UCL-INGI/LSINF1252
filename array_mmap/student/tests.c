@@ -137,7 +137,7 @@ void test_empty_file(){
     root_ret = load_linked_list("empty_file.txt");
     SANDBOX_END;
     
-    int memory_used = stats.memory.used;
+    int memory_used = stats.memory.used - start;
     
     monitored.open = false;
     monitored.malloc = false;
@@ -213,7 +213,7 @@ void test_malloc_fails_third_time(){
     root_ret = load_linked_list("malloc_fails.txt");
     SANDBOX_END;
     
-    int memory_used_sol = stats.memory.used - start;
+    int memory_used = stats.memory.used - start;
     
     monitored.open = false;
     monitored.malloc = false;
@@ -239,7 +239,7 @@ void test_malloc_fails_last_time(){
     
     student_t* root_ret;
     
-    failures.malloc = FAIL_FIFTH;
+    failures.malloc = 0b00000000000000000000000000010000;
     
     monitored.open = true;
     monitored.malloc = true;
