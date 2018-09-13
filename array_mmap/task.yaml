@@ -37,7 +37,7 @@ problems:
                  * @pre: the length of the file is an entire multiple of
                  *      the size of student_t
                  * @return: the pointer to the head of the linked list,
-                 *         NULL is case of error
+                 *         NULL in case of error
                  * you cannot use fopen, read, fread, fgetc, fgets
                  * which means that you have to use mmap
                  */
