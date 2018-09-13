@@ -1,5 +1,6 @@
 /**
 * WORKING ON IT, DON'T TOUCH !!!
+* cmp(run1,run2,len) -> nodeEquals(run1,run2). Because the pointer next shouldn't be the same !
 */
 
 
@@ -10,6 +11,15 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+
+int nodeEquals(struct node *a, struct node *b){
+    /*problem : how to compare void*fifo.. we don't even know it's size !
+     * return ( a->hash==b->hash && a->id==b->id && !strcmp(a->name,b->name) && !strcmp(a->buffer,b->buffer) && a->timestamp==b->timestamp && a->acl==b->acl && a->flow==b->flow && !strcmp(a->parent,b->parent) && HERE HOW DO WE COMPARE THE 2 FIFO'S IF WE DON T KNOW THE SIZE)
+     */
+    
+    //another solution, since the pointer is the first allocated thing in the node structure :
+    return !memcmp((void*)(a+sizeof(struct node*)),(void*)(b+sizeof(struct node*)), sizeof(struct node) - sizeof(struct node*));
+}
 
 struct node *generate_list(){
     int len = sizeof(struct node);
@@ -163,7 +173,7 @@ void test_pair_filter(){
             return;
         }
         
-        cmp = memcmp((const void*) run1, (const void*) run2, len);
+        cmp = nodeEquals(run1,run2);
         if (cmp != 0){
             CU_FAIL("The function produced a wrong list");
             push_info_msg(_("The function produced a wrong list"));
