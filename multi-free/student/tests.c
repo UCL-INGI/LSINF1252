@@ -376,12 +376,154 @@ void test_init_normal_case(){
         strcpy(city,"changed");
         strcpy(name,"changed");
         int cmpChange = uniEquals(ret,ucl);
-        if(!cmpChange){
+        if(cmpChange){
             push_info_msg(_("You didn't copy the strings ! You should use strcpy or copy it yourself."));
             CU_FAIL();
         }
     }
     free_a(ucl);
+
+}
+
+void test_init_first_malloc_fails(){
+    set_test_metadata("init_all", _("Testing the behaviour of the function when first malloc fails"),1);
+
+    university_t* ucl = init_new();
+    char* city = malloc(sizeof(char)*17);
+    char* name = malloc(sizeof(char)*16);
+
+    if(!ucl || !city || !name){
+        if(ucl) free_a(ucl);
+        if(city) free(city);
+        if(name) free(name);
+        CU_FAIL(_("Internal error while allocating memory"));
+        return;
+    }
+
+    strcpy(city,"Louvain-la-Neuve");
+    strcpy(name,"Vincent Blondel");
+
+    failures.malloc = FAIL_FIRST;
+    
+    monitored.free = true;
+    monitored.malloc = true;
+    SANDBOX_BEGIN;
+    university_t* ret = init_all(city, creation, rectname, age, salary);
+    SANDBOX_END;
+
+    monitored.malloc = false;
+    monitored.free = false;
+
+
+    CU_ASSERT_EQUAL(stats.free.called, 0);
+    if(stats.free.called)
+        push_info_msg(_("Why did you use free ?"));
+
+    CU_ASSERT_EQUAL(stats.malloc.called, 1);
+    if(stats.malloc.called != 1){
+        push_info_msg(_("You should call malloc once !"));
+        return;
+    }
+
+    if(ret){
+        CU_FAIL();
+        push_info_msg(_("You should return NULL in this case."));
+        return;
+    }
+
+}
+
+void test_init_second_malloc_fails(){
+    set_test_metadata("init_all", _("Testing the behaviour of the function when second malloc fails"),1);
+
+    university_t* ucl = init_new();
+    char* city = malloc(sizeof(char)*17);
+    char* name = malloc(sizeof(char)*16);
+
+    if(!ucl || !city || !name){
+        if(ucl) free_a(ucl);
+        if(city) free(city);
+        if(name) free(name);
+        CU_FAIL(_("Internal error while allocating memory"));
+        return;
+    }
+
+    strcpy(city,"Louvain-la-Neuve");
+    strcpy(name,"Vincent Blondel");
+    
+    failures.malloc = FAIL_SECOND;
+    monitored.free = true;
+    monitored.malloc = true;
+    SANDBOX_BEGIN;
+    university_t* ret = init_all(city, creation, rectname, age, salary);
+    SANDBOX_END;
+
+    monitored.malloc = false;
+    monitored.free = false;
+
+
+    CU_ASSERT_EQUAL(stats.free.called, 1);
+    if(stats.free.called)
+        push_info_msg(_("You should call free once in this case."));
+
+    CU_ASSERT_EQUAL(stats.malloc.called, 2);
+    if(stats.malloc.called != 2){
+        push_info_msg(_("You should call malloc twice in this case."));
+        return;
+    }
+
+    if(ret){
+        CU_FAIL();
+        push_info_msg(_("You should return NULL in this case."));
+        return;
+    }
+
+}
+
+void test_init_third_malloc_fails(){
+    set_test_metadata("init_all", _("Testing the behaviour of the function when third malloc fails"),1);
+
+    university_t* ucl = init_new();
+    char* city = malloc(sizeof(char)*17);
+    char* name = malloc(sizeof(char)*16);
+
+    if(!ucl || !city || !name){
+        if(ucl) free_a(ucl);
+        if(city) free(city);
+        if(name) free(name);
+        CU_FAIL(_("Internal error while allocating memory"));
+        return;
+    }
+
+    strcpy(city,"Louvain-la-Neuve");
+    strcpy(name,"Vincent Blondel");
+    
+    failures.malloc = FAIL_THIRD;
+    monitored.free = true;
+    monitored.malloc = true;
+    SANDBOX_BEGIN;
+    university_t* ret = init_all(city, creation, rectname, age, salary);
+    SANDBOX_END;
+
+    monitored.malloc = false;
+    monitored.free = false;
+
+
+    CU_ASSERT_EQUAL(stats.free.called, 2);
+    if(stats.free.called)
+        push_info_msg(_("You should call free twice in this case."));
+
+    CU_ASSERT_EQUAL(stats.malloc.called, 3);
+    if(stats.malloc.called != 3){
+        push_info_msg(_("You should call malloc 3 times in this case."));
+        return;
+    }
+
+    if(ret){
+        CU_FAIL();
+        push_info_msg(_("You should return NULL in this case."));
+        return;
+    }
 
 }
 
@@ -455,5 +597,5 @@ int compute_graphic(university_t* u){
 int main(int argc,char* argv[])
 {
     BAN_FUNCS(calloc);
-    RUN(test_success, test_rector_null, test_strings_null, test_init_normal_case);
+    RUN(test_success, test_rector_null, test_strings_null, test_init_normal_case, test_init_first_malloc_fails, test_init_second_malloc_fails, test_init_third_malloc_fails);
 }
