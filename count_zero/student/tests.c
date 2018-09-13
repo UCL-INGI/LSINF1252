@@ -5,6 +5,9 @@
 #include "student_code.h"
 #include "CTester/CTester.h"
 
+/*
+ * Test with a basic string
+ */
 void test_1(){
     
     set_test_metadata("counting_zero", _("Test 1"), 1);
@@ -22,6 +25,9 @@ void test_1(){
     }
 }
 
+/*
+ * Test with a string beginning and ending by '\0'
+ */
 void test_2(){
     set_test_metadata("counting_zero", _("Test 2"), 1);
     
@@ -38,6 +44,9 @@ void test_2(){
     }
 }
 
+/*
+ * Test with a string beginning and ending by '\0', and containing "traps"
+ */
 void test_complexe(){
     set_test_metadata("counting_zero", _("Test more complex"), 1);
     
@@ -54,6 +63,9 @@ void test_complexe(){
     }
 }
 
+/*
+ * Test with a NULL string
+ */
 void test_null(){
     set_test_metadata("counting_zero", _("Test with NULL args"), 1);
     

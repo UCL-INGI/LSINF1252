@@ -19,7 +19,10 @@ network_grading: false
 order: 16
 problems:
     counting_zero:
+        type: code
+        name: Compter le nombre de \0
         default: ''
+        language: c
         header: |-
             .. code-block:: c
 
@@ -30,9 +33,6 @@ problems:
                  *         -1 in case of error
                  */
                  int counting_zero(char* str, int length){
-        type: code
-        language: c
-        name: Compter le nombre de \0
 stored_submissions: 0
 submission_limit:
     amount: -1
@@ -40,8 +40,8 @@ submission_limit:
 tags:
     '0':
         type: 2
-        visible: true
         name: S2
+        visible: true
         description: ''
         id: ''
 weight: 1.0
