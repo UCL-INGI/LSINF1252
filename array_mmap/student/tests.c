@@ -99,6 +99,8 @@ int same_linked_list(student_t* st1, student_t* st2){
 
 /*
  * Test when the call to open fails
+ * file created with: student_t* l = create_linked_list(12351600, 5);
+ *                   create_file("normal_case.txt", l);
  */
 void test_open_fails(){
     set_test_metadata("load_linked_list", _("Test with fail of open"), 1);
@@ -151,6 +153,8 @@ void test_open_fails(){
 
 /*
  * Test when the file is empty
+ * file created with: student_t* l = NULL;
+ *                   create_file("one_elemt.txt", l);
  */
 void test_empty_file(){
     set_test_metadata("load_linked_list", _("Test with an empty file"), 1);
@@ -210,6 +214,8 @@ void test_empty_file(){
 /*
  * Test when the first call to malloc fails
  * All the memory allocated has to be freed
+ * file created with: student_t* l = create_linked_list(46691600, 5);
+ *                   create_file("malloc_fails.txt", l);
  */
 void test_malloc_fails_first_time(){
     set_test_metadata("load_linked_list", _("Test whith malloc failing first time"), 1);
@@ -271,6 +277,8 @@ void test_malloc_fails_first_time(){
 /*
  * Test when the third call to malloc fails
  * All the memory allocated has to be freed
+ * file created with: student_t* l = create_linked_list(46691600, 5);
+ *                   create_file("malloc_fails.txt", l);
  */
 void test_malloc_fails_third_time(){
     set_test_metadata("load_linked_list", _("Test with malloc failing the third time"), 1);
@@ -334,6 +342,8 @@ void test_malloc_fails_third_time(){
  * last = fifth here because the linked list
  * contains five elements
  * All the memory allocated has to be freed
+ * file created with: student_t* l = create_linked_list(46691600, 5);
+ *                   create_file("malloc_fails.txt", l);
  */
 void test_malloc_fails_last_time(){
     set_test_metadata("load_linked_list", _("Test with malloc failing the last time"), 1);
@@ -395,6 +405,8 @@ void test_malloc_fails_last_time(){
 /*
  * Test when there is only one element in the file
  * one_element.txt: 12691600
+ * file created with: student_t* l = create_linked_list(12691600, 1);
+ *                   create_file("one_element.txt", l);
  */
 void test_one_element(){
     set_test_metadata("load_linked_list", _("Test with a file containing one element"), 1);
@@ -461,6 +473,8 @@ void test_one_element(){
 /*
  * Test when there are many (5) elements in the file
  * normal_case/txt: 12351600->12361600->12371600->12381600->12391600
+ * file created with: student_t* l = create_linked_list(12351600, 5);
+ *                   create_file("normal_case.txt", l);
  */
 void test_normal_case(){
     set_test_metadata("load_linked_list", _("Test with a file containing many elements"), 1);
