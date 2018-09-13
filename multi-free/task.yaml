@@ -38,9 +38,8 @@ order: 31
 problems:
     free_all:
         default: ''
-        type: code
         name: Free all
-        language: c
+        type: code
         header: |-
             Write the body of the function ``free_all``.
 
@@ -51,6 +50,7 @@ problems:
                  * @pre: u != NULL
                  */
                  void free_all(university_t* u){
+        language: c
     init_all:
         name: Init all
         default: ''

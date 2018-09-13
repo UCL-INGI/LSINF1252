@@ -52,11 +52,12 @@ evaluate: best
 groups: false
 input_random: '0'
 limits:
-    time: '30'
     output: '2'
+    time: '30'
     memory: '100'
 name: 'BST : Insert and Delete'
 network_grading: false
+order: 0
 problems:
     insert:
         language: c
@@ -84,7 +85,6 @@ problems:
         language: c
         optional: 'on'
     delete:
-        type: code
         header: |-
             Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique. Delete the node using the technique explained in the problem statement.
             **Note :** You can write subfonctions (if needed) at the same place as for the *insert* function.
@@ -98,6 +98,7 @@ problems:
                 void delete(bt_t* bt, char* enWord);
         default: ''
         language: c
+        type: code
         name: Delete function
 stored_submissions: 0
 submission_limit:
@@ -105,4 +106,3 @@ submission_limit:
     period: -1
 tags: {}
 weight: 1.0
-order: 0
