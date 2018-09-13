@@ -182,6 +182,10 @@ void test_empty_file(){
         CU_FAIL();
         push_info_msg(_("You did not close the file after opening it"));
     }
+    else if(stats.open.called == 1 && stats.close.called > 1){
+        CU_FAIL();
+        push_info_msg(_("Why do you call close more than once ?"));
+    }
 }
 
 void test_malloc_fails_first_time(){
@@ -234,6 +238,10 @@ void test_malloc_fails_first_time(){
     else if(stats.open.called == 1 && stats.close.called == 0){
         CU_FAIL();
         push_info_msg(_("You did not close the file after opening it"));
+    }
+    else if(stats.open.called == 1 && stats.close.called > 1){
+        CU_FAIL();
+        push_info_msg(_("Why do you call close more than once ?"));
     }
 }
 
@@ -288,6 +296,10 @@ void test_malloc_fails_third_time(){
         CU_FAIL();
         push_info_msg(_("You did not close the file after opening it"));
     }
+    else if(stats.open.called == 1 && stats.close.called > 1){
+        CU_FAIL();
+        push_info_msg(_("Why do you call close more than once ?"));
+    }
 }
 
 void test_malloc_fails_last_time(){
@@ -329,9 +341,21 @@ void test_malloc_fails_last_time(){
         push_info_msg(_("You allocated memory and you did not free it in case of error"));
     }
     
-    if(stats.open.called > 0 && stats.close.called == 0){
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open only one file"));
+    }
+    else if(stats.open.called < 1){
+        CU_FAIL();
+        push_info_msg(_("You shouldl open the file before using mmap"));
+    }
+    else if(stats.open.called == 1 && stats.close.called == 0){
         CU_FAIL();
         push_info_msg(_("You did not close the file after opening it"));
+    }
+    else if(stats.open.called == 1 && stats.close.called > 1){
+        CU_FAIL();
+        push_info_msg(_("Why do you call close more than once ?"));
     }
 }
 
@@ -376,11 +400,21 @@ void test_one_element(){
         push_info_msg(_("You did not allocate the right amount of memory"));
     }
     
-    
-    
-    if(stats.open.called > 0 && stats.close.called == 0){
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open onyl one file"));
+    }
+    else if(stats.open.called < 1){
+        CU_FAIL();
+        push_info_msg(_("You have to open the file before using mmap"));
+    }
+    else if(stats.open.called == 1 && stats.close.called == 0){
         CU_FAIL();
         push_info_msg(_("You did not close the file after opening it"));
+    }
+    else if(stats.open.called == 1 && stats.close.called > 1){
+        CU_FAIL();
+        push_info_msg(_("Why do you call close more than once ?"));
     }
     
     free_all(sol);
@@ -400,6 +434,7 @@ void test_normal_case(){
     
     
     monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -412,6 +447,7 @@ void test_normal_case(){
     int memory_used = stats.memory.used - start;
     
     monitored.open = false;
+    monitored.close = false;
     monitored.malloc = false;
     monitored.free = false;
     
@@ -427,6 +463,23 @@ void test_normal_case(){
     CU_ASSERT_EQUAL(memory_used, memory_used_sol);
     if(memory_used != memory_used_sol){
         push_info_msg(_("You did not allocate the wright amount of memory"));
+    }
+    
+    if(stats.open.called > 1){
+        CU_FAIL();
+        push_info_msg(_("You should open only one file"));
+    }
+    else if(stats.open.called < 1){
+        CU_FAIL();
+        push_info_msg(_("You have to open the file before using mmap"));
+    }
+    else if(stats.open.called == 1 && stats.close.called == 0){
+        CU_FAIL();
+        push_info_msg(_("You did not close the file after opening it"));
+    }
+    else if(stats.open.called == 1 && stats.close.called > 1){
+        CU_FAIL();
+        push_info_msg(_("Why do you call close more than once ?"));
     }
     
     free_all(sol);
