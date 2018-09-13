@@ -176,7 +176,7 @@ void test_empty_file(){
     }
     else if(stats.open.called < 0){
         CU_FAIL();
-        push_info_msg(_("You have to open the file before using mmap"))
+        push_info_msg(_("You have to open the file before using mmap"));
     }
     else if(stats.open.called == 1 && stats.close.called == 0){
         CU_FAIL();
@@ -310,7 +310,7 @@ void test_malloc_fails_last_time(){
     failures.malloc = 0b00000000000000000000000000010000;
     
     monitored.open = true;
-    monitored.open = true;
+    monitored.close = true;
     monitored.malloc = true;
     monitored.free = true;
     
@@ -347,7 +347,7 @@ void test_malloc_fails_last_time(){
     }
     else if(stats.open.called < 1){
         CU_FAIL();
-        push_info_msg(_("You shouldl open the file before using mmap"));
+        push_info_msg(_("You should open the file before using mmap"));
     }
     else if(stats.open.called == 1 && stats.close.called == 0){
         CU_FAIL();
