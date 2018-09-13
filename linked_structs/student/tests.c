@@ -147,9 +147,7 @@ void test_pair_filter(){
     //------
     int count = 0;
     //------
-    if(!run2)
-        push_info_msg("run2 null");
-    while(!run2){
+    while(run2){
         //------
         count++;
         //------
