@@ -1,3 +1,7 @@
+/*
+* MODIFIED, to check
+*/
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <strings.h>
@@ -37,7 +41,7 @@ void test_myfunc_ret()
     else if (strncmp("a ihuqfiudshfsi\n", buf, 16)){
         CU_FAIL("");
         char error_msg[200];
-        sprintf(error_msg, _("Arguments : %s %s %s %s %s, expected : 'a ihuqfiudshfsi\\\\n', your answer : %s"), str1, str2, str3, str4, str5, buf);
+        sprintf(error_msg, _("Arguments : '%s %s %s %s %s', expected : 'a ihuqfiudshfsi\\\\n', your answer : '%s'"), str1, str2, str3, str4, str5, buf);
         push_info_msg(error_msg);
     }
     else
@@ -55,7 +59,9 @@ void test_myfunc_ret()
     }
     else if (strncmp("a kujsvglqiu\n", buf, 13)){
         CU_FAIL("");
-        push_info_msg(_("Your function output the wrong string when 3 arguments are provided"));
+        char error_msg[200];
+        sprintf(error_msg, _("Arguments : '%s %s %s %s', expected : 'a kujsvglqiu\\\\n', your answer : '%s'"), str1, str2, str3, str5, buf);
+        push_info_msg(error_msg);
     }
     else
         CU_PASS("");
@@ -66,7 +72,9 @@ void test_myfunc_ret()
     read(stdout_cpy, buf, 1);
     if (strncmp("\n", buf, 1)){
         CU_FAIL("");
-        push_info_msg(_("Your function output the wrong string when no arguments are provided"));
+        char error_msg[200];
+        sprintf(error_msg, _("Arguments : '%s', expected : '\\\\n', your answer : '%s'"), str1, buf);
+        push_info_msg(error_msg);
     }
     else
         CU_PASS("");
@@ -82,7 +90,9 @@ void test_myfunc_ret()
     }
     else if (strncmp("a\n", buf, 2)){
         CU_FAIL("");
-        push_info_msg(_("Your function output the wrong string when 2 arguments are provided"));
+        char error_msg[200];
+        sprintf(error_msg, _("Arguments : '%s %s %s', expected : 'a\\\\n', your answer : '%s'"), str1, str2, str3, buf);
+        push_info_msg(error_msg);
     }
     else
         CU_PASS("");
@@ -98,7 +108,9 @@ void test_myfunc_ret()
     }
     if (strncmp("kujsvglqiu\n", buf, 11)){
         CU_FAIL("");
-        push_info_msg(_("Your function output the wrong string 1 arguments is provided"));
+        char error_msg[200];
+        sprintf(error_msg, _("Arguments : '%s %s', expected : 'kujsvglqiu\\\\n', your answer : '%s'"), str1, str5, buf);
+        push_info_msg(error_msg);
     }
     else
         CU_PASS("");
