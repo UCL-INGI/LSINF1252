@@ -248,7 +248,6 @@ bt_t* tree4(){
 void test_insert_normal(){
     set_test_metadata("insert", _("Test in a normal case"), 1);
     bt_t* tree = tree1();
-    int count = logs.malloc.n;
     char* newEnWord = malloc(sizeof(char)*5);
     char* newFrWord = malloc(sizeof(char)*5);
 
@@ -283,7 +282,7 @@ void test_insert_normal(){
     strcpy(newFrWord, "dodo");
 
     //to be able to know how many bytes the student malloced
-    count = logs.malloc.n;
+    int begin = logs.malloc.n;
 
     monitored.malloc = true;
     int inserted;
@@ -305,13 +304,14 @@ void test_insert_normal(){
         push_info_msg(_("You can only use 3 calls to malloc for this case"));
     else{ // did he allocate enough memory ? or not too much ?
         int size[3];
-        size[0] = logs.malloc.log[count].size;
-        size[1]= logs.malloc.log[count+1].size;
-        size[2] = logs.malloc.log[count+2].size;
-        if(!containsArray(size,3,32)){
+        size[0] = logs.malloc.log[begin].size;
+        size[1] = logs.malloc.log[begin+1].size;
+        size[2] = logs.malloc.log[begin+2].size;
+        if(!containsArray(size,3,sizeof(node))){
             CU_FAIL();
             push_info_msg(_("You didn't malloc the right space for the node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
         }
+        // 5 = size of the enWord and frWord given before changing ("dodo")
         if(containsArray(size,3,5) != 2){
             CU_FAIL();
             //TODO Question : why \\\\ for only one backslash ?
