@@ -290,7 +290,7 @@ void test_pop_value(){
                   "i;rvqr6tgbsecr26", "5qvf15rg5g", "42",
                   "r157g1srq7v16zs6"};
 
-    struct node *stack, *tmp_head;
+    struct node *stack, *tmp_head, *tmp_new_head;
     char *name_head;
 
     //print_stack(stack, 6);
@@ -302,6 +302,7 @@ void test_pop_value(){
     stack =  generate_stack(a, 6);
     tmp_head = stack;
     name_head = tmp_head->name;
+    tmp_new_head = tmp_head->next;
     ret = pop(&stack, result);
     SANDBOX_END;
 
@@ -326,7 +327,7 @@ void test_pop_value(){
     char *src2 = *(a+4);
     //printf("src = %s, result = %s, size = %li ", src2, stack->name, strlen(stack->name));
 
-    if (stack != tmp_head->next){
+    if (stack != tmp_new_head){
         push_info_msg(_("The head ptr is not the expected one"));
         return;
     }
