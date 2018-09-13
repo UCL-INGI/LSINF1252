@@ -12,13 +12,17 @@ groups: false
 input_random: '0'
 limits:
     time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
 name: '[S3] Improved strcpy '
 network_grading: false
 order: 34
 problems:
     strcpy_impl:
+        type: code
+        default: ''
+        name: buf_strcpy
+        language: c
         header: |
             Write the body of the function *buf_strcpy*.
 
@@ -33,73 +37,69 @@ problems:
                 * Remember that strings are terminated with '\0' and that strlen("abc") returns 3 even if 4 bytes are required to store this string.
                 */
                 char *buf_strcpy(const char *src) {
-        name: buf_strcpy
-        default: ''
-        language: c
-        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
     '0':
+        name: Timeout
+        type: 1
         description: Your code exceeds the maximum allowed time.
         id: timeout
         visible: true
-        type: 1
-        name: Timeout
     '1':
-        visible: true
-        description: ''
         type: 1
+        visible: true
         id: sigsegv
+        description: ''
         name: Segmentation Fault
     '2':
+        name: Not compile
+        id: not_compile
         visible: true
         type: 1
-        id: not_compile
         description: You code does not compile.
-        name: Not compile
     '3':
-        id: memory
         visible: true
         name: Memory Exceeded
         type: 1
+        id: memory
         description: ''
     '4':
-        type: 1
-        name: Floating Point Exception
+        visible: true
         description: ''
-        visible: true
         id: sigfpe
-    '5':
+        name: Floating Point Exception
         type: 1
-        visible: true
+    '5':
         id: double_free
         name: Double free
-        description: Your code produced a double free.
-    '6':
-        description: You use some banned functions.
-        type: 1
-        name: Banned functions
         visible: true
+        description: Your code produced a double free.
+        type: 1
+    '6':
+        name: Banned functions
+        description: You use some banned functions.
+        visible: true
+        type: 1
         id: banned_funcs
     '7':
-        type: 1
+        visible: true
         description: You do not manage the case where malloc() fails.
-        visible: true
-        id: malloc_fail
+        type: 1
         name: Malloc fail
+        id: malloc_fail
     '8':
-        visible: true
-        name: S3
         description: ''
+        visible: true
         type: 2
+        name: S3
         id: ''
     '9':
         type: 2
-        description: Usage of malloc()
         name: Malloc
+        description: Usage of malloc()
         visible: true
         id: ''
 weight: 1.0

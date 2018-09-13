@@ -22,8 +22,6 @@ void test_strcpy_return() {
     ret = buf_strcpy(src);
     SANDBOX_END;
 
-    // Tests
-    //-----------------------------------------------------------------
 
     // check if only one call to malloc
     int ms = stats.malloc.called;
@@ -41,7 +39,7 @@ void test_strcpy_return() {
     if (mal && ms) {
         if(stats.malloc.last_params.size != strlen(src)+1) {
             CU_FAIL("wrong malloc size");
-            push_info_msg(_("The allocated memory has not the correct size."));
+            push_info_msg(_("The allocated memory doesn't the correct size."));
             set_tag("malloc_fail");
             return;
         }
@@ -55,6 +53,7 @@ void test_strcpy_return() {
         set_tag("malloc_fail");
     }
     if(cs){
+        CU_FAIL();
         set_tag("malloc_fail");
         push_info_msg(_("You should use malloc for this task. Calloc could also work but it's not efficient to use it here since we initialise the memory just after we allocate it"));
     }
