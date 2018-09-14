@@ -134,6 +134,18 @@ int uniEquals(university_t* u1, university_t* u2){
 }
 
 /*
+ * @return: 1 if @array contains @value, 0 otherwise
+ */
+int containsArray(int* array, int size, int value){
+    int count = 0;
+    for(int i = 0; i < size; i++){
+        if(array[i] == value)
+            return 1;
+    }
+    return 0;
+}
+
+/*
  * Test with a normal case: all the memory should be freed
  */
 void test_success(){
@@ -328,7 +340,8 @@ void test_init_normal_case(){
 
     strcpy(city,"Louvain-la-Neuve");
     strcpy(name,"Vincent Blondel");
-
+    
+    int begin = logs.malloc.n;
     monitored.free = true;
     monitored.malloc = true;
     
@@ -339,15 +352,24 @@ void test_init_normal_case(){
     monitored.malloc = false;
     monitored.free = false;
 
-
     CU_ASSERT_EQUAL(stats.free.called, 0);
     if(stats.free.called)
         push_info_msg(_("Why did you use free ?"));
 
-    CU_ASSERT_EQUAL(stats.malloc.called, 3);
-    if(stats.malloc.called != 3){
-        push_info_msg(_("You should call malloc 3 times !"));
+    CU_ASSERT_EQUAL(stats.malloc.called, 4);
+    if(stats.malloc.called != 4){
+        push_info_msg(_("You should call malloc 4 times !"));
         return;
+    }
+    else{ // did he allocate enough memory ? or not too much ?
+        int size[4];
+        size[0] = logs.malloc.log[begin].size;
+        size[1] = logs.malloc.log[begin+1].size;
+        size[2] = logs.malloc.log[begin+2].size;
+        size[3] = logs.malloc.log[begin+3].size;
+        if(!containsArray(size,4,sizeof(university_t))){
+            CU_FAIL();
+            push_info_msg(_("You didn't malloc the right space for the university node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
     }
 
     if(!ret){

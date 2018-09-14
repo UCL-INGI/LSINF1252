@@ -1,7 +1,7 @@
 accessible: false
 author: Louis Navarre & Alexandre Gobeaux
 context: |-
-    Given the following structure *univrsity_t*:
+    Given the following structure *university_t*:
 
     .. code-block:: c
 
@@ -21,7 +21,7 @@ context: |-
             int age;
         } person_t;
 
-    You are asked to implement the functions ``free_all`` and ``init_all``, which respectively initializes the structure *universiy_t* and frees all the memory associated with it.
+    You are asked to implement the functions ``init_all`` and ``free_all``, which respectively initialises the structure *universiy_t* and frees all the memory associated with it.
 
     The *name* and the *city* have been allocated with *malloc*.
 
@@ -50,6 +50,8 @@ problems:
             .. code-block:: c
 
                 /*
+                 * @city != NULL
+                 * @rectname != NULL
                  * @return: a pointer to the university structure containing the elements
                  */
                  university_t* init_all(char* city, int creation, char* rectname, int age, int salary){
