@@ -148,7 +148,7 @@ int containsArray(int* array, int size, int value){
 /*
  * Test with a normal case: all the memory should be freed
  */
-void test_success(){
+void test_free_success(){
 
     set_test_metadata("free_all", _("Testing in a normal case"), 1);
 
@@ -214,7 +214,7 @@ void test_success(){
 /*
  * Test when the rector is NULL
  */
-void test_rector_null(){
+void test_free_rector_null(){
     set_test_metadata("free_all", _("Testing when there is no rector"), 1);
 
     university_t* u = init_u(NULL, "Ottawa", 1848);
@@ -267,7 +267,7 @@ void test_rector_null(){
 /*
  * Test when the strings (city and rector's name) are NULL
  */
-void test_strings_null(){
+void test_free_strings_null(){
     set_test_metadata("free_all", _("Testing when the strings are NULL"), 1);
 
     person_t* p = init_p(NULL, 50, 10000);
@@ -372,7 +372,12 @@ void test_init_normal_case(){
             push_info_msg(_("You didn't malloc the right space for the university node. You should have malloced 20 bytes since you have 2 pointers (of 8 bytes each) + an int."));
         }
         if(!containsArray(size,4,sizeof(person_t))){
-            
+            CU_FAIL();
+            push_info_msg(_("You didn't malloc the right space for the person node. You should have malloced 16 bytes since you have 1 pointer (of 8 bytes) and 2 ints (of 4 bytes each)"));
+        }
+        if(!containsArray(size,4,strlen(city)+1) || !containsArray(size,4,strlen(name)+1)){
+            CU_FAIL();
+            push_info_msg(_("You didn't malloc the right space for at least one string. Maybe you forgot to allocate space for the \\\\0 character."));
         }
     }
 
@@ -450,14 +455,15 @@ void test_init_first_malloc_fails(){
     strcpy(name,"Vincent Blondel");
 
     failures.malloc = FAIL_FIRST;
-    
+    int begin = logs.malloc.n;
     monitored.free = true;
     monitored.malloc = true;
+    int start = stats.memory.used;
     
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
     SANDBOX_END;
-
+    
     monitored.malloc = false;
     monitored.free = false;
 
@@ -476,6 +482,12 @@ void test_init_first_malloc_fails(){
         CU_FAIL();
         push_info_msg(_("You should return NULL in this case."));
         return;
+    }
+    
+    int notFreed = start - stats.memory.used;
+    if(notFreed){
+        CU_FAIL();
+        push_info_msg(_("You didn't free all the memory you allocated."));
     }
 
 }
@@ -506,6 +518,7 @@ void test_init_second_malloc_fails(){
     
     monitored.free = true;
     monitored.malloc = true;
+    int start = stats.memory.used;
     
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
@@ -524,7 +537,13 @@ void test_init_second_malloc_fails(){
         push_info_msg(_("You should call malloc twice in this case."));
         return;
     }
-
+    
+    int notFreed = start - stats.memory.used;
+    if(notFreed){
+        CU_FAIL();
+        push_info_msg(_("You didn't free all the memory you allocated."));
+    }
+    
     if(ret){
         CU_FAIL();
         push_info_msg(_("You should return NULL in this case."));
@@ -559,11 +578,11 @@ void test_init_third_malloc_fails(){
     
     monitored.free = true;
     monitored.malloc = true;
+    int start = stats.memory.used;
     
     SANDBOX_BEGIN;
     university_t* ret = init_all(city, creation, rectname, age, salary);
     SANDBOX_END;
-
     monitored.malloc = false;
     monitored.free = false;
 
@@ -576,7 +595,71 @@ void test_init_third_malloc_fails(){
         push_info_msg(_("You should call malloc 3 times in this case."));
         return;
     }
+    
+    int notFreed = start - stats.memory.used;
+    if(notFreed){
+        CU_FAIL();
+        push_info_msg(_("You didn't free all the memory you allocated."));
+    }
+    
+    if(ret){
+        CU_FAIL();
+        push_info_msg(_("You should return NULL in this case."));
+        return;
+    }
 
+}
+
+void test_init_fourth_malloc_fails(){
+    set_test_metadata("init_all", _("Testing the behaviour of the function when third malloc fails"),1);
+
+    university_t* ucl = init_new();
+    char* city = malloc(sizeof(char)*17);
+    char* name = malloc(sizeof(char)*16);
+
+    if(!ucl || !city || !name){
+        if(ucl) 
+            free_a(ucl);
+        if(city) 
+            free(city);
+        if(name) 
+            free(name);
+        
+        CU_FAIL(_("Internal error while allocating memory"));
+        return;
+    }
+
+    strcpy(city,"Louvain-la-Neuve");
+    strcpy(name,"Vincent Blondel");
+    
+    failures.malloc = 1 << 4; // should make the fourth malloc fail.
+    
+    monitored.free = true;
+    monitored.malloc = true;
+    int start = stats.memory.used;
+    
+    SANDBOX_BEGIN;
+    university_t* ret = init_all(city, creation, rectname, age, salary);
+    SANDBOX_END;
+    monitored.malloc = false;
+    monitored.free = false;
+
+    CU_ASSERT_EQUAL(stats.free.called, 3);
+    if(stats.free.called)
+        push_info_msg(_("You should call free twice in this case."));
+
+    CU_ASSERT_EQUAL(stats.malloc.called, 4);
+    if(stats.malloc.called != 4){
+        push_info_msg(_("You should call malloc 4 times in this case."));
+        return;
+    }
+    
+    int notFreed = start - stats.memory.used;
+    if(notFreed){
+        CU_FAIL();
+        push_info_msg(_("You didn't free all the memory you allocated."));
+    }
+    
     if(ret){
         CU_FAIL();
         push_info_msg(_("You should return NULL in this case."));
@@ -655,5 +738,5 @@ int compute_graphic(university_t* u){
 int main(int argc,char* argv[])
 {
     BAN_FUNCS(calloc);
-    RUN(test_success, test_rector_null, test_strings_null, test_init_normal_case, test_init_first_malloc_fails, test_init_second_malloc_fails, test_init_third_malloc_fails);
+    RUN(test_free_success, test_free_rector_null, test_free_strings_null, test_init_normal_case, test_init_first_malloc_fails, test_init_second_malloc_fails, test_init_third_malloc_fails, test_init_fourth_malloc_fails);
 }
