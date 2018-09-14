@@ -84,16 +84,22 @@ tags:
         description: ''
     '1':
         type: 1
+        visible: true
         id: double_free
         description: Your code produced a double free.
         name: Double free
-        visible: true
     '2':
         name: Not compile
         id: not_compile
-        visible: true
         type: 1
         description: You code does not compile.
+        visible: true
+    '4':
+        visible: true
+        id: not_free
+        description: You do not free all the memory
+        name: Not freed
+        type: 1
     '3':
         visible: true
         name: S3
