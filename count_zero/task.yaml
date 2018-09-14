@@ -12,16 +12,13 @@ groups: false
 input_random: '0'
 limits:
     time: '30'
-    memory: '100'
     output: '2'
+    memory: '100'
 name: '[S2] Count the ''\0'''
 network_grading: false
 order: 16
 problems:
     counting_zero:
-        type: code
-        name: Compter le nombre de \0
-        default: ''
         language: c
         header: |-
             .. code-block:: c
@@ -33,15 +30,48 @@ problems:
                  *         -1 in case of error
                  */
                  int counting_zero(char* str, int length){
+        name: Compter le nombre de \0
+        default: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
 tags:
+    '4':
+        id: sum
+        name: Sum
+        type: 0
+        description: The student has correctly computed and returned the sum.
+        visible: false
+    '1':
+        type: 1
+        visible: true
+        id: not_compile
+        description: You code does not compile.
+        name: Not compile
+    '2':
+        name: Segmentation Fault
+        id: sigsegv
+        type: 1
+        description: ''
+        visible: true
+    '3':
+        visible: true
+        name: Timeout
+        type: 1
+        id: timeout
+        description: Your code exceeds the maximum allowed time.
+    '5':
+        id: wrong_args_handling
+        description: Wrong return value when wrong args.
+        type: 1
+        name: Bad Args handling
+        visible: false
     '0':
         type: 2
-        name: S2
         visible: true
         description: ''
+        name: S2
         id: ''
 weight: 1.0

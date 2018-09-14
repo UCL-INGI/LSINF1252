@@ -61,6 +61,9 @@ void test_complexe(){
     if(ret != 5){
         push_info_msg(_("Your function does not work correctly with the following string : \"\0\0\0\0a\\0b\0\\0\""));
     }
+    else{
+        set_tag("sum");
+    }
 }
 
 /*
@@ -79,6 +82,7 @@ void test_null(){
     CU_ASSERT_EQUAL(ret, -1);
     if(ret != -1){
         push_info_msg(_("Your function does return -1 if its first argument is NULL"));
+        set_tag("wrong_args_handling");
     }
 }
 
