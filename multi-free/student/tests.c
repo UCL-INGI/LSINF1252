@@ -369,7 +369,11 @@ void test_init_normal_case(){
         size[3] = logs.malloc.log[begin+3].size;
         if(!containsArray(size,4,sizeof(university_t))){
             CU_FAIL();
-            push_info_msg(_("You didn't malloc the right space for the university node. You should have malloced 32 bytes since you have 4 pointers (of 8 bytes each)."));
+            push_info_msg(_("You didn't malloc the right space for the university node. You should have malloced 20 bytes since you have 2 pointers (of 8 bytes each) + an int."));
+        }
+        if(!containsArray(size,4,sizeof(person_t))){
+            
+        }
     }
 
     if(!ret){
