@@ -179,6 +179,7 @@ void test_free_success(){
     CU_ASSERT_EQUAL(stats.free.called, 4);
     if(stats.free.called != 4){
         push_info_msg(_("You did not free all the memory"));
+        set_tag("not_free");
     }
 
     int verif_u = malloced(u_c);
@@ -242,6 +243,7 @@ void test_free_rector_null(){
     CU_ASSERT_EQUAL(stats.free.called, 2);
     if(stats.free.called != 2){
         push_info_msg(_("You did not free all the memory"));
+        set_tag("not_free");
     }
 
     int verif_u = malloced(u_c);
@@ -298,9 +300,11 @@ void test_free_strings_null(){
     CU_ASSERT_EQUAL(stats.free.called,2);
     if(stats.free.called > 2){
         push_info_msg(_("Your code does not work correctly when the strings are NULL"));
+        set_tag("not_free");
     }
     if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
+        set_tag("not_free");
     }
 
     int verif_u = malloced(u_c);
