@@ -191,18 +191,28 @@ void test_free_success(){
     CU_ASSERT_EQUAL(verif_city, false);
     CU_ASSERT_EQUAL(verif_rector, false);
     CU_ASSERT_EQUAL(verif_name, false);
+    
+    int not_free = 0;
 
     if(verif_u != false){
         push_info_msg(_("You did not free the memory associated with the university"));
+        not_free++;
     }
     if(verif_city != false){
         push_info_msg(_("You did not free the memory associated with the city"));
+        not_free++;
     }
     if(verif_rector != false){
         push_info_msg(_("You did not free the memory associated with the rector"));
+        not_free++;
     }
     if(verif_name != false){
         push_info_msg(_("You did not free the memory associated with the rector's name"));
+        not_free++;
+    }
+    
+    if(not_free){
+        set_tag("not_free");
     }
 
     void *last_ptr = (void*) stats.free.last_params.ptr;
@@ -241,9 +251,13 @@ void test_free_rector_null(){
     }
 
     CU_ASSERT_EQUAL(stats.free.called, 2);
-    if(stats.free.called != 2){
+    if(stats.free.called > 3){
+        push_info_msg(_("Your function does not work correctly when the rector is NULL"));
+        set_tag("wrong_args_handling");
+    }
+    else if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
-        set_tag("not_free");
+        set_tag("wrong_args_handling");
     }
 
     int verif_u = malloced(u_c);
@@ -251,12 +265,20 @@ void test_free_rector_null(){
 
     CU_ASSERT_EQUAL(verif_u, false);
     CU_ASSERT_EQUAL(verif_city, false);
+    
+    int not_free = 0;
 
     if(verif_u != false){
         push_info_msg(_("You did not free the memory associated with the university"));
+        not_free++;
     }
     if(verif_city != false){
         push_info_msg(_("You did not free the memory associated with the city"));
+        not_free++;
+    }
+    
+    if(not_free){
+        set_tag("not_free");
     }
 
     void *last_ptr = (void*) stats.free.last_params.ptr;
@@ -300,11 +322,11 @@ void test_free_strings_null(){
     CU_ASSERT_EQUAL(stats.free.called,2);
     if(stats.free.called > 2){
         push_info_msg(_("Your code does not work correctly when the strings are NULL"));
-        set_tag("not_free");
+        set_tag("wrong_args_handling");
     }
     if(stats.free.called < 2){
         push_info_msg(_("You did not free all the memory"));
-        set_tag("not_free");
+        set_tag("wrong_args_handling");
     }
 
     int verif_u = malloced(u_c);
@@ -312,12 +334,20 @@ void test_free_strings_null(){
 
     CU_ASSERT_EQUAL(verif_u, false);
     CU_ASSERT_EQUAL(verif_rector, false);
+    
+    int not_free = 0;
 
     if(verif_u != false){
         push_info_msg(_("You did not free the memory associated with the university"));
+        not_free++;
     }
     if(verif_rector != false){
         push_info_msg(_("You did not free the memory associated with the rector"));
+        not_free++;
+    }
+    
+    if(not_free){
+        set_tag("not_free");
     }
 
     void *last_ptr = (void*) stats.free.last_params.ptr;
