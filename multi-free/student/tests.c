@@ -369,7 +369,7 @@ void test_init_normal_case(){
         size[3] = logs.malloc.log[begin+3].size;
         if(!containsArray(size,4,sizeof(university_t))){
             CU_FAIL();
-            push_info_msg(_("You didn't malloc the right space for the university node. You should have malloced 20 bytes since you have 2 pointers (of 8 bytes each) + an int."));
+            push_info_msg(_("You didn't malloc the right space for the university node. You should have malloced 20 bytes since you have 2 pointers (of 8 bytes each) + an int"));
         }
         if(!containsArray(size,4,sizeof(person_t))){
             CU_FAIL();
@@ -377,37 +377,41 @@ void test_init_normal_case(){
         }
         if(!containsArray(size,4,strlen(city)+1) || !containsArray(size,4,strlen(name)+1)){
             CU_FAIL();
-            push_info_msg(_("You didn't malloc the right space for at least one string. Maybe you forgot to allocate space for the \\\\0 character."));
+            push_info_msg(_("You didn't malloc the right space for at least one string. Maybe you forgot to allocate space for the \\\\0 character"));
+        }
+        if(containsArray(size,4,8)){
+            CU_FAIL();
+            push_info_msg(_("It seems like you allocated at least one pointer"))
         }
     }
 
     if(!ret){
         CU_FAIL();
-        push_info_msg(_("You returned a null value."));
+        push_info_msg(_("You returned a null value"));
         return;
     }
 
     if(!(ret->city)){
         CU_FAIL();
-        push_info_msg(_("You returned a NULL city."));
+        push_info_msg(_("You returned a NULL city"));
         return;
     }
 
     if(!(ret->rector)){
         CU_FAIL();
-        push_info_msg(_("You returned a NULL rector."));
+        push_info_msg(_("You returned a NULL rector"));
         return;
     }
     if(!(ret->rector)->name){
         CU_FAIL();
-        push_info_msg(_("You returned a NULL rector name."));
+        push_info_msg(_("You returned a NULL rector name"));
         return;
     }
 
     int uniCmp = uniEquals(ret,ucl);
     CU_ASSERT_EQUAL(uniCmp,true);
     if(!uniCmp)
-        push_info_msg(_("Your structure isn't the expected one."));
+        push_info_msg(_("Your structure isn't the expected one"));
     else{
         realloc(city,8);
         realloc(name,8);
@@ -428,7 +432,7 @@ void test_init_normal_case(){
         int cmpChange = uniEquals(ret,ucl);
         
         if(cmpChange){
-            push_info_msg(_("You didn't copy the strings ! You should use strcpy or copy it yourself."));
+            push_info_msg(_("You didn't copy the strings ! You should use strcpy or copy it yourself"));
             CU_FAIL();
         }
     }
@@ -480,14 +484,14 @@ void test_init_first_malloc_fails(){
 
     if(ret){
         CU_FAIL();
-        push_info_msg(_("You should return NULL in this case."));
+        push_info_msg(_("You should return NULL in this case"));
         return;
     }
     
     int notFreed = start - stats.memory.used;
     if(notFreed){
         CU_FAIL();
-        push_info_msg(_("You didn't free all the memory you allocated."));
+        push_info_msg(_("You didn't free all the memory you allocated"));
     }
 
 }
@@ -530,23 +534,23 @@ void test_init_second_malloc_fails(){
 
     CU_ASSERT_EQUAL(stats.free.called, 1);
     if(stats.free.called)
-        push_info_msg(_("You should call free once in this case."));
+        push_info_msg(_("You should call free once in this case"));
 
     CU_ASSERT_EQUAL(stats.malloc.called, 2);
     if(stats.malloc.called != 2){
-        push_info_msg(_("You should call malloc twice in this case."));
+        push_info_msg(_("You should call malloc twice in this case"));
         return;
     }
     
     int notFreed = start - stats.memory.used;
     if(notFreed){
         CU_FAIL();
-        push_info_msg(_("You didn't free all the memory you allocated."));
+        push_info_msg(_("You didn't free all the memory you allocated"));
     }
     
     if(ret){
         CU_FAIL();
-        push_info_msg(_("You should return NULL in this case."));
+        push_info_msg(_("You should return NULL in this case"));
         return;
     }
 
@@ -588,23 +592,23 @@ void test_init_third_malloc_fails(){
 
     CU_ASSERT_EQUAL(stats.free.called, 2);
     if(stats.free.called)
-        push_info_msg(_("You should call free twice in this case."));
+        push_info_msg(_("You should call free twice in this case"));
 
     CU_ASSERT_EQUAL(stats.malloc.called, 3);
     if(stats.malloc.called != 3){
-        push_info_msg(_("You should call malloc 3 times in this case."));
+        push_info_msg(_("You should call malloc 3 times in this case"));
         return;
     }
     
     int notFreed = start - stats.memory.used;
     if(notFreed){
         CU_FAIL();
-        push_info_msg(_("You didn't free all the memory you allocated."));
+        push_info_msg(_("You didn't free all the memory you allocated"));
     }
     
     if(ret){
         CU_FAIL();
-        push_info_msg(_("You should return NULL in this case."));
+        push_info_msg(_("You should return NULL in this case"));
         return;
     }
 
@@ -646,23 +650,23 @@ void test_init_fourth_malloc_fails(){
 
     CU_ASSERT_EQUAL(stats.free.called, 3);
     if(stats.free.called)
-        push_info_msg(_("You should call free twice in this case."));
+        push_info_msg(_("You should call free twice in this case"));
 
     CU_ASSERT_EQUAL(stats.malloc.called, 4);
     if(stats.malloc.called != 4){
-        push_info_msg(_("You should call malloc 4 times in this case."));
+        push_info_msg(_("You should call malloc 4 times in this case"));
         return;
     }
     
     int notFreed = start - stats.memory.used;
     if(notFreed){
         CU_FAIL();
-        push_info_msg(_("You didn't free all the memory you allocated."));
+        push_info_msg(_("You didn't free all the memory you allocated"));
     }
     
     if(ret){
         CU_FAIL();
-        push_info_msg(_("You should return NULL in this case."));
+        push_info_msg(_("You should return NULL in this case"));
         return;
     }
 
