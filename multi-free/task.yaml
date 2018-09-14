@@ -74,28 +74,28 @@ submission_limit:
     amount: -1
     period: -1
 tags:
-    '1':
+    '0':
+        name: Segmentation Fault
         type: 1
         id: sigsegv
+        visible: true
         description: ''
-        name: Segmentation Fault
+    '1':
+        type: 1
+        id: double_free
+        description: Your code produced a double free.
+        name: Double free
         visible: true
     '2':
-        name: Double free
-        id: double_free
+        name: Not compile
+        id: not_compile
         visible: true
         type: 1
-        description: Your code produced a double free.
+        description: You code does not compile.
     '3':
         visible: true
-        name: Not compile
-        type: 1
-        id: not_compile
-        description: You code does not compile.
-    '0':
         name: S3
         type: 2
-        visible: true
         description: ''
         id: ''
 weight: 1.0

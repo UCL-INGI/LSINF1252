@@ -124,13 +124,13 @@ int uniEquals(university_t* u1, university_t* u2){
 */
 
 int uniEquals(university_t* u1, university_t* u2){
-    int cmp_city = strcmp(u1->city, u2->city);
+    int cmp_city = !strcmp(u1->city, u2->city);
     int cmp_creation = u1->creation == u2->creation;
-    int cmp_rector_name = u1->rector->name == u2->rector->name;
+    int cmp_rector_name = !strcmp((u1->rector)->name,(u2->rector)->name);
     int cmp_rector_age = u1->rector->age == u2->rector->age;
     int cmp_rector_salary = u1->rector->salary == u2->rector->salary;
     
-    return !cmp_city && cmp_creation && !cmp_rector_name && cmp_rector_age && cmp_rector_salary;
+    return cmp_city && cmp_creation && cmp_rector_name && cmp_rector_age && cmp_rector_salary;
 }
 
 /*
