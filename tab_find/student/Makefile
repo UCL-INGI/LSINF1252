@@ -1,5 +1,8 @@
+# MakeFile for the tasks using Chestier
 CC=gcc
+CPP=cppcheck
 EXEC=tests
+CPPFLAGS=--error-exitcode=1
 LDFLAGS=-lcunit -lm -lpthread -ldl -rdynamic
 SRC=$(wildcard *.c) CTester/wrap_mutex.c CTester/wrap_malloc.c CTester/wrap_file.c CTester/wrap_sleep.c CTester/CTester.c CTester/trap.c
 OBJ=$(SRC:.c=.o)
@@ -27,10 +30,12 @@ compile-mo:
 	msgfmt --no-hash --output-file=po/fr/tests.mo po/fr/tests.po
 	mkdir -p fr/LC_MESSAGES/
 	cp po/fr/tests.mo fr/LC_MESSAGES/tests.mo
+    
+check: $(SRC)
+	$(CPP) $(CPPFLAGS) $<
 
 clean:
 	rm -f $(EXEC) $(OBJ)
 
 .PHONY: tests
-
 

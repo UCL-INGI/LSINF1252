@@ -1,80 +1,47 @@
 accessible: true
 author: Mathieu Xhonneux & Maxime Mawait
-context: |-
-    Pointers to functions can be used to handle functions in a dynamic fashion, and will be of great importance later in this course. It is hence important to grasp how they work.
+context: 'Pointers to functions can be used to handle functions in a dynamic fashion,
+  and will be of great importance later in this course. It is hence important to grasp
+  how they work.
 
-    In this exercise, you will code a function which receives pointers to two functions, to determine if these functions are equivalent. Two functions are considered to be equivalent if they always produce the same output for the same input.
 
-    The functions passed by pointers will be of the form ``uint8_t func(uint8_t n)``.
+  In this exercise, you will code a function which receives pointers to two functions,
+  to determine if these functions are equivalent. Two functions are considered to
+  be equivalent if they always produce the same output for the same input.
+
+
+  The functions passed by pointers will be of the form ``uint8_t func(uint8_t n)``.'
 environment: cpp
 evaluate: best
 groups: false
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S4] Comparing functions '
 network_grading: false
 order: 48
 problems:
-    cmp_func:
-        type: code
-        header: |+
-            Write the function ``cmp_func`` (prototype and body), which receives two pointers to functions (described above), and returns an ``int``, set to ``1`` if the functions are equivalent and ``0`` otherwise. Compare the two functions by testing their values for all possible ``uint8_t`` (i.e. from ``0`` to ``255``)
+  cmp_func: {header: 'Write the function ``cmp_func`` (prototype and body), which
+      receives two pointers to functions (described above), and returns an ``int``,
+      set to ``1`` if the functions are equivalent and ``0`` otherwise. Compare the
+      two functions by testing their values for all possible ``uint8_t`` (i.e. from
+      ``0`` to ``255``)
 
-        name: Compare functions
-        language: c
+
+      ', language: c, name: Compare functions, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        visible: true
-        name: Timeout
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        type: 1
-    '1':
-        type: 1
-        visible: true
-        id: sigsegv
-        name: Segmentation Fault
-        description: ''
-    '2':
-        visible: true
-        id: not_compile
-        description: You code does not compile.
-        type: 1
-        name: Not compile
-    '3':
-        visible: true
-        description: ''
-        type: 1
-        id: memory
-        name: Memory Exceeded
-    '4':
-        visible: true
-        type: 1
-        name: Floating Point Exception
-        id: sigfpe
-        description: ''
-    '5':
-        type: 1
-        name: Double free
-        description: Your code produced a double free.
-        visible: true
-        id: double_free
-    '6':
-        name: Banned functions
-        id: banned_funcs
-        type: 1
-        visible: true
-        description: You use some banned functions.
-    '7':
-        name: S4
-        visible: true
-        type: 2
-        description: ''
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S4, type: 2, visible: true}
+  '8': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

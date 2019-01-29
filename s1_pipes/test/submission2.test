@@ -1,0 +1,37 @@
+_id: 5a79ce90aff4142b31e41e73
+archive: 5b9a510a1a750b164077170e
+courseid: LSINF1252
+custom: {}
+grade: 100.0
+input:
+  '@lang': en
+  '@username': anonymous
+  file:
+    filename: newDossier.txt
+    value: !!binary |
+      IAogI2Fhcm9uCiAjYWJhY2sKICNhYmF0ZQogI2FiYm90CiAjYWJlbAogI2Fib3J0CiAjYWJvdXQK
+      ICNhY2NydWUKICNhY29ybgogI2FjdXRlCiAjYWRkaXMKICNhZWdpcwogI2FlbmVpZAogI2FmZml4
+      CiAjYWltCiAjYWluJ3QKICNhaXJtYW4KICNha2luCiAjYWxhc2thCiAjYWxiYQogI2FsZWMKICNh
+      bGVjawogI2FsZXBoCiAjYWxpYXMKICNhbGljZQogI2FsbGVuCiAjYWxsZXkKICNhbGxpcwogI2Fs
+      bG95CiAjYWxsdXJlCiAjYWx0YXIKICNhbHRlcgogI2FtCiAjYW1lbgogI2FtbWFuCiAjYW1wbGUK
+      ICNhbXJhCiAjYW5lbnQKICNhbmdpZQogI2FuZ2xlCiAjYW5ncnkKICNhbmdzdAogI2FuZ3VzCiAj
+      YW5uaWUKICNhbm5veQogI2Fub2RlCiAjYW51cwogI2FudmlsCiAjYXAKICNhcGF0aHkKICNhcQog
+      I2FyCiAjYXJjaGVyCiAjYXJlbmEKICNhcmdpdmUKICNhcmdvdAogI2FyaGF0CiAjYXJpZAogI2Fy
+      aXNlCiAjYXJsZW4KICNhcm15CiAjYXJub2xkCiAjYXJyYXkKICNhcnJvdwogI2FydGVyeQogI2Fz
+      c2F5CiAjYXNzZXQKICNhdGUKICNhdXJhbAogI2F2YWlsCiAjYXZlCiAjYXZpYXRlCiAjYXZvdwog
+      I2F3CiAjYXdhcmUKICNhd2wKICNheAogI2F4b24KICNiCiAjYmFieQogI2JhY2gKICNiYWNvbgog
+      I2JhaAogI2JhbG0KICNiYWxzYQogI2JhbmlzaAogI2JhcmZseQogI2JhcnRvbgogI2Jhc3RlCiAj
+      YmF0CiAjYmF1ZXIKICNiYXlkYQogI2JiYgogI2JiYmIKICNiZAogI2JlYWsKICNiZWNhbG0KICNi
+      ZWVjaAogI2JlZWZ5CiAjYidzCg==
+problems: {}
+response_type: rst
+result: success
+state: ''
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-02-06 16:49:36.113000
+taskid: s1_pipes
+tests: {}
+text: ''
+username: anonymous

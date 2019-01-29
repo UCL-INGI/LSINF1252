@@ -1,131 +1,61 @@
 accessible: true
 author: Nicolas Rybowski, Mathieu Xhonneux
-context: |-
-    In a C program, variables are stored in different regions in memory, depending on where the variables have been initialized. Each memory region has different properties about how the variables can be accessed, modified, ... This exercise will show you how global variables and variables on the stack are managed.
-
-    .. code-block:: c
-
-        int result;
-
-        void sum1(int a1, int b1) {
-            a1 = a1 + b1;
-        }
-
-        void main(int argc, char **argv) {
-            int a1 = 5, b1 = 6;
-
-            sum1(a1, b1);
-            printf("sum1: %d\n", a1);
-
-            int a2 = 3, b2 = 7;
-            sum2(a2, b2)
-            printf("sum2: %d\n", result);
-
-            int a3 = 1, b3 = 8;
-            sum3(&a3, &b3);
-            printf("sum3: %d\n", a3);
-        }
+context: "In a C program, variables are stored in different regions in memory, depending\
+  \ on where the variables have been initialized. Each memory region has different\
+  \ properties about how the variables can be accessed, modified, ... This exercise\
+  \ will show you how global variables and variables on the stack are managed.\n\n\
+  .. code-block:: c\n\n    int result;\n\n    void sum1(int a1, int b1) {\n      \
+  \  a1 = a1 + b1;\n    }\n\n    void main(int argc, char **argv) {\n        int a1\
+  \ = 5, b1 = 6;\n\n        sum1(a1, b1);\n        printf(\"sum1: %d\\n\", a1);\n\n\
+  \        int a2 = 3, b2 = 7;\n        sum2(a2, b2)\n        printf(\"sum2: %d\\\
+  n\", result);\n\n        int a3 = 1, b3 = 8;\n        sum3(&a3, &b3);\n        printf(\"\
+  sum3: %d\\n\", a3);\n    }"
 environment: cpp
 evaluate: best
 groups: false
-limits:
-    output: '2'
-    memory: '100'
-    time: '30'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Global and local variables'
 network_grading: false
 order: 28
 problems:
-    return1:
-        name: On the stack
-        header: |-
-            The variables which are declared inside functions are stored on the program's stack. These variables are only accessible by the function in which they were declared.
+  return1: {answer: '5', header: 'The variables which are declared inside functions
+      are stored on the program''s stack. These variables are only accessible by the
+      function in which they were declared.
 
-            Moreover, passing arguments to functions, and returning values from a function, also use the stack, and use the mechanism of passing by value. Once a variable is passed by value, a copy of its value is placed on the stack.
 
-            Consider the ``main`` function here above. What number would the first call to ``printf`` print ?
-        answer: '5'
-        type: match
-    version1:
-        type: code
-        language: c
-        header: |
-            Write the body of the function ``sum2`` which stores in the global variable ``result`` the sum of its parameters. Why does it work with a global variable ?
+      Moreover, passing arguments to functions, and returning values from a function,
+      also use the stack, and use the mechanism of passing by value. Once a variable
+      is passed by value, a copy of its value is placed on the stack.
 
-            .. code-block:: c
 
-                void sum2(int a, int b) {
-        name: Global variables
-    version2:
-        language: c
-        header: |
-            You are now asked to return the result of the sum, neither by using the ``return`` keyword, nor by using a global variables.
-
-            .. code-block:: c
-
-                /*
-                 * @post stores the sum of the values pointed by a and b in the memory pointed by r
-                 */
-                void sum3 (int *a, int *b, int *r) {
-        name: Passing by reference
-        type: code
+      Consider the ``main`` function here above. What number would the first call
+      to ``printf`` print ?', name: On the stack, type: match}
+  version1: {header: "Write the body of the function ``sum2`` which stores in the\
+      \ global variable ``result`` the sum of its parameters. Why does it work with\
+      \ a global variable ?\n\n.. code-block:: c\n\n    void sum2(int a, int b) {\n",
+    language: c, name: Global variables, type: code}
+  version2: {header: "You are now asked to return the result of the sum, neither by\
+      \ using the ``return`` keyword, nor by using a global variables.\n\n.. code-block::\
+      \ c\n\n    /*\n     * @post stores the sum of the values pointed by a and b\
+      \ in the memory pointed by r\n     */\n    void sum3 (int *a, int *b, int *r)\
+      \ {\n", language: c, name: Passing by reference, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        name: Memory Exceeded
-        type: 1
-        id: memory
-        description: ''
-        visible: true
-    '1':
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-        type: 1
-        id: timeout
-    '2':
-        type: 1
-        description: ''
-        name: Segmentation Fault
-        visible: true
-        id: sigsegv
-    '3':
-        type: 1
-        name: Not compile
-        id: not_compile
-        description: You code does not compile.
-        visible: true
-    '4':
-        visible: true
-        type: 1
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
-    '5':
-        description: Your code produced a double free.
-        type: 1
-        visible: true
-        name: Double free
-        id: double_free
-    '6':
-        description: You use some banned functions.
-        type: 1
-        name: Banned functions
-        visible: true
-        id: banned_funcs
-    '7':
-        name: S3
-        type: 2
-        visible: true
-        description: ''
-        id: ''
-    '8':
-        description: Task about pointers and their use
-        name: Pointer
-        type: 2
-        visible: true
-        id: ''
+  '0': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '1': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '2': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '3': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S3, type: 2, visible: true}
+  '8': {description: Task about pointers and their use, id: '', name: Pointer, type: 2,
+    visible: true}
+  '9': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

@@ -1,109 +1,45 @@
 accessible: false
 author: Louis Navarre & Alexandre Gobeaux
-context: |-
-    Given the following structure *university_t*:
-
-    .. code-block:: c
-
-        typedef struct university {
-            char* city;
-            int creation;
-            person_t* rector;
-        } university_t;
-
-    And the structure *person_t*:
-
-    .. code-block:: c
-
-        typedef struct person {
-            char* name;
-            int salary;
-            int age;
-        } person_t;
-
-    You are asked to implement the functions ``init_all`` and ``free_all``, which respectively initialises the structure *universiy_t* and frees all the memory associated with it.
-
-    The *name* and the *city* have been allocated with *malloc*.
-
-    *Hint:* all the data may not have been initialised correctly. Therefore, you have to handle all the cases (e.g. some pointers can be already NULL, and don't need to be freed).
+context: "Given the following structure *university_t*:\n\n.. code-block:: c\n\n \
+  \   typedef struct university {\n        char* city;\n        int creation;\n  \
+  \      person_t* rector;\n    } university_t;\n\nAnd the structure *person_t*:\n\
+  \n.. code-block:: c\n\n    typedef struct person {\n        char* name;\n      \
+  \  int salary;\n        int age;\n    } person_t;\n\nYou are asked to implement\
+  \ the functions ``init_all`` and ``free_all``, which respectively initialises the\
+  \ structure *universiy_t* and frees all the memory associated with it.\n\nThe *name*\
+  \ and the *city* have been allocated with *malloc*.\n\n*Hint:* all the data may\
+  \ not have been initialised correctly. Therefore, you have to handle all the cases\
+  \ (e.g. some pointers can be already NULL, and don't need to be freed)."
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Manipulate the memory'
 network_grading: false
 order: 31
 problems:
-    init_all:
-        name: Init all
-        default: ''
-        language: c
-        header: |-
-            Write the body of the function ``init_all``. You must copy the strings.
-
-            *Hint :* Use strcpy.
-
-            .. code-block:: c
-
-                /*
-                 * @city != NULL
-                 * @rectname != NULL
-                 * @return: a pointer to the university structure containing the elements
-                 */
-                 university_t* init_all(char* city, int creation, char* rectname, int age, int salary){
-        type: code
-    free_all:
-        name: Free all
-        type: code
-        default: ''
-        language: c
-        header: |-
-            Write the body of the function ``free_all``.
-
-            .. code-block:: c
-
-                /*
-                 * Frees all the memory associated with u
-                 * @pre: u != NULL
-                 */
-                 void free_all(university_t* u){
+  free_all: {default: '', header: "Write the body of the function ``free_all``.\n\n\
+      .. code-block:: c\n\n    /*\n     * Frees all the memory associated with u\n\
+      \     * @pre: u != NULL\n     */\n     void free_all(university_t* u){", language: c,
+    name: Free all, type: code}
+  init_all: {default: '', header: "Write the body of the function ``init_all``. You\
+      \ must copy the strings.\n\n*Hint :* Use strcpy.\n\n.. code-block:: c\n\n  \
+      \  /*\n     * @city != NULL\n     * @rectname != NULL\n     * @return: a pointer\
+      \ to the university structure containing the elements\n     */\n     university_t*\
+      \ init_all(char* city, int creation, char* rectname, int age, int salary){",
+    language: c, name: Init all, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        name: Segmentation Fault
-        type: 1
-        id: sigsegv
-        visible: true
-        description: ''
-    '1':
-        type: 1
-        id: double_free
-        description: Your code produced a double free.
-        name: Double free
-        visible: true
-    '2':
-        name: Not compile
-        id: not_compile
-        type: 1
-        description: You code does not compile.
-        visible: true
-    '3':
-        name: Not freed
-        type: 1
-        visible: true
-        id: not_free
-        description: You do not free all the memory
-    '4':
-        visible: true
-        description: ''
-        name: S3
-        type: 2
-        id: ''
+  '0': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '1': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: You do not free all the memory, id: not_free, name: Not freed,
+    type: 1, visible: true}
+  '4': {description: '', id: '', name: S3, type: 2, visible: true}
+  '5': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

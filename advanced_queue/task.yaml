@@ -1,135 +1,57 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: |-
-    You must implement the ``enqueue`` and ``dequeue`` functions of a `Queue` that is implemented as a simple circular list. This
-    `Wikipedia page <https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_ describes such a list as follows:
-
-    "With a circular list, a pointer to the last node gives easy access also to the first node, by following one link. Thus, in applications that require access to both ends of the list (e.g., in the implementation of a queue), a circular structure allows one to handle the structure by a single pointer, instead of two."
-
-
-    .. image:: https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg
-
-    Assume that the head of the queue is the leftmost node and that the tail of the queue is the rightmost node. In the previous example, the head and the tail are respectively ``12`` and ``37``. So in this case, the only pointer you can use will point to the ``37`` node.
-
-    You can use the following datastructures for this exercise:
-
-    .. code-block:: c
-
-        typedef struct node{
-          struct node* next;
-          int value;
-        } node_t;
-
-        typedef struct queue{
-          struct node* tail;
-          int size;
-        } queue_t  ;
+context: "You must implement the ``enqueue`` and ``dequeue`` functions of a `Queue`\
+  \ that is implemented as a simple circular list. This\n`Wikipedia page <https://en.wikipedia.org/wiki/Linked_list#Circularly_linked_vs._linearly_linked>`_\
+  \ describes such a list as follows:\n\n\"With a circular list, a pointer to the\
+  \ last node gives easy access also to the first node, by following one link. Thus,\
+  \ in applications that require access to both ends of the list (e.g., in the implementation\
+  \ of a queue), a circular structure allows one to handle the structure by a single\
+  \ pointer, instead of two.\"\n\n\n.. image:: https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg\n\
+  \nAssume that the head of the queue is the leftmost node and that the tail of the\
+  \ queue is the rightmost node. In the previous example, the head and the tail are\
+  \ respectively ``12`` and ``37``. So in this case, the only pointer you can use\
+  \ will point to the ``37`` node.\n\nYou can use the following datastructures for\
+  \ this exercise:\n\n.. code-block:: c\n\n    typedef struct node{\n      struct\
+  \ node* next;\n      int value;\n    } node_t;\n\n    typedef struct queue{\n  \
+  \    struct node* tail;\n      int size;\n    } queue_t  ;"
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S4] Advanced queue'
 network_grading: false
 order: 50
 problems:
-    enqueue:
-        name: Enqueue
-        type: code
-        default: ''
-        language: c
-        header: |-
-            .. code:: c
-
-                /*
-                * Add @val value at the head of the @q queue
-                *
-                * @val     : the value to enqueue
-                * @q     : the queue
-                *
-                * @return 0 if no error, -1 otherwise
-                *
-                * pre : The queue q will always be valid, you don't need to handle the NULL case.
-                */
-                int enqueue(queue_t* q, int val){
-    dequeue:
-        header: |-
-            *HINT* : Do not forget to free all the unused memory.
-
-            .. code:: c
-
-                /*
-                * Remove the node at the tail of the @q queue and return the value of this node
-                * @q         : the queue
-                * @return     : the value at the tail
-                *
-                * pre         : The given queue will always be valid, you do not need to handle the NULL case.
-                */
-                int dequeue(queue_t* q){
-        default: ''
-        name: Dequeue
-        type: code
-        language: c
+  dequeue: {default: '', header: "*HINT* : Do not forget to free all the unused memory.\n\
+      \n.. code:: c\n\n    /*\n    * Remove the node at the tail of the @q queue and\
+      \ return the value of this node\n    * @q         : the queue\n    * @return\
+      \     : the value at the tail\n    *\n    * pre         : The given queue will\
+      \ always be valid, you do not need to handle the NULL case.\n    */\n    int\
+      \ dequeue(queue_t* q){", language: c, name: Dequeue, type: code}
+  enqueue: {default: '', header: ".. code:: c\n\n    /*\n    * Add @val value at the\
+      \ head of the @q queue\n    *\n    * @val     : the value to enqueue\n    *\
+      \ @q     : the queue\n    *\n    * @return 0 if no error, -1 otherwise\n   \
+      \ *\n    * pre : The queue q will always be valid, you don't need to handle\
+      \ the NULL case.\n    */\n    int enqueue(queue_t* q, int val){", language: c,
+    name: Enqueue, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        name: Timeout
-    '1':
-        type: 1
-        visible: true
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
-    '2':
-        name: Not compile
-        description: You code does not compile.
-        id: not_compile
-        type: 1
-        visible: true
-    '3':
-        visible: true
-        name: Memory Exceeded
-        type: 1
-        id: memory
-        description: ''
-    '4':
-        visible: true
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-    '5':
-        id: double_free
-        name: Double free
-        visible: true
-        description: Your code produced a double free.
-        type: 1
-    '6':
-        name: Banned functions
-        description: You use some banned functions.
-        visible: true
-        type: 1
-        id: banned_funcs
-    '7':
-        description: Task dealing with data structures and linked list
-        type: 2
-        visible: true
-        name: Data structures
-        id: ''
-    '8':
-        visible: true
-        description: ''
-        type: 2
-        name: S4
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: Task dealing with data structures and linked list, id: '', name: Data
+      structures, type: 2, visible: true}
+  '8': {description: '', id: '', name: S4, type: 2, visible: true}
+  '9': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

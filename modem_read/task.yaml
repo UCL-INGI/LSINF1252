@@ -1,96 +1,51 @@
 accessible: true
 author: Mathieu Xhonneux & Maxime Mawait
-context: |-
-    Back in 1977, you want to read your e-mail with your freshly bought Apple II. You are connected to the ARPANET through a modem, but unfortunately the modem's manufacturer has only given a single function ``modem_read``, to read the data received by the modem, with the following prototype :
+context: 'Back in 1977, you want to read your e-mail with your freshly bought Apple
+  II. You are connected to the ARPANET through a modem, but unfortunately the modem''s
+  manufacturer has only given a single function ``modem_read``, to read the data received
+  by the modem, with the following prototype :
 
-    ``void modem_read(void *buffer, int *buf_len);``
 
-    This function fills the supplied buffer with the data received from the modem (an array of ``char``), and writes the number of bytes written to the value pointed by ``buf_len``. It can write up to maximum 256 bytes in a single call. This function is guaranteed to return.
+  ``void modem_read(void *buffer, int *buf_len);``
+
+
+  This function fills the supplied buffer with the data received from the modem (an
+  array of ``char``), and writes the number of bytes written to the value pointed
+  by ``buf_len``. It can write up to maximum 256 bytes in a single call. This function
+  is guaranteed to return.'
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    memory: '100'
-    output: '2'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Reading from the wire '
 network_grading: false
 order: 38
 problems:
-    modem:
-        header: |-
-            You want to know if the information that you received from the modem you received contains a byte whose numerical value is ``42``.
-            Write the body of the function ``has_42``, this function has to use ``malloc`` to create the buffer before calling ``modem_read``:
-
-            .. code-block:: c
-
-                /*
-                 * @return: 1 if the modem received a byte containing 42
-                 *         else 0, -1 if an error has happened.
-                 */
-                int has_42() {
-        language: c
-        type: code
-        name: '42'
-        default: ''
+  modem: {default: '', header: "You want to know if the information that you received\
+      \ from the modem you received contains a byte whose numerical value is ``42``.\n\
+      Write the body of the function ``has_42``, this function has to use ``malloc``\
+      \ to create the buffer before calling ``modem_read``:\n\n.. code-block:: c\n\
+      \n    /*\n     * @return: 1 if the modem received a byte containing 42\n   \
+      \  *         else 0, -1 if an error has happened.\n     */\n    int has_42()\
+      \ {", language: c, name: '42', type: code}
 stored_submissions: 0
-submission_limit:
-    amount: 12
-    period: 1
+submission_limit: {amount: 12, period: 1}
 tags:
-    '0':
-        id: timeout
-        type: 1
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-    '1':
-        name: Segmentation Fault
-        description: ''
-        visible: true
-        id: sigsegv
-        type: 1
-    '2':
-        id: not_compile
-        description: You code does not compile.
-        type: 1
-        visible: true
-        name: Not compile
-    '3':
-        id: memory
-        description: ''
-        visible: true
-        name: Memory Exceeded
-        type: 1
-    '4':
-        description: ''
-        id: sigfpe
-        type: 1
-        name: Floating Point Exception
-        visible: true
-    '5':
-        description: Your code produced a double free.
-        type: 1
-        id: double_free
-        name: Double free
-        visible: true
-    '6':
-        visible: true
-        name: Banned functions
-        description: You use some banned functions.
-        type: 1
-        id: banned_funcs
-    '7':
-        type: 2
-        visible: true
-        name: S3
-        description: ''
-        id: ''
-    '8':
-        description: Task about pointers and their use
-        name: Pointer
-        visible: true
-        type: 2
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S3, type: 2, visible: true}
+  '8': {description: Task about pointers and their use, id: '', name: Pointer, type: 2,
+    visible: true}
+  '9': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

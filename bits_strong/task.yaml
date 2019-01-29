@@ -1,98 +1,65 @@
 accessible: true
 author: Arthur van Stratum
-context: |-
-    In this exercise, we will work with operation on bits. When we speak about the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest order bit, ...
+context: 'In this exercise, we will work with operation on bits. When we speak about
+  the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest
+  order bit, ...
 
-    In C source code, you can write a number in binary (base 2) by prefixing it via 0b., e.g. 0b11010 = 26.
 
-    This exercise will introduce some non-standard data types which guarantee that the variable has a fixed number of bits. Indeed, on some machines, a *int* could use 2, 4 or 8 bytes. Hence, if we want to perform bitwise operations, we have to know first on how many bits we are working.
+  In C source code, you can write a number in binary (base 2) by prefixing it via
+  0b., e.g. 0b11010 = 26.
 
-    For this, C introduces a new class of variable types :
 
-    - *int8_t* (signed integer of 8 bits)
-    - *uint8_t* (unsigned integer of 8 bits)
-    - *uint16_t* (unsigned integer of 16 bits)
+  This exercise will introduce some non-standard data types which guarantee that the
+  variable has a fixed number of bits. Indeed, on some machines, a *int* could use
+  2, 4 or 8 bytes. Hence, if we want to perform bitwise operations, we have to know
+  first on how many bits we are working.
 
-    You can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). These types are defined in <stdint.h>
+
+  For this, C introduces a new class of variable types :
+
+
+  - *int8_t* (signed integer of 8 bits)
+
+  - *uint8_t* (unsigned integer of 8 bits)
+
+  - *uint16_t* (unsigned integer of 16 bits)
+
+
+  You can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). These types are
+  defined in <stdint.h>'
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    output: '2'
-    memory: '100'
-    time: '30'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S2] Bitwise operation: resetting the highest order bit '
 network_grading: false
 order: 24
 problems:
-    q1:
-        type: code
-        header: |-
-            Write the body of a function ``reset_highestorder_bit``, which sets to ``0`` the highest bit set to ``1`` it founds, and does nothing if there's no bit set to ``0``.
-
-            For example, with bytes, ``reset_highestorder_bit(0b000111010101010)`` would return ``0b000011010101010`` and
-            ``reset_highestorder_bit(0b100111010101010)`` would return ``0b000111010101010``
-
-            To write this function, you first need to determine the position of the highest order bit that is set to ``1`` and the reset its value.
-
-            .. code-block:: c
-
-                #include <stdint.h>
-                uint32_t reset_highestorder_strong_bit(uint32_t x) {
-        name: ''
-        language: c
+  q1: {header: "Write the body of a function ``reset_highestorder_bit``, which sets\
+      \ to ``0`` the highest bit set to ``1`` it founds, and does nothing if there's\
+      \ no bit set to ``0``.\n\nFor example, with bytes, ``reset_highestorder_bit(0b000111010101010)``\
+      \ would return ``0b000011010101010`` and\n``reset_highestorder_bit(0b100111010101010)``\
+      \ would return ``0b000111010101010``\n\nTo write this function, you first need\
+      \ to determine the position of the highest order bit that is set to ``1`` and\
+      \ the reset its value.\n\n.. code-block:: c\n\n    #include <stdint.h>\n   \
+      \ uint32_t reset_highestorder_strong_bit(uint32_t x) {", language: c, name: '',
+    type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        type: 1
-        visible: true
-        name: Timeout
-    '1':
-        visible: true
-        description: ''
-        id: sigsegv
-        type: 1
-        name: Segmentation Fault
-    '2':
-        description: You code does not compile.
-        name: Not compile
-        id: not_compile
-        type: 1
-        visible: true
-    '3':
-        visible: true
-        name: Memory Exceeded
-        id: memory
-        type: 1
-        description: ''
-    '4':
-        id: sigfpe
-        description: ''
-        visible: true
-        type: 1
-        name: Floating Point Exception
-    '5':
-        type: 1
-        id: double_free
-        description: Your code produced a double free.
-        name: Double free
-        visible: true
-    '6':
-        description: You use some banned functions.
-        id: banned_funcs
-        visible: true
-        type: 1
-        name: Banned functions
-    '7':
-        description: ''
-        name: S2
-        visible: true
-        type: 2
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S2, type: 2, visible: true}
+  '8': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

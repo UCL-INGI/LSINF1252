@@ -24,8 +24,18 @@ if p.returncode:
     feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
     exit(0)
 else:
-    feedback.set_global_result("success")
-    feedback.set_global_feedback("- Votre code compile.\n")
+    # Cppcheck
+    p = subprocess.Popen(shlex.split("make check"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    cppcheck_output = p.communicate()[0].decode('utf-8')
+    if p.returncode:
+        feedback.set_tag("cppcheck", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code avec ``cppcheck`` a échoué. Voici le message de sortie de la commande ``make check`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', cppcheck_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
 
 # Parse banned functions
 try:
@@ -52,8 +62,8 @@ LANG = input.get_input('@lang')
 
 # Run the code in a parallel container
 p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-p.communicate()
-
+o, e = p.communicate()
+print(o.decode("utf-8"))
 # If run failed, exit with "failed" result
 if p.returncode:
     feedback.set_global_result("failed")

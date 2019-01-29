@@ -1,0 +1,35 @@
+_id: 5aaecd4daff4146437ca45e0
+archive: 5aaecd4eaff4146437ca45e1
+courseid: LSINF1252
+custom: {}
+grade: 0.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  insert: "struct node *new;\nnew=malloc(sizeof(struct node));\nif(new==NULL)\n  \
+    \  return -1;\nnew->val=val;\nif((*head)==NULL){\n    *head=new;\n    new->next=NULL;\n\
+    \    return 0;\n}\nif((*cmp)(val,(*head)->val)<0){\n    new->next=(*head);\n \
+    \   (*head)=new;\n    return 0;\n}\nstruct node *current=*head;\nwhile((current->next->val)!=NULL){\n\
+    \    if(current->next->val<0){\n        new->next=current->next;\n        current->next=new;\n\
+    \        return 0;\n    }\n    current=current->next;\n}\nif(current->next==NULL){\n\
+    \    new->next=NULL;\n    current->next=new;\n    return 0;\n}\nreturn 0;"
+  order_relation: return a-b;
+problems: {}
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-03-18 21:34:21.132000
+taskid: order_relation_linked_list
+tests: {not_compile: true}
+text: "La compilation de votre code a \xE9chou\xE9. Voici le message de sortie de\
+  \ la commande ``make`` :\n\n.. code-block::\n\n    gcc -Wall -Werror -DC99 -std=gnu99\
+  \ -ICTester -c -o tests.o tests.c\n    gcc -Wall -Werror -DC99 -std=gnu99 -ICTester\
+  \ -c -o student_code.o student_code.c\n    student_code.c: In function \u2018insert\u2019\
+  :\n    student_code.c:26:27: error: comparison between pointer and integer [-Werror]\n\
+  \     while((current->next->val)!=NULL){\n                               ^\n   \
+  \ cc1: all warnings being treated as errors\n    make: *** [student_code.o] Error\
+  \ 1\n\n"
+username: anonymous

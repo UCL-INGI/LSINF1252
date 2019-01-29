@@ -1,117 +1,51 @@
 accessible: true
 author: Maxime Mawait
-context: |-
-    A hacker wanted to challenge you and encrypted your hard drive. To unlock your drive, he gave you a function ``get_key(int a, char b, int c)`` which returns the decryption key if the correct parameters are given.
+context: 'A hacker wanted to challenge you and encrypted your hard drive. To unlock
+  your drive, he gave you a function ``get_key(int a, char b, int c)`` which returns
+  the decryption key if the correct parameters are given.
 
-    He then hid the parameters *a*, *b* and *c* in memory, and gave you a pointer from which you can retrieve these parameters.
+
+  He then hid the parameters *a*, *b* and *c* in memory, and gave you a pointer from
+  which you can retrieve these parameters.'
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    memory: '100'
-    output: '2'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Pointer arithmetic '
 network_grading: false
 order: 35
 problems:
-    first:
-        default: ''
-        name: First argument
-        header: |-
-            You found a hint from the hacker, telling the first parameter is  located at the 12th byte after *ptr*. An int is guaranteed to be 4 bytes long.
-
-            Write the body of the function *first* which returns the integer at that position in memory.
-
-            .. code-block:: c
-
-                int first(void *ptr) {
-        type: code
-        language: c
-    second:
-        header: |-
-            The second parameter is a char located 6 bytes after *ptr*.
-
-            Write the body of the function *second* which returns the char at that position in memory.
-
-            .. code-block:: c
-
-                char second(void *ptr) {
-        type: code
-        name: Second argument
-        language: c
-        default: ''
-    third:
-        type: code
-        header: |-
-            The third parameter is an int located 45 bytes after *ptr*.
-
-            Write the body of the function *third* which returns the int at that position in memory.
-
-            .. code-block:: c
-
-                int third(void *ptr) {
-        language: c
-        default: ''
-        name: Third argument
+  first: {default: '', header: "You found a hint from the hacker, telling the first\
+      \ parameter is  located at the 12th byte after *ptr*. An int is guaranteed to\
+      \ be 4 bytes long.\n\nWrite the body of the function *first* which returns the\
+      \ integer at that position in memory.\n\n.. code-block:: c\n\n    int first(void\
+      \ *ptr) {", language: c, name: First argument, type: code}
+  second: {default: '', header: "The second parameter is a char located 6 bytes after\
+      \ *ptr*.\n\nWrite the body of the function *second* which returns the char at\
+      \ that position in memory.\n\n.. code-block:: c\n\n    char second(void *ptr)\
+      \ {", language: c, name: Second argument, type: code}
+  third: {default: '', header: "The third parameter is an int located 45 bytes after\
+      \ *ptr*.\n\nWrite the body of the function *third* which returns the int at\
+      \ that position in memory.\n\n.. code-block:: c\n\n    int third(void *ptr)\
+      \ {", language: c, name: Third argument, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        type: 1
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-        name: Timeout
-    '1':
-        visible: true
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
-        type: 1
-    '2':
-        name: Not compile
-        id: not_compile
-        description: You code does not compile.
-        visible: true
-        type: 1
-    '3':
-        name: Memory Exceeded
-        type: 1
-        id: memory
-        description: ''
-        visible: true
-    '4':
-        visible: true
-        description: ''
-        name: Floating Point Exception
-        type: 1
-        id: sigfpe
-    '5':
-        id: double_free
-        name: Double free
-        visible: true
-        type: 1
-        description: Your code produced a double free.
-    '6':
-        visible: true
-        id: banned_funcs
-        name: Banned functions
-        type: 1
-        description: You use some banned functions.
-    '7':
-        type: 2
-        name: Pointer
-        description: Task about pointers and their use
-        visible: true
-        id: ''
-    '8':
-        description: ''
-        name: S3
-        type: 2
-        visible: true
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: Task about pointers and their use, id: '', name: Pointer, type: 2,
+    visible: true}
+  '8': {description: '', id: '', name: S3, type: 2, visible: true}
+  '9': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

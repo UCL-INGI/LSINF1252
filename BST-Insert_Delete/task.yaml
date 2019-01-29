@@ -1,108 +1,68 @@
 accessible: true
 author: Alexandre Gobeaux
-context: |-
-    To help you study your english course, you've got the wonderful idea of creating a Binary Search Tree (BST). This will also help you to study for the LSINF1252 course! The key of each node will be the english word and the value will be the french word corresponding. Those are represented using an array of char.
-    So let's define our 2 structures :
-
-    .. code-block:: c
-
-        typedef struct bt {
-            struct node *root;
-        } bt_t;
-
-        typedef struct node {
-            char *enWord;
-            char *frWord;
-            struct node *left;
-            struct node *right;
-        } node_t;
-
-    **What is a Binary Search Tree (BST) ?**
-
-    A Binary Search Tree is a tree for which every node has a special property : the subtree defined by node.left only contains keys(enWord) lower than the node's key. Similarly, the subtree defined by node.right only contains keys higher than the node's key. This is helpful when searching for a specific key in the data structure.
-
-    TODO : SCHEME NEEDED + EXPLAIN WHICH NODE IS THE ROOT.
-    + CHANGE THE CODE : word -> enWord, definition -> frWord.
-
-    **Your mission**
-
-    Your mission will be to implement the **insert** and the **delete** functions.
-
-    - **Insert** function :
-
-    For each node we know this : every key (*enWord*) in the node.left subpart is lower than the key of the node. Similarly, every key (*enWord*) in the node.right subpart is lower than the key of the node. We use the alphabetical order to check if one word is lower or higher than another one.
-
-    - **Delete** function :
-
-    Deleting a node in a tree like that might not be easy ! That's why I'll explain you how to proceed (you'll have to use this procedure in order to get the points).
-    If the node we want to delete has 0 or only 1 child, it's quite easy, we only have to replace this node by his child (if there is one).
-    When it comes to a node which has two children, it's harder. We first have to find the right subtree's leftmost child. In the example, if we want to suppress *XXX*, the leftmost node of the right subpart is *YYY*. Then, we can move *YYY* to *XXX* and replace *YYY* by his child (if it has one).
-
-    SCHEME NEEDED for XXX and YYY.
-
-    *Hints :*
-
-    - ``char *enWord`` and ``char *frWord`` are pointers, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the strings in the tree.
-
-    - Other useful commands: `strcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcpy.3.html>`_, `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_ and `strcmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcmp.3.html>`_.
-
-    - Do not forget to free **all** the allocated space deleting an element.
+context: "To help you study your english course, you've got the wonderful idea of\
+  \ creating a Binary Search Tree (BST). This will also help you to study for the\
+  \ LSINF1252 course! The key of each node will be the english word and the value\
+  \ will be the french word corresponding. Those are represented using an array of\
+  \ char.\nSo let's define our 2 structures :\n\n.. code-block:: c\n\n    typedef\
+  \ struct bt {\n        struct node *root;\n    } bt_t;\n\n    typedef struct node\
+  \ {\n        char *enWord;\n        char *frWord;\n        struct node *left;\n\
+  \        struct node *right;\n    } node_t;\n\n**What is a Binary Search Tree (BST)\
+  \ ?**\n\nA Binary Search Tree is a tree for which every node has a special property\
+  \ : the subtree defined by node.left only contains keys(enWord) lower than the node's\
+  \ key. Similarly, the subtree defined by node.right only contains keys higher than\
+  \ the node's key. This is helpful when searching for a specific key in the data\
+  \ structure.\n\nTODO : SCHEME NEEDED + EXPLAIN WHICH NODE IS THE ROOT.\n+ CHANGE\
+  \ THE CODE : word -> enWord, definition -> frWord.\n\n**Your mission**\n\nYour mission\
+  \ will be to implement the **insert** and the **delete** functions.\n\n- **Insert**\
+  \ function :\n\nFor each node we know this : every key (*enWord*) in the node.left\
+  \ subpart is lower than the key of the node. Similarly, every key (*enWord*) in\
+  \ the node.right subpart is lower than the key of the node. We use the alphabetical\
+  \ order to check if one word is lower or higher than another one.\n\n- **Delete**\
+  \ function :\n\nDeleting a node in a tree like that might not be easy ! That's why\
+  \ I'll explain you how to proceed (you'll have to use this procedure in order to\
+  \ get the points).\nIf the node we want to delete has 0 or only 1 child, it's quite\
+  \ easy, we only have to replace this node by his child (if there is one).\nWhen\
+  \ it comes to a node which has two children, it's harder. We first have to find\
+  \ the right subtree's leftmost child. In the example, if we want to suppress *XXX*,\
+  \ the leftmost node of the right subpart is *YYY*. Then, we can move *YYY* to *XXX*\
+  \ and replace *YYY* by his child (if it has one).\n\nSCHEME NEEDED for XXX and YYY.\n\
+  \n*Hints :*\n\n- ``char *enWord`` and ``char *frWord`` are pointers, memory must\
+  \ be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_\
+  \ to copy the strings in the tree.\n\n- Other useful commands: `strcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcpy.3.html>`_,\
+  \ `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_\
+  \ and `strcmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcmp.3.html>`_.\n\
+  \n- Do not forget to free **all** the allocated space deleting an element."
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    output: '2'
-    time: '30'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: 'BST : Insert and Delete'
 network_grading: false
 order: 0
 problems:
-    insert:
-        language: c
-        header: |-
-            Write the body of the ``insert`` function. If you use subfonctions, write them in the box below with their signature and body.
-
-            .. code-block:: c
-
-                /*
-                 * @bt: the binary tree, bt != NULL
-                 * @enWord: the key of the new node, enWord != NULL
-                 * @frWord: the value of the new node, frWord != NULL
-                 * @return: 1 if the new node was inserted, 0 otherwise
-                 */
-                int insert(bt_t* bt, char* enWord, char* frWord);
-        default: ''
-        name: Insert function
-        type: code
-    other:
-        default: ''
-        name: Subfunctions
-        header: You can write your needed subfunctions here. Don't forget to write
-            their signature and body.
-        type: code
-        language: c
-        optional: 'on'
-    delete:
-        header: |-
-            Write the body of the ``delete`` function. Using another fonction already written above would be helpful. We assume that each key (enWord) is unique. Delete the node using the technique explained in the problem statement.
-            **Note :** You can write subfonctions (if needed) at the same place as for the *insert* function.
-
-            .. code-block:: c
-
-                /*
-                 * @bt: the binary tree, bt != NULL
-                 * @enWord: the key of the node you want to delete, enWord != NULL
-                 */
-                void delete(bt_t* bt, char* enWord);
-        default: ''
-        language: c
-        type: code
-        name: Delete function
+  delete: {default: '', header: "Write the body of the ``delete`` function. Using\
+      \ another fonction already written above would be helpful. We assume that each\
+      \ key (enWord) is unique. Delete the node using the technique explained in the\
+      \ problem statement.\n**Note :** You can write subfonctions (if needed) at the\
+      \ same place as for the *insert* function.\n\n.. code-block:: c\n\n    /*\n\
+      \     * @bt: the binary tree, bt != NULL\n     * @enWord: the key of the node\
+      \ you want to delete, enWord != NULL\n     */\n    void delete(bt_t* bt, char*\
+      \ enWord);", language: c, name: Delete function, type: code}
+  insert: {default: '', header: "Write the body of the ``insert`` function. If you\
+      \ use subfonctions, write them in the box below with their signature and body.\n\
+      \n.. code-block:: c\n\n    /*\n     * @bt: the binary tree, bt != NULL\n   \
+      \  * @enWord: the key of the new node, enWord != NULL\n     * @frWord: the value\
+      \ of the new node, frWord != NULL\n     * @return: 1 if the new node was inserted,\
+      \ 0 otherwise\n     */\n    int insert(bt_t* bt, char* enWord, char* frWord);",
+    language: c, name: Insert function, type: code}
+  other: {default: '', header: You can write your needed subfunctions here. Don't
+      forget to write their signature and body., language: c, name: Subfunctions,
+    optional: 'on', type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
-tags: {}
+submission_limit: {amount: -1, period: -1}
+tags:
+  '1': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

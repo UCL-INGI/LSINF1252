@@ -1,0 +1,35 @@
+_id: 5c52fd9b6779dd1104dbce26
+archive: null
+courseid: LSINF1252
+custom: {}
+grade: 100.0
+input:
+    '@lang': en
+    '@random': []
+    '@state': ''
+    '@username': mawait
+    CU_UNREFERENCED_PARAMETER_pTest: '652'
+    CU_trim_left: Util.h
+    assert: '349'
+problems:
+    CU_UNREFERENCED_PARAMETER_pTest:
+    - success
+    - Correct answer
+    CU_trim_left:
+    - success
+    - Correct answer
+    assert:
+    - success
+    - Correct answer
+response_type: rst
+result: success
+state: ''
+status: done
+stderr: null
+stdout: null
+submitted_on: 2019-01-31 13:52:27.051000
+taskid: s1_grep
+tests: {}
+text: ''
+username:
+- mawait

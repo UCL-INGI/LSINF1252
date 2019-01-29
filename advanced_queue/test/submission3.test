@@ -1,0 +1,33 @@
+_id: 5b16ba6faff414647d256902
+archive: 5b16ba71aff414647d256903
+courseid: LSINF1252
+custom: {}
+grade: 0.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "int v = q->tail->value;\nwhile(runner->next!=q->tail){\n    runner=runner->next;\n\
+    }\n\nrunner=q->tail->next;\nq->tail=runner;\nq->size=q->size-1;\nfree(runner);\n\
+    return v;\n"
+  enqueue: "node_t *new =(node_t *)malloc(sizeof(node_t));\nif(new==NULL){\n    return\
+    \ -1;\n}\nnew->value=val;\nnew->next = q->tail->next;\nq->tail->next = new;\n\
+    q->tail = new;\n(q->size)++;\nreturn 0;"
+problems: {}
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-06-05 18:29:35.534000
+taskid: advanced_queue
+tests: {not_compile: true}
+text: "La compilation de votre code a \xE9chou\xE9. Voici le message de sortie de\
+  \ la commande ``make`` :\n\n.. code-block::\n\n    gcc -Wall -Werror -DC99 -std=gnu99\
+  \ -ICTester -c -o tests.o tests.c\n    gcc -Wall -Werror -DC99 -std=gnu99 -ICTester\
+  \ -c -o student_code.o student_code.c\n    student_code.c: In function \u2018dequeue\u2019\
+  :\n    student_code.c:20:7: error: \u2018runner\u2019 undeclared (first use in this\
+  \ function)\n     while(runner->next!=q->tail){\n           ^\n    student_code.c:20:7:\
+  \ note: each undeclared identifier is reported only once for each function it appears\
+  \ in\n    make: *** [student_code.o] Error 1\n\n"
+username: anonymous

@@ -1,169 +1,75 @@
 accessible: true
 author: Olivier Martin
-context: |-
-    *Estimated time: 30 minutes*
+context: '*Estimated time: 30 minutes*
 
-    Given a file containing a large array of integers, you have to write a function to edit the element at a given index the array and another function to retrieve a specific element from this array.
 
-    Since the array is huge, you cannot load it completely in memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek(2)``.
+  Given a file containing a large array of integers, you have to write a function
+  to edit the element at a given index the array and another function to retrieve
+  a specific element from this array.
 
-    You may want to use ``fstat(2)`` to obtain informations about a given file.
 
-    Use only ``open(2)``, ``read(2)``, ``write(2)``, ``close(2)`` and ``lseek(2)``.
+  Since the array is huge, you cannot load it completely in memory. Consequently,
+  you have to naviguate directly through the array in the file by using ``lseek(2)``.
+
+
+  You may want to use ``fstat(2)`` to obtain informations about a given file.
+
+
+  Use only ``open(2)``, ``read(2)``, ``write(2)``, ``close(2)`` and ``lseek(2)``.'
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    memory: '50'
-    time: '30'
-    output: '2'
+limits: {memory: '50', output: '2', time: '30'}
 name: '[S5] Get and set on array stored in binary file '
 network_grading: false
 order: 54
 problems:
-    q1:
-        type: code
-        name: Retrieve the element at a given index
-        header: |-
-            .. code-block:: c
-
-                /*
-                 * @pre filename != NULL, index >= 0
-                 * @post return the integer at the index {index}
-                 *       of the array in the file {filename}.
-                 *       return -1 in case of error.
-                 *       return -2 if index >= length of array.
-                 */
-                int get(char *filename, int index) {
-        default: ''
-        language: c
-    q2:
-        type: code
-        language: c
-        header: |-
-            .. code-block:: c
-
-                /*
-                 * @pre filename != NULL, index >= 0
-                 * @post set the element in the file {filename}
-                 *       at index {index} at value {value}.
-                 *       do nothing in case of errors
-                 */
-                void set(char *filename, int index, int value) {
-        default: ''
-        name: Change the value at a given index
+  q1: {default: '', header: ".. code-block:: c\n\n    /*\n     * @pre filename !=\
+      \ NULL, index >= 0\n     * @post return the integer at the index {index}\n \
+      \    *       of the array in the file {filename}.\n     *       return -1 in\
+      \ case of error.\n     *       return -2 if index >= length of array.\n    \
+      \ */\n    int get(char *filename, int index) {", language: c, name: Retrieve
+      the element at a given index, type: code}
+  q2: {default: '', header: ".. code-block:: c\n\n    /*\n     * @pre filename !=\
+      \ NULL, index >= 0\n     * @post set the element in the file {filename}\n  \
+      \   *       at index {index} at value {value}.\n     *       do nothing in case\
+      \ of errors\n     */\n    void set(char *filename, int index, int value) {",
+    language: c, name: Change the value at a given index, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        visible: true
-        type: 0
-        description: This tag validate that your close are correctly performed.
-        name: Close
-        id: close
-    '1':
-        type: 0
-        name: Open
-        visible: true
-        id: open
-        description: This tag validate you are able to open a file.
-    '10':
-        visible: true
-        id: sigfpe
-        name: Floating Point Exception
-        description: ''
-        type: 1
-    '11':
-        visible: true
-        description: ''
-        name: Memory Exceeded
-        id: memory
-        type: 1
-    '12':
-        description: You code do not compile.
-        visible: true
-        id: not_compile
-        type: 1
-        name: Not compile
-    '13':
-        id: original_modif
-        type: 1
-        name: Original file modified
-        description: You have modified the original file.
-        visible: true
-    '14':
-        id: wrong_set_value
-        description: The value written in the file has not the correct value.
-        name: Wrong Set Value
-        type: 1
-        visible: true
-    '15':
-        visible: true
-        description: A value at an unwanted index was modified.
-        type: 1
-        id: wrong_index_set
-        name: Wrong Index Set
-    '2':
-        id: wrong_get_value_returned
-        visible: true
-        type: 1
-        name: Wrong Get Value Returned
-        description: The get() function did not return the expected value.
-    '3':
-        type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-        id: timeout
-    '4':
-        description: You try to read outside of the array.
-        name: Out of bounds
-        id: oob
-        visible: true
-        type: 1
-    '5':
-        id: too_many_op
-        name: Too many read/write
-        description: You call the read or write function more than necessary.
-        visible: true
-        type: 1
-    '6':
-        name: Segmentation Fault
-        id: sigsegv
-        description: ''
-        type: 1
-        visible: true
-    '7':
-        id: banned_funcs
-        type: 1
-        name: Banned functions
-        visible: true
-        description: You use some banned functions.
-    '8':
-        name: Double free
-        type: 1
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
-    '9':
-        id: failure_handling
-        type: 1
-        description: You do not manage failures properly.
-        name: Failure handling
-        visible: true
-    '16':
-        description: ''
-        visible: true
-        name: File
-        type: 2
-        id: ''
-    '17':
-        description: ''
-        name: S5
-        visible: true
-        type: 2
-        id: ''
+  '0': {description: This tag validate that your close are correctly performed., id: close,
+    name: Close, type: 0, visible: true}
+  '1': {description: This tag validate you are able to open a file., id: open, name: Open,
+    type: 0, visible: true}
+  '10': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '11': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '12': {description: You code do not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '13': {description: You have modified the original file., id: original_modif, name: Original
+      file modified, type: 1, visible: true}
+  '14': {description: The value written in the file has not the correct value., id: wrong_set_value,
+    name: Wrong Set Value, type: 1, visible: true}
+  '15': {description: A value at an unwanted index was modified., id: wrong_index_set,
+    name: Wrong Index Set, type: 1, visible: true}
+  '16': {description: '', id: '', name: File, type: 2, visible: true}
+  '17': {description: '', id: '', name: S5, type: 2, visible: true}
+  '18': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '2': {description: The get() function did not return the expected value., id: wrong_get_value_returned,
+    name: Wrong Get Value Returned, type: 1, visible: true}
+  '3': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '4': {description: You try to read outside of the array., id: oob, name: Out of
+      bounds, type: 1, visible: true}
+  '5': {description: You call the read or write function more than necessary., id: too_many_op,
+    name: Too many read/write, type: 1, visible: true}
+  '6': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '7': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '8': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '9': {description: You do not manage failures properly., id: failure_handling, name: Failure
+      handling, type: 1, visible: true}
 weight: 1.0

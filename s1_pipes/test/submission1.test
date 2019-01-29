@@ -1,0 +1,36 @@
+_id: 5a7c2426aff4143aa2fa2e03
+archive: 5a7c2428aff4143aa2fa2e06
+courseid: LSINF1252
+custom: {}
+grade: 0.0
+input:
+  '@lang': en
+  '@username': anonymous
+  file:
+    filename: file.txt
+    value: !!binary |
+      ICNhYXJvbgogI2FiYWNrCiAjYWJhdGUKICNhYmJvdAogI2FiZWwKICNhYm9ydAogI2Fib3V0CiAj
+      YWNjcnVlCiAjYWNvcm4KICNhY3V0ZQogI2FkZGlzCiAjYWVnaXMKICNhZW5laWQKICNhZmZpeAog
+      I2FpbQogI2Fpbid0CiAjYWlybWFuCiAjYWtpbgogI2FsYXNrYQogI2FsYmEKICNhbGVjCiAjYWxl
+      Y2sKICNhbGVwaAogI2FsaWFzCiAjYWxpY2UKICNhbGxlbgogI2FsbGV5CiAjYWxsaXMKICNhbGxv
+      eQogI2FsbHVyZQogI2FsdGFyCiAjYWx0ZXIKICNhbQogI2FtZW4KICNhbW1hbgogI2FtcGxlCiAj
+      YW1yYQogI2FuZW50CiAjYW5naWUKICNhbmdsZQogI2FuZ3J5CiAjYW5nc3QKICNhbmd1cwogI2Fu
+      bmllCiAjYW5ub3kKICNhbm9kZQogI2FudXMKICNhbnZpbAogI2FwCiAjYXBhdGh5CiAjYXEKICNh
+      cgogI2FyY2hlcgogI2FyZW5hCiAjYXJnaXZlCiAjYXJnb3QKICNhcmhhdAogI2FyaWQKICNhcmlz
+      ZQogI2FybGVuCiAjYXJteQogI2Fybm9sZAogI2FycmF5CiAjYXJyb3cKICNhcnRlcnkKICNhc3Nh
+      eQogI2Fzc2V0CiAjYXRlCiAjYXVyYWwKICNhdmFpbAogI2F2ZQogI2F2aWF0ZQogI2F2b3cKICNh
+      dwogI2F3YXJlCiAjYXdsCiAjYXgKICNheG9uCiAjYgogI2IncwogI2JhYnkKICNiYWNoCiAjYmFj
+      b24KICNiYWgKICNiYWxtCiAjYmFsc2EKICNiYW5pc2gKICNiYXJmbHkKICNiYXJ0b24KICNiYXN0
+      ZQogI2JhdAogI2JhdWVyCiAjYmF5ZGEKICNiYmIKICNiYmJiCiAjYmQKICNiZWFrCiAjYmVjYWxt
+      CiAjYmVlY2gKICNiZWVmeQo=
+problems: {}
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-02-08 11:19:18.505000
+taskid: s1_pipes
+tests: {}
+text: You have to do this exercise on Linux!
+username: anonymous

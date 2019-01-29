@@ -1,115 +1,49 @@
 accessible: true
 author: Mathieu Xhonneux, Nicolas Rybowski
-context: |-
-    You have a linked list. Each element of the list is a ``struct node``.
-
-    .. code-block:: c
-
-        struct node {
-            struct node *next;
-            int hash;
-            int id;
-            char name[20];
-            char buffer[100];
-            unsigned int timestamp;
-            char acl;
-            short flow;
-            char *parent;
-            void *fifo;
-        };
+context: "You have a linked list. Each element of the list is a ``struct node``.\n\
+  \n.. code-block:: c\n\n    struct node {\n        struct node *next;\n        int\
+  \ hash;\n        int id;\n        char name[20];\n        char buffer[100];\n  \
+  \      unsigned int timestamp;\n        char acl;\n        short flow;\n       \
+  \ char *parent;\n        void *fifo;\n    };"
 environment: pyjavacpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S4] Filtering a linked list '
 network_grading: false
 order: 49
 problems:
-    includes:
-        default: ''
-        name: Includes
-        header: 'Please insert here the ``#include`` that are required to use the
-            functions that you use to answer this question. These includes are specified
-            in the man pages of the functions that you use. '
-        type: code
-        language: ''
-    filter:
-        name: Filtering
-        type: code
-        language: c
-        default: ''
-        header: |-
-            We want to filter this list and extract the elements with an even index (the index starts at 0, hence the first, the third, the fifth, ... elements of the linked list have to be taken), without modifying the initial list.
-
-            Write the body of the function ``pair_filter``.
-
-            Hint : You should use `memcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/memcpy.3.html>`_ for this question
-
-            .. code-block:: c
-
-                /* pair_filter
-                 * Make a copy of the linked list starting at head,
-                 * only taking the elements with an even index
-                 *
-                 * @head : head of a linked list, possibly NULL
-                 * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
-                 */
-                struct node *pair_filter(struct node *head) {
+  filter: {default: '', header: "We want to filter this list and extract the elements\
+      \ with an even index (the index starts at 0, hence the first, the third, the\
+      \ fifth, ... elements of the linked list have to be taken), without modifying\
+      \ the initial list.\n\nWrite the body of the function ``pair_filter``.\n\nHint\
+      \ : You should use `memcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/memcpy.3.html>`_\
+      \ for this question\n\n.. code-block:: c\n\n    /* pair_filter\n     * Make\
+      \ a copy of the linked list starting at head,\n     * only taking the elements\
+      \ with an even index\n     *\n     * @head : head of a linked list, possibly\
+      \ NULL\n     * @return: pointer to the filtered linked list, return NULL if\
+      \ error or if head == NULL\n     */\n    struct node *pair_filter(struct node\
+      \ *head) {", language: c, name: Filtering, type: code}
+  includes: {default: '', header: 'Please insert here the ``#include`` that are required
+      to use the functions that you use to answer this question. These includes are
+      specified in the man pages of the functions that you use. ', language: '', name: Includes,
+    type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        name: Timeout
-    '1':
-        id: sigsegv
-        type: 1
-        description: ''
-        name: Segmentation Fault
-        visible: true
-    '2':
-        name: Not compile
-        description: You code does not compile.
-        id: not_compile
-        type: 1
-        visible: true
-    '3':
-        visible: true
-        name: Memory Exceeded
-        type: 1
-        id: memory
-        description: ''
-    '4':
-        visible: true
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-    '5':
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
-        type: 1
-        name: Double free
-    '6':
-        name: Banned functions
-        description: You use some banned functions.
-        type: 1
-        visible: true
-        id: banned_funcs
-    '7':
-        visible: true
-        description: ''
-        type: 2
-        name: S4
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S4, type: 2, visible: true}
+  '8': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

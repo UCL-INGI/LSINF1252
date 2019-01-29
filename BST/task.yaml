@@ -1,125 +1,49 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: |
-    For this task, you will implement a simple binary search on an existing binary tree. A binary tree has the following structure:
-
-    .. image:: BST/bst.png
-        :height: 340px
-        :width: 540px
-        :scale: 100%
-
-
-    This binary tree is composed of nodes implemented using the following structure.
-
-    .. code-block:: c
-
-        /*
-        * Node has a value, @value, and two children, @left and @right.
-        * All the children of @left and itself have a smaller value than the node and all the children of @right and itself have a larger value than node
-        */
-        typedef struct node{
-            int value;
-            struct node* left; // to smaller values
-            struct node* right; // to larger values
-        } node_t;
-
-    The binary tree itself is defined as follows.
-
-    .. code-block:: c
-
-        typedef struct bt{
-            struct node* root;
-        } bt_t;
+context: "For this task, you will implement a simple binary search on an existing\
+  \ binary tree. A binary tree has the following structure:\n\n.. image:: BST/bst.png\n\
+  \    :height: 340px\n    :width: 540px\n    :scale: 100%\n\n\nThis binary tree is\
+  \ composed of nodes implemented using the following structure.\n\n.. code-block::\
+  \ c\n\n    /*\n    * Node has a value, @value, and two children, @left and @right.\n\
+  \    * All the children of @left and itself have a smaller value than the node and\
+  \ all the children of @right and itself have a larger value than node\n    */\n\
+  \    typedef struct node{\n        int value;\n        struct node* left; // to\
+  \ smaller values\n        struct node* right; // to larger values\n    } node_t;\n\
+  \nThe binary tree itself is defined as follows.\n\n.. code-block:: c\n\n    typedef\
+  \ struct bt{\n        struct node* root;\n    } bt_t;\n"
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    memory: '100'
-    output: '2'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Simple Binary Search Tree'
 network_grading: false
 order: 37
 problems:
-    contains:
-        default: ''
-        type: code
-        name: Function contains
-        header: |-
-            Write the body of the ``contains`` function. If you use subfunctions, write them in the box below with their signature and body.
-
-            .. code-block:: c
-
-                /*
-                * Return 1 if there is a node containing @value in @tree and 0 otherwise.
-                */
-                int contains(bt_t* tree, int value){
-        language: c
-    other:
-        optional: 'on'
-        name: Helpful submethods
-        default: ''
-        header: Write here the submethods used by the contains method.
-        type: code
-        language: c
+  contains: {default: '', header: "Write the body of the ``contains`` function. If\
+      \ you use subfunctions, write them in the box below with their signature and\
+      \ body.\n\n.. code-block:: c\n\n    /*\n    * Return 1 if there is a node containing\
+      \ @value in @tree and 0 otherwise.\n    */\n    int contains(bt_t* tree, int\
+      \ value){", language: c, name: Function contains, type: code}
+  other: {default: '', header: Write here the submethods used by the contains method.,
+    language: c, name: Helpful submethods, optional: 'on', type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        id: timeout
-        visible: true
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        type: 1
-    '1':
-        name: Segmentation Fault
-        description: ''
-        visible: true
-        id: sigsegv
-        type: 1
-    '2':
-        id: not_compile
-        type: 1
-        description: You code does not compile.
-        visible: true
-        name: Not compile
-    '3':
-        id: memory
-        description: ''
-        type: 1
-        visible: true
-        name: Memory Exceeded
-    '4':
-        description: ''
-        visible: true
-        type: 1
-        name: Floating Point Exception
-        id: sigfpe
-    '5':
-        id: double_free
-        description: Your code produced a double free.
-        type: 1
-        name: Double free
-        visible: true
-    '6':
-        name: Banned functions
-        description: You use some banned functions.
-        visible: true
-        type: 1
-        id: banned_funcs
-    '7':
-        type: 2
-        visible: true
-        name: Data structures
-        description: Task dealing with data structures and linked list.
-        id: ''
-    '8':
-        description: ''
-        name: S4
-        visible: true
-        type: 2
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: Task dealing with data structures and linked list., id: '', name: Data
+      structures, type: 2, visible: true}
+  '8': {description: '', id: '', name: S4, type: 2, visible: true}
+  '9': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

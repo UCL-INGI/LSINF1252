@@ -1,0 +1,46 @@
+_id: 5b251091aff414647d276e5a
+archive: 5b251095aff414647d276e5e
+courseid: LSINF1252
+custom: {}
+grade: 77.78
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "struct node *current1 = q -> tail;\nint l = q->size;\nif (q->size == 1){\n\
+    \    int p = q->tail->value;\n    q->tail = NULL;\n    free(current1);\n    q\
+    \ -> size = q -> size -1;\n    return p;\n}\nstruct node *current2 = q -> tail;\n\
+    for (int i = 0; i < l-1; i ++){\n      current2 = current2 -> next;\n}\ncurrent2\
+    \ -> next = q->tail->next;\nq -> tail = current2 -> next;\nint p = current1 ->\
+    \ value;\ncurrent1 -> next = NULL;\nq -> size = q -> size -1;\nfree(current1);\n\
+    return p;\n\n\n\n"
+  enqueue: "struct node * hello = (struct node *)malloc (sizeof(struct node));\nif\
+    \ (hello == NULL) return -1;\nhello -> value = val;\nif (q == NULL) return -1;\n\
+    if (q -> tail == NULL){\n    q->tail = hello;\n    hello -> next = hello;\n  \
+    \  q-> size = q -> size +1;\n    return 0;\n}\n\nhello -> next = q-> tail->next;\n\
+    q->tail-> next = hello;\nq->size = q->size + 1;\nreturn 0;\n\n\n\n\n"
+problems:
+  dequeue: [failed, "* Dequeue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Dequeue in a queue of size 5\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info:\
+      \ The elements of the queue are not in the good order\n\n* Dequeue in a queue\
+      \ of size 10\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: The elements of the\
+      \ queue are not in the good order\n\n"]
+  enqueue: [success, "* Enqueue of an empty queue\n\n  => r\xE9ussi (1/1) pts)\n\n\
+      \n* Enqueue of an empty queue when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Enqueue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue\
+      \ in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue\
+      \ of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size\
+      \ 10 and malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-06-16 15:28:49.336000
+taskid: advanced_queue
+tests: {}
+text: '- Votre code compile.
+
+
+  - Il y a des erreurs dans votre solution.'
+username: anonymous

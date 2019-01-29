@@ -1,0 +1,63 @@
+_id: 5aaecdbbaff4146437ca462b
+archive: 5aaecdbfaff4146437ca462f
+courseid: LSINF1252
+custom: {}
+grade: 64.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  insert: "struct node *new;\nnew=malloc(sizeof(struct node));\nif(new==NULL)\n  \
+    \  return -1;\nnew->val=val;\nif((*head)==NULL){\n    *head=new;\n    new->next=NULL;\n\
+    \    return 0;\n}\nif((*cmp)(val,(*head)->val)<0){\n    new->next=(*head);\n \
+    \   (*head)=new;\n    return 0;\n}\nstruct node *current=*head;\nwhile(current->next!=NULL){\n\
+    \    if(current->next->val<0){\n        new->next=current->next;\n        current->next=new;\n\
+    \        return 0;\n    }\n    current=current->next;\n}\nif(current->next==NULL){\n\
+    \    new->next=NULL;\n    current->next=new;\n    return 0;\n}\nreturn 0;"
+  order_relation: return a-b;
+problems:
+  insert: [failed, "* Insertion in an empty list\n\n  => r\xE9ussi (1/1) pts)\n\n\n\
+      * Insertion in an empty list with malloc fail\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Insertion in first place, natural order\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Insertion in first place with malloc failure\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Insertion in middle place, simple case, natural order\n\n  => \xE9chou\xE9\
+      \ (0/1) pts)\n\n  Info: The inserted element is not malloced\n\n* Insertion\
+      \ in middle place, complex case, natural order\n\n  => \xE9chou\xE9 (0/2) pts)\n\
+      \n  Info: The inserted element is not malloced\n\n* Insertion in middle place,\
+      \ with malloc failure\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Insertion in last\
+      \ place, simple case, natural order\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Insertion\
+      \ in last place, complex case, natural order\n\n  => r\xE9ussi (2/2) pts)\n\n\
+      \n* Insertion in last place, with malloc failure\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Insertion in first place, reverse order\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Insertion in middle place, simple case, reverse order\n\n  => \xE9chou\xE9\
+      \ (0/1) pts)\n\n  Info: The inserted element is not malloced\n\n* Insertion\
+      \ in middle place, complex case, reverse order\n\n  => \xE9chou\xE9 (0/2) pts)\n\
+      \n  Info: The inserted element is not malloced\n\n* Insertion in last place,\
+      \ simple case, reverse order\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Insertion in\
+      \ last place, complex case, reverse order\n\n  => r\xE9ussi (2/2) pts)\n\n\n\
+      * Reinsertion in first place\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: You\
+      \ shouldn't allocate memory for a reinsertion \u2014 You must not reinsert elements\
+      \ \u2014 The elements are not in the correct order\n\n* Reinsertion in middle\
+      \ place\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: You shouldn't allocate memory\
+      \ for a reinsertion \u2014 You don't have to call malloc \u2014 You must not\
+      \ reinsert elements \u2014 The elements are not in the correct order\n\n* Reinsertion\
+      \ in last place\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: You don't allocate\
+      \ the good amount of memory \u2014 You don't have to call malloc \u2014 You\
+      \ must not reinsert elements \u2014 The elements are not in the correct order\n\
+      \n"]
+  order_relation: [success, "* Comparison of equals char\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Comparison with a > b\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Comparison with\
+      \ a < b\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-03-18 21:36:11.868000
+taskid: order_relation_linked_list
+tests: {}
+text: '- Votre code compile.
+
+
+  - Il y a des erreurs dans votre solution.'
+username: anonymous

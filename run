@@ -4,8 +4,7 @@
 # Auteurs : Mathieu Xhonneux, Anthony Gégo
 # Licence : GPLv3
 
-import subprocess, shlex, re, os
-from xml.etree import ElementTree
+import subprocess, shlex, re, os, yaml
 from inginious import feedback, rst, input
 
 # Switch working directory to student/
@@ -19,23 +18,38 @@ p = subprocess.Popen(shlex.split("make"), stderr=subprocess.STDOUT, stdout=subpr
 make_output = p.communicate()[0].decode('utf-8')
 # If compilation failed, exit with "failed" result
 if p.returncode:
+    feedback.set_tag("not_compile", True)
     feedback.set_global_result("failed")
     feedback.set_global_feedback("La compilation de votre code a échoué. Voici le message de sortie de la commande ``make`` :")
     feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
     exit(0)
 else:
-    feedback.set_global_result("success")
-    feedback.set_global_feedback("- Votre code compile.\n")
+    # Cppcheck
+    p = subprocess.Popen(shlex.split("make check"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    cppcheck_output = p.communicate()[0].decode('utf-8')
+    if p.returncode:
+        feedback.set_tag("cppcheck", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code avec ``cppcheck`` a échoué. Voici le message de sortie de la commande ``make check`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', cppcheck_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
 
 # Parse banned functions
-banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
-banned_funcs = list(filter(None, banned_funcs))
+try:
+    banned_funcs = re.findall("BAN_FUNCS\(([a-zA-Z0-9_, ]*)\)", open('tests.c').read())[-1].replace(" ", "").split(",")
+    banned_funcs = list(filter(None, banned_funcs))
+except IndexError:
+    banned_funcs = []
 
 if banned_funcs:
     p = subprocess.Popen(shlex.split("readelf -s student_code.o"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     readelf_output = p.communicate()[0].decode('utf-8')
     for func in banned_funcs:
         if re.search("UND {}\n".format(func), readelf_output):
+            feedback.set_tag("banned_funcs", True)
             feedback.set_global_result("failed")
             feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
             exit(0)
@@ -44,24 +58,28 @@ if banned_funcs:
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
+LANG = input.get_input('@lang')
+
 # Run the code in a parallel container
-p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-#run_output = p.communicate()[0].decode('utf-8')
-p.communicate()
+p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+o, e = p.communicate()
+print(o.decode("utf-8"))
 # If run failed, exit with "failed" result
 if p.returncode:
     feedback.set_global_result("failed")
     if p.returncode == 256-8:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGFPE a été envoyé : *Floating Point Exception*.")
+        feedback.set_tag("sigfpe", True)
     elif p.returncode == 256-11:
-       montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
+        montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur. Le signal SIGSEGV a été envoyé : *Segmentation Fault*.")
     elif p.returncode == 252:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a tenté d'allouer plus de mémoire que disponible.")
+        feedback.set_tag("memory", True)
     elif p.returncode == 253:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a pris trop de temps pour s'exécuter.")
     else:
         montest_output = rst.get_admonition("warning", "**Erreur d'exécution**", "Votre code a produit une erreur.")
-    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)    
+    feedback.set_global_feedback(rst.indent_block(2, montest_output, " "), True)
     exit(0)
 #elif run_output:   
 #    feedback.set_global_feedback("- Sortie de votre méthode de test:\n" + rst.indent_block(2, rst.get_codeblock('', run_output), " "), True)
@@ -72,7 +90,7 @@ if p.returncode:
 
 # Fetch CUnit test results
 results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
-results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'info_msgs':r[4:]} for r in results_raw]
+results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
 
 
 # Produce feedback
@@ -87,7 +105,9 @@ tests_result = {}
 
 for test in results:
     total += test['weight']
-
+    for tag in test['tags']:
+        if tag != "":
+            feedback.set_tag(tag, True)
     if test['code'] == 'SUCCESS':
         score += test['weight']
         feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
@@ -103,7 +123,22 @@ for pid, result in tests_result.items():
         feedback.set_problem_result("success", pid)
     else:
         feedback.set_problem_result("failed", pid)
-        
+
+with open("../task.yaml", 'r') as stream:
+    problems = yaml.load(stream)['problems']
+    
+    for name, meta in problems.items():
+        if meta['type'] == 'match':
+            answer = input.get_input(name)
+            if answer == meta['answer']:
+                feedback.set_problem_result("success", name)
+                feedback.set_problem_feedback("Votre réponse est correcte. (1/1 pts)", name, True)
+                score += 1
+            else:
+                feedback.set_problem_result("failed", name)
+                feedback.set_problem_feedback("Votre réponse est incorrecte. (0/1 pts)", name, True)
+
+            total += 1
 
 score = 100*score/(total if not total == 0 else 1)
 feedback.set_grade(score)

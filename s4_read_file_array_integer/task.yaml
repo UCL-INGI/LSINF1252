@@ -1,123 +1,60 @@
 accessible: true
 author: Olivier Martin
-context: |-
-    *Estimated time: 25 minutes*
+context: '*Estimated time: 25 minutes*
 
-    Given a binary file containing some (possibly none) positive integers (``int``) that were stored in the file by successive calls of ``write(fd,&num,sizeof(int))`` write a code that computes the sum of all integers that were stored in the file. The function returns the sum when there are no errors. In case of errors, it returns.
 
-    - If ``open()`` fails, return ``-1``.
-    - If ``read()`` fails, return ``-2``.
-    - If ``close()`` fails, return ``-3``.
+  Given a binary file containing some (possibly none) positive integers (``int``)
+  that were stored in the file by successive calls of ``write(fd,&num,sizeof(int))``
+  write a code that computes the sum of all integers that were stored in the file.
+  The function returns the sum when there are no errors. In case of errors, it returns.
 
-    You can only use ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.
+
+  - If ``open()`` fails, return ``-1``.
+
+  - If ``read()`` fails, return ``-2``.
+
+  - If ``close()`` fails, return ``-3``.
+
+
+  You can only use ``open(2)``, ``read(2)``, ``write(2)`` and ``close(2)``.'
 environment: cpp
 evaluate: best
 groups: false
-limits:
-    memory: '100'
-    output: '2'
-    time: '30'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S5] Reading integers in a binary file'
 network_grading: false
 order: 53
 problems:
-    q1:
-        language: c
-        type: code
-        header: |-
-            .. code-block:: c
-
-                /*
-                 * @pre filename != NULL, name of the file
-                 * @post returns the sum of all integers stored in the binary file.
-                 *       return -1 if the file can not be open.
-                 *       return -2 if an error occurs during reading
-                 *       return -3 if close() fails.
-                 */
-                int sum_file(char *filename) {
-        name: Write your code here
+  q1: {header: ".. code-block:: c\n\n    /*\n     * @pre filename != NULL, name of\
+      \ the file\n     * @post returns the sum of all integers stored in the binary\
+      \ file.\n     *       return -1 if the file can not be open.\n     *       return\
+      \ -2 if an error occurs during reading\n     *       return -3 if close() fails.\n\
+      \     */\n    int sum_file(char *filename) {", language: c, name: Write your
+      code here, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        id: close
-        name: Close
-        visible: true
-        description: This tag validate that your close are correctly performed.
-        type: 0
-    '1':
-        id: open
-        description: This tag validate you are able to open a file and handle errors
-            with open().
-        type: 0
-        visible: true
-        name: Open
-    '2':
-        type: 0
-        id: sum
-        description: The student has correctly computed and returned the sum.
-        name: Sum
-        visible: false
-    '10':
-        visible: true
-        id: memory
-        name: Memory Exceeded
-        description: ''
-        type: 1
-    '3':
-        visible: true
-        description: You code does not compile.
-        id: not_compile
-        name: Not compile
-        type: 1
-    '4':
-        type: 1
-        visible: true
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
-    '5':
-        type: 1
-        visible: true
-        id: timeout
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-    '6':
-        description: You do not manage failures properly during read operations.
-        name: Failure handling
-        type: 1
-        visible: true
-        id: failure_handling
-    '7':
-        name: Banned functions
-        type: 1
-        id: banned_funcs
-        visible: true
-        description: You use some banned functions.
-    '8':
-        id: double_free
-        name: Double free
-        visible: true
-        description: Your code produced a double free.
-        type: 1
-    '9':
-        id: sigfpe
-        visible: true
-        description: ''
-        name: Floating Point Exception
-        type: 1
-    '11':
-        type: 2
-        visible: true
-        name: S5
-        description: ''
-        id: ''
-    '12':
-        type: 2
-        description: ''
-        visible: true
-        name: File
-        id: ''
+  '0': {description: This tag validate that your close are correctly performed., id: close,
+    name: Close, type: 0, visible: true}
+  '1': {description: This tag validate you are able to open a file and handle errors
+      with open()., id: open, name: Open, type: 0, visible: true}
+  '10': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '11': {description: '', id: '', name: S5, type: 2, visible: true}
+  '12': {description: '', id: '', name: File, type: 2, visible: true}
+  '13': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '2': {description: The student has correctly computed and returned the sum., id: sum,
+    name: Sum, type: 0, visible: false}
+  '3': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '4': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '5': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '6': {description: You do not manage failures properly during read operations.,
+    id: failure_handling, name: Failure handling, type: 1, visible: true}
+  '7': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '8': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '9': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
 weight: 1.0

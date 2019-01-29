@@ -1,0 +1,37 @@
+_id: 5b030c14aff4142551b3138f
+archive: 5b030c16aff4142551b31390
+courseid: LSINF1252
+custom: {}
+grade: 0.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "struct node *hello = (struct node*) malloc (sizeof (struct node));\nstruct\
+    \ node *current = q->tail;\nstruct node *current2;\nint i = 0;\nwhile (current\
+    \ -> next != q -> tail){\n    current = current -> next;\n}\ncurrent2 =  current\
+    \ -> next;\ni = current2 -> value;\ncurrent2 -> next = NULL;\ncurrent -> next\
+    \ = q ->tail;\nfree(current2);\nq->size = q->size -1;\nreturn i;"
+  enqueue: "struct node *hello = (struct node*) malloc (sizeof (struct node));\nif\
+    \ (hello == 0) return -1;\nhello -> value = val;\nstruct node *current = q->tail;\n\
+    while (current -> next != q -> tail){\n    current = current -> next;\n}\ncurrent\
+    \ -> next = hello;\nhello -> next = q->tail;\nq -> tail = hello;\nq->size = q->size\
+    \ +1;\nreturn 0;"
+problems: {}
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-05-21 20:12:36.088000
+taskid: advanced_queue
+tests: {not_compile: true}
+text: "La compilation de votre code a \xE9chou\xE9. Voici le message de sortie de\
+  \ la commande ``make`` :\n\n.. code-block::\n\n    gcc -Wall -Werror -DC99 -std=gnu99\
+  \ -ICTester -c -o tests.o tests.c\n    gcc -Wall -Werror -DC99 -std=gnu99 -ICTester\
+  \ -c -o student_code.o student_code.c\n    student_code.c: In function \u2018dequeue\u2019\
+  :\n    student_code.c:21:15: error: unused variable \u2018hello\u2019 [-Werror=unused-variable]\n\
+  \      struct node *hello = (struct node*) malloc (sizeof (struct node));\n    \
+  \               ^\n    cc1: all warnings being treated as errors\n    make: ***\
+  \ [student_code.o] Error 1\n\n"
+username: anonymous

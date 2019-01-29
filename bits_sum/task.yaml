@@ -1,100 +1,61 @@
 accessible: true
 author: Arthur van Stratum
-context: |-
-    In this exercise, we will work with operation on bits. When we speak about the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest order bit, ...
+context: 'In this exercise, we will work with operation on bits. When we speak about
+  the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest
+  order bit, ...
 
-    In C source code, you can write a number in binary (base 2) by prefixing it via 0b., e.g. 0b11010 = 26.
 
-    This exercise will introduce some non-standard data types which guarantee that the variable has a fixed number of bits. Indeed, on some machines, a *int* could use 2, 4 or 8 bytes. Hence, if we want to perform bitwise operations, we have to know first on how many bits we are working.
+  In C source code, you can write a number in binary (base 2) by prefixing it via
+  0b., e.g. 0b11010 = 26.
 
-    For this, C introduces a new class of variable types :
 
-    - *int8_t* (signed integer of 8 bits)
-    - *uint8_t* (unsigned integer of 8 bits)
-    - *uint16_t* (unsigned integer of 16 bits)
+  This exercise will introduce some non-standard data types which guarantee that the
+  variable has a fixed number of bits. Indeed, on some machines, a *int* could use
+  2, 4 or 8 bytes. Hence, if we want to perform bitwise operations, we have to know
+  first on how many bits we are working.
 
-    You can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). These types are defined in <stdint.h>
+
+  For this, C introduces a new class of variable types :
+
+
+  - *int8_t* (signed integer of 8 bits)
+
+  - *uint8_t* (unsigned integer of 8 bits)
+
+  - *uint16_t* (unsigned integer of 16 bits)
+
+
+  You can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). These types are
+  defined in <stdint.h>'
 environment: cpp
 evaluate: best
 groups: false
-limits:
-    output: '2'
-    memory: '100'
-    time: '30'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S2] Bitwise operation: counting set bits '
 network_grading: false
 order: 23
 problems:
-    q1:
-        header: |-
-            Write the body of a function that counts the number of bits set to ``1`` in its parameter :
-
-            For example, with bytes you should obtain the following results:
-
-            .. code-block:: c
-
-               nbits(0b00000100) == 1;
-               nbits(0b00000111) == 3;
-               nbits(0b00001010) == 2;
-
-            .. code-block:: c
-
-                #include <stdint.h>
-                uint8_t nbits(uint32_t n) {
-        name: ''
-        type: code
-        language: c
+  q1: {header: "Write the body of a function that counts the number of bits set to\
+      \ ``1`` in its parameter :\n\nFor example, with bytes you should obtain the\
+      \ following results:\n\n.. code-block:: c\n\n   nbits(0b00000100) == 1;\n  \
+      \ nbits(0b00000111) == 3;\n   nbits(0b00001010) == 2;\n\n.. code-block:: c\n\
+      \n    #include <stdint.h>\n    uint8_t nbits(uint32_t n) {", language: c, name: '',
+    type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-        visible: true
-        type: 1
-        id: timeout
-    '1':
-        description: ''
-        type: 1
-        visible: true
-        id: sigsegv
-        name: Segmentation Fault
-    '2':
-        name: Not compile
-        description: You code does not compile.
-        type: 1
-        visible: true
-        id: not_compile
-    '3':
-        type: 1
-        id: memory
-        visible: true
-        description: ''
-        name: Memory Exceeded
-    '4':
-        description: ''
-        id: sigfpe
-        type: 1
-        name: Floating Point Exception
-        visible: true
-    '5':
-        description: Your code produced a double free.
-        name: Double free
-        visible: true
-        id: double_free
-        type: 1
-    '6':
-        type: 1
-        id: banned_funcs
-        name: Banned functions
-        description: You use some banned functions.
-        visible: true
-    '7':
-        visible: true
-        description: ''
-        type: 2
-        name: S2
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S2, type: 2, visible: true}
+  '8': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

@@ -1,216 +1,77 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: |+
-    We ask you to write two simple functions that are  needed to implement a simple linked list.
-
-
-    .. code-block:: c
-
-        /**
-        * Structure node
-        *
-        * @next: pointer to the next node in the list, NULL if last node_t
-        * @value: value stored in the node
-        */
-        typedef struct node {
-          struct node *next;
-          int value;
-        } node_t;
-
-        /**
-        * Structure list
-        *
-        * @first: first node of the list, NULL if list is empty
-        * @size: number of nodes in the list
-        */
-        typedef struct list {
-          struct node *first;
-          int size;
-        } list_t;
-
-
-    **In your functions, you cannot use the function** `calloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_
-
+context: "We ask you to write two simple functions that are  needed to implement a\
+  \ simple linked list.\n\n\n.. code-block:: c\n\n    /**\n    * Structure node\n\
+  \    *\n    * @next: pointer to the next node in the list, NULL if last node_t\n\
+  \    * @value: value stored in the node\n    */\n    typedef struct node {\n   \
+  \   struct node *next;\n      int value;\n    } node_t;\n\n    /**\n    * Structure\
+  \ list\n    *\n    * @first: first node of the list, NULL if list is empty\n   \
+  \ * @size: number of nodes in the list\n    */\n    typedef struct list {\n    \
+  \  struct node *first;\n      int size;\n    } list_t;\n\n\n**In your functions,\
+  \ you cannot use the function** `calloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_\n\
+  \n"
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    output: '2'
-    time: '30'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Simple linked list '
 network_grading: false
 order: 36
 problems:
-    init_node:
-        name: Node initialisation
-        default: ''
-        header: |
-            .. code-block:: c
-
-                /*
-                * Create a new node containing the value @value.
-                *
-                * @value: value stored in the node
-                * @return: returns the pointer to the newly created node, or NULL if an error occured.
-                */
-                node_t *init_node(int value) {
-        language: c
-        type: code
-    add_node:
-        type: code
-        header: |
-            .. code-block:: c
-
-                /*
-                * Add a node at the head of the list @list and increment the number of nodes in the list (member `size`)
-                *
-                * @l: linked list
-                * @value: value to add to the list
-                *
-                * @return: 0 if success, 1 otherwise
-                */
-                int add_node(list_t *list, int value);
-        name: Adding a node
-        language: c
-        default: ''
+  add_node: {default: '', header: ".. code-block:: c\n\n    /*\n    * Add a node at\
+      \ the head of the list @list and increment the number of nodes in the list (member\
+      \ `size`)\n    *\n    * @l: linked list\n    * @value: value to add to the list\n\
+      \    *\n    * @return: 0 if success, 1 otherwise\n    */\n    int add_node(list_t\
+      \ *list, int value);\n", language: c, name: Adding a node, type: code}
+  init_node: {default: '', header: ".. code-block:: c\n\n    /*\n    * Create a new\
+      \ node containing the value @value.\n    *\n    * @value: value stored in the\
+      \ node\n    * @return: returns the pointer to the newly created node, or NULL\
+      \ if an error occured.\n    */\n    node_t *init_node(int value) {\n", language: c,
+    name: Node initialisation, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        name: Timeout
-        id: timeout
-        type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-    '1':
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
-        visible: true
-        type: 1
-    '10':
-        type: 1
-        description: A new node is not allocated with malloc().
-        name: Not allocated
-        id: not_allocated
-        visible: false
-    '11':
-        id: error_normal_case
-        description: Your function returns an error in normal case.
-        name: Error normal case
-        type: 1
-        visible: false
-    '12':
-        description: The list has not the expected size.
-        type: 1
-        name: Wrong list size
-        id: wrong_list_size
-        visible: false
-    '13':
-        type: 1
-        name: Bad Args handling
-        description: Wrong return value when wrong args.
-        id: wrong_args_handling
-        visible: false
-    '14':
-        type: 1
-        description: The linked list does not correspond to the waited one.
-        name: Incorrect list
-        id: not_expected_list
-        visible: false
-    '15':
-        type: 1
-        description: The list was modified while the malloc() fails.
-        id: modif_list_malloc_fail
-        name: Modif list malloc fail
-        visible: false
-    '16':
-        name: Not compile
-        type: 1
-        visible: true
-        description: You code does not compile.
-        id: not_compile
-    '17':
-        visible: true
-        description: ''
-        type: 1
-        id: memory
-        name: Memory Exceeded
-    '18':
-        type: 1
-        visible: true
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
-    '2':
-        description: Your code produced a double free.
-        name: Double free
-        visible: true
-        id: double_free
-        type: 1
-    '3':
-        visible: true
-        name: Banned functions
-        type: 1
-        id: banned_funcs
-        description: You use some banned functions.
-    '4':
-        description: The malloc() functions was not called exactly once.
-        id: not_malloc_once
-        name: Not malloc once
-        type: 1
-        visible: false
-    '5':
-        id: SCRIPT_ERROR
-        description: SCRIPT_ERROR - This tag should not appear. If it appears this
-            is probably an error in the test suite of this task.
-        name: SCRIPT ERROR
-        type: 1
-        visible: false
-    '6':
-        type: 1
-        name: Wrong malloc memory size
-        description: The allocated memory doesn't have the correct size.
-        id: malloc_fail_memory_size
-        visible: false
-    '7':
-        description: The value of the node is not the expected one.
-        type: 1
-        id: bad_node_value
-        name: Bad node value
-        visible: false
-    '8':
-        name: Bad next pointer
-        id: bad_next_pointer
-        description: The 'next' pointer is not correctly initialised
-        type: 1
-        visible: false
-    '9':
-        type: 1
-        id: malloc_fail_handling
-        name: Malloc fail handling
-        description: Wrong return value when malloc call fails.
-        visible: false
-    '19':
-        description: ''
-        name: S3
-        visible: true
-        type: 2
-        id: ''
-    '20':
-        description: Task dealing with data structures and linked list
-        type: 2
-        visible: true
-        name: Data structures
-        id: ''
-    '21':
-        visible: true
-        name: Malloc
-        type: 2
-        description: Usage of malloc()
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '10': {description: A new node is not allocated with malloc()., id: not_allocated,
+    name: Not allocated, type: 1, visible: false}
+  '11': {description: Your function returns an error in normal case., id: error_normal_case,
+    name: Error normal case, type: 1, visible: false}
+  '12': {description: The list has not the expected size., id: wrong_list_size, name: Wrong
+      list size, type: 1, visible: false}
+  '13': {description: Wrong return value when wrong args., id: wrong_args_handling,
+    name: Bad Args handling, type: 1, visible: false}
+  '14': {description: The linked list does not correspond to the waited one., id: not_expected_list,
+    name: Incorrect list, type: 1, visible: false}
+  '15': {description: The list was modified while the malloc() fails., id: modif_list_malloc_fail,
+    name: Modif list malloc fail, type: 1, visible: false}
+  '16': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '17': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '18': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '19': {description: '', id: '', name: S3, type: 2, visible: true}
+  '2': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '20': {description: Task dealing with data structures and linked list, id: '', name: Data
+      structures, type: 2, visible: true}
+  '21': {description: Usage of malloc(), id: '', name: Malloc, type: 2, visible: true}
+  '22': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '3': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '4': {description: The malloc() functions was not called exactly once., id: not_malloc_once,
+    name: Not malloc once, type: 1, visible: false}
+  '5': {description: SCRIPT_ERROR - This tag should not appear. If it appears this
+      is probably an error in the test suite of this task., id: SCRIPT_ERROR, name: SCRIPT
+      ERROR, type: 1, visible: false}
+  '6': {description: The allocated memory doesn't have the correct size., id: malloc_fail_memory_size,
+    name: Wrong malloc memory size, type: 1, visible: false}
+  '7': {description: The value of the node is not the expected one., id: bad_node_value,
+    name: Bad node value, type: 1, visible: false}
+  '8': {description: The 'next' pointer is not correctly initialised, id: bad_next_pointer,
+    name: Bad next pointer, type: 1, visible: false}
+  '9': {description: Wrong return value when malloc call fails., id: malloc_fail_handling,
+    name: Malloc fail handling, type: 1, visible: false}
 weight: 1.0

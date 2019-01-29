@@ -1,144 +1,55 @@
 accessible: true
 author: Maxime Mawait & Nicolas Rybowski
-context: |
-    You are asked to implement the ``pop`` and ``push`` functions of the following `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface :
-
-    .. code-block:: c
-
-        struct node {
-            node *next;
-            char *name;
-        };
-
-    .. image:: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png
-            :align: right
-            :height: 540px
-            :width: 773px
-            :scale: 50%
-
-
-
-    *Hints* :
-
-    - ``char *name`` is also a pointer, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the string on the stack.
-
-    - Other useful commands: `strncpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strncpy.3.html>`_ and `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_.
-
-    - Do not forget to free **all** the allocated space when popping one element.
+context: "You are asked to implement the ``pop`` and ``push`` functions of the following\
+  \ `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface\
+  \ :\n\n.. code-block:: c\n\n    struct node {\n        node *next;\n        char\
+  \ *name;\n    };\n\n.. image:: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png\n\
+  \        :align: right\n        :height: 540px\n        :width: 773px\n        :scale:\
+  \ 50%\n\n\n\n*Hints* :\n\n- ``char *name`` is also a pointer, memory must be allocated\
+  \ by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_\
+  \ to copy the string on the stack.\n\n- Other useful commands: `strncpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strncpy.3.html>`_\
+  \ and `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_.\n\
+  \n- Do not forget to free **all** the allocated space when popping one element.\n"
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S4] Simple stack '
 network_grading: false
 order: 47
 problems:
-    push:
-        name: Push
-        header: |-
-            .. code-block:: c
-
-                /**
-                * Add @name at the "top" of the stack.
-                *
-                * @head : pointer to the top of the stack
-                * @name : the string to be placed in the element at the top of the stack
-                *
-                * @return 0 if no error, 1 otherwise
-                */
-
-                int push(struct node **head, const char *value){
-        type: code
-        language: c
-        default: ''
-    pop:
-        name: Pop
-        language: c
-        type: code
-        header: |-
-            .. code-block:: c
-
-                /**
-                * Remove the top element of the stack and return its content.
-                *
-                * @head : pointer to the top of the stack
-                * @result : pointer to store the popped element
-                *
-                * @return 0 if no error, 1 otherwise
-                *
-                * pre : @result contains a null-terminated correct string
-                * post : @result contains the string @name from the element at the top of the stack
-                */
-
-                int pop(struct node **head, char *result){
-        default: ''
+  pop: {default: '', header: ".. code-block:: c\n\n    /**\n    * Remove the top element\
+      \ of the stack and return its content.\n    *\n    * @head : pointer to the\
+      \ top of the stack\n    * @result : pointer to store the popped element\n  \
+      \  *\n    * @return 0 if no error, 1 otherwise\n    *\n    * pre : @result contains\
+      \ a null-terminated correct string\n    * post : @result contains the string\
+      \ @name from the element at the top of the stack\n    */\n\n    int pop(struct\
+      \ node **head, char *result){", language: c, name: Pop, type: code}
+  push: {default: '', header: ".. code-block:: c\n\n    /**\n    * Add @name at the\
+      \ \"top\" of the stack.\n    *\n    * @head : pointer to the top of the stack\n\
+      \    * @name : the string to be placed in the element at the top of the stack\n\
+      \    *\n    * @return 0 if no error, 1 otherwise\n    */\n\n    int push(struct\
+      \ node **head, const char *value){", language: c, name: Push, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        type: 1
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        visible: true
-    '1':
-        type: 1
-        visible: true
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
-    '2':
-        name: Not compile
-        visible: true
-        id: not_compile
-        type: 1
-        description: You code does not compile.
-    '3':
-        visible: true
-        name: Memory Exceeded
-        type: 1
-        id: memory
-        description: ''
-    '4':
-        visible: true
-        id: sigfpe
-        description: ''
-        name: Floating Point Exception
-        type: 1
-    '5':
-        id: double_free
-        name: Double free
-        visible: true
-        description: Your code produced a double free.
-        type: 1
-    '6':
-        name: Banned functions
-        description: You use some banned functions.
-        visible: true
-        type: 1
-        id: banned_funcs
-    '9':
-        id: wrong_alloc_size
-        type: 1
-        name: Wrong allocation size
-        description: You don't allocate the right amount of memory.
-        visible: true
-    '7':
-        visible: true
-        description: Task dealing with data structures and linked list
-        type: 2
-        name: Data structures
-        id: ''
-    '8':
-        visible: true
-        description: ''
-        type: 2
-        name: S4
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '10': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: Task dealing with data structures and linked list, id: '', name: Data
+      structures, type: 2, visible: true}
+  '8': {description: '', id: '', name: S4, type: 2, visible: true}
+  '9': {description: You don't allocate the right amount of memory., id: wrong_alloc_size,
+    name: Wrong allocation size, type: 1, visible: true}
 weight: 1.0

@@ -1,0 +1,48 @@
+_id: 5b030cafaff4142551b3139e
+archive: 5b030cb3aff4142551b3139f
+courseid: LSINF1252
+custom: {}
+grade: 22.22
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "struct node *current = q->tail;\nstruct node *current2;\nint i = 0;\n\
+    for (int o = 1; o < q->size; o++){\n    current = current -> next;\n}\ncurrent2\
+    \ =  current -> next;\ni = current2 -> value;\ncurrent2 -> next = NULL;\ncurrent\
+    \ -> next = q ->tail;\nfree(current2);\nq->size = q->size -1;\nreturn i;"
+  enqueue: "struct node *hello = (struct node*) malloc (sizeof (struct node));\nif\
+    \ (hello == 0) return -1;\nhello -> value = val;\nstruct node *current = q->tail;\n\
+    for (int o = 1; o < q->size; o++){\n    current = current -> next;\n}\ncurrent\
+    \ -> next = hello;\nhello -> next = q->tail;\nq -> tail = hello;\nq->size = q->size\
+    \ +1;\nreturn 0;"
+problems:
+  dequeue: [failed, "* Dequeue in a queue of size 1\n\n  => \xE9chou\xE9 (0/1) pts)\n\
+      \n  Info: You have to change the value of the tail to NULL for a queue of size\
+      \ 1\n\n* Dequeue in a queue of size 5\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info:\
+      \ The elements of the queue are not in the good order\n\n* Dequeue in a queue\
+      \ of size 10\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: The elements of the\
+      \ queue are not in the good order\n\n"]
+  enqueue: [failed, "* Enqueue of an empty queue\n\n  => \xE9chou\xE9 (0/1) pts)\n\
+      \n  Info: Your code produced a segfault. \u2014 You don't return the good value\
+      \ \u2014 You have to update the size of the queue\n\n* Enqueue of an empty queue\
+      \ when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of\
+      \ size 1\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: The elements of the queue\
+      \ are not in the good order\n\n* Enqueue in a queue of size 5\n\n  => \xE9chou\xE9\
+      \ (0/1) pts)\n\n  Info: The elements of the queue are not in the good order\n\
+      \n* Enqueue in a queue of size 10\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info:\
+      \ The elements of the queue are not in the good order\n\n* Enqueue in a queue\
+      \ of size 10 and malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-05-21 20:15:11.292000
+taskid: advanced_queue
+tests: {sigsegv: true}
+text: '- Votre code compile.
+
+
+  - Il y a des erreurs dans votre solution.'
+username: anonymous

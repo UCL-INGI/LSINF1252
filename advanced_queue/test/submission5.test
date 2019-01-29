@@ -1,0 +1,41 @@
+_id: 5aaedd33aff4146437ca53b2
+archive: 5aaedd36aff4146437ca53b5
+courseid: LSINF1252
+custom: {}
+grade: 88.89
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "int value = q->tail->value;\nif(q->size==1){\n    q->tail=NULL;\n    free(q->tail);\n\
+    }\nelse{\nnode_t *run;\nrun =q->tail->next;\nwhile(run->next != q->tail){\n  \
+    \  run=run->next;\n}\n    run->next=q->tail->next;\n    q->tail=run;\n    free(run);}\n\
+    q->size=(q->size)-1;\nreturn value;"
+  enqueue: "node_t *new;\nnew = malloc(sizeof(node_t));\nif(new==NULL) return -1;\n\
+    if(q->size!=0){\nnew->value=val;\nnew->next=q->tail->next;\nq->tail->next=new;}\n\
+    else\n    q->tail=new;\nq->size=(q->size)+1;\nreturn 0;"
+problems:
+  dequeue: [success, "* Dequeue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Dequeue in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Dequeue\
+      \ in a queue of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+  enqueue: [failed, "* Enqueue of an empty queue\n\n  => \xE9chou\xE9 (0/1) pts)\n\
+      \n  Info: The elements of the queue are not in the good order \u2014 You must\
+      \ link the tail with itself! That's a circular linked list\n\n* Enqueue of an\
+      \ empty queue when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue\
+      \ in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue\
+      \ of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size 10\n\
+      \n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size 10 and malloc\
+      \ fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-03-18 22:42:11.238000
+taskid: advanced_queue
+tests: {}
+text: '- Votre code compile.
+
+
+  - Il y a des erreurs dans votre solution.'
+username: anonymous

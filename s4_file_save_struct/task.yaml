@@ -1,133 +1,56 @@
 accessible: true
 author: Olivier Martin
-context: |-
-    *Estimated time: 25 minutes*
-
-    You are currently processing an array composed of ``struct point`` defined below. In this programme, you need to store the content of the entire array in a file to be able to reuse it later. Write a C function to write the array composed of ``struct point`` into a file. The file may already exist or not. After the execution of the function, the file should only contain the array. If the file has to be created, the user who created it must have the permission to read it.
-
-    .. code-block:: c
-
-        typedef struct point {
-            int x;
-            int y;
-            int z;
-        } point_t;
-
-    Use only ``open(2)``, ``write(2)`` and ``close(2)``. You can only call ``write(2)`` once.
-
-    Hint : read carefully the man page of ``open(2)`` to manage all the  cases mentionned above. Be sure to open the file with the appropriate rights.
+context: "*Estimated time: 25 minutes*\n\nYou are currently processing an array composed\
+  \ of ``struct point`` defined below. In this programme, you need to store the content\
+  \ of the entire array in a file to be able to reuse it later. Write a C function\
+  \ to write the array composed of ``struct point`` into a file. The file may already\
+  \ exist or not. After the execution of the function, the file should only contain\
+  \ the array. If the file has to be created, the user who created it must have the\
+  \ permission to read it.\n\n.. code-block:: c\n\n    typedef struct point {\n  \
+  \      int x;\n        int y;\n        int z;\n    } point_t;\n\nUse only ``open(2)``,\
+  \ ``write(2)`` and ``close(2)``. You can only call ``write(2)`` once.\n\nHint :\
+  \ read carefully the man page of ``open(2)`` to manage all the  cases mentionned\
+  \ above. Be sure to open the file with the appropriate rights."
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    memory: '100'
-    output: '2'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S5] Save struct into file'
 network_grading: false
 order: 55
 problems:
-    q1:
-        language: c
-        default: ''
-        name: ''
-        header: |-
-            .. code-block:: c
-
-                /*
-                 * @pre pt != NULL, pointer to the first point_t in the array
-                 *      size > 0, the length of the array.
-                 *      filename != NULL
-                 * @post writes the array of point_t in the file.
-                 *       return 0 is everything worked correctly
-                 *       -1 if open() failed.
-                 *       -2 if write() failed.
-                 *       -3 if close() failed.
-                 */
-                int save(point_t *pt, int size, char *filename) {
-        type: code
+  q1: {default: '', header: ".. code-block:: c\n\n    /*\n     * @pre pt != NULL,\
+      \ pointer to the first point_t in the array\n     *      size > 0, the length\
+      \ of the array.\n     *      filename != NULL\n     * @post writes the array\
+      \ of point_t in the file.\n     *       return 0 is everything worked correctly\n\
+      \     *       -1 if open() failed.\n     *       -2 if write() failed.\n   \
+      \  *       -3 if close() failed.\n     */\n    int save(point_t *pt, int size,\
+      \ char *filename) {", language: c, name: '', type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        description: This tag validate you are able to open a file.
-        name: Open
-        id: open
-        type: 0
-        visible: true
-    '1':
-        type: 0
-        description: This tag validate that your close are correctly performed.
-        name: Close
-        visible: true
-        id: close
-    '10':
-        id: memory
-        name: Memory Exceeded
-        type: 1
-        visible: true
-        description: ''
-    '2':
-        id: sigfpe
-        description: ''
-        name: Floating Point Exception
-        visible: true
-        type: 1
-    '3':
-        description: Your code produced a double free.
-        visible: true
-        name: Double free
-        id: double_free
-        type: 1
-    '4':
-        description: You use some banned functions.
-        name: Banned functions
-        type: 1
-        id: banned_funcs
-        visible: true
-    '5':
-        type: 1
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        visible: true
-    '6':
-        description: ''
-        type: 1
-        visible: true
-        id: sigsegv
-        name: Segmentation Fault
-    '7':
-        type: 1
-        name: Too many read/write
-        description: You call the read or write function more than necessary.
-        id: too_many_op
-        visible: true
-    '8':
-        visible: true
-        description: You do not manage failures properly during write operations.
-        type: 1
-        name: Failure handling
-        id: failure_handling
-    '9':
-        name: Not compile
-        id: not_compile
-        type: 1
-        visible: true
-        description: You code do not compile.
-    '11':
-        type: 2
-        visible: true
-        name: S5
-        description: ''
-        id: ''
-    '12':
-        description: ''
-        name: File
-        visible: true
-        type: 2
-        id: ''
+  '0': {description: This tag validate you are able to open a file., id: open, name: Open,
+    type: 0, visible: true}
+  '1': {description: This tag validate that your close are correctly performed., id: close,
+    name: Close, type: 0, visible: true}
+  '10': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '11': {description: '', id: '', name: S5, type: 2, visible: true}
+  '12': {description: '', id: '', name: File, type: 2, visible: true}
+  '13': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '2': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '3': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '4': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '5': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '6': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '7': {description: You call the read or write function more than necessary., id: too_many_op,
+    name: Too many read/write, type: 1, visible: true}
+  '8': {description: You do not manage failures properly during write operations.,
+    id: failure_handling, name: Failure handling, type: 1, visible: true}
+  '9': {description: You code do not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
 weight: 1.0

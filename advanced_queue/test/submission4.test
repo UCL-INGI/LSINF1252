@@ -1,0 +1,36 @@
+_id: 5b16ad12aff414647d256506
+archive: 5b16ad16aff414647d25650c
+courseid: LSINF1252
+custom: {}
+grade: 100.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "int value = q->tail->value;\nif(q->size==1){\n    q->tail=NULL;\n    free(q->tail);\n\
+    }\nelse{\nnode_t *run;\nrun =q->tail->next;\nwhile(run->next != q->tail){\n  \
+    \  run=run->next;\n}\n    run->next=q->tail->next;\n    q->tail=run;\n    free(run);}\n\
+    q->size=(q->size)-1;\nreturn value;"
+  enqueue: "node_t *new;\nnew = malloc(sizeof(node_t));\nif(new==NULL) return -1;\n\
+    new->value=val;\nif(q->size!=0){\n    new->next=q->tail->next;\n}\nelse{\n   \
+    \ q->tail=new;}\nq->tail->next=new;\nq->size=(q->size)+1;\nreturn 0;"
+problems:
+  dequeue: [success, "* Dequeue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Dequeue in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Dequeue\
+      \ in a queue of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+  enqueue: [success, "* Enqueue of an empty queue\n\n  => r\xE9ussi (1/1) pts)\n\n\
+      \n* Enqueue of an empty queue when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Enqueue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue\
+      \ in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue\
+      \ of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size\
+      \ 10 and malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-06-05 17:32:34.675000
+taskid: advanced_queue
+tests: {}
+text: "- Votre code compile.\n\n- Votre code a pass\xE9 tous les tests."
+username: anonymous

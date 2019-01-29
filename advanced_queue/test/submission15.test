@@ -1,0 +1,39 @@
+_id: 5aad3b30aff4146437c9b93e
+archive: 5aaf9945aff4146437ca8184
+courseid: LSINF1252
+custom: {}
+grade: 100.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "int a;\nif (q -> size == 1){\n    a = q->tail->value;\n    q->tail = NULL;\n\
+    \    q-> size --;\n    free(q->tail);\n    return a;\n}\nstruct node *head = q->tail->next;\n\
+    for (int i = 0; i<(q->size-1); i++){\n    q->tail = q->tail->next;\n}\na = q->tail->next->value;\n\
+    free(q->tail->next);\nq->tail->next = head;\nq->size = q->size-1;\nreturn a;\n\
+    \n"
+  enqueue: "node_t *nouveau = (node_t *) malloc (sizeof (node_t));\nif (nouveau ==\
+    \ NULL) return -1;\nnouveau -> value = val;\nif (q->tail == NULL){\n    q->tail\
+    \ = nouveau;\n    nouveau->next = nouveau;\n    q->size++;\n    return  0;\n}\n\
+    struct node *head = q -> tail -> next;\nnouveau -> next = head;\nq -> tail ->\
+    \ next = nouveau;\nq -> size ++;\nreturn 0;\n\n\n"
+problems:
+  dequeue: [success, "* Dequeue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Dequeue in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Dequeue\
+      \ in a queue of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+  enqueue: [success, "* Enqueue of an empty queue\n\n  => r\xE9ussi (1/1) pts)\n\n\
+      \n* Enqueue of an empty queue when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Enqueue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue\
+      \ in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue\
+      \ of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size\
+      \ 10 and malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-03-17 16:58:40.348000
+taskid: advanced_queue
+tests: {}
+text: "- Votre code compile.\n\n- Votre code a pass\xE9 tous les tests."
+username: anonymous

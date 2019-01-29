@@ -1,0 +1,55 @@
+_id: 5aaedc53aff4146437ca52ef
+archive: 5aaedc57aff4146437ca52f2
+courseid: LSINF1252
+custom: {}
+grade: 77.78
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "int value = q->tail->value;\nif(q->size==1){\n    q->tail=NULL;\n    free(q->tail);\n\
+    }\nnode_t *run;\nrun =q->tail->next;\nwhile(run->next != q->tail){\n    run=run->next;\n\
+    }\n    run->next=q->tail->next;\n    q->tail=run;\n    free(run);\nq->size=(q->size)-1;\n\
+    return value;"
+  enqueue: 'node_t *new;
+
+    new = malloc(sizeof(node_t));
+
+    if(new==NULL) return -1;
+
+    new->value=val;
+
+    new->next=q->tail->next;
+
+    q->tail->next=new;
+
+    q->size=q->size+1;
+
+    return 0;'
+problems:
+  dequeue: [failed, "* Dequeue in a queue of size 1\n\n  => \xE9chou\xE9 (0/1) pts)\n\
+      \n  Info: Your code produced a segfault. \u2014 You don't return the good value\
+      \ \u2014 You have to change the size of the queue after the dequeue\n\n* Dequeue\
+      \ in a queue of size 5\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Dequeue in a queue\
+      \ of size 10\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+  enqueue: [failed, "* Enqueue of an empty queue\n\n  => \xE9chou\xE9 (0/1) pts)\n\
+      \n  Info: Your code produced a segfault. \u2014 You don't return the good value\
+      \ \u2014 You have to update the size of the queue\n\n* Enqueue of an empty queue\
+      \ when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of\
+      \ size 1\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size 5\n\n\
+      \  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue in a queue of size 10\n\n  => r\xE9\
+      ussi (1/1) pts)\n\n\n* Enqueue in a queue of size 10 and malloc fails\n\n  =>\
+      \ r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-03-18 22:38:27.816000
+taskid: advanced_queue
+tests: {sigsegv: true}
+text: '- Votre code compile.
+
+
+  - Il y a des erreurs dans votre solution.'
+username: anonymous

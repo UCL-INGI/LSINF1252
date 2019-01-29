@@ -1,0 +1,11 @@
+backend: local
+backup_directory: ../Backup_INGInious
+local-config: {}
+mongo_opt:
+    database: INGInious
+    host: localhost
+plugins: []
+superadmins:
+- superadmin
+tasks_directory: ../Courses_INGInious
+use_minified_js: true

@@ -1,0 +1,49 @@
+_id: 5b250d23aff414647d276c92
+archive: 5b250d27aff414647d276c98
+courseid: LSINF1252
+custom: {}
+grade: 44.44
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: " struct node *current1 = q -> tail;\nstruct node *current2 = q -> tail;\n\
+    int l = q->size;\nfor (int i = 0; i < l-1; i ++){\n      current2 = current2 ->\
+    \ next;\n}\ncurrent2 -> next = q->tail->next;\nq -> tail = current2 -> next;\n\
+    int p = current1 -> value;\ncurrent1 -> next = NULL;\nfree(current1);\nreturn\
+    \ p;\n"
+  enqueue: "struct node * hello = (struct node *)malloc (sizeof(struct node));\nif\
+    \ (hello == NULL) return -1;\nhello -> value = val;\nif (q == NULL) return -1;\n\
+    if (q -> tail == NULL){\n    q->tail = hello;\n    hello -> next = hello;\n  \
+    \  q-> size = q -> size +1;\n    return 0;\n}\nstruct node *current = q -> tail;\n\
+    int l = q->size;\nfor (int i = 0; i < l-1; i ++){\n      current = current ->\
+    \ next;\n}\nhello -> next = q-> tail;\ncurrent -> next = hello;\nq->size = q->size\
+    \ + 1;\nreturn 0;\n"
+problems:
+  dequeue: [failed, "* Dequeue in a queue of size 1\n\n  => \xE9chou\xE9 (0/1) pts)\n\
+      \n  Info: You have to change the value of the tail to NULL for a queue of size\
+      \ 1 \u2014 You have to change the size of the queue after the dequeue\n\n* Dequeue\
+      \ in a queue of size 5\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: You have to\
+      \ update the size of the queue\n\n* Dequeue in a queue of size 10\n\n  => \xE9\
+      chou\xE9 (0/1) pts)\n\n  Info: You have to update the size of the queue\n\n"]
+  enqueue: [failed, "* Enqueue of an empty queue\n\n  => r\xE9ussi (1/1) pts)\n\n\n\
+      * Enqueue of an empty queue when malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n* Enqueue in a queue of size 1\n\n  => r\xE9ussi (1/1) pts)\n\n\n* Enqueue\
+      \ in a queue of size 5\n\n  => \xE9chou\xE9 (0/1) pts)\n\n  Info: You have to\
+      \ malloc the enqueued element\n\n* Enqueue in a queue of size 10\n\n  => \xE9\
+      chou\xE9 (0/1) pts)\n\n  Info: You have to malloc the enqueued element\n\n*\
+      \ Enqueue in a queue of size 10 and malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\
+      \n\n"]
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-06-16 15:14:11.651000
+taskid: advanced_queue
+tests: {}
+text: '- Votre code compile.
+
+
+  - Il y a des erreurs dans votre solution.'
+username: anonymous

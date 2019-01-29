@@ -1,0 +1,38 @@
+_id: 5b2513f6aff414647d276f04
+archive: 5b2513f8aff414647d276f05
+courseid: LSINF1252
+custom: {}
+grade: 0.0
+input:
+  '@lang': en
+  '@random': []
+  '@username': anonymous
+  dequeue: "struct node *current1 = q -> tail;\nint l = q->size;\nif (q->size == 1){\n\
+    \    int p = q->tail->value;\n    q->tail = NULL;\n    free(current1);\n    q\
+    \ -> size = q -> size -1;\n    return p;\n}\n\nfor (int i = 0; i < l-1; i ++){\n\
+    \      q->tail = q->tail->next;\n}\ncurrent1 -> next = q->tail->next;\nq -> tail\
+    \ = current2 -> next;\nint p = current1 -> value;\ncurrent1 -> next = NULL;\n\
+    q -> size = q -> size -1;\nfree(current1);\nreturn p;\n\n\n\n"
+  enqueue: "struct node * hello = (struct node *)malloc (sizeof(struct node));\nif\
+    \ (hello == NULL) return -1;\nhello -> value = val;\nif (q == NULL) return -1;\n\
+    if (q -> tail == NULL){\n    q->tail = hello;\n    hello -> next = hello;\n  \
+    \  q-> size = q -> size +1;\n    return 0;\n}\n\nhello -> next = q-> tail->next;\n\
+    q->tail-> next = hello;\nq->size = q->size + 1;\nreturn 0;\n\n\n\n\n"
+problems: {}
+response_type: rst
+result: failed
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-06-16 15:43:18.491000
+taskid: advanced_queue
+tests: {not_compile: true}
+text: "La compilation de votre code a \xE9chou\xE9. Voici le message de sortie de\
+  \ la commande ``make`` :\n\n.. code-block::\n\n    gcc -Wall -Werror -DC99 -std=gnu99\
+  \ -ICTester -c -o tests.o tests.c\n    gcc -Wall -Werror -DC99 -std=gnu99 -ICTester\
+  \ -c -o student_code.o student_code.c\n    student_code.c: In function \u2018dequeue\u2019\
+  :\n    student_code.c:42:13: error: \u2018current2\u2019 undeclared (first use in\
+  \ this function)\n     q -> tail = current2 -> next;\n                 ^\n    student_code.c:42:13:\
+  \ note: each undeclared identifier is reported only once for each function it appears\
+  \ in\n    make: *** [student_code.o] Error 1\n\n"
+username: anonymous

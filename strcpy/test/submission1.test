@@ -1,0 +1,23 @@
+_id: 5a8e8660aff4146a5a4cb2bf
+archive: 5b9a61461a750b1640772c86
+courseid: LSINF1252
+custom: {}
+grade: 100.0
+input: {'@lang': en, '@username': anonymous, strcpy_impl: "char *ret=(char *) malloc(strlen(src)+1);\n\
+    if(src==NULL || ret==NULL)\n    return NULL;\nfor(int i=0; i<=strlen(src); i++){\n\
+    \    ret[i]=src[i];\n}\nreturn ret;"}
+problems:
+  strcpy_impl: [success, "* Check if the string is correctly put in memory\n\n  =>\
+      \ r\xE9ussi (1/1) pts)\n\n\n* Check the behavior of the function when the call\
+      \ to malloc fails\n\n  => r\xE9ussi (1/1) pts)\n\n\n"]
+response_type: rst
+result: success
+state: ''
+status: done
+stderr: ''
+stdout: ''
+submitted_on: 2018-02-22 09:59:12.418000
+taskid: strcpy
+tests: {}
+text: "- Votre code compile.\n\n- Votre code a pass\xE9 tous les tests."
+username: anonymous

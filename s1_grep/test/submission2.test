@@ -1,0 +1,35 @@
+_id: 5c52fe186779dd1102ce7ce6
+archive: null
+courseid: LSINF1252
+custom: {}
+grade: 0.0
+input:
+    '@lang': en
+    '@random': []
+    '@state': ''
+    '@username': mawait
+    CU_UNREFERENCED_PARAMETER_pTest: ss
+    CU_trim_left: ss
+    assert: s
+problems:
+    CU_UNREFERENCED_PARAMETER_pTest:
+    - failed
+    - Wrong answer
+    CU_trim_left:
+    - failed
+    - Wrong answer
+    assert:
+    - failed
+    - Wrong answer
+response_type: rst
+result: failed
+state: ''
+status: done
+stderr: null
+stdout: null
+submitted_on: 2019-01-31 13:54:32.423000
+taskid: s1_grep
+tests: {}
+text: You have 3 wrong answer(s).
+username:
+- mawait

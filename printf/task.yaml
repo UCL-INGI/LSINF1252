@@ -1,132 +1,57 @@
 accessible: true
 author: Mathieu Xhonneux
 context: In this exercise, you will familiarize yourself with the functions `printf(3)
-    <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ (printing
-    on the standard output) and `sprintf(3) <`printf <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
-    (text formatting).
+  <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ (printing on
+  the standard output) and `sprintf(3) <`printf <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
+  (text formatting).
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    memory: '100'
-    output: '2'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S2] Printing data'
 network_grading: false
 order: 14
 problems:
-    simple:
-        type: code
-        header: |-
-            The function `printf <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ writes data to the standard output stream (*stdout*).
-
-            Write the body of the function *print_foo* which will print "foo\\n" (without the quotes, the symbol '\\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
-
-            .. code-block:: c
-
-                void print_foo() {
-        default: ''
-        name: Foo
-        language: c
-    digit:
-        language: c
-        name: Digital
-        default: ''
-        header: |-
-            ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
-
-            .. code-block:: c
-
-                /* print_digit
-                 * @n: an integer
-                 *
-                 * result: print to stdout "The magic number is NUMBER.\n"
-                 */
-                void print_digit(int number) {
-        type: code
-    example:
-        answer: pi = 3.1416
-        header: |
-            ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
-
-            What would the following call print to *stdout* ?
-
-            .. code-block:: c
-
-                float PI = 3.1415926;
-                printf("pi = %.4f", PI);
-        name: Floating away
-        type: match
-    sprintf:
-        default: ''
-        header: |
-            ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
-
-            Write the body of the function *format_str*.
-
-            .. code-block:: c
-
-                /* format_str, example:
-                 * format_str(buf, 42, "Olivier", 'B') will write into buf
-                 * the string "Mister Olivier B. has 42 eggs" (no line feed)
-                 * The given buffer is guaranteed to be big enough
-                 */
-                void format_str(char *buffer, unsigned int d, char *name, char initial) {
-        type: code
-        language: c
-        name: sprintf
+  digit: {default: '', header: "``printf`` can also print the content of a variable.\
+      \ Write the body of the function *print_digit*.\n\n.. code-block:: c\n\n   \
+      \ /* print_digit\n     * @n: an integer\n     *\n     * result: print to stdout\
+      \ \"The magic number is NUMBER.\\n\"\n     */\n    void print_digit(int number)\
+      \ {", language: c, name: Digital, type: code}
+  example: {answer: pi = 3.1416, header: "``printf`` is a powerful formatting tool\
+      \ which can handle several data types, and several formatting parameters.\n\n\
+      What would the following call print to *stdout* ?\n\n.. code-block:: c\n\n \
+      \   float PI = 3.1415926;\n    printf(\"pi = %.4f\", PI);\n", name: Floating
+      away, type: match}
+  simple: {default: '', header: "The function `printf <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_\
+      \ writes data to the standard output stream (*stdout*).\n\nWrite the body of\
+      \ the function *print_foo* which will print \"foo\\\\n\" (without the quotes,\
+      \ the symbol '\\\\n' represents a **line feed**, i.e. the end of a line) to\
+      \ *stdout*.\n\n.. code-block:: c\n\n    void print_foo() {", language: c, name: Foo,
+    type: code}
+  sprintf: {default: '', header: "``sprintf(2)`` is a variant of ``printf(2)`` which\
+      \ doesn't write to *stdout*, but instead writes to a *buffer*.\n\nWrite the\
+      \ body of the function *format_str*.\n\n.. code-block:: c\n\n    /* format_str,\
+      \ example:\n     * format_str(buf, 42, \"Olivier\", 'B') will write into buf\n\
+      \     * the string \"Mister Olivier B. has 42 eggs\" (no line feed)\n     *\
+      \ The given buffer is guaranteed to be big enough\n     */\n    void format_str(char\
+      \ *buffer, unsigned int d, char *name, char initial) {\n", language: c, name: sprintf,
+    type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        visible: true
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        type: 1
-    '1':
-        type: 1
-        name: Segmentation Fault
-        description: ''
-        visible: true
-        id: sigsegv
-    '2':
-        id: not_compile
-        description: You code does not compile.
-        visible: true
-        name: Not compile
-        type: 1
-    '3':
-        id: memory
-        description: ''
-        visible: true
-        name: Memory Exceeded
-        type: 1
-    '4':
-        description: ''
-        name: Floating Point Exception
-        type: 1
-        id: sigfpe
-        visible: true
-    '5':
-        type: 1
-        name: Double free
-        description: Your code produced a double free.
-        id: double_free
-        visible: true
-    '6':
-        description: You use some banned functions.
-        type: 1
-        visible: true
-        id: banned_funcs
-        name: Banned functions
-    '7':
-        type: 2
-        visible: true
-        description: ''
-        name: S2
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S2, type: 2, visible: true}
+  '8': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

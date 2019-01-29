@@ -1,76 +1,33 @@
 accessible: false
 author: 'Nicolas Rybowski, '
 context: Your objective is to implement `strlen <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
-    one of the basic functions of the C library that deals with strings.
+  one of the basic functions of the C library that deals with strings.
 environment: cpp
 evaluate: best
 groups: false
-limits:
-    output: '2'
-    memory: '100'
-    time: '30'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S2] My strlen - REVIEWED'
 network_grading: false
 order: 15
 problems:
-    my_stlren:
-        type: code
-        name: my_stlren
-        language: c
-        header: Include here the code and the signature for your ``my_strlen``. Your
-            function must have the same signature as the `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
-            function of the standard C library.
+  my_stlren: {header: 'Include here the code and the signature for your ``my_strlen``.
+      Your function must have the same signature as the `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_
+      function of the standard C library.', language: c, name: my_stlren, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-        name: Timeout
-        type: 1
-        id: timeout
-    '1':
-        description: ''
-        type: 1
-        id: sigsegv
-        visible: true
-        name: Segmentation Fault
-    '2':
-        name: Not compile
-        description: You code does not compile.
-        type: 1
-        visible: true
-        id: not_compile
-    '3':
-        type: 1
-        id: memory
-        visible: true
-        description: ''
-        name: Memory Exceeded
-    '4':
-        description: ''
-        name: Floating Point Exception
-        id: sigfpe
-        type: 1
-        visible: true
-    '5':
-        description: Your code produced a double free.
-        name: Double free
-        visible: true
-        id: double_free
-        type: 1
-    '6':
-        id: banned_funcs
-        type: 1
-        name: Banned functions
-        description: You use some banned functions.
-        visible: true
-    '7':
-        description: ''
-        visible: true
-        type: 2
-        name: S2
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: '', id: '', name: S2, type: 2, visible: true}
+  '8': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0

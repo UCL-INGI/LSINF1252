@@ -1,105 +1,50 @@
 accessible: true
 author: Nicolas Rybowski
-context: |-
-    The classic function ``char *strcpy(char *destination, const char *source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then performs the copy.
+context: 'The classic function ``char *strcpy(char *destination, const char *source);``
+  `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where
+  the source string is copied. We ask you to code a function which allocates a buffer
+  itself, and then performs the copy.
 
-    The use of copy functions as ``memcpy`` is not allowed.
 
-    *Hint* : use `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_
+  The use of copy functions as ``memcpy`` is not allowed.
+
+
+  *Hint* : use `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_'
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[S3] Improved strcpy '
 network_grading: false
 order: 34
 problems:
-    strcpy_impl:
-        type: code
-        default: ''
-        name: buf_strcpy
-        language: c
-        header: |
-            Write the body of the function *buf_strcpy*.
-
-            .. code-block:: c
-
-                /*
-                * Creates a buffer that has the same size as src, and copies the content of src to this buffer.
-                *
-                * @src: string to be copied
-                * @return: return pointer. if src == NULL or in case of error, return NULL
-                *
-                * Remember that strings are terminated with '\0' and that strlen("abc") returns 3 even if 4 bytes are required to store this string.
-                */
-                char *buf_strcpy(const char *src) {
+  strcpy_impl: {default: '', header: "Write the body of the function *buf_strcpy*.\n\
+      \n.. code-block:: c\n\n    /*\n    * Creates a buffer that has the same size\
+      \ as src, and copies the content of src to this buffer.\n    *\n    * @src:\
+      \ string to be copied\n    * @return: return pointer. if src == NULL or in case\
+      \ of error, return NULL\n    *\n    * Remember that strings are terminated with\
+      \ '\\0' and that strlen(\"abc\") returns 3 even if 4 bytes are required to store\
+      \ this string.\n    */\n    char *buf_strcpy(const char *src) {\n", language: c,
+    name: buf_strcpy, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        name: Timeout
-        type: 1
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        visible: true
-    '1':
-        type: 1
-        visible: true
-        id: sigsegv
-        description: ''
-        name: Segmentation Fault
-    '2':
-        name: Not compile
-        id: not_compile
-        visible: true
-        type: 1
-        description: You code does not compile.
-    '3':
-        visible: true
-        name: Memory Exceeded
-        type: 1
-        id: memory
-        description: ''
-    '4':
-        visible: true
-        description: ''
-        id: sigfpe
-        name: Floating Point Exception
-        type: 1
-    '5':
-        id: double_free
-        name: Double free
-        visible: true
-        description: Your code produced a double free.
-        type: 1
-    '6':
-        name: Banned functions
-        description: You use some banned functions.
-        visible: true
-        type: 1
-        id: banned_funcs
-    '7':
-        visible: true
-        description: You do not manage the case where malloc() fails.
-        type: 1
-        name: Malloc fail
-        id: malloc_fail
-    '8':
-        description: ''
-        visible: true
-        type: 2
-        name: S3
-        id: ''
-    '9':
-        type: 2
-        name: Malloc
-        description: Usage of malloc()
-        visible: true
-        id: ''
+  '0': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '1': {description: '', id: sigsegv, name: Segmentation Fault, type: 1, visible: true}
+  '10': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '2': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '3': {description: '', id: memory, name: Memory Exceeded, type: 1, visible: true}
+  '4': {description: '', id: sigfpe, name: Floating Point Exception, type: 1, visible: true}
+  '5': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '6': {description: You use some banned functions., id: banned_funcs, name: Banned
+      functions, type: 1, visible: true}
+  '7': {description: You do not manage the case where malloc() fails., id: malloc_fail,
+    name: Malloc fail, type: 1, visible: true}
+  '8': {description: '', id: '', name: S3, type: 2, visible: true}
+  '9': {description: Usage of malloc(), id: '', name: Malloc, type: 2, visible: true}
 weight: 1.0

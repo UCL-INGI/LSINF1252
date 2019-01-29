@@ -1,150 +1,64 @@
 accessible: false
 author: Louis Navarre
-context: |-
-    Given a file containing a linked list of the structure *student_t* following, you have to write a function to load the entire linked list from the file and to return a pointer to the head of this linked list. Assume that, in the file, if **a** is followed by **b**, you will have ``a->next = b``.
-
-    .. code-block:: c
-
-        typedef struct student{
-            struct student* next;
-            int noma;
-        } student_t;
-
-    In this exercice, you **cannot** use *fopen*, *read*, *fread*, *fgetc*, *fgets*, which means that you must use `mmap(2). <https://sites.uclouvain.be/SystInfo/manpages/man2/mmap.2.html>`_
-
-    In case of error (using malloc), you have to free **all** the memory you have allocated.
+context: "Given a file containing a linked list of the structure *student_t* following,\
+  \ you have to write a function to load the entire linked list from the file and\
+  \ to return a pointer to the head of this linked list. Assume that, in the file,\
+  \ if **a** is followed by **b**, you will have ``a->next = b``.\n\n.. code-block::\
+  \ c\n\n    typedef struct student{\n        struct student* next;\n        int noma;\n\
+  \    } student_t;\n\nIn this exercice, you **cannot** use *fopen*, *read*, *fread*,\
+  \ *fgetc*, *fgets*, which means that you must use `mmap(2). <https://sites.uclouvain.be/SystInfo/manpages/man2/mmap.2.html>`_\n\
+  \nIn case of error (using malloc), you have to free **all** the memory you have\
+  \ allocated."
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    output: '2'
-    time: '30'
-    memory: '100'
+limits: {memory: '100', output: '2', time: '30'}
 name: '[Beta, S5] Get an array from a binary file using mmap'
 network_grading: false
 order: 1
 problems:
-    load_linked_list:
-        type: code
-        name: Load linked list
-        header: |-
-            Write the body of the function ``load_linked_list`` using mmap.
-
-            .. code-block:: c
-
-                /*
-                 * @filename: the file to be manipulated, filename != NULL
-                 * @pre: the length of the file is an entire multiple of
-                 *      the size of student_t
-                 * @return: the pointer to the head of the linked list,
-                 *         NULL in case of error
-                 * you cannot use fopen, read, fread, fgetc, fgets
-                 * which means that you have to use mmap
-                 */
-                student_t* load_linked_list(char* filename){
-        language: c
-        default: ''
+  load_linked_list: {default: '', header: "Write the body of the function ``load_linked_list``\
+      \ using mmap.\n\n.. code-block:: c\n\n    /*\n     * @filename: the file to\
+      \ be manipulated, filename != NULL\n     * @pre: the length of the file is an\
+      \ entire multiple of\n     *      the size of student_t\n     * @return: the\
+      \ pointer to the head of the linked list,\n     *         NULL in case of error\n\
+      \     * you cannot use fopen, read, fread, fgetc, fgets\n     * which means\
+      \ that you have to use mmap\n     */\n    student_t* load_linked_list(char*\
+      \ filename){", language: c, name: Load linked list, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
+submission_limit: {amount: -1, period: -1}
 tags:
-    '0':
-        name: Close
-        id: close
-        type: 0
-        visible: true
-        description: This tag validate that your close are correctly performed.
-    '1':
-        id: open
-        description: This tag validate you are able to open a file and handle errors
-            with open().
-        name: Open
-        type: 0
-        visible: true
-    '14':
-        type: 1
-        visible: true
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-    '15':
-        type: 1
-        description: Your code produced a double free.
-        name: Double free
-        id: double_free
-        visible: true
-    '2':
-        name: Malloc fail
-        description: You do not manage the case where malloc() fails.
-        id: malloc_fail
-        type: 1
-        visible: false
-    '3':
-        name: Malloc fail handling
-        type: 1
-        id: malloc_fail_handling
-        description: Wrong return value when malloc call fails.
-        visible: false
-    '4':
-        visible: true
-        description: You code does not compile.
-        id: not_compile
-        name: Not compile
-        type: 1
-    '5':
-        id: malloc_fail_memory_size
-        description: The allocated memory doesn't have the correct size.
-        name: Wrong malloc memory size
-        type: 1
-        visible: false
-    '6':
-        type: 1
-        name: Bad next pointer
-        description: The 'next' pointer is not correctly initialised
-        id: bad_next_pointer
-        visible: false
-    '7':
-        description: The value of the node is not the expected one.
-        type: 1
-        name: Bad node value
-        id: bad_node_value
-        visible: false
-    '8':
-        id: error_normal_case
-        description: Your function returns an error in normal case.
-        type: 1
-        name: Error normal case
-        visible: false
-    '9':
-        type: 1
-        id: not_expected_list
-        description: The linked list does not correspond to the waited one.
-        name: Incorrect list
-        visible: false
-    '10':
-        type: 2
-        description: ''
-        name: S5
-        visible: true
-        id: ''
-    '11':
-        description: ''
-        name: File
-        type: 2
-        visible: true
-        id: ''
-    '12':
-        type: 2
-        visible: true
-        name: Data structures
-        description: Task dealing with data structures and linked list
-        id: ''
-    '13':
-        type: 2
-        name: Pointer
-        description: Task about pointers and their use
-        visible: false
-        id: ''
+  '0': {description: This tag validate that your close are correctly performed., id: close,
+    name: Close, type: 0, visible: true}
+  '1': {description: This tag validate you are able to open a file and handle errors
+      with open()., id: open, name: Open, type: 0, visible: true}
+  '10': {description: '', id: '', name: S5, type: 2, visible: true}
+  '11': {description: '', id: '', name: File, type: 2, visible: true}
+  '12': {description: Task dealing with data structures and linked list, id: '', name: Data
+      structures, type: 2, visible: true}
+  '13': {description: Task about pointers and their use, id: '', name: Pointer, type: 2,
+    visible: false}
+  '14': {description: Your code exceeds the maximum allowed time., id: timeout, name: Timeout,
+    type: 1, visible: true}
+  '15': {description: Your code produced a double free., id: double_free, name: Double
+      free, type: 1, visible: true}
+  '16': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
+  '2': {description: You do not manage the case where malloc() fails., id: malloc_fail,
+    name: Malloc fail, type: 1, visible: false}
+  '3': {description: Wrong return value when malloc call fails., id: malloc_fail_handling,
+    name: Malloc fail handling, type: 1, visible: false}
+  '4': {description: You code does not compile., id: not_compile, name: Not compile,
+    type: 1, visible: true}
+  '5': {description: The allocated memory doesn't have the correct size., id: malloc_fail_memory_size,
+    name: Wrong malloc memory size, type: 1, visible: false}
+  '6': {description: The 'next' pointer is not correctly initialised, id: bad_next_pointer,
+    name: Bad next pointer, type: 1, visible: false}
+  '7': {description: The value of the node is not the expected one., id: bad_node_value,
+    name: Bad node value, type: 1, visible: false}
+  '8': {description: Your function returns an error in normal case., id: error_normal_case,
+    name: Error normal case, type: 1, visible: false}
+  '9': {description: The linked list does not correspond to the waited one., id: not_expected_list,
+    name: Incorrect list, type: 1, visible: false}
 weight: 1.0

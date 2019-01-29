@@ -1,46 +1,25 @@
 accessible: true
 author: Olivier Bonaventure
-context: |-
-    Parcourez un fichier sans jamais utiliser l'appel système read.
-    Le syllabus est accessible depuis http://sites.uclouvain.be/SystInfo
+context: "Parcourez un fichier sans jamais utiliser l'appel syst\xE8me read.\nLe syllabus\
+  \ est accessible depuis http://sites.uclouvain.be/SystInfo"
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
-limits:
-    time: '120'
-    memory: '100'
-    output: '2'
+limits: {memory: '100', output: '2', time: '120'}
 name: Parcours de fichiers
 network_grading: false
 order: 58
 problems:
-    count:
-        default: ''
-        type: code
-        header: |-
-            Ecrivez une fonction qui permet de compter le nombre de fois qu'un caractère est présent dans un fichier sans jamais utiliser l'appel système read.
-
-            #include <sys/mman.h>
-
-            #include <sys/types.h>
-
-            #include <sys/stat.h>
-
-            #include <fcntl.h>
-
-            #include <sys/uio.h>
-
-            #include <unistd.h>
-
-            .. code-block:: c
-
-                int count(char *filename, char c) {
-        name: count
-        language: c
+  count: {default: '', header: "Ecrivez une fonction qui permet de compter le nombre\
+      \ de fois qu'un caract\xE8re est pr\xE9sent dans un fichier sans jamais utiliser\
+      \ l'appel syst\xE8me read.\n\n#include <sys/mman.h>\n\n#include <sys/types.h>\n\
+      \n#include <sys/stat.h>\n\n#include <fcntl.h>\n\n#include <sys/uio.h>\n\n#include\
+      \ <unistd.h>\n\n.. code-block:: c\n\n    int count(char *filename, char c) {",
+    language: c, name: count, type: code}
 stored_submissions: 0
-submission_limit:
-    amount: -1
-    period: -1
-tags: {}
+submission_limit: {amount: -1, period: -1}
+tags:
+  '1': {description: Your code does not compile with cppcheck, id: cppcheck, name: Cppcheck
+      fails, type: 1, visible: true}
 weight: 1.0
