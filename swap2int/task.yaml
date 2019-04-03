@@ -9,7 +9,7 @@ name: '[S2] Swap my integers '
 network_grading: false
 order: 25
 problems:
-  q1: {header: "Write the body of the function *swap* which exchanges the values pointed\
+  q1: {header: "Write the body of the function *swap* which exchanges the values pointed to\
       \ by *i* and *j*.\n\n.. code-block:: c\n\n    void swap(int *i, int *j) {",
     language: c, name: Swap, type: code}
 stored_submissions: 0

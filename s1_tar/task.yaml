@@ -1,7 +1,7 @@
 accessible: true
 author: Tom Rousseaux
 context: |+
-    Unix users often need to backup files and directories or send them over the Internet. `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_ is a very useful tool which can be used to create compressed archives of directories and all the files that they contain. At the end of a project, you have created the following files (you can download them from `here <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_tar/Enonce.zip>`_)
+    Unix users often need to backup files and directories or send them over the Internet. `tar(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/tar.1.html>`_ is a very useful tool which can be used to create compressed archives of directories and all the files that they contain. At the end of a project, you will have created the following files (you can download them from `here <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_tar/Enonce.zip>`_)
 
     .. code-block:: console
 

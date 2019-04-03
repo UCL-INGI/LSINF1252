@@ -9,7 +9,7 @@ context: "*Estimated time: 25 minutes*\n\nYou are currently processing an array 
   \ permission to read it.\n\n.. code-block:: c\n\n    typedef struct point {\n  \
   \      int x;\n        int y;\n        int z;\n    } point_t;\n\nUse only ``open(2)``,\
   \ ``write(2)`` and ``close(2)``. You can only call ``write(2)`` once.\n\nHint :\
-  \ read carefully the man page of ``open(2)`` to manage all the  cases mentionned\
+  \ read carefully the man page of ``open(2)`` to manage all the  cases mentioned\
   \ above. Be sure to open the file with the appropriate rights."
 environment: cpp
 evaluate: best

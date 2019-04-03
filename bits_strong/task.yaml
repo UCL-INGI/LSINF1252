@@ -1,6 +1,6 @@
 accessible: true
 author: Arthur van Stratum
-context: 'In this exercise, we will work with operation on bits. When we speak about
+context: 'In this exercise, we will work with operations on bits. When we speak about
   the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest
   order bit, ...
 
@@ -37,12 +37,12 @@ network_grading: false
 order: 24
 problems:
   q1: {header: "Write the body of a function ``reset_highestorder_bit``, which sets\
-      \ to ``0`` the highest bit set to ``1`` it founds, and does nothing if there's\
+      \ to ``0`` the highest bit set to ``1`` it finds, and does nothing if there's\
       \ no bit set to ``0``.\n\nFor example, with bytes, ``reset_highestorder_bit(0b000111010101010)``\
       \ would return ``0b000011010101010`` and\n``reset_highestorder_bit(0b100111010101010)``\
       \ would return ``0b000111010101010``\n\nTo write this function, you first need\
       \ to determine the position of the highest order bit that is set to ``1`` and\
-      \ the reset its value.\n\n.. code-block:: c\n\n    #include <stdint.h>\n   \
+      \ then reset its value.\n\n.. code-block:: c\n\n    #include <stdint.h>\n   \
       \ uint32_t reset_highestorder_strong_bit(uint32_t x) {", language: c, name: '',
     type: code}
 stored_submissions: 0

@@ -1,6 +1,6 @@
 accessible: true
 author: Arthur van Stratum
-context: 'In this exercise, we will work with operation on bits. When we speak about
+context: 'In this exercise, we will work with operations on bits. When we speak about
   the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest
   order bit, ...
 
