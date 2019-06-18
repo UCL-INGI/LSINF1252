@@ -5,7 +5,7 @@ services:
   - mongodb
   - docker
 install:
-  - pip3 install git+https://github.com/Maxmawt/INGInious
+  - pip3 install git+https://github.com/UCL-INGI/INGInious
   - docker pull ingi/inginious-c-base
   - docker pull ingi/inginious-c-default
   - docker pull ingi/inginious-c-cpp
