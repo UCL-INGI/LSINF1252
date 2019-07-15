@@ -9,6 +9,7 @@ install:
   - docker pull ingi/inginious-c-base
   - docker pull ingi/inginious-c-default
   - docker pull ingi/inginious-c-cpp
+  - docker pull ingi/inginious-c-pyjavacpp
 before_script:
   - python3 travis_setup.py
 script:
