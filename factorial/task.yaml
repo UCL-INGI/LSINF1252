@@ -10,7 +10,7 @@ name: '[S1] Factorial'
 network_grading: false
 order: 11
 problems:
-  facto: {header: 'Write your own function ``factorial`` which takes as parameter
+  facto: {header: 'Write your own function ``factorial`` which takes as a parameter
       an integer and returns an integer value. Your function must be named ``factorial``.
 
 

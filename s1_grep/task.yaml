@@ -1,7 +1,7 @@
 accessible: true
 author: Tom Rousseaux
 context: The `grep(1) command <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_
-    can be use to detect or extract lots of information from text files. When working
+    can be used to detect or extract lots of information from text files. When working
     with source code, `grep(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/grep.1.html>`_
     can help you to find in which files some functions or constants have been defined.
     For this exercise, we will use the source code of the `CUnit <http://cunit.sourceforge.net>`_

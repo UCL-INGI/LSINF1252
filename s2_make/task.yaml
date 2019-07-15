@@ -10,18 +10,18 @@ context: |-
 
     To give you a first taste, open up a *terminal* and type the following command: ``make``.
 
-    ``make`` will great you with the following message:
+    ``make`` will greet you with the following message:
 
     .. code-block::
 
         make: *** No targets specified and no makefile found.  Stop.
 
-    So what happened? ``make`` first start to search in your *current directory* for a file called ``Makefile``. This file contains *instructions*, aka *rules*, that tell ``make`` what to do.  Since there are no such file, ``make`` stops almost instantly.
+    So what happened? ``make`` first start to search in your *current directory* for a file called ``Makefile``. This file contains *instructions*, aka *rules*, that tell ``make`` what to do.  Since there is no such file, ``make`` stops almost instantly.
 
     ``make`` it simple
     ------------------
 
-    Now write a simple hello world program, which you will save into a file called ``hello.c``. This programs will print the following on the standard output:
+    Now write a simple hello world program, which you will save into a file called ``hello.c``. This program will print the following on the standard output:
 
     .. code-block::
 

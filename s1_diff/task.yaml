@@ -1,8 +1,8 @@
 accessible: true
 author: Tom Rousseaux
 context: |-
-    3 students are suspected of doing illegal things with computer of the university. They know that computers send logs to the server and so hid their activity to the server. But they don't know that logs are also saved on the different computers.
-    There are the logs from the server and from the students, use `diff(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/diff.1.html>`_ to compare them and find which student are innocent.
+    3 students are suspected of doing illegal things with computers of the university. They know that the computers send logs to the server and so hid their activity from the server. But they don't know that logs are also saved on the different computers.
+    There are the logs from the server and from the students, use `diff(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/diff.1.html>`_ to compare them and find which students are innocent.
 
     - `syslog <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_diff/syslog.log>`_
     - `student 1 <https://inginious.info.ucl.ac.be/course/LSINF1252/s1_diff/student1.log>`_
@@ -25,7 +25,7 @@ problems:
         -   text: Student 2
         -   text: Student 3
             valid: true
-        name: Which students are innocents?
+        name: Which students are innocent?
         limit: 0
         multiple: true
         header: ''

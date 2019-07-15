@@ -14,7 +14,7 @@ problems:
   q1: {default: '', header: "Write a complete C program containing a *main*. Your\
       \ program should print one argument out of two (starting with the first), and\
       \ return 0. Each argument shall be separated by a space, and the output shall\
-      \ be terminated by a new line. Don't forget the required includes for your program.\n\
+      \ be terminated by a new line. Don't forget the required formatting for your program.\n\
       \nExample :\n\n.. code-block:: bash\n\n    ./myProg a b c d e f g\n    a c e\
       \ g\n", language: c, name: '', type: code}
 stored_submissions: 0

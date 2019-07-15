@@ -5,7 +5,7 @@ context: '*Estimated time: 25 minutes*
 
   Given a binary file containing some (possibly none) positive integers (``int``)
   that were stored in the file by successive calls of ``write(fd,&num,sizeof(int))``
-  write a code that computes the sum of all integers that were stored in the file.
+  write code that computes the sum of all integers that were stored in the file.
   The function returns the sum when there are no errors. In case of errors, it returns.
 
 

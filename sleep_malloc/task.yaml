@@ -2,7 +2,7 @@ accessible: true
 author: Mathieu Xhonneux & Maxime Mawait
 context: 'The `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_
   function may fail, for instance if the OS has no free memory remaining. In this
-  case, it may be possible that some other processes to free some memory after some
+  case, it may be possible that some other processes may free some memory after some
   time.
 
 

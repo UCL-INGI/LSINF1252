@@ -4,7 +4,7 @@ context: '*Estimated time: 30 minutes*
 
 
   Given a file containing a large array of integers, you have to write a function
-  to edit the element at a given index the array and another function to retrieve
+  to edit the element at a given index in the array and another function to retrieve
   a specific element from this array.
 
 

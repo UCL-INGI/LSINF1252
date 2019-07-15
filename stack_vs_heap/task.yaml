@@ -35,7 +35,7 @@ problems:
       \ a global variable ?\n\n.. code-block:: c\n\n    void sum2(int a, int b) {\n",
     language: c, name: Global variables, type: code}
   version2: {header: "You are now asked to return the result of the sum, neither by\
-      \ using the ``return`` keyword, nor by using a global variables.\n\n.. code-block::\
+      \ using the ``return`` keyword, nor by using a global variable.\n\n.. code-block::\
       \ c\n\n    /*\n     * @post stores the sum of the values pointed by a and b\
       \ in the memory pointed by r\n     */\n    void sum3 (int *a, int *b, int *r)\
       \ {\n", language: c, name: Passing by reference, type: code}
